@@ -1,0 +1,130 @@
+<main class="exeDashboard">
+    <div class="container">
+       <div class="Wrapper">
+        
+        <div class="row justify-content-end date">
+						<div class="col t-r pr-0"> <i class="i i-date ib-m p-r-5"></i> 
+						<span class="ib-m font-weight-normal"><?php echo date('l F d, Y'); ?></span></div>
+         </div>
+
+         <div class="row justify-content-between">
+             <div class="col-lg-11">
+                <div class="row headOuter">
+                    <div class="head">
+                        <h3>Affiliate Compliance</h3>
+                    </div>
+                </div>
+                <div class="row chartBody">
+                    <canvas id="myChart2" width="300" height="200"></canvas>
+                </div>
+             </div>
+             <div class="col-lg-11">
+                <div class="row headOuter">
+                    <div class="head">
+                        <h3>Performance score</h3>
+                    </div>
+                </div>
+                <div class="row chartBody">
+                    <canvas id="myChart" width="300" height="200"></canvas>
+                </div>
+            </div>
+         </div>
+
+         <div class="row justify-content-between py-3">
+                <div class="col-sm-18 p-0">
+                  <div class="text-md-left">
+
+                    <a class="btn btn-round-ib ml-0 btnSort" href="<?php echo base_url('home/filter_affiliates?compliance_status=11');?>" data-rel="tooltip" data-placement="bottom" title="Indeterminate"><i class="i i-Indeterminate"></i><span class="sr-only">Indeterminate</span></a>
+                    <a class="btn btn-round-ib btnSort" href="<?php echo base_url('home/filter_affiliates?compliance_status=8');?>" data-rel="tooltip" data-placement="bottom" title="Compliance"><i class="i i-compliant"></i><span class="sr-only">Compliance</span></a>
+                    <a class="btn btn-round-ib btnSort" href="<?php echo base_url('home/filter_affiliates?compliance_status=9');?>" data-rel="tooltip" data-placement="bottom" title="Non Compliance"><i class="i i-non-compliant"></i><span class="sr-only">Non Compliance</span></a>
+                    <a class="btn btn-round-ib btnSort" href="<?php echo base_url('home/filter_affiliates?compliance_status=10');?>" data-rel="tooltip" data-placement="bottom" title="Waiting"><i class="i i-waiting"></i><span class="sr-only">Waiting</span></a>
+                    
+                 </div>
+              </div>
+              <div class="col-sm-4">
+								<form id="search-form" action="<?php echo base_url('home/filter_affiliates');?>"></form>
+                    <div class="search-box">
+                      <label class="sr-only" for="input-search">Search</label>
+                      <input type="text" placeholder="Search" class="form-control input" id="input-search" name="search" value="" />
+                      <div class="btn2" data-rel="tooltip" data-placement="bottom" title="Search">
+                        <i class="i i-search" aria-hidden="true"></i>
+                      </div>
+                    </div>
+								</form>
+              </div>
+         </div>
+
+         <div class="row">
+
+          <div class="pane112 w-100">
+           <?php // set the month array
+						$monthArray = array(
+							"1" => "JAN", "2" => "FEB", "3" => "MAR", "4" => "APR", "5" => "MAY", "6" => "JUN", "7" => "JUL", "8" => "AUG","9" => "SEP", "10" => "OCT", "11" => "NOV", "12" => "DEC"); 
+						?>
+            <table class="table table1" id="#table11">
+              <thead>
+                <tr>
+                  <th scope="col">AFFILIATE NAME</th>
+                  <!-- <th scope="col">Contact Name</th> -->
+                  <th scope="col">Month</th>
+                  <th scope="col">Year</th>
+                  <th scope="col">Compliance Status</th>
+                  <th scope="col">Performance Score</th>
+                  <th scope="col" class="pl-0">last Site Visit</th>
+                </tr>
+              </thead>
+              <tbody id="table-body">
+								<?php if(!empty($affiliates)):?>
+									<?php foreach($affiliates as $row): ?>
+									<tr>
+									<td scope="row" class="t-l-c"><a href="<?php echo base_url('module/affiliate/status/details/'.$row["affiliate_id"]); ?>"><?php echo $row['city'].', '.$row['state']; ?></a></td>
+									<!-- <td>Ms. A BCD</td> -->
+									<td><?php echo $monthArray[$row['month']]; ?></td>
+									<td><?php echo $row['year']; ?></td>
+									<td><div class="icon-rounded" data-rel="tooltip" data-placement="bottom" title="<?php echo $row['status_name']; ?>"><?php echo $row['icon']; ?></div></td>
+									<td class="f-b">46</td>
+									<td><?php echo isset($row['last_login']) ? date("m-d-Y | H:i", strtotime($row['last_login'])) : ""; ?></td>
+									</tr>
+									<?php endforeach; ?>
+								<?php else: ?>
+								<tr>
+									<td scope="row" class="text-center" colspan="6"> No data found!</td>
+								</tr>
+								<?php endif;?>
+              
+              </tbody>
+          </table>
+            
+          </div>
+
+            <div class="row justify-content-end w-100 pt-3 pb-5 m-0">
+               
+                <a href="<?php echo base_url('module/affiliate/status');?>" class="btn btn-primary btn-rounded btn-action-lg" data-rel="tooltip" data-placement="bottom" title="All Affiliates">
+								<i class="i i-right"></i><span class="sr-only">All Affiliates</span>
+								</a> 
+              
+            </div>
+
+         </div>
+
+        </div>
+    </div>
+    
+</main>
+<script id="template" type="x-tmpl-mustache">
+{{#affiliates}}
+<tr>
+	<td scope="row" class="t-l-c"><a href="{{link}}">{{city}},{{state}}</a></td>
+	<td>{{currentMonth}}</td>
+	<td>{{year}}</td>
+	<td><div class="icon-rounded">{{{icon}}}</div></td>
+	<td>46</td>
+	<td>12 Jun,2020 | 09:45</td>
+</tr>
+{{/affiliates}}
+{{^affiliates}}
+<tr>
+	<td scope="row" colspan="6">No affiliates found!</td>
+</tr>
+{{/affiliates}}
+</script>
