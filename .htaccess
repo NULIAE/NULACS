@@ -1,11 +1,6 @@
-<Directory /var/www/html/nulacs_dev/>
-Options Indexes FollowSymLinks
-AllowOverride All
-Require all granted
-</Directory>
-
 RewriteEngine on
-RewriteCond $1 !^(index\.php|resources|robots\.txt)
+RewriteBase /nulacs_dev/
+# RewriteCond $1 !^(index\.php)
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php?/$1 [L,QSA] 
+RewriteRule ^(.*)$ index.php/$1 [L,QSA]
