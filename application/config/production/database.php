@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------
-| DATABASE CONNECTIVITY SETTINGS - PRODUCTION
+| DATABASE CONNECTIVITY SETTINGS - DEVELOPMENT
 | -------------------------------------------------------------------
 | This file will contain the settings needed to access your database.
 |
@@ -76,13 +76,13 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
-	'username' => '',
-	'password' => '',
-	'database' => '',
+	'username' => 'adms_user',
+	'password' => '2019@#765An@#33##',
+	'database' => 'adms_db',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
-	'db_debug' => FALSE,
+	'db_debug' => TRUE,
 	'cache_on' => FALSE,
 	'cachedir' => '',
 	'char_set' => 'utf8',
