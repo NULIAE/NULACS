@@ -12,6 +12,13 @@ class Affiliate_model extends CI_Model
 	 */
 	public function get_affiliate_count($where = NULL) 
 	{
+		if(isset($where['affiliate.organization']))
+		{
+			$aname = $where['affiliate.organization'];
+			$this->db->like('affiliate.organization', $aname);
+			unset($where['affiliate.organization']);
+		}
+		
 		if( $where !== NULL)
 		{
 			$this->db->where($where);
@@ -38,6 +45,13 @@ class Affiliate_model extends CI_Model
 		if( $isYearNeeded )
 		{
 			$this->db->join('financial_year', 'financial_year.affiliate_id = affiliate.affiliate_id');
+		}
+
+		if(isset($where['affiliate.organization']))
+		{
+			$aname = $where['affiliate.organization'];
+			$this->db->like('affiliate.organization', $aname);
+			unset($where['affiliate.organization']);
 		}
 
 		if( $where !== NULL)
@@ -107,8 +121,8 @@ class Affiliate_model extends CI_Model
 	{
 		$affiliate_id = $data['affiliate_id'];
 		$year_end = $data['year_end'];
-		$board_chair = $data['board_chair'];
-		$adm_uploader = $data['adm_uploader'];
+		$board_chair = isset($data['board_chair']) ? $data['board_chair'] : "";
+		$adm_uploader = isset($data['adm_uploader']) ? $data['adm_uploader'] : "";
 
 		unset($data['year_end']);
 		unset($data['board_chair']);
@@ -228,7 +242,8 @@ class Affiliate_model extends CI_Model
 	 */
 	public function get_affiliate_users($affiliate_id)
 	{
-		$this->db->select('user_id, prifix, first_name, last_name, is_board_chair, is_adm_uploader');
+		$this->db->select('user_id, name, prifix, first_name, last_name, is_board_chair, is_adm_uploader, role_description');
+		$this->db->join('roles', 'roles.role_id = users.role_id');
 		$this->db->where('affiliate_id', $affiliate_id);
 
 		$query = $this->db->get('users');
@@ -282,17 +297,11 @@ class Affiliate_model extends CI_Model
 			}
 		}
 
-		//Get the last month and year
-		$month = date("m", strtotime("-1 month", time()));
-		$year = date("Y", strtotime("-1 month", time()));
-
 		$this->db->select('affiliate.affiliate_id,email,phone,city,stateabbreviation as state,month,year,compliance_status,status_flags.name as status_name,icon');
 		$this->db->from('affiliate');
 		$this->db->join('affiliate_compliance_status_monthly cms', 'cms.affiliate_id = affiliate.affiliate_id');
 		$this->db->join('state', 'state.stateid = affiliate.state');
 		$this->db->join('status_flags', 'status_flags.id = cms.compliance_status');
-		$this->db->where('cms.year', $year);
-		$this->db->where('cms.month', $month);
 
 		if( $search !== NULL )
 		{
@@ -308,6 +317,9 @@ class Affiliate_model extends CI_Model
 		{
 			$this->db->limit($limit, $start);
 		}
+
+		$this->db->order_by('cms.year', "DESC");
+		$this->db->order_by('cms.id', "DESC");
 
 		$query = $this->db->get();
 
@@ -733,37 +745,112 @@ class Affiliate_model extends CI_Model
 
 		$row = $query->row_array();
 
-		if(isset($row)) {
-			return array("key_indicators_id" => $row['id'], "key_indicators" => json_decode($row['indicators'], TRUE));
+		if(isset($row)) 
+		{
+			return array("id" => $row['id'], "key_indicators" => json_decode($row['indicators'], TRUE));
+		} 
+		else 
+		{
+			return NULL;
 		}
-
-		return NULL;
 	}
 
 	public function save_key_indicators($data)
 	{
-		$status = FALSE;
+		$row = $this->get_key_indicators($data['affiliate_id'], $data['quarter'], $data['year']);
 
-		$id = $data['key_id'];
-		unset($data['key_id']);
-		
-		if(isset($id) && $id !== "")
+		if(isset($row))
 		{
-			$this->db->where('id', $id);
+			$this->db->where('id', $row['id']);
 
-			$status = $this->db->update('key_indicators', $data);
+			return $this->db->update('key_indicators', $data);
 		}
 		else
 		{
-			$status = $this->db->insert('key_indicators', $data);
-
-			if($status)
-			{
-				$id = $this->db->insert_id();
-			}
+			return $this->db->insert('key_indicators', $data);
 		}
+	}
 
-		return ($status === TRUE) ? $id : $status;
+	/**
+	 * get_legal_document
+	 *
+	 * @return array
+	 */
+	public function get_legal_document($affiliate_id)
+	{
+		$this->db->select('*');
+		$this->db->from('legal_document_status');
+		$this->db->where('affiliate_id',$affiliate_id);
+
+
+		$query = $this->db->get(); 
+
+		return $query->result_array();
+	}
+		/**
+	 * get_other_document
+	 *
+	 * @return array
+	 */
+	public function get_other_document($affiliate_id)
+	{
+		$this->db->select('*');
+		$this->db->from('other_document_status');
+		$this->db->where('affiliate_id',$affiliate_id);
+
+
+		$query = $this->db->get(); 
+
+		return $query->result_array();
+	}
+	public function legal_compliance_document($data)
+	{
+
+
+
+		$insert_data = array(
+			"document_id" => '07',
+			"affiliate_id" =>  $data['affiliate_id'],
+			'quarterly_submitted_by' =>$this->session->user_id,
+			'quarterly_submitted_date'=>date("m-d-Y"),
+			'quarterly_submitted_ontime_yes_no'=>'',
+			'quarterly_reviewed_date'=>date("m-d-Y"),
+			'quarterly_reviewed_by'=>date("m-d-Y"),
+			'quarterly_review_status'=>'',
+			'quarterly_compliance_status'=>'',
+			'quarterly_upload_file'=>$data['file_path'],
+			'quarterly_upload_file_name'=>$data['upload_file_name'],
+			'quarterly_upload_file_extension'=>$data['upload_file_extension'],
+			'quarterly_document_comment'=>'',
+		);
+	 
+		$this->db->insert('legal_document_status', $insert_data);
+		$insert_id = $this->db->insert_id();
+
+
+
+		return $insert_id;
+	
+	}
+
+	public function other_compliance_document($data)
+	{
+		$insert_data = array(
+			"affiliate_id" =>  $data['affiliate_id'],
+			'other_submitted_by' =>$this->session->user_id,
+			'other_submitted_date'=>date("m-d-Y"),
+			'other_upload_file'=>$data['file_path'],
+			'other_upload_file_name'=>$data['upload_file_name'],
+			'other_upload_file_extension'=>$data['upload_file_extension'],
+		);
+	 
+		$this->db->insert('other_document_status', $insert_data);
+		$insert_id = $this->db->insert_id();
+
+
+
+		return $insert_id;
+	
 	}
 	
 }
