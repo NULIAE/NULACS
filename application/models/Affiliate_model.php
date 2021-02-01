@@ -297,11 +297,12 @@ class Affiliate_model extends CI_Model
 			}
 		}
 
-		$this->db->select('affiliate.affiliate_id,email,phone,city,stateabbreviation as state,month,year,compliance_status,status_flags.name as status_name,icon');
+		$this->db->select('affiliate.affiliate_id,email,phone,city,stateabbreviation as state,cms.month,cms.year,cms.compliance_status,status_flags.name as status_name,icon,cms.id');
 		$this->db->from('affiliate');
 		$this->db->join('affiliate_compliance_status_monthly cms', 'cms.affiliate_id = affiliate.affiliate_id');
 		$this->db->join('state', 'state.stateid = affiliate.state');
 		$this->db->join('status_flags', 'status_flags.id = cms.compliance_status');
+		$this->db->where_in('cms.year', array(2017,2018,2019,2020,2021));
 
 		if( $search !== NULL )
 		{
@@ -318,8 +319,8 @@ class Affiliate_model extends CI_Model
 			$this->db->limit($limit, $start);
 		}
 
+		$this->db->group_by('affiliate.affiliate_id');
 		$this->db->order_by('cms.year', "DESC");
-		$this->db->order_by('cms.id', "DESC");
 
 		$query = $this->db->get();
 
