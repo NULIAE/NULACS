@@ -80,6 +80,8 @@ $route['module/user'] = 'modules/user_management/user/index';
 $route['module/user/filter'] = 'modules/user_management/user/filter';
 $route['module/user/add'] = 'modules/user_management/user/add_form';
 $route['module/user/insert'] = 'modules/user_management/user/insert';
+$route['module/affiliate/document/doupload'] = 'modules/affiliate/affiliate/doupload';
+
 
 $route['module/notification/all'] = 'modules/notification_center/notification/index';
 $route['module/notification/emails'] = 'modules/notification_center/email_template/index';
