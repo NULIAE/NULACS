@@ -786,72 +786,93 @@ class Affiliate_model extends CI_Model
 
 		$query = $this->db->get(); 
 
-		return $query->result_array();
+		$result = $query->result_array();
+
+		foreach($result as $key => $row)
+		{
+			$result[$key]['comments'] = $this->Document_model->get_document_comments($row['legal_d_id'], 10);
+		}
+
+		return $result;
 	}
 		/**
 	 * get_other_document
 	 *
 	 * @return array
 	 */
-	public function get_other_document($affiliate_id)
+	public function get_other_document($affiliate_id, $document_type_id)
 	{
 		$this->db->select('*');
 		$this->db->from('other_document_status');
 		$this->db->where('affiliate_id',$affiliate_id);
-
+		$this->db->where('document_type_id',$document_type_id);
 
 		$query = $this->db->get(); 
 
-		return $query->result_array();
+		$result = $query->result_array();
+
+		foreach($result as $key => $row)
+		{
+			$result[$key]['comments'] = $this->Document_model->get_document_comments($row['id'], $row['document_type_id']);
+		}
+
+		return $result;
 	}
+	
 	public function legal_compliance_document($data)
 	{
-
-
-
 		$insert_data = array(
-			"document_id" => '07',
-			"affiliate_id" =>  $data['affiliate_id'],
+			"document_id" => $data['document_type_id'],
+			"affiliate_id" => $data['affiliate_id'],
 			'quarterly_submitted_by' =>$this->session->user_id,
-			'quarterly_submitted_date'=>date("m-d-Y"),
-			'quarterly_submitted_ontime_yes_no'=>'',
-			'quarterly_reviewed_date'=>date("m-d-Y"),
-			'quarterly_reviewed_by'=>date("m-d-Y"),
-			'quarterly_review_status'=>'',
-			'quarterly_compliance_status'=>'',
+			'quarterly_submitted_date'=>date("Y-m-d H:i:s"),
 			'quarterly_upload_file'=>$data['file_path'],
 			'quarterly_upload_file_name'=>$data['upload_file_name'],
-			'quarterly_upload_file_extension'=>$data['upload_file_extension'],
-			'quarterly_document_comment'=>'',
+			'quarterly_upload_file_extension'=>$data['upload_file_extension']
 		);
-	 
-		$this->db->insert('legal_document_status', $insert_data);
-		$insert_id = $this->db->insert_id();
 
+		if(isset($data['legal_d_id']))
+		{
+			$this->db->where('legal_d_id', $data['legal_d_id']);
+			
+			$this->db->update('legal_document_status', $insert_data);
 
-
-		return $insert_id;
-	
+			return $data['legal_d_id'];
+		}
+		else
+		{
+			$this->db->insert('legal_document_status', $insert_data);
+			
+			return $this->db->insert_id();
+		}
 	}
 
-	public function other_compliance_document($data)
+	public function other_document($data)
 	{
 		$insert_data = array(
+			"document_type_id" => $data['document_type_id'],
 			"affiliate_id" =>  $data['affiliate_id'],
 			'other_submitted_by' =>$this->session->user_id,
-			'other_submitted_date'=>date("m-d-Y"),
+			'other_submitted_date'=>date("Y-m-d H:i:s"),
 			'other_upload_file'=>$data['file_path'],
 			'other_upload_file_name'=>$data['upload_file_name'],
 			'other_upload_file_extension'=>$data['upload_file_extension'],
 		);
-	 
-		$this->db->insert('other_document_status', $insert_data);
-		$insert_id = $this->db->insert_id();
 
+		if(isset($data['id']))
+		{
+			$this->db->where('id', $data['id']);
 
+			$this->db->update('other_document_status', $insert_data);
 
-		return $insert_id;
-	
+			return $data['id'];
+		}
+		else
+		{
+			$this->db->insert('other_document_status', $insert_data);
+			
+			return $this->db->insert_id();	
+		}
 	}
 	
 }

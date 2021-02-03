@@ -484,6 +484,7 @@ $config['csrf_exclude_uris'] = array(
 	'module/assessment/criteria-answers',
 	'module/assessment/rating',
 	'module/assessment/assessment-listing',
+	'module/affiliate/document/doupload'
 );
 
 /*

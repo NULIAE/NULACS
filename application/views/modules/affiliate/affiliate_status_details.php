@@ -23,6 +23,12 @@ $quarterArray = array(
 {
  border-color: red !important;
 }
+.update-status a.btn-primary
+{
+color: #fff;
+background-color: #000;
+border-color: #000;
+}
 </style>
 <main class="user">
     <div class="container">
@@ -36,7 +42,7 @@ $quarterArray = array(
 					<h3><?php echo $affiliate['organization'].' - '.$affiliate['city'].', '.$affiliate['stateabbreviation']; ?></h3>
 				</div>
 			</div>
-			<div class="mainTab">
+			<div class="mainTab mb-5">
 				<nav>
 					<div class="nav justify-content-center" id="nav-tab" role="tablist">
 						<a class="nav-item nav-link active" id="nav-x1-tab" data-toggle="tab" href="#nav-x1" role="tab"
@@ -79,7 +85,7 @@ $quarterArray = array(
 
 								<div class=" m-y-20">
 									<div class="h5 t-c f-bold">MONTHLY (<?php echo strtoupper(date('M', mktime(0, 0, 0, $month, 10))).' '.$year; ?>)</div>
-									<div class="h6">Due Date: 12/31/2020</div>
+									<div class="h6">Due Date: 01/31/2021</div>
 
 								</div>
 
@@ -107,7 +113,7 @@ $quarterArray = array(
 																<div class="col-3 col-md-2"><span class="sub"><?php echo $key+1; ?></span></div>
 																<div class="col-14 col-md-6" id="document-name-<?php echo $document['document_id']; ?>">
 																	<?php if(isset($currentDoc)) : ?>
-																		<a href="<?php echo base_url($currentDoc['monthly_upload_file']); ?>"><span class="sub text-primary link"><?php echo $document['document_name']; ?> <i class="i i-create"></i></span></a>
+																		<a href="<?php echo base_url($currentDoc['monthly_upload_file']); ?>" class="float-left"><span class="sub text-primary link"><?php echo $document['document_name']; ?></span></a> <a href="#" data-document="<?php echo $document['document_id']; ?>" data-interval="month" class="reupload"><span class="sub"><i class="i i-create"></i></span></a>
 																	<?php else: ?>
 																		<span class="sub"><?php echo $document['document_name']; ?></span>
 																	<?php endif; ?>
@@ -115,7 +121,7 @@ $quarterArray = array(
 																<div class="col-7 col-md-4" id="submitted-<?php echo $document['document_id']; ?>"><span class="sub"><?php if(isset($currentDoc)) echo date('m/d/Y', strtotime($currentDoc['monthly_submitted_date'])); ?></span></div>
 																<?php if(isset($currentDoc)): ?>
 																	
-																	<div class="col-24 col-md-5">
+																	<div class="col-24 col-md-5" id="doc-status-<?php echo $document['document_id']; ?>">
 																		<span class="sub">
 																			<?php if($this->session->role_id == 1): ?>
 																				<select class="form-control selG" data-interval="month" data-documentid="<?php echo $currentDoc['monthly_document_id'] ?>" data-doctype="<?php echo $currentDoc['document_type_id'] ?>" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>">
@@ -129,7 +135,7 @@ $quarterArray = array(
 																		</span>
 																	</div>
 
-																	<div class="col-24 col-md-7">
+																	<div class="col-24 col-md-7" id="chat-box-<?php echo $document['document_id']; ?>">
 
 																		<div class="chatBox">
 																			<div class="chatBoxinn">
@@ -160,34 +166,41 @@ $quarterArray = array(
 																		</div>
 
 																	</div>
-																<?php else: ?>
-																	<div class="col-20 col-md-10" id="month-segment-<?php echo $document['document_id']; ?>">
-																		<span class="sub">
-																			<div id="dropzone-<?php echo $document['document_id']; ?>">
-																				<form action="<?php echo base_url('module/affiliate/document/upload'); ?>" class="dropzone needsclick" data-document="<?php echo $document['document_id']; ?>"  data-doctype="<?php echo $document['document_file_extension']; ?>">
-																					<div class="dz-message needsclick">
-																					<span class="text">
-																						<i class="i i-file_upload"></i>
-																						Click here or Drop Files
-
-																					</span>
-
-																					</div>
-																				</form>
-																			</div>
-																		</span>
-																	</div>
-
-																	<button id="btn-collapse-<?php echo $document['document_id']; ?>" class="btn btn-primary btn-rounded btn-add ml-auto " data-toggle="collapse"
-																	data-target="#collapse<?php echo $document['document_id']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $document['document_id']; ?>"><i
-																		class="i i-add"></i> <span class="sr-only">Add</span></button>
 																<?php endif; ?>
+																<div class="col-20 col-md-10 <?php if(isset($currentDoc)) echo "d-none"; ?>" id="month-segment-<?php echo $document['document_id']; ?>">
+																	<span class="sub">
+																		<div id="dropzone-<?php echo $document['document_id']; ?>">
+																			<form action="<?php echo base_url('module/affiliate/document/upload'); ?>" class="dropzone needsclick" data-document="<?php echo $document['document_id']; ?>"  data-doctype="<?php echo $document['document_file_extension']; ?>">
+																				<div class="dz-message needsclick">
+																				<span class="text">
+																					<i class="i i-file_upload"></i>
+																					Click here or Drop Files
+
+																				</span>
+
+																				</div>
+																			</form>
+																		</div>
+																	</span>
+																	<p class="text-center m-0"><small><i>
+																	<?php if(isset($currentDoc['monthly_upload_file_name'])): ?>
+																		<?php echo $currentDoc['monthly_upload_file_name']; ?>
+																	<?php endif; ?>
+																	<?php if($document['document_file_extension'] != ""): ?>
+																	(Supports only <?php echo $document['document_file_extension']; ?> files)
+																	<?php endif; ?>
+																	</i></small></p>
+																</div>
+
+																<button id="btn-collapse-<?php echo $document['document_id']; ?>" class="btn btn-primary btn-rounded btn-add ml-auto <?php if(isset($currentDoc)) echo "d-none"; ?>" data-toggle="collapse"
+																data-target="#collapse<?php echo $document['document_id']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $document['document_id']; ?>"><i
+																	class="i i-add"></i> <span class="sr-only">Add</span></button>
 															</div>
 														</div>
 													</div>
 												</div>
 
-												<?php if(!isset($currentDoc)): ?>
+												<?php //if(!isset($currentDoc)): ?>
 													<div id="collapse<?php echo $document['document_id']; ?>" class="collapse " aria-labelledby="heading<?php echo $key+1; ?>" data-parent="#accordionExample">
 														<div class="acc-body">
 															<form id="form-upload-<?php echo $document['document_id']; ?>" class="row align-items-end form-metadata">
@@ -214,7 +227,7 @@ $quarterArray = array(
 															</form>
 														</div>
 													</div>
-												<?php endif; ?>
+												<?php //endif; ?>
 
 											</div>
 										<?php endforeach; ?>
@@ -227,11 +240,12 @@ $quarterArray = array(
 												<div class="p-a-15 text-md-right">
 												<span class="h5">Affiliate monthly compliance for <?php echo strtoupper(date('M', mktime(0, 0, 0, $month, 10))).' '.$year; ?></span>
 
-												<?php foreach($compliance_status as $status): ?>
-												<a class="btn btn-lbl" data-status="<?php echo $status['id']; ?>"  data-rel="tooltip" data-placement="bottom" title="<?php echo $status['name']; ?>"><?php echo $status['icon']; ?> </a>
-												<?php endforeach; ?>
+												<a class="btn btn-round-ib btn-lbl ml-3 <?php if($monthly_compliance == 8) echo "btn-primary"; ?>" data-status="8" data-rel="tooltip" data-placement="bottom" title="Compliance"><i class="i i-compliant"></i><span class="sr-only">Compliance</span></a>
+												<a class="btn btn-round-ib btn-lbl <?php if($monthly_compliance == 9) echo "btn-primary"; ?>" data-status="9" data-rel="tooltip" data-placement="bottom" title="Non Compliance"><i class="i i-non-compliant"></i><span class="sr-only">Non Compliance</span></a>
+												<a class="btn btn-round-ib btn-lbl <?php if($monthly_compliance == 10) echo "btn-primary"; ?>" data-status="10" data-rel="tooltip" data-placement="bottom" title="Waiting"><i class="i i-waiting"></i><span class="sr-only">Waiting</span></a>
+												<a class="btn btn-round-ib btn-lbl <?php if($monthly_compliance == 11) echo "btn-primary"; ?>" data-status="11" data-rel="tooltip" data-placement="bottom" title="Indeterminate"><i class="i i-Indeterminate"></i><span class="sr-only">Indeterminate</span></a>
 
-												<button class="btn btn-primary btn-rounded min w-100px status-update-btn" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>" data-interval="month" disabled>UPDATE</button>
+												<button class="btn btn-primary btn-rounded min w-100px status-update-btn" data-compliance="<?php echo $monthly_compliance; ?>" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>" data-interval="month" disabled>UPDATE</button>
 												</div>
 											</div>
 										</div>
@@ -243,7 +257,7 @@ $quarterArray = array(
 
 								<div class=" m-y-20">
 									<div class="h5 t-c f-bold">Q<?php echo $quarter; ?> (<?php echo $quarterArray[$quarter]; ?>)</div>
-									<div class="h6">Due Date: 12/31/2020</div>
+									<div class="h6">Due Date: 01/31/2021</div>
 
 								</div>
 
@@ -270,14 +284,14 @@ $quarterArray = array(
 																<div class="col-3 col-md-2"><span class="sub"><?php echo $key+1; ?></span></div>
 																<div class="col-14 col-md-6" id="document-name-<?php echo $document['document_id']; ?>">
 																<?php if(isset($currentDoc)) : ?>
-																		<a href="<?php echo base_url($currentDoc['quarterly_upload_file']); ?>"><span class="sub text-primary link"><?php echo $document['document_name']; ?> <i class="i i-create"></i></span></a>
+																		<a href="<?php echo base_url($currentDoc['quarterly_upload_file']); ?>" class="float-left"><span class="sub text-primary link"><?php echo $document['document_name']; ?></span></a> <a href="#" data-document="<?php echo $document['document_id']; ?>" data-interval="quarter" class="reupload"><span class="sub"><i class="i i-create"></i></span></a>
 																	<?php else: ?>
 																		<span class="sub"><?php echo $document['document_name']; ?></span>
 																	<?php endif; ?>
 																</div>
 																<div class="col-7 col-md-4" id="submitted-<?php echo $document['document_id']; ?>"><span class="sub"><?php if(isset($currentDoc)) echo date('m/d/Y', strtotime($currentDoc['quarterly_submitted_date'])); ?></span></div>
 																<?php if(isset($currentDoc)): ?>
-																<div class="col-24 col-md-5">
+																<div class="col-24 col-md-5" id="doc-status-<?php echo $document['document_id']; ?>">
 																	<span class="sub">
 																		<?php if($this->session->role_id == 1): ?>
 																			<select class="form-control selG" data-interval="quarter" data-documentid="<?php echo $currentDoc['quarterly_id'] ?>" data-doctype="<?php echo $currentDoc['document_type_id'] ?>" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>">
@@ -291,7 +305,7 @@ $quarterArray = array(
 																	</span>
 																</div>
 
-																<div class="col-24 col-md-7">
+																<div class="col-24 col-md-7" id="chat-box-<?php echo $document['document_id']; ?>">
 
 																	<div class="chatBox">
 																		<div class="chatBoxinn">
@@ -322,8 +336,8 @@ $quarterArray = array(
 																	</div>
 
 																</div>
-																<?php else: ?>
-																<div class="col-20 col-md-10" id="quarter-segment-<?php echo $document['document_id']; ?>">
+																<?php endif; ?>
+																<div class="col-20 col-md-10 <?php if(isset($currentDoc)) echo "d-none"; ?>" id="quarter-segment-<?php echo $document['document_id']; ?>">
 																	<span class="sub">
 																		<div id="dropzone-<?php echo $document['document_id']; ?>">
 																			<form action="<?php echo base_url('module/affiliate/document/upload'); ?>" class="dropzone needsclick" data-document="<?php echo $document['document_id']; ?>"  data-doctype="<?php echo $document['document_file_extension']; ?>">
@@ -338,45 +352,50 @@ $quarterArray = array(
 																			</form>
 																		</div>
 																	</span>
+																	<p class="text-center m-0"><small><i>
+																	<?php if(isset($currentDoc['quarterly_upload_file_name'])): ?>
+																		<?php echo $currentDoc['quarterly_upload_file_name']; ?>
+																	<?php endif; ?>
+																	<?php if($document['document_file_extension'] != ""): ?>
+																	(Supports only <?php echo $document['document_file_extension']; ?> files)
+																	<?php endif; ?>
+																	</i></small></p>
 																</div>
 
-																<button id="btn-collapse-<?php echo $document['document_id']; ?>" class="btn btn-primary btn-rounded btn-add ml-auto " data-toggle="collapse"
+																<button id="btn-collapse-<?php echo $document['document_id']; ?>" class="btn btn-primary btn-rounded btn-add ml-auto <?php if(isset($currentDoc)) echo "d-none"; ?>" data-toggle="collapse"
 																	data-target="#collapse<?php echo $document['document_id']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $document['document_id']; ?>"><i
 																		class="i i-add"></i> <span class="sr-only">Add</span></button>
-																<?php endif; ?>
 															</div>
 														</div>
 													</div>
 												</div>
 
-												<?php if(!isset($currentDoc)): ?>
-													<div id="collapse<?php echo $document['document_id']; ?>" class="collapse " aria-labelledby="heading<?php echo $key+1; ?>" data-parent="#accordionExample">
-														<div class="acc-body">
-															<form id="form-upload-<?php echo $document['document_id']; ?>" class="row align-items-end form-metadata">
-																<?php if(isset($document['metadata'])): ?>
-																	<?php $metadata_fields = json_decode($document['metadata']);?>
-																	<?php foreach($metadata_fields as $index => $field): ?>
-																	<div class="col-lg-7 col-md-12 form-group">
-																		<div>
-																			<label for="metafield-<?php echo $document['document_id'].$index; ?>"><?php echo $field->metadata; ?></label>
-																			<input type="<?php echo $field->datatype; ?>" name="metadata[<?php echo $field->metadata; ?>]" class="form-control" id="metafield-<?php echo $document['document_id'].$index; ?>" placeholder="<?php echo $field->metadata; ?>" required />
-																		</div>
+												<div id="collapse<?php echo $document['document_id']; ?>" class="collapse " aria-labelledby="heading<?php echo $key+1; ?>" data-parent="#accordionExample">
+													<div class="acc-body">
+														<form id="form-upload-<?php echo $document['document_id']; ?>" class="row align-items-end form-metadata">
+															<?php if(isset($document['metadata'])): ?>
+																<?php $metadata_fields = json_decode($document['metadata']);?>
+																<?php foreach($metadata_fields as $index => $field): ?>
+																<div class="col-lg-7 col-md-12 form-group">
+																	<div>
+																		<label for="metafield-<?php echo $document['document_id'].$index; ?>"><?php echo $field->metadata; ?></label>
+																		<input type="<?php echo $field->datatype; ?>" name="metadata[<?php echo $field->metadata; ?>]" class="form-control" id="metafield-<?php echo $document['document_id'].$index; ?>" placeholder="<?php echo $field->metadata; ?>" required />
 																	</div>
-																	<?php endforeach; ?>
-																<?php endif; ?>
-																<div class="col-lg-3 col-md-12 form-group">
-																	<button type="submit" id="btn-upload-<?php echo $document['document_id']; ?>" class="btn btn-primary btn-rounded min w-100px">UPLOAD</button>
 																</div>
-																<input type="hidden" name="interval" value="quarter" />
-																<input type="hidden" name="document_id" value="<?php echo $document['document_id']; ?>" />
-																<input type="hidden" name="document_type_id" value="<?php echo $document['document_type_id']; ?>" />
-																<input type="hidden" name="affiliate_id" value="<?php echo $affiliate['affiliate_id']; ?>" />
-																<input type="hidden" name="year" value="<?php echo $year; ?>" />
-																<input type="hidden" name="month" value="<?php echo isset($_GET['month']) ? $_GET['month'] : $month; ?>" />
-															</form>
-														</div>
+																<?php endforeach; ?>
+															<?php endif; ?>
+															<div class="col-lg-3 col-md-12 form-group">
+																<button type="submit" id="btn-upload-<?php echo $document['document_id']; ?>" class="btn btn-primary btn-rounded min w-100px">UPLOAD</button>
+															</div>
+															<input type="hidden" name="interval" value="quarter" />
+															<input type="hidden" name="document_id" value="<?php echo $document['document_id']; ?>" />
+															<input type="hidden" name="document_type_id" value="<?php echo $document['document_type_id']; ?>" />
+															<input type="hidden" name="affiliate_id" value="<?php echo $affiliate['affiliate_id']; ?>" />
+															<input type="hidden" name="year" value="<?php echo $year; ?>" />
+															<input type="hidden" name="month" value="<?php echo isset($_GET['month']) ? $_GET['month'] : $month; ?>" />
+														</form>
 													</div>
-												<?php endif; ?>
+												</div>
 
 											</div>
 										<?php endforeach; ?>
@@ -389,11 +408,12 @@ $quarterArray = array(
 											<div class="p-a-15 text-md-right">
 											<span class="h5">Affiliate quarterly compliance for <?php echo $quarterArray[$quarter]; ?></span>
 
-											<?php foreach($compliance_status as $status): ?>
-												<a class="btn btn-lbl" data-status="<?php echo $status['id']; ?>" data-rel="tooltip" data-placement="bottom" title="<?php echo $status['name']; ?>"><?php echo $status['icon']; ?> </a>
-											<?php endforeach; ?>
+											<a class="btn btn-round-ib btn-lbl ml-3 <?php if($quarterly_compliance == 8) echo "btn-primary"; ?>" data-status="8" data-rel="tooltip" data-placement="bottom" title="Compliance"><i class="i i-compliant"></i><span class="sr-only">Compliance</span></a>
+											<a class="btn btn-round-ib btn-lbl <?php if($quarterly_compliance == 9) echo "btn-primary"; ?>" data-status="9" data-rel="tooltip" data-placement="bottom" title="Non Compliance"><i class="i i-non-compliant"></i><span class="sr-only">Non Compliance</span></a>
+											<a class="btn btn-round-ib btn-lbl <?php if($quarterly_compliance == 10) echo "btn-primary"; ?>" data-status="10" data-rel="tooltip" data-placement="bottom" title="Waiting"><i class="i i-waiting"></i><span class="sr-only">Waiting</span></a>
+											<a class="btn btn-round-ib btn-lbl <?php if($quarterly_compliance == 11) echo "btn-primary"; ?>" data-status="11" data-rel="tooltip" data-placement="bottom" title="Indeterminate"><i class="i i-Indeterminate"></i><span class="sr-only">Indeterminate</span></a>
 
-											<button class="btn btn-primary btn-rounded min w-100px status-update-btn" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>" data-interval="quarter" disabled>UPDATE</button>
+											<button class="btn btn-primary btn-rounded min w-100px status-update-btn" data-compliance="<?php echo $quarterly_compliance; ?>" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>" data-interval="quarter" disabled>UPDATE</button>
 											</div>
 										</div>
 									</div>
@@ -403,7 +423,7 @@ $quarterArray = array(
 							<div class="tab-pane fade" id="nav-y3" role="tabpanel" aria-labelledby="nav-y3-tab">
 								<div class=" m-y-20">
 									<div class="h5 t-c f-bold">YEARLY (<?php echo strtoupper(date('M', strtotime($affiliate['year_start'])))." ".$year; ?> - <?php echo strtoupper(date('M', strtotime($affiliate['year_end'])))." ".($year+1); ?>)</div>
-									<div class="h6">Due Date: 12/31/2020</div>
+									<div class="h6">Due Date: 01/31/2021</div>
 
 								</div>
 
@@ -430,7 +450,7 @@ $quarterArray = array(
 																<div class="col-3 col-md-2"><span class="sub"><?php echo $key+1; ?></span></div>
 																<div class="col-14 col-md-6" id="document-name-<?php echo $document['document_id']; ?>">
 																	<?php if(isset($currentDoc)) : ?>
-																		<a href="<?php echo base_url($currentDoc['yearly_upload_file']); ?>"><span class="sub text-primary link"><?php echo $document['document_name']; ?> <i class="i i-create"></i></span></a>
+																		<a href="<?php echo base_url($currentDoc['yearly_upload_file']); ?>" class="float-left"><span class="sub text-primary link"><?php echo $document['document_name']; ?></span></a> <a href="#" data-document="<?php echo $document['document_id']; ?>" data-interval="year" class="reupload"><span class="sub"><i class="i i-create"></i></span></a>
 																	<?php else: ?>
 																		<span class="sub"><?php echo $document['document_name']; ?></span>
 																	<?php endif; ?>
@@ -438,7 +458,7 @@ $quarterArray = array(
 																<div class="col-7 col-md-4" id="submitted-<?php echo $document['document_id']; ?>"><span class="sub"><?php if(isset($currentDoc)) echo date('m/d/Y', strtotime($currentDoc['yearly_submitted_date'])); ?></span></div>
 																<?php if(isset($currentDoc)): ?>
 																	
-																	<div class="col-24 col-md-5">
+																	<div class="col-24 col-md-5" id="doc-status-<?php echo $document['document_id']; ?>">
 																		<span class="sub">
 																			<?php if($this->session->role_id == 1): ?>
 																				<select class="form-control selG" data-interval="year" data-documentid="<?php echo $currentDoc['yearly_d_id'] ?>" data-doctype="<?php echo $currentDoc['document_type_id'] ?>" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>">
@@ -452,7 +472,7 @@ $quarterArray = array(
 																		</span>
 																	</div>
 
-																	<div class="col-24 col-md-7">
+																	<div class="col-24 col-md-7" id="chat-box-<?php echo $document['document_id']; ?>">
 
 																		<div class="chatBox">
 																			<div class="chatBoxinn">
@@ -483,28 +503,35 @@ $quarterArray = array(
 																		</div>
 
 																	</div>
-																<?php else: ?>
-																	<div class="col-20 col-md-10" id="year-segment-<?php echo $document['document_id']; ?>">
-																		<span class="sub">
-																			<div id="dropzone-<?php echo $document['document_id']; ?>">
-																			<form action="<?php echo base_url('module/affiliate/document/upload'); ?>" class="dropzone needsclick" data-document="<?php echo $document['document_id']; ?>"  data-doctype="<?php echo $document['document_file_extension']; ?>">
-																					<div class="dz-message needsclick">
-																					<span class="text">
-																						<i class="i i-file_upload"></i>
-																						Click here or Drop Files
-
-																					</span>
-
-																					</div>
-																				</form>
-																			</div>
-																		</span>
-																	</div>
-
-																	<button id="btn-collapse-<?php echo $document['document_id']; ?>" class="btn btn-primary btn-rounded btn-add ml-auto " data-toggle="collapse"
-																	data-target="#collapse<?php echo $document['document_id']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $document['document_id']; ?>"><i
-																		class="i i-add"></i> <span class="sr-only">Add</span></button>
 																<?php endif; ?>
+																<div class="col-20 col-md-10 <?php if(isset($currentDoc)) echo "d-none"; ?>" id="year-segment-<?php echo $document['document_id']; ?>">
+																	<span class="sub">
+																		<div id="dropzone-<?php echo $document['document_id']; ?>">
+																		<form action="<?php echo base_url('module/affiliate/document/upload'); ?>" class="dropzone needsclick" data-document="<?php echo $document['document_id']; ?>"  data-doctype="<?php echo $document['document_file_extension']; ?>">
+																				<div class="dz-message needsclick">
+																				<span class="text">
+																					<i class="i i-file_upload"></i>
+																					Click here or Drop Files
+
+																				</span>
+
+																				</div>
+																			</form>
+																		</div>
+																	</span>
+																	<p class="text-center m-0"><small><i>
+																	<?php if(isset($currentDoc['yearly_upload_file_name'])): ?>
+																		<?php echo $currentDoc['yearly_upload_file_name']; ?>
+																	<?php endif; ?>
+																	<?php if($document['document_file_extension'] != ""): ?>
+																	(Supports only <?php echo $document['document_file_extension']; ?> files)
+																	<?php endif; ?>
+																	</i></small></p>
+																</div>
+
+																<button id="btn-collapse-<?php echo $document['document_id']; ?>" class="btn btn-primary btn-rounded btn-add ml-auto  <?php if(isset($currentDoc)) echo "d-none"; ?>" data-toggle="collapse"
+																data-target="#collapse<?php echo $document['document_id']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $document['document_id']; ?>"><i
+																	class="i i-add"></i> <span class="sr-only">Add</span></button>
 															</div>
 														</div>
 													</div>
@@ -550,54 +577,181 @@ $quarterArray = array(
 											<div class="p-a-15 text-md-right">
 											<span class="h5">Affiliate yearly compliance for JAN <?php echo $year; ?> - JAN <?php echo $year+1; ?></span>
 
-											<?php foreach($compliance_status as $status): ?>
-												<a class="btn btn-lbl" data-status="<?php echo $status['id']; ?>" data-rel="tooltip" data-placement="bottom" title="<?php echo $status['name']; ?>"><?php echo $status['icon']; ?> </a>
-											<?php endforeach; ?>
+											<a class="btn btn-round-ib btn-lbl ml-3 <?php if($yearly_compliance == 8) echo "btn-primary"; ?>" data-status="8" data-rel="tooltip" data-placement="bottom" title="Compliance"><i class="i i-compliant"></i><span class="sr-only">Compliance</span></a>
+											<a class="btn btn-round-ib btn-lbl <?php if($yearly_compliance == 9) echo "btn-primary"; ?>" data-status="9" data-rel="tooltip" data-placement="bottom" title="Non Compliance"><i class="i i-non-compliant"></i><span class="sr-only">Non Compliance</span></a>
+											<a class="btn btn-round-ib btn-lbl <?php if($yearly_compliance == 10) echo "btn-primary"; ?>" data-status="10" data-rel="tooltip" data-placement="bottom" title="Waiting"><i class="i i-waiting"></i><span class="sr-only">Waiting</span></a>
+											<a class="btn btn-round-ib btn-lbl <?php if($yearly_compliance == 11) echo "btn-primary"; ?>" data-status="11" data-rel="tooltip" data-placement="bottom" title="Indeterminate"><i class="i i-Indeterminate"></i><span class="sr-only">Indeterminate</span></a>
 
-											<button class="btn btn-primary btn-rounded min w-100px status-update-btn" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>" data-interval="year" disabled>UPDATE</button>
+											<button class="btn btn-primary btn-rounded min w-100px status-update-btn" data-compliance="<?php echo $yearly_compliance; ?>" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>" data-interval="year" disabled>UPDATE</button>
 											</div>
 										</div>
 									</div>
 									<?php endif; ?>
 								</div>
 							</div>
+							<!--  UPLOAD SECTION -->
 							<div class="tab-pane fade" id="nav-y4" role="tabpanel" aria-labelledby="nav-y4-tab">
-
+							
 								<div class="head m-t-30">
 									<div class="row">
-									<div class="col-24"><span class="sub ">
-										<div class="t-c">LEGAL</div>
-										</span></div>
-
-
+										<div class="col-24">
+											<span class="sub ">
+											<div class="t-c">LEGAL</div>
+											</span>
+										</div>
+									</div>
+								</div>
+								<div class="cdnWrap ">
+									<div class="accordion" id="accordionExample">
+										<div class="card">
+											<div class="card-header" id="headingOne">
+											<div class="mb-0">
+												<div class="btn wrdiv odd">
+													<div class="row  align-items-center">
+														<div class="col-3 col-md-2"><span class="sub">1</span></div>
+														<div class="col-14 col-md-6"><span class="sub ">Legal Compliance Document</span></div>
+														<div class="col-7 col-md-4"><span class="sub"></span></div>
+														<div class="col-20 col-md-10">
+														<span class="sub">
+															<div class="dropzone">
+																<form action="/upload" class="l_dZUpload needsclick">
+																	<input type="hidden" name="affiliate_id" value="<?php echo $affiliate['affiliate_id']; ?>" />
+																	<input type="hidden" name="notification" value="Compliance legal document is uploaded" />
+																	<input type="hidden" name="document_type_id" value="10" />
+																	<input type="hidden" name="document_type" value="legal_compliance_document" />
+																	
+																	<div class="dz-default dz-message">
+																	<span class="text">
+																	<i class="i i-file_upload"></i>
+																	Click here or Drop Files
+																	</span>
+																	</div>
+																</form>
+															</div>
+														</span>
+														</div>
+														<button class="btn btn-primary btn-rounded btn-add ml-auto " data-toggle="collapse"
+														data-target=".collapsedoc" aria-expanded="false" aria-controls="collapsedoc"><i
+														class="i i-add"></i> </button>
+													</div>
+												</div>
+											</div>
+											</div>
+											<div id="collapselegal" class="collapse collapsedoc" aria-labelledby="headingOne"
+											data-parent="#accordionExample">
+											<div class="acc-body">
+												<div class="row align-items-end">
+													<div class="col-lg-3 col-md-12 form-group">
+														<a class="btn btn-primary btn-rounded min w-100px btn-upload-l" id="btn-upload-l">UPLOAD</a>
+													</div>
+												</div>
+											</div>
+											</div>
+										</div>
 									</div>
 								</div>
 
-								<div class="cdnWrap">
-									<div class="accordion">
-									<div class="sub dropWrap">
-
-
-										<div id="dropzone-3">
-										<form action="/upload" class="dropzone needsclick">
-											<div class="dz-message needsclick">
-											<span class="text">
-												UPDATE DOCUMENTS
-											</span>
-
-											</div>
-										</form>
+								<!-- END UPLOAD SECTION -->
+								<div class="tab-pane fade show active" id="nav-z1" role="tabpanel" aria-labelledby="nav-z1-tab">
+									<div class="head">
+										<div class="row align-items-center">
+											<div class="col-3 col-md-3"><span class="sub">NO</span></div>
+											<div class="col-10 col-md-10"><span class="sub">DOCUMENT NAME</span></div>
+											<div class="col-3 col-md-3"><span class="sub">DETAILS</span></div>
 										</div>
-
-
 									</div>
-
+									<div class="cdnWrap">
+										<div class="accordion"  id="legal_loop">
+											<?php
+											$i=1;  
+											foreach ($legal_document as $legal){ ?>
+											<div class="card">
+												<div class="card-header">
+													<div class="mb-0">
+														<div class="btn wrdiv <?php if($i%2==0) echo "odd"; ?>">
+															<div class="row  align-items-center">
+																<div class="col-3 col-md-3"><span class="sub"><?=$i++?></span></div>
+																<div class="col-24 col-md-10"><span class="sub"><a href="<?= base_url().$legal['quarterly_upload_file'].$legal['quarterly_upload_file_name']?>"><?=isset($legal['quarterly_upload_file_name'])?$legal['quarterly_upload_file_name']:''?></a>
+																	<a href="javascript:reupload('legal', <?php echo $legal['legal_d_id']; ?>);">
+																	<span class="sub"><i class="i i-create"></i>
+																	</span>
+																	</a>
+																	</span>
+																</div>
+																<div class="col-24 col-md-10" id="legal-row-<?php echo $legal['legal_d_id']; ?>">
+																	<div class="chatBox">
+																		<div class="chatBoxinn">
+																			<?php if(isset($legal['comments'])): ?>
+																				<?php foreach($legal['comments'] as $comment): ?>
+																				<div class="chatrow">
+																					<span class="user <?php echo ($comment['created_by'] === $this->session->userdata('affiliate_id')) ? 'send' : 'rec'; ?>"><?php echo strtoupper($comment['city'][0].$comment['state'][0]); ?></span>
+																					<div class="chatline">
+																						<div class="h6"><?php echo $comment['notification']; ?></div>
+																						<span class="text-primary">
+																							<?php echo $comment['city'].', '.$comment['state']; ?>
+																						</span>
+																						<span class="ml-auto text-secondary">
+																						<?php echo date("jS M,Y | H:i", strtotime($comment['created'])); ?>
+																						</span>
+																					</div>
+																				</div>
+																				<?php endforeach; ?>
+																			<?php endif; ?>
+																		</div>
+																		<div class="search collapsed">
+																			<input type="text" class="input-comment"  data-document="<?php echo $legal['legal_d_id']; ?>" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>" data-doctype="<?php echo $legal['document_id']; ?>" placeholder="Type here" />
+																			<a class="btn btn-secondary   btn-rounded btn-action-sm "><i
+																			class="i i-chat-box"></i> </a>
+																		</div>
+																		<label class="mt-2 ml-3 small" style="display:none;">Hit 'Enter' to send.</label>
+																	</div>
+																	<div class="upload d-none">
+																		<div class="card">
+																			<div class="card-header" id="headingOne">
+																			<div class="mb-0">
+																				<div class="btn wrdiv border-0">
+																					<div class="row  align-items-center">
+																						<div class="col-20 col-md-16">
+																						<span class="sub">
+																							<div class="dropzone">
+																								<form action="/upload" class="l_dZUpload needsclick">
+																									<input type="hidden" name="affiliate_id" value="<?php echo $affiliate['affiliate_id']; ?>" />
+																									<input type="hidden" name="notification" value="Compliance legal document is uploaded" />
+																									<input type="hidden" name="document_type_id" value="10" />
+																									<input type="hidden" name="legal_id" value="<?php echo $legal['legal_d_id']; ?>" />
+																									<input type="hidden" name="document_type" value="legal_compliance_document" />
+																									<div class="dz-default dz-message">
+																									<span class="text">
+																									<i class="i i-file_upload"></i>
+																									Click here or Drop Files
+																									</span>
+																									</div>
+																								</form>
+																							</div>
+																						</span>
+																						</div>
+																						<div class="col-lg-3 col-md-8">
+																						<a class="btn btn-primary btn-rounded min w-100px btn-upload-l" id="btn-upload-l">UPLOAD</a>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<?php } ?>
+										</div>
 									</div>
-
-
-
 								</div>
 							</div>
+
+							
 							<div class="tab-pane fade" id="nav-y5" role="tabpanel" aria-labelledby="nav-y5-tab">
 
 								<div class="head m-t-30">
@@ -610,26 +764,154 @@ $quarterArray = array(
 									</div>
 								</div>
 
-								<div class="cdnWrap">
-									<div class="accordion">
-									<div class="sub dropWrap">
-										<div id="dropzone-4">
-										<form action="/upload" class="dropzone needsclick">
-											<div class="dz-message needsclick">
-											<span class="text">
-												UPDATE DOCUMENTS
-											</span>
-
+								<div class="cdnWrap ">
+									<div class="accordion" id="accordionExample">
+										<div class="card">
+											<div class="card-header" id="headingOne">
+												<div class="mb-0">
+													<div class="btn wrdiv odd">
+														<div class="row  align-items-center">
+															<div class="col-3 col-md-2"><span class="sub">1</span></div>
+															<div class="col-14 col-md-6"><span class="sub ">Other Compliance Document</span></div>
+															<div class="col-7 col-md-4"><span class="sub"></span></div>
+															<div class="col-20 col-md-10">
+															<span class="sub">
+																<div class="dropzone">
+																	<form action="/upload" class="o_dZUpload needsclick">
+																		<input type="hidden" name="affiliate_id" value="<?php echo $affiliate['affiliate_id']; ?>" />
+																		<input type="hidden" name="notification" value="Compliance other document is uploaded " />
+																		<input type="hidden" name="document_type_id" value="11" />
+																		<input type="hidden" name="document_type" value="other_compliance_document" />
+																		
+																		<div class="dz-default dz-message">
+																		<span class="text">
+																		<i class="i i-file_upload"></i>
+																		Click here or Drop Files
+																		</span>
+																		</div>
+																	</form>
+																</div>
+															</span>
+															</div>
+															<button class="btn btn-primary btn-rounded btn-add ml-auto " data-toggle="collapse"
+															data-target=".collapselegal" aria-expanded="false" aria-controls="collapsedoc"><i
+															class="i i-add"></i> </button>
+														</div>
+													</div>
+												</div>
 											</div>
-										</form>
+											<div id="collapselegal" class="collapse collapsedoc" aria-labelledby="headingOne"
+											data-parent="#accordionExample">
+												<div class="acc-body">
+													<div class="row align-items-end">
+														<div class="col-lg-3 col-md-12 form-group">
+															<a class="btn btn-primary btn-rounded min w-100px btn-upload-o" id="btn-upload-o">UPLOAD</a>
+														</div>
+													</div>
+												</div>
+											</div>
 										</div>
 									</div>
-
-									</div>
-
-
-
 								</div>
+
+								<div class="tab-pane fade show active" id="nav-z22" role="tabpanel" aria-labelledby="nav-z1-tab">
+									<div class="head">
+										<div class="row align-items-center">
+											<div class="col-3 col-md-3"><span class="sub">NO</span></div>
+											<div class="col-10 col-md-10"><span class="sub">DOCUMENT NAME</span></div>
+											<div class="col-3 col-md-3"><span class="sub">DETAILS</span></div>
+										</div>
+									</div>
+									<div class="cdnWrap">
+										<div class="accordion"  id="com_other_loop">
+											<?php
+											$i=1;  
+											foreach ($compliance_other as $other){ ?>
+											<div class="card">
+												<div class="card-header">
+													<div class="mb-0">
+														<div class="btn wrdiv <?php if($i%2==0) echo "odd"; ?>">
+															<div class="row  align-items-center">
+																<div class="col-3 col-md-3"><span class="sub"><?=$i++?></span></div>
+																<div class="col-24 col-md-10"><span class="sub"><a href="<?= base_url().$other['other_upload_file'].$other['other_upload_file_name']?>"><?=isset($other['other_upload_file_name'])?$other['other_upload_file_name']:''?></a>
+																	<a href="javascript:reupload('com-other', <?php echo $other['id']; ?>);">
+																	<span class="sub"><i class="i i-create"></i>
+																	</span>
+																	</a>
+																	</span>
+																</div>
+																<div class="col-24 col-md-10" id="com-other-row-<?php echo $other['id']; ?>">
+																	<div class="chatBox">
+																		<div class="chatBoxinn">
+																			<?php if(isset($other['comments'])): ?>
+																				<?php foreach($other['comments'] as $comment): ?>
+																				<div class="chatrow">
+																					<span class="user <?php echo ($comment['created_by'] === $this->session->userdata('affiliate_id')) ? 'send' : 'rec'; ?>"><?php echo strtoupper($comment['city'][0].$comment['state'][0]); ?></span>
+																					<div class="chatline">
+																						<div class="h6"><?php echo $comment['notification']; ?></div>
+																						<span class="text-primary">
+																							<?php echo $comment['city'].', '.$comment['state']; ?>
+																						</span>
+																						<span class="ml-auto text-secondary">
+																						<?php echo date("jS M,Y | H:i", strtotime($comment['created'])); ?>
+																						</span>
+																					</div>
+																				</div>
+																				<?php endforeach; ?>
+																			<?php endif; ?>
+																		</div>
+																		<div class="search collapsed">
+																			<input type="text" class="input-comment"  data-document="<?php echo $other['id']; ?>" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>" data-doctype="<?php echo $other['document_type_id']; ?>" placeholder="Type here" />
+																			<a class="btn btn-secondary   btn-rounded btn-action-sm "><i
+																			class="i i-chat-box"></i> </a>
+																		</div>
+																		<label class="mt-2 ml-3 small" style="display:none;">Hit 'Enter' to send.</label>
+																	</div>
+																	<div class="upload d-none">
+																		<div class="card">
+																			<div class="card-header" id="headingOne">
+																			<div class="mb-0">
+																				<div class="btn wrdiv border-0">
+																					<div class="row  align-items-center">
+																						<div class="col-20 col-md-16">
+																						<span class="sub">
+																							<div class="dropzone">
+																								<form action="/upload" class="l_dZUpload needsclick">
+																									<input type="hidden" name="affiliate_id" value="<?php echo $affiliate['affiliate_id']; ?>" />
+																									<input type="hidden" name="notification" value="Compliance other document is uploaded" />
+																									<input type="hidden" name="document_type_id" value="11" />
+																									<input type="hidden" name="other_id" value="<?php echo $other['id']; ?>" />
+																									<input type="hidden" name="document_type" value="other_compliance_document" />
+																									<div class="dz-default dz-message">
+																									<span class="text">
+																									<i class="i i-file_upload"></i>
+																									Click here or Drop Files
+																									</span>
+																									</div>
+																								</form>
+																							</div>
+																						</span>
+																						</div>
+																						<div class="col-lg-3 col-md-8">
+																						<a class="btn btn-primary btn-rounded min w-100px btn-upload-l" id="btn-upload-l">UPLOAD</a>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<?php } ?>
+										</div>
+									</div>
+								</div>
+
 							</div>
 						</div>
 					</div>
@@ -774,6 +1056,9 @@ $quarterArray = array(
 																				</form>
 																			</div>
 																		</span>
+																		<?php if($document['document_file_extension'] != ""): ?>
+																		<p class="text-center m-0"><small><i>Supports only <?php echo $document['document_file_extension']; ?> files</i></small></p>
+																		<?php endif; ?>
 																	</div>
 																	<button id="btn-collapse-<?php echo $document['document_id']; ?>" class="btn btn-primary btn-rounded btn-add ml-auto " data-toggle="collapse"
 																	data-target="#collapse<?php echo $document['document_id']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $document['document_id']; ?>"><i
@@ -891,6 +1176,9 @@ $quarterArray = array(
 																				</form>
 																			</div>
 																		</span>
+																		<?php if($document['document_file_extension'] != ""): ?>
+																		<p class="text-center m-0"><small><i>Supports only <?php echo $document['document_file_extension']; ?> files</i></small></p>
+																		<?php endif; ?>
 																	</div>
 
 																	<button id="btn-collapse-<?php echo $document['document_id']; ?>" class="btn btn-primary btn-rounded btn-add ml-auto " data-toggle="collapse"
@@ -1014,6 +1302,9 @@ $quarterArray = array(
 																				</form>
 																			</div>
 																		</span>
+																		<?php if($document['document_file_extension'] != ""): ?>
+																		<p class="text-center m-0"><small><i>Supports only <?php echo $document['document_file_extension']; ?> files</i></small></p>
+																		<?php endif; ?>
 																	</div>
 
 																	<button id="btn-collapse-<?php echo $document['document_id']; ?>" class="btn btn-primary btn-rounded btn-add ml-auto " data-toggle="collapse"
@@ -1083,7 +1374,170 @@ $quarterArray = array(
 								</div>
 							</div>
 
-							<div class="tab-pane fade " id="nav-z5" role="tabpanel" aria-labelledby="nav-z5-tab">Others</div>
+							<!-- <div class="tab-pane fade " id="nav-z5" role="tabpanel" aria-labelledby="nav-z5-tab">Otherssss</div> -->
+
+							<div class="tab-pane fade" id="nav-z5" role="tabpanel" aria-labelledby="nav-y5-tab">
+
+								<div class="head m-t-30">
+									<div class="row">
+									<div class="col-24"><span class="sub ">
+										<div class="t-c">OTHERS</div>
+										</span></div>
+
+
+									</div>
+								</div>
+
+								<div class="cdnWrap ">
+									<div class="accordion" id="accordionExample">
+										<div class="card">
+											<div class="card-header" id="headingOne">
+												<div class="mb-0">
+													<div class="btn wrdiv odd">
+														<div class="row  align-items-center">
+															<div class="col-3 col-md-2"><span class="sub">1</span></div>
+															<div class="col-14 col-md-6"><span class="sub ">Other Performance Assessment Documents</span></div>
+															<div class="col-7 col-md-4"><span class="sub"></span></div>
+															<div class="col-20 col-md-10">
+															<span class="sub">
+																<div class="dropzone">
+																	<form action="/upload" class="o_dZUpload needsclick">
+																		<input type="hidden" name="affiliate_id" value="<?php echo $affiliate['affiliate_id']; ?>" />
+																		<input type="hidden" name="notification" value="Performance Assessment other document is uploaded" />
+																		<input type="hidden" name="document_type_id" value="9" />
+																		<input type="hidden" name="document_type" value="other_performance_assessment_documents" />
+																		
+																		<div class="dz-default dz-message">
+																		<span class="text">
+																		<i class="i i-file_upload"></i>
+																		Click here or Drop Files
+																		</span>
+																		</div>
+																	</form>
+																</div>
+															</span>
+															</div>
+															<button class="btn btn-primary btn-rounded btn-add ml-auto " data-toggle="collapse"
+															data-target=".collapselegal" aria-expanded="false" aria-controls="collapsedoc"><i
+															class="i i-add"></i> </button>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="collapselegal" class="collapse collapsedoc" aria-labelledby="headingOne"
+											data-parent="#accordionExample">
+												<div class="acc-body">
+													<div class="row align-items-end">
+														<div class="col-lg-3 col-md-12 form-group">
+															<a class="btn btn-primary btn-rounded min w-100px btn-upload-o" id="btn-upload-o-p">UPLOAD</a>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="tab-pane fade show active" id="nav-z23" role="tabpanel" aria-labelledby="nav-z1-tab">
+									<div class="head">
+										<div class="row align-items-center">
+											<div class="col-3 col-md-3"><span class="sub">NO</span></div>
+											<div class="col-10 col-md-10"><span class="sub">DOCUMENT NAME</span></div>
+											<div class="col-3 col-md-3"><span class="sub">DETAILS</span></div>
+										</div>
+									</div>
+									<div class="cdnWrap">
+										<div class="accordion"  id="per_other_loop">
+											<?php
+											$i=1;  
+											foreach ($performance_other as $other){ ?>
+											<div class="card">
+												<div class="card-header">
+													<div class="mb-0">
+														<div class="btn wrdiv <?php if($i%2==0) echo "odd"; ?>">
+															<div class="row  align-items-center">
+																<div class="col-3 col-md-3"><span class="sub"><?=$i++?></span></div>
+																<div class="col-24 col-md-10"><span class="sub"><a href="<?= base_url().$other['other_upload_file'].$other['other_upload_file_name']?>"><?=isset($other['other_upload_file_name'])?$other['other_upload_file_name']:''?></a>
+																	<a href="javascript:reupload('per-other', <?php echo $other['id']; ?>);">
+																	<span class="sub"><i class="i i-create"></i>
+																	</span>
+																	</a>
+																	</span>
+																</div>
+																<div class="col-24 col-md-10" id="per-other-row-<?php echo $other['id']; ?>">
+																	<div class="chatBox">
+																		<div class="chatBoxinn">
+																			<?php if(isset($other['comments'])): ?>
+																				<?php foreach($other['comments'] as $comment): ?>
+																				<div class="chatrow">
+																					<span class="user <?php echo ($comment['created_by'] === $this->session->userdata('affiliate_id')) ? 'send' : 'rec'; ?>"><?php echo strtoupper($comment['city'][0].$comment['state'][0]); ?></span>
+																					<div class="chatline">
+																						<div class="h6"><?php echo $comment['notification']; ?></div>
+																						<span class="text-primary">
+																							<?php echo $comment['city'].', '.$comment['state']; ?>
+																						</span>
+																						<span class="ml-auto text-secondary">
+																						<?php echo date("jS M,Y | H:i", strtotime($comment['created'])); ?>
+																						</span>
+																					</div>
+																				</div>
+																				<?php endforeach; ?>
+																			<?php endif; ?>
+																		</div>
+																		<div class="search collapsed">
+																			<input type="text" class="input-comment"  data-document="<?php echo $other['id']; ?>" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>" data-doctype="<?php echo $other['document_type_id']; ?>" placeholder="Type here" />
+																			<a class="btn btn-secondary   btn-rounded btn-action-sm "><i
+																			class="i i-chat-box"></i> </a>
+																		</div>
+																		<label class="mt-2 ml-3 small" style="display:none;">Hit 'Enter' to send.</label>
+																	</div>
+																	<div class="upload d-none">
+																		<div class="card">
+																			<div class="card-header" id="headingOne">
+																			<div class="mb-0">
+																				<div class="btn wrdiv border-0">
+																					<div class="row  align-items-center">
+																						<div class="col-20 col-md-16">
+																						<span class="sub">
+																							<div class="dropzone">
+																								<form action="/upload" class="l_dZUpload needsclick">
+																									<input type="hidden" name="affiliate_id" value="<?php echo $affiliate['affiliate_id']; ?>" />
+																									<input type="hidden" name="notification" value="Performance Assessment other document is uploaded" />
+																									<input type="hidden" name="document_type_id" value="9" />
+																									<input type="hidden" name="other_id" value="<?php echo $other['id']; ?>" />
+																									<input type="hidden" name="document_type" value="other_performance_assessment_documents" />
+																									<div class="dz-default dz-message">
+																									<span class="text">
+																									<i class="i i-file_upload"></i>
+																									Click here or Drop Files
+																									</span>
+																									</div>
+																								</form>
+																							</div>
+																						</span>
+																						</div>
+																						<div class="col-lg-3 col-md-8">
+																						<a class="btn btn-primary btn-rounded min w-100px btn-upload-l" id="btn-upload-l">UPLOAD</a>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<?php } ?>
+										</div>
+									</div>
+								</div>
+
+							</div>
+							
 						</div>
 
 					</div>
@@ -1112,7 +1566,7 @@ $quarterArray = array(
 						</form>
 						<?php $key_indicators = isset($key_indicators_details['key_indicators']) ? $key_indicators_details['key_indicators'] : NULL; ?>
 						<?php $key_indicators_id = isset($key_indicators_details['key_indicators_id']) ? $key_indicators_details['key_indicators_id'] : NULL; ?>
-						<form id="form-key-indicators" method="post" data-keyid="<?php echo $key_indicators_id;?>" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>">
+						<form id="form-key-indicators" method="post" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>">
 							<div class="cdnWrap round">
 								<ul class="altUl">
 									<li class="wrapIn">
@@ -1330,7 +1784,7 @@ $quarterArray = array(
 {{/comment}}
 </script>
 <script id="template-submitted" type="x-tmpl-mustache">
-<div class="col-24 col-md-5">
+<div class="col-24 col-md-5" id="doc-status-{{document.document_id}}">
 	<span class="sub">
 		<?php if($this->session->role_id == 1): ?>
 			<select class="form-control selG" data-interval="{{document.interval}}" data-documentid="{{document.added_document_id}}">
@@ -1339,15 +1793,27 @@ $quarterArray = array(
 				<?php endforeach; ?>
 			</select>
 		<?php else: ?>
-			<a href="javascript:(0)" class="btn btn-lbl"><i class="i i-review-pending r-pending"></i> </a>
+			<a href="javascript:(0)" class="btn btn-lbl" data-rel="tooltip" data-placement="bottom" title="Review Pending"><i class="i i-review-pending r-pending"></i> </a>
 		<?php endif; ?>
 	</span>
 </div>
 
-<div class="col-24 col-md-7">
+<div class="col-24 col-md-7" id="chat-box-{{document.document_id}}">
 
 	<div class="chatBox">
-		<div class="chatBoxinn"></div>
+		<div class="chatBoxinn">
+			{{#comment}}
+			<div class="chatrow">
+				<span class="user send">{{avatar}}</span>
+				
+				<div class="chatline">
+					<div class="h6">{{notification}}</div>
+					<span class="text-primary">{{city}}, {{state}}</span>
+					<span class="ml-auto text-secondary">{{commentTime}}</span>
+				</div>
+			</div>
+			{{/comment}}
+		</div>
 
 		<div class="search collapsed">
 			<input type="text" class="input-comment" id="{{document.interval}}-comment-{{document.added_document_id}}" data-document="{{document.added_document_id}}" data-affiliate="{{document.affiliate_id}}" data-doctype="{{document.document_type_id}}" placeholder="Type here" />
@@ -1407,6 +1873,165 @@ $quarterArray = array(
 					<div class="col-3 col-md-3"><span class="sub">{{assessment_start_year}}</span></div>
 					<div class="col-3 col-md-3"><span class="sub">{{assessment_end_year}}</span></div>
 					<div class="col-4 col-md-4"><span class="sub">{{createdDate}}</span></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{{/documents}}
+</script>
+
+<script id="template-legal" type="x-tmpl-mustache">
+{{#documents}}
+<div class="card">
+	<div class="card-header">
+		<div class="mb-0">
+			<div class="btn wrdiv">
+				<div class="row  align-items-center">
+					<div class="col-3 col-md-3"><span class="sub" >{{count}}</span></div>
+					<div class="col-10 col-md-10"><span class="sub"><a href="{{documentPath}}">{{quarterly_upload_file_name}}</a>
+					<a href="javascript:reupload('legal', {{legal_d_id}});">
+																	<span class="sub"><i class="i i-create"></i>
+																	</span>
+																	</a>
+																	</span></div>
+					<div class="col-24 col-md-10" id="legal-row-{{legal_d_id}}">
+						<div class="chatBox">
+							<div class="chatBoxinn">
+								{{#comments}}
+								<div class="chatrow">
+									<span class="user send">{{avatar}}</span>
+									
+									<div class="chatline">
+										<div class="h6">{{notification}}</div>
+										<span class="text-primary">{{city}}, {{state}}</span>
+										<span class="ml-auto text-secondary">{{commentTime}}</span>
+									</div>
+								</div>
+								{{/comments}}
+							</div>
+							<div class="search collapsed">
+								<input type="text" class="input-comment"  data-document="{{legal_d_id}}" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>" data-doctype="{{document_id}}" placeholder="Type here" />
+								<a class="btn btn-secondary   btn-rounded btn-action-sm "><i
+								class="i i-chat-box"></i> </a>
+							</div>
+							<label class="mt-2 ml-3 small" style="display:none;">Hit 'Enter' to send.</label>
+						</div>
+						<div class="upload d-none">
+							<div class="card">
+								<div class="card-header" id="headingOne">
+								<div class="mb-0">
+									<div class="btn wrdiv border-0">
+										<div class="row  align-items-center">
+											<div class="col-20 col-md-16">
+											<span class="sub">
+												<div class="dropzone">
+													<form action="/upload" class="l_dZUpload needsclick">
+														<input type="hidden" name="affiliate_id" value="<?php echo $affiliate['affiliate_id']; ?>" />
+														<input type="hidden" name="notification" value="Compliance legal document is uploaded" />
+														<input type="hidden" name="document_type_id" value="10" />
+														<input type="hidden" name="legal_id" value="{{legal_d_id}}" />
+														<input type="hidden" name="document_type" value="legal_compliance_document" />
+														<div class="dz-default dz-message">
+														<span class="text">
+														<i class="i i-file_upload"></i>
+														Click here or Drop Files
+														</span>
+														</div>
+													</form>
+												</div>
+											</span>
+											</div>
+											<div class="col-lg-3 col-md-8">
+											<a class="btn btn-primary btn-rounded min w-100px btn-upload-l" id="btn-upload-l">UPLOAD</a>
+											</div>
+										</div>
+									</div>
+								</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{{/documents}}
+</script>
+<script id="template-other" type="x-tmpl-mustache">
+{{#documents}}
+<div class="card">
+	<div class="card-header">
+		<div class="mb-0">
+			<div class="btn wrdiv">
+				<div class="row  align-items-center">
+					<div class="col-3 col-md-3"><span class="sub" >{{count}}</span></div>
+					<div class="col-10 col-md-10"><span class="sub"><a href="{{documentPath}}">{{other_upload_file_name}}</a>
+					<a href="javascript:reupload('com-other', {{id}});">
+																	<span class="sub"><i class="i i-create"></i>
+																	</span>
+																	</a>
+																	</span></div>
+					<div class="col-24 col-md-10" id="com-other-row-{{id}}">
+						<div class="chatBox">
+							<div class="chatBoxinn">
+								{{#comments}}
+								<div class="chatrow">
+									<span class="user send">{{avatar}}</span>
+									
+									<div class="chatline">
+										<div class="h6">{{notification}}</div>
+										<span class="text-primary">{{city}}, {{state}}</span>
+										<span class="ml-auto text-secondary">{{commentTime}}</span>
+									</div>
+								</div>
+								{{/comments}}
+							</div>
+							<div class="search collapsed">
+								<input type="text" class="input-comment"  data-document="{{id}}" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>" data-doctype="{{document_type_id}}" placeholder="Type here" />
+								<a class="btn btn-secondary   btn-rounded btn-action-sm "><i
+								class="i i-chat-box"></i> </a>
+							</div>
+							<label class="mt-2 ml-3 small" style="display:none;">Hit 'Enter' to send.</label>
+						</div>
+						<div class="upload d-none">
+							<div class="card">
+								<div class="card-header" id="headingOne">
+								<div class="mb-0">
+									<div class="btn wrdiv border-0">
+										<div class="row  align-items-center">
+											<div class="col-20 col-md-16">
+											<span class="sub">
+												<div class="dropzone">
+													<form action="/upload" class="l_dZUpload needsclick">
+														<input type="hidden" name="affiliate_id" value="<?php echo $affiliate['affiliate_id']; ?>" />
+														<input type="hidden" name="notification" value="{{notifyMessage}}" />
+														<input type="hidden" name="document_type_id" value="11" />
+														<input type="hidden" name="other_id" value="{{id}}" />
+														<input type="hidden" name="document_type" value="{{documentType}}" />
+														<div class="dz-default dz-message">
+														<span class="text">
+														<i class="i i-file_upload"></i>
+														Click here or Drop Files
+														</span>
+														</div>
+													</form>
+												</div>
+											</span>
+											</div>
+											<div class="col-lg-3 col-md-8">
+											<a class="btn btn-primary btn-rounded min w-100px btn-upload-l" id="btn-upload-l">UPLOAD</a>
+											</div>
+										</div>
+									</div>
+								</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
 				</div>
 			</div>
 		</div>

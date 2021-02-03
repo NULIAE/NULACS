@@ -49,6 +49,9 @@ class Affiliate extends MY_Controller
 
 		if( isset($data['region']) && ($data['region'] !== '') )
 			$filters['affiliate.region_id'] =  $data['region'];
+		
+		if( isset($data['aname']) && ($data['aname'] !== '') )
+			$filters['affiliate.organization'] =  $data['aname'];
 
 		if( empty($filters) )
 			$filters = NULL;
@@ -172,6 +175,28 @@ class Affiliate extends MY_Controller
 	}
 
 	/**
+	 * Show affiliate edit form page
+	 *
+	 * @return view 'modules/affiliate/edit_affiliate.php'
+	 */
+	public function edit_form($affiliate_id)
+	{
+		$data['content'] = array(
+			'affiliate' => $this->Affiliate_model->get_affiliate_by_id($affiliate_id),
+			'users' => $this->Affiliate_model->get_affiliate_users($affiliate_id),
+			'regions' => $this->User_model->get_all_regions(),
+			'states' => $this->Affiliate_model->get_all_states()
+		);
+		
+		//Name of the view file
+		$data['view_name'] = 'modules/affiliate/edit_affiliate';
+		//Page specific javascript files
+		$data['footer']['js'] = array('pages/modules/edit_affiliate.js');
+		$data['notifications'] = $this->Document_model->get_notifications();
+		$this->load->view('template', $data);
+	}
+
+	/**
 	 * Update the details of an Affiliate
 	 *
 	 * @return json
@@ -199,6 +224,8 @@ class Affiliate extends MY_Controller
 			//New affiliate added
 			$status = TRUE;
 			$message = 'Affiliate details updated successfully.';
+
+			$this->session->set_flashdata("message", $message);
 		}
 		else
 		{
@@ -574,11 +601,31 @@ class Affiliate extends MY_Controller
 
 		$quarter = ceil($data['month']/3);
 
+		//Get monthly compliance status
+		$compliance_filter = array(
+			'month' => $data['month'],
+			'year'	=> $data['year'],
+			'affiliate.affiliate_id' => $affiliate_id
+		);
+		$monthly_compliance_status = $this->Affiliate_model->monthly_compliance_status(NULL, NULL, $compliance_filter);
+		
+		//Get quarterly compliance status
+		unset($compliance_filter['month']);
+		$compliance_filter['quarter'] = $quarter;
+		$quarterly_compliance_status = $this->Affiliate_model->quarterly_compliance_status(NULL, NULL, $compliance_filter);
+		
+		//Get yearly compliance status
+		unset($compliance_filter['quarter']);
+		$yearly_compliance_status = $this->Affiliate_model->yearly_compliance_status(NULL, NULL, $compliance_filter);
+
 		$data['content'] = array(
 			'affiliate' => $this->Affiliate_model->get_affiliate_by_id($affiliate_id),
 			'monthly_status' => $monthly_documents,
 			'quarterly_status' => $quarterly_documents,
 			'yearly_status' => $yearly_documents,
+			'monthly_compliance' => empty($monthly_compliance_status) ? 11 : $monthly_compliance_status[0]['compliance_status'],
+			'quarterly_compliance' => empty($quarterly_compliance_status) ? 11 : $quarterly_compliance_status[0]['compliance_status'],
+			'yearly_compliance' => empty($yearly_compliance_status) ? 11 : $yearly_compliance_status[0]['compliance_status'],
 			'self_assessment_documents' => $this->Affiliate_model->get_self_assessment_documents($affiliate_id),
 			'soundness_document_status' => $soundness_document_status,
 			'vitality_document_status' => $vitality_document_status,
@@ -594,7 +641,10 @@ class Affiliate extends MY_Controller
 			'key_indicators_details' => $this->Affiliate_model->get_key_indicators($affiliate_id, $quarter, $data['year']),
 			'month' => $data['month'],
 			'quarter' => $quarter,
-			'year' => $data['year']
+			'year' => $data['year'],
+			'legal_document' => $this->Affiliate_model->get_legal_document($affiliate_id),
+			'compliance_other' => $this->Affiliate_model->get_other_document($affiliate_id, 11),
+			'performance_other' => $this->Affiliate_model->get_other_document($affiliate_id, 9),
 		);
 		
 		//Name of the view file
@@ -929,23 +979,20 @@ class Affiliate extends MY_Controller
 		
 		$status = $message = NULL;
 
-		$key_indicator_id = $this->Affiliate_model->save_key_indicators($data);
+		$status = $this->Affiliate_model->save_key_indicators($data);
 
-		if ( $key_indicator_id !== FALSE )
+		if ($status)
 		{	
-			$status = TRUE;
 			$message = 'Key Indicators saved successfully.';
 		}
 		else
 		{
-			$status = FALSE;
 			$message = 'Something went wrong. Try again later.';
 		}
 		
 		$response = array(
 			'success' => $status,
-			'message' => $message,
-			'key_id' => $key_indicator_id
+			'message' => $message
 		);
 
 		echo json_encode($response);
@@ -1038,7 +1085,7 @@ class Affiliate extends MY_Controller
 	public function do_upload($upload_path, $data)
 	{
 		$config['upload_path'] = './uploads/Documents/MonthlyDocument/' . $upload_path;
-		$config['allowed_types'] = 'pdf|xls|xlsx|doc|docx';
+		$config['allowed_types'] = '*';
 
 		$this->load->library('upload', $config);
 
@@ -1098,6 +1145,8 @@ class Affiliate extends MY_Controller
 				$data['self_assessment_documents'] = $this->Affiliate_model->get_self_assessment_documents($data['affiliate_id']);
 			}
 
+			$inserted_comment = null;
+
 			if($added_document_id !== FALSE)
 			{
 				$uploadStatus = TRUE;
@@ -1112,15 +1161,105 @@ class Affiliate extends MY_Controller
 						'created_by'	=> $this->session->affiliate_id
 					);
 
-					$this->Document_model->add_comment($comment_data);
+					$inserted_comment = $this->Document_model->add_comment($comment_data);
 				}
 			}
 
 			return array(
 				"success" => $uploadStatus, 
 				"message" => ucfirst($data['interval']).' Document has been uploaded.', 
-				'upload_data' => $data
+				'upload_data' => $data,
+				'comment' => $inserted_comment
 			);
 		}
 	}
+	/**
+	 * Upload the file legal and other and save to table
+	 *
+	 * @param  string $upload_path
+	 * @return array
+	 */
+	public function doupload()
+     {
+		if($_POST['document_type'] == 'legal_compliance_document')
+		{
+			$filePath = './uploads/Documents/legal/'.date('Y').'/'.date('m').'/';
+		}
+		else if($_POST['document_type'] == 'other_compliance_document')
+		{
+			$filePath = './uploads/Documents/compliance_other/'.date('Y').'/'.date('m').'/';
+		}
+		else
+		{
+			$filePath = './uploads/Documents/performance_other/'.date('Y').'/'.date('m').'/';
+		}
+
+		$config['upload_path'] = $filePath;
+		$config['allowed_types'] = '*';
+	
+        if(!file_exists($filePath)) 
+        {
+            mkdir($filePath, 0777, true);
+        }
+       
+        $this->load->library('upload', $config);
+		
+		if(!$this->upload->do_upload('file'))
+        { 
+            echo json_encode( $this->upload->display_errors());
+		} 
+		else
+		{
+			$fileName =$this->upload->data('file_name');
+			$fileExtension = substr($this->upload->data('file_ext'), 1);
+			
+			$val = array(
+				'document_type_id'=>$_POST['document_type_id'],
+				'affiliate_id'=>$_POST['affiliate_id'],
+				'file_path'=>$filePath,
+				'upload_file_name'=>$fileName,
+				'upload_file_extension'=>$fileExtension
+			);
+
+			$comment_data = array(
+				'document_type_id' =>$_POST['document_type_id'],
+				'affiliate_id'	=> $_POST['affiliate_id'],
+				'notification'	=> $_POST['notification'],
+				'created_by'	=> $this->session->affiliate_id
+			);
+			
+			if($_POST['document_type'] == 'legal_compliance_document')
+			{
+				if(isset($_POST['legal_id']))
+				{
+					$val['legal_d_id'] = $_POST['legal_id'];
+				}
+				
+				$uploadDocId = $this->Affiliate_model->legal_compliance_document($val);
+
+				$comment_data['document_id'] = $uploadDocId;
+				$this->Document_model->add_comment($comment_data);
+				
+				$uploadResponse = $this->Affiliate_model->get_legal_document($_POST['affiliate_id']);
+			}
+			else
+			{
+				if(isset($_POST['other_id']))
+				{
+					$val['id'] = $_POST['other_id'];
+				}
+
+				$uploadDocId = $this->Affiliate_model->other_document($val);
+
+				$comment_data['document_id'] = $uploadDocId;
+				$this->Document_model->add_comment($comment_data);
+				
+				$uploadResponse = $this->Affiliate_model->get_other_document($_POST['affiliate_id'], $_POST['document_type_id']);
+			}
+
+            echo json_encode($uploadResponse);
+        }
+
+	 }
+	 
 }

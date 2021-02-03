@@ -1,5 +1,5 @@
 $(function () {
-
+	$('.chatBoxinn').scrollTop($('.chatBoxinn')[0].scrollHeight);
 	var toastConfig = {
 		timeout: 5000,
 		position: 'top',
@@ -10,6 +10,8 @@ $(function () {
 	initCommentBox();
 
 	initStatusSelectBoxes();
+
+	initReUploadDocuments();
 
 	//----Filter result using month and year
 	var $btnYear = $('#btn-year-pick');
@@ -74,10 +76,13 @@ $(function () {
 		$(this).toggleClass('btn-primary');
 
 		var updateButton = $(this).siblings('button');
-		if ($(updateButton).siblings('a.btn-primary').length == 1)
+		var compliance = $(updateButton).data('compliance');
+		if ($(updateButton).siblings('a.btn-primary').length == 1 && $(this).data('status') != compliance)
 			$(updateButton).removeAttr('disabled');
-		else
+		else{
+			$(updateButton).siblings('[data-status="'+compliance+'"]').addClass('btn-primary');
 			$(updateButton).attr('disabled', 'disabled');
+		}
 	});
 
 	$('.status-update-btn').on('click', function () {
@@ -110,6 +115,22 @@ $(function () {
 		}
 	});
 	//---End compliance status updation
+
+	//---Show re-upload form
+	function initReUploadDocuments(){
+		$('a.reupload').on('click', function(e){
+			e.preventDefault();
+			var id = $(this).data('document');
+			var interval = $(this).data('interval');
+			$("#doc-status-" + id).toggleClass("d-none");
+			$("#chat-box-" + id).toggleClass("d-none");
+			var segment = $("#" + interval + "-segment-" + id);
+			$(segment).next('button').toggleClass('d-none');
+			$(segment).toggleClass('d-none');
+
+		});
+	}
+	//---End re-upload form
 
 	//---Document upload using Dropzone JS
 	$("form.dropzone").each(function () {
@@ -192,23 +213,57 @@ $(function () {
 						var interval = response.upload_data.interval;
 
 						if(interval != "self-assessment"){ 
-							$('#collapse' + elemId).remove();
+							$('#collapse' + elemId).collapse('hide');
 							var segment = $("#" + interval + "-segment-" + elemId);
-							$(segment).next('button').remove();
-							$(segment).remove();
+							$(segment).next('button').toggleClass('d-none');
+							$(segment).toggleClass('d-none');
 
 							if (interval == "month" || interval == "quarter" || interval == "year") {
 								$('#submitted-' + elemId).html('<span class="sub">' + moment().format("MM/DD/YYYY") + '</span>');
 								var docName = $('#document-name-' + elemId + ' span').html();
-								$('#document-name-' + elemId).html('<a href="' + base_url + response.upload_data.full_path + '"><span class="sub text-primary link">' + docName + ' <i class="i i-create"></i></span></a>');
-								$("#" + interval + "-row-" + elemId).append(Mustache.render($("#template-submitted").html(), { document: response.upload_data }));
+								$('#document-name-' + elemId).html('<a href="' + base_url + response.upload_data.full_path + '" class="float-left"><span class="sub text-primary link">' + docName + '</span></a> <a href="#" data-document="'+elemId+'" data-interval="'+interval+'" class="reupload"><span class="sub"><i class="i i-create"></i></span></a>');
+								
+								if($("#doc-status-" + elemId).length){
+									$("#doc-status-" + elemId).toggleClass("d-none");
+									$("#chat-box-" + elemId).toggleClass("d-none");
+									var chatBox = $("#chat-box-" + elemId).find(".chatBoxinn");
+									$(chatBox).append(Mustache.render($("#template-comment").html(), {
+										"comment": response.comment,
+										"avatar": function () {
+											return this.city.charAt(0) + this.state.charAt(0);
+										},
+										"commentTime": function () {
+											return moment().format("Do MMM YYYY | HH:mm");
+										}
+									}));
+								} else {
+									console.log(response);
+									$("#" + interval + "-row-" + elemId).append(Mustache.render($("#template-submitted").html(), { 
+										document: response.upload_data,
+										"comment": response.comment,
+										"avatar": function () {
+											return this.city.charAt(0) + this.state.charAt(0);
+										},
+										"commentTime": function () {
+											return moment().format("Do MMM YYYY | HH:mm");
+										}
+									}));
 
-								//Re-initialize comment box
-								initCommentBox();
-								//Re-initialize status select box
-								initStatusSelectBoxes();
+									//Re-initialize comment box
+									initCommentBox();
+									//Re-initialize status select box
+									initStatusSelectBoxes();
+								}
 
-								$("#" + interval + "-row-" + elemId + ' select.selG').val(5);
+								initReUploadDocuments();
+								
+								if($("#" + interval + "-row-" + elemId + ' select.selG').length){
+									$("#" + interval + "-row-" + elemId + ' select.selG').val(5);
+								} else {
+									$("#doc-status-" + elemId).html('<span class="sub"><a href="javascript:(0)" class="btn btn-lbl" data-rel="tooltip" data-placement="bottom" title="Review Pending"><i class="i i-review-pending r-pending"></i> </a></span>');
+								}
+								$('[data-rel="tooltip"]').tooltip();
+
 							} else {
 								$("#name-row-" + elemId).removeClass("col-md-8").addClass("col-md-6");
 								$("#" + interval + "-row-" + elemId).append(Mustache.render($("#template-performance").html(), {
@@ -334,7 +389,6 @@ $(function () {
 			dataType: 'json'
 		}).done(function (data) {
 			if (data != null) {
-				$("#form-key-indicators").data('keyid', data.key_indicators_id);
 				$.each(data.key_indicators, function (key, value) {
 					$("input[name='" + key + "']").val(value);
 				});
@@ -364,7 +418,6 @@ $(function () {
 			values[el.name] = el.value;
 		});
 		var inputData = {
-			key_id: form.data('keyid'),
 			affiliate_id: form.data('affiliate'),
 			quarter: $("#key-quarter").val(),
 			year: $("#key-year").val(),
@@ -377,9 +430,6 @@ $(function () {
 			data: inputData,
 			dataType: 'json'
 		}).done(function (data) {
-			if (data.success) {
-				form.data('keyid', data.key_id);
-			}
 			toastConfig.message = data.message;
 			setTimeout(function () {
 				$('#snackbar').NitroToast(toastConfig);
@@ -485,4 +535,164 @@ $(function () {
 			});
 		});
 	}
+
+	//Dropzone.autoDiscover = false;
+
+	$("form.l_dZUpload").each(function () {
+		var formElement = $(this);
+		formElement.dropzone({	
+			autoProcessQueue: false,
+			url: base_url + 'module/affiliate/document/doupload',
+			addRemoveLinks: true,
+			init: function () {
+				var myDropzone = this;
+				$(".btn-upload-l").click(function (e) {
+					e.preventDefault();
+				
+						myDropzone.processQueue();
+				});
+				this.on("addedfile", function (file) {
+					$('.collapsedoc').collapse('show');
+				});
+
+			},
+			success: function (file, response) {
+				// myDropzone.removeFile(file);
+				this.removeAllFiles(true);
+				var toastConfig = {
+					timeout: 1000,
+					position: 'top',
+					actionText: 'OK',
+					message: ''
+				};
+				toastConfig.message = "Uploaded";
+				setTimeout(function () {
+					$('#snackbar').NitroToast(toastConfig);
+				}, 1000);
+
+				var resp = JSON.parse(response);
+
+				var count = 1;
+				$('#legal_loop').html(Mustache.render($("#template-legal").html(), {
+					documents: resp,
+					"count": function(){
+						return count++;
+					},
+					"documentPath": function () {
+						return base_url + this.quarterly_upload_file+this.quarterly_upload_file_name;
+					},
+					"comments": this.comments,
+					"avatar": function () {
+						return this.city.charAt(0) + this.state.charAt(0);
+					},
+					"commentTime": function () {
+						return moment().format("Do MMM YYYY | HH:mm");
+					}
+				}));
+
+				initCommentBox();
+
+			},
+			error: function (file, response) {
+				file.previewElement.classList.add("dz-error");
+			},
+			sending: function(file, xhr, formData){
+				//Append data for all other Documents
+				var data = formElement.serializeArray();
+				$.each(data, function (key, el) {
+					formData.append(el.name, el.value);
+				});
+			}
+		});
+	});
+	
+	
+	$("form.o_dZUpload").each(function () {
+		var formElement = $(this);
+		formElement.dropzone({
+			autoProcessQueue: false,
+			url: base_url + 'module/affiliate/document/doupload',
+			addRemoveLinks: true,
+			init: function () {
+				var myDropzone = this;
+				$(".btn-upload-o").click(function (e) {
+					e.preventDefault();
+				
+						myDropzone.processQueue();
+				});
+				this.on("addedfile", function (file) {
+					$('.collapsedoc').collapse('show');
+				});
+
+			},
+			success: function (file, response) {
+				// myDropzone.removeFile(file);
+				this.removeAllFiles(true);
+				var toastConfig = {
+					timeout: 1000,
+					position: 'top',
+					actionText: 'OK',
+					message: ''
+				};
+				toastConfig.message = "Uploaded";
+				setTimeout(function () {
+					$('#snackbar').NitroToast(toastConfig);
+				}, 1000);
+
+				var resp = JSON.parse(response);
+				
+
+				var docType = formElement.find('input[name="document_type"]').val();
+				var notification = formElement.find('input[name="notification"]').val();
+
+				if(docType == "other_compliance_document"){
+					var containerElem = '#com_other_loop';
+				} else {
+					var containerElem = '#per_other_loop';
+				}
+
+				var count = 1;
+				$(containerElem).html(Mustache.render($("#template-other").html(), {
+					documents: resp,
+					"count": function(){
+						return count++;
+					},
+					"documentPath": function () {
+						return base_url + this.other_upload_file+this.other_upload_file_name;
+					},
+					"documentType": function(){
+						return docType;
+					},
+					"notifyMessage": function(){
+						return notification;
+					},
+					"comments": this.comments,
+					"avatar": function () {
+						return this.city.charAt(0) + this.state.charAt(0);
+					},
+					"commentTime": function () {
+						return moment().format("Do MMM YYYY | HH:mm");
+					}
+					
+				}));
+				
+				initCommentBox();
+			},
+			error: function (file, response) {
+				file.previewElement.classList.add("dz-error");
+			},
+			sending: function(file, xhr, formData){
+				var data = formElement.serializeArray();
+				$.each(data, function (key, el) {
+					formData.append(el.name, el.value);
+				});
+			}
+		});
+	});
 });
+
+function reupload(type, docId){
+	var elem = "#"+type+'-row-'+docId;
+	$(elem).find('.chatBox').toggleClass("d-none");
+	$(elem).find('.upload').toggleClass("d-none");
+}
