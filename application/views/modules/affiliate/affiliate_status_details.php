@@ -652,7 +652,7 @@ border-color: #000;
 								</div>
 
 								<!-- END UPLOAD SECTION -->
-								<div class="tab-pane fade show active" id="nav-z1" role="tabpanel" aria-labelledby="nav-z1-tab">
+								<!--<div class="tab-pane fade show active" id="nav-z1" role="tabpanel" aria-labelledby="nav-z1-tab">-->
 									<div class="head">
 										<div class="row align-items-center">
 											<div class="col-3 col-md-3"><span class="sub">NO</span></div>
@@ -748,7 +748,7 @@ border-color: #000;
 											<?php } ?>
 										</div>
 									</div>
-								</div>
+								<!--</div>-->
 							</div>
 
 							
@@ -814,7 +814,7 @@ border-color: #000;
 									</div>
 								</div>
 
-								<div class="tab-pane fade show active" id="nav-z22" role="tabpanel" aria-labelledby="nav-z1-tab">
+								<!--<div class="tab-pane fade show active" id="nav-z22" role="tabpanel" aria-labelledby="nav-z1-tab">-->
 									<div class="head">
 										<div class="row align-items-center">
 											<div class="col-3 col-md-3"><span class="sub">NO</span></div>
@@ -910,7 +910,7 @@ border-color: #000;
 											<?php } ?>
 										</div>
 									</div>
-								</div>
+								<!-- </div> -->
 
 							</div>
 						</div>
@@ -1438,7 +1438,7 @@ border-color: #000;
 									</div>
 								</div>
 
-								<div class="tab-pane fade show active" id="nav-z23" role="tabpanel" aria-labelledby="nav-z1-tab">
+								<!-- <div class="tab-pane fade show active" id="nav-z23" role="tabpanel" aria-labelledby="nav-z23-tab"> -->
 									<div class="head">
 										<div class="row align-items-center">
 											<div class="col-3 col-md-3"><span class="sub">NO</span></div>
@@ -1534,7 +1534,7 @@ border-color: #000;
 											<?php } ?>
 										</div>
 									</div>
-								</div>
+								<!-- </div> -->
 
 							</div>
 							
