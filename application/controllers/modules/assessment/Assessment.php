@@ -286,7 +286,7 @@ class Assessment extends MY_Controller
 		$mpdf = new \Mpdf\Mpdf();
 		$html = $this->load->view('modules/performance_assessment/assessment_pdf',$data,true);
 		$mpdf->WriteHTML($html);
-		$mpdf->Output(); 
+		$mpdf->Output('assessment.pdf','D'); 
 		
 	
 	}
