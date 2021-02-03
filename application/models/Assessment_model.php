@@ -52,6 +52,7 @@ class Assessment_model extends CI_Model
 			'created_by'=> $this->session->affiliate_id,
 			'year'=>  date("Y"), 
 			'created'=>date("Y-m-d"),
+			'last_update'=>date("Y-m-d"),
 		);
 	 
 		$this->db->insert('performance_assesment_answers', $insert_data);
@@ -60,6 +61,7 @@ class Assessment_model extends CI_Model
 
 		$update_data = array(
 			"answers" => json_encode($data),
+			'last_update'=>date("m-d-Y H:i:s"),
 		);
 		
 		$this->db->where('question_id', $data['criteriaId']);
@@ -96,12 +98,12 @@ class Assessment_model extends CI_Model
 	*
 	* @return array rating 
 	*/
-	public function rating($data)
+	public function rating($selfAssessmentId,$affiliateId)
 	{
 		$this->db->select('*');
 		$this->db->from('performance_assesment_answers');
-		$this->db->where('self_assessment_id', $data['selfAssessmentId']);
-		$this->db->where('affiliate_id', $data['affiliateId']);
+		$this->db->where('self_assessment_id', $selfAssessmentId);
+		$this->db->where('affiliate_id', $affiliateId);
 		$query = $this->db->get(); 
 		return $query->result_array();
 	}
@@ -113,20 +115,28 @@ class Assessment_model extends CI_Model
 	*/
 	public function assessment_listing($data)
 	{
-		$this->db->select('*');
-		$this->db->from('self_assessment s');
-		if(isset($data['saffiliate_id']) && !empty($data['affiliate_id'])){
-			$this->db->where('s.affiliate_id', $data['affiliate_id']);
+		$this->db->select('*, sa.self_assessment_id as sid, sa.affiliate_id as affiliate_id, paa.form_status as formstatus');
+		$this->db->from('self_assessment sa');
+		$this->db->join('performance_assesment_answers paa', 'paa.self_assessment_id = sa.self_assessment_id','left');
+		$this->db->join('users u', 'u.affiliate_id = sa.affiliate_id','left');
+		$this->db->join('affiliate a', 'a.affiliate_id = u.affiliate_id','left');
+		$this->db->join('state s', 's.stateid = a.state','left');
+
+		if(isset($data['affiliate_id']) && !empty($data['affiliate_id'])){
+			$this->db->where('sa.affiliate_id', $data['affiliate_id']);
 		}
 		if(isset($data['performance_assessment_from']) && !empty($data['performance_assessment_from'])){
-			$this->db->where('s.assessment_start_year', $data['performance_assessment_from']);
+			$this->db->where('sa.assessment_start_year >=', $data['performance_assessment_from']);
+			// $this->db->where('s.assessment_start_year', $data['performance_assessment_from']);
 		}
 		if(isset($data['performance_assessment_to'])&& !empty($data['performance_assessment_to'])){
-			$this->db->where('s.assessment_end_year',   $data['performance_assessment_to']);
+			$this->db->where('sa.assessment_end_year <=', $data['performance_assessment_to']);
+			// $this->db->where('s.assessment_end_year',   $data['performance_assessment_to']);
 		}
 			
-		$this->db->order_by('s.self_assessment_id','desc');
+		$this->db->order_by('sa.self_assessment_id','desc');
 		$this->db->limit(5); 
+		$this->db->group_by('sa.self_assessment_id');
 		$query = $this->db->get(); 
 
 		return $query->result_array();
@@ -144,7 +154,9 @@ class Assessment_model extends CI_Model
 		$this->db->join('users u', 'u.affiliate_id = sa.affiliate_id','left');
 		$this->db->join('affiliate a', 'a.affiliate_id = u.affiliate_id','left');
 		$this->db->join('state s', 's.stateid = a.state','left');
-
+		// if(isset($data['aid']) && !empty($data['aid'])){
+		// 	$this->db->where('sa.affiliate_id',   $data['aid']);
+		// }
 		$this->db->group_by('sa.affiliate_id');
 		$query = $this->db->get(); 
 		return $query->result_array();
@@ -163,6 +175,24 @@ class Assessment_model extends CI_Model
 		$this->db->group_by('sa.self_assessment_id');
 		$query = $this->db->get(); 
 		return $query->result_array();
+	}
+	
+   /**
+	* get save 
+	*
+	* @return array save form 
+	*/
+	public function saveform($data)
+	{
+		$update_data = array(
+			"form_status" => "yes",
+		);
+		
+		$this->db->where('affiliate_id',  $data['affiliateId']);
+		$this->db->where('self_assessment_id',  $data['selfAssessmentId']);
+
+
+		$this->db->update('performance_assesment_answers', $update_data);
 	}
 	
 }
