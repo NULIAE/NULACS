@@ -17,17 +17,23 @@
           <form action="<?php echo base_url('module/assessment/assessment-listing'); ?>" method="post"> 
             <div class="foot fend">
               <div class="ib-m p-t-15">
-                <select data-control="material" data-type="selector" name="affiliate_id">
-               
-                  <?php foreach ($affiliate_details as $details){ 
-                    if(!$assessment_listing_date['affiliate_id']){?>
-                        <option>choose</option>
-                  <?php  }?>
-             
-                    <option  value="<?=isset($details['affiliate_id'])?$details['affiliate_id']:''?>">
-                      <?=isset($details['city'])?$details['city']:''?>, <?=isset($details['stateabbreviation'])?$details['stateabbreviation']:''?>
-                    </option>
-                  <?php } ?>
+                <select data-control="material" data-type="selector" name="affiliate_id">         
+                 <?php  if(isset($affiliate_details) && !empty($affiliate_details)){?>
+                  <option>Choose Affiliate</option>
+                   <?php foreach ($affiliate_details as $details){ 
+                     if($details['affiliate_id'] == $assessment_listing_date['affiliate_id']){ ?>
+                     
+                     <option selected='selected' value="<?=isset($details['affiliate_id'])?$details['affiliate_id']:''?>">
+                     <?=isset($details['city'])?$details['city']:''?>, <?=isset($details['stateabbreviation'])?$details['stateabbreviation']:''?>
+                   </option>
+                 <?php    }else{
+                     ?>
+                   
+                   <option  value="<?=isset($details['affiliate_id'])?$details['affiliate_id']:''?>">
+                     <?=isset($details['city'])?$details['city']:''?>, <?=isset($details['stateabbreviation'])?$details['stateabbreviation']:''?>
+                   </option>
+                 <?php } }
+                 }?>
                 </select>
               </div>
               <label for="docx-pick">Assessment Year: Period covered from</label>
@@ -52,45 +58,60 @@
                 <thead>
                   <tr>
                     <th scope="col">NO</th>
-                    <th scope="col">DOCUMENT NAME</th>
+                    <th scope="col">AFFILIATE NAME</th>
+                    <th scope="col">FINAL ASSESSMENT </th>
                     <th scope="col">ASSESSMENT PERIOD START</th>
                     <th scope="col">ASSESSMENT PERIOD END</th>
-                    <th scope="col">SUBMITTED ON</th>
-                    <th scope="col">START/EDIT ASSESSMENT </th>
+                    <th scope="col">LAST EDITED</th>
+                    <th scope="col">SELF ASSESSMENT</th>
+                  
 
                   </tr>
                 </thead>
+                <?php
+                ?>
                 <tbody>
-                  <?php foreach($assessment_listing as $listing){
-                    $formatedDate = date('m-d-Y ', strtotime($listing['created_date']));?>
+                  <?php 
+                  $i=1;
+                  foreach($assessment_listing as $listing){
+                    // $formatedDate = date('m-d-Y H:i:s', strtotime($listing['last_update']));?>
                    <tr>
-                    <td scope="row"><?=isset($listing['self_assessment_id'])?$listing['self_assessment_id']:''?></td>
-                    <td><a class="link" href="#"><?=isset($listing['document_name'])?$listing['document_name']:''?></a></td>
-                    <td><?=isset($listing['assessment_start_year'])?$listing['assessment_start_year']:''?></td>
-                    <td><?=isset($listing['assessment_end_year'])?$listing['assessment_end_year']:''?></td>
-                    <td><?=isset($formatedDate)?$formatedDate:''?></td>
+                    <td scope="row"><?=$i?></td>
+                    <td> <?=isset($listing['city'])?$listing['city']:''?>, <?=isset($listing['stateabbreviation'])?$listing['stateabbreviation']:''?></td>
                     <td>
-                      <?php foreach($get_assessement_answers_details as $datalisting ){
-                        if($datalisting['self_assessment_id'] == $listing['self_assessment_id']){ ?>
-                     <a class="link m-x-10" href="<?php echo base_url('module/assessment/assessment?sid='.$listing['self_assessment_id'].'&aid='.$listing['affiliate_id']); ?>"><i class="i i-create"></i></a>
-                     
-                     <?php }else{ ?>
-                    
-                     <a class="link  m-x-10" href="<?php echo base_url('module/assessment/assessment?sid='.$listing['self_assessment_id'].'&aid='.$listing['affiliate_id']); ?>"  >
-                     <i class="i i-add"></i></a>
-                   <?php  }  }
+                      <?php
+                        if(isset($listing['answers']) && !empty($listing['answers'] )){
+                          ?>
+                     <a class="link m-x-10" href="<?php echo base_url('module/assessment/assessment?sid='.$listing['sid'].'&aid='.$listing['affiliate_id']); ?>"><i class="i i-create"></i></a>
+                    <a class="iconLink ib-m" style="color:black;" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$listing['sid'].'&aid='.$listing['affiliate_id']); ?>">
+                        <i class="i i-timer"></i>
+                      </a>
+                     <?php }  
                    
-                 if(empty($datalisting['self_assessment_id']) ){ ?>
+                 if(empty($listing['self_assessment_id']) ){ ?>
                 
-                  <a class="link  m-x-10" href="<?php echo base_url('module/assessment/assessment?sid='.$listing['self_assessment_id'].'&aid='.$listing['affiliate_id']); ?>"  >
+                  <a class="link  m-x-10" href="<?php echo base_url('module/assessment/assessment?sid='.$listing['sid'].'&aid='.$listing['affiliate_id']); ?>"  >
                   <i class="i i-add"></i></a>
                   
-                <?php  } ?>
+                <?php  }
+                 if(!empty($listing['formstatus']) && $listing['formstatus'] =='yes' ){ ?>
+                
+                <a class="checkLink  m-x-10" href="javascript:;"><i class="i i-check"></i></a>
+                  
+                <?php  }
+                ?>
                     
                     </td>
+                    <td><?=isset($listing['assessment_start_year'])?$listing['assessment_start_year']:''?></td>
+                    <td><?=isset($listing['assessment_end_year'])?$listing['assessment_end_year']:''?></td>
+                    <td><?=isset($listing['last_update'])?$listing['last_update']:''?></td>
+                    <td><?=isset($listing['document_name'])?$listing['document_name']:''?></td>
+                  
 
                   </tr>
-                 <?php } ?>
+                 <?php
+                
+                $i++;} ?>
 
 
 

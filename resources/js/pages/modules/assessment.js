@@ -1,4 +1,9 @@
 
+   $(function() {
+	$('[data-toggle="popover"]').popover()
+})
+
+
 
   $(document).ready(function() {
    
@@ -330,7 +335,7 @@
         
         // }
     
-    page.loader(true);
+    // page.loader(true);
     $(function () {
 
 
@@ -367,8 +372,11 @@
         }).done(function(data) {
            
             // var qustionId =  JSON.parse(data);
+        //    console.log(data);
             
             $.each(data, function(j, items) {
+                var answer = JSON.parse(items['answers']);
+                // console.log(answer);
                 var answer = JSON.parse(items['answers']);
              
                 $.each(answer, function(i, item) {
@@ -378,6 +386,7 @@
                     }
     
                     $('#'+i).val(item);
+
 
                  });
                 
@@ -417,7 +426,7 @@
                         total_rating_criteria_three +=  +((name['val'] / name['count']).toFixed(1));
                     }
 
-                    console.log(name['val']+'--'+j+'----'+name['count']);
+                    // console.log(name['val']+'--'+j+'----'+name['count']);
 
 
                
@@ -527,7 +536,71 @@
           $(this).addClass('active').parent().siblings().find('a').removeClass('active');
       });
       
-      
+function c1s1_1_href(){
+
+    var year = $('#c1s1_1_href').val();
+    var aid = $('#affiliate_id').val();
+    
+    window.open(base_url+"module/affiliate/status/details/"+aid+"?year="+year,'_blank');
+}
+ 
+function c1s2_1_href(){
+
+    var year = $('#c1s2_1_href').val();
+    var aid = $('#affiliate_id').val();
+       window.open(base_url+"module/affiliate/status/details/"+aid+"?year="+year,'_blank');
+
+}
+function c1s3_2_href(){
+
+    var year = $('#c1s3_2_href').val();
+    var aid = $('#affiliate_id').val();
+       window.open(base_url+"module/affiliate/status/details/"+aid+"?year="+year,'_blank');
+
+}
+function c1s3_16_href(){
+
+    var year = $('#c1s3_16_href').val();
+    var aid = $('#affiliate_id').val();
+       window.open(base_url+"module/affiliate/status/details/"+aid+"?year="+year,'_blank');
+
+}
+function c2s8_2_href(){
+
+    var year = $('#c2s8_2_href').val();
+    var aid = $('#affiliate_id').val();
+       window.open(base_url+"module/affiliate/status/details/"+aid+"?year="+year,'_blank');
+
+}
+
+function checkrating(rating){
+   
+var val  = rating.value;
+
+if(!/^[0-9]+$/.test(val)){
+    $('#'+rating.id).val("");
+    var toastConfig = {
+        timeout: 5000,
+        position: 'top',
+        actionText: 'OK',
+        message: "Rating must be a number",
+        };
+    $('#snackbar').NitroToast(toastConfig);
+}else{
+    if(val >= 6){ 
+        $('#'+rating.id).val("");
+        var toastConfig = {
+            timeout: 5000,
+            position: 'top',
+            actionText: 'OK',
+            message: "Rating must be 5 or below 5",
+            };
+        $('#snackbar').NitroToast(toastConfig);
+       }
+}
+
+
+}
 
 function c_one_s_one()
 {
@@ -581,6 +654,7 @@ function c_one_s_one()
                 data : criteriaOneStandardOne, // our data object
 				dataType : 'json'
 			}).done(function(data) {
+                update_rating();
                 // location.reload();
 				// if ( ! data.success ) {
 				// 	var toastConfig = {
@@ -613,6 +687,8 @@ function c_one_s_two()
                  "c1_s2_2_1_comment_1":$('#c1_s2_2_1_comment_1').val(),
                  "c1_s2_2_1_rating_1":$('#c1_s2_2_1_rating_1').val(),
                  "c1_s2_2_2_comment_1":$('#c1_s2_2_2_comment_1').val(),
+                 "c1_s2_2_2_rating_1":$('#c1_s2_2_2_rating_1').val(),
+
         
             }
 			// $('#message-box').fadeOut();
@@ -623,6 +699,7 @@ function c_one_s_two()
                 data : criteriaOneStandardTwo, // our data object
 				dataType : 'json'
 			}).done(function(data) {
+                 update_rating();
 				// if ( ! data.success ) {
 				// 	var toastConfig = {
 				// 		timeout: 5000,
@@ -707,21 +784,21 @@ function c_one_s_three()
                  "c1_s3_3_14_comment_1":$('#c1_s3_3_14_comment_1').val(),
                  "c1_s3_3_14_checkbox_1":$('#c1_s3_3_14_checkbox_1').val(),
                  "c1_s3_3_14_val_1":$('#c1_s3_3_14_val_1').val(),
-                 "c1_s3_3_14_val_1":$('#c1_s3_3_14_val_2').val(),
-                 "c1_s3_3_14_val_1":$('#c1_s3_3_14_val_3').val(),
-                 "c1_s3_3_14_val_1":$('#c1_s3_3_14_val_4').val(),
-                 "c1_s3_3_14_val_1":$('#c1_s3_3_14_val_5').val(),
-                 "c1_s3_3_14_val_1":$('#c1_s3_3_14_val_6').val(),
-                 "c1_s3_3_14_val_1":$('#c1_s3_3_14_val_7').val(),
-                 "c1_s3_3_14_val_1":$('#c1_s3_3_14_val_8').val(),
-                 "c1_s3_3_14_val_1":$('#c1_s3_3_14_val_9').val(),
-                 "c1_s3_3_14_val_1":$('#c1_s3_3_14_val_10').val(),
-                 "c1_s3_3_14_val_1":$('#c1_s3_3_14_val_11').val(),
-                 "c1_s3_3_14_val_1":$('#c1_s3_3_14_val_12').val(),
-                 "c1_s3_3_14_val_1":$('#c1_s3_3_14_val_13').val(),
-                 "c1_s3_3_14_val_1":$('#c1_s3_3_14_val_14').val(),
-                 "c1_s3_3_14_val_1":$('#c1_s3_3_14_val_15').val(),
-                 "c1_s3_3_14_val_1":$('#c1_s3_3_14_val_16').val(),
+                 "c1_s3_3_14_val_2":$('#c1_s3_3_14_val_2').val(),
+                 "c1_s3_3_14_val_3":$('#c1_s3_3_14_val_3').val(),
+                 "c1_s3_3_14_val_4":$('#c1_s3_3_14_val_4').val(),
+                 "c1_s3_3_14_val_5":$('#c1_s3_3_14_val_5').val(),
+                 "c1_s3_3_14_val_6":$('#c1_s3_3_14_val_6').val(),
+                 "c1_s3_3_14_val_7":$('#c1_s3_3_14_val_7').val(),
+                 "c1_s3_3_14_val_8":$('#c1_s3_3_14_val_8').val(),
+                 "c1_s3_3_14_val_9":$('#c1_s3_3_14_val_9').val(),
+                 "c1_s3_3_14_val_10":$('#c1_s3_3_14_val_10').val(),
+                 "c1_s3_3_14_val_11":$('#c1_s3_3_14_val_11').val(),
+                 "c1_s3_3_14_val_12":$('#c1_s3_3_14_val_12').val(),
+                 "c1_s3_3_14_val_13":$('#c1_s3_3_14_val_13').val(),
+                 "c1_s3_3_14_val_14":$('#c1_s3_3_14_val_14').val(),
+                 "c1_s3_3_14_val_15":$('#c1_s3_3_14_val_15').val(),
+                 "c1_s3_3_14_val_16":$('#c1_s3_3_14_val_16').val(),
                  "c1_s3_3_14_date_1":$('#c1_s3_3_14_date_1').val(),
                  "c1_s3_3_14_val_17":$('#c1_s3_3_14_val_17').val(),
                  "c1_s3_3_14_date_2":$('#c1_s3_3_14_date_2').val(),
@@ -747,6 +824,7 @@ function c_one_s_three()
                 data : criteriaOneStandardThree, // our data object
 				dataType : 'json'
 			}).done(function(data) {
+                 update_rating();
 				// if ( ! data.success ) {
 				// 	var toastConfig = {
 				// 		timeout: 5000,
@@ -803,6 +881,7 @@ function c_one_s_four(){
                 data : criteriaOneStandardfour, // our data object
 				dataType : 'json'
 			}).done(function(data) {
+                 update_rating();
 				// if ( ! data.success ) {
 				// 	var toastConfig = {
 				// 		timeout: 5000,
@@ -877,6 +956,7 @@ function c_one_s_five(){
                    data : criteriaOneStandardFive, // our data object
                    dataType : 'json'
                }).done(function(data) {
+                    update_rating();
                    // if ( ! data.success ) {
                    // 	var toastConfig = {
                    // 		timeout: 5000,
@@ -915,6 +995,11 @@ function c_one_s_five(){
                    data : criteriaOneStandardSix, // our data object
                    dataType : 'json'
                }).done(function(data) {
+                    update_rating();
+
+                $(".tab-pane").removeClass("active in");
+                    $("#nav-x2").addClass("active in");
+                    $('a[href="#nav-x2"]').tab('show');
                    // if ( ! data.success ) {
                    // 	var toastConfig = {
                    // 		timeout: 5000,
@@ -984,6 +1069,7 @@ function c_one_s_five(){
                    data : criteriaTwoStandardOne, // our data object
                    dataType : 'json'
                }).done(function(data) {
+                    update_rating();
                    // if ( ! data.success ) {
                    // 	var toastConfig = {
                    // 		timeout: 5000,
@@ -1066,6 +1152,7 @@ function c_one_s_five(){
                    data : criteriaTwoStandardTwo, // our data object
                    dataType : 'json'
                }).done(function(data) {
+                    update_rating();
                    // if ( ! data.success ) {
                    // 	var toastConfig = {
                    // 		timeout: 5000,
@@ -1215,6 +1302,7 @@ function c_one_s_five(){
                    data : criteriaTwoStandardThree, // our data object
                    dataType : 'json'
                }).done(function(data) {
+                    update_rating();
                    // if ( ! data.success ) {
                    // 	var toastConfig = {
                    // 		timeout: 5000,
@@ -1337,6 +1425,7 @@ function c_one_s_five(){
                    data : criteriaTwoStandardFour, // our data object
                    dataType : 'json'
                }).done(function(data) {
+                    update_rating();
                    // if ( ! data.success ) {
                    // 	var toastConfig = {
                    // 		timeout: 5000,
@@ -1395,6 +1484,7 @@ function c_one_s_five(){
                    data : criteriaTwoStandardFive, // our data object
                    dataType : 'json'
                }).done(function(data) {
+                    update_rating();
                    // if ( ! data.success ) {
                    // 	var toastConfig = {
                    // 		timeout: 5000,
@@ -1439,6 +1529,7 @@ function c_one_s_five(){
                    data : criteriaTwoStandardSix, // our data object
                    dataType : 'json'
                }).done(function(data) {
+                    update_rating();
                    // if ( ! data.success ) {
                    // 	var toastConfig = {
                    // 		timeout: 5000,
@@ -1489,6 +1580,7 @@ function c_one_s_five(){
                    data : criteriaTwoStandardSeven, // our data object
                    dataType : 'json'
                }).done(function(data) {
+                    update_rating();
                    // if ( ! data.success ) {
                    // 	var toastConfig = {
                    // 		timeout: 5000,
@@ -1535,6 +1627,11 @@ function c_one_s_five(){
                    data : criteriaTwoStandardEight, // our data object
                    dataType : 'json'
                }).done(function(data) {
+                    update_rating();
+
+                $(".tab-pane").removeClass("active in");
+                $("#nav-x2").addClass("active in");
+                $('a[href="#nav-x3"]').tab('show');
                    // if ( ! data.success ) {
                    // 	var toastConfig = {
                    // 		timeout: 5000,
@@ -1591,6 +1688,7 @@ function c_one_s_five(){
                    data : criteriaThreeStandardOne, // our data object
                    dataType : 'json'
                }).done(function(data) {
+                    update_rating();
                    // if ( ! data.success ) {
                    // 	var toastConfig = {
                    // 		timeout: 5000,
@@ -1636,6 +1734,7 @@ function c_one_s_five(){
                    data : criteriaThreeStandardTwo, // our data object
                    dataType : 'json'
                }).done(function(data) {
+                    update_rating();
                    // if ( ! data.success ) {
                    // 	var toastConfig = {
                    // 		timeout: 5000,
@@ -1681,6 +1780,7 @@ function c_one_s_five(){
                    data : criteriaThreeStandardThree, // our data object
                    dataType : 'json'
                }).done(function(data) {
+                    update_rating();
                    // if ( ! data.success ) {
                    // 	var toastConfig = {
                    // 		timeout: 5000,
@@ -1737,6 +1837,7 @@ function c_one_s_five(){
                    data : criteriaThreeStandardFour, // our data object
                    dataType : 'json'
                }).done(function(data) {
+                    update_rating();
                    // if ( ! data.success ) {
                    // 	var toastConfig = {
                    // 		timeout: 5000,
@@ -1791,6 +1892,7 @@ function c_one_s_five(){
                    data : criteriaThreeStandardFive, // our data object
                    dataType : 'json'
                }).done(function(data) {
+                    update_rating();
                    // if ( ! data.success ) {
                    // 	var toastConfig = {
                    // 		timeout: 5000,
@@ -1838,6 +1940,7 @@ function c_one_s_five(){
                    data : criteriaThreeStandardSix, // our data object
                    dataType : 'json'
                }).done(function(data) {
+                    update_rating();
                    // if ( ! data.success ) {
                    // 	var toastConfig = {
                    // 		timeout: 5000,
@@ -1878,6 +1981,7 @@ function c_one_s_five(){
                    data : criteriaThreeStandardSeven, // our data object
                    dataType : 'json'
                }).done(function(data) {
+                    update_rating();
                    // if ( ! data.success ) {
                    // 	var toastConfig = {
                    // 		timeout: 5000,
@@ -1898,6 +2002,9 @@ function c_one_s_five(){
  }
 
  function c_three_s_eight(){
+     var sid = $('#self_assessment_id').val();
+     var aid = $('#affiliate_id').val();
+
  
     var criteriaThreeStandardEight = {
                     "selfAssessmentId":$('#self_assessment_id').val(),
@@ -1922,21 +2029,155 @@ function c_one_s_five(){
                    data : criteriaThreeStandardEight, // our data object
                    dataType : 'json'
                }).done(function(data) {
-                   // if ( ! data.success ) {
-                   // 	var toastConfig = {
-                   // 		timeout: 5000,
-                   // 		position: 'top',
-                   // 		actionText: 'OK',
-                   // 		message: data.message,
-                   // 		//actionHandler: someCallbackFunction
-                   // 	};
-                   // 	setTimeout(function(){
-                   // 		$('#snackbar').NitroToast(toastConfig);
-                   // 	}, 2000);
-                   // } else {
-                   // 	window.location.href = base_url + "module/user";
-                   // }
-                   // alert("success");
+
+                    var dataId = {
+                        "selfAssessmentId":$('#self_assessment_id').val(),
+                        "affiliateId":$('#affiliate_id').val(),                                              
+                   }
+
+                    $.ajax({
+                        type : 'POST', // define the type of HTTP verb we want to use (POST for our form)
+                        url	 : base_url+'module/assessment/form-data', // the url where we want to POST
+                       
+                        data : dataId, // our data object
+                        dataType : 'json'
+                    }).done(function(data) {
+                       
+                    });
+
+                    update_rating();
+                   	window.location.href = base_url + "module/assessment/assessment-summary?sid="+sid+"&aid="+aid;
                });
    
  }
+
+
+
+$(function() {
+    var url_string = window.location.href; //window.location.href
+    var url = new URL(url_string);
+    var tid = url.searchParams.get("tid");
+    var stid = url.searchParams.get("stid");
+  
+if(tid && stid){
+    $(".tab-pane").removeClass("active in");
+    $("#" + tid).addClass("active in");
+    $('a[href="#'+ tid +'"]').tab('show');
+    $("#"+stid).click(); 
+} 
+
+
+})
+
+
+function update_rating(){
+
+    var selfAssessmentData = {
+        "selfAssessmentId":$('#self_assessment_id').val(),
+        "affiliateId":$('#affiliate_id').val(),
+    }
+
+$.ajax({
+    type : 'POST',
+    url	 : base_url+'module/assessment/rating',
+    data: selfAssessmentData,
+    dataType : 'json'
+}).done(function(data) {
+    $.each(data, function(i, items) {
+  
+           
+        var total_rating_criteria_one = total_rating_criteria_two =total_rating_criteria_three = 0;
+
+        $.each(items, function(j, name) {
+       
+
+            if (j.indexOf('c1_') > -1){
+                total_rating_criteria_one +=  +((name['val'] / name['count']).toFixed(1));
+           }
+            if (j.indexOf('c2_') > -1){
+                total_rating_criteria_two +=  +((name['val'] / name['count']).toFixed(1));
+            }
+            if (j.indexOf('c3_') > -1){
+                total_rating_criteria_three +=  +((name['val'] / name['count']).toFixed(1));
+            }
+
+            
+        var c1s1=  (name['val'] / name['count']);
+
+        if(c1s1 >= 5){
+
+        $("span ."+j+"_five").addClass("active");
+
+        }else if(c1s1 >= 4){
+
+        $("span ."+j+"_four").addClass("active");
+
+        }else if(c1s1 >= 3){
+
+        $("span ."+j+"_three").addClass("active");
+
+        }else if(c1s1 >= 2){
+
+        $("span ."+j+"_two").addClass("active");
+
+        }else if(c1s1 >= 1){
+
+        $("span ."+j+"_one").addClass("active");
+
+        }
+            $("#"+j).text( c1s1.toFixed(1));
+
+        });
+
+        if(total_rating_criteria_one){
+            $("#total_rating_c1").text( (total_rating_criteria_one/6).toFixed(1));
+            t_c1 = (total_rating_criteria_one/6).toFixed(1);
+            if(t_c1 >= 5){ $("span .c1_five").addClass("active");
+                }else if(t_c1 >= 4){ $("span .c1_four").addClass("active");
+                }else if(t_c1 >= 3){ $("span .c1_three").addClass("active");
+                }else if(t_c1 >= 2){ $("span .c1_two").addClass("active");
+                }else if(t_c1 >= 1){ $("span .c1_one").addClass("active");
+            }
+            
+        }
+
+        if(total_rating_criteria_two){
+            $("#total_rating_c2").text( (total_rating_criteria_two/8).toFixed(1));
+            t_c2 = (total_rating_criteria_two/8).toFixed(1);
+            if(t_c2 >= 5){ $("span .c2_five").addClass("active");
+                }else if(t_c2 >= 4){ $("span .c2_four").addClass("active");
+                }else if(t_c2 >= 3){ $("span .c2_three").addClass("active");
+                }else if(t_c2 >= 2){ $("span .c2_two").addClass("active");
+                }else if(t_c2 >= 1){ $("span .c2_one").addClass("active");
+            }
+            
+        }
+
+        if(total_rating_criteria_three){
+            $("#total_rating_c3").text( (total_rating_criteria_three/8).toFixed(1));
+            t_c3 = (total_rating_criteria_three/8).toFixed(1);
+            if(t_c3 >= 5){ $("span .c3_five").addClass("active");
+                }else if(t_c3 >= 4){ $("span .c3_four").addClass("active");
+                }else if(t_c3 >= 3){ $("span .c3_three").addClass("active");
+                }else if(t_c3 >= 2){ $("span .c3_two").addClass("active");
+                }else if(t_c3 >= 1){ $("span .c3_one").addClass("active");
+            }
+            
+        }
+
+
+        });
+        });
+}
+
+    function savebtn(){
+        var toastConfig = {
+                    timeout: 5000,
+                    position: 'top',
+                    actionText: 'OK',
+                    message: "You have successfully saved the answers.",
+                };
+                
+                $('#snackbar').NitroToast(toastConfig);
+            
+        }

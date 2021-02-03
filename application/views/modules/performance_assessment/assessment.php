@@ -1,4 +1,50 @@
 
+<?php
+if(isset($_GET['sid']) && isset($_GET['aid']) && !empty($_GET['sid']) && !empty($_GET['aid']) ){ ?>
+
+<?php 
+foreach($form_data  as $formVal){
+  if($formVal['qId'] == $criteria_one_standard_one->cid){if($formVal['totalcount'] == $formVal['count']){ $bgc1s1= "formactive"; }}
+  if($formVal['qId'] == $criteria_one_standard_two->cid){if($formVal['totalcount'] == $formVal['count']){ $bgc1s2= "formactive"; }}
+  if($formVal['qId'] == $criteria_one_standard_three->cid){if($formVal['totalcount'] == $formVal['count']){ $bgc1s3= "formactive"; }}
+  if($formVal['qId'] == $criteria_one_standard_four->cid){if($formVal['totalcount'] == $formVal['count']){ $bgc1s4= "formactive"; }}
+  if($formVal['qId'] == $criteria_one_standard_five->cid){if($formVal['totalcount'] == $formVal['count']){ $bgc1s5= "formactive"; }}
+  if($formVal['qId'] == $criteria_one_standard_six->cid){if($formVal['totalcount'] == $formVal['count']){ $bgc1s6= "formactive"; }}
+
+  if($formVal['qId'] == $criteria_two_standard_one->cid){if($formVal['totalcount'] == $formVal['count']){ $bgc2s1= "formactive"; }}
+  if($formVal['qId'] == $criteria_two_standard_two->cid){if($formVal['totalcount'] == $formVal['count']){ $bgc2s2= "formactive"; }}
+  if($formVal['qId'] == $criteria_two_standard_three->cid){if($formVal['totalcount'] == $formVal['count']){ $bgc2s3= "formactive"; }}
+  if($formVal['qId'] == $criteria_two_standard_four->cid){if($formVal['totalcount'] == $formVal['count']){ $bgc2s4= "formactive"; }}
+  if($formVal['qId'] == $criteria_two_standard_five->cid){if($formVal['totalcount'] == $formVal['count']){ $bgc2s5= "formactive"; }}
+  if($formVal['qId'] == $criteria_two_standard_six->cid){if($formVal['totalcount'] == $formVal['count']){ $bgc2s6= "formactive"; }}
+  if($formVal['qId'] == $criteria_two_standard_seven->cid){if($formVal['totalcount'] == $formVal['count']){ $bgc2s7= "formactive"; }}
+  if($formVal['qId'] == $criteria_two_standard_eight->cid){if($formVal['totalcount'] == $formVal['count']){ $bgc2s8= "formactive"; }}
+
+  if($formVal['qId'] == $criteria_three_standard_one->cid){if($formVal['totalcount'] == $formVal['count']){ $bgc3s1= "formactive"; }}
+  if($formVal['qId'] == $criteria_three_standard_two->cid){if($formVal['totalcount'] == $formVal['count']){ $bgc3s2= "formactive"; }}
+  if($formVal['qId'] == $criteria_three_standard_three->cid){if($formVal['totalcount'] == $formVal['count']){ $bgc3s3= "formactive"; }}
+  if($formVal['qId'] == $criteria_three_standard_four->cid){if($formVal['totalcount'] == $formVal['count']){ $bgc3s4= "formactive"; }}
+  if($formVal['qId'] == $criteria_three_standard_five->cid){if($formVal['totalcount'] == $formVal['count']){ $bgc3s5= "formactive"; }}
+  if($formVal['qId'] == $criteria_three_standard_six->cid){if($formVal['totalcount'] == $formVal['count']){ $bgc3s6= "formactive"; }}
+  if($formVal['qId'] == $criteria_three_standard_seven->cid){if($formVal['totalcount'] == $formVal['count']){ $bgc3s7= "formactive"; }}
+  if($formVal['qId'] == $criteria_three_standard_eight->cid){if($formVal['totalcount'] == $formVal['count']){ $bgc3s8= "formactive"; }} 
+}
+
+foreach($criteria_answers_view as $answers){
+  if($answers['question_id'] == $criteria_one_standard_one->cid){?><input type="hidden" value="<?=isset($answers['year'])?$answers['year']:''?>" id="c1s1_1_href"><?php }
+  if($answers['question_id'] == $criteria_one_standard_two->cid){?><input type="hidden" value="<?=isset($answers['year'])?$answers['year']:''?>" id="c1s2_1_href"><?php }
+  if($answers['question_id'] == $criteria_one_standard_three->cid){?><input type="hidden" value="<?=isset($answers['year'])?$answers['year']:''?>" id="c1s3_2_href"><?php }
+  if($answers['question_id'] == $criteria_one_standard_three->cid){?><input type="hidden" value="<?=isset($answers['year'])?$answers['year']:''?>" id="c1s3_16_href"><?php }
+  if($answers['question_id'] == $criteria_two_standard_eight->cid){?><input type="hidden" value="<?=isset($answers['year'])?$answers['year']:''?>" id="c2s8_2_href"><?php }
+
+
+
+}
+
+
+
+?>
+
 
   <main class="performanceAssess">
     <div class="container">
@@ -10,7 +56,7 @@
         <div class=" document-mdata">
 
           <div class="mnHead">
-            <h3>AFFILIATE Performance Assessment - Akron, OH</h3>
+            <h3>AFFILIATE Performance Assessment -   <?=isset($affiliate_details[0]['city'])?$affiliate_details[0]['city']:''?>, <?=isset($affiliate_details[0]['stateabbreviation'])?$affiliate_details[0]['stateabbreviation']:''?></h3>
           </div>
         </div>
         <div class="mainTab2">
@@ -31,38 +77,38 @@
    <div class="tab-pane fade show active" id="nav-x1" role="tabpanel" aria-labelledby="nav-x1-tab">
 
               <div class="row wrapouterIcons">
-                  <div class="col-4 colCenter">
-                      <a class="active" id="os-1" title="Administration and Governance ">
+                  <div class="col-4 colCenter" >
+                      <a class="active <?=isset($bgc1s1)?$bgc1s1:''?>"  id="os-1" title="Administration and Governance ">
                           <i class="i i-governance"></i>
                       </a>
                       <span class="min w-180px">Administration and Governance </span>
                   </div>
                  <div class="col-4 colCenter">
-                      <a class="" id="os-2" title="Annual Reports">
+                      <a class="<?=isset($bgc1s2)?$bgc1s2:''?>" id="os-2" title="Annual Reports">
                           <i class="i i-docs-l"></i>
                       </a>
                       <span class="min w-180px">Annual <br>Reports </span>
                  </div>
                   <div class="col-4 colCenter">
-                      <a class="" id="os-3" title="Board of Directors">
+                      <a class="<?=isset($bgc1s3)?$bgc1s3:''?>" id="os-3" title="Board of Directors">
                           <i class="i i-b-o-d"></i>
                       </a>
                       <span class="min w-180px">Board of <br> Directors </span>
                   </div>
                   <div class="col-4 colCenter">
-                      <a class="" id="os-4" title="Affiliate Policies and Procedures">
+                      <a class="<?=isset($bgc1s4)?$bgc1s4:''?>" id="os-4" title="Affiliate Policies and Procedures">
                           <i class="i i-affiliate-p-p"></i>
                       </a>
                       <span class="min w-180px">Affiliate Policies and<br> Procedures </span>
                   </div>
                   <div class="col-4 colCenter">
-                      <a class="" id="os-5" title="Strategic Planning ">
+                      <a class="<?=isset($bgc1s5)?$bgc1s5:''?>" id="os-5" title="Strategic Planning ">
                           <i class="i i-strategic"></i>
                       </a>
                       <span class="min w-180px">Strategic <br> Planning </span>
                   </div>
                   <div class="col-4 colCenter">
-                      <a class="" id="os-6" title="Public Affairs  and Public Policy">
+                      <a class="<?=isset($bgc1s6)?$bgc1s6:''?>" id="os-6" title="Public Affairs  and Public Policy">
                           <i class="i i-policy"></i>
                       </a>
                       <span class="min w-180px">Public Affairs <br> and Public Policy </span>
@@ -75,7 +121,10 @@
                  <div class="criteria">
                       <div class="headOuter">
                           <div class="head">
-                              <h3>Criteria 1: Organizational Soundness </h3>
+                          <h3 class="ib-m">Criteria 1: Organizational Soundness </h3>
+                      <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>">
+                        <i class="i i-timer"></i>
+                      </a>
                           </div>
                       </div>
                       <div class="criteriaBottom">
@@ -128,7 +177,7 @@
                     </div>
                      
                       <div class="d-flex justify-content-end">
-                        <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_one_s_one();" type="submit">Save</button>
+                        <button class="btn btn-dark btn-rounded min w-100px mr-2"  onclick="c_one_s_one(); savebtn();" type="submit">Save</button>
                         <button class="btn btn-primary btn-rounded min w-100px" onclick="c_one_s_one();" id="saveContinue" type="submit">SAVE AND CONTINUE</button>
                       </div>
           
@@ -147,7 +196,10 @@
 
         <div class="headOuter">
             <div class="head">
-                <h3>Criteria 1: Organizational Soundness </h3>
+            <h3 class="ib-m">Criteria 1: Organizational Soundness </h3>
+                      <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>">
+                        <i class="i i-timer"></i>
+                      </a>
             </div>
         </div>
 
@@ -163,7 +215,7 @@
 
     <div class="headOuter">
         <div class="head">
-            <h3>Administration and Governance  </h3>
+            <h3>Annual Reports </h3>
         </div>
     </div>
 
@@ -203,7 +255,7 @@
 
   <div class="d-flex justify-content-end">
 
-  <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_one_s_two();" type="submit">Save</button>
+  <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_one_s_two(); savebtn();" type="submit">Save</button>
  <button class="btn btn-primary btn-rounded min w-100px" onclick="c_one_s_two();" id="saveContinue2" type="submit">SAVE AND CONTINUE</button>
 
 
@@ -220,7 +272,10 @@
     
             <div class="headOuter">
                 <div class="head">
-                    <h3>Criteria 1: Organizational Soundness </h3>
+                    <h3 class="ib-m">Criteria 1: Organizational Soundness </h3>
+                      <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>">
+                        <i class="i i-timer"></i>
+                      </a>
                 </div>
             </div>
     
@@ -274,7 +329,7 @@
     
     
        <div class="d-flex justify-content-end">
-       <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_one_s_three();" type="submit">Save</button>
+       <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_one_s_three(); savebtn();" type="submit">Save</button>
        <button class="btn btn-primary btn-rounded min w-100px" onclick="c_one_s_three();" id="saveContinue3" type="submit">SAVE AND CONTINUE</button>
 
       </div>
@@ -295,7 +350,10 @@
     
           <div class="headOuter">
               <div class="head">
-                  <h3>Criteria 1: Organizational Soundness </h3>
+                  <h3 class="ib-m">Criteria 1: Organizational Soundness </h3>
+                      <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>">
+                        <i class="i i-timer"></i>
+                      </a>
               </div>
           </div>
     
@@ -352,7 +410,7 @@
     
     
      <div class="d-flex justify-content-end">
-     <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_one_s_four();" type="submit">Save</button>
+     <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_one_s_four(); savebtn();" type="submit">Save</button>
       <button class="btn btn-primary btn-rounded min w-100px" onclick="c_one_s_four();" id="saveContinue4" type="submit">SAVE AND CONTINUE</button>
 
     </div>
@@ -372,7 +430,10 @@
 
       <div class="headOuter">
           <div class="head">
-              <h3>Criteria 1: Organizational Soundness </h3>
+              <h3 class="ib-m">Criteria 1: Organizational Soundness </h3>
+                      <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>">
+                        <i class="i i-timer"></i>
+                      </a>
           </div>
       </div>
 
@@ -386,7 +447,7 @@
 
         <div class="headOuter">
             <div class="head">
-                <h3>Affiliate Policies and Procedures </h3>
+                <h3>Strategic Planning</h3>
             </div>
         </div>
 
@@ -428,7 +489,7 @@
 
       <div class="d-flex justify-content-end">
        
-      <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_one_s_five();" type="submit">Save</button>
+      <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_one_s_five(); savebtn();" type="submit">Save</button>
       <button class="btn btn-primary btn-rounded min w-100px" onclick="c_one_s_five();" id="saveContinue5" type="submit">SAVE AND CONTINUE</button>
 
       </div>
@@ -445,7 +506,10 @@
 
       <div class="headOuter">
           <div class="head">
-              <h3>Criteria 1: Organizational Soundness </h3>
+              <h3 class="ib-m">Criteria 1: Organizational Soundness </h3>
+                      <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>">
+                        <i class="i i-timer"></i>
+                      </a>
           </div>
       </div>
 
@@ -516,7 +580,7 @@
       </div>
 
       <div class="d-flex justify-content-end">
-      <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_one_s_six();" type="submit">Save</button>
+      <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_one_s_six(); savebtn();" type="submit">Save</button>
       <button class="btn btn-primary btn-rounded min w-100px" onclick="c_one_s_six();" id="saveContinue6" type="submit">SAVE AND CONTINUE</button>
       
     
@@ -538,49 +602,49 @@
 
 <div class="row wrapouterIcons">
   <div class="col-3 colCenter">
-      <a class="active" id="qs-1" title="Personnel Policies" >
+      <a class="active <?=isset($bgc2s1)?$bgc2s1:''?>" id="qs-1" title="Personnel Policies" >
           <i class="i i-p-policies"></i>
       </a>
       <span class="min w-180px">Personnel <br> Policies </span>
   </div>
  <div class="col-3 colCenter">
-      <a class="" id="qs-2" title="Fundraising">
+      <a class="<?=isset($bgc2s2)?$bgc2s2:''?>" id="qs-2" title="Fundraising">
           <i class="i i-fundraising"></i>
       </a>
       <span class="min w-180px">Fundraising</span>
  </div>
   <div class="col-3 colCenter">
-      <a class="" id="qs-3" title="Fiscal/Financial Management">
+      <a class="<?=isset($bgc2s3)?$bgc2s3:''?>" id="qs-3" title="Fiscal/Financial Management">
           <i class="i i-financial-man"></i>
       </a>
       <span class="min w-180px">Fiscal/Financial <br> Management</span>
   </div>
   <div class="col-3 colCenter">
-      <a class="" id="qs-4"  title="Internal Controls">
+      <a class="<?=isset($bgc2s4)?$bgc2s4:''?>" id="qs-4"  title="Internal Controls">
           <i class="i i-internal-cntrl"></i>
       </a>
       <span class="min w-180px">Internal <br> Controls </span>
   </div>
   <div class="col-3 colCenter">
-      <a class="" id="qs-5" title="Fiscal Policies and Procedures">
+      <a class="<?=isset($bgc2s5)?$bgc2s5:''?>" id="qs-5" title="Fiscal Policies and Procedures">
           <i class="i i-fiscal-policies"></i>
       </a>
       <span class="min w-180px">Fiscal Policies <br>and Procedures </span>
   </div>
   <div class="col-3 colCenter">
-      <a class="" id="qs-6" title="Endowments">
+      <a class="<?=isset($bgc2s6)?$bgc2s6:''?>" id="qs-6" title="Endowments">
           <i class="i i-endowments"></i>
       </a>
       <span class="min w-180px">Endowments</span>
   </div>
   <div class="col-3 colCenter">
-      <a class="" id="qs-7" title="Corporate Goals">
+      <a class="<?=isset($bgc2s7)?$bgc2s7:''?>" id="qs-7" title="Corporate Goals">
           <i class="i i-corporate-gol"></i>
       </a>
       <span class="min w-180px">Corporate <br> Goals </span>
   </div>
   <div class="col-3 colCenter">
-      <a class="" id="qs-8" title="Legal, Compliance  and Accountability">
+      <a class="<?=isset($bgc2s8)?$bgc2s8:''?>" id="qs-8" title="Legal, Compliance  and Accountability">
           <i class="i i-legal-compliance"></i>
       </a>
       <span class="min w-180px">Legal, Compliance  and Accountability</span>
@@ -598,7 +662,10 @@
         <div  class="d-block">
         <div class="headOuter">
             <div class="head">
-                <h3>Criteria 2: Organizational Vitality</h3>
+                <h3 class="ib-m">Criteria 2: Organizational Vitality </h3>
+                      <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>">
+                        <i class="i i-timer"></i>
+                      </a>
             </div>
         </div>
 
@@ -611,7 +678,7 @@
         <div class="d-block">
           <div class="headOuter">
               <div class="head">
-                  <h3>Human Resources</h3>
+                  <h3>Personnel Policies</h3>
               </div>
           </div>
 
@@ -674,7 +741,7 @@
 
 
         <div class="d-flex justify-content-end">
-      <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_two_s_one();" type="submit">Save</button>
+      <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_two_s_one(); savebtn();" type="submit">Save</button>
       <button class="btn btn-primary btn-rounded min w-100px" onclick="c_two_s_one();" id="saveContinue-x1" type="submit">SAVE AND CONTINUE</button>
 
         </div>
@@ -696,7 +763,10 @@
 
         <div class="headOuter">
             <div class="head">
-                <h3>Criteria 2: Organizational Vitality</h3>
+                <h3 class="ib-m">Criteria 2: Organizational Vitality </h3>
+                      <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>">
+                        <i class="i i-timer"></i>
+                      </a>
             </div>
         </div>
 
@@ -769,7 +839,7 @@
 
 
         <div class="d-flex justify-content-end">
-        <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_two_s_two();" type="submit">Save</button>
+        <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_two_s_two(); savebtn();" type="submit">Save</button>
        <button class="btn btn-primary btn-rounded min w-100px" onclick="c_two_s_two();" id="saveContinue-x2" type="submit">SAVE AND CONTINUE</button>
         </div>
 
@@ -788,7 +858,10 @@
                 
                         <div class="headOuter">
                             <div class="head">
-                                <h3>Criteria 2: Organizational Vitality</h3>
+                                <h3 class="ib-m">Criteria 2: Organizational Vitality </h3>
+                      <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>">
+                        <i class="i i-timer"></i>
+                      </a>
                             </div>
                         </div>
                 
@@ -854,7 +927,7 @@
                           </div></div>
                 
                         <div class="d-flex justify-content-end">
-                        <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_two_s_three();" type="submit">Save</button>
+                        <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_two_s_three(); savebtn();" type="submit">Save</button>
                         <button class="btn btn-primary btn-rounded min w-100px" onclick="c_two_s_three();" id="saveContinue-x3" type="submit">SAVE AND CONTINUE</button>
                          
                         </div>
@@ -878,7 +951,10 @@
 
         <div class="headOuter">
             <div class="head">
-                <h3>Criteria 2: Organizational Vitality </h3>
+            <h3 class="ib-m">Criteria 2: Organizational Vitality </h3>
+                      <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>">
+                        <i class="i i-timer"></i>
+                      </a>
             </div>
         </div>
 
@@ -950,7 +1026,7 @@
       </div>
 
         <div class="d-flex justify-content-end">
-        <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_two_s_four();" type="submit">Save</button>
+        <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_two_s_four(); savebtn();" type="submit">Save</button>
         <button class="btn btn-primary btn-rounded min w-100px" onclick="c_two_s_four();" id="saveContinue-x4" type="submit">SAVE AND CONTINUE</button>
                          
          
@@ -973,7 +1049,10 @@
           <div class="d-block">
         <div class="headOuter">
             <div class="head">
-                <h3>Criteria 2: Organizational Vitality</h3>
+                <h3 class="ib-m">Criteria 2: Organizational Vitality </h3>
+                      <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>">
+                        <i class="i i-timer"></i>
+                      </a>
             </div>
         </div>
   
@@ -1043,7 +1122,7 @@
     </div></div>
   
         <div class="d-flex justify-content-end">
-         <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_two_s_five();" type="submit">Save</button>
+         <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_two_s_five(); savebtn();" type="submit">Save</button>
         <button class="btn btn-primary btn-rounded min w-100px" onclick="c_two_s_five();" id="saveContinue-x5" type="submit">SAVE AND CONTINUE</button>
        
         </div>
@@ -1064,7 +1143,10 @@
   
         <div class="headOuter">
             <div class="head">
-                <h3>Criteria 2: Organizational Vitality</h3>
+                <h3 class="ib-m">Criteria 2: Organizational Vitality </h3>
+                      <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>">
+                        <i class="i i-timer"></i>
+                      </a>
             </div>
         </div>
   
@@ -1139,7 +1221,7 @@
   
         <div class="d-flex justify-content-end">
 
-        <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_two_s_six();" type="submit">Save</button>
+        <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_two_s_six(); savebtn();" type="submit">Save</button>
         <button class="btn btn-primary btn-rounded min w-100px" onclick="c_two_s_six();" id="saveContinue-x6" type="submit">SAVE AND CONTINUE</button>
          
         </div>
@@ -1161,7 +1243,10 @@
         <div class="d-block">
         <div class="headOuter">
             <div class="head">
-                <h3>Criteria 2: Organizational Vitality </h3>
+            <h3 class="ib-m">Criteria 2: Organizational Vitality </h3>
+                      <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>">
+                        <i class="i i-timer"></i>
+                      </a>
             </div>
         </div>
   
@@ -1230,7 +1315,7 @@
       </div>
   
         <div class="d-flex justify-content-end">
-        <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_two_s_seven();" type="submit">Save</button>
+        <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_two_s_seven(); savebtn();" type="submit">Save</button>
         <button class="btn btn-primary btn-rounded min w-100px" onclick="c_two_s_seven();" id="saveContinue-x7" type="submit">SAVE AND CONTINUE</button>
          
         </div>
@@ -1253,7 +1338,11 @@
   
         <div class="headOuter">
             <div class="head">
-                <h3>Criteria 2: Organizational Vitality </h3>
+               
+            <h3 class="ib-m">Criteria 2: Organizational Vitality </h3>
+                <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>">
+                <i class="i i-timer"></i>
+                </a>
             </div>
         </div>
   
@@ -1377,49 +1466,49 @@
 
     <div class="row wrapouterIcons">
       <div class="col-3 colCenter">
-          <a class="active" id="dt-1" title="Standard 1" >
+          <a class="active <?=isset($bgc3s1)?$bgc3s1:''?>" id="dt-1" title="Standard 1" >
               <i class="i i-standard-icon"></i>
           </a>
           <span class="min w-180px">Standard 1 </span>
       </div>
      <div class="col-3 colCenter">
-          <a class="" id="dt-2" title="Standard 2">
+          <a class="<?=isset($bgc3s2)?$bgc3s2:''?>" id="dt-2" title="Standard 2">
               <i class="i i-standard-icon"></i>
           </a>
           <span class="min w-180px">Standard 2</span>
      </div>
       <div class="col-3 colCenter">
-          <a class="" id="dt-3" title="Standard 3">
+          <a class="<?=isset($bgc3s3)?$bgc3s3:''?>" id="dt-3" title="Standard 3">
               <i class="i i-standard-icon"></i>
           </a>
           <span class="min w-180px">Standard 3</span>
       </div>
       <div class="col-3 colCenter">
-          <a class="" id="dt-4"  title="Standard 4">
+          <a class="<?=isset($bgc3s4)?$bgc3s4:''?>" id="dt-4"  title="Standard 4">
               <i class="i i-standard-icon"></i>
           </a>
           <span class="min w-180px">Standard 4 </span>
       </div>
       <div class="col-3 colCenter">
-          <a class="" id="dt-5" title="Standard 5">
+          <a class="<?=isset($bgc3s5)?$bgc3s5:''?>" id="dt-5" title="Standard 5">
               <i class="i i-standard-icon"></i>
           </a>
           <span class="min w-180px">Standard 5 </span>
       </div>
       <div class="col-3 colCenter">
-          <a class="" id="dt-6" title="Standard 6">
+          <a class="<?=isset($bgc3s6)?$bgc3s6:''?>" id="dt-6" title="Standard 6">
               <i class="i i-standard-icon"></i>
           </a>
           <span class="min w-180px">Standard 6</span>
       </div>
       <div class="col-3 colCenter">
-          <a class="" id="dt-7" title="Standard 7">
+          <a class="<?=isset($bgc3s7)?$bgc3s7:''?>" id="dt-7" title="Standard 7">
               <i class="i i-standard-icon"></i>
           </a>
           <span class="min w-180px">Standard 7</span>
       </div>
       <div class="col-3 colCenter">
-          <a class="" id="dt-8" title="Standard 8">
+          <a class="<?=isset($bgc3s8)?$bgc3s8:''?>" id="dt-8" title="Standard 8">
               <i class="i i-standard-icon"></i>
           </a>
           <span class="min w-180px">Standard 8</span>
@@ -1434,7 +1523,11 @@
   <div class="criteria">
        <div class="headOuter">
            <div class="head">
-               <h3>Criteria 3: Implementation of Mission </h3>
+             
+               <h3 class="ib-m">Criteria 3: Implementation of Mission  </h3>
+                <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>">
+                <i class="i i-timer"></i>
+                </a>
            </div>
        </div>
        <div class="criteriaBottom">
@@ -1484,7 +1577,7 @@
       
        <div class="d-flex justify-content-end">
 
-       <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_three_s_one();" type="submit">Save</button>
+       <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_three_s_one(); savebtn();" type="submit">Save</button>
        <button class="btn btn-primary btn-rounded min w-100px" onclick="c_three_s_one();" id="saveContinue-s1" type="submit">SAVE AND CONTINUE</button>
          
        </div>
@@ -1502,7 +1595,10 @@
 
       <div class="headOuter">
           <div class="head">
-              <h3>Criteria 3: Implementation of Mission </h3>
+          <h3 class="ib-m">Criteria 3: Implementation of Mission  </h3>
+                <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>">
+                <i class="i i-timer"></i>
+                </a>
           </div>
       </div>
 
@@ -1555,7 +1651,7 @@
 </div>
 
 <div class="d-flex justify-content-end">
-<button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_three_s_two();" type="submit">Save</button>
+<button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_three_s_two(); savebtn();" type="submit">Save</button>
 <button class="btn btn-primary btn-rounded min w-100px" onclick="c_three_s_two();" id="saveContinue-s2" type="submit">SAVE AND CONTINUE</button>
        
 </div>
@@ -1571,7 +1667,10 @@
 
       <div class="headOuter">
           <div class="head">
-              <h3>Criteria 3: Implementation of Mission </h3>
+          <h3 class="ib-m">Criteria 3: Implementation of Mission  </h3>
+                <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>">
+                <i class="i i-timer"></i>
+                </a>
           </div>
       </div>
 
@@ -1623,7 +1722,7 @@
 
 
  <div class="d-flex justify-content-end">
- <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_three_s_three();" type="submit">Save</button>
+ <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_three_s_three(); savebtn();" type="submit">Save</button>
 <button class="btn btn-primary btn-rounded min w-100px" onclick="c_three_s_three();" id="saveContinue-s3" type="submit">SAVE AND CONTINUE</button>
   
 </div>
@@ -1640,7 +1739,10 @@
 
     <div class="headOuter">
         <div class="head">
-            <h3>Criteria 3: Implementation of Mission</h3>
+        <h3 class="ib-m">Criteria 3: Implementation of Mission  </h3>
+                <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>">
+                <i class="i i-timer"></i>
+                </a>
         </div>
     </div>
 
@@ -1695,7 +1797,7 @@
 
 <div class="d-flex justify-content-end">
 
-<button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_three_s_four();" type="submit">Save</button>
+<button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_three_s_four(); savebtn();" type="submit">Save</button>
 <button class="btn btn-primary btn-rounded min w-100px" onclick="c_three_s_four();" id="saveContinue-s4" type="submit">SAVE AND CONTINUE</button>
 </div>
 
@@ -1711,7 +1813,10 @@
 
       <div class="headOuter">
           <div class="head">
-              <h3>Criteria 3: Implementation of Mission </h3>
+          <h3 class="ib-m">Criteria 3: Implementation of Mission  </h3>
+                <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>">
+                <i class="i i-timer"></i>
+                </a>
           </div>
       </div>
 
@@ -1762,7 +1867,7 @@
       </div>
 
       <div class="d-flex justify-content-end">
-      <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_three_s_five();" type="submit">Save</button>
+      <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_three_s_five(); savebtn();" type="submit">Save</button>
       <button class="btn btn-primary btn-rounded min w-100px" onclick="c_three_s_five();" id="saveContinue-s5" type="submit">SAVE AND CONTINUE</button>
       </div>
 
@@ -1780,7 +1885,10 @@
 
       <div class="headOuter">
           <div class="head">
-              <h3>Criteria 3: Implementation of Mission </h3>
+          <h3 class="ib-m">Criteria 3: Implementation of Mission  </h3>
+                <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>">
+                <i class="i i-timer"></i>
+                </a>
           </div>
       </div>
 
@@ -1826,7 +1934,7 @@
       </div>
 
       <div class="d-flex justify-content-end">
-      <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_three_s_six();" type="submit">Save</button>
+      <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_three_s_six(); savebtn();" type="submit">Save</button>
       <button class="btn btn-primary btn-rounded min w-100px" onclick="c_three_s_six();" id="saveContinue-s6" type="submit">SAVE AND CONTINUE</button>
 
       </div>
@@ -1843,7 +1951,10 @@
 
       <div class="headOuter">
           <div class="head">
-              <h3>Criteria 3: Implementation of Mission</h3>
+          <h3 class="ib-m">Criteria 3: Implementation of Mission  </h3>
+                <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>">
+                <i class="i i-timer"></i>
+                </a>
           </div>
       </div>
       <div class="criteriaBottom">
@@ -1892,7 +2003,7 @@
       </div>
 
       <div class="d-flex justify-content-end">
-      <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_three_s_seven();" type="submit">Save</button>
+      <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_three_s_seven(); savebtn();" type="submit">Save</button>
       <button class="btn btn-primary btn-rounded min w-100px" onclick="c_three_s_seven();" id="saveContinue-s7" type="submit">SAVE AND CONTINUE</button>
 
       </div>
@@ -1909,7 +2020,10 @@
 
       <div class="headOuter">
           <div class="head">
-              <h3>Criteria 3: Implementation of Mission</h3>
+          <h3 class="ib-m">Criteria 3: Implementation of Mission  </h3>
+                <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>">
+                <i class="i i-timer"></i>
+                </a>
           </div>
       </div>
 
@@ -1975,8 +2089,8 @@
       </div>
 
       <div class="d-flex justify-content-end">
-      <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_three_s_eight();" type="submit">Save</button>
-      <button class="btn btn-primary btn-rounded min w-100px" onclick="c_three_s_eight();" id="saveContinue-s8" type="submit">SAVE AND CONTINUE</button>
+      <!-- <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_three_s_eight();" type="submit">Save</button> -->
+      <button class="btn btn-primary btn-rounded min w-100px" onclick="c_three_s_eight();" id="saveContinue-s8" type="submit">SAVE</button>
 
       </div>
 
@@ -2000,3 +2114,9 @@
       </div>
     </div>
   </main>
+<?php 
+}else{
+  $url = base_url('module/assessment/assessment-listing');
+  header('Location: ' . $url."?error_:_invaild_assessemnt_id_and_affiliate_id");
+}
+?>
