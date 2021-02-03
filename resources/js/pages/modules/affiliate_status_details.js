@@ -1,5 +1,7 @@
 $(function () {
+	if($('.chatBoxinn').length){
 	$('.chatBoxinn').scrollTop($('.chatBoxinn')[0].scrollHeight);
+	}
 	var toastConfig = {
 		timeout: 5000,
 		position: 'top',
