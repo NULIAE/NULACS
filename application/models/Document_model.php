@@ -84,6 +84,18 @@ class Document_model extends CI_Model
 
 		return $query->result_array();
 	}
+	/**
+	 * get affiliate details 
+	 *
+	 * @return array
+	 */
+	public function get_affiliate_details()
+	{
+
+		$query = $this->db->get('users');
+
+		return $query->result_array();
+	}
 
 	 /**
 	 * Get all notifications
@@ -272,7 +284,38 @@ class Document_model extends CI_Model
 			"metadata_value" => $data["metadata"],
 		);
 
-		if( $this->db->insert('monthly_document_status', $insert_data) )
+		//Check document already uploaded
+		$this->db->where("document_id", $data["document_id"]);
+		$this->db->where("affiliate_id", $data["affiliate_id"]);
+		$this->db->where("document_month", $data["month"]);
+		$this->db->where("document_year", $data["year"]);
+
+		$query = $this->db->get('monthly_document_status');
+
+		$row = $query->row_array();
+		
+		if (isset($row))
+		{
+			//Delete already existing file
+			$path = FCPATH . $row["monthly_upload_file"];
+			if(file_exists($row["monthly_upload_file"]))
+			{
+				unlink(FCPATH . $row["monthly_upload_file"]);
+			}
+			
+			//Update the new details
+			$this->db->where("monthly_document_id", $row["monthly_document_id"]);
+			
+			if( $this->db->update('monthly_document_status', $insert_data) )
+			{
+				return $row["monthly_document_id"];
+			}
+			else
+			{
+				return FALSE;
+			}
+		}
+		else if( $this->db->insert('monthly_document_status', $insert_data) ) //Insert new document
 		{
 			return $this->db->insert_id();
 		}
@@ -304,7 +347,38 @@ class Document_model extends CI_Model
 			"metadata_value" => $data["metadata"],
 		);
 
-		if( $this->db->insert('quarterly_document_status', $insert_data) )
+		//Check document already uploaded
+		$this->db->where("document_id", $data["document_id"]);
+		$this->db->where("affiliate_id", $data["affiliate_id"]);
+		$this->db->where("document_month", ceil($data["month"]/3));
+		$this->db->where("document_year", $data["year"]);
+
+		$query = $this->db->get('quarterly_document_status');
+
+		$row = $query->row_array();
+		
+		if (isset($row))
+		{
+			//Delete already existing file
+			$path = FCPATH . $row["quarterly_upload_file"];
+			if(file_exists($row["quarterly_upload_file"]))
+			{
+				unlink(FCPATH . $row["quarterly_upload_file"]);
+			}
+			
+			//Update the new details
+			$this->db->where("quarterly_id", $row["quarterly_id"]);
+			
+			if( $this->db->update('quarterly_document_status', $insert_data) )
+			{
+				return $row["quarterly_id"];
+			}
+			else
+			{
+				return FALSE;
+			}
+		}
+		else if( $this->db->insert('quarterly_document_status', $insert_data) ) //Insert new document
 		{
 			return $this->db->insert_id();
 		}
@@ -335,7 +409,37 @@ class Document_model extends CI_Model
 			"metadata_value" => $data["metadata"],
 		);
 
-		if( $this->db->insert('yearly_document_status', $insert_data) )
+		//Check document already uploaded
+		$this->db->where("document_id", $data["document_id"]);
+		$this->db->where("affiliate_id", $data["affiliate_id"]);
+		$this->db->where("document_year", $data["year"]);
+
+		$query = $this->db->get('yearly_document_status');
+
+		$row = $query->row_array();
+		
+		if (isset($row))
+		{
+			//Delete already existing file
+			$path = FCPATH . $row["yearly_upload_file"];
+			if(file_exists($row["yearly_upload_file"]))
+			{
+				unlink(FCPATH . $row["yearly_upload_file"]);
+			}
+			
+			//Update the new details
+			$this->db->where("yearly_d_id", $row["yearly_d_id"]);
+			
+			if( $this->db->update('yearly_document_status', $insert_data) )
+			{
+				return $row["yearly_d_id"];
+			}
+			else
+			{
+				return FALSE;
+			}
+		}
+		else if( $this->db->insert('yearly_document_status', $insert_data) ) //Insert new document
 		{
 			return $this->db->insert_id();
 		}

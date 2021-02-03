@@ -7,6 +7,7 @@ class Email_template extends MY_Controller
 	{
 		parent::__construct();
 		$this->load->model('Email_model');
+		$this->load->model('Document_model');
 		//$this->output->enable_profiler(TRUE);
 	}
 
@@ -17,6 +18,8 @@ class Email_template extends MY_Controller
 	 */
 	public function index()
 	{
+		$data['notifications'] = $this->Document_model->get_notifications();
+		
 		$data['content'] = array(
 			'templates' => $this->Email_model->get_email_templates()
 		);

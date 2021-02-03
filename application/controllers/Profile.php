@@ -80,27 +80,45 @@ class Profile extends MY_Controller {
 
 		$status = $message = NULL;
 
-		if ( $this->User_model->update($data['user_id'], $data) )
+		$user = $this->User_model->get_user_by_id($data['user_id']);
+
+		if(!empty($user))
 		{
-			$log_data = array(
-				'user_id' => $this->session->user_id,
-				'affiliate_id' => $this->session->affiliate_id,
-				'record_id'	=> $data['user_id'],
-				'note' => 'User profile updated'
-			);
-	
-			//Log user activities
-			$this->User_model->user_log($log_data);
-			
-			//User profile updated
-			$status = TRUE;
-			$message = 'User profile updated successfully.';
+			if( $this->session->role_id == 1 )
+			{
+				$data['is_adm_uploader'] = isset($data['is_adm_uploader']) ? 1 : 0;
+				$data['isuser_super_administrator'] = isset($data['isuser_super_administrator']) ? 1 : 0;
+				$data['user_status'] = isset($data['user_status']) ? 1 : 0;
+			}
+
+			if ( $this->User_model->update($data['user_id'], $data) )
+			{
+				$log_data = array(
+					'user_id' => $this->session->user_id,
+					'affiliate_id' => $this->session->affiliate_id,
+					'record_id'	=> $data['user_id'],
+					'note' => 'User profile updated'
+				);
+		
+				//Log user activities
+				$this->User_model->user_log($log_data);
+				
+				//User profile updated
+				$status = TRUE;
+				$message = 'User profile updated successfully.';
+			}
+			else
+			{
+				//Failed to save the user details.
+				$status = FALSE;
+				$message = 'Something went wrong. Try again later.';
+			}
 		}
 		else
 		{
-			//Failed to save the new password.
+			//Failed to save the user details.
 			$status = FALSE;
-			$message = 'Something went wrong. Try again later.';
+			$message = 'User not found.';
 		}
 		
 		$response = array(

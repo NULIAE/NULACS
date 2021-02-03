@@ -30,7 +30,7 @@
 							<div class="col-lg-6 col-md-12 form-group">
 								<div>
 									<label>User ID</label>
-									<input type="text" name="name" class="form-control" value="<?php echo $user['name']; ?>" placeholder="userid@nul.org" required />
+									<input type="text" name="name" class="form-control" value="<?php echo $user['name']; ?>" placeholder="userid@nul.org" disabled />
 								</div>
 							</div>
 							<div class="col-lg-6 col-md-12 form-group">
@@ -63,28 +63,6 @@
                         <div class="row w-100 mb-3">
 							<div class="col-lg-6 col-md-12 form-group">
 								<div>
-									<label>User Suffix</label>
-									<input type="text" name="user_suffix" class="form-control" value="<?php echo $user['user_suffix']; ?>" placeholder="User Suffix" required />
-								</div>
-							</div>
-						
-							<div class="col-lg-6 col-md-12 form-group">
-								<div>
-									<label>Title</label>
-									<input type="text" name="user_title" class="form-control" value="<?php echo $user['user_title']; ?>" placeholder="Enter your title" required />
-								</div>
-							</div>
-							
-							<div class="col-lg-6 col-md-12 form-group">
-								<label for="pu-1">Is user active?</label>
-								<div>
-									<label class="checkbox switch bool <?php if($user['user_status']) echo "checked"; ?>" for="pu-2">
-									<input type="checkbox" id="pu-2" name="user_status" value="1" <?php if($user['user_status']) echo "checked"; ?> <?php if($role_id != '1') echo "disabled"; ?>>
-									</label>
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-12 form-group">
-								<div>
 								<label>Role</label>
 									<?php if($role_id != '1'):?>
 										<input type="text" name="role_id" class="form-control" value="<?php echo $user['role_description']; ?>" disabled />
@@ -100,44 +78,62 @@
 									<?php endif; ?>
 								</div>
 							</div>
+
+							<div class="col-lg-6 col-md-12 form-group">
+								<div>
+									<label>Title</label>
+									<input type="text" name="user_title" class="form-control" value="<?php echo $user['user_title']; ?>" placeholder="Enter your title" required />
+								</div>
+							</div>
+
+							<div class="col-lg-6 col-md-12 form-group">
+								<div>
+									<label>Email Address</label>
+									<input type="email" name="user_email_address_1" class="form-control" value="<?php echo $user['user_email_address_1']; ?>" placeholder="mail@nul.org" required />
+								</div>
+							</div>
+							<div class="col-lg-6 col-md-12 form-group">
+								<div>
+									<label>Phone</label>
+									<input type="text" name="user_phone" class="form-control" value="<?php echo $user['user_phone']; ?>" placeholder="000-000-0000" />
+								</div>
+							</div>
+							
                         </div>
                     </div>
 
                 	<div class="row w-100 my-5">
-                        <div class="col-lg-6 col-md-12 form-group">
-							<div>
-								<label>Email Address</label>
-								<input type="email" name="user_email_address_1" class="form-control" value="<?php echo $user['user_email_address_1']; ?>" placeholder="mail@nul.org" required />
-							</div>
-                        </div>
-                        <div class="col-lg-6 col-md-12 form-group">
-							<div>
-								<label>Phone</label>
-								<input type="text" name="user_phone" class="form-control" value="<?php echo $user['user_phone']; ?>" placeholder="000-000-0000" />
-							</div>
-                    	</div>
+
                         <div class="col-lg-6 col-md-12 form-group">
 							<div>
 								<label>Is ADM Uploader?</label>
 								<div>
-									<label class="checkbox switch bool <?php if($user['is_adm_uploader']) echo "checked"; ?>">
+									<label class="checkbox switch bool <?php if($role_id != '1') echo "disabled"; ?> <?php if($user['is_adm_uploader']) echo "checked"; ?>">
 									<input type="checkbox" name="is_adm_uploader" value="1" <?php if($user['is_adm_uploader']) echo "checked"; ?> <?php if($role_id != '1') echo "disabled"; ?> />
 									</label>
 								</div>
 							</div>
 						</div>
-						<?php if($this->session->role_id==1): ?>
+						
                         <div class="col-lg-6 col-md-12 form-group">
 							<div>
 								<label>Is user super administrator?</label>
 								<div>
-									<label class="checkbox switch bool <?php if($user['isuser_super_administrator']) echo "checked"; ?>">
+									<label class="checkbox switch bool <?php if($role_id != '1') echo "disabled"; ?> <?php if($user['isuser_super_administrator']) echo "checked"; ?>">
 									<input type="checkbox" name="isuser_super_administrator" value="1" <?php if($user['isuser_super_administrator']) echo "checked"; ?> <?php if($role_id != '1') echo "disabled"; ?> />
 									</label>
 								</div>
 							</div>
 						</div>
-						<?php endif; ?>
+						
+						<div class="col-lg-6 col-md-12 form-group">
+							<label for="pu-1">Is user active?</label>
+							<div>
+								<label class="checkbox switch bool <?php if($role_id != '1') echo "disabled"; ?> <?php if($user['user_status']) echo "checked"; ?>" for="pu-2">
+								<input type="checkbox" id="pu-2" name="user_status" value="1" <?php if($user['user_status']) echo "checked"; ?> <?php if($role_id != '1') echo "disabled"; ?>>
+								</label>
+							</div>
+						</div>
                 	</div>
 
 					<div class="foot">

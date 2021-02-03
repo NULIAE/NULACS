@@ -104,11 +104,24 @@ $(function () {
 			doctype: $('#doctype').val(),
 			document: $('#document').val(),
 			docstatus: $('#docstatus').val(),
+			affiliate: $('#affiliate').val(),
+			metadata: $('#metadata').val(),
 			month: $('#monthpicker').val(),
 			quarter: $('#quarter').val(),
 			year:$('#yearpicker').val(),
 			page_items:$('#select-page-items').val()
 		};
+		$('#e_doctype').val($('#doctype').val());
+		$('#e_document').val($('#document').val());
+		$('#e_docstatus').val($('#docstatus').val());
+		$('#e_affiliate').val($('#affiliate').val());
+		$('#e_metadata').val($('#metadata').val());
+		$('#e_monthpicker').val($('#monthpicker').val());
+		$('#e_quarter').val($('#quarter').val());
+		$('#e_yearpicker').val($('#yearpicker').val());
+		$('#e_select-page-items').val($('#select-page-items').val());
+
+
 		
 		$.ajax({
 			url	 : url,

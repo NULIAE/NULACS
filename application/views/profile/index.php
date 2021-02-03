@@ -57,49 +57,48 @@
 							</div>
 							
 							<div class="col-lg-8 col-md-8 form-group">
-								<label>Is user active?</label>
-								<div>
-									<label class="checkbox switch bool <?php if($user['user_status']) echo "checked"; ?>" for="pu-2"><span class="sr-only">Is user active?</span>
-									<input type="checkbox" id="pu-2" name="user_status" value="1" disabled>
-									</label>
-								</div>
-							</div>
-							<div class="col-lg-8 col-md-8 form-group">
-							<label for="user-email">Email</label>
+								<label for="user-email">Email</label>
 								<input type="email" name="user_email" id="user-email" class="form-control" value="<?php echo $user['user_email_address_1']; ?>" placeholder="mail@nul.org" disabled />
+							</div>
+
+							<div class="col-lg-8 col-md-8 form-group">
+								<div>
+									<label for="user-phone">Phone</label>
+									<input type="text" name="user_phone" id="user-phone" class="form-control" value="<?php echo $user['user_phone']; ?>" disabled />
+								</div>
 							</div>
                         </div>
                     </div>
 
                 	<div class="row w-100 my-5">
-                        <div class="col-lg-8 col-md-8 form-group">
-							<div>
-								<label for="user-phone">Phone</label>
-								<input type="text" name="user_phone" id="user-phone" class="form-control" value="<?php echo $user['user_phone']; ?>" disabled />
-							</div>
-                    	</div>
 						<div class="col-lg-8 col-md-8 form-group">
 							<div>
 								<label>Is ADM Uploader?</label>
 								<div>
-									<label class="checkbox switch bool <?php if($user['is_adm_uploader']) echo "checked"; ?>" for="switch-adm"><span class="sr-only">Is ADM Uploader?</span>
+									<label class="checkbox switch bool disabled <?php if($user['is_adm_uploader']) echo "checked"; ?>" for="switch-adm"><span class="sr-only">Is ADM Uploader?</span>
 									<input type="checkbox" name="is_adm_uploader" id="switch-adm" value="1" disabled />
 									</label>
 								</div>
 							</div>
 						</div>
-						<?php if($this->session->role_id==1): ?>
 						<div class="col-lg-8 col-md-8 form-group">
 							<div>
 								<label>Is user super administrator?</label>
 								<div>
-									<label class="checkbox switch bool <?php if($user['isuser_super_administrator']) echo "checked"; ?>" for="switch-user"><span class="sr-only">Is user super administrator?</span>
+									<label class="checkbox switch bool disabled <?php if($user['isuser_super_administrator']) echo "checked"; ?>" for="switch-user"><span class="sr-only">Is user super administrator?</span>
 									<input type="checkbox" name="isuser_super_administrator" id="switch-user" value="1" disabled />
 									</label>
 								</div>
 							</div>
 						</div>
-						<?php endif; ?>
+						<div class="col-lg-8 col-md-8 form-group">
+							<label>Is user active?</label>
+							<div>
+								<label class="checkbox switch bool disabled <?php if($user['user_status']) echo "checked"; ?>" for="pu-2"><span class="sr-only">Is user active?</span>
+								<input type="checkbox" id="pu-2" name="user_status" value="1" disabled>
+								</label>
+							</div>
+						</div>
                 	</div>
 
 					<div class="foot">

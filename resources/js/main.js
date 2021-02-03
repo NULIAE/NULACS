@@ -201,7 +201,7 @@ function buildChooserList(list, opt) {
 }
 
 $(document).ajaxStart(function () {
-  page.loader(true);
+  //page.loader(true);
 });
 
 $(document).ajaxStop(function () {

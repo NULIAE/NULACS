@@ -257,10 +257,10 @@
                         <td><?=date('Y', strtotime('-3 year', strtotime($_GET['year'].'-01-01')))?></td>
                         <td><?=date('Y', strtotime('-4 year', strtotime($_GET['year'].'-01-01')))?></td>
                       <?php }else{ ?>
-                        <td><?=date("M-Y",strtotime("-1 years"))?></td>
-                        <td><?=date("M-Y",strtotime("-2 years"))?></td>
-                        <td><?=date("M-Y",strtotime("-3 years"))?></td>
-                        <td><?=date("M-Y",strtotime("-4 years"))?></td>
+                        <td><?=date("Y",strtotime("-1 years"))?></td>
+                        <td><?=date("Y",strtotime("-2 years"))?></td>
+                        <td><?=date("Y",strtotime("-3 years"))?></td>
+                        <td><?=date("Y",strtotime("-4 years"))?></td>
                    <?php  } ?>
                     </tr>
                   </thead>

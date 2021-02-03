@@ -19,6 +19,7 @@
 						<div><img src="<?php echo base_url('/resources/images/login/logo.png');?>" class="img-fluid" alt="Logo"></div>
 
 						<form class="validate-form" id="loginForm" method="post" action="<?php echo base_url('/authenticate'); ?>">
+						<p style="text-align:center;font-size:20px;">Affiliate Compliance System</p>
 							<span class="Sign-in">Sign in</span>
 		
 							<!-- Show error message -->

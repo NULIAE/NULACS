@@ -13,8 +13,8 @@
 			<div class="row rel pt-4">
 				<form class="filter" id="filter-form" action="<?php echo base_url('module/affiliate/status'); ?>">
 					<div class="row align-items-end">
-						<div class="col-lg-3 col-md-3 col-sm-24 ">
-							<label for="region">Region</label>
+						<div class="col-lg-5 col-md-6 col-sm-24 d-row">
+							<label for="region" class="rowLabel">Region</label>
 							<select name="region_id" data-placeholder="Region" data-type="selector">
 								<option value="">All Region</option>
 								<?php foreach($regions as $region): ?>
@@ -22,10 +22,10 @@
 								<?php endforeach;?>
 							</select>
 						</div>
-						<div class="col-lg-4 col-md-4 col-sm-24 ">
-							<label for="role">Region(s) for the due date</label>
+						<div class="col-lg-5 col-md-7 col-sm-24 d-row">
+							<label for="role" class="rowLabel">Region(s) for the due date</label>
 							<div class="d-flex justify-content-around">
-								<div>
+								<div class="m-r-10">
 								<?php
 								// set the month array
 								$monthArray = array(
@@ -52,7 +52,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-3 col-md-3 col-sm-24 ">
+						<div class="col-lg-4 col-md-6 col-12 d-rows ">
 							<label>Compliance Status</label>
 							<select name="compliance_status" data-placeholder="Status" data-type="selector">
 								<option value="">All Status</option>
@@ -64,7 +64,7 @@
 							</select>
 						</div>
 
-						<div class="col-lg-4 col-md-5 col-sm-24 ">
+						<div class="col-lg-5 col-md-5 col-12 ">
 							<div class="t-l"><button type="submit" class="btn btn-primary btn-rounded min w-100px">GET STATUS</button></div>
 						</div>
 

@@ -27,11 +27,19 @@ class Reports extends MY_Controller
         }
         if(isset($get['choose_yr'])){
             $year = $get['choose_yr'];
-        }
+		}
+		if(isset($get['choose_affiliate_tb'])){
+			$ind_affiliate = $get['choose_affiliate_tb'];
+		}else{
+			$ind_affiliate = '';
+		}
+
 		$data['content'] = array(
-            'affiliates'	 => $this->Reports_model->get_all_affiliates(),
-			'key_indicators' => $this->Reports_model->get_key_indicators($affiliate, $year),
-			'kpi_report'     => $this->Reports_model->get_kpi_report($affiliate, $year)
+            'affiliates'	 	=> $this->Reports_model->get_all_affiliates(),
+			'key_indicators' 	=> $this->Reports_model->get_key_indicators($affiliate, $year),
+			'kpi_report'     	=> $this->Reports_model->get_kpi_report($affiliate, $year),
+			'ind_affiliate'  	=> $this->Reports_model->get_ind_affiliate_report($ind_affiliate),
+			'ind_affiliate_yr'  => $this->Reports_model->get_ind_affiliate_yr_report($ind_affiliate)
         );
 		//print_r($data);
 		//Name of the view file

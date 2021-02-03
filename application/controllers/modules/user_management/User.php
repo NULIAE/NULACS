@@ -49,7 +49,7 @@ class User extends MY_Controller
 		$filters = array();
 
 		if( isset($data['region']) && ($data['region'] !== '') )
-			$filters['users.affiliate_id'] =  $data['region'];
+			$filters['users.region_id'] =  $data['region'];
 
 		if( isset($data['role']) && ($data['role'] !== '') )
 			$filters['users.role_id'] =  $data['role'];
@@ -112,8 +112,7 @@ class User extends MY_Controller
 	{
 		$data['content'] = array(
 			'affiliates' => $this->Affiliate_model->get_all_affiliates(),
-			'roles' => $this->User_model->get_user_roles(),
-			'regions' => $this->User_model->get_all_regions()
+			'roles' => $this->User_model->get_user_roles()
 		);
 		
 		//Name of the view file
@@ -147,6 +146,10 @@ class User extends MY_Controller
 		}
 		else
 		{
+			$affiliate = $this->Affiliate_model->get_affiliate_by_id($data['affiliate_id']);
+
+			$data['region_id'] = $affiliate['region_id'];
+			
 			//Add new user
 			$user_id = $this->User_model->new_user($data);
 

@@ -45,7 +45,7 @@
 	<?php endif; ?>
 	
   <script>
-    page.loader(true);
+    // page.loader(true);
     $(function () {
       setTimeout(function () {
         page.loader(false);
@@ -82,7 +82,7 @@
   </script>
   <!-- Manipulate Graphs here -->
   <script>
-    page.loader(true);
+    // page.loader(true);
     $(function () {
       setTimeout(function () {
         page.loader(false);

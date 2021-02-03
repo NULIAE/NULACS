@@ -6,7 +6,7 @@
 						<div class="col t-r pr-0"> <i class="i i-date ib-m p-r-5"></i> 
 						<span class="ib-m font-weight-normal"><?php echo date('l F d, Y'); ?></span></div>
          </div>
-
+         <div style="display: none;" class="chartBody2"></div>
          <div class="row justify-content-between">
              <div class="col-lg-11">
                 <div class="row headOuter">
@@ -32,7 +32,7 @@
 
          <div class="row justify-content-between py-3">
                 <div class="col-sm-18 p-0">
-                  <div class="text-md-left">
+                  <div class="textIcons">
 
                     <a class="btn btn-round-ib ml-0 btnSort" href="<?php echo base_url('home/filter_affiliates?compliance_status=11');?>" data-rel="tooltip" data-placement="bottom" title="Indeterminate"><i class="i i-Indeterminate"></i><span class="sr-only">Indeterminate</span></a>
                     <a class="btn btn-round-ib btnSort" href="<?php echo base_url('home/filter_affiliates?compliance_status=8');?>" data-rel="tooltip" data-placement="bottom" title="Compliance"><i class="i i-compliant"></i><span class="sr-only">Compliance</span></a>
@@ -43,13 +43,16 @@
               </div>
               <div class="col-sm-4">
 								<form id="search-form" action="<?php echo base_url('home/filter_affiliates');?>"></form>
-                    <div class="search-box">
+                    <div class="search-box d-none d-sm-block">
                       <label class="sr-only" for="input-search">Search</label>
                       <input type="text" placeholder="Search" class="form-control input" id="input-search" name="search" value="" />
                       <div class="btn2" data-rel="tooltip" data-placement="bottom" title="Search">
                         <i class="i i-search" aria-hidden="true"></i>
                       </div>
                     </div>
+                    <div class="search-box d-block d-sm-none m-b-20">
+                   <input type="text" placeholder="Search" class="form-control input mob" id="input-search" name="search" >
+                 </div>
 								</form>
               </div>
          </div>

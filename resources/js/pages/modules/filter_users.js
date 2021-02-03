@@ -19,45 +19,6 @@ $(function () {
 	});
 	
 	$( "#search-btn").click();
-
-	function revalidateForms(){
-		$('form.update-form').each(function(){
-			$(this).validate({
-				errorElement: "div",
-				errorPlacement: function(error, element) {
-					error.appendTo( element.parent() ).addClass('invalid-feedback');
-					$(element).addClass('is-invalid');
-				},
-				highlight: function(element, errorClass, validClass) {
-					$(element).addClass('is-invalid').removeClass(validClass);
-					//$(element).next().addClass('invalid-feedback').removeClass(validClass);
-				},
-				unhighlight: function(element, errorClass, validClass) {
-					$(element).removeClass('is-invalid').addClass(validClass);
-					//$(element).next().removeClass('invalid-feedback').addClass(validClass);
-				},
-				submitHandler: function(form) { 
-					$.ajax({
-						type : 'POST',
-						url	 : $(form).prop('action'), 
-						data : $(form).serialize(),
-						dataType : 'json'
-					}).done(function(data) {
-						var toastConfig = {
-							timeout: 5000,
-							position: 'top',
-							actionText: 'OK',
-							message: data.message,
-							//actionHandler: someCallbackFunction
-						};
-						setTimeout(function(){
-							$('#snackbar').NitroToast(toastConfig);
-						}, 2000);
-					}); 
-				}
-			});
-		});
-	}
 	
 	function getUsers(url) {
 		$('#page-items').val($('#select-page-items').val());
@@ -66,24 +27,33 @@ $(function () {
 			data : $( "#filter-form" ).serialize(),
 			dataType : 'json'
 		}).done(function(data) {
-			$('#accordionUsers').html(Mustache.render($('#template-user').html(), { users : data.users }));
+			$('#accordionUsers').html(Mustache.render($('#template-user').html(), { 
+				users : data.users,
+				"update_url": function () {
+					return base_url + "user/edit-profile/" + this.user_id;
+				},
+			}));
 			if(data.pagination)
 				$('#page-links').html(data.pagination);
 			else {
 				$('#page-links').html(Mustache.render($('#template-empty-page').html(), { }));
 			}
-			$('[data-type="selector"]').SumoSelect();
+			
 			if(data.users.length != 0) {
 				$(data.users).each(function(i, item){
-					$('#prifix'+item.user_id)[0].sumo.selectItem(item.prifix);
-					$('#role'+item.user_id)[0].sumo.selectItem(item.role_id);
-					$('#affiliate'+item.user_id)[0].sumo.selectItem(item.affiliate_id);
 					if(item.user_status == "1"){
 						$('#status-label'+item.user_id).addClass('checked');
 						$('#status'+item.user_id).attr('checked','checked');
 					}
+					if(item.is_adm_uploader == "1"){
+						$('#isadm-label'+item.user_id).addClass('checked');
+						$('#isadm'+item.user_id).attr('checked','checked');
+					}
+					if(item.isuser_super_administrator == "1"){
+						$('#issuper-label'+item.user_id).addClass('checked');
+						$('#issuper'+item.user_id).attr('checked','checked');
+					}
 				});
-				revalidateForms();
 			}
 		});
 	}

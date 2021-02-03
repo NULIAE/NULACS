@@ -23,6 +23,10 @@
 							<?php endforeach;?>
 							</select>
 						</div>
+						<div class="col-lg-4 col-md-6 col-sm-24">
+							<label for="aname">Affiliate Name</label>
+							<input type="text" class="form-control" name="aname" id="aname" value="" />
+						</div>
 					
 						<div class="col-lg-3 col-md-3 col-sm-24 ">
 							<div class="t-c"><button id="search-btn" type="submit" class="btn btn-primary btn-rounded min w-100px">SEARCH</button> </div>
@@ -117,13 +121,13 @@
 					<div class="col-lg-8 col-md-8 form-group">
 						<div>
 							<label>Name</label>
-							<input type="text" class="form-control" name="organization" placeholder="Name" value="{{organization}}" required />
+							<input type="text" class="form-control" name="organization" placeholder="Name" value="{{organization}}" disabled />
 						</div>
 					</div>
 					<div class="col-lg-8 col-md-8 form-group">
 						<div>
 							<label>Region</label>
-							<select name="region_id" id="region{{affiliate_id}}" data-placeholder="East" data-type="selector" required>
+							<select name="region_id" id="region{{affiliate_id}}" data-placeholder="East" data-type="selector" disabled>
 								<option value="">Select Region</option>
 								<?php foreach($regions as $region): ?>
 									<option value="<?php echo $region['region_id'];?>"><?php echo $region['name'];?></option>
@@ -134,92 +138,69 @@
 					<div class="col-lg-8 col-md-8 form-group">
 						<div>
 							<label>Year ending date?</label>
-							<input type="text" class="form-control" name="year_end" placeholder="YYYY-MM-DD" value="{{year_end}}" required />
+							<input type="text" class="form-control" name="year_end" placeholder="YYYY-MM-DD" value="{{year_end}}" disabled />
 						</div>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-lg-6 col-md-12 form-group">
+					<div class="col-lg-8 col-md-8 form-group">
 						<div>
-							<label>City</label>
-							<input type="text" class="form-control" name="city" placeholder="City" value="{{city}}" required />
-						</div>
-					</div>
-				
-					<div class="col-lg-6 col-md-12 form-group">
-						<div>
-							<label>State</label>
-							<select name="state" id="state{{affiliate_id}}" data-placeholder="State" data-type="selector" required>
-								<option value="">Select State</option>
-								<?php foreach($states as $state): ?>
-									<option value="<?php echo $state['stateid'];?>"><?php echo $state['state'];?></option>
-								<?php endforeach; ?>
-							</select>
+							<label>Location</label>
+							<input type="text" class="form-control" name="location" placeholder="City" value="{{city}},{{stateabbreviation}}" disabled />
 						</div>
 					</div>
 
-					<div class="col-lg-6 col-md-12 form-group">
+					<div class="col-lg-8 col-md-8 form-group">
 						<div>
 							<label>Phone</label>
-							<input type="text" class="form-control" name="phone" placeholder="Phone" value="{{phone}}" required />
+							<input type="text" class="form-control" name="phone" placeholder="Phone" value="{{phone}}" disabled />
+						</div>
+					</div>
+
+					<div class="col-lg-8 col-md-8 form-group">
+						<div>
+							<label>Frequency of Board Meeting?</label>
+							<input type="text" class="form-control" name="board_meeting_frequency" value="{{board_meeting_frequency}}" disabled />
 						</div>
 					</div>
 					
-					<div class="col-lg-6 col-md-12 form-group">
-						<span class="label">Is affiliate active?</span>
-						<div>
-						<label class="checkbox switch bool" id="status-label{{affiliate_id}}">
-						<input id="status{{affiliate_id}}" type="checkbox" name="affiliate_status" value="1" />
-						</label>
-						</div>
-					</div>
                 </div>
                 <div class="bg-light">
 					<div class="row">
-						<div class="col-lg-8 col-md-8 form-group">
-							<div>
-								<label>Email</label>
-								<input type="email" class="form-control" name="email" placeholder="Email" value="{{email}}" required />
-							</div>
-						</div>
-						
-						<div class="col-lg-8 col-md-8 form-group">
-							<div>
-								<label>Frequency of Board Meeting?</label>
-								<input type="text" class="form-control" name="board_meeting_frequency" value="{{board_meeting_frequency}}" required />
-							</div>
-						</div>
 
                         <div class="col-lg-8 col-md-8 form-group">
 							<div>
 								<label>Board Chair</label>
-								<select name="board_chair" id="board_chair{{affiliate_id}}" data-placeholder="State" data-type="selector">
-									<option value="">Select User</option>
-									{{#users}}
-										<option value="{{user_id}}">{{prifix}}.{{first_name}} {{last_name}}</option>
-									{{/users}}
-								</select>
+								<input type="text" class="form-control" name="board_chair" id="board_chair{{affiliate_id}}" value="" disabled />
 							</div>
                         </div>
+
+						<div class="col-lg-8 col-md-8 form-group">
+							<div>
+								<label>Email</label>
+								<input type="email" class="form-control" name="email" placeholder="Email" value="{{email}}" disabled />
+							</div>
+						</div>
+
+						<div class="col-lg-8 col-md-8 form-group">
+							<div>
+								<label>Term Expiration</label>
+								<input type="text" class="form-control" placeholder="Term Expiration" disabled />
+							</div>
+						</div>
+
                     </div>
                 </div>
 
                 <div class="row">
-					<div class="col-lg-8 col-md-8 form-group">
-						<div>
-							<label>Term Expiration</label>
-							<input type="text" class="form-control" placeholder="Term Expiration" />
-						</div>
-					</div>
+					
 				
 					<div class="col-lg-8 col-md-8 form-group">
 						<div>
-							<label>ADM Uploader</label>
-							<select name="adm_uploader" id="adm_uploader{{affiliate_id}}" data-placeholder="ADM Uploader" data-type="selector">
-								<option value="">Select User</option>
-								{{#users}}
-									<option value="{{user_id}}">{{prifix}}.{{first_name}} {{last_name}}</option>
-								{{/users}}
+							<label>Compliance Dues</label>
+							<select name="compliance_dues" id="compliance_dues{{affiliate_id}}" data-placeholder="Compliance Dues" data-type="selector" disabled>
+								<option value="1">Yes</option>
+								<option value="0">No</option>
 							</select>
 						</div>
 					</div>
@@ -228,12 +209,13 @@
 						<label>Current Compliance Status</label>
 						<input type="text" class="form-control" placeholder="Current Compliance Status" disabled>
 					</div>
-                </div>
-                <div class="row">
 					<div class="col-lg-8 col-md-8 form-group">
 						<label>Last site visit</label>
 						<input type="text" class="form-control" placeholder="Last site visit" disabled>
 					</div>
+                </div>
+                <div class="row">
+					
 					<div class="col-lg-8 col-md-8 form-group">
 						<label>Performance Score</label>
 						<input type="text" class="form-control" placeholder="Performance Score" disabled>
@@ -242,19 +224,46 @@
 						<span class="label">Report Available</span>
 						
 						<div>
-						<label class="checkbox switch bool" for="report-label{{affiliate_id}}">
-							<input id="report-label{{affiliate_id}}" type="checkbox" name="px-1">
+						<label class="checkbox switch bool disabled" for="report-label{{affiliate_id}}">
+							<input id="report-label{{affiliate_id}}" type="checkbox" name="px-1" disabled>
+						</label>
+						</div>
+					</div>
+
+					<div class="col-lg-8 col-md-8 form-group">
+						<span class="label">Active</span>
+						<div>
+						<label class="checkbox switch bool disabled" id="status-label{{affiliate_id}}">
+						<input id="status{{affiliate_id}}" type="checkbox" name="affiliate_status" value="1" disabled />
 						</label>
 						</div>
 					</div>
                 </div>
 
 				<div class="foot">
-					<button class="btn btn-dark btn-rounded min w-100px update-btn" type="submit">UPDATE</button>
+					<a class="btn btn-dark btn-rounded min w-100px update-btn" href="{{update_url}}">UPDATE</a>
 					<a  class="btn btn-primary btn-rounded min w-100px" data-toggle="collapse" data-target="#collapse{{affiliate_id}}" aria-expanded="true" aria-controls="collapse{{affiliate_id}}">CANCEL</a>
 				</div>
 				<input type="hidden" name="affiliate_id" value="{{affiliate_id}}" />
 			</form>
+			<table class="table table-bordered table-striped my-5">
+			<thead>
+				<tr class="bg-primary">
+					<th scope="col">USER ID</th>
+					<th scope="col" class="text-center">USER NAME</th>
+					<th  scope="col" class="text-center">ROLE</th>
+				</tr>
+			</thead>
+			<tbody>
+			{{#users}}
+				<tr>
+					<td>{{name}}</td>
+					<td class="text-center">{{prifix}}{{first_name}} {{last_name}}</td>
+					<td class="text-center">{{role_description}}</td>
+				</tr>
+			{{/users}}
+			</tbody>
+			</table>
 		</div>
 	</div>
 </div>

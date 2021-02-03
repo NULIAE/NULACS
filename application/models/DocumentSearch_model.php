@@ -42,6 +42,16 @@ class DocumentSearch_model extends CI_Model
 			$this->db->where('mds.document_year', $data['year']);
 		}
 
+		if($data['affiliate'] !== "")
+		{
+			$this->db->where('mds.affiliate_id', $data['affiliate']);
+		}
+
+		if($data['metadata'] !== "")
+		{
+			$this->db->like('doc.metadata', $data['metadata']);
+		}
+
 		$this->db->order_by('monthly_submitted_date','ASC');
 
 		$query = $this->db->get();
@@ -86,6 +96,14 @@ class DocumentSearch_model extends CI_Model
 		{
 			$this->db->where('qds.document_year', $data['year']);
 		}
+		if($data['affiliate'] !== "")
+		{
+			$this->db->where('qds.affiliate_id', $data['affiliate']);
+		}
+		if($data['metadata'] !== "")
+		{
+			$this->db->like('doc.metadata', $data['metadata']);
+		}
 
 		$this->db->order_by('quarterly_submitted_date','ASC');
 
@@ -126,6 +144,14 @@ class DocumentSearch_model extends CI_Model
 		{
 			$this->db->where('yds.document_year', $data['year']);
 		}
+		if($data['affiliate'] !== "")
+		{
+			$this->db->where('yds.affiliate_id', $data['affiliate']);
+		}
+		if($data['metadata'] !== "")
+		{
+			$this->db->like('doc.metadata', $data['metadata']);
+		}
 
 		$this->db->order_by('yearly_submitted_date','ASC');
 
@@ -152,6 +178,14 @@ class DocumentSearch_model extends CI_Model
 		if(isset($data['year']))
 		{
 			$this->db->where('osd.document_year', $data['year']);
+		}
+		if($data['affiliate'] !== "")
+		{
+			$this->db->where('osd.affiliate_id', $data['affiliate']);
+		}
+		if($data['metadata'] !== "")
+		{
+			$this->db->like('doc.metadata', $data['metadata']);
 		}
 
 		$this->db->order_by('performance_org_doc_submitted_date','ASC');
@@ -180,6 +214,14 @@ class DocumentSearch_model extends CI_Model
 		{
 			$this->db->where('ovd.document_year', $data['year']);
 		}
+		if($data['affiliate'] !== "")
+		{
+			$this->db->where('ovd.affiliate_id', $data['affiliate']);
+		}
+		if($data['metadata'] !== "")
+		{
+			$this->db->like('doc.metadata', $data['metadata']);
+		}
 
 		$this->db->order_by('performance_vitality_submitted_date','ASC');
 
@@ -206,6 +248,14 @@ class DocumentSearch_model extends CI_Model
 		if(isset($data['year']))
 		{
 			$this->db->where('imd.document_year', $data['year']);
+		}
+		if($data['affiliate'] !== "")
+		{
+			$this->db->where('imd.affiliate_id', $data['affiliate']);
+		}
+		if($data['metadata'] !== "")
+		{
+			$this->db->like('doc.metadata', $data['metadata']);
 		}
 
 		$this->db->order_by('performance_im_mi_submitted_date','ASC');

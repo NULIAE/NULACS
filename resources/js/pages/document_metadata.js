@@ -7,14 +7,14 @@ $(function () {
 				'<div class="col-lg-8 col-md-12 form-group nulselect">'+
 				'<select data-placeholder="data type" name="data-type['+i+'] "class="data-type" data-type="selector" data-class="CaptionCont">'+
 					'<option value="">Data type</option>'+
-					'<option value="number">Number</option>'+
-					'<option value="text">Text</option>'+
+					'<option value="number"' +(value.datatype == "number" ? 'selected' : '')+'>Number</option>'+
+					'<option value="text"' +(value.datatype == "text" ? 'selected' : '')+'>Text</option>'+
 				'</select>'+
 				'</div>'+
-				'<input type="text" name="metadata['+i+']" class="col-20 form-control meta-data-value" placeholder="Meta Data" value="'+value+'" required>'+
+				'<input type="text" name="metadata['+i+']" class="col-20 form-control meta-data-value" placeholder="Meta Data" value="'+value.metadata+'" required>'+
 				'<button name="remove" id="'+i+'" class="btn btn_remove"><i class="i i-minus"></i></button>'+
 			'</span>');
-			$('[data-type="selector"]').multiselector({});
+			$('[data-type="selector"]').SumoSelect();
 		} else {
 			$('#add').attr('disabled', 'true');
 			i = 5;
@@ -24,6 +24,7 @@ $(function () {
 	function remove_all_dynamic_input() {
 		$('.appending').remove();
 		$('.meta-data-value').val("");
+		$('.data-type')[0].sumo.selectItem("");
 		i = 1;
 	}
 
@@ -77,7 +78,8 @@ $(function () {
 					if(i !== 0){
 						add_dynamic_input(item);
 					} else {
-						$('.meta-data-value:first').val(item);
+						$('.meta-data-value:first').val(item.metadata);
+						$('.data-type:first')[0].sumo.selectItem(item.datatype);
 					}
 				});
 			}

@@ -35,7 +35,7 @@ class Reports_model extends CI_Model
         $this->db->join('affiliate', 'affiliate.affiliate_id = key_indicators.affiliate_id');
         $this->db->join('state', 'state.stateid = affiliate.state');
         if($affiliate){
-            $this->db->where('key_indicators.affiliate_id', $affiliate);
+            $this->db->where('key_indicators.quarter', $affiliate);
         }
         if($year){
             $this->db->where('key_indicators.year', $year);
@@ -68,7 +68,38 @@ class Reports_model extends CI_Model
         
         $query = $this->db->get();
 		return  $query->result_array();
-    }
+	}
+	
+	/**
+	 * Detail report of affiliate key indicator
+	 * list
+	 */
+	public function get_ind_affiliate_report($affiliate){
+		if($affiliate){
+			$this->db->select('*');
+			$this->db->from('key_indicators');
+			$this->db->where('key_indicators.affiliate_id', $affiliate);
+			// $this->db->group_by('key_indicators.year'); 
+			$this->db->order_by("quarter", "asc");
+			$query = $this->db->get();
+			return  $query->result_array();
+		}	
+	}
+
+	/**
+	 * Detail report of affiliate key indicator year
+	 * list
+	 */
+	public function get_ind_affiliate_yr_report($affiliate){
+		if($affiliate){
+			$this->db->select('year');
+			$this->db->from('key_indicators');
+			$this->db->where('key_indicators.affiliate_id', $affiliate);
+			$this->db->group_by('key_indicators.year'); 
+			$query = $this->db->get();
+			return  $query->result_array();
+		}		
+	}
 
     
 

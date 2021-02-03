@@ -1,5 +1,5 @@
 $(function(){
-	
+	$('.chartBody2').scrollTop($('.chartBody2')[0].scrollHeight);
 	var activeTab = window.localStorage.getItem('activeTab');
 	if(activeTab){
 	   $('#selected a[href="'+activeTab+'"]').trigger('click');

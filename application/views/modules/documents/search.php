@@ -49,7 +49,9 @@
 										<option value="<?php echo $status['id']; ?>"><?php echo $status['name']; ?></option>
 									<?php endforeach; ?>
 								</select>
-                			</div>
+							</div>
+							
+						
               			</div>
 
               			<div class="row w-100 mb-3 justify-content-center align-items-end">
@@ -79,6 +81,23 @@
 								</div>
                 			</div>
 						</div>
+						<div class="row w-100 mb-3  align-items-end">
+						<div class="col-lg-8 col-md-12 form-group">
+								<label for="affiliate">Affiliate</label>
+								<select name="affiliate" id="affiliate" aria-labelledby="affiliate" data-all="true" data-type="selector" data-search="true" class="SumoSelect CaptionCont d-none" data-placeholder="Affiliate">
+									<option value="">Affiliate</option>
+									<?php foreach($affiliate_details as $affiliate): ?>
+										<option value="<?php echo $affiliate['affiliate_id']; ?>"><?php echo $affiliate['first_name']; ?></option>
+									<?php endforeach; ?>
+								</select>
+							</div>
+							<div class="col-lg-8 col-md-12 form-group">
+								<label for="affiliate">Meta Data</label>
+								<div>
+									<input class="form-control" type="text" name="metadata" id="metadata">
+								</div>
+							</div>
+						</div>
 						<div class="row w-100 justify-content-center align-items-end">
                 			<div class="col-lg-8 col-md-12 form-group text-center">
 								<button class="btn btn-primary btn-rounded min w-120px mr-2" type="submit">SEARCH</button>
@@ -87,6 +106,18 @@
             		</div>
           		</form>
         	</div>
+		<form method="post" action="<?php echo base_url('module/documents/export'); ?>">
+		<input type="hidden" id="e_doctype" name="doctype">
+		<input type="hidden" id="e_document" name="document">
+		<input type="hidden" id="e_docstatus" name="docstatus">
+		<input type="hidden" id="e_affiliate" name="affiliate">
+		<input type="hidden" id="e_metadata" name="metadata">
+		<input type="hidden" id="e_monthpicker" name="month">
+		<input type="hidden" id="e_quarter" name="quarter">
+		<input type="hidden" id="e_yearpicker" name="year">
+		<input type="hidden" id="e_select-page-items" name="page_items">
+
+
 
         	<div class="foot fend">
 				<label for="docx-pick">From</label>
@@ -101,8 +132,9 @@
 					<input class="datepick form-control" placeholder="Nov 12, 2019" type="text" id="docx-pick1"
 					aria-labelledby="docx-pick1">
 				</div>
-				<a class="btn btn-dark btn-rounded min w-120px mr-2" href="javascript:;">EXPORT</a>
+				<button type="submit" class="btn btn-dark btn-rounded min w-120px mr-2"  >EXPORT</button>
 			</div>
+			<form>
 
         	<div class="row">
           		<div class="Maincontent">

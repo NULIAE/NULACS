@@ -134,111 +134,86 @@
 		<div class="acc-body">
 			<form id="update-form{{user_id}}" class="update-form w-100" method="post" action="<?php echo base_url('user/profile/update/'); ?>">
 				<div class="row">
-					<div class="col-lg-6 col-md-12 form-group">
+					<div class="col-lg-8 col-md-8 form-group">
 						<div>
 							<label>User ID</label>
-							<input type="text" class="form-control" placeholder="User ID" name="name" value="{{name}}" required />
+							<input type="text" class="form-control" placeholder="User ID" name="name" value="{{name}}" disabled />
 						</div>
 					</div>
-					<div class="col-lg-6 col-md-12 form-group">
+					<div class="col-lg-8 col-md-8 form-group">
 						<div>
-							<label for="prefix-1">User Prefix</label>
-							<select name="prifix" id="prifix{{user_id}}" data-placeholder="User Prefix" data-type="selector" required>
-								<option value="">Select prifix</option>
-								<option value="Mr.">Mr</option>
-								<option value="Mrs.">Mrs</option>
-								<option value="Ms.">Ms</option>
-							</select>
+							<label>Name</label>
+							<input type="text" class="form-control" placeholder="Name" name="name" value="{{prifix}}{{first_name}} {{last_name}}" disabled />
 						</div>
 					</div>
-					<div class="col-lg-6 col-md-12 form-group">
-						<div>
-							<label>First Name</label>
-							<input type="text" class="form-control" placeholder="First Name" name="first_name" value="{{first_name}}" required />
-						</div>
-					</div>
-					<div class="col-lg-6 col-md-12 form-group">
-						<div>
-							<label>Last Name</label>
-							<input type="text" class="form-control" placeholder="Last Name" name="last_name" value="{{last_name}}" required />
-						</div>
-					</div>
-					
-				</div>
-				<div class="row">
-					<div class="col-lg-6 col-md-12 form-group">
-						<div>
-							<label>User Suffix</label>
-							<input type="text" class="form-control" placeholder="User Suffix" name="user_suffix" value="{{user_suffix}}" required />
-						</div>
-					</div>
-					
-					<div class="col-lg-6 col-md-12 form-group">
-						<div>
-							<label>Title</label>
-							<input type="text" class="form-control" placeholder="First Title" name="user_title" value="{{user_title}}" required />
-						</div>
-					</div>
-					
-					<div class="col-lg-6 col-md-12 form-group">
-						<label>Is user active?</label>
-						<div>
-						<label class="checkbox switch bool" id="status-label{{user_id}}">
-							<input type="checkbox" name="user_status" id="status{{user_id}}"  value="1" />
-						</label>
-						</div>
-					</div>
-					<div class="col-lg-6 col-md-12 form-group">
+					<div class="col-lg-8 col-md-8 form-group">
 						<div>
 							<label>Role</label>
-							<select name="role_id" id="role{{user_id}}" data-placeholder="Role" data-type="selector" required>
-								<option value="">Select role</option>
-								<?php foreach($roles as $role): ?>
-									<option value="<?php echo $role['role_id']; ?>">
-										<?php echo $role['role_description']; ?>
-									</option>
-								<?php endforeach; ?>
-							</select>
+							<input type="text" class="form-control" placeholder="Role" name="role" value="{{role_description}}" disabled />
 						</div>
 					</div>
+				</div>
+				<div class="row">
 					
+					<div class="col-lg-8 col-md-8 form-group">
+						<div>
+							<label>Title</label>
+							<input type="text" class="form-control" placeholder="First Title" name="user_title" value="{{user_title}}" disabled />
+						</div>
+					</div>
+
+					<div class="col-lg-8 col-md-8 form-group">
+						<div>
+							<label>Email</label>
+							<input type="email" class="form-control" placeholder="Email" name="user_email_address_1" value="{{user_email_address_1}}" disabled />
+						</div>
+					</div>
+
+					<div class="col-lg-8 col-md-8 form-group">
+						<div>
+							<label>Phone</label>
+							<input type="text" class="form-control" placeholder="Phone" name="user_phone" value="{{user_phone}}" disabled />
+						</div>
+					</div>
 				</div>
 				<div class="bg-light">
 					<div class="row">
-						<div class="col-lg-8 col-md-8 form-group">
+					<div class="col-lg-6 col-md-12 form-group">
 							<div>
-								<label>Email Address</label>
-								<input type="email" class="form-control" placeholder="Email" name="user_email_address_1" value="{{user_email_address_1}}" required />
+								<label>Is ADM Uploader?</label>
+								<div>
+									<label class="checkbox switch bool disabled" id="isadm-label{{user_id}}">
+									<input type="checkbox" name="is_adm_uploader" id="isadm{{user_id}}" value="1" disabled />
+									</label>
+								</div>
+							</div>
+						</div>
+						
+                        <div class="col-lg-6 col-md-12 form-group">
+							<div>
+								<label>Is user super administrator?</label>
+								<div>
+									<label class="checkbox switch bool disabled" id="issuper-label{{user_id}}">
+									<input type="checkbox" name="isuser_super_administrator" id="issuper{{user_id}}" value="1" disabled />
+									</label>
+								</div>
 							</div>
 						</div>
 
 						<div class="col-lg-8 col-md-8 form-group">
+							<label>Active</label>
 							<div>
-								<label>Phone</label>
-								<input type="text" class="form-control" placeholder="Phone" name="user_phone" value="{{user_phone}}" />
+							<label class="checkbox switch bool disabled" id="status-label{{user_id}}">
+								<input type="checkbox" name="user_status" id="status{{user_id}}"  value="1" disabled />
+							</label>
 							</div>
-						</div>
-				
-						<div class="col-lg-8 col-md-8 form-group">
-							<div>
-								<label>Location</label>
-								<select name="affiliate_id" id="affiliate{{user_id}}" data-placeholder="Location" data-type="selector" required>
-									<option value="">Select Location</option>
-									<?php foreach($locations as $location): ?>
-										<option value="<?php echo $location['affiliate_id']; ?>">
-											<?php echo $location['organization'].' - '.$location['city'].','.$location['state']; ?>
-										</option>
-									<?php endforeach;?>
-								</select>
-							</div>
-						</div>
+						</div>	
 					</div>
 				</div>
 				<div class="foot">
-					<button class="btn btn-dark btn-rounded min w-100px update-btn" type="submit">UPDATE</button>
+					<a class="btn btn-dark btn-rounded min w-100px update-btn" href="{{update_url}}">UPDATE</a>
 					<a  class="btn btn-primary btn-rounded min w-100px" data-toggle="collapse" data-target="#collapse{{user_id}}" aria-expanded="true" aria-controls="collapse{{user_id}}">CANCEL</a>
 				</div>
-				<input type="hidden" name="user_id" value="{{user_id}}" />
 			</form>
 		</div>
 	</div>
