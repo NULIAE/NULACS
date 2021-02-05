@@ -1,4 +1,13 @@
 $(function () {
+	var key_indicators_status = $('#key_indicators_status').val();
+
+	if(key_indicators_status == '1'){
+		$('#key_indicators_save_btn').prop('disabled', true);
+		document.getElementById("fieldset_disable").disabled = true;
+	}else{
+		document.getElementById("fieldset_disable").disabled = false;
+	}
+
 	if($('.chatBoxinn').length){
 	$('.chatBoxinn').scrollTop($('.chatBoxinn')[0].scrollHeight);
 	}
@@ -392,6 +401,18 @@ $(function () {
 		}).done(function (data) {
 			if (data != null) {
 				$.each(data.key_indicators, function (key, value) {
+				
+					if(data.status == '1'){
+						$('#key_indicators_save_btn').prop('disabled', true);
+						document.getElementById("fieldset_disable").disabled = true;
+					}else{
+						$('#key_indicators_save_btn').removeAttr('disabled');
+						document.getElementById("fieldset_disable").disabled = false;
+					}
+
+					if(key=='liquidity' && value){
+						$("#form-key-indicators-approve").addClass("d-block");
+					}
 					$("input[name='" + key + "']").val(value);
 				});
 				if (data.key_indicators.is_net_assets_positive != null) {
@@ -402,6 +423,10 @@ $(function () {
 					$("#pu-dx").parent("label").removeClass("checked");
 				}
 			} else {
+				$('#key_indicators_save_btn').removeAttr('disabled');
+				document.getElementById("fieldset_disable").disabled = false;
+				$("#form-key-indicators-approve").removeClass("d-block");
+				$("#form-key-indicators-approve").addClass(" d-none");
 				$("#pu-dx").removeAttr("checked");
 				$("#pu-dx").parent("label").removeClass("checked");
 			}
@@ -440,6 +465,34 @@ $(function () {
 	});
 
 	//End of form submit
+
+		//Key indicators form approve
+		$("#form-key-indicators-approve").click( function() {
+	
+		
+			var inputData = {
+				affiliate_id: $('#affiliate_id_val').val(),
+				quarter: $("#key-quarter").val(),
+				year: $("#key-year").val(),
+				status: 1,			
+			}
+	
+			$.ajax({
+				type: 'POST',
+				url: base_url + 'module/affiliate/key-indicators/approve',
+				data: inputData,
+				dataType: 'json'
+			}).done(function (data) {
+				toastConfig.message = data.message;
+				document.getElementById("fieldset_disable").disabled = true;
+				$('#key_indicators_save_btn').prop('disabled', true);
+				setTimeout(function () {
+					$('#snackbar').NitroToast(toastConfig);
+				}, 2000);
+			});
+		});
+	
+		//End of form approve
 
 	//Initialize comment box for the document
 	function initCommentBox() {

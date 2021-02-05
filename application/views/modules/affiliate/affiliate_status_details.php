@@ -422,7 +422,8 @@ border-color: #000;
 							</div>
 							<div class="tab-pane fade" id="nav-y3" role="tabpanel" aria-labelledby="nav-y3-tab">
 								<div class=" m-y-20">
-									<div class="h5 t-c f-bold">YEARLY (<?php echo strtoupper(date('M', strtotime($affiliate['year_start'])))." ".$year; ?> - <?php echo strtoupper(date('M', strtotime($affiliate['year_end'])))." ".($year+1); ?>)</div>
+									<?php $startMonth = date('m', strtotime($affiliate['year_start'])); ?>
+									<div class="h5 t-c f-bold">YEARLY (<?php echo strtoupper(date('M', strtotime($affiliate['year_start'])))." ".$year; ?> - <?php echo strtoupper(date('M Y', strtotime("+11 month", mktime(0, 0, 0, $startMonth, 1, $year)))); ?>)</div>
 									<div class="h6">Due Date: 01/31/2021</div>
 
 								</div>
@@ -575,7 +576,7 @@ border-color: #000;
 
 										<div class="col-sm-24 update-status">
 											<div class="p-a-15 text-md-right">
-											<span class="h5">Affiliate yearly compliance for JAN <?php echo $year; ?> - JAN <?php echo $year+1; ?></span>
+											<span class="h5">Affiliate yearly compliance for <?php echo strtoupper(date('M', strtotime($affiliate['year_start'])))." ".$year; ?> - <?php echo strtoupper(date('M Y', strtotime("+11 month", mktime(0, 0, 0, $startMonth, 1, $year)))); ?></span>
 
 											<a class="btn btn-round-ib btn-lbl ml-3 <?php if($yearly_compliance == 8) echo "btn-primary"; ?>" data-status="8" data-rel="tooltip" data-placement="bottom" title="Compliance"><i class="i i-compliant"></i><span class="sr-only">Compliance</span></a>
 											<a class="btn btn-round-ib btn-lbl <?php if($yearly_compliance == 9) echo "btn-primary"; ?>" data-status="9" data-rel="tooltip" data-placement="bottom" title="Non Compliance"><i class="i i-non-compliant"></i><span class="sr-only">Non Compliance</span></a>
@@ -935,7 +936,7 @@ border-color: #000;
 
 						<div class="tab-content" id="nav-tabContent-nner-z">
 							<div class="tab-pane fade show active" id="nav-z1" role="tabpanel" aria-labelledby="nav-z1-tab">
-								<?php if($this->session->role_id == 2): ?>
+								<?php //if($this->session->role_id == 2): ?>
 									<div class="row m-y-20 justify-content-center align-items-center">
 										<span class="col-md-6">Assessment Year: Period covered from</span>
 										<span class="col-md-3"><div class="yearPick">
@@ -970,7 +971,7 @@ border-color: #000;
 											<a id="btn-upload-self-assessment-doc" class="btn btn-primary btn-rounded min w-100px">UPLOAD</a>
 										</div>
 									</div>
-								<?php endif; ?>
+								<?php //endif; ?>
 
 								<div class="head">
 									<div class="row align-items-center">
@@ -1568,6 +1569,8 @@ border-color: #000;
 						<?php $key_indicators_id = isset($key_indicators_details['key_indicators_id']) ? $key_indicators_details['key_indicators_id'] : NULL; ?>
 						<form id="form-key-indicators" method="post" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>">
 							<div class="cdnWrap round">
+								<input type="hidden" id="key_indicators_status" value="<?=isset($key_indicators_details['status'])?$key_indicators_details['status']:''?>">
+							<fieldset id='fieldset_disable' style="padding: 0px;border-radius: 0px;border: none;">
 								<ul class="altUl">
 									<li class="wrapIn">
 										<div class="d-flex align-items-center">
@@ -1759,8 +1762,13 @@ border-color: #000;
 								</ul>
 							</div>
 
+							</fieldset>
 							<div class="d-flex p-b-20">
-								<button class="btn btn-primary btn-rounded min w-100px ml-auto" type="submit">SAVE</button>
+								<button class="btn btn-primary btn-rounded min w-100px ml-auto" type="submit" id='key_indicators_save_btn'>SAVE</button>
+								<input type="hidden" id="affiliate_id_val" value="<?php echo $affiliate['affiliate_id']; ?>" />
+								<?php if($this->session->role_id == 1 ){ ?>
+									<input type="button"  class="<?=isset($key_indicators['liquidity'])?'d-block':'d-none'?> btn btn-primary btn-rounded min w-100px m-l-10" value="Approve" id="form-key-indicators-approve">
+								<?php } ?>
 							</div>
 						</form>
 					</div>

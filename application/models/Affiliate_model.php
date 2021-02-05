@@ -410,7 +410,7 @@ class Affiliate_model extends CI_Model
 		$this->db->join('monthly_document_status mds', 'mds.document_id = doc.document_id', 'left');
 		$this->db->join('status_flags sf', 'sf.id = mds.monthly_compliance_status');
 		$this->db->where('mds.affiliate_id', $affiliate_id);
-		$this->db->where('doc.document_id !=', 6);
+		//$this->db->where('doc.document_id !=', 6);
 		
 		if( $filter !== NULL )
 		{
@@ -487,7 +487,7 @@ class Affiliate_model extends CI_Model
 		$this->db->join('quarterly_document_status qds', 'qds.document_id = doc.document_id', 'left');
 		$this->db->join('status_flags sf', 'sf.id = qds.quarterly_compliance_status');
 		$this->db->where('qds.affiliate_id', $affiliate_id);
-		$this->db->where('doc.document_id !=', 8);
+		//$this->db->where('doc.document_id !=', 8);
 		
 		if( $filter !== NULL )
 		{
@@ -564,7 +564,7 @@ class Affiliate_model extends CI_Model
 		$this->db->join('yearly_document_status yds', 'yds.document_id = doc.document_id', 'left');
 		$this->db->join('status_flags sf', 'sf.id = yds.yearly_compliance_status');
 		$this->db->where('yds.affiliate_id', $affiliate_id);
-		$this->db->where('doc.document_id !=', 14);
+		//$this->db->where('doc.document_id !=', 14);
 		
 		if( $filter !== NULL )
 		{
@@ -748,7 +748,7 @@ class Affiliate_model extends CI_Model
 
 		if(isset($row)) 
 		{
-			return array("id" => $row['id'], "key_indicators" => json_decode($row['indicators'], TRUE));
+			return array("id" => $row['id'], "status"=>$row['status'], "key_indicators" => json_decode($row['indicators'], TRUE));
 		} 
 		else 
 		{
@@ -770,6 +770,23 @@ class Affiliate_model extends CI_Model
 		{
 			return $this->db->insert('key_indicators', $data);
 		}
+	}
+
+	public function approve_key_indicators($data)
+	{
+		$row = $this->get_key_indicators($data['affiliate_id'], $data['quarter'], $data['year']);
+
+		if(isset($row))
+		{
+			$insert_data = array(
+				"status" => $data['status'],
+		
+			);
+			$this->db->where('id', $row['id']);
+
+			return $this->db->update('key_indicators', $insert_data);
+		}
+		
 	}
 
 	/**

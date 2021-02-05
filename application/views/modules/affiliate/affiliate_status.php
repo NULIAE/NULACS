@@ -12,6 +12,7 @@
 
 			<div class="row rel pt-4">
 				<form class="filter" id="filter-form" action="<?php echo base_url('module/affiliate/status'); ?>">
+					<input type="hidden" id="input-interval" name="interval" value="<?php echo (isset($_GET['interval']) ? $_GET['interval'] : "nav-y1"); ?>" />
 					<div class="row align-items-end">
 						<div class="col-lg-5 col-md-6 col-sm-24 d-row">
 							<label for="region" class="rowLabel">Region</label>
@@ -24,8 +25,8 @@
 						</div>
 						<div class="col-lg-5 col-md-7 col-sm-24 d-row">
 							<label for="role" class="rowLabel">Region(s) for the due date</label>
-							<div class="d-flex justify-content-around">
-								<div class="m-r-10">
+							<div class="d-flex justify-content-start">
+								<div id="div-month-select" class="m-r-10">
 								<?php
 								// set the month array
 								$monthArray = array(
@@ -37,6 +38,18 @@
 										<?php foreach($monthArray as $key => $value): ?>
 										<option value="<?php echo $key; ?>" <?php if($key == $selectedMonth) echo "selected"; ?>><?php echo $value; ?></option>
 										<?php endforeach; ?>
+									</select>
+								</div>
+
+								<div id="div-quarter-select" class="m-r-10">
+								<?php
+								$selectedQuarter = isset($_GET['quarter']) ? $_GET['quarter'] : ceil(date("m", strtotime("-1 month", time())/3));
+								?>
+									<select name="quarter" data-placeholder="Quarter" data-type="selector">
+										<option value="1" <?php if($selectedQuarter == 1) echo "selected"; ?>>Q1</option>
+										<option value="2" <?php if($selectedQuarter == 2) echo "selected"; ?>>Q2</option>
+										<option value="3" <?php if($selectedQuarter == 3) echo "selected"; ?>>Q3</option>
+										<option value="4" <?php if($selectedQuarter == 4) echo "selected"; ?>>Q4</option>
 									</select>
 								</div>
 						
@@ -79,9 +92,9 @@
 				<div class="tab-content w-100">
 					<nav>
 						<div class="nav b-b-1 p-b-0" id="tab-inner" role="tablist">
-							<a class="nav-item nav-link active" id="nav-y1-tab" data-toggle="tab" href="#nav-y1" role="tab" aria-controls="nav-y1" aria-selected="true"><i class="i i-month-o"></i> View Monthly Status</a>
-							<a class="nav-item nav-link" id="nav-y2-tab" data-toggle="tab" href="#nav-y2" role="tab" aria-controls="nav-y2" aria-selected="false"><i class="i i-quater"></i> View Quarterly Status</a>
-							<a class="nav-item nav-link" id="nav-y3-tab" data-toggle="tab" href="#nav-y3" role="tab" aria-controls="nav-y3" aria-selected="false"><i class="i i-date-o"></i> View Yearly Status</a>
+							<a class="nav-item nav-link active" id="nav-y1-tab" data-toggle="tab" href="#nav-y1" role="tab" aria-controls="nav-y1" aria-selected="true" onclick="openTab('nav-y1')"><i class="i i-month-o"></i> View Monthly Status</a>
+							<a class="nav-item nav-link" id="nav-y2-tab" data-toggle="tab" href="#nav-y2" role="tab" aria-controls="nav-y2" aria-selected="false" onclick="openTab('nav-y2')"><i class="i i-quater"></i> View Quarterly Status</a>
+							<a class="nav-item nav-link" id="nav-y3-tab" data-toggle="tab" href="#nav-y3" role="tab" aria-controls="nav-y3" aria-selected="false" onclick="openTab('nav-y3')"><i class="i i-date-o"></i> View Yearly Status</a>
 						</div>
 					</nav>
 					<div class="tab-content">
@@ -157,7 +170,7 @@
 									<?php foreach($quarterly_status['affiliates'] as $row): ?>
 									<tr>
 										<td scope="row"><a href="<?php echo base_url('module/affiliate/status/details/'.$row["affiliate_id"]); ?>"><?php echo $row['city'].','.$row['state']; ?></a></td>
-										<td><?php echo $monthArray[$selectedMonth]."-".$selectedYear; ?></td>
+										<td><?php echo "Q".$selectedQuarter."-".$selectedYear; ?></td>
 										<td><div class="icon-rounded" data-rel="tooltip" data-placement="bottom" title="<?php echo $row['status_name']; ?>"><?php echo $row['icon']; ?></div></td>
 										<?php foreach($quarterly_documents as $doc): ?>
 											<?php $status_flag = FALSE; ?>
@@ -198,7 +211,7 @@
 								<thead>
 									<tr>
 										<th scope="col">AFFILIATE NAME</th>
-										<th scope="col">CURRENT MONTH</th>
+										<th scope="col">CURRENT YEAR</th>
 										<th scope="col">Compliance Status</th>
 										<?php foreach($yearly_documents as $item): ?>
 										<th scope="col"><?php echo $item['document_name']; ?></th>
@@ -210,7 +223,7 @@
 									<?php foreach($yearly_status['affiliates'] as $row): ?>
 									<tr>
 										<td scope="row"><a href="<?php echo base_url('module/affiliate/status/details/'.$row["affiliate_id"]); ?>"><?php echo $row['city'].','.$row['state']; ?></a></td>
-										<td><?php echo $monthArray[$selectedMonth]."-".$selectedYear; ?></td>
+										<td><?php echo $selectedYear; ?></td>
 										<td><div class="icon-rounded" data-rel="tooltip" data-placement="bottom" title="<?php echo $row['status_name']; ?>"><?php echo $row['icon']; ?></div></td>
 										<?php foreach($yearly_documents as $doc): ?>
 											<?php $status_flag = FALSE; ?>
@@ -310,7 +323,7 @@
 {{#affiliates}}
 <tr>
 	<td scope="row"><a href="">{{city}},{{state}}</a></td>
-	<td>{{currentMonth}}</td>
+	<td>{{currentDate}}</td>
 	<td><div class="icon-rounded">{{{icon}}}</div></td>
 	{{#document_status}}
 		<td><div class="icon-rounded">{{{icon}}}</div></td>
@@ -327,7 +340,7 @@
 {{#affiliates}}
 <tr>
 	<td scope="row"><a href="">{{city}},{{state}}</a></td>
-	<td>{{currentMonth}}</td>
+	<td>{{currentDate}}</td>
 	<td><div class="icon-rounded">{{{icon}}}</div></td>
 	{{#document_status}}
 		<td><div class="icon-rounded">{{{icon}}}</div></td>
@@ -344,7 +357,7 @@
 {{#affiliates}}
 <tr>
 	<td scope="row"><a href="">{{city}},{{state}}</a></td>
-	<td>{{currentMonth}}</td>
+	<td>{{currentDate}}</td>
 	<td><div class="icon-rounded">{{{icon}}}</div></td>
 	{{#document_status}}
 		<td><div class="icon-rounded">{{{icon}}}</div></td>

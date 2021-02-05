@@ -478,6 +478,7 @@ $config['csrf_exclude_uris'] = array(
 	'module/affiliate/document/upload',
 	'module/affiliate/key-indicators/save',
 	'module/affiliate/key-indicators/search',
+	'module/affiliate/key-indicators/approve',
 	'module/affiliate/filter-performance-documents',
 	'module/documents/search-documents',
 	'module/assessment/criteria-answers-view',

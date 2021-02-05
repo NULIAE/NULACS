@@ -248,9 +248,9 @@ class Affiliate extends MY_Controller
 			'monthly_status' => $this->get_monthly_status(TRUE),
 			'quarterly_status' => $this->get_quarterly_status(TRUE),
 			'yearly_status' => $this->get_yearly_status(TRUE),
-			'monthly_documents' => $this->Document_model->get_documents(1, array(6)),
-			'quarterly_documents' => $this->Document_model->get_documents(2, array(8)),
-			'yearly_documents' => $this->Document_model->get_documents(3, array(14)),
+			'monthly_documents' => $this->Document_model->get_documents(1),
+			'quarterly_documents' => $this->Document_model->get_documents(2),
+			'yearly_documents' => $this->Document_model->get_documents(3),
 			'regions' => $this->User_model->get_all_regions(),
 			'compliance_status' => $this->Affiliate_model->get_compliance_status_flags(),
 		);
@@ -351,7 +351,10 @@ class Affiliate extends MY_Controller
 		if( !isset($data['month']) || ($data['month'] == '') )
 			$data['month'] =  date("m", strtotime("-1 month", time()));
 		
-		$compliance_filter['quarter'] =  ceil($data['month']/3);
+		if( isset($data['quarter']) && ($data['quarter'] !== '') )
+			$compliance_filter['quarter'] =  $data['quarter'];
+		else
+			$compliance_filter['quarter'] = $data['quarter'] = ceil($data['month']/3);
 		
 		if( isset($data['year']) && ($data['year'] !== '') )
 			$compliance_filter['year'] =  $data['year'];
@@ -362,10 +365,7 @@ class Affiliate extends MY_Controller
 			$compliance_filter['compliance_status'] =  $data['compliance_status'];
 
 		//Document Filter
-		if( isset($data['month']) && ($data['month'] !== '') )
-			$document_filter['document_month'] =  ceil($data['month']/3);
-		else
-			$document_filter['document_month'] =  ceil(date("m", strtotime("-1 month", time()))/3);
+		$document_filter['document_month'] =  $data['quarter'];
 
 		if( isset($data['year']) && ($data['year'] !== '') )
 			$document_filter['document_year'] =  $data['year'];
@@ -398,6 +398,7 @@ class Affiliate extends MY_Controller
 			'affiliates' => $affiliates, 
 			'pagination' => $this->pagination->create_links(), 
 			'month' => $data['month'], 
+			'quarter' => $data['quarter'], 
 			'year' => $data['year'],
 			'status' => 'quarterly'
 		);
@@ -418,11 +419,14 @@ class Affiliate extends MY_Controller
 		//Compliance Filter
 		if( isset($data['region_id']) && ($data['region_id'] !== '') )
 			$compliance_filter['affiliate.region_id'] =  $data['region_id'];
+
+		if( !isset($data['month']) || ($data['month'] == '') )
+			$data['month'] =  date("m", strtotime("-1 month", time()));
 		
 		if( isset($data['year']) && ($data['year'] !== '') )
 			$compliance_filter['year'] =  $data['year'];
 		else
-			$compliance_filter['year'] = $data['month'] = date("Y", strtotime("-1 month", time()));
+			$compliance_filter['year'] = date("Y", strtotime("-1 month", time()));
 
 		if( isset($data['compliance_status']) && ($data['compliance_status'] !== '') )
 			$compliance_filter['compliance_status'] =  $data['compliance_status'];
@@ -630,9 +634,9 @@ class Affiliate extends MY_Controller
 			'soundness_document_status' => $soundness_document_status,
 			'vitality_document_status' => $vitality_document_status,
 			'mission_document_status' => $mission_document_status,
-			'monthly_documents' => $this->Document_model->get_documents(1, array(6)),
-			'quarterly_documents' => $this->Document_model->get_documents(2, array(8)),
-			'yearly_documents' => $this->Document_model->get_documents(3, array(14)),
+			'monthly_documents' => $this->Document_model->get_documents(1),
+			'quarterly_documents' => $this->Document_model->get_documents(2),
+			'yearly_documents' => $this->Document_model->get_documents(3),
 			'soundness_documents' => $soundness_documents,
 			'vitality_documents' => $vitality_documents,
 			'mission_documents' => $mission_documents,
@@ -984,6 +988,32 @@ class Affiliate extends MY_Controller
 		if ($status)
 		{	
 			$message = 'Key Indicators saved successfully.';
+		}
+		else
+		{
+			$message = 'Something went wrong. Try again later.';
+		}
+		
+		$response = array(
+			'success' => $status,
+			'message' => $message
+		);
+
+		echo json_encode($response);
+	}
+
+	public function approve_key_indicators()
+	{
+		//XSS Filter all the input post fields
+		$data = $this->input->post(NULL, TRUE);
+		
+		$status = $message = NULL;
+
+		$status = $this->Affiliate_model->approve_key_indicators($data);
+
+		if ($status)
+		{	
+			$message = 'Key Indicators approve successfully.';
 		}
 		else
 		{

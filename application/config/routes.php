@@ -126,3 +126,4 @@ $route['module/assessment/form-data'] = 'modules/assessment/assessment/formData'
 $route['module/documents/export'] = 'modules/documents/DocumentsSearch/export';
 $route['module/affiliate/document/doupload'] = 'modules/affiliate/affiliate/doupload';
 $route['module/affiliate/edit/(:num)'] = 'modules/affiliate/affiliate/edit_form/$1';
+$route['module/affiliate/key-indicators/approve'] = 'modules/affiliate/affiliate/approve_key_indicators';
