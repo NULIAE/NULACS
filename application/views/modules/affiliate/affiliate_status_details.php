@@ -1767,7 +1767,16 @@ border-color: #000;
 								<button class="btn btn-primary btn-rounded min w-100px ml-auto" type="submit" id='key_indicators_save_btn'>SAVE</button>
 								<input type="hidden" id="affiliate_id_val" value="<?php echo $affiliate['affiliate_id']; ?>" />
 								<?php if($this->session->role_id == 1 ){ ?>
-									<input type="button"  class="<?=isset($key_indicators['liquidity'])?'d-block':'d-none'?> btn btn-primary btn-rounded min w-100px m-l-10" value="Approve" id="form-key-indicators-approve">
+
+									<?php if(isset($key_indicators_details['status']) && $key_indicators_details['status'] == 1){ 
+										$btn = "btn btn-success";
+										$btn_name="Approved"; 
+									}else{
+										$btn = "btn btn-primary";
+										$btn_name="Approve"; 
+									}?>
+									<input type="button"  class="<?=isset($key_indicators['liquidity'])?'d-block':'d-none'?> <?=$btn?>  btn-rounded min w-100px m-l-10 key_indicators_approve_btn" 
+									value="<?=$btn_name?>" id="form-key-indicators-approve">
 								<?php } ?>
 							</div>
 						</form>

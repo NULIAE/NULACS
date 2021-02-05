@@ -2,7 +2,9 @@ $(function () {
 	var key_indicators_status = $('#key_indicators_status').val();
 
 	if(key_indicators_status == '1'){
+
 		$('#key_indicators_save_btn').prop('disabled', true);
+		$('.key_indicators_approve_btn').prop('disabled', true);
 		document.getElementById("fieldset_disable").disabled = true;
 	}else{
 		document.getElementById("fieldset_disable").disabled = false;
@@ -403,9 +405,16 @@ $(function () {
 				$.each(data.key_indicators, function (key, value) {
 				
 					if(data.status == '1'){
+						$('.key_indicators_approve_btn').val('Approved');
+						$(".key_indicators_approve_btn").addClass("btn btn-success");
+						$('.key_indicators_approve_btn').prop('disabled', true);
 						$('#key_indicators_save_btn').prop('disabled', true);
 						document.getElementById("fieldset_disable").disabled = true;
 					}else{
+						$('.key_indicators_approve_btn').val('Approve');
+						$(".key_indicators_approve_btn").removeClass("btn btn-success");
+						$(".key_indicators_approve_btn").addClass("btn btn-primary");
+						$('.key_indicators_approve_btn').removeAttr('disabled');
 						$('#key_indicators_save_btn').removeAttr('disabled');
 						document.getElementById("fieldset_disable").disabled = false;
 					}
@@ -423,6 +432,10 @@ $(function () {
 					$("#pu-dx").parent("label").removeClass("checked");
 				}
 			} else {
+				$('.key_indicators_approve_btn').val('Approve');
+				$(".key_indicators_approve_btn").removeClass("btn btn-success");
+				$(".key_indicators_approve_btn").addClass("btn btn-primary");
+				$('.key_indicators_approve_btn').removeAttr('disabled');
 				$('#key_indicators_save_btn').removeAttr('disabled');
 				document.getElementById("fieldset_disable").disabled = false;
 				$("#form-key-indicators-approve").removeClass("d-block");
@@ -485,6 +498,9 @@ $(function () {
 			}).done(function (data) {
 				toastConfig.message = data.message;
 				document.getElementById("fieldset_disable").disabled = true;
+				$('.key_indicators_approve_btn').val('Approved');
+				$(".key_indicators_approve_btn").addClass("btn btn-success");
+				$('.key_indicators_approve_btn').prop('disabled', true);
 				$('#key_indicators_save_btn').prop('disabled', true);
 				setTimeout(function () {
 					$('#snackbar').NitroToast(toastConfig);
