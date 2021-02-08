@@ -486,8 +486,6 @@ class Affiliate extends MY_Controller
 		//XSS Filter all the input post fields
 		$data = $this->input->get(NULL, TRUE);
 
-		$recent_data = $this->Affiliate_model->recent_affiliate_data($affiliate_id);
-
 		$document_filter = array();
 
 		//Document Filter
