@@ -486,6 +486,8 @@ class Affiliate extends MY_Controller
 		//XSS Filter all the input post fields
 		$data = $this->input->get(NULL, TRUE);
 
+		$recent_data = $this->Affiliate_model->recent_affiliate_data($affiliate_id);
+
 		$document_filter = array();
 
 		//Document Filter
@@ -1158,7 +1160,7 @@ class Affiliate extends MY_Controller
 			}
 			else if($data["interval"] == "soundness")
 			{
-				$added_document_id = $this->Document_model->add_organizational_soundness_document($data);
+				$added_document_id = $this->Document_model->add_performance_soundness_document($data);
 			}
 			else if($data["interval"] == "vitality")
 			{

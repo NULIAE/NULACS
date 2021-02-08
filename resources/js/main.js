@@ -89,7 +89,8 @@ $(function () {
 					label: 'Proceed',
 					class: "btn btn-primary mr-1",
 					action: function () {
-						window.location = $('#btn-logout').attr('href');
+            window.location = $('#btn-logout').attr('href');
+            $('#dialog').NitroDialog({ action: "close" });
 					}
 				},
 				{
