@@ -26,9 +26,10 @@ $(function () {
 
 	initReUploadDocuments();
 
-	//----Filter result using month and year
+	//----Filter result using month, quarter and year
 	var $btnYear = $('#btn-year-pick');
 	var $btnMonth = $('#btn-month-pick');
+	openTab($("#input-interval").val());
 
 	$('#yearpicker').datetimepicker({
 		widgetParent: $btnYear,
@@ -82,6 +83,12 @@ $(function () {
 	});
 	//------End filter
 
+	$("#quarter-dropdown button.dropdown-item").on('click', function(){
+		$("#quarter-dropdown button.dropdown-item").removeClass('active');
+		$(this).addClass('active');
+		$("#quarterpicker").val($(this).data('quarter'));
+	});
+
 
 	//----- Update compliance status of an affiliate
 	$('.update-status .btn-lbl').on('click', function () {
@@ -106,6 +113,7 @@ $(function () {
 				interval: $(this).data('interval'),
 				affiliate_id: $(this).data('affiliate'),
 				month: $('#monthpicker').val(),
+				quarter: $('#quarterpicker').val(),
 				year: $('#yearpicker').val(),
 				status: $(selectedStatusElement).data('status')
 			}
@@ -767,3 +775,26 @@ function reupload(type, docId){
 	$(elem).find('.chatBox').toggleClass("d-none");
 	$(elem).find('.upload').toggleClass("d-none");
 }
+function openTab(val) {
+	$('#tab-inner a[href="#' + val + '"]').tab('show');
+	if(val == 'nav-y1'){
+		$("#monthpicker").removeAttr('disabled');
+		$("#btn-month-pick").removeClass('d-none').addClass('d-inline');
+		$("#quarter-dropdown").removeClass('d-inline').addClass('d-none');
+		$("#quarterpicker").attr('disabled', 'disabled');
+		$("#yearpicker").attr('name', 'monthly_year');
+	} else if(val == 'nav-y2'){
+		$("#btn-month-pick").removeClass('d-inline').addClass('d-none');
+		$("#monthpicker").attr('disabled', 'disabled');
+		$("#quarterpicker").removeAttr('disabled');
+		$("#quarter-dropdown").removeClass('d-none').addClass('d-inline');
+		$("#yearpicker").attr('name', 'quarterly_year');
+	} else {
+		$("#btn-month-pick").removeClass('d-inline').addClass('d-none');
+		$("#quarter-dropdown").removeClass('d-inline').addClass('d-none');
+		$("#monthpicker").attr('disabled', 'disabled');
+		$("#quarterpicker").attr('disabled', 'disabled');
+		$("#yearpicker").attr('name', 'yearly_year');
+	}
+	$("#input-interval").val(val);
+  }

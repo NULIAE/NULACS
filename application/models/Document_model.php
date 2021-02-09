@@ -336,7 +336,7 @@ class Document_model extends CI_Model
 		$insert_data = array(
 			"document_id" => $data["document_id"],
 			"affiliate_id" => $data["affiliate_id"],
-			"document_month" => ceil($data["month"]/3),
+			"document_month" => $data["quarter"],
 			"document_year" => $data["year"],
 			"quarterly_submitted_by" => $data["submitted_by"],
 			"quarterly_submitted_date" => date('Y-m-d H:i:s'),
@@ -350,7 +350,7 @@ class Document_model extends CI_Model
 		//Check document already uploaded
 		$this->db->where("document_id", $data["document_id"]);
 		$this->db->where("affiliate_id", $data["affiliate_id"]);
-		$this->db->where("document_month", ceil($data["month"]/3));
+		$this->db->where("document_month", $data["quarter"]);
 		$this->db->where("document_year", $data["year"]);
 
 		$query = $this->db->get('quarterly_document_status');

@@ -618,7 +618,7 @@ class Affiliate_model extends CI_Model
 	{
 		$where = array(
 			'affiliate_id'=> $data['affiliate_id'],
-			'quarter'=> ceil($data['month']/3),
+			'quarter'=> $data['quarter'],
 			'year'=> $data['year'],
 		);
 
@@ -890,6 +890,27 @@ class Affiliate_model extends CI_Model
 			
 			return $this->db->insert_id();	
 		}
+	}
+
+	public function recent_affiliate_data($affiliate_id)
+	{
+		$query = $this->db->query("SELECT MAX(`month`) AS `month`, MAX(`year`) AS `year` FROM `affiliate_compliance_status_monthly` WHERE `affiliate_id` = '$affiliate_id' AND `year` IN (SELECT MAX(`year`) AS `year` FROM `affiliate_compliance_status_monthly` WHERE `affiliate_id` = '$affiliate_id')");
+	
+		$recent_month = $query->row_array();
+		
+		$query = $this->db->query("SELECT MAX(`quarter`) AS `quarter`, MAX(`year`) AS `year` FROM `affiliate_compliance_status_quarterly` WHERE `affiliate_id` = '$affiliate_id' AND `year` IN (SELECT MAX(`year`) AS `year` FROM `affiliate_compliance_status_quarterly` WHERE `affiliate_id` = '$affiliate_id')");
+		
+		$recent_quarter = $query->row_array();
+		
+		$query = $this->db->query("SELECT MAX(`year`) AS `year` FROM `affiliate_compliance_status_yearly` WHERE `affiliate_id` = '$affiliate_id'");
+
+		$recent_year = $query->row_array();
+
+		return array(
+			'monthly' => $recent_month,
+			'quarterly' => $recent_quarter,
+			'yearly' => $recent_year
+		);
 	}
 	
 }

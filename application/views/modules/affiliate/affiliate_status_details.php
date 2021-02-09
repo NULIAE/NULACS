@@ -1,9 +1,9 @@
 <?php
 $quarterArray = array(
-	'1' => 'JAN '.$year.' - '.'MAR '.$year,
-	'2' => 'APR '.$year.' - '.'JUN '.$year,
-	'3' => 'JUL '.$year.' - '.'SEP '.$year,
-	'4' => 'OCT '.$year.' - '.'DEC '.$year,
+	'1' => 'JAN '.$quarterly_year.' - '.'MAR '.$quarterly_year,
+	'2' => 'APR '.$quarterly_year.' - '.'JUN '.$quarterly_year,
+	'3' => 'JUL '.$quarterly_year.' - '.'SEP '.$quarterly_year,
+	'4' => 'OCT '.$quarterly_year.' - '.'DEC '.$quarterly_year,
 );
 ?>
 <style>
@@ -58,11 +58,11 @@ border-color: #000;
 						<nav>
 							<div class="nav b-b-1 p-b-0" id="tab-inner" role="tablist">
 								<a class="nav-item nav-link active" id="nav-y1-tab" data-toggle="tab" href="#nav-y1" role="tab"
-									aria-controls="nav-y1" aria-selected="true"><i class="i i-month-o"></i> Monthly</a>
+									aria-controls="nav-y1" aria-selected="true" onclick="openTab('nav-y1')"><i class="i i-month-o"></i> Monthly</a>
 								<a class="nav-item nav-link" id="nav-y2-tab" data-toggle="tab" href="#nav-y2" role="tab"
-									aria-controls="nav-y2" aria-selected="false"><i class="i i-quater"></i> Quarterly</a>
+									aria-controls="nav-y2" aria-selected="false" onclick="openTab('nav-y2')"><i class="i i-quater"></i> Quarterly</a>
 								<a class="nav-item nav-link" id="nav-y3-tab" data-toggle="tab" href="#nav-y3" role="tab"
-									aria-controls="nav-y3" aria-selected="false"><i class="i i-date-o"></i> Yearly</a>
+									aria-controls="nav-y3" aria-selected="false" onclick="openTab('nav-y3')"><i class="i i-date-o"></i> Yearly</a>
 								<a class="nav-item nav-link" id="nav-y4-tab" data-toggle="tab" href="#nav-y4" role="tab"
 									aria-controls="nav-y4" aria-selected="false"><i class="i i-legal"></i> Legal</a>
 								<a class="nav-item nav-link" id="nav-y5-tab" data-toggle="tab" href="#nav-y5" role="tab"
@@ -70,12 +70,25 @@ border-color: #000;
 
 								<div class="ml-auto">
 									<span>View past documents</span>
-									<div class="btn btn-secondary  btn-rounded btn-action-sm" id="btn-year-pick" style="position:relative;" data-rel="tooltip" data-placement="top" title="Year"><i class="i i-date-o"></i></div>
-									<div class="btn btn-secondary  btn-rounded btn-action-sm" id="btn-month-pick" style="position:relative;" data-rel="tooltip" data-placement="top" title="Month"><i
-										class="i i-month-31"></i></div><a href="javascript:;" class="btn btn-primary btn-rounded btn-action-sm" id="btn-filter-date" data-rel="tooltip" data-placement="top" title="Search"><i class="i i-search"></i><span class="sr-only">Filter</span></a>
+									<div class="btn btn-secondary  btn-rounded btn-action-sm position-relative d-inline" id="btn-year-pick" data-rel="tooltip" data-placement="top" title="Year"><i class="i i-date-o"></i></div>
+									<div class="btn btn-secondary  btn-rounded btn-action-sm position-relative d-inline" id="btn-month-pick" data-rel="tooltip" data-placement="top" title="Month"><i class="i i-month-31"></i></div>
+									<div id="quarter-dropdown" class="dropdown d-inline">
+										<button class="btn btn-secondary btn-rounded dropdown-toggle ml-2" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-rel="tooltip" data-placement="top" title="Quarter">
+											<i class="i i-month-31"></i>
+										</button>
+										<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+											<button class="dropdown-item <?php if($quarter == 1) echo "active"; ?>" data-quarter="1">Q1</button>
+											<button class="dropdown-item <?php if($quarter == 2) echo "active"; ?>" data-quarter="2">Q2</button>
+											<button class="dropdown-item <?php if($quarter == 3) echo "active"; ?>" data-quarter="3">Q3</button>
+											<button class="dropdown-item <?php if($quarter == 4) echo "active"; ?>" data-quarter="4">Q4</button>
+										</div>
+									</div>
+									<a href="javascript:;" class="btn btn-primary btn-rounded btn-action-sm" id="btn-filter-date" data-rel="tooltip" data-placement="top" title="Search"><i class="i i-search"></i><span class="sr-only">Filter</span></a>
 									<form id="filter-date" class="d-none" action="<?php echo current_url(); ?>">
-										<input type="hidden" id="yearpicker" name="year" value="<?php echo $year; ?>" />
-										<input type="hidden" id="monthpicker" name="month" value="<?php echo isset($_GET['month']) ? $_GET['month'] : $month; ?>" />
+										<input type="hidden" id="input-interval" name="interval" value="<?php echo isset($_GET['interval'])?$_GET['interval']:"nav-y1"; ?>" />
+										<input type="hidden" id="yearpicker" name="monthly_year" value="<?php echo $year; ?>" />
+										<input type="hidden" id="monthpicker" name="month" value="<?php echo $month; ?>" />
+										<input type="hidden" id="quarterpicker" name="quarter" value="<?php echo $quarter; ?>" />
 									</form>
 								</div>
 							</div>
@@ -84,7 +97,7 @@ border-color: #000;
 							<div class="tab-pane fade show active" id="nav-y1" role="tabpanel" aria-labelledby="nav-y1-tab">
 
 								<div class=" m-y-20">
-									<div class="h5 t-c f-bold">MONTHLY (<?php echo strtoupper(date('M', mktime(0, 0, 0, $month, 10))).' '.$year; ?>)</div>
+									<div class="h5 t-c f-bold">MONTHLY (<?php echo strtoupper(date('M', mktime(0, 0, 0, $month, 10))).' '.$monthly_year; ?>)</div>
 									<div class="h6">Due Date: 01/31/2021</div>
 
 								</div>
@@ -222,8 +235,8 @@ border-color: #000;
 																<input type="hidden" name="document_id" value="<?php echo $document['document_id']; ?>" />
 																<input type="hidden" name="document_type_id" value="<?php echo $document['document_type_id']; ?>" />
 																<input type="hidden" name="affiliate_id" value="<?php echo $affiliate['affiliate_id']; ?>" />
-																<input type="hidden" name="year" value="<?php echo $year; ?>" />
-																<input type="hidden" name="month" value="<?php echo isset($_GET['month']) ? $_GET['month'] : $month; ?>" />
+																<input type="hidden" name="year" value="<?php echo $monthly_year; ?>" />
+																<input type="hidden" name="month" value="<?php echo $month; ?>" />
 															</form>
 														</div>
 													</div>
@@ -238,7 +251,7 @@ border-color: #000;
 
 											<div class="col-sm-24 update-status">
 												<div class="p-a-15 text-md-right">
-												<span class="h5">Affiliate monthly compliance for <?php echo strtoupper(date('M', mktime(0, 0, 0, $month, 10))).' '.$year; ?></span>
+												<span class="h5">Affiliate monthly compliance for <?php echo strtoupper(date('M', mktime(0, 0, 0, $month, 10))).' '.$monthly_year; ?></span>
 
 												<a class="btn btn-round-ib btn-lbl ml-3 <?php if($monthly_compliance == 8) echo "btn-primary"; ?>" data-status="8" data-rel="tooltip" data-placement="bottom" title="Compliance"><i class="i i-compliant"></i><span class="sr-only">Compliance</span></a>
 												<a class="btn btn-round-ib btn-lbl <?php if($monthly_compliance == 9) echo "btn-primary"; ?>" data-status="9" data-rel="tooltip" data-placement="bottom" title="Non Compliance"><i class="i i-non-compliant"></i><span class="sr-only">Non Compliance</span></a>
@@ -391,8 +404,8 @@ border-color: #000;
 															<input type="hidden" name="document_id" value="<?php echo $document['document_id']; ?>" />
 															<input type="hidden" name="document_type_id" value="<?php echo $document['document_type_id']; ?>" />
 															<input type="hidden" name="affiliate_id" value="<?php echo $affiliate['affiliate_id']; ?>" />
-															<input type="hidden" name="year" value="<?php echo $year; ?>" />
-															<input type="hidden" name="month" value="<?php echo isset($_GET['month']) ? $_GET['month'] : $month; ?>" />
+															<input type="hidden" name="year" value="<?php echo $quarterly_year; ?>" />
+															<input type="hidden" name="quarter" value="<?php echo $quarter; ?>" />
 														</form>
 													</div>
 												</div>
@@ -423,7 +436,7 @@ border-color: #000;
 							<div class="tab-pane fade" id="nav-y3" role="tabpanel" aria-labelledby="nav-y3-tab">
 								<div class=" m-y-20">
 									<?php $startMonth = date('m', strtotime($affiliate['year_start'])); ?>
-									<div class="h5 t-c f-bold">YEARLY (<?php echo strtoupper(date('M', strtotime($affiliate['year_start'])))." ".$year; ?> - <?php echo strtoupper(date('M Y', strtotime("+11 month", mktime(0, 0, 0, $startMonth, 1, $year)))); ?>)</div>
+									<div class="h5 t-c f-bold">YEARLY (<?php echo strtoupper(date('M', strtotime($affiliate['year_start'])))." ".$yearly_year; ?> - <?php echo strtoupper(date('M Y', strtotime("+11 month", mktime(0, 0, 0, $startMonth, 1, $yearly_year)))); ?>)</div>
 									<div class="h6">Due Date: 01/31/2021</div>
 
 								</div>
@@ -560,8 +573,8 @@ border-color: #000;
 																<input type="hidden" name="document_id" value="<?php echo $document['document_id']; ?>" />
 																<input type="hidden" name="document_type_id" value="<?php echo $document['document_type_id']; ?>" />
 																<input type="hidden" name="affiliate_id" value="<?php echo $affiliate['affiliate_id']; ?>" />
-																<input type="hidden" name="year" value="<?php echo $year; ?>" />
-																<input type="hidden" name="month" value="<?php echo isset($_GET['month']) ? $_GET['month'] : $month; ?>" />
+																<input type="hidden" name="year" value="<?php echo $yearly_year; ?>" />
+																<!--<input type="hidden" name="month" value="<?php echo isset($_GET['month']) ? $_GET['month'] : $month; ?>" />-->
 															</form>
 														</div>
 													</div>
@@ -576,7 +589,7 @@ border-color: #000;
 
 										<div class="col-sm-24 update-status">
 											<div class="p-a-15 text-md-right">
-											<span class="h5">Affiliate yearly compliance for <?php echo strtoupper(date('M', strtotime($affiliate['year_start'])))." ".$year; ?> - <?php echo strtoupper(date('M Y', strtotime("+11 month", mktime(0, 0, 0, $startMonth, 1, $year)))); ?></span>
+											<span class="h5">Affiliate yearly compliance for <?php echo strtoupper(date('M', strtotime($affiliate['year_start'])))." ".$yearly_year; ?> - <?php echo strtoupper(date('M Y', strtotime("+11 month", mktime(0, 0, 0, $startMonth, 1, $yearly_year)))); ?></span>
 
 											<a class="btn btn-round-ib btn-lbl ml-3 <?php if($yearly_compliance == 8) echo "btn-primary"; ?>" data-status="8" data-rel="tooltip" data-placement="bottom" title="Compliance"><i class="i i-compliant"></i><span class="sr-only">Compliance</span></a>
 											<a class="btn btn-round-ib btn-lbl <?php if($yearly_compliance == 9) echo "btn-primary"; ?>" data-status="9" data-rel="tooltip" data-placement="bottom" title="Non Compliance"><i class="i i-non-compliant"></i><span class="sr-only">Non Compliance</span></a>
@@ -1131,7 +1144,6 @@ border-color: #000;
 																<input type="hidden" name="document_type_id" value="<?php echo $document['document_type_id']; ?>" />
 																<input type="hidden" name="affiliate_id" value="<?php echo $affiliate['affiliate_id']; ?>" />
 																<input type="hidden" name="year" value="<?php echo $year; ?>" />
-																<input type="hidden" name="month" value="<?php echo isset($_GET['month']) ? $_GET['month'] : $month; ?>" />
 															</form>
 														</div>
 													</div>
@@ -1257,7 +1269,6 @@ border-color: #000;
 															<input type="hidden" name="document_type_id" value="<?php echo $document['document_type_id']; ?>" />
 															<input type="hidden" name="affiliate_id" value="<?php echo $affiliate['affiliate_id']; ?>" />
 															<input type="hidden" name="year" value="<?php echo $year; ?>" />
-															<input type="hidden" name="month" value="<?php echo isset($_GET['month']) ? $_GET['month'] : $month; ?>" />
 														</form>
 													</div>
 												</div>
@@ -1364,7 +1375,6 @@ border-color: #000;
 																<input type="hidden" name="document_type_id" value="<?php echo $document['document_type_id']; ?>" />
 																<input type="hidden" name="affiliate_id" value="<?php echo $affiliate['affiliate_id']; ?>" />
 																<input type="hidden" name="year" value="<?php echo $year; ?>" />
-																<input type="hidden" name="month" value="<?php echo isset($_GET['month']) ? $_GET['month'] : $month; ?>" />
 															</form>
 														</div>
 													</div>
@@ -1556,7 +1566,7 @@ border-color: #000;
 								<div class="col-6 col-md-6 col-lg-3">
 									<div class="yearPick">
 										<i class="i i-year-pick"></i>
-										<input id="key-year" class="yearpick form-control" name="year" type="text" value="<?php echo $year; ?>" />
+										<input id="key-year" class="yearpick form-control" name="year" type="text" value="<?php echo $quarterly_year; ?>" />
 									</div>
 								</div>
 

@@ -486,21 +486,27 @@ class Affiliate extends MY_Controller
 		//XSS Filter all the input post fields
 		$data = $this->input->get(NULL, TRUE);
 
-		$document_filter = array();
+		$recent_data = $this->Affiliate_model->recent_affiliate_data($affiliate_id);
 
-		//Document Filter
+		//Monthly Document Filter
+		$monthly_filter = array();
+		
 		if( isset($data['month']) && ($data['month'] !== '') )
-			$document_filter['document_month'] =  $data['month'];
+			$monthly_filter['document_month'] =  $recent_data['monthly']['month'] = $data['month'];
+		else if(isset($recent_data['monthly']['month']))
+			$monthly_filter['document_month'] =  $recent_data['monthly']['month'];
 		else
-			$document_filter['document_month'] = $data['month'] = date("m", strtotime("-1 month", time()));
+			$monthly_filter['document_month'] = $recent_data['monthly']['month'] = date("m", strtotime("-1 month", time()));
 
-		if( isset($data['year']) && ($data['year'] !== '') )
-			$document_filter['document_year'] =  $data['year'];
+		if( isset($data['monthly_year']) && ($data['monthly_year'] !== '') )
+			$monthly_filter['document_year'] = $recent_data['monthly']['year'] = $data['monthly_year'];
+		else if(isset($recent_data['monthly']['year']))
+			$monthly_filter['document_year'] =  $recent_data['monthly']['year'];
 		else
-			$document_filter['document_year'] = $data['year'] = date("Y", strtotime("-1 month", time()));
+			$monthly_filter['document_year'] = $recent_data['monthly']['year'] = date("Y", strtotime("-1 month", time()));
 
 		//Monthly document status
-		$monthly_document_status = $this->Affiliate_model->monthly_document_status($affiliate_id, $document_filter);
+		$monthly_document_status = $this->Affiliate_model->monthly_document_status($affiliate_id, $monthly_filter);
 
 		$monthly_documents = array();
 		foreach( $monthly_document_status as $row )
@@ -509,9 +515,25 @@ class Affiliate extends MY_Controller
 			$monthly_documents[$row['document_id']]['comments'] = $this->Document_model->get_document_comments($row['monthly_document_id'], $row['document_type_id']);
 		}
 
+		//Quarterly Document Filter
+		$quarterly_filter = array();
+
+		if( isset($data['quarter']) && ($data['quarter'] !== '') )
+			$quarterly_filter['document_month'] = $recent_data['quarterly']['quarter'] = $data['quarter'];
+		else if(isset($recent_data['quarterly']['quarter']))
+			$quarterly_filter['document_month'] =  $recent_data['quarterly']['quarter'];
+		else
+			$quarterly_filter['document_month'] = $recent_data['quarterly']['quarter'] = ceil(date("m", strtotime("-1 month", time()))/3);
+
+		if( isset($data['quarterly_year']) && ($data['quarterly_year'] !== '') )
+			$quarterly_filter['document_year'] = $recent_data['quarterly']['year'] = $data['quarterly_year'];
+		else if(isset($recent_data['quarterly']['year']))
+			$quarterly_filter['document_year'] = $recent_data['quarterly']['year'];
+		else
+			$quarterly_filter['document_year'] = $recent_data['quarterly']['year'] = date("Y", strtotime("-1 month", time()));
+
 		//Quarterly document status
-		$document_filter['document_month'] = ceil($document_filter['document_month']/3);
-		$quarterly_document_status = $this->Affiliate_model->quarterly_document_status($affiliate_id, $document_filter);
+		$quarterly_document_status = $this->Affiliate_model->quarterly_document_status($affiliate_id, $quarterly_filter);
 
 		$quarterly_documents = array();
 		foreach( $quarterly_document_status as $row )
@@ -520,10 +542,19 @@ class Affiliate extends MY_Controller
 			$quarterly_documents[$row['document_id']]['comments'] = $this->Document_model->get_document_comments($row['quarterly_id'], $row['document_type_id']);
 		}
 		
-		//Yearly document status
-		unset($document_filter['document_month']);
+		//Yearly Document Filter
+		$yearly_filter = array();
 
-		$yearly_document_status = $this->Affiliate_model->yearly_document_status($affiliate_id, $document_filter);
+		if( isset($data['yearly_year']) && ($data['yearly_year'] !== '') )
+			$yearly_filter['document_year'] = $recent_data['yearly']['year'] = $data['yearly_year'];
+		else if(isset($recent_data['yearly']['year']))
+			$yearly_filter['document_year'] = $recent_data['yearly']['year'];
+		else
+			$yearly_filter['document_year'] = $recent_data['yearly']['year'] = date("Y", strtotime("-1 month", time()));
+
+		
+		//Yearly document status
+		$yearly_document_status = $this->Affiliate_model->yearly_document_status($affiliate_id, $yearly_filter);
 
 		$yearly_documents = array();
 		foreach( $yearly_document_status as $row )
@@ -531,6 +562,10 @@ class Affiliate extends MY_Controller
 			$yearly_documents[$row['document_id']] = $row;
 			$yearly_documents[$row['document_id']]['comments'] = $this->Document_model->get_document_comments($row['yearly_d_id'], $row['document_type_id']);
 		}
+
+		$data['year'] = date("Y", strtotime("-1 month", time()));
+
+		$document_filter = array('document_year' => $data['year']);
 
 		//Performance Organizational Soundness documents status
 		$soundness_documents = $this->Document_model->get_documents(6);
@@ -543,7 +578,7 @@ class Affiliate extends MY_Controller
 			{
 				$filter = array(
 					'doc.document_id' => $row['ref_document'],
-					'document_year'	=> $document_filter['document_year']
+					'document_year'	=> $data['year']
 				);
 
 				if($row['document_name'] == "Board Roster")
@@ -572,7 +607,7 @@ class Affiliate extends MY_Controller
 			{
 				$filter = array(
 					'doc.document_id' => $row['ref_document'],
-					'document_year'	=> $document_filter['document_year']
+					'document_year'	=> $data['year']
 				);
 
 				if($row['document_name'] == "Form 990" || $row['document_name'] == "Current Operating Budget")
@@ -603,23 +638,27 @@ class Affiliate extends MY_Controller
 			$mission_document_status[$row['document_id']]['document'] = $this->Affiliate_model->mission_document_status($affiliate_id, $row['document_id'], $document_filter);
 		}
 
-		$quarter = ceil($data['month']/3);
-
 		//Get monthly compliance status
 		$compliance_filter = array(
-			'month' => $data['month'],
-			'year'	=> $data['year'],
+			'month' => $recent_data['monthly']['month'],
+			'year'	=> $recent_data['monthly']['year'],
 			'affiliate.affiliate_id' => $affiliate_id
 		);
 		$monthly_compliance_status = $this->Affiliate_model->monthly_compliance_status(NULL, NULL, $compliance_filter);
 		
 		//Get quarterly compliance status
-		unset($compliance_filter['month']);
-		$compliance_filter['quarter'] = $quarter;
+		$compliance_filter = array(
+			'quarter' => $recent_data['quarterly']['quarter'],
+			'year'	=> $recent_data['quarterly']['year'],
+			'affiliate.affiliate_id' => $affiliate_id
+		);
 		$quarterly_compliance_status = $this->Affiliate_model->quarterly_compliance_status(NULL, NULL, $compliance_filter);
 		
 		//Get yearly compliance status
-		unset($compliance_filter['quarter']);
+		$compliance_filter = array(
+			'year'	=> $recent_data['yearly']['year'],
+			'affiliate.affiliate_id' => $affiliate_id
+		);
 		$yearly_compliance_status = $this->Affiliate_model->yearly_compliance_status(NULL, NULL, $compliance_filter);
 
 		$data['content'] = array(
@@ -642,9 +681,12 @@ class Affiliate extends MY_Controller
 			'mission_documents' => $mission_documents,
 			'document_status' => $this->Document_model->get_document_status_flags(),
 			'compliance_status' => $this->Affiliate_model->get_compliance_status_flags(),
-			'key_indicators_details' => $this->Affiliate_model->get_key_indicators($affiliate_id, $quarter, $data['year']),
-			'month' => $data['month'],
-			'quarter' => $quarter,
+			'key_indicators_details' => $this->Affiliate_model->get_key_indicators($affiliate_id, $recent_data['quarterly']['quarter'], $recent_data['quarterly']['year']),
+			'month' => $recent_data['monthly']['month'],
+			'monthly_year' => $recent_data['monthly']['year'],
+			'quarter' => $recent_data['quarterly']['quarter'],
+			'quarterly_year' => $recent_data['quarterly']['year'],
+			'yearly_year' => $recent_data['yearly']['year'],
 			'year' => $data['year'],
 			'legal_document' => $this->Affiliate_model->get_legal_document($affiliate_id),
 			'compliance_other' => $this->Affiliate_model->get_other_document($affiliate_id, 11),
@@ -1054,7 +1096,7 @@ class Affiliate extends MY_Controller
 			* (/uploads/Documents/MonthlyDocument/affiliate_id/year/quarter)
 			* Sample => "/uploads/Documents/MonthlyDocument/75/2020/Q1/" 
 			* */
-			$quarter =  "Q" . ceil($data['month']/3);
+			$quarter =  "Q" . $data['quarter'];
 			$path = implode("/", array($data['affiliate_id'],$data['year'],$quarter)). "/";
 
 		}
