@@ -1052,11 +1052,11 @@ border-color: #000;
 														<div class="btn wrdiv <?php  echo ($key%2 != 0)? "odd": ""; ?>">
 															<div class="row  align-items-center" id="soundness-row-<?php echo $document['document_id']; ?>">
 																<div class="col-3 col-md-2"><span class="sub"><?php echo $key+1; ?></span></div>
-																<div id="name-row-<?php echo $document['document_id']; ?>" class="col-14 <?php echo (empty($currentDoc['document']) && empty($currentDoc['ref_documents'])) ? "col-md-8" : "col-md-6"; ?>"><span class="sub "><?php echo $document['document_name']; ?></span></div>
+																<div id="name-row-<?php echo $document['document_id']; ?>" class="col-14 <?php echo (empty($currentDoc['document']) && ($document['ref_document']=== NULL)) ? "col-md-8" : "col-md-6"; ?>"><span class="sub "><?php echo $document['document_name']; ?></span></div>
 																<?php /*if(!empty($currentDoc['document'])): ?>
 																<div class="col-7 col-md-4"><span class="sub"><?php echo date('m/d/Y', strtotime($currentDoc['document'][0]['performance_org_doc_submitted_date'])); ?></span></div>
 																<?php endif;*/ ?>
-																<?php if(empty($currentDoc['document']) && empty($currentDoc['ref_documents'])) : ?>
+																<?php if(empty($currentDoc['document']) && ($document['ref_document'] == NULL)) : ?>
 																	<div class="col-20 col-md-8" id="soundness-segment-<?php echo $document['document_id']; ?>">
 																		<span class="sub">
 																			<div id="dropzone-<?php echo $document['document_id']; ?>">
@@ -1089,7 +1089,9 @@ border-color: #000;
 																					</div>
 																				</div>
 																			</div>
+																			<?php $check_flag = false; ?>
 																			<?php if(!empty($currentDoc['document'])): ?>
+																				<?php $check_flag = true; ?>
 																				<?php foreach($currentDoc['document'] as $ref): ?>
 																					<div class="row">
 																						<div class="col-14 col-md-18"><span class="text-primary"><a href="<?php echo base_url($ref['performance_org_doc_upload_file']);?>"><?php echo $ref['performance_org_doc_upload_file_name']; ?></a></span></div>
@@ -1098,6 +1100,7 @@ border-color: #000;
 																				<?php endforeach; ?>
 																			<?php endif; ?>
 																			<?php if(!empty($currentDoc['ref_documents'])): ?>
+																				<?php $check_flag = true; ?>
 																				<?php foreach($currentDoc['ref_documents'] as $ref): ?>
 																					<?php if($document['document_name'] == "Board Roster"): ?>
 																					<div class="row">
@@ -1112,6 +1115,11 @@ border-color: #000;
 																					<?php endif; ?>
 																				<?php endforeach; ?>
 																			<?php endif; ?>
+																			<?php if(!$check_flag): ?>
+																				<div class="row">
+																					<div class="col-24 text-center">No documents found!</div>
+																				</div>
+																			<?php endif; ?>
 																		</div>
 																	</div>
 																<?php endif; ?>
@@ -1119,7 +1127,7 @@ border-color: #000;
 														</div>
 													</div>
 												</div>
-												<?php if(empty($currentDoc['document']) && empty($currentDoc['ref_documents'])) : ?>
+												<?php if(empty($currentDoc['document']) && ($document['ref_document']==NULL)) : ?>
 													<div id="collapse<?php echo $document['document_id']; ?>" class="collapse " aria-labelledby="headingq<?php echo $document['document_id']; ?>" data-parent="#accordionq">
 														<div class="acc-body">
 															<form id="form-upload-<?php echo $document['document_id']; ?>" class="row align-items-end form-metadata">
@@ -1174,9 +1182,9 @@ border-color: #000;
 														<div class="btn wrdiv <?php  echo ($key%2 != 0)? "odd": ""; ?>">
 															<div class="row  align-items-center" id="vitality-row-<?php echo $document['document_id']; ?>">
 																<div class="col-3 col-md-2"><span class="sub"><?php echo $key+1; ?></span></div>
-																<div id="name-row-<?php echo $document['document_id']; ?>" class="col-14 <?php echo (empty($currentDoc['document']) && empty($currentDoc['ref_documents'])) ? "col-md-8" : "col-md-6"; ?>"><span class="sub "><?php echo $document['document_name']; ?></span></div>
+																<div id="name-row-<?php echo $document['document_id']; ?>" class="col-14 <?php echo (empty($currentDoc['document']) && ($document['ref_document']==NULL)) ? "col-md-8" : "col-md-6"; ?>"><span class="sub "><?php echo $document['document_name']; ?></span></div>
 																<!-- <div class="col-7 col-md-4"><span class="sub">12/31/2020</span></div> -->
-																<?php if(empty($currentDoc['document']) && empty($currentDoc['ref_documents'])) : ?>
+																<?php if(empty($currentDoc['document']) && ($document['ref_document']==NULL)) : ?>
 																	<div class="col-20 col-md-8" id="vitality-segment-<?php echo $document['document_id']; ?>">
 																		<span class="sub">
 																			<div id="dropzone-<?php echo $document['document_id']; ?>">
@@ -1209,7 +1217,9 @@ border-color: #000;
 																					</div>
 																				</div>
 																			</div>
+																			<?php $check_flag = false;?>
 																			<?php if(!empty($currentDoc['document'])): ?>
+																				<?php $check_flag = true;?>
 																				<?php foreach($currentDoc['document'] as $ref): ?>
 																					<div class="row">
 																						<div class="col-14 col-md-18"><span class="text-primary"><a href="<?php echo base_url($ref['performance_vitality_upload_file']);?>"><?php echo $ref['performance_vitality_upload_file_name']; ?></a></span></div>
@@ -1218,6 +1228,7 @@ border-color: #000;
 																				<?php endforeach; ?>
 																			<?php endif; ?>
 																			<?php if(!empty($currentDoc['ref_documents'])): ?>
+																				<?php $check_flag = true;?>
 																				<?php foreach($currentDoc['ref_documents'] as $ref): ?>
 																					<?php if($document['document_name'] == "Form 990" || $document['document_name'] == "Current Operating Budget"): ?>
 																					<div class="row">
@@ -1237,6 +1248,11 @@ border-color: #000;
 																					<?php endif; ?>
 																				<?php endforeach; ?>
 																			<?php endif; ?>
+																			<?php if(!$check_flag): ?>
+																				<div class="row">
+																					<div class="col-24 text-center">No documents found!</div>
+																				</div>
+																			<?php endif; ?>
 																		</div>
 																	</div>
 																<?php endif; ?>
@@ -1244,7 +1260,7 @@ border-color: #000;
 														</div>
 													</div>
 												</div>
-												<?php if(empty($currentDoc['document']) && empty($currentDoc['ref_documents'])) : ?>
+												<?php if(empty($currentDoc['document']) && ($document['ref_document']==NULL)) : ?>
 												<div id="collapse<?php echo $document['document_id']; ?>" class="collapse " aria-labelledby="headingn<?php echo $document['document_id']; ?>" data-parent="#accordionn">
 													<div class="acc-body">
 														<form id="form-upload-<?php echo $document['document_id']; ?>" class="row align-items-end form-metadata">
@@ -1873,10 +1889,12 @@ border-color: #000;
 </script>
 <script id="template-performance-filter" type="x-tmpl-mustache">
 {{#documents}}
+{{#filename}}
 <div class="row">
 	<div class="col-14 col-md-18"><span class="text-primary"><a href="{{documentPath}}">{{filename}}</a></span></div>
 	<div class="col-10 col-md-6"><span class="statround">{{submittedTime}}</span></div>
 </div>
+{{/filename}}
 {{/documents}}
 {{^documents}}
 <div class="row">

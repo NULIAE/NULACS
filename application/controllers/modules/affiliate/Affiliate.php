@@ -622,9 +622,20 @@ class Affiliate extends MY_Controller
 				{
 					$vitality_document_status[$row['document_id']]['ref_documents'] = $this->Affiliate_model->quarterly_document_status($affiliate_id, $filter);
 				}
-				else
+				else if($row['document_name'] == "Monthly Financial Statements")
 				{
-					$vitality_document_status[$row['document_id']]['ref_documents'] = $this->Affiliate_model->monthly_document_status($affiliate_id, $filter);
+					$vitality_document_status[$row['document_id']]['ref_documents'] = array();
+					
+					$ref_doc_ids = explode(',', $row['ref_document']);
+					
+					foreach($ref_doc_ids as $ref_id)
+					{
+						$filter['doc.document_id'] = $ref_id;
+						
+						$monthly_finacial_docs = $this->Affiliate_model->monthly_document_status($affiliate_id, $filter);
+						
+						array_merge($vitality_document_status[$row['document_id']]['ref_documents'], $monthly_finacial_docs);
+					}
 				}
 			}
 			else
