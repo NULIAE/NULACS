@@ -19,7 +19,39 @@ $(function () {
 			var tableBody = "#" + data.status + "-table-body";
 			var pagination = "#" + data.status + "-pagination";
 			$(tableBody).html(Mustache.render($(template).html(), { 
-				affiliates : data.affiliates, 
+				affiliates : data.affiliates,
+				"document_status_list": function(){
+					var list_content = "";
+					var i,j,check,currentDocument, item;
+					for(i=0; i < data.documents.length; i++) {
+						check = false;
+						currentDocument = data.documents[i]
+						//$.each(this.document_status, function (key, docStatus) {
+						for(j=0; j < this.document_status.length; j++) {
+							item = this.document_status[j];
+							if(currentDocument.document_id === item.document_id){
+								list_content += '<td><div class="icon-rounded" data-rel="tooltip" data-placement="bottom" title="'+item.status_name+'">'+item.icon+'</div></td>';
+								check = true;
+								break;
+							}
+						}
+						if(!check){
+							list_content += '<td><div class="icon-rounded" data-rel="tooltip" data-placement="bottom" title="Submission Pending"><i class="i i-document-status d-status"></i></div></td>';
+						}
+					}
+					return list_content;
+				},
+				"key_status": function(){
+					if(this.key_indicator.length){
+						if(this.key_indicator[0].status == 0){
+							return '<div class="icon-rounded" data-rel="tooltip" data-placement="bottom" title="Review Pending"><i class="i i-review-pending r-pending"></i></div>';
+						} else {
+							return '<div class="icon-rounded" data-rel="tooltip" data-placement="bottom" title="Approved"><i class="i i-approved apprvd"></i></div>';
+						}
+					} else {
+						return '<div class="icon-rounded" data-rel="tooltip" data-placement="bottom" title="Submission Pending"><i class="i i-document-status d-status"></i></div>';
+					}
+				},
 				"currentDate": function () {
 					if(data.status == "monthly")
 						return Intl.DateTimeFormat('en', { month: 'short' }).format(data.month).toUpperCase()+ "-" + data.year;
@@ -36,6 +68,7 @@ $(function () {
 				$(pagination).html(Mustache.render($('#template-empty-page').html(), { }));
 			}
 			$('.pagination').removeClass('justify-content-end').addClass('justify-content-center');
+			$('[data-rel="tooltip"]').tooltip();
 		});
 	}
 });
