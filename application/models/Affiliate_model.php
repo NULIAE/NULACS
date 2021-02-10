@@ -63,7 +63,7 @@ class Affiliate_model extends CI_Model
 		{
 			$this->db->limit($limit, $start);
 		}
-
+		$this->db->group_by('affiliate.affiliate_id'); 
 		$query = $this->db->get();
 
 		$affiliates =  $query->result_array();
@@ -403,14 +403,16 @@ class Affiliate_model extends CI_Model
 	 * @param  array $filter
 	 * @return array
 	 */
-	public function monthly_document_status($affiliate_id, $filter = NULL)
+	public function monthly_document_status($affiliate_id, $filter = NULL, $exclude_other = FALSE)
 	{
 		$this->db->select('mds.monthly_document_id,doc.document_id,doc.document_type_id,document_name,document_month,document_year,monthly_submitted_date,monthly_upload_file,monthly_upload_file_name,monthly_review_status,monthly_compliance_status,sf.name as status_name,sf.icon');
 		$this->db->from('documents doc');
 		$this->db->join('monthly_document_status mds', 'mds.document_id = doc.document_id', 'left');
 		$this->db->join('status_flags sf', 'sf.id = mds.monthly_compliance_status');
 		$this->db->where('mds.affiliate_id', $affiliate_id);
-		//$this->db->where('doc.document_id !=', 6);
+		
+		if($exclude_other)
+			$this->db->where('doc.document_id !=', 6);
 		
 		if( $filter !== NULL )
 		{
@@ -480,14 +482,16 @@ class Affiliate_model extends CI_Model
 	 * @param  array $filter
 	 * @return array
 	 */
-	public function quarterly_document_status($affiliate_id, $filter = NULL)
+	public function quarterly_document_status($affiliate_id, $filter = NULL, $exclude_other = FALSE)
 	{
 		$this->db->select('qds.quarterly_id,doc.document_id,doc.document_type_id,document_name,document_month,document_year,quarterly_submitted_date,quarterly_upload_file,quarterly_upload_file_name,quarterly_review_status,quarterly_compliance_status,sf.name as status_name,sf.icon');
 		$this->db->from('documents doc');
 		$this->db->join('quarterly_document_status qds', 'qds.document_id = doc.document_id', 'left');
 		$this->db->join('status_flags sf', 'sf.id = qds.quarterly_compliance_status');
 		$this->db->where('qds.affiliate_id', $affiliate_id);
-		//$this->db->where('doc.document_id !=', 8);
+
+		if($exclude_other)
+			$this->db->where('doc.document_id !=', 8);
 		
 		if( $filter !== NULL )
 		{
@@ -499,6 +503,31 @@ class Affiliate_model extends CI_Model
 		return $query->result_array();
 	}
 
+		/**
+	 * Get list of key indicator of an Affiliate with its compliance status
+	 * Other files are omitted
+	 * 
+	 * @param  int $affiliate_id
+	 * @param  array $filter
+	 * @return array
+	 */
+	public function key_indicator($affiliate_id, $filter = NULL)
+	{
+
+		$this->db->select('*');
+		$this->db->from('key_indicators ki');
+		$this->db->where('ki.affiliate_id', $affiliate_id);
+		
+		if( $filter !== NULL )
+		{
+			$this->db->where('ki.quarter', $filter['document_month'] );
+			$this->db->where('ki.year', $filter['document_year'] );
+		}
+
+		$query = $this->db->get();
+
+		return $query->result_array();
+	}
 	/**
 	 * Get the count of all affiliate yearly status using the filters
 	 *
@@ -557,14 +586,16 @@ class Affiliate_model extends CI_Model
 	 * @param  array $filter
 	 * @return array
 	 */
-	public function yearly_document_status($affiliate_id, $filter = NULL)
+	public function yearly_document_status($affiliate_id, $filter = NULL, $exclude_other = FALSE)
 	{
 		$this->db->select('yds.yearly_d_id,doc.document_id,doc.document_type_id,document_name,document_year,yearly_submitted_date,yearly_upload_file,yearly_upload_file_name,yearly_review_status,yearly_compliance_status,sf.name as status_name,sf.icon');
 		$this->db->from('documents doc');
 		$this->db->join('yearly_document_status yds', 'yds.document_id = doc.document_id', 'left');
 		$this->db->join('status_flags sf', 'sf.id = yds.yearly_compliance_status');
 		$this->db->where('yds.affiliate_id', $affiliate_id);
-		//$this->db->where('doc.document_id !=', 14);
+
+		if($exclude_other)
+			$this->db->where('doc.document_id !=', 14);
 		
 		if( $filter !== NULL )
 		{

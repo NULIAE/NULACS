@@ -163,6 +163,7 @@
 									<?php foreach($quarterly_documents as $item): ?>
 										<th scope="col"><?php echo $item['document_name']; ?></th>
 									<?php endforeach; ?>
+									<th scope="col">Key Indicators</th>
 								</tr>
 								</thead>
 								<tbody id="quarterly-table-body">
@@ -185,6 +186,18 @@
 												<td><div class="icon-rounded" data-rel="tooltip" data-placement="bottom" title="Submission Pending"><i class="i i-document-status d-status"></i></div></td>
 											<?php endif; ?>
 										<?php endforeach; ?>
+
+											<?php $key_indicator_flag = FALSE; ?>
+											<?php if(isset( $row['key_indicator'][0]['status'])): ?>						
+													<td>
+														<div class="icon-rounded" data-rel="tooltip" data-placement="bottom" title="<?php if($row['key_indicator'][0]['status']=='0'){ echo"Review Pending"; }else{ echo"Approved"; } ?>">
+														<?php if($row['key_indicator'][0]['status']=='0'){ echo"<i class='i i-review-pending r-pending'></i>"; }else{ echo"<i class='i i-approved apprvd'></i>"; } ?></div>
+													</td>
+													<?php $key_indicator_flag = TRUE; ?>
+										<?php endif; ?>
+											<?php if( ! $key_indicator_flag ): ?>
+												<td><div class="icon-rounded" data-rel="tooltip" data-placement="bottom" title="Submission Pending"><i class="i i-document-status d-status"></i></div></td>
+											<?php endif; ?>
 									</tr>
 									<?php endforeach; ?>
 									<?php else: ?>
@@ -324,10 +337,8 @@
 <tr>
 	<td scope="row"><a href="">{{city}},{{state}}</a></td>
 	<td>{{currentDate}}</td>
-	<td><div class="icon-rounded">{{{icon}}}</div></td>
-	{{#document_status}}
-		<td><div class="icon-rounded">{{{icon}}}</div></td>
-	{{/document_status}}
+	<td><div class="icon-rounded" data-rel="tooltip" data-placement="bottom" title="{{status_name}}">{{{icon}}}</div></td>
+	{{{document_status_list}}}
 </tr>
 {{/affiliates}}
 {{^affiliates}}
@@ -341,10 +352,9 @@
 <tr>
 	<td scope="row"><a href="">{{city}},{{state}}</a></td>
 	<td>{{currentDate}}</td>
-	<td><div class="icon-rounded">{{{icon}}}</div></td>
-	{{#document_status}}
-		<td><div class="icon-rounded">{{{icon}}}</div></td>
-	{{/document_status}}
+	<td><div class="icon-rounded" data-rel="tooltip" data-placement="bottom" title="{{status_name}}">{{{icon}}}</div></td>
+	{{{document_status_list}}}
+	<td>{{{key_status}}}</td>
 </tr>
 {{/affiliates}}
 {{^affiliates}}
@@ -358,10 +368,8 @@
 <tr>
 	<td scope="row"><a href="">{{city}},{{state}}</a></td>
 	<td>{{currentDate}}</td>
-	<td><div class="icon-rounded">{{{icon}}}</div></td>
-	{{#document_status}}
-		<td><div class="icon-rounded">{{{icon}}}</div></td>
-	{{/document_status}}
+	<td><div class="icon-rounded" data-rel="tooltip" data-placement="bottom" title="{{status_name}}">{{{icon}}}</div></td>
+	{{{document_status_list}}}
 </tr>
 {{/affiliates}}
 {{^affiliates}}

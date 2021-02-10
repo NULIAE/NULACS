@@ -8,7 +8,7 @@
           <div class="col-lg-11">
              <div class="row headOuter">
                  <div class="head">
-                     <h3>Affiliate Compliance</h3>
+                 <h3><?php echo $affiliate['organization'].' - '.$affiliate['city'].', '.$affiliate['stateabbreviation']; ?></h3>
                  </div>
              </div>
              <div class="row chartBody sub-form">  <div class="col-24">

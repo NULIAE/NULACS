@@ -248,9 +248,9 @@ class Affiliate extends MY_Controller
 			'monthly_status' => $this->get_monthly_status(TRUE),
 			'quarterly_status' => $this->get_quarterly_status(TRUE),
 			'yearly_status' => $this->get_yearly_status(TRUE),
-			'monthly_documents' => $this->Document_model->get_documents(1),
-			'quarterly_documents' => $this->Document_model->get_documents(2),
-			'yearly_documents' => $this->Document_model->get_documents(3),
+			'monthly_documents' => $this->Document_model->get_documents(1, array(6)),
+			'quarterly_documents' => $this->Document_model->get_documents(2, array(8)),
+			'yearly_documents' => $this->Document_model->get_documents(3, array(14)),
 			'regions' => $this->User_model->get_all_regions(),
 			'compliance_status' => $this->Affiliate_model->get_compliance_status_flags(),
 		);
@@ -320,11 +320,12 @@ class Affiliate extends MY_Controller
 
 		foreach ( $affiliates as $key => $affiliate )
 		{
-			$affiliates[$key]['document_status'] = $this->Affiliate_model->monthly_document_status($affiliate['affiliate_id'], $document_filter);
+			$affiliates[$key]['document_status'] = $this->Affiliate_model->monthly_document_status($affiliate['affiliate_id'], $document_filter, TRUE);
 		}
 
 		$result = array(
-			'affiliates' => $affiliates, 
+			'affiliates' => $affiliates,
+			'documents' => $this->Document_model->get_documents(1, array(6)),
 			'pagination' => $this->pagination->create_links(), 
 			'month' => $data['month'], 
 			'year' => $data['year'],
@@ -391,11 +392,13 @@ class Affiliate extends MY_Controller
 
 		foreach ( $affiliates as $key => $affiliate )
 		{
-			$affiliates[$key]['document_status'] = $this->Affiliate_model->quarterly_document_status($affiliate['affiliate_id'], $document_filter);
+			$affiliates[$key]['document_status'] = $this->Affiliate_model->quarterly_document_status($affiliate['affiliate_id'], $document_filter, TRUE);
+			$affiliates[$key]['key_indicator'] = $this->Affiliate_model->key_indicator($affiliate['affiliate_id'], $document_filter);
 		}
 
 		$result = array(
 			'affiliates' => $affiliates, 
+			'documents' => $this->Document_model->get_documents(2, array(8)),
 			'pagination' => $this->pagination->create_links(), 
 			'month' => $data['month'], 
 			'quarter' => $data['quarter'], 
@@ -455,11 +458,12 @@ class Affiliate extends MY_Controller
 
 		foreach ( $affiliates as $key => $affiliate )
 		{
-			$affiliates[$key]['document_status'] = $this->Affiliate_model->yearly_document_status($affiliate['affiliate_id'], $document_filter);
+			$affiliates[$key]['document_status'] = $this->Affiliate_model->yearly_document_status($affiliate['affiliate_id'], $document_filter, TRUE);
 		}
 
 		$result = array(
 			'affiliates' => $affiliates, 
+			'documents' => $this->Document_model->get_documents(3, array(14)),
 			'pagination' => $this->pagination->create_links(), 
 			'month' => $data['month'], 
 			'year' => $data['year'],
@@ -1055,7 +1059,12 @@ class Affiliate extends MY_Controller
 
 		if ($status)
 		{	
-			$message = 'Key Indicators approve successfully.';
+			if($data['status']=='1' ){
+				$message = 'Key Indicators approve successfully.';
+			}else{
+				$message = 'Key Indicators unapproved successfully.';
+
+			}
 		}
 		else
 		{

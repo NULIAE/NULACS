@@ -4,7 +4,7 @@ $(function () {
 	if(key_indicators_status == '1'){
 
 		$('#key_indicators_save_btn').prop('disabled', true);
-		$('.key_indicators_approve_btn').prop('disabled', true);
+		// $('.key_indicators_approve_btn').prop('disabled', true);
 		document.getElementById("fieldset_disable").disabled = true;
 	}else{
 		document.getElementById("fieldset_disable").disabled = false;
@@ -415,7 +415,7 @@ $(function () {
 					if(data.status == '1'){
 						$('.key_indicators_approve_btn').val('Approved');
 						$(".key_indicators_approve_btn").addClass("btn btn-success");
-						$('.key_indicators_approve_btn').prop('disabled', true);
+						// $('.key_indicators_approve_btn').prop('disabled', true);
 						$('#key_indicators_save_btn').prop('disabled', true);
 						document.getElementById("fieldset_disable").disabled = true;
 					}else{
@@ -489,13 +489,20 @@ $(function () {
 
 		//Key indicators form approve
 		$("#form-key-indicators-approve").click( function() {
-	
+			var statusval='';
+			var statusvals = $(this).val();
+			
+			if(statusvals == 'Approved'){
+				statusval= 0; 
+			}else{
+				statusval= 1; 
+			}
 		
 			var inputData = {
 				affiliate_id: $('#affiliate_id_val').val(),
 				quarter: $("#key-quarter").val(),
 				year: $("#key-year").val(),
-				status: 1,			
+				status: statusval,			
 			}
 	
 			$.ajax({
@@ -505,11 +512,18 @@ $(function () {
 				dataType: 'json'
 			}).done(function (data) {
 				toastConfig.message = data.message;
-				document.getElementById("fieldset_disable").disabled = true;
-				$('.key_indicators_approve_btn').val('Approved');
-				$(".key_indicators_approve_btn").addClass("btn btn-success");
-				$('.key_indicators_approve_btn').prop('disabled', true);
-				$('#key_indicators_save_btn').prop('disabled', true);
+				if(statusval == '1'){
+					document.getElementById("fieldset_disable").disabled = true;
+					$('.key_indicators_approve_btn').val('Approved');
+					$(".key_indicators_approve_btn").addClass("btn btn-success");
+					$('#key_indicators_save_btn').prop('disabled', true);
+				}else{
+					$('.key_indicators_approve_btn').val('Approve');
+					$(".key_indicators_approve_btn").removeClass("btn btn-success");
+					$(".key_indicators_approve_btn").addClass("btn btn-primary");
+					$('#key_indicators_save_btn').removeAttr('disabled');
+					document.getElementById("fieldset_disable").disabled = false;
+				}		
 				setTimeout(function () {
 					$('#snackbar').NitroToast(toastConfig);
 				}, 2000);
