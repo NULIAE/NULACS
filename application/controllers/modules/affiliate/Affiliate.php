@@ -705,7 +705,7 @@ class Affiliate extends MY_Controller
 			'year' => $data['year'],
 			'legal_document' => $this->Affiliate_model->get_legal_document($affiliate_id),
 			'compliance_other' => $this->Affiliate_model->get_other_document($affiliate_id, 11),
-			'performance_other' => $this->Affiliate_model->get_other_document($affiliate_id, 9),
+			'performance_other' => $this->Affiliate_model->get_other_performance_documents($affiliate_id, 9),
 		);
 		
 		//Name of the view file
@@ -1334,7 +1334,7 @@ class Affiliate extends MY_Controller
 				
 				$uploadResponse = $this->Affiliate_model->get_legal_document($_POST['affiliate_id']);
 			}
-			else
+			else if($_POST['document_type'] == 'other_compliance_document')
 			{
 				if(isset($_POST['other_id']))
 				{
@@ -1347,11 +1347,73 @@ class Affiliate extends MY_Controller
 				$this->Document_model->add_comment($comment_data);
 				
 				$uploadResponse = $this->Affiliate_model->get_other_document($_POST['affiliate_id'], $_POST['document_type_id']);
+		
+			}else if($_POST['document_type'] == 'other_performance_assessment_documents')
+			{
+				if(isset($_POST['other_id']))
+				{
+					$val['id'] = $_POST['other_id'];
+				}
+
+				$uploadDocId = $this->Affiliate_model->performance_other_document($val);
+
+				$comment_data['document_id'] = $uploadDocId;
+				$this->Document_model->add_comment($comment_data);
+				
+				$uploadResponse = $this->Affiliate_model->get_other_performance_documents($_POST['affiliate_id'], $_POST['document_type_id']);
 			}
 
             echo json_encode($uploadResponse);
         }
 
 	 }
+
+	 	/**
+	 * Upload the file legal and other and save to table
+	 *
+	 * @param  string $upload_path
+	 * @return array
+	 */
+	public function delete_upload()
+	{
+		$data = $this->input->post(NULL, TRUE);
+		if($data['doc_type']=='legal_compliance_document'){
+			
+				$docData = $this->Affiliate_model->get_legal_document_id($data['del_document_id']);
+				$filePath= $docData['quarterly_upload_file'].$docData['quarterly_upload_file_name'];
+				
+				if (unlink($filePath)) {
+					 $this->Affiliate_model->delete_legal_document($data['del_document_id']);
+				     $this->Affiliate_model->delete_notification_summary($data['del_document_id']);
+					 $uploadResponse = $this->Affiliate_model->get_legal_document($data['affiliate_id']);
+				} 
+
+		}else if($data['doc_type']=='other_compliance_document'){
+
+				$docData = $this->Affiliate_model->get_other_compliance_document_id($data['del_document_id']);
+				$filePath= $docData['other_upload_file'].$docData['other_upload_file_name'];
+				
+				if (unlink($filePath)) {
+					$this->Affiliate_model->delete_other_compliance_document($data['del_document_id']);
+					$this->Affiliate_model->delete_notification_summary($data['del_document_id']);
+					$uploadResponse = $this->Affiliate_model->get_other_document($data['affiliate_id'], $data['doc_type_id']);
+				} 
+
+		}else if($data['doc_type']=='other_performance_assessment_documents'){
+
+				$docData = $this->Affiliate_model->get_performance_other_document_id($data['del_document_id']);
+					$filePath= $docData['performance_other_upload_file'].$docData['performance_other_upload_file_name'];
+					
+					if (unlink($filePath)) {
+						$this->Affiliate_model->delete_performance_other_document($data['del_document_id']);
+						$this->Affiliate_model->delete_notification_summary($data['del_document_id']);
+						$uploadResponse = $this->Affiliate_model->get_other_performance_documents($data['affiliate_id'],$data['doc_type_id']);
+					} 
+		}
+	
+
+		echo json_encode($uploadResponse);
+
+	}
 	 
 }

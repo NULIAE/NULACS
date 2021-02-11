@@ -687,9 +687,13 @@ border-color: #000;
 																<div class="col-3 col-md-3"><span class="sub"><?=$i++?></span></div>
 																<div class="col-24 col-md-10"><span class="sub"><a href="<?= base_url().$legal['quarterly_upload_file'].$legal['quarterly_upload_file_name']?>"><?=isset($legal['quarterly_upload_file_name'])?$legal['quarterly_upload_file_name']:''?></a>
 																	<a href="javascript:reupload('legal', <?php echo $legal['legal_d_id']; ?>);">
-																	<span class="sub"><i class="i i-create"></i>
+																	<span><i class="i i-create"></i> 
 																	</span>
 																	</a>
+																	
+																	 <a href="#" class="delete_upload" doc_type="legal_compliance_document" del_document_id="<?=$legal['legal_d_id']?> " a_id_document="<?=$legal['affiliate_id']?>" doc_type_id="<?=$legal['document_id']?>">
+																	 <span><i class="i i-delete"></i> </span></a>
+																	
 																	</span>
 																</div>
 																<div class="col-24 col-md-10" id="legal-row-<?php echo $legal['legal_d_id']; ?>">
@@ -849,9 +853,13 @@ border-color: #000;
 																<div class="col-3 col-md-3"><span class="sub"><?=$i++?></span></div>
 																<div class="col-24 col-md-10"><span class="sub"><a href="<?= base_url().$other['other_upload_file'].$other['other_upload_file_name']?>"><?=isset($other['other_upload_file_name'])?$other['other_upload_file_name']:''?></a>
 																	<a href="javascript:reupload('com-other', <?php echo $other['id']; ?>);">
-																	<span class="sub"><i class="i i-create"></i>
+																	<span><i class="i i-create"></i>
+																	</span></a>
+															
+																	<a href="#" class="delete_upload" doc_type="other_compliance_document" del_document_id="<?=$other['id']?> " a_id_document="<?=$other['affiliate_id']?>" doc_type_id="<?=$other['document_type_id']?>" >
+
+																	<span><i class="i i-delete"></i> </span></a>
 																	</span>
-																	</a>
 																	</span>
 																</div>
 																<div class="col-24 col-md-10" id="com-other-row-<?php echo $other['id']; ?>">
@@ -1484,14 +1492,18 @@ border-color: #000;
 														<div class="btn wrdiv <?php if($i%2==0) echo "odd"; ?>">
 															<div class="row  align-items-center">
 																<div class="col-3 col-md-3"><span class="sub"><?=$i++?></span></div>
-																<div class="col-24 col-md-10"><span class="sub"><a href="<?= base_url().$other['other_upload_file'].$other['other_upload_file_name']?>"><?=isset($other['other_upload_file_name'])?$other['other_upload_file_name']:''?></a>
-																	<a href="javascript:reupload('per-other', <?php echo $other['id']; ?>);">
-																	<span class="sub"><i class="i i-create"></i>
+																<div class="col-24 col-md-10"><span class="sub"><a href="<?= base_url().$other['performance_other_upload_file'].$other['performance_other_upload_file_name']?>"><?=isset($other['performance_other_upload_file_name'])?$other['performance_other_upload_file_name']:''?></a>
+																	<a href="javascript:reupload('per-other', <?php echo $other['performance_o_id']; ?>);">
+																	<span><i class="i i-create"></i> 
 																	</span>
 																	</a>
+																	
+																	 <a href="#" class="delete_upload" doc_type="other_performance_assessment_documents" del_document_id="<?=$other['performance_o_id']?>" a_id_document="<?=$other['affiliate_id']?>" doc_type_id="<?=$other['document_id']?>">
+																	 <span><i class="i i-delete"></i> </span></a>
+																	
 																	</span>
 																</div>
-																<div class="col-24 col-md-10" id="per-other-row-<?php echo $other['id']; ?>">
+																<div class="col-24 col-md-10" id="per-other-row-<?php echo $other['performance_o_id']; ?>">
 																	<div class="chatBox">
 																		<div class="chatBoxinn">
 																			<?php if(isset($other['comments'])): ?>
@@ -1512,7 +1524,7 @@ border-color: #000;
 																			<?php endif; ?>
 																		</div>
 																		<div class="search collapsed">
-																			<input type="text" class="input-comment"  data-document="<?php echo $other['id']; ?>" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>" data-doctype="<?php echo $other['document_type_id']; ?>" placeholder="Type here" />
+																			<input type="text" class="input-comment"  data-document="<?php echo $other['performance_o_id']; ?>" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>" data-doctype="<?php echo $other['document_id']; ?>" placeholder="Type here" />
 																			<a class="btn btn-secondary   btn-rounded btn-action-sm "><i
 																			class="i i-chat-box"></i> </a>
 																		</div>
@@ -1531,7 +1543,7 @@ border-color: #000;
 																									<input type="hidden" name="affiliate_id" value="<?php echo $affiliate['affiliate_id']; ?>" />
 																									<input type="hidden" name="notification" value="Performance Assessment other document is uploaded" />
 																									<input type="hidden" name="document_type_id" value="9" />
-																									<input type="hidden" name="other_id" value="<?php echo $other['id']; ?>" />
+																									<input type="hidden" name="other_id" value="<?php echo $other['performance_o_id']; ?>" />
 																									<input type="hidden" name="document_type" value="other_performance_assessment_documents" />
 																									<div class="dz-default dz-message">
 																									<span class="text">
@@ -1936,9 +1948,11 @@ border-color: #000;
 					<div class="col-3 col-md-3"><span class="sub" >{{count}}</span></div>
 					<div class="col-10 col-md-10"><span class="sub"><a href="{{documentPath}}">{{quarterly_upload_file_name}}</a>
 					<a href="javascript:reupload('legal', {{legal_d_id}});">
-																	<span class="sub"><i class="i i-create"></i>
+																	<span><i class="i i-create"></i>
 																	</span>
 																	</a>
+																	<a href="#" class="delete_upload" doc_type="legal_compliance_document" del_document_id="{{legal_d_id}}" a_id_document="<?php echo $affiliate['affiliate_id']; ?>" doc_type_id="{{document_id}}">
+																	 <span><i class="i i-delete"></i> </span></a>
 																	</span></div>
 					<div class="col-24 col-md-10" id="legal-row-{{legal_d_id}}">
 						<div class="chatBox">
@@ -2015,9 +2029,11 @@ border-color: #000;
 					<div class="col-3 col-md-3"><span class="sub" >{{count}}</span></div>
 					<div class="col-10 col-md-10"><span class="sub"><a href="{{documentPath}}">{{other_upload_file_name}}</a>
 					<a href="javascript:reupload('com-other', {{id}});">
-																	<span class="sub"><i class="i i-create"></i>
+																	<span><i class="i i-create"></i>
 																	</span>
 																	</a>
+																	<a href="#" class="delete_upload" doc_type="other_compliance_document" del_document_id="{{id}}" a_id_document="<?php echo $affiliate['affiliate_id']; ?>" doc_type_id="{{document_type_id}}">
+																	 <span><i class="i i-delete"></i> </span></a>
 																	</span></div>
 					<div class="col-24 col-md-10" id="com-other-row-{{id}}">
 						<div class="chatBox">
@@ -2036,6 +2052,87 @@ border-color: #000;
 							</div>
 							<div class="search collapsed">
 								<input type="text" class="input-comment"  data-document="{{id}}" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>" data-doctype="{{document_type_id}}" placeholder="Type here" />
+								<a class="btn btn-secondary   btn-rounded btn-action-sm "><i
+								class="i i-chat-box"></i> </a>
+							</div>
+							<label class="mt-2 ml-3 small" style="display:none;">Hit 'Enter' to send.</label>
+						</div>
+						<div class="upload d-none">
+							<div class="card">
+								<div class="card-header" id="headingOne">
+								<div class="mb-0">
+									<div class="btn wrdiv border-0">
+										<div class="row  align-items-center">
+											<div class="col-20 col-md-16">
+											<span class="sub">
+												<div class="dropzone">
+													<form action="/upload" class="l_dZUpload needsclick">
+														<input type="hidden" name="affiliate_id" value="<?php echo $affiliate['affiliate_id']; ?>" />
+														<input type="hidden" name="notification" value="{{notifyMessage}}" />
+														<input type="hidden" name="document_type_id" value="11" />
+														<input type="hidden" name="other_id" value="{{id}}" />
+														<input type="hidden" name="document_type" value="{{documentType}}" />
+														<div class="dz-default dz-message">
+														<span class="text">
+														<i class="i i-file_upload"></i>
+														Click here or Drop Files
+														</span>
+														</div>
+													</form>
+												</div>
+											</span>
+											</div>
+											<div class="col-lg-3 col-md-8">
+											<a class="btn btn-primary btn-rounded min w-100px btn-upload-l" id="btn-upload-l">UPLOAD</a>
+											</div>
+										</div>
+									</div>
+								</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{{/documents}}
+</script>
+<script id="template-per-other" type="x-tmpl-mustache">
+{{#documents}}
+<div class="card">
+	<div class="card-header">
+		<div class="mb-0">
+			<div class="btn wrdiv">
+				<div class="row  align-items-center">
+					<div class="col-3 col-md-3"><span class="sub" >{{count}}</span></div>
+					<div class="col-10 col-md-10"><span class="sub"><a href="{{documentPath}}">{{performance_other_upload_file_name}}</a>
+					<a href="javascript:reupload('com-other', {{id}});">
+																	<span><i class="i i-create"></i>
+																	</span>
+																	</a>
+																	<a href="#" class="delete_upload" doc_type="other_performance_assessment_documents" del_document_id="{{performance_o_id}}" a_id_document="<?php echo $affiliate['affiliate_id']; ?>" doc_type_id="{{document_id}}">
+																	 <span><i class="i i-delete"></i> </span></a>
+																	</span></div>
+					<div class="col-24 col-md-10" id="com-other-row-{{id}}">
+						<div class="chatBox">
+							<div class="chatBoxinn">
+								{{#comments}}
+								<div class="chatrow">
+									<span class="user send">{{avatar}}</span>
+									
+									<div class="chatline">
+										<div class="h6">{{notification}}</div>
+										<span class="text-primary">{{city}}, {{state}}</span>
+										<span class="ml-auto text-secondary">{{commentTime}}</span>
+									</div>
+								</div>
+								{{/comments}}
+							</div>
+							<div class="search collapsed">
+								<input type="text" class="input-comment"  data-document="{{id}}" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>" data-doctype="{{document_id}}" placeholder="Type here" />
 								<a class="btn btn-secondary   btn-rounded btn-action-sm "><i
 								class="i i-chat-box"></i> </a>
 							</div>

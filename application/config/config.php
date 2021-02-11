@@ -487,7 +487,8 @@ $config['csrf_exclude_uris'] = array(
 	'module/assessment/assessment-listing',
 	'module/affiliate/document/doupload',
 	'module/documents/export',
-	'module/assessment/form-data'
+	'module/assessment/form-data',
+	'module/affiliate/document/delete_upload'
 );
 
 /*

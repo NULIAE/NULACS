@@ -25,6 +25,7 @@ $(function () {
 	initStatusSelectBoxes();
 
 	initReUploadDocuments();
+	init_delect_upload();
 
 	//----Filter result using month, quarter and year
 	var $btnYear = $('#btn-year-pick');
@@ -35,6 +36,7 @@ $(function () {
 		widgetParent: $btnYear,
 		format: 'YYYY',
 		viewMode: 'years',
+		maxDate: moment().subtract(1,'months').endOf('month').format('YYYY-MM-DD'),
 		icons: {
 			previous: 'i i-keyboard_arrow_left',
 			next: 'i i-keyboard_arrow_right',
@@ -50,6 +52,7 @@ $(function () {
 		widgetParent: $btnMonth,
 		format: 'M',
 		viewMode: 'months',
+		maxDate: moment().subtract(1,'months').endOf('month').format('YYYY-MM-DD'),
 		icons: {
 			previous: 'i i-keyboard_arrow_left',
 			next: 'i i-keyboard_arrow_right',
@@ -76,6 +79,7 @@ $(function () {
 
 	$('.yearpick').datetimepicker({
 		format: 'YYYY',
+		maxDate: moment().subtract(1,'months').endOf('month').format('YYYY-MM-DD'),
 		icons: {
 			previous: 'i i-keyboard_arrow_left',
 			next: 'i i-keyboard_arrow_right',
@@ -684,6 +688,7 @@ $(function () {
 				}));
 
 				initCommentBox();
+				init_delect_upload();
 
 			},
 			error: function (file, response) {
@@ -740,12 +745,14 @@ $(function () {
 
 				if(docType == "other_compliance_document"){
 					var containerElem = '#com_other_loop';
+					var rendertemplateother = "#template-other";
 				} else {
 					var containerElem = '#per_other_loop';
+					var rendertemplateother = "#template-per-other";
 				}
 
 				var count = 1;
-				$(containerElem).html(Mustache.render($("#template-other").html(), {
+				$(containerElem).html(Mustache.render($(rendertemplateother).html(), {
 					documents: resp,
 					"count": function(){
 						return count++;
@@ -770,6 +777,7 @@ $(function () {
 				}));
 				
 				initCommentBox();
+				init_delect_upload();
 			},
 			error: function (file, response) {
 				file.previewElement.classList.add("dz-error");
@@ -782,6 +790,154 @@ $(function () {
 			}
 		});
 	});
+
+
+	function init_delect_upload(){
+
+	$('.delete_upload').click(function () {
+		var docType = $(this).attr('doc_type');
+		var inputData = {
+			doc_type: $(this).attr('doc_type'),
+			del_document_id:$(this).attr('del_document_id'),
+			affiliate_id: $(this).attr('a_id_document'),
+			doc_type_id: $(this).attr('doc_type_id'),
+		}
+		
+		$('#dialog').NitroDialog({
+			action: "open",
+			backdrop: true,
+			message: '<h4 class="bold m-b-15"><i class="i i-warning text-warning m-r-10"></i>Confirm</h4><p>Do you want to delete this document?</p>',
+			buttons: [
+				{
+					label: 'Yes',
+					class: "btn btn-primary mr-1",
+					action: function () {
+
+
+	$.ajax({
+			type: 'POST',
+			url: base_url + 'module/affiliate/document/delete_upload',
+			data: inputData,
+			dataType: 'json'
+		}).done(function (response) {
+	
+				var toastConfig = {
+					timeout: 1000,
+					position: 'top',
+					actionText: 'OK',
+					message: ''
+				};
+				toastConfig.message = "Deleted";
+				setTimeout(function () {
+					$('#snackbar').NitroToast(toastConfig);
+				}, 1000);
+				var resp = response;
+				
+				if(docType == 'legal_compliance_document'){
+	
+				var count = 1;
+				$('#legal_loop').html(Mustache.render($("#template-legal").html(), {
+					documents: resp,
+					"count": function(){
+						return count++;
+					},
+					"documentPath": function () {
+						return base_url + this.quarterly_upload_file+this.quarterly_upload_file_name;
+					},
+					"comments": this.comments,
+					"avatar": function () {
+						return this.city.charAt(0) + this.state.charAt(0);
+					},
+					"commentTime": function () {
+						return moment().format("Do MMM YYYY | HH:mm");
+					}
+				}));
+
+
+			}
+
+
+			if(docType == 'other_compliance_document'){
+
+				var count = 1;
+				$('#com_other_loop').html(Mustache.render($("#template-other").html(), {
+					documents: resp,
+					"count": function(){
+						return count++;
+					},
+					"documentPath": function () {
+						return base_url + this.other_upload_file+this.other_upload_file_name;
+					},
+					"documentType": function(){
+						return docType;
+					},
+					"notifyMessage": function(){
+						return "Compliance other document is uploaded";
+					},
+					"comments": this.comments,
+					"avatar": function () {
+						return this.city.charAt(0) + this.state.charAt(0);
+					},
+					"commentTime": function () {
+						return moment().format("Do MMM YYYY | HH:mm");
+					}
+					
+				}));
+			}
+
+
+			if(docType == 'other_performance_assessment_documents'){
+
+				var count = 1;
+				$('#per_other_loop').html(Mustache.render($("#template-per-other").html(), {
+					documents: resp,
+					"count": function(){
+						return count++;
+					},
+					"documentPath": function () {
+						return base_url + this.other_upload_file+this.other_upload_file_name;
+					},
+					"documentType": function(){
+						return docType;
+					},
+					"notifyMessage": function(){
+						return "Compliance other document is uploaded";
+					},
+					"comments": this.comments,
+					"avatar": function () {
+						return this.city.charAt(0) + this.state.charAt(0);
+					},
+					"commentTime": function () {
+						return moment().format("Do MMM YYYY | HH:mm");
+					}
+					
+				}));
+			}
+
+				initCommentBox();
+				init_delect_upload();
+
+
+			});
+            $('#dialog').NitroDialog({ action: "close" });
+					}
+				},
+				{
+					label: 'Cancel',
+					class: "btn btn-secondary",
+					action: function () {
+						$('#dialog').NitroDialog({ action: "close" });
+					}
+				}
+			]
+		});
+
+
+
+	});
+	}
+
+
 });
 
 function reupload(type, docId){
@@ -812,3 +968,7 @@ function openTab(val) {
 	}
 	$("#input-interval").val(val);
   }
+
+
+
+

@@ -867,6 +867,28 @@ class Affiliate_model extends CI_Model
 		return $result;
 	}
 	
+			/**
+	 * get_other_document
+	 *
+	 * @return array
+	 */
+	public function get_other_performance_documents($affiliate_id,$document_type_id)
+	{
+		$this->db->select('*');
+		$this->db->from('performance_other_document_status');
+		$this->db->where('affiliate_id',$affiliate_id);
+
+		$query = $this->db->get(); 
+
+		$result = $query->result_array();
+
+		foreach($result as $key => $row)
+		{
+			$result[$key]['comments'] = $this->Document_model->get_document_comments($row['performance_o_id'], $row['document_id']);
+		}
+
+		return $result;
+	}
 	public function legal_compliance_document($data)
 	{
 		$insert_data = array(
@@ -923,6 +945,34 @@ class Affiliate_model extends CI_Model
 		}
 	}
 
+	public function performance_other_document($data)
+	{
+		$insert_data = array(
+			"document_id" => $data['document_type_id'],
+			"affiliate_id" =>  $data['affiliate_id'],
+			'performance_other_submitted_by' =>$this->session->user_id,
+			'performance_other_submitted_date'=>date("Y-m-d H:i:s"),
+			'performance_other_upload_file'=>$data['file_path'],
+			'performance_other_upload_file_name'=>$data['upload_file_name'],
+			'performance_other_upload_file_extension'=>$data['upload_file_extension'],
+		);
+
+		if(isset($data['performance_o_id']))
+		{
+			$this->db->where('performance_o_id', $data['id']);
+
+			$this->db->update('performance_other_document_status', $insert_data);
+
+			return $data['performance_o_id'];
+		}
+		else
+		{
+			$this->db->insert('performance_other_document_status', $insert_data);
+			
+			return $this->db->insert_id();	
+		}
+	}
+
 	public function recent_affiliate_data($affiliate_id)
 	{
 		$query = $this->db->query("SELECT MAX(`month`) AS `month`, MAX(`year`) AS `year` FROM `affiliate_compliance_status_monthly` WHERE `affiliate_id` = '$affiliate_id' AND `year` IN (SELECT MAX(`year`) AS `year` FROM `affiliate_compliance_status_monthly` WHERE `affiliate_id` = '$affiliate_id')");
@@ -943,5 +993,113 @@ class Affiliate_model extends CI_Model
 			'yearly' => $recent_year
 		);
 	}
+
+	/**
+	 * get_legal_document with document id
+	 *
+	 * @return array
+	 */
+	public function get_legal_document_id($docId)
+	{
+		$this->db->select('*');
+		$this->db->from('legal_document_status');
+		$this->db->where('legal_d_id',$docId);
+
+		$query = $this->db->get(); 
+		$result = $query->row_array();
+
+		return $result;
+	}
 	
+	/**
+	 *delete_legal_document with document id
+	 *
+	 * @return array
+	 */
+	public function delete_legal_document($docId)
+	{
+		$this->db->where('legal_d_id', $docId);
+		$del = $this->db->delete('legal_document_status');
+		return $del;
+
+	
+	}
+
+		/**
+	 * get_other_compliance_document_id with document id
+	 *
+	 * @return array
+	 */
+	public function get_other_compliance_document_id($docId)
+	{
+		$this->db->select('*');
+		$this->db->from('other_document_status');
+		$this->db->where('id',$docId);
+
+		$query = $this->db->get(); 
+		$result = $query->row_array();
+
+		return $result;
+	}
+	
+	/**
+	 *delete_other_compliance_document with document id
+	 *
+	 * @return array
+	 */
+	public function delete_other_compliance_document($docId)
+	{
+		$this->db->where('id', $docId);
+		$del = $this->db->delete('other_document_status');
+		return $del;
+
+	
+	}
+
+			/**
+	 * get_performance_other_document_id with document id
+	 *
+	 * @return array
+	 */
+	public function get_performance_other_document_id($docId)
+	{
+		$this->db->select('*');
+		$this->db->from('performance_other_document_status');
+		$this->db->where('performance_o_id',$docId);
+
+		$query = $this->db->get(); 
+		$result = $query->row_array();
+
+		return $result;
+	}
+	
+	/**
+	 *delete_performance_other_document with document id
+	 *
+	 * @return array
+	 */
+	public function delete_performance_other_document($docId)
+	{
+		$this->db->where('performance_o_id', $docId);
+		$del = $this->db->delete('performance_other_document_status');
+		return $del;
+
+	
+	}
+	
+
+	/**
+	 * delete notification summary  with document id
+	 *
+	 * @return array
+	 */
+	public function delete_notification_summary($docId)
+	{
+
+		$this->db->where('document_id', $docId);
+		$del = $this->db->delete('notification_summary');
+		 return $del;
+
+	
+	}
 }
