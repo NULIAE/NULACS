@@ -77,15 +77,14 @@ $(function () {
 		$('#filter-date').submit();
 	});
 
-	$('.yearpick').datetimepicker({
-		format: 'YYYY',
-		maxDate: moment().subtract(1,'months').endOf('month').format('YYYY-MM-DD'),
-		icons: {
-			previous: 'i i-keyboard_arrow_left',
-			next: 'i i-keyboard_arrow_right',
-		}
-	});
 	//------End filter
+	initDatePickerforPerformanceDocuments();
+
+	$(".input-upload-year").on("blur", function(){
+		var formId = "#form-upload-" + $(this).data("document");
+		var value = $(this).val()?$(this).val():moment().format('YYYY')
+		$(formId).find("input[name=year]").val(value);
+	});
 
 	$("#quarter-dropdown button.dropdown-item").on('click', function(){
 		$("#quarter-dropdown button.dropdown-item").removeClass('active');
@@ -240,7 +239,8 @@ $(function () {
 						if(interval != "self-assessment"){ 
 							$('#collapse' + elemId).collapse('hide');
 							var segment = $("#" + interval + "-segment-" + elemId);
-							$(segment).next('button').toggleClass('d-none');
+							$(segment).next('.yearPick').toggleClass('d-none');
+							$("#btn-collapse-"+elemId).toggleClass('d-none');
 							$(segment).toggleClass('d-none');
 
 							if (interval == "month" || interval == "quarter" || interval == "year") {
@@ -300,13 +300,9 @@ $(function () {
 										return moment().format("MM/DD/YYYY");
 									}
 								}));
-								$('.yearpick').datetimepicker({
-									format: 'YYYY',
-									icons: {
-										previous: 'i i-keyboard_arrow_left',
-										next: 'i i-keyboard_arrow_right',
-									}
-								});
+
+								//Re-initialize yearpickers
+								initDatePickerforPerformanceDocuments();
 							}
 						}else{
 							var key = 1;
@@ -362,39 +358,53 @@ $(function () {
 	});
 	//---End form validation
 
-
-	//---Search performance documents by year
-	$('.input-search-year').on("blur", function () {
-		var inputElem = $(this);
-		var inputData = {
-			affiliate_id: inputElem.data('affiliate'),
-			document_id: inputElem.data('document'),
-			interval: inputElem.data('interval'),
-			year: inputElem.val()
-		}
-
-		$.ajax({
-			type: 'POST',
-			url: base_url + 'module/affiliate/filter-performance-documents',
-			data: inputData,
-			dataType: 'json'
-		}).done(function (data) {
-			var parentElem = inputElem.closest('.intab');
-			parentElem.find('span.year-lbl').html(inputData.year);
-			parentElem.children('.row').remove();
-			parentElem.append(Mustache.render($("#template-performance-filter").html(), { 
-				documents: data,
-				"documentPath": function () {
-					return base_url + this.filepath;
-				},
-				"submittedTime": function () {
-					return moment(this.submitted).format("MM/DD/YYYY");
-				}
-			}));
+	function initDatePickerforPerformanceDocuments(){
+		$('.yearpick').datetimepicker({
+			useCurrent: false,
+			format: 'YYYY',
+			maxDate: moment().subtract(1,'months').endOf('month').format('YYYY-MM-DD'),
+			icons: {
+				previous: 'i i-keyboard_arrow_left',
+				next: 'i i-keyboard_arrow_right',
+			}
+		}).on('dp.hide', function (e) {
+			console.log($(this).data());
+			$(this).val(e.date.format('YYYY'));
 		});
 
-	});
-	//---End of Search by year
+		//---Search performance documents by year
+		$('.input-search-year').on("blur", function () {
+			var inputElem = $(this);
+			var inputData = {
+				affiliate_id: inputElem.data('affiliate'),
+				document_id: inputElem.data('document'),
+				interval: inputElem.data('interval'),
+				year: inputElem.val()
+			}
+
+			$.ajax({
+				type: 'POST',
+				url: base_url + 'module/affiliate/filter-performance-documents',
+				data: inputData,
+				dataType: 'json'
+			}).done(function (data) {
+				var parentElem = inputElem.closest('.intab');
+				parentElem.find('span.year-lbl').html(inputData.year);
+				parentElem.children('.row').remove();
+				parentElem.append(Mustache.render($("#template-performance-filter").html(), { 
+					documents: data,
+					"documentPath": function () {
+						return base_url + this.filepath;
+					},
+					"submittedTime": function () {
+						return moment(this.submitted).format("MM/DD/YYYY");
+					}
+				}));
+			});
+
+		});
+		//---End of Search by year
+	}
 
 	//Key indicators search form submit
 	$("#form-search-key-indicators").submit(function (e) {

@@ -12,10 +12,10 @@ $quarterArray = array(
 	top:35px !important;
 	right:0 !important;
 }
-#btn-month-pick .picker-switch, #btn-month-pick .prev, #btn-month-pick .next
+/* #btn-month-pick .picker-switch, #btn-month-pick .prev, #btn-month-pick .next
 {
   display: none !important;
-}
+} */
 .yearPick i{
 	z-index: 999;
 }
@@ -1082,6 +1082,10 @@ border-color: #000;
 																		<p class="text-center m-0"><small><i>Supports only <?php echo $document['document_file_extension']; ?> files</i></small></p>
 																		<?php endif; ?>
 																	</div>
+																	<div class="yearPick" >
+																		<i class="i i-year-pick"></i>
+																		<input class="yearpick form-control input-upload-year" placeholder="<?php echo $year; ?>" type="text" value="<?php echo $year; ?>" data-document="<?php echo $document['document_id']; ?>" />
+																	</div>
 																	<button id="btn-collapse-<?php echo $document['document_id']; ?>" class="btn btn-primary btn-rounded btn-add ml-auto " data-toggle="collapse"
 																	data-target="#collapse<?php echo $document['document_id']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $document['document_id']; ?>"><i
 																		class="i i-add"></i> </button>
@@ -1209,7 +1213,10 @@ border-color: #000;
 																		<p class="text-center m-0"><small><i>Supports only <?php echo $document['document_file_extension']; ?> files</i></small></p>
 																		<?php endif; ?>
 																	</div>
-
+																	<div class="yearPick" >
+																		<i class="i i-year-pick"></i>
+																		<input class="yearpick form-control input-upload-year" placeholder="<?php echo $year; ?>" type="text" value="<?php echo $year; ?>" data-document="<?php echo $document['document_id']; ?>" />
+																	</div>
 																	<button id="btn-collapse-<?php echo $document['document_id']; ?>" class="btn btn-primary btn-rounded btn-add ml-auto " data-toggle="collapse"
 																	data-target="#collapse<?php echo $document['document_id']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $document['document_id']; ?>"><i
 																		class="i i-add"></i> </button>
@@ -1342,7 +1349,10 @@ border-color: #000;
 																		<p class="text-center m-0"><small><i>Supports only <?php echo $document['document_file_extension']; ?> files</i></small></p>
 																		<?php endif; ?>
 																	</div>
-
+																	<div class="yearPick" >
+																		<i class="i i-year-pick"></i>
+																		<input class="yearpick form-control input-upload-year" placeholder="<?php echo $year; ?>" type="text" value="<?php echo $year; ?>" data-document="<?php echo $document['document_id']; ?>" />
+																	</div>
 																	<button id="btn-collapse-<?php echo $document['document_id']; ?>" class="btn btn-primary btn-rounded btn-add ml-auto " data-toggle="collapse"
 																	data-target="#collapse<?php echo $document['document_id']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $document['document_id']; ?>"><i
 																		class="i i-add"></i> </button>
@@ -1884,11 +1894,11 @@ border-color: #000;
 <div class="col-24 col-md-15">
 	<div class="intab ">
 		<div class="d-flex header">
-			<span class="year-lbl"><?php echo $year; ?></span>
+			<span class="year-lbl">{{document.year}}</span>
 			<div class="m-l-auto">
 				<div class="yearPick" >
 				<i class="i i-year-pick"></i>
-				<input class="yearpick form-control" placeholder="<?php echo $year; ?>" type="text" value="<?php echo $year; ?>" />
+				<input class="yearpick form-control input-search-year" placeholder="<?php echo $year; ?>" type="text" value="{{document.year}}" data-document="{{document.document_id}}" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>" data-interval="{{document.interval}}" />
 				</div>
 			</div>
 		</div>
