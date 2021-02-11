@@ -1382,33 +1382,39 @@ class Affiliate extends MY_Controller
 				$docData = $this->Affiliate_model->get_legal_document_id($data['del_document_id']);
 				$filePath= $docData['quarterly_upload_file'].$docData['quarterly_upload_file_name'];
 				
-				if (unlink($filePath)) {
+
+				if(file_exists($filePath)){
+					unlink($filePath);
+			    }
 					 $this->Affiliate_model->delete_legal_document($data['del_document_id']);
 				     $this->Affiliate_model->delete_notification_summary($data['del_document_id']);
 					 $uploadResponse = $this->Affiliate_model->get_legal_document($data['affiliate_id']);
-				} 
+			
 
 		}else if($data['doc_type']=='other_compliance_document'){
 
 				$docData = $this->Affiliate_model->get_other_compliance_document_id($data['del_document_id']);
 				$filePath= $docData['other_upload_file'].$docData['other_upload_file_name'];
 				
-				if (unlink($filePath)) {
+				if(file_exists($filePath)){
+					unlink($filePath);
+			    }
 					$this->Affiliate_model->delete_other_compliance_document($data['del_document_id']);
 					$this->Affiliate_model->delete_notification_summary($data['del_document_id']);
 					$uploadResponse = $this->Affiliate_model->get_other_document($data['affiliate_id'], $data['doc_type_id']);
-				} 
+				
 
 		}else if($data['doc_type']=='other_performance_assessment_documents'){
 
 				$docData = $this->Affiliate_model->get_performance_other_document_id($data['del_document_id']);
 					$filePath= $docData['performance_other_upload_file'].$docData['performance_other_upload_file_name'];
-					
-					if (unlink($filePath)) {
+					if(file_exists($filePath)){
+						unlink($filePath);
+					}
 						$this->Affiliate_model->delete_performance_other_document($data['del_document_id']);
 						$this->Affiliate_model->delete_notification_summary($data['del_document_id']);
 						$uploadResponse = $this->Affiliate_model->get_other_performance_documents($data['affiliate_id'],$data['doc_type_id']);
-					} 
+					
 		}
 	
 
