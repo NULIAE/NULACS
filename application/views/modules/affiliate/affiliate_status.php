@@ -23,6 +23,20 @@
 								<?php endforeach;?>
 							</select>
 						</div>
+			
+						<div class="col-lg-5 col-md-6 col-sm-24 d-row">
+								<label for="affiliate">Affiliate</label>
+								<select name="affiliate" id="affiliate" aria-labelledby="affiliate" data-all="true" data-type="selector" data-search="true" class="SumoSelect CaptionCont d-none" data-placeholder="Affiliate">
+									<option value="">Affiliate</option>
+									<?php
+											$sAffiliate = isset($_GET['affiliate']) ? $_GET['affiliate'] : '';
+									?>
+									<?php foreach($affiliate_details as $key => $affiliate): ?>
+								
+										<option value="<?php echo $affiliate['affiliate_id']; ?>" <?php if($affiliate['affiliate_id'] == $sAffiliate) echo "selected"; ?>><?php echo $affiliate['city'].','.$affiliate['stateabbreviation'] ; ?></option>
+									<?php endforeach; ?>
+								</select>
+							</div>
 						<div class="col-lg-5 col-md-7 col-sm-24 d-row">
 							<label for="role" class="rowLabel">Region(s) for the due date</label>
 							<div class="d-flex justify-content-start">
@@ -112,12 +126,23 @@
 									</tr>
 								</thead>
 								<tbody id="monthly-table-body">
-									<?php if(!empty($monthly_status['affiliates'])): ?>
+									<?php if(!empty($monthly_status['affiliates'])): ?>								
 									<?php foreach($monthly_status['affiliates'] as $row): ?>
 									<tr>
 										<td scope="row"><a href="<?php echo base_url('module/affiliate/status/details/'.$row["affiliate_id"]); ?>"><?php echo $row['city'].','.$row['state']; ?></a></td>
 										<td><?php echo $monthArray[$selectedMonth]."-".$selectedYear; ?></td>
-										<td><div class="icon-rounded" data-rel="tooltip" data-placement="bottom" title="<?php echo $row['status_name']; ?>"><?php echo $row['icon']; ?></div></td>
+										<td><div class="icon-rounded" data-rel="tooltip" data-placement="bottom" title="
+										
+										<?php if(isset($row['monthly_compliance_status']['status_name']) && !empty($row['monthly_compliance_status']['status_name'])){
+												echo $row['monthly_compliance_status']['status_name'];
+											}else{
+												echo "Indeterminate";
+												 }?>">
+										<?php if(isset($row['monthly_compliance_status']['icon'])){
+												echo $row['monthly_compliance_status']['icon'];
+											}else{
+												echo "<i class='i i-Indeterminate inter'></i>";
+												 }?></div></td>
 
 										<?php foreach($monthly_documents as $doc): ?>
 											<?php $status_flag = FALSE; ?>
@@ -172,7 +197,16 @@
 									<tr>
 										<td scope="row"><a href="<?php echo base_url('module/affiliate/status/details/'.$row["affiliate_id"]); ?>"><?php echo $row['city'].','.$row['state']; ?></a></td>
 										<td><?php echo "Q".$selectedQuarter."-".$selectedYear; ?></td>
-										<td><div class="icon-rounded" data-rel="tooltip" data-placement="bottom" title="<?php echo $row['status_name']; ?>"><?php echo $row['icon']; ?></div></td>
+										<td><div class="icon-rounded" data-rel="tooltip" data-placement="bottom" title="<?php if(isset($row['quarterly_compliance_status']['status_name']) && !empty($row['quarterly_compliance_status']['status_name'])){
+												echo $row['quarterly_compliance_status']['status_name'];
+											}else{
+												echo "Indeterminate";
+												 }?>">
+										<?php if(isset($row['quarterly_compliance_status']['icon'])){
+												echo $row['quarterly_compliance_status']['icon'];
+											}else{
+												echo "<i class='i i-Indeterminate inter'></i>";
+												 }?></div></td>
 										<?php foreach($quarterly_documents as $doc): ?>
 											<?php $status_flag = FALSE; ?>
 											<?php foreach($row['document_status'] as $doc_status): ?>
@@ -237,7 +271,16 @@
 									<tr>
 										<td scope="row"><a href="<?php echo base_url('module/affiliate/status/details/'.$row["affiliate_id"]); ?>"><?php echo $row['city'].','.$row['state']; ?></a></td>
 										<td><?php echo $selectedYear; ?></td>
-										<td><div class="icon-rounded" data-rel="tooltip" data-placement="bottom" title="<?php echo $row['status_name']; ?>"><?php echo $row['icon']; ?></div></td>
+										<td><div class="icon-rounded" data-rel="tooltip" data-placement="bottom" title="<?php if(isset($row['yearly_compliance_status']['status_name']) && !empty($row['yearly_compliance_status']['status_name'])){
+												echo $row['yearly_compliance_status']['status_name'];
+											}else{
+												echo "Indeterminate";
+												 }?>">
+										<?php if(isset($row['yearly_compliance_status']['icon'])){
+												echo $row['yearly_compliance_status']['icon'];
+											}else{
+												echo "<i class='i i-Indeterminate inter'></i>";
+												 }?></div></td>
 										<?php foreach($yearly_documents as $doc): ?>
 											<?php $status_flag = FALSE; ?>
 											<?php foreach($row['document_status'] as $doc_status): ?>
@@ -335,9 +378,9 @@
 <script id="template-monthly" type="x-tmpl-mustache">
 {{#affiliates}}
 <tr>
-	<td scope="row"><a href="">{{city}},{{state}}</a></td>
+	<td scope="row"><a href="<?php echo base_url('module/affiliate/status/details/{{affiliate_id}}'); ?>">{{city}},{{state}}</a></td>
 	<td>{{currentDate}}</td>
-	<td><div class="icon-rounded" data-rel="tooltip" data-placement="bottom" title="{{status_name}}">{{{icon}}}</div></td>
+	<td>{{{compliance_status}}}</td>
 	{{{document_status_list}}}
 </tr>
 {{/affiliates}}
@@ -350,9 +393,9 @@
 <script id="template-quarterly" type="x-tmpl-mustache">
 {{#affiliates}}
 <tr>
-	<td scope="row"><a href="">{{city}},{{state}}</a></td>
+	<td scope="row"><a href="<?php echo base_url('module/affiliate/status/details/{{affiliate_id}}'); ?>">{{city}},{{state}}</a></td>
 	<td>{{currentDate}}</td>
-	<td><div class="icon-rounded" data-rel="tooltip" data-placement="bottom" title="{{status_name}}">{{{icon}}}</div></td>
+	<td>{{{compliance_status_quarterly_}}}</td>
 	{{{document_status_list}}}
 	<td>{{{key_status}}}</td>
 </tr>
@@ -366,9 +409,9 @@
 <script id="template-yearly" type="x-tmpl-mustache">
 {{#affiliates}}
 <tr>
-	<td scope="row"><a href="">{{city}},{{state}}</a></td>
+	<td scope="row"><a href="<?php echo base_url('module/affiliate/status/details/{{affiliate_id}}'); ?>">{{city}},{{state}}</a></td>
 	<td>{{currentDate}}</td>
-	<td><div class="icon-rounded" data-rel="tooltip" data-placement="bottom" title="{{status_name}}">{{{icon}}}</div></td>
+	<td>{{{compliance_status_yearly_}}}</td>
 	{{{document_status_list}}}
 </tr>
 {{/affiliates}}

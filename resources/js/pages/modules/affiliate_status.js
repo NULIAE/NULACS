@@ -52,6 +52,35 @@ $(function () {
 						return '<div class="icon-rounded" data-rel="tooltip" data-placement="bottom" title="Submission Pending"><i class="i i-document-status d-status"></i></div>';
 					}
 				},
+				"compliance_status": function(){
+					if(data.status == "monthly"){
+					if(this.monthly_compliance_status==null){
+							return '<div class="icon-rounded" data-rel="tooltip" data-placement="bottom" title="Indeterminate"><i class="i i-Indeterminate inter"></i></div>';
+					} else {
+						    return '<div class="icon-rounded" data-rel="tooltip" data-placement="bottom" title="'+this.monthly_compliance_status.status_name+'">'+this.monthly_compliance_status.icon+'</div>';
+					}
+				}
+				},
+				"compliance_status_quarterly_": function(){
+					if(data.status == "quarterly"){
+					if(this.quarterly_compliance_status==null){
+						console.log(this.quarterly_compliance_status);
+							return '<div class="icon-rounded" data-rel="tooltip" data-placement="bottom" title="Indeterminate"><i class="i i-Indeterminate inter"></i></div>';
+					} else {
+						    return '<div class="icon-rounded" data-rel="tooltip" data-placement="bottom" title="'+this.quarterly_compliance_status.status_name+'">'+this.quarterly_compliance_status.icon+'</div>';
+					}
+				}
+				},
+				"compliance_status_yearly_": function(){
+					if(data.status == "yearly"){
+					if(this.yearly_compliance_status==null){
+						console.log(this.yearly_compliance_status);
+							return '<div class="icon-rounded" data-rel="tooltip" data-placement="bottom" title="Indeterminate"><i class="i i-Indeterminate inter"></i></div>';
+					} else {
+						    return '<div class="icon-rounded" data-rel="tooltip" data-placement="bottom" title="'+this.yearly_compliance_status.status_name+'">'+this.yearly_compliance_status.icon+'</div>';
+					}
+				}
+				},
 				"currentDate": function () {
 					if(data.status == "monthly")
 						return Intl.DateTimeFormat('en', { month: 'short' }).format(data.month).toUpperCase()+ "-" + data.year;

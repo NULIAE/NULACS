@@ -253,6 +253,7 @@ class Affiliate extends MY_Controller
 			'yearly_documents' => $this->Document_model->get_documents(3, array(14)),
 			'regions' => $this->User_model->get_all_regions(),
 			'compliance_status' => $this->Affiliate_model->get_compliance_status_flags(),
+			'affiliate_details' => $this->Affiliate_model->get_all_affiliates_list(null,null.null),
 		);
 		
 		//Name of the view file
@@ -276,6 +277,9 @@ class Affiliate extends MY_Controller
 		//Compliance Filter
 		if( isset($data['region_id']) && ($data['region_id'] !== '') )
 			$compliance_filter['affiliate.region_id'] =  $data['region_id'];
+
+		if( isset($data['affiliate']) && ($data['affiliate'] !== '') )
+			$compliance_filter['affiliate'] =  $data['affiliate'];
 
 		if( isset($data['month']) && ($data['month'] !== '') )
 			$compliance_filter['month'] =  $data['month'];
@@ -310,17 +314,27 @@ class Affiliate extends MY_Controller
 
 		//Override necessary configurations for pagination
 		$config['base_url'] = base_url('module/affiliate/status/monthly/get');
-		$config['total_rows'] = $this->Affiliate_model->monthly_compliance_status_count($compliance_filter);
 
+		if( isset($compliance_filter['compliance_status']) || isset($compliance_filter['affiliate'])){
+			$config['total_rows'] = $this->Affiliate_model->monthly_compliance_status_count($compliance_filter);
+		}else{
+			$config['total_rows'] = $this->Affiliate_model->get_affiliate_count();
+		}
 		$this->pagination->initialize($config);
 
 		$page_number = isset($data['per_page']) ? $data['per_page'] : 0;
 
-		$affiliates = $this->Affiliate_model->monthly_compliance_status($config['per_page'], $page_number, $compliance_filter);
+		if( isset($compliance_filter['compliance_status']) ){
+			$affiliates = $this->Affiliate_model->monthly_compliance_status($config['per_page'], $page_number, $compliance_filter);
+
+		}else{
+			$affiliates = $this->Affiliate_model->get_all_affiliates_list($config['per_page'], $page_number, $compliance_filter);
+		}
 
 		foreach ( $affiliates as $key => $affiliate )
 		{
-			$affiliates[$key]['document_status'] = $this->Affiliate_model->monthly_document_status($affiliate['affiliate_id'], $document_filter, TRUE);
+			$affiliates[$key]['monthly_compliance_status'] = $this->Affiliate_model->monthly_compliance_status_listing($config['per_page'], $page_number, $compliance_filter,$affiliate['affiliate_id']);
+			$affiliates[$key]['document_status'] = $this->Affiliate_model->monthly_document_status($affiliate['affiliate_id'], $document_filter, TRUE);		
 		}
 
 		$result = array(
@@ -348,6 +362,9 @@ class Affiliate extends MY_Controller
 		//Compliance Filter
 		if( isset($data['region_id']) && ($data['region_id'] !== '') )
 			$compliance_filter['affiliate.region_id'] =  $data['region_id'];
+
+		if( isset($data['affiliate']) && ($data['affiliate'] !== '') )
+			$compliance_filter['affiliate'] =  $data['affiliate']; 
 
 		if( !isset($data['month']) || ($data['month'] == '') )
 			$data['month'] =  date("m", strtotime("-1 month", time()));
@@ -382,16 +399,27 @@ class Affiliate extends MY_Controller
 
 		//Override necessary configurations for pagination
 		$config['base_url'] = base_url('module/affiliate/status/quarterly/get');
-		$config['total_rows'] = $this->Affiliate_model->quarterly_compliance_status_count($compliance_filter);
+	
+		if( isset($compliance_filter['compliance_status']) || isset($compliance_filter['affiliate'])){
+			$config['total_rows'] = $this->Affiliate_model->quarterly_compliance_status_count($compliance_filter);
+		}else{
+			$config['total_rows'] = $this->Affiliate_model->get_affiliate_count();
+		}
 
 		$this->pagination->initialize($config);
 
 		$page_number = isset($data['per_page']) ? $data['per_page'] : 0;
 
-		$affiliates = $this->Affiliate_model->quarterly_compliance_status($config['per_page'], $page_number, $compliance_filter);
+		if( isset($compliance_filter['compliance_status']) ){
+			$affiliates = $this->Affiliate_model->quarterly_compliance_status($config['per_page'], $page_number, $compliance_filter);
+
+		}else{			
+			$affiliates = $this->Affiliate_model->get_all_affiliates_list($config['per_page'], $page_number, $compliance_filter);
+		}
 
 		foreach ( $affiliates as $key => $affiliate )
 		{
+		    $affiliates[$key]['quarterly_compliance_status'] = $this->Affiliate_model->quarterly_compliance_status_listing($config['per_page'], $page_number, $compliance_filter,$affiliate['affiliate_id']);
 			$affiliates[$key]['document_status'] = $this->Affiliate_model->quarterly_document_status($affiliate['affiliate_id'], $document_filter, TRUE);
 			$affiliates[$key]['key_indicator'] = $this->Affiliate_model->key_indicator($affiliate['affiliate_id'], $document_filter);
 		}
@@ -422,7 +450,8 @@ class Affiliate extends MY_Controller
 		//Compliance Filter
 		if( isset($data['region_id']) && ($data['region_id'] !== '') )
 			$compliance_filter['affiliate.region_id'] =  $data['region_id'];
-
+		if( isset($data['affiliate']) && ($data['affiliate'] !== '') )
+			$compliance_filter['affiliate'] =  $data['affiliate'];
 		if( !isset($data['month']) || ($data['month'] == '') )
 			$data['month'] =  date("m", strtotime("-1 month", time()));
 		
@@ -448,16 +477,26 @@ class Affiliate extends MY_Controller
 
 		//Override necessary configurations for pagination
 		$config['base_url'] = base_url('module/affiliate/status/yearly/get');
-		$config['total_rows'] = $this->Affiliate_model->yearly_compliance_status_count($compliance_filter);
+		if( isset($compliance_filter['compliance_status']) || isset($compliance_filter['affiliate'])){
+			$config['total_rows'] = $this->Affiliate_model->yearly_compliance_status_count($compliance_filter);
+		}else{
+			$config['total_rows'] = $this->Affiliate_model->get_affiliate_count();
+		}
 
 		$this->pagination->initialize($config);
 
 		$page_number = isset($data['per_page']) ? $data['per_page'] : 0;
 
-		$affiliates = $this->Affiliate_model->yearly_compliance_status($config['per_page'], $page_number, $compliance_filter);
+		if( isset($compliance_filter['compliance_status']) ){
+			$affiliates = $this->Affiliate_model->yearly_compliance_status($config['per_page'], $page_number, $compliance_filter);
+
+		}else{			
+			$affiliates = $this->Affiliate_model->get_all_affiliates_list($config['per_page'], $page_number, $compliance_filter);
+		}
 
 		foreach ( $affiliates as $key => $affiliate )
 		{
+			$affiliates[$key]['yearly_compliance_status'] =  $this->Affiliate_model->yearly_compliance_status_listing($config['per_page'], $page_number, $compliance_filter,$affiliate['affiliate_id']);
 			$affiliates[$key]['document_status'] = $this->Affiliate_model->yearly_document_status($affiliate['affiliate_id'], $document_filter, TRUE);
 		}
 
@@ -511,6 +550,9 @@ class Affiliate extends MY_Controller
 
 		//Monthly document status
 		$monthly_document_status = $this->Affiliate_model->monthly_document_status($affiliate_id, $monthly_filter);
+		
+		$monthly_filter['mds.document_id'] = 6;
+		$monthly_document_other = $this->Affiliate_model->monthly_document_status($affiliate_id, $monthly_filter);
 
 		$monthly_documents = array();
 		foreach( $monthly_document_status as $row )
@@ -538,6 +580,9 @@ class Affiliate extends MY_Controller
 
 		//Quarterly document status
 		$quarterly_document_status = $this->Affiliate_model->quarterly_document_status($affiliate_id, $quarterly_filter);
+		
+		$quarterly_filter['qds.document_id'] = 8;
+		$quarterly_document_other = $this->Affiliate_model->quarterly_document_status($affiliate_id, $quarterly_filter);
 
 		$quarterly_documents = array();
 		foreach( $quarterly_document_status as $row )
@@ -559,7 +604,10 @@ class Affiliate extends MY_Controller
 		
 		//Yearly document status
 		$yearly_document_status = $this->Affiliate_model->yearly_document_status($affiliate_id, $yearly_filter);
-
+		
+		$yearly_filter['yds.document_id'] = 14;
+		$yearly_document_other = $this->Affiliate_model->yearly_document_status($affiliate_id, $yearly_filter);
+		
 		$yearly_documents = array();
 		foreach( $yearly_document_status as $row )
 		{
@@ -679,8 +727,11 @@ class Affiliate extends MY_Controller
 		$data['content'] = array(
 			'affiliate' => $this->Affiliate_model->get_affiliate_by_id($affiliate_id),
 			'monthly_status' => $monthly_documents,
+			'monthly_other' => $monthly_document_other,
 			'quarterly_status' => $quarterly_documents,
+			'quarterly_other' => $quarterly_document_other,
 			'yearly_status' => $yearly_documents,
+			'yearly_other' => $yearly_document_other,
 			'monthly_compliance' => empty($monthly_compliance_status) ? 11 : $monthly_compliance_status[0]['compliance_status'],
 			'quarterly_compliance' => empty($quarterly_compliance_status) ? 11 : $quarterly_compliance_status[0]['compliance_status'],
 			'yearly_compliance' => empty($yearly_compliance_status) ? 11 : $yearly_compliance_status[0]['compliance_status'],
@@ -688,9 +739,9 @@ class Affiliate extends MY_Controller
 			'soundness_document_status' => $soundness_document_status,
 			'vitality_document_status' => $vitality_document_status,
 			'mission_document_status' => $mission_document_status,
-			'monthly_documents' => $this->Document_model->get_documents(1),
-			'quarterly_documents' => $this->Document_model->get_documents(2),
-			'yearly_documents' => $this->Document_model->get_documents(3),
+			'monthly_documents' => $this->Document_model->get_documents(1, array(6)),
+			'quarterly_documents' => $this->Document_model->get_documents(2, array(8)),
+			'yearly_documents' => $this->Document_model->get_documents(3, array(14)),
 			'soundness_documents' => $soundness_documents,
 			'vitality_documents' => $vitality_documents,
 			'mission_documents' => $mission_documents,
@@ -813,7 +864,7 @@ class Affiliate extends MY_Controller
 				'document_id' => $data['document_id'],
 				'document_type_id' => $data['document_type_id'],
 				'affiliate_id'	=> $data['affiliate_id'],
-				'notification'	=> 'Compliance status '.$data['interval'].'ly documnent is '.$doc_status[$data['status']],
+				'notification'	=> 'Compliance status '.$data['interval'].'ly document is '.$doc_status[$data['status']],
 				'created_by'	=> $this->session->affiliate_id
 			);
 
@@ -1249,7 +1300,7 @@ class Affiliate extends MY_Controller
 						'document_id' => $added_document_id,
 						'document_type_id' => $data['document_type_id'],
 						'affiliate_id'	=> $data['affiliate_id'],
-						'notification'	=> 'Compliance status '.$data['interval'].'ly documnent is uploaded',
+						'notification'	=> 'Compliance status '.$data['interval'].'ly document is uploaded',
 						'created_by'	=> $this->session->affiliate_id
 					);
 

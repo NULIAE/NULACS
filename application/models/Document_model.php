@@ -294,7 +294,7 @@ class Document_model extends CI_Model
 
 		$row = $query->row_array();
 		
-		if (isset($row))
+		if (isset($row) && ($row['document_id'] != 6))
 		{
 			//Delete already existing file
 			$path = FCPATH . $row["monthly_upload_file"];
@@ -357,7 +357,7 @@ class Document_model extends CI_Model
 
 		$row = $query->row_array();
 		
-		if (isset($row))
+		if (isset($row) && ($row['document_id'] != 8))
 		{
 			//Delete already existing file
 			$path = FCPATH . $row["quarterly_upload_file"];
@@ -418,7 +418,7 @@ class Document_model extends CI_Model
 
 		$row = $query->row_array();
 		
-		if (isset($row))
+		if (isset($row) && ($row['document_id'] != 14))
 		{
 			//Delete already existing file
 			$path = FCPATH . $row["yearly_upload_file"];

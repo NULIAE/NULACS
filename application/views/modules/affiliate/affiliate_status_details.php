@@ -244,6 +244,72 @@ border-color: #000;
 
 											</div>
 										<?php endforeach; ?>
+										<!--Monthly other files-->
+										<?php $key++; ?>
+										<div class="card">
+											<div class="card-header" id="heading<?php echo $key+1; ?>">
+												<div class="mb-0">
+													<div class="btn wrdiv <?php  echo ($key%2 != 0)? "odd": ""; ?>">
+														<div class="row  align-items-center" id="month-row-6">
+															<div class="col-3 col-md-2"><span class="sub"><?php echo $key+1; ?></span></div>
+															<div class="col-14 col-md-6" id="document-name-6">
+																<span class="sub">Others</span><a href="#" data-document="6" data-interval="month" class="other-reupload d-inline"><span class="sub"><i class="i i-create"></i></span></a>
+															</div>
+															<div class="col-24 col-md-16 <?php if(empty($monthly_other)) echo "d-none"; ?>" id="other-list-6">
+																<div class="intab" >
+																<?php foreach($monthly_other as $index => $ref): ?>
+																	<div class="row w-100" <?php if($index==0) echo 'style="border-top:0;"'; ?>>
+																		<div class="col-14 col-md-18"><span class="text-primary"><a href="<?php echo base_url($ref['monthly_upload_file']);?>"><?php echo $ref['monthly_upload_file_name']; ?></a></span></div>
+																		<div class="col-10 col-md-6"><span class="statround"><?php echo date('m/d/Y', strtotime($ref['monthly_submitted_date'])); ?></span></div>
+																	</div>
+																<?php endforeach; ?>
+																</div>
+															</div>
+															<div class="col-20 col-md-10 <?php if(!empty($monthly_other)) echo "d-none"; ?>" id="month-segment-6">
+																<span class="sub">
+																	<div id="dropzone-6">
+																		<form action="<?php echo base_url('module/affiliate/document/upload'); ?>" class="dropzone needsclick" data-document="6"  data-doctype="">
+																			<div class="dz-message needsclick">
+																			<span class="text">
+																				<i class="i i-file_upload"></i>
+																				Click here or Drop Files
+
+																			</span>
+
+																			</div>
+																		</form>
+																	</div>
+																</span>
+															</div>
+
+															<button id="btn-collapse-6" class="btn btn-primary btn-rounded btn-add ml-auto <?php if(!empty($monthly_other)) echo "d-none"; ?>" data-toggle="collapse"
+															data-target="#collapse6" aria-expanded="false" aria-controls="collapse6"><i
+																class="i i-add"></i> <span class="sr-only">Add</span></button>
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<?php //if(!isset($currentDoc)): ?>
+												<div id="collapse6" class="collapse " aria-labelledby="heading<?php echo $key+1; ?>" data-parent="#accordionExample">
+													<div class="acc-body">
+														<form id="form-upload-6" class="row align-items-end form-metadata">
+															<div class="col-lg-3 col-md-12 form-group">
+																<button type="submit" id="btn-upload-6" class="btn btn-primary btn-rounded min w-100px">UPLOAD</button>
+															</div>
+															<input type="hidden" name="interval" value="month" />
+															<input type="hidden" name="document_id" value="6" />
+															<input type="hidden" name="document_type_id" value="1" />
+															<input type="hidden" name="affiliate_id" value="<?php echo $affiliate['affiliate_id']; ?>" />
+															<input type="hidden" name="year" value="<?php echo $monthly_year; ?>" />
+															<input type="hidden" name="month" value="<?php echo $month; ?>" />
+														</form>
+													</div>
+												</div>
+											<?php //endif; ?>
+
+										</div>
+										<!--Monthly other files end-->
 									</div>
 									
 									<?php if($this->session->role_id == 1): ?>
@@ -412,7 +478,72 @@ border-color: #000;
 
 											</div>
 										<?php endforeach; ?>
+										<!--Quarterly other files-->
+										<?php $key++; ?>
+										<div class="card">
+											<div class="card-header" id="heading<?php echo $key+1; ?>">
+												<div class="mb-0">
+													<div class="btn wrdiv <?php  echo ($key%2 != 0)? "odd": ""; ?>">
+														<div class="row  align-items-center" id="quarter-row-8">
+															<div class="col-3 col-md-2"><span class="sub"><?php echo $key+1; ?></span></div>
+															<div class="col-14 col-md-6" id="document-name-8">
+																<span class="sub">Others</span><a href="#" data-document="8" data-interval="quarter" class="other-reupload d-inline"><span class="sub"><i class="i i-create"></i></span></a>
+															</div>
+															<div class="col-24 col-md-16 <?php if(empty($quarterly_other)) echo "d-none"; ?>" id="other-list-8" >
+																<div class="intab">
+																<?php foreach($quarterly_other as $index => $ref): ?>
+																	<div class="row w-100" <?php if($index==0) echo 'style="border-top:0;"'; ?>>
+																		<div class="col-14 col-md-18"><span class="text-primary"><a href="<?php echo base_url($ref['quarterly_upload_file']);?>"><?php echo $ref['quarterly_upload_file_name']; ?></a></span></div>
+																		<div class="col-10 col-md-6"><span class="statround"><?php echo date('m/d/Y', strtotime($ref['quarterly_submitted_date'])); ?></span></div>
+																	</div>
+																<?php endforeach; ?>
+																</div>
+															</div>
+															<div class="col-20 col-md-10 <?php if(!empty($quarterly_other)) echo "d-none"; ?>" id="quarter-segment-8">
+																<span class="sub">
+																	<div id="dropzone-8">
+																		<form action="<?php echo base_url('module/affiliate/document/upload'); ?>" class="dropzone needsclick" data-document="8"  data-doctype="">
+																			<div class="dz-message needsclick">
+																			<span class="text">
+																				<i class="i i-file_upload"></i>
+																				Click here or Drop Files
 
+																			</span>
+
+																			</div>
+																		</form>
+																	</div>
+																</span>
+															</div>
+
+															<button id="btn-collapse-8" class="btn btn-primary btn-rounded btn-add ml-auto <?php if(!empty($quarterly_other)) echo "d-none"; ?>" data-toggle="collapse"
+															data-target="#collapse8" aria-expanded="false" aria-controls="collapse8"><i
+																class="i i-add"></i> <span class="sr-only">Add</span></button>
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<?php //if(!isset($currentDoc)): ?>
+												<div id="collapse8" class="collapse " aria-labelledby="heading<?php echo $key+1; ?>" data-parent="#accordionExample">
+													<div class="acc-body">
+														<form id="form-upload-8" class="row align-items-end form-metadata">
+															<div class="col-lg-3 col-md-12 form-group">
+																<button type="submit" id="btn-upload-8" class="btn btn-primary btn-rounded min w-100px">UPLOAD</button>
+															</div>
+															<input type="hidden" name="interval" value="quarter" />
+															<input type="hidden" name="document_id" value="8" />
+															<input type="hidden" name="document_type_id" value="2" />
+															<input type="hidden" name="affiliate_id" value="<?php echo $affiliate['affiliate_id']; ?>" />
+															<input type="hidden" name="year" value="<?php echo $quarterly_year; ?>" />
+															<input type="hidden" name="quarter" value="<?php echo $quarter; ?>" />
+														</form>
+													</div>
+												</div>
+											<?php //endif; ?>
+
+										</div>
+										<!--Quarterly other files end-->
 									</div>
 									<?php if($this->session->role_id == 1): ?>
 									<div class="row align-items-center ">
@@ -582,7 +713,71 @@ border-color: #000;
 
 											</div>
 										<?php endforeach; ?>
+										<!--Yearly other files-->
+										<?php $key++; ?>
+										<div class="card">
+											<div class="card-header" id="heading<?php echo $key+1; ?>">
+												<div class="mb-0">
+													<div class="btn wrdiv <?php  echo ($key%2 != 0)? "odd": ""; ?>">
+														<div class="row  align-items-center" id="year-row-6">
+															<div class="col-3 col-md-2"><span class="sub"><?php echo $key+1; ?></span></div>
+															<div class="col-14 col-md-6" id="document-name-14">
+																<span class="sub">Others</span><a href="#" data-document="14" data-interval="year" class="other-reupload d-inline"><span class="sub"><i class="i i-create"></i></span></a>
+															</div>
+															<div class="col-24 col-md-16 <?php if(empty($yearly_other)) echo "d-none"; ?>" id="other-list-14">
+																<div class="intab">
+																<?php foreach($yearly_other as $index => $ref): ?>
+																	<div class="row w-100" <?php if($index==0) echo 'style="border-top:0;"'; ?>>
+																		<div class="col-14 col-md-18"><span class="text-primary"><a href="<?php echo base_url($ref['yearly_upload_file']);?>"><?php echo $ref['yearly_upload_file_name']; ?></a></span></div>
+																		<div class="col-10 col-md-6"><span class="statround"><?php echo date('m/d/Y', strtotime($ref['yearly_submitted_date'])); ?></span></div>
+																	</div>
+																<?php endforeach; ?>
+																</div>
+															</div>
+															<div class="col-20 col-md-10 <?php if(!empty($yearly_other)) echo "d-none"; ?>" id="year-segment-14">
+																<span class="sub">
+																	<div id="dropzone-14">
+																		<form action="<?php echo base_url('module/affiliate/document/upload'); ?>" class="dropzone needsclick" data-document="14"  data-doctype="">
+																			<div class="dz-message needsclick">
+																			<span class="text">
+																				<i class="i i-file_upload"></i>
+																				Click here or Drop Files
 
+																			</span>
+
+																			</div>
+																		</form>
+																	</div>
+																</span>
+															</div>
+
+															<button id="btn-collapse-14" class="btn btn-primary btn-rounded btn-add ml-auto <?php if(!empty($yearly_other)) echo "d-none"; ?>" data-toggle="collapse"
+															data-target="#collapse14" aria-expanded="false" aria-controls="collapse14"><i
+																class="i i-add"></i> <span class="sr-only">Add</span></button>
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<?php //if(!isset($currentDoc)): ?>
+												<div id="collapse14" class="collapse " aria-labelledby="heading<?php echo $key+1; ?>" data-parent="#accordionExample">
+													<div class="acc-body">
+														<form id="form-upload-14" class="row align-items-end form-metadata">
+															<div class="col-lg-3 col-md-12 form-group">
+																<button type="submit" id="btn-upload-14" class="btn btn-primary btn-rounded min w-100px">UPLOAD</button>
+															</div>
+															<input type="hidden" name="interval" value="year" />
+															<input type="hidden" name="document_id" value="14" />
+															<input type="hidden" name="document_type_id" value="3" />
+															<input type="hidden" name="affiliate_id" value="<?php echo $affiliate['affiliate_id']; ?>" />
+															<input type="hidden" name="year" value="<?php echo $yearly_year; ?>" />
+														</form>
+													</div>
+												</div>
+											<?php //endif; ?>
+
+										</div>
+										<!--Yearly other files end-->
 									</div>
 									<?php if($this->session->role_id == 1): ?>
 									<div class="row align-items-center ">
@@ -1060,86 +1255,87 @@ border-color: #000;
 														<div class="btn wrdiv <?php  echo ($key%2 != 0)? "odd": ""; ?>">
 															<div class="row  align-items-center" id="soundness-row-<?php echo $document['document_id']; ?>">
 																<div class="col-3 col-md-2"><span class="sub"><?php echo $key+1; ?></span></div>
-																<div id="name-row-<?php echo $document['document_id']; ?>" class="col-14 <?php echo (empty($currentDoc['document']) && ($document['ref_document']=== NULL)) ? "col-md-8" : "col-md-6"; ?>"><span class="sub "><?php echo $document['document_name']; ?></span></div>
+																<div id="name-row-<?php echo $document['document_id']; ?>" class="col-14 col-md-6"><span class="sub "><?php echo $document['document_name']; ?></span></div>
 																<?php /*if(!empty($currentDoc['document'])): ?>
 																<div class="col-7 col-md-4"><span class="sub"><?php echo date('m/d/Y', strtotime($currentDoc['document'][0]['performance_org_doc_submitted_date'])); ?></span></div>
 																<?php endif;*/ ?>
-																<?php if(empty($currentDoc['document']) && ($document['ref_document'] == NULL)) : ?>
-																	<div class="col-20 col-md-8" id="soundness-segment-<?php echo $document['document_id']; ?>">
-																		<span class="sub">
-																			<div id="dropzone-<?php echo $document['document_id']; ?>">
-																				<form action="<?php echo base_url('module/affiliate/document/upload'); ?>" class="dropzone needsclick" data-document="<?php echo $document['document_id']; ?>"  data-doctype="<?php echo $document['document_file_extension']; ?>">
-																					<div class="dz-message needsclick">
-																					<span class="text">
-																						<i class="i i-file_upload"></i> Click here or Drop Files
-																					</span>
-
-																					</div>
-																				</form>
+																<div class="col-24 col-md-15">
+																	<div class="intab ">
+																		<div class="d-flex header">
+																			<span class="year-lbl"><?php echo $year; ?></span>
+																			<div class="m-l-auto">
+																				<div class="yearPick" >
+																				<i class="i i-year-pick"></i>
+																				<input class="yearpick form-control input-search-year" placeholder="<?php echo $year; ?>" type="text" value="<?php echo $year; ?>" data-document="<?php echo $document['document_id']; ?>" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>" data-interval="soundness" />
+																				</div>
 																			</div>
-																		</span>
-																		<?php if($document['document_file_extension'] != ""): ?>
-																		<p class="text-center m-0"><small><i>Supports only <?php echo $document['document_file_extension']; ?> files</i></small></p>
+																		</div>
+																		<?php $check_flag = false; ?>
+																		<?php if(!empty($currentDoc['document'])): ?>
+																			<?php $check_flag = true; ?>
+																			<?php foreach($currentDoc['document'] as $ref): ?>
+																				<div class="row">
+																					<div class="col-14 col-md-18"><span class="text-primary"><a href="<?php echo base_url($ref['performance_org_doc_upload_file']);?>"><?php echo $ref['performance_org_doc_upload_file_name']; ?></a></span></div>
+																					<div class="col-10 col-md-6"><span class="statround"><?php echo date('m/d/Y', strtotime($ref['performance_org_doc_submitted_date'])); ?></span></div>
+																				</div>
+																			<?php endforeach; ?>
+																		<?php endif; ?>
+																		<?php if(!empty($currentDoc['ref_documents'])): ?>
+																			<?php $check_flag = true; ?>
+																			<?php foreach($currentDoc['ref_documents'] as $ref): ?>
+																				<?php if($document['document_name'] == "Board Roster"): ?>
+																				<div class="row">
+																					<div class="col-14 col-md-18"><span class="text-primary"><a href="<?php echo base_url($ref['yearly_upload_file']);?>"><?php echo $ref['yearly_upload_file_name']; ?></a></span></div>
+																					<div class="col-10 col-md-6"><span class="statround"><?php echo date('m/d/Y', strtotime($ref['yearly_submitted_date'])); ?></span></div>
+																				</div>
+																				<?php else: ?>
+																					<div class="row">
+																						<div class="col-14 col-md-18"><span class="text-primary"><a href="<?php echo base_url($ref['monthly_upload_file']);?>"><?php echo $ref['monthly_upload_file_name']; ?></a></span></div>
+																						<div class="col-10 col-md-6"><span class="statround"><?php echo date('m/d/Y', strtotime($ref['monthly_submitted_date'])); ?></span></div>
+																					</div>
+																				<?php endif; ?>
+																			<?php endforeach; ?>
+																		<?php endif; ?>
+																		<?php if(!$check_flag): ?>
+																			<div class="row">
+																				<div class="col-24 text-center">No documents found!</div>
+																			</div>
+																		<?php endif; ?>
+																		<?php if($document['ref_document'] == NULL) : ?>
+																			<div class="row upload-row">
+																				<div class="col-24 col-md-14" id="soundness-segment-<?php echo $document['document_id']; ?>">
+																					<span class="sub">
+																						<div id="dropzone-<?php echo $document['document_id']; ?>">
+																							<form action="<?php echo base_url('module/affiliate/document/upload'); ?>" class="dropzone needsclick" data-document="<?php echo $document['document_id']; ?>"  data-doctype="<?php echo $document['document_file_extension']; ?>">
+																								<div class="dz-message needsclick">
+																								<span class="text">
+																									<i class="i i-file_upload"></i> Click here or Drop Files
+																								</span>
+
+																								</div>
+																							</form>
+																						</div>
+																					</span>
+																					<?php if($document['document_file_extension'] != ""): ?>
+																					<p class="text-center m-0"><small><i>Supports only <?php echo $document['document_file_extension']; ?> files</i></small></p>
+																					<?php endif; ?>
+																				</div>
+																				<div class="yearPick" >
+																					<i class="i i-year-pick"></i>
+																					<input class="yearpick form-control input-upload-year" placeholder="<?php echo $year; ?>" type="text" value="<?php echo $year; ?>" data-document="<?php echo $document['document_id']; ?>" />
+																				</div>
+																				<button id="btn-collapse-<?php echo $document['document_id']; ?>" class="btn btn-primary btn-rounded btn-add ml-auto " data-toggle="collapse"
+																				data-target="#collapse<?php echo $document['document_id']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $document['document_id']; ?>"><i
+																					class="i i-add"></i> </button>
+																			</div>
 																		<?php endif; ?>
 																	</div>
-																	<div class="yearPick" >
-																		<i class="i i-year-pick"></i>
-																		<input class="yearpick form-control input-upload-year" placeholder="<?php echo $year; ?>" type="text" value="<?php echo $year; ?>" data-document="<?php echo $document['document_id']; ?>" />
-																	</div>
-																	<button id="btn-collapse-<?php echo $document['document_id']; ?>" class="btn btn-primary btn-rounded btn-add ml-auto " data-toggle="collapse"
-																	data-target="#collapse<?php echo $document['document_id']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $document['document_id']; ?>"><i
-																		class="i i-add"></i> </button>
-																<?php else: ?>
-																	<div class="col-24 col-md-15">
-																		<div class="intab ">
-																			<div class="d-flex header">
-																				<span class="year-lbl"><?php echo $year; ?></span>
-																				<div class="m-l-auto">
-																					<div class="yearPick" >
-																					<i class="i i-year-pick"></i>
-																					<input class="yearpick form-control input-search-year" placeholder="<?php echo $year; ?>" type="text" value="<?php echo $year; ?>" data-document="<?php echo $document['document_id']; ?>" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>" data-interval="soundness" />
-																					</div>
-																				</div>
-																			</div>
-																			<?php $check_flag = false; ?>
-																			<?php if(!empty($currentDoc['document'])): ?>
-																				<?php $check_flag = true; ?>
-																				<?php foreach($currentDoc['document'] as $ref): ?>
-																					<div class="row">
-																						<div class="col-14 col-md-18"><span class="text-primary"><a href="<?php echo base_url($ref['performance_org_doc_upload_file']);?>"><?php echo $ref['performance_org_doc_upload_file_name']; ?></a></span></div>
-																						<div class="col-10 col-md-6"><span class="statround"><?php echo date('m/d/Y', strtotime($ref['performance_org_doc_submitted_date'])); ?></span></div>
-																					</div>
-																				<?php endforeach; ?>
-																			<?php endif; ?>
-																			<?php if(!empty($currentDoc['ref_documents'])): ?>
-																				<?php $check_flag = true; ?>
-																				<?php foreach($currentDoc['ref_documents'] as $ref): ?>
-																					<?php if($document['document_name'] == "Board Roster"): ?>
-																					<div class="row">
-																						<div class="col-14 col-md-18"><span class="text-primary"><a href="<?php echo base_url($ref['yearly_upload_file']);?>"><?php echo $ref['yearly_upload_file_name']; ?></a></span></div>
-																						<div class="col-10 col-md-6"><span class="statround"><?php echo date('m/d/Y', strtotime($ref['yearly_submitted_date'])); ?></span></div>
-																					</div>
-																					<?php else: ?>
-																						<div class="row">
-																							<div class="col-14 col-md-18"><span class="text-primary"><a href="<?php echo base_url($ref['monthly_upload_file']);?>"><?php echo $ref['monthly_upload_file_name']; ?></a></span></div>
-																							<div class="col-10 col-md-6"><span class="statround"><?php echo date('m/d/Y', strtotime($ref['monthly_submitted_date'])); ?></span></div>
-																						</div>
-																					<?php endif; ?>
-																				<?php endforeach; ?>
-																			<?php endif; ?>
-																			<?php if(!$check_flag): ?>
-																				<div class="row">
-																					<div class="col-24 text-center">No documents found!</div>
-																				</div>
-																			<?php endif; ?>
-																		</div>
-																	</div>
-																<?php endif; ?>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-												<?php if(empty($currentDoc['document']) && ($document['ref_document']==NULL)) : ?>
+												<?php if($document['ref_document']==NULL) : ?>
 													<div id="collapse<?php echo $document['document_id']; ?>" class="collapse " aria-labelledby="headingq<?php echo $document['document_id']; ?>" data-parent="#accordionq">
 														<div class="acc-body">
 															<form id="form-upload-<?php echo $document['document_id']; ?>" class="row align-items-end form-metadata">
@@ -1194,33 +1390,9 @@ border-color: #000;
 														<div class="btn wrdiv <?php  echo ($key%2 != 0)? "odd": ""; ?>">
 															<div class="row  align-items-center" id="vitality-row-<?php echo $document['document_id']; ?>">
 																<div class="col-3 col-md-2"><span class="sub"><?php echo $key+1; ?></span></div>
-																<div id="name-row-<?php echo $document['document_id']; ?>" class="col-14 <?php echo (empty($currentDoc['document']) && ($document['ref_document']==NULL)) ? "col-md-8" : "col-md-6"; ?>"><span class="sub "><?php echo $document['document_name']; ?></span></div>
+																<div id="name-row-<?php echo $document['document_id']; ?>" class="col-14 col-md-6"><span class="sub "><?php echo $document['document_name']; ?></span></div>
 																<!-- <div class="col-7 col-md-4"><span class="sub">12/31/2020</span></div> -->
-																<?php if(empty($currentDoc['document']) && ($document['ref_document']==NULL)) : ?>
-																	<div class="col-20 col-md-8" id="vitality-segment-<?php echo $document['document_id']; ?>">
-																		<span class="sub">
-																			<div id="dropzone-<?php echo $document['document_id']; ?>">
-																				<form action="<?php echo base_url('module/affiliate/document/upload'); ?>" class="dropzone needsclick" data-document="<?php echo $document['document_id']; ?>"  data-doctype="<?php echo $document['document_file_extension']; ?>">
-																					<div class="dz-message needsclick">
-																					<span class="text">
-																						<i class="i i-file_upload"></i> Click here or Drop Files
-																					</span>
-																					</div>
-																				</form>
-																			</div>
-																		</span>
-																		<?php if($document['document_file_extension'] != ""): ?>
-																		<p class="text-center m-0"><small><i>Supports only <?php echo $document['document_file_extension']; ?> files</i></small></p>
-																		<?php endif; ?>
-																	</div>
-																	<div class="yearPick" >
-																		<i class="i i-year-pick"></i>
-																		<input class="yearpick form-control input-upload-year" placeholder="<?php echo $year; ?>" type="text" value="<?php echo $year; ?>" data-document="<?php echo $document['document_id']; ?>" />
-																	</div>
-																	<button id="btn-collapse-<?php echo $document['document_id']; ?>" class="btn btn-primary btn-rounded btn-add ml-auto " data-toggle="collapse"
-																	data-target="#collapse<?php echo $document['document_id']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $document['document_id']; ?>"><i
-																		class="i i-add"></i> </button>
-																<?php else: ?>
+																
 																	<div class="col-24 col-md-15">
 																		<div class="intab ">
 																			<div class="d-flex header">
@@ -1268,14 +1440,40 @@ border-color: #000;
 																					<div class="col-24 text-center">No documents found!</div>
 																				</div>
 																			<?php endif; ?>
+																			<?php if($document['ref_document']==NULL) : ?>
+																			<div class="row upload-row">
+																				<div class="col-24 col-md-14" id="vitality-segment-<?php echo $document['document_id']; ?>">
+																					<span class="sub">
+																						<div id="dropzone-<?php echo $document['document_id']; ?>">
+																							<form action="<?php echo base_url('module/affiliate/document/upload'); ?>" class="dropzone needsclick" data-document="<?php echo $document['document_id']; ?>"  data-doctype="<?php echo $document['document_file_extension']; ?>">
+																								<div class="dz-message needsclick">
+																								<span class="text">
+																									<i class="i i-file_upload"></i> Click here or Drop Files
+																								</span>
+																								</div>
+																							</form>
+																						</div>
+																					</span>
+																					<?php if($document['document_file_extension'] != ""): ?>
+																					<p class="text-center m-0"><small><i>Supports only <?php echo $document['document_file_extension']; ?> files</i></small></p>
+																					<?php endif; ?>
+																				</div>
+																				<div class="yearPick" >
+																					<i class="i i-year-pick"></i>
+																					<input class="yearpick form-control input-upload-year" placeholder="<?php echo $year; ?>" type="text" value="<?php echo $year; ?>" data-document="<?php echo $document['document_id']; ?>" />
+																				</div>
+																				<button id="btn-collapse-<?php echo $document['document_id']; ?>" class="btn btn-primary btn-rounded btn-add ml-auto " data-toggle="collapse"
+																				data-target="#collapse<?php echo $document['document_id']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $document['document_id']; ?>"><i
+																					class="i i-add"></i> </button>
+																			</div>
+																			<?php endif; ?>
 																		</div>
 																	</div>
-																<?php endif; ?>
 															</div>
 														</div>
 													</div>
 												</div>
-												<?php if(empty($currentDoc['document']) && ($document['ref_document']==NULL)) : ?>
+												<?php if($document['ref_document']==NULL) : ?>
 												<div id="collapse<?php echo $document['document_id']; ?>" class="collapse " aria-labelledby="headingn<?php echo $document['document_id']; ?>" data-parent="#accordionn">
 													<div class="acc-body">
 														<form id="form-upload-<?php echo $document['document_id']; ?>" class="row align-items-end form-metadata">
@@ -1330,89 +1528,91 @@ border-color: #000;
 														<div class="btn wrdiv <?php  echo ($key%2 != 0)? "odd": ""; ?>">
 															<div class="row  align-items-center" id="mission-row-<?php echo $document['document_id']; ?>">
 																<div class="col-3 col-md-2"><span class="sub"><?php echo $key+1; ?></span></div>
-																<div id="name-row-<?php echo $document['document_id']; ?>" class="col-14 <?php echo (empty($currentDoc['document']) && empty($currentDoc['ref_documents'])) ? "col-md-8" : "col-md-6"; ?>"><span class="sub "><?php echo $document['document_name']; ?></span></div>
+																<div id="name-row-<?php echo $document['document_id']; ?>" class="col-14 col-md-6"><span class="sub "><?php echo $document['document_name']; ?></span></div>
 																<!-- <div class="col-7 col-md-4"><span class="sub">12/31/2020</span></div> -->
-																<?php if(empty($currentDoc['document'])) : ?>
-																	<div class="col-20 col-md-8" id="mission-segment-<?php echo $document['document_id']; ?>">
-																		<span class="sub">
-																			<div id="dropzone-<?php echo $document['document_id']; ?>">
-																				<form action="<?php echo base_url('module/affiliate/document/upload'); ?>" class="dropzone needsclick" data-document="<?php echo $document['document_id']; ?>"  data-doctype="<?php echo $document['document_file_extension']; ?>">
-																					<div class="dz-message needsclick">
-																						<span class="text">
-																							<i class="i i-file_upload"></i> Click here or Drop Files
-																						</span>
-																					</div>
-																				</form>
-																			</div>
-																		</span>
-																		<?php if($document['document_file_extension'] != ""): ?>
-																		<p class="text-center m-0"><small><i>Supports only <?php echo $document['document_file_extension']; ?> files</i></small></p>
-																		<?php endif; ?>
-																	</div>
-																	<div class="yearPick" >
-																		<i class="i i-year-pick"></i>
-																		<input class="yearpick form-control input-upload-year" placeholder="<?php echo $year; ?>" type="text" value="<?php echo $year; ?>" data-document="<?php echo $document['document_id']; ?>" />
-																	</div>
-																	<button id="btn-collapse-<?php echo $document['document_id']; ?>" class="btn btn-primary btn-rounded btn-add ml-auto " data-toggle="collapse"
-																	data-target="#collapse<?php echo $document['document_id']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $document['document_id']; ?>"><i
-																		class="i i-add"></i> </button>
-																<?php else: ?>
-																	<div class="col-24 col-md-15">
-																		<div class="intab ">
-																			<div class="d-flex header">
-																				<span class="year-lbl"><?php echo $year; ?></span>
-																				<div class="m-l-auto">
-																					<div class="yearPick" >
-																					<i class="i i-year-pick"></i>
-																					<input class="yearpick form-control input-search-year" placeholder="<?php echo $year; ?>" type="text" value="<?php echo $year; ?>" data-document="<?php echo $document['document_id']; ?>" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>" data-interval="mission" />
-																					</div>
+																	
+																<div class="col-24 col-md-15">
+																	<div class="intab ">
+																		<div class="d-flex header">
+																			<span class="year-lbl"><?php echo $year; ?></span>
+																			<div class="m-l-auto">
+																				<div class="yearPick" >
+																				<i class="i i-year-pick"></i>
+																				<input class="yearpick form-control input-search-year" placeholder="<?php echo $year; ?>" type="text" value="<?php echo $year; ?>" data-document="<?php echo $document['document_id']; ?>" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>" data-interval="mission" />
 																				</div>
 																			</div>
-																			<?php if(!empty($currentDoc['document'])): ?>
-																				<?php foreach($currentDoc['document'] as $ref): ?>
-																					<div class="row">
-																						<div class="col-14 col-md-18"><span class="text-primary"><a href="<?php echo base_url($ref['performance_im_mi_upload_file']);?>"><?php echo $ref['performance_im_mi_upload_file_name']; ?></a></span></div>
-																						<div class="col-10 col-md-6"><span class="statround"><?php echo date('m/d/Y', strtotime($ref['performance_im_mi_submitted_date'])); ?></span></div>
+																		</div>
+																		<?php if(!empty($currentDoc['document'])): ?>
+																			<?php foreach($currentDoc['document'] as $ref): ?>
+																				<div class="row">
+																					<div class="col-14 col-md-18"><span class="text-primary"><a href="<?php echo base_url($ref['performance_im_mi_upload_file']);?>"><?php echo $ref['performance_im_mi_upload_file_name']; ?></a></span></div>
+																					<div class="col-10 col-md-6"><span class="statround"><?php echo date('m/d/Y', strtotime($ref['performance_im_mi_submitted_date'])); ?></span></div>
+																				</div>
+																			<?php endforeach; ?>
+																		<?php else: ?>
+																			<div class="row">
+																				<div class="col-24 text-center">No documents found!</div>
+																			</div>
+																		<?php endif; ?>
+																		<div class="row upload-row">
+																			<div class="col-20 col-md-14" id="mission-segment-<?php echo $document['document_id']; ?>">
+																				<span class="sub">
+																					<div id="dropzone-<?php echo $document['document_id']; ?>">
+																						<form action="<?php echo base_url('module/affiliate/document/upload'); ?>" class="dropzone needsclick" data-document="<?php echo $document['document_id']; ?>"  data-doctype="<?php echo $document['document_file_extension']; ?>">
+																							<div class="dz-message needsclick">
+																								<span class="text">
+																									<i class="i i-file_upload"></i> Click here or Drop Files
+																								</span>
+																							</div>
+																						</form>
 																					</div>
-																				<?php endforeach; ?>
-																			<?php endif; ?>
+																				</span>
+																				<?php if($document['document_file_extension'] != ""): ?>
+																				<p class="text-center m-0"><small><i>Supports only <?php echo $document['document_file_extension']; ?> files</i></small></p>
+																				<?php endif; ?>
+																			</div>
+																			<div class="yearPick" >
+																				<i class="i i-year-pick"></i>
+																				<input class="yearpick form-control input-upload-year" placeholder="<?php echo $year; ?>" type="text" value="<?php echo $year; ?>" data-document="<?php echo $document['document_id']; ?>" />
+																			</div>
+																			<button id="btn-collapse-<?php echo $document['document_id']; ?>" class="btn btn-primary btn-rounded btn-add ml-auto " data-toggle="collapse"
+																			data-target="#collapse<?php echo $document['document_id']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $document['document_id']; ?>"><i
+																				class="i i-add"></i> </button>
 																		</div>
 																	</div>
-																<?php endif; ?>
+																</div>
 
 															</div>
 														</div>
 													</div>
 												</div>
-												<?php if(empty($currentDoc['document'])) : ?>
-													<div id="collapse<?php echo $document['document_id']; ?>" class="collapse " aria-labelledby="headingm<?php echo $document['document_id']; ?>" data-parent="#accordionm">
-														<div class="acc-body">
-															<form id="form-upload-<?php echo $document['document_id']; ?>" class="row align-items-end form-metadata">
-																<div class="row align-items-end">
-																	<?php if(isset($document['metadata'])): ?>
-																		<?php $metadata_fields = json_decode($document['metadata']);?>
-																		<?php foreach($metadata_fields as $index => $field): ?>
-																		<div class="col-lg-7 col-md-12 form-group">
-																			<div>
-																				<label for="metafield-<?php echo $document['document_id'].$index; ?>"><?php echo $field->metadata; ?></label>
-																				<input type="<?php echo $field->datatype; ?>" name="metadata[<?php echo $field->metadata; ?>]" class="form-control" id="metafield-<?php echo $document['document_id'].$index; ?>" placeholder="<?php echo $field->metadata; ?>" required />
-																			</div>
+												<div id="collapse<?php echo $document['document_id']; ?>" class="collapse " aria-labelledby="headingm<?php echo $document['document_id']; ?>" data-parent="#accordionm">
+													<div class="acc-body">
+														<form id="form-upload-<?php echo $document['document_id']; ?>" class="row align-items-end form-metadata">
+															<div class="row align-items-end">
+																<?php if(isset($document['metadata'])): ?>
+																	<?php $metadata_fields = json_decode($document['metadata']);?>
+																	<?php foreach($metadata_fields as $index => $field): ?>
+																	<div class="col-lg-7 col-md-12 form-group">
+																		<div>
+																			<label for="metafield-<?php echo $document['document_id'].$index; ?>"><?php echo $field->metadata; ?></label>
+																			<input type="<?php echo $field->datatype; ?>" name="metadata[<?php echo $field->metadata; ?>]" class="form-control" id="metafield-<?php echo $document['document_id'].$index; ?>" placeholder="<?php echo $field->metadata; ?>" required />
 																		</div>
-																		<?php endforeach; ?>
-																	<?php endif; ?>
-																	<div class="col-lg-3 col-md-12 form-group">
-																		<button type="submit" id="btn-upload-<?php echo $document['document_id']; ?>" class="btn btn-primary btn-rounded min w-100px">UPLOAD</button>
 																	</div>
+																	<?php endforeach; ?>
+																<?php endif; ?>
+																<div class="col-lg-3 col-md-12 form-group">
+																	<button type="submit" id="btn-upload-<?php echo $document['document_id']; ?>" class="btn btn-primary btn-rounded min w-100px">UPLOAD</button>
 																</div>
-																<input type="hidden" name="interval" value="mission" />
-																<input type="hidden" name="document_id" value="<?php echo $document['document_id']; ?>" />
-																<input type="hidden" name="document_type_id" value="<?php echo $document['document_type_id']; ?>" />
-																<input type="hidden" name="affiliate_id" value="<?php echo $affiliate['affiliate_id']; ?>" />
-																<input type="hidden" name="year" value="<?php echo $year; ?>" />
-															</form>
-														</div>
+															</div>
+															<input type="hidden" name="interval" value="mission" />
+															<input type="hidden" name="document_id" value="<?php echo $document['document_id']; ?>" />
+															<input type="hidden" name="document_type_id" value="<?php echo $document['document_type_id']; ?>" />
+															<input type="hidden" name="affiliate_id" value="<?php echo $affiliate['affiliate_id']; ?>" />
+															<input type="hidden" name="year" value="<?php echo $year; ?>" />
+														</form>
 													</div>
-												<?php endif; ?>
+												</div>
 											</div>
 										<?php endforeach; ?>
 									</div>
@@ -1890,8 +2090,14 @@ border-color: #000;
 
 </div>
 </script>
+<script id="template-other-row" type="x-tmpl-mustache">
+<div class="row w-100" {{#isEmpty}}style="border-top:0;"{{/isEmpty}}>
+	<div class="col-14 col-md-18"><span class="text-primary"><a href="{{documentPath}}">{{filename}}</a></span></div>
+	<div class="col-10 col-md-6"><span class="statround">{{submittedTime}}</span></div>
+</div>
+</script>
 <script id="template-performance" type="x-tmpl-mustache">
-<div class="col-24 col-md-15">
+<!-- <div class="col-24 col-md-15">
 	<div class="intab ">
 		<div class="d-flex header">
 			<span class="year-lbl">{{document.year}}</span>
@@ -1901,13 +2107,13 @@ border-color: #000;
 				<input class="yearpick form-control input-search-year" placeholder="<?php echo $year; ?>" type="text" value="{{document.year}}" data-document="{{document.document_id}}" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>" data-interval="{{document.interval}}" />
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<div class="row">
 			<div class="col-14 col-md-18"><span class="text-primary"><a href="{{documentPath}}">{{document.file_name}}</a></span></div>
 			<div class="col-10 col-md-6"><span class="statround">{{submittedTime}}</span></div>
 		</div>
-	</div>
-</div>
+<!-- 	</div>
+</div> -->
 </script>
 <script id="template-performance-filter" type="x-tmpl-mustache">
 {{#documents}}

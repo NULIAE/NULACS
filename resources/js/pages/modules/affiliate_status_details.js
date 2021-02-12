@@ -25,6 +25,17 @@ $(function () {
 	initStatusSelectBoxes();
 
 	initReUploadDocuments();
+
+	$('a.other-reupload').on('click', function(e){
+		e.preventDefault();
+		var id = $(this).data('document');
+		var interval = $(this).data('interval');
+		$("#other-list-" + id).toggleClass("d-none");
+		var segment = $("#" + interval + "-segment-" + id);
+		$(segment).next('button').toggleClass('d-none');
+		$(segment).toggleClass('d-none');
+	});
+
 	init_delect_upload();
 
 	//----Filter result using month, quarter and year
@@ -238,60 +249,82 @@ $(function () {
 
 						if(interval != "self-assessment"){ 
 							$('#collapse' + elemId).collapse('hide');
-							var segment = $("#" + interval + "-segment-" + elemId);
-							$(segment).next('.yearPick').toggleClass('d-none');
-							$("#btn-collapse-"+elemId).toggleClass('d-none');
-							$(segment).toggleClass('d-none');
-
+							
 							if (interval == "month" || interval == "quarter" || interval == "year") {
-								$('#submitted-' + elemId).html('<span class="sub">' + moment().format("MM/DD/YYYY") + '</span>');
+								var segment = $("#" + interval + "-segment-" + elemId);
+								$("#btn-collapse-"+elemId).toggleClass('d-none');
+								$(segment).toggleClass('d-none');
 								var docName = $('#document-name-' + elemId + ' span').html();
-								$('#document-name-' + elemId).html('<a href="' + base_url + response.upload_data.full_path + '" class="float-left"><span class="sub text-primary link">' + docName + '</span></a> <a href="#" data-document="'+elemId+'" data-interval="'+interval+'" class="reupload"><span class="sub"><i class="i i-create"></i></span></a>');
-								
-								if($("#doc-status-" + elemId).length){
-									$("#doc-status-" + elemId).toggleClass("d-none");
-									$("#chat-box-" + elemId).toggleClass("d-none");
-									var chatBox = $("#chat-box-" + elemId).find(".chatBoxinn");
-									$(chatBox).append(Mustache.render($("#template-comment").html(), {
-										"comment": response.comment,
-										"avatar": function () {
-											return this.city.charAt(0) + this.state.charAt(0);
-										},
-										"commentTime": function () {
-											return moment().format("Do MMM YYYY | HH:mm");
-										}
-									}));
-								} else {
-									console.log(response);
-									$("#" + interval + "-row-" + elemId).append(Mustache.render($("#template-submitted").html(), { 
+								if(docName != "Others") {
+									$('#submitted-' + elemId).html('<span class="sub">' + moment().format("MM/DD/YYYY") + '</span>');
+									$('#document-name-' + elemId).html('<a href="' + base_url + response.upload_data.full_path + '" class="float-left"><span class="sub text-primary link">' + docName + '</span></a> <a href="#" data-document="'+elemId+'" data-interval="'+interval+'" class="reupload"><span class="sub"><i class="i i-create"></i></span></a>');
+									
+									if($("#doc-status-" + elemId).length){
+										$("#doc-status-" + elemId).toggleClass("d-none");
+										$("#chat-box-" + elemId).toggleClass("d-none");
+										var chatBox = $("#chat-box-" + elemId).find(".chatBoxinn");
+										$(chatBox).append(Mustache.render($("#template-comment").html(), {
+											"comment": response.comment,
+											"avatar": function () {
+												return this.city.charAt(0) + this.state.charAt(0);
+											},
+											"commentTime": function () {
+												return moment().format("Do MMM YYYY | HH:mm");
+											}
+										}));
+									} else {
+										$("#" + interval + "-row-" + elemId).append(Mustache.render($("#template-submitted").html(), { 
+											document: response.upload_data,
+											"comment": response.comment,
+											"avatar": function () {
+												return this.city.charAt(0) + this.state.charAt(0);
+											},
+											"commentTime": function () {
+												return moment().format("Do MMM YYYY | HH:mm");
+											}
+										}));
+
+										//Re-initialize comment box
+										initCommentBox();
+										//Re-initialize status select box
+										initStatusSelectBoxes();
+									}
+
+									initReUploadDocuments();
+									
+									if($("#" + interval + "-row-" + elemId + ' select.selG').length){
+										$("#" + interval + "-row-" + elemId + ' select.selG').val(5);
+									} else {
+										$("#doc-status-" + elemId).html('<span class="sub"><a href="javascript:(0)" class="btn btn-lbl" data-rel="tooltip" data-placement="bottom" title="Review Pending"><i class="i i-review-pending r-pending"></i> </a></span>');
+									}
+									$('[data-rel="tooltip"]').tooltip();
+								}else{
+									$('#other-list-'+elemId).toggleClass('d-none');
+									$('#other-list-'+elemId+' .intab').append(Mustache.render($("#template-other-row").html(), {
 										document: response.upload_data,
-										"comment": response.comment,
-										"avatar": function () {
-											return this.city.charAt(0) + this.state.charAt(0);
+										"documentPath": function () {
+											return base_url + response.upload_data.full_path;
 										},
-										"commentTime": function () {
-											return moment().format("Do MMM YYYY | HH:mm");
-										}
+										"filename": function () {
+											return response.upload_data.file_name;
+										},
+										"submittedTime": function () {
+											return moment().format("MM/DD/YYYY");
+										},
+										"isEmpty": function () {
+											if($('#other-list-'+elemId+' .intab').html().trim().length)
+												return false;
+											else
+												return true;
+										},
 									}));
-
-									//Re-initialize comment box
-									initCommentBox();
-									//Re-initialize status select box
-									initStatusSelectBoxes();
 								}
-
-								initReUploadDocuments();
-								
-								if($("#" + interval + "-row-" + elemId + ' select.selG').length){
-									$("#" + interval + "-row-" + elemId + ' select.selG').val(5);
-								} else {
-									$("#doc-status-" + elemId).html('<span class="sub"><a href="javascript:(0)" class="btn btn-lbl" data-rel="tooltip" data-placement="bottom" title="Review Pending"><i class="i i-review-pending r-pending"></i> </a></span>');
-								}
-								$('[data-rel="tooltip"]').tooltip();
 
 							} else {
-								$("#name-row-" + elemId).removeClass("col-md-8").addClass("col-md-6");
-								$("#" + interval + "-row-" + elemId).append(Mustache.render($("#template-performance").html(), {
+								var parentElem = $("#" + interval + "-row-" + elemId).find('.intab');
+								parentElem.find('.input-search-year').val(response.upload_data.year).trigger("blur");
+								/* parentElem.children('.row').not('.upload-row').remove();
+								parentElem.children('.header').after(Mustache.render($("#template-performance").html(), {
 									document: response.upload_data,
 									"documentPath": function () {
 										return base_url + response.upload_data.full_path;
@@ -302,7 +335,7 @@ $(function () {
 								}));
 
 								//Re-initialize yearpickers
-								initDatePickerforPerformanceDocuments();
+								initDatePickerforPerformanceDocuments(); */
 							}
 						}else{
 							var key = 1;
@@ -368,7 +401,6 @@ $(function () {
 				next: 'i i-keyboard_arrow_right',
 			}
 		}).on('dp.hide', function (e) {
-			console.log($(this).data());
 			$(this).val(e.date.format('YYYY'));
 		});
 
@@ -390,8 +422,8 @@ $(function () {
 			}).done(function (data) {
 				var parentElem = inputElem.closest('.intab');
 				parentElem.find('span.year-lbl').html(inputData.year);
-				parentElem.children('.row').remove();
-				parentElem.append(Mustache.render($("#template-performance-filter").html(), { 
+				parentElem.children('.row').not('.upload-row').remove();
+				parentElem.children('.header').after(Mustache.render($("#template-performance-filter").html(), { 
 					documents: data,
 					"documentPath": function () {
 						return base_url + this.filepath;

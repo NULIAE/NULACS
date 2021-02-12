@@ -355,6 +355,9 @@ class Affiliate_model extends CI_Model
 		$this->db->from('affiliate');
 		$this->db->join('affiliate_compliance_status_monthly cms', 'cms.affiliate_id = affiliate.affiliate_id');
 
+		if(isset($where['affiliate'])){
+			unset($where['affiliate']);
+		}
 		if( $where !== NULL )
 		{
 			$this->db->where($where);
@@ -379,9 +382,12 @@ class Affiliate_model extends CI_Model
 		$this->db->join('affiliate_compliance_status_monthly cms', 'cms.affiliate_id = affiliate.affiliate_id');
 		$this->db->join('state', 'state.stateid = affiliate.state');
 		$this->db->join('status_flags', 'status_flags.id = cms.compliance_status');
-		
+		if(isset($filter['affiliate'])){
+			$this->db->where('affiliate.affiliate_id',$filter['affiliate']);
+		}
 		if( $filter !== NULL )
 		{
+			unset($filter['affiliate']);
 			$this->db->where($filter);
 		}
 
@@ -416,6 +422,7 @@ class Affiliate_model extends CI_Model
 		
 		if( $filter !== NULL )
 		{
+			unset($filter['affiliate']);
 			$this->db->where($filter);
 		}
 
@@ -437,6 +444,7 @@ class Affiliate_model extends CI_Model
 
 		if( $where !== NULL )
 		{
+			unset($where['affiliate']);
 			$this->db->where($where);
 		}
 
@@ -459,6 +467,10 @@ class Affiliate_model extends CI_Model
 		$this->db->join('state', 'state.stateid = affiliate.state');
 		$this->db->join('status_flags', 'status_flags.id = cqs.compliance_status');
 		
+		if(isset($filter['affiliate'])){
+			$this->db->where('affiliate.affiliate_id',$filter['affiliate']);
+				unset($filter['affiliate']);
+		}
 		if( $filter !== NULL )
 		{
 			$this->db->where($filter);
@@ -538,7 +550,11 @@ class Affiliate_model extends CI_Model
 	{
 		$this->db->from('affiliate');
 		$this->db->join('affiliate_compliance_status_yearly cys', 'cys.affiliate_id = affiliate.affiliate_id');
-
+		if(isset($where['affiliate'])){
+			$this->db->where('affiliate.affiliate_id',$where['affiliate']);
+			unset($where['affiliate']);
+		}
+		
 		if( $where !== NULL )
 		{
 			$this->db->where($where);
@@ -563,6 +579,9 @@ class Affiliate_model extends CI_Model
 		$this->db->join('state', 'state.stateid = affiliate.state');
 		$this->db->join('status_flags', 'status_flags.id = cys.compliance_status');
 		
+		if(isset($filter['affiliate'])){
+			unset($filter['affiliate']);
+		}
 		if( $filter !== NULL )
 		{
 			$this->db->where($filter);
@@ -1101,5 +1120,162 @@ class Affiliate_model extends CI_Model
 		 return $del;
 
 	
+	}
+	/**
+	 * Get all affiliates and sort them using conditions
+	 *
+	 * @param  int $limit
+	 * @param  int $start
+	 * @param  array $where
+	 * @return void
+	 */
+	public function get_all_affiliates_list($limit = NULL, $start = NULL, $where = NULL, $isYearNeeded = FALSE)
+	{
+		$this->db->select('*,stateabbreviation as state, region.name AS region');
+		$this->db->from('affiliate');
+		$this->db->join('region', 'region.region_id = affiliate.region_id');
+		$this->db->join('state', 'state.stateid = affiliate.state');
+
+		if(isset($where['affiliate']))
+		{
+			$this->db->where('affiliate.affiliate_id',$where['affiliate']);
+		}
+
+		
+		if( $isYearNeeded )
+		{
+			$this->db->join('financial_year', 'financial_year.affiliate_id = affiliate.affiliate_id');
+		}
+
+		if(isset($where['affiliate.organization']))
+		{
+			$aname = $where['affiliate.organization'];
+			$this->db->like('affiliate.organization', $aname);
+			unset($where['affiliate.organization']);
+		}
+		if(isset($where['month'])){
+			unset($where['month']);
+		}
+
+		if(isset($where['year'])){
+			unset($where['year']);
+		}
+
+		if(isset($where['affiliate'])){
+			unset($where['affiliate']);
+		}
+		if(isset($where['quarter'])){
+			unset($where['quarter']);
+		}
+		
+		if( $where !== NULL)
+		{
+
+			$this->db->where($where);
+		}
+
+		if( ($limit !== NULL) && ($start !== NULL) )
+		{
+			$this->db->limit($limit, $start);
+		}
+		$this->db->group_by('affiliate.affiliate_id'); 
+		$query = $this->db->get();
+
+		$affiliates =  $query->result_array();
+		return $affiliates;
+	}
+
+		/**
+	 * Get list of affiliates with their monthly compliance status
+	 *
+	 * @param  int $limit
+	 * @param  int $start
+	 * @param  array $filter
+	 * @return void
+	 */
+	public function monthly_compliance_status_listing($limit = NULL, $start = NULL, $filter = NULL,$affiliate_id)
+	{
+		$this->db->select('affiliate.affiliate_id,city,stateabbreviation as state,compliance_status,status_flags.name as status_name,status_flags.icon');
+		$this->db->from('affiliate');
+		$this->db->join('affiliate_compliance_status_monthly cms', 'cms.affiliate_id = affiliate.affiliate_id');
+		$this->db->join('state', 'state.stateid = affiliate.state');
+		$this->db->join('status_flags', 'status_flags.id = cms.compliance_status');
+		if(isset($affiliate_id)){
+			$this->db->where('affiliate.affiliate_id', $affiliate_id);
+
+		}
+		if(isset($filter['affiliate'])){
+			unset($filter['affiliate']);
+		}
+
+		if( $filter !== NULL )
+		{
+			$this->db->where($filter);
+		}
+		$query = $this->db->get();
+		 return $query->row_array();
+	}
+	/**
+	 * Get list of affiliates with their quarterly compliance status
+	 *
+	 * @param  int $limit
+	 * @param  int $start
+	 * @param  array $filter
+	 * @return void
+	 */
+	public function quarterly_compliance_status_listing($limit = NULL, $start = NULL, $filter = NULL,$affiliate_id)
+	{
+		$this->db->select('affiliate.affiliate_id,city,stateabbreviation as state,compliance_status,status_flags.name as status_name,icon');
+		$this->db->from('affiliate');
+		$this->db->join('affiliate_compliance_status_quarterly cqs', 'cqs.affiliate_id = affiliate.affiliate_id');
+		$this->db->join('state', 'state.stateid = affiliate.state');
+		$this->db->join('status_flags', 'status_flags.id = cqs.compliance_status');
+		if($affiliate_id){
+			$this->db->where('affiliate.affiliate_id', $affiliate_id);
+
+		}
+		if(isset($filter['affiliate'])){
+			unset($filter['affiliate']);
+		}
+
+		if( $filter !== NULL )
+		{
+			$this->db->where($filter);
+		}
+		$query = $this->db->get();
+		return $query->row_array();
+	}
+
+		/**
+	 * Get list of affiliates with their yearly compliance status
+	 *
+	 * @param  int $limit
+	 * @param  int $start
+	 * @param  array $filter
+	 * @return void
+	 */
+	public function yearly_compliance_status_listing($limit = NULL, $start = NULL, $filter = NULL,$affiliate_id)
+	{
+		$this->db->select('affiliate.affiliate_id,city,stateabbreviation as state,compliance_status,status_flags.name as status_name,icon');
+		$this->db->from('affiliate');
+		$this->db->join('affiliate_compliance_status_yearly cys', 'cys.affiliate_id = affiliate.affiliate_id');
+		$this->db->join('state', 'state.stateid = affiliate.state');
+		$this->db->join('status_flags', 'status_flags.id = cys.compliance_status');
+		
+		if($affiliate_id){
+			$this->db->where('affiliate.affiliate_id', $affiliate_id);
+
+		}
+		if(isset($filter['affiliate'])){
+			unset($filter['affiliate']);
+		}
+
+		if( $filter !== NULL )
+		{
+			
+			$this->db->where($filter);
+		}
+		$query = $this->db->get();
+		return $query->row_array();
 	}
 }
