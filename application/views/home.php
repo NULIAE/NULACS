@@ -1,3 +1,11 @@
+<style>
+.btn-round-ib{
+  background-color: #fff;
+}
+.btn-round-ib.active{
+  box-shadow : 0 0 0px 0.2rem #a10707 !important;
+} 
+</style>
 <main class="exeDashboard">
     <div class="container">
        <div class="Wrapper">
@@ -33,11 +41,10 @@
          <div class="row justify-content-between py-3">
                 <div class="col-sm-18 p-0">
                   <div class="textIcons">
-
-                    <a class="btn btn-round-ib ml-0 btnSort" href="<?php echo base_url('home/filter_affiliates?compliance_status=11');?>" data-rel="tooltip" data-placement="bottom" title="Indeterminate"><i class="i i-Indeterminate"></i><span class="sr-only">Indeterminate</span></a>
-                    <a class="btn btn-round-ib btnSort" href="<?php echo base_url('home/filter_affiliates?compliance_status=8');?>" data-rel="tooltip" data-placement="bottom" title="Compliance"><i class="i i-compliant"></i><span class="sr-only">Compliance</span></a>
-                    <a class="btn btn-round-ib btnSort" href="<?php echo base_url('home/filter_affiliates?compliance_status=9');?>" data-rel="tooltip" data-placement="bottom" title="Non Compliance"><i class="i i-non-compliant"></i><span class="sr-only">Non Compliance</span></a>
-                    <a class="btn btn-round-ib btnSort" href="<?php echo base_url('home/filter_affiliates?compliance_status=10');?>" data-rel="tooltip" data-placement="bottom" title="Waiting"><i class="i i-waiting"></i><span class="sr-only">Waiting</span></a>
+                    <a class="btn btn-round-ib ml-0 btnSort" href="<?php echo base_url('home/filter_affiliates?compliance_status=11');?>" data-rel="tooltip" data-placement="bottom" title="Indeterminate"><i class="i i-Indeterminate inter"></i><span class="sr-only">Indeterminate</span></a>
+                    <a class="btn btn-round-ib btnSort" href="<?php echo base_url('home/filter_affiliates?compliance_status=8');?>" data-rel="tooltip" data-placement="bottom" title="Compliance"><i class="i i-compliant cmplt"></i><span class="sr-only">Compliance</span></a>
+                    <a class="btn btn-round-ib btnSort" href="<?php echo base_url('home/filter_affiliates?compliance_status=9');?>" data-rel="tooltip" data-placement="bottom" title="Non Compliance"><i class="i i-non-compliant n-cmplt"></i><span class="sr-only">Non Compliance</span></a>
+                    <a class="btn btn-round-ib btnSort" href="<?php echo base_url('home/filter_affiliates?compliance_status=10');?>" data-rel="tooltip" data-placement="bottom" title="Waiting"><i class="i i-waiting wait"></i><span class="sr-only">Waiting</span></a>
                     
                  </div>
               </div>
