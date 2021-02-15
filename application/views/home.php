@@ -92,7 +92,7 @@
 									<td><?php echo $monthArray[$row['month']]; ?></td>
 									<td><?php echo $row['year']; ?></td>
 									<td><div class="icon-rounded" data-rel="tooltip" data-placement="bottom" title="<?php echo $row['status_name']; ?>"><?php echo $row['icon']; ?></div></td>
-									<td class="f-b">46</td>
+									<td class="f-b"></td>
 									<td><?php echo isset($row['last_login']) ? date("m-d-Y | H:i", strtotime($row['last_login'])) : ""; ?></td>
 									</tr>
 									<?php endforeach; ?>
@@ -127,9 +127,9 @@
 	<td scope="row" class="t-l-c"><a href="{{link}}">{{city}},{{state}}</a></td>
 	<td>{{currentMonth}}</td>
 	<td>{{year}}</td>
-	<td><div class="icon-rounded">{{{icon}}}</div></td>
-	<td>46</td>
-	<td>12 Jun,2020 | 09:45</td>
+	<td><div class="icon-rounded" data-rel="tooltip" data-placement="bottom" title="{{status_name}}">{{{icon}}}</div></td>
+	<td></td>
+	<td>{{lastLogin}}</td>
 </tr>
 {{/affiliates}}
 {{^affiliates}}

@@ -78,10 +78,17 @@ $(function(){
 				"currentMonth": function () {
 					return Intl.DateTimeFormat('en', { month: 'short' }).format(data.month).toUpperCase();
 				},
+				"lastLogin": function () {
+					if(this.last_login)
+						return  moment(this.last_login, "YYYY-MM-DD hh:mm:ss").format("MM-DD-YYYY | HH:mm");
+					else
+						return null;
+				},
 				"link": function () {
 					return base_url + 'module/affiliate/status/details/' + this.affiliate_id;
 				} 
 			}));
+			$('[data-rel="tooltip"]').tooltip();
 		});
 	}
 });
