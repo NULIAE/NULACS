@@ -138,7 +138,7 @@
 
 					<div class="foot">
 						<button class="btn btn-dark btn-rounded min w-100px mr-2" type="submit">UPDATE</button>
-						<a class="btn btn-primary btn-rounded min w-100px">CANCEL</a>
+						<a class="btn btn-primary btn-rounded min w-100px" onclick="window.history.back();">CANCEL</a>
 					</div>
 					<input type="hidden" name="user_id" value="<?php echo $user['user_id']; ?>">
                 </form>

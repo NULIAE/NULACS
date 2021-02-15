@@ -62,6 +62,8 @@ $(function(){
 	
 	$(document).on("click", ".btnSort", function(e){
 		e.preventDefault();
+		$(this).siblings('a.active').removeClass('active');
+		$(this).addClass('active');
 		getAffiliates($(this).prop('href'), {});
 	});
 

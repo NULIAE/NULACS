@@ -106,22 +106,22 @@ $(function () {
 
 	//----- Update compliance status of an affiliate
 	$('.update-status .btn-lbl').on('click', function () {
-		$(this).siblings('a.btn-primary').removeClass('btn-primary');
-		$(this).toggleClass('btn-primary');
+		$(this).siblings('a.active').removeClass('active');
+		$(this).toggleClass('active');
 
 		var updateButton = $(this).siblings('button');
 		var compliance = $(updateButton).data('compliance');
-		if ($(updateButton).siblings('a.btn-primary').length == 1 && $(this).data('status') != compliance)
+		if ($(updateButton).siblings('a.active').length == 1 && $(this).data('status') != compliance)
 			$(updateButton).removeAttr('disabled');
 		else{
-			$(updateButton).siblings('[data-status="'+compliance+'"]').addClass('btn-primary');
+			$(updateButton).siblings('[data-status="'+compliance+'"]').addClass('active');
 			$(updateButton).attr('disabled', 'disabled');
 		}
 	});
 
 	$('.status-update-btn').on('click', function () {
 		var statusBtn = $(this);
-		var selectedStatusElement = statusBtn.siblings('a.btn-primary');
+		var selectedStatusElement = statusBtn.siblings('a.active');
 		if (selectedStatusElement.length == 1) {
 			var inputData = {
 				interval: $(this).data('interval'),
@@ -138,8 +138,8 @@ $(function () {
 				dataType: 'json'
 			}).done(function (data) {
 				if (data.success) {
-					$(selectedStatusElement).removeClass('btn-primary');
-					statusBtn.attr('disabled', 'disabled');
+					//$(selectedStatusElement).removeClass('active');
+					statusBtn.attr('disabled', 'disabled').data('compliance', $(selectedStatusElement).data('status'));
 				}
 				toastConfig.message = data.message;
 				$('#snackbar').NitroToast(toastConfig);
@@ -1011,6 +1011,325 @@ function openTab(val) {
 	$("#input-interval").val(val);
   }
 
+  function alert_msg(message_val){
+	var toastConfig = {
+		timeout: 5000,
+		position: 'top',
+		actionText: 'OK',
+		message: ''
+	};
+	toastConfig.message = message_val;
+	setTimeout(function () {
+		$('#snackbar').NitroToast(toastConfig);
+	}, 1000);
+}
+
+  $('.liquidity_v_blur').on('blur', function() {
+
+	var liquidity_assets_available_v = $('#liquidity_assets_available_v').val();
+	var liquidity_contractual_restrictions_v = $('#liquidity_contractual_restrictions_v').val();
+	var liquidity_restrictions_by_donor_v = $('#liquidity_restrictions_by_donor_v').val();
+	if(liquidity_assets_available_v || liquidity_contractual_restrictions_v || liquidity_restrictions_by_donor_v){
+		$("#liquidity_assets_available_v").prop('required',true);
+		$("#liquidity_contractual_restrictions_v").prop('required',true);
+		$("#liquidity_restrictions_by_donor_v").prop('required',true);
+	}else{
+		$("#liquidity_assets_available_v").prop('required',false);
+		$("#liquidity_contractual_restrictions_v").prop('required',false);
+		$("#liquidity_restrictions_by_donor_v").prop('required',false);
+		$("#liquidity_v").val('');
+	}
+
+	if(liquidity_assets_available_v && liquidity_contractual_restrictions_v && liquidity_restrictions_by_donor_v){
+
+		var liquidity_s =  ((liquidity_assets_available_v) - ((+liquidity_contractual_restrictions_v) + (+liquidity_restrictions_by_donor_v)) )  ;
 
 
+		if($.isNumeric(liquidity_s) && liquidity_s > 0  ) { 
+			$("#liquidity_v").val(liquidity_s);
+		}else{
+			alert_msg("Enter vaild number");
+			$("#liquidity_v").val('');
+			$("#liquidity_assets_available_v").val('');
+			$("#liquidity_contractual_restrictions_v").val('');
+			$("#liquidity_restrictions_by_donor_v").val('');
 
+		}
+	}
+});
+
+$('.current_ratio_blur').on('blur', function() {
+	var current_assets_v = $('#current_assets_v').val();
+	var current_liabilities_v = $('#current_liabilities_v').val();
+	if(current_assets_v || current_liabilities_v){
+		$("#current_assets_v").prop('required',true);
+		$("#current_liabilities_v").prop('required',true);
+	}else{
+		$("#current_assets_v").prop('required',false);
+		$("#current_liabilities_v").prop('required',false);
+		$("#current_ratio_v").val('');
+	}
+	if(current_assets_v && current_liabilities_v){
+
+		var current_ratio_s =  ((current_assets_v) / (current_liabilities_v))   ;
+
+		if($.isNumeric(current_ratio_s) && current_ratio_s > 0) { 
+			$("#current_ratio_v").val(current_ratio_s);
+		}else{
+
+			alert_msg("Enter vaild number");
+			$("#current_assets_v").val('');
+			$("#current_liabilities_v").val('');
+			$("#current_ratio_v").val('');
+
+		}
+		
+	}
+});
+
+$('.current_debt_ratio_blur').on('blur', function() {
+	var total_liabilities_v = $('#total_liabilities_v').val();
+	var total_assets_v = $('#total_assets_v').val();
+	if(total_liabilities_v || total_assets_v){
+		$("#total_liabilities_v").prop('required',true);
+		$("#total_assets_v").prop('required',true);
+	}else{
+		$("#total_liabilities_v").prop('required',false);
+		$("#total_assets_v").prop('required',false);
+		$("#current_debt_ratio_v").val('');
+
+	}
+	if(total_liabilities_v && total_assets_v){
+
+		var current_debt_ratio_s =  ((total_liabilities_v) / (total_assets_v))   ;
+
+		if($.isNumeric(current_debt_ratio_s)  && current_debt_ratio_s > 0) { 
+			$("#current_debt_ratio_v").val(current_debt_ratio_s);
+		}else{
+
+			alert_msg("Enter vaild number");
+			$("#total_liabilities_v").val('');
+			$("#total_assets_v").val('');
+			$("#current_debt_ratio_v").val('');
+
+		}
+		
+	}
+});
+
+
+$('.change_in_cash_ytd_blur').on('blur', function() {
+
+	var from_operations_v = $('#from_operations_v').val();
+	var from_financing_v = $('#from_financing_v').val();
+	var from_investing_v = $('#from_investing_v').val();
+	if(from_operations_v || from_financing_v || from_investing_v){
+		$("#from_operations_v").prop('required',true);
+		$("#from_financing_v").prop('required',true);
+		$("#from_investing_v").prop('required',true);
+	}else{
+		$("#from_operations_v").prop('required',false);
+		$("#from_financing_v").prop('required',false);
+		$("#from_investing_v").prop('required',false);
+		$("#change_in_cash_ytd_v").val('');
+	}
+
+	if(from_operations_v && from_financing_v && from_investing_v){
+
+		var change_in_cash_ytd_s =  ((+from_financing_v) + (+from_operations_v) + (+from_investing_v))   ;
+
+
+		if($.isNumeric(change_in_cash_ytd_s) && change_in_cash_ytd_s > 0) { 
+			$("#change_in_cash_ytd_v").val(change_in_cash_ytd_s);
+		}else{
+			alert_msg("Enter vaild number");
+			$("#change_in_cash_ytd_v").val('');
+			$("#from_operations_v").val('');
+			$("#from_financing_v").val('');
+			$("#from_investing_v").val('');
+
+		}
+	}
+});
+
+
+$('.operating_efficiency_program_value_blur').on('blur', function() {
+	var operating_efficiency_program_expense_v = $('#operating_efficiency_program_expense_v').val();
+	var operating_efficiency_program_total_expense_v = $('#operating_efficiency_program_total_expense_v').val();
+	if(operating_efficiency_program_expense_v || operating_efficiency_program_total_expense_v){
+		$("#operating_efficiency_program_expense_v").prop('required',true);
+		$("#operating_efficiency_program_total_expense_v").prop('required',true);
+	}else{
+		$("#operating_efficiency_program_expense_v").prop('required',false);
+		$("#operating_efficiency_program_total_expense_v").prop('required',false);
+		$("#operating_efficiency_program_value_v").val('');
+
+	}
+	if(operating_efficiency_program_expense_v && operating_efficiency_program_total_expense_v){
+
+		var operating_efficiency_program_value_s =  ((operating_efficiency_program_expense_v) / (operating_efficiency_program_total_expense_v))   ;
+
+		if($.isNumeric(operating_efficiency_program_value_s) && operating_efficiency_program_value_s > 0) { 
+			$("#operating_efficiency_program_value_v").val(operating_efficiency_program_value_s);
+		}else{
+
+			alert_msg("Enter vaild number");
+			$("#operating_efficiency_program_expense_v").val('');
+			$("#operating_efficiency_program_total_expense_v").val('');
+			$("#operating_efficiency_program_value_v").val('');
+
+		}
+		
+	}
+});
+
+
+$('.operating_efficiency_admin_value_blur').on('blur', function() {
+	var operating_efficiency_admin_expense_v = $('#operating_efficiency_admin_expense_v').val();
+	var operating_efficiency_admin_total_expense_v = $('#operating_efficiency_admin_total_expense_v').val();
+	if(operating_efficiency_admin_expense_v || operating_efficiency_admin_total_expense_v){
+		$("#operating_efficiency_admin_expense_v").prop('required',true);
+		$("#operating_efficiency_admin_total_expense_v").prop('required',true);
+	}else{
+		$("#operating_efficiency_admin_expense_v").prop('required',false);
+		$("#operating_efficiency_admin_total_expense_v").prop('required',false);
+		$("#operating_efficiency_admin_value_v").val('');
+
+	}
+	if(operating_efficiency_admin_expense_v && operating_efficiency_admin_total_expense_v){
+
+		var operating_efficiency_admin_value_s =  ((operating_efficiency_admin_expense_v) / (operating_efficiency_admin_total_expense_v))   ;
+
+		if($.isNumeric(operating_efficiency_admin_value_s) && operating_efficiency_admin_value_s > 0) { 
+			$("#operating_efficiency_admin_value_v").val(operating_efficiency_admin_value_s);
+		}else{
+
+			alert_msg("Enter vaild number");
+			$("#operating_efficiency_admin_expense_v").val('');
+			$("#operating_efficiency_admin_total_expense_v").val('');
+			$("#operating_efficiency_admin_value_v").val('');
+
+		}
+		
+	}
+});
+
+$('.operating_efficiency_fundraising_value_blur').on('blur', function() {
+	var operating_efficiency_fundraising_expense_v = $('#operating_efficiency_fundraising_expense_v').val();
+	var operating_efficiency_fundraising_total_expense_v = $('#operating_efficiency_fundraising_total_expense_v').val();
+	if(operating_efficiency_fundraising_expense_v || operating_efficiency_fundraising_total_expense_v){
+		$("#operating_efficiency_fundraising_expense_v").prop('required',true);
+		$("#operating_efficiency_fundraising_total_expense_v").prop('required',true);
+	}else{
+		$("#operating_efficiency_fundraising_expense_v").prop('required',false);
+		$("#operating_efficiency_fundraising_total_expense_v").prop('required',false);
+		$("#operating_efficiency_fundraising_value_v").val('');
+
+	}
+	if(operating_efficiency_fundraising_expense_v && operating_efficiency_fundraising_total_expense_v){
+
+		var operating_efficiency_fundraising_value_s =  ((operating_efficiency_fundraising_expense_v) / (operating_efficiency_fundraising_total_expense_v))   ;
+
+		if($.isNumeric(operating_efficiency_fundraising_value_s)  && operating_efficiency_fundraising_value_s > 0) { 
+			$("#operating_efficiency_fundraising_value_v").val(operating_efficiency_fundraising_value_s);
+		}else{
+
+			alert_msg("Enter vaild number");
+			$("#operating_efficiency_fundraising_expense_v").val('');
+			$("#operating_efficiency_fundraising_total_expense_v").val('');
+			$("#operating_efficiency_fundraising_value_v").val('');
+
+		}
+		
+	}
+});
+
+$('.change_in_net_assets_in_quarter_blur').on('blur', function() {
+
+	var net_assets_in_last_quarter_value_v = $('#net_assets_in_last_quarter_value_v').val();
+	var less_net_assets_in_last_quarter_value_v = $('#less_net_assets_in_last_quarter_value_v').val();
+	if(net_assets_in_last_quarter_value_v || less_net_assets_in_last_quarter_value_v){
+		$("#net_assets_in_last_quarter_value_v").prop('required',true);
+		$("#less_net_assets_in_last_quarter_value_v").prop('required',true);
+	}else{
+		$("#net_assets_in_last_quarter_value_v").prop('required',false);
+		$("#less_net_assets_in_last_quarter_value_v").prop('required',false);
+		$("#change_in_net_assets_in_quarter_v").val('');
+	}
+
+	if(net_assets_in_last_quarter_value_v && less_net_assets_in_last_quarter_value_v){
+
+		var change_in_net_assets_in_quarter_s =  (net_assets_in_last_quarter_value_v - less_net_assets_in_last_quarter_value_v)  ;
+
+
+		if($.isNumeric(change_in_net_assets_in_quarter_s)  && change_in_net_assets_in_quarter_s > 0) { 
+			$("#change_in_net_assets_in_quarter_v").val(change_in_net_assets_in_quarter_s);
+		}else{
+			alert_msg("Enter vaild number");
+			$("#net_assets_in_last_quarter_value_v").val('');
+			$("#less_net_assets_in_last_quarter_value_v").val('');
+			$("#change_in_net_assets_in_quarter_v").val('');
+
+		}
+	}
+});
+
+$('.borad_giving_blur').on('blur', function() {
+
+	var direct_borad_giving_v = $('#direct_borad_giving_v').val();
+	var borad_commitment_v = $('#borad_commitment_v').val();
+	if(direct_borad_giving_v || borad_commitment_v){
+		$("#direct_borad_giving_v").prop('required',true);
+		$("#borad_commitment_v").prop('required',true);
+	}else{
+		$("#direct_borad_giving_v").prop('required',false);
+		$("#borad_commitment_v").prop('required',false);
+		$("#borad_giving_v").val('');
+	}
+
+	if(direct_borad_giving_v && borad_commitment_v){
+
+		var borad_giving_s =  (direct_borad_giving_v / borad_commitment_v)  ;
+
+
+		if($.isNumeric(borad_giving_s) && borad_giving_s > 0) { 
+			$("#borad_giving_v").val(borad_giving_s);
+		}else{
+			alert_msg("Enter vaild number");
+			$("#direct_borad_giving_v").val('');
+			$("#borad_commitment_v").val('');
+			$("#borad_giving_v").val('');
+
+		}
+	}
+});
+
+$('.operating_reserves_percentage_blur').on('blur', function() {
+
+	var operating_reserves_amount_v = $('#operating_reserves_amount_v').val();
+	var three_months_annual_expenses_v = $('#three_months_annual_expenses_v').val();
+	if(operating_reserves_amount_v || three_months_annual_expenses_v){
+		$("#operating_reserves_amount_v").prop('required',true);
+		$("#three_months_annual_expenses_v").prop('required',true);
+	}else{
+		$("#operating_reserves_amount_v").prop('required',false);
+		$("#three_months_annual_expenses_v").prop('required',false);
+		$("#operating_reserves_percentage_v").val('');
+	}
+
+	if(operating_reserves_amount_v && three_months_annual_expenses_v){
+
+		var operating_reserves_percentage_s =  (operating_reserves_amount_v / three_months_annual_expenses_v)  ;
+
+
+		if($.isNumeric(operating_reserves_percentage_s) && operating_reserves_percentage_s > 0) { 
+			$("#operating_reserves_percentage_v").val(operating_reserves_percentage_s);
+		}else{
+			alert_msg("Enter vaild number");
+			$("#operating_reserves_amount_v").val('');
+			$("#three_months_annual_expenses_v").val('');
+			$("#operating_reserves_percentage_v").val('');
+
+		}
+	}
+});

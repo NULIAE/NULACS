@@ -45,7 +45,7 @@
 
 							<div class="passwordfoot">
 								<button class="btn btn-dark btn-rounded min w-100px mr-2">RESET PASSWORD</button>
-								<a class="btn btn-primary btn-rounded min w-100px">CANCEL</a>
+								<a class="btn btn-primary btn-rounded min w-100px" onclick="window.history.back();">CANCEL</a>
 							</div>
 
 						</form>

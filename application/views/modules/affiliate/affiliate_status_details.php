@@ -23,11 +23,11 @@ $quarterArray = array(
 {
  border-color: red !important;
 }
-.update-status a.btn-primary
-{
-color: #fff;
-background-color: #000;
-border-color: #000;
+.btn-round-ib{
+  background-color: #fff;
+}
+.btn-round-ib.active{
+  box-shadow : 0 0 0px 0.2rem #a10707 !important;
 }
 </style>
 <main class="user">
@@ -319,10 +319,10 @@ border-color: #000;
 												<div class="p-a-15 text-md-right">
 												<span class="h5">Affiliate monthly compliance for <?php echo strtoupper(date('M', mktime(0, 0, 0, $month, 10))).' '.$monthly_year; ?></span>
 
-												<a class="btn btn-round-ib btn-lbl ml-3 <?php if($monthly_compliance == 8) echo "btn-primary"; ?>" data-status="8" data-rel="tooltip" data-placement="bottom" title="Compliance"><i class="i i-compliant"></i><span class="sr-only">Compliance</span></a>
-												<a class="btn btn-round-ib btn-lbl <?php if($monthly_compliance == 9) echo "btn-primary"; ?>" data-status="9" data-rel="tooltip" data-placement="bottom" title="Non Compliance"><i class="i i-non-compliant"></i><span class="sr-only">Non Compliance</span></a>
-												<a class="btn btn-round-ib btn-lbl <?php if($monthly_compliance == 10) echo "btn-primary"; ?>" data-status="10" data-rel="tooltip" data-placement="bottom" title="Waiting"><i class="i i-waiting"></i><span class="sr-only">Waiting</span></a>
-												<a class="btn btn-round-ib btn-lbl <?php if($monthly_compliance == 11) echo "btn-primary"; ?>" data-status="11" data-rel="tooltip" data-placement="bottom" title="Indeterminate"><i class="i i-Indeterminate"></i><span class="sr-only">Indeterminate</span></a>
+												<a class="btn btn-round-ib btn-lbl ml-3 <?php if($monthly_compliance == 8) echo "active"; ?>" data-status="8" data-rel="tooltip" data-placement="bottom" title="Compliance"><i class="i i-compliant cmplt"></i><span class="sr-only">Compliance</span></a>
+												<a class="btn btn-round-ib btn-lbl <?php if($monthly_compliance == 9) echo "active"; ?>" data-status="9" data-rel="tooltip" data-placement="bottom" title="Non Compliance"><i class="i i-non-compliant n-cmplt"></i><span class="sr-only">Non Compliance</span></a>
+												<a class="btn btn-round-ib btn-lbl <?php if($monthly_compliance == 10) echo "active"; ?>" data-status="10" data-rel="tooltip" data-placement="bottom" title="Waiting"><i class="i i-waiting wait"></i><span class="sr-only">Waiting</span></a>
+												<a class="btn btn-round-ib btn-lbl <?php if($monthly_compliance == 11) echo "active"; ?>" data-status="11" data-rel="tooltip" data-placement="bottom" title="Indeterminate"><i class="i i-Indeterminate inter"></i><span class="sr-only">Indeterminate</span></a>
 
 												<button class="btn btn-primary btn-rounded min w-100px status-update-btn" data-compliance="<?php echo $monthly_compliance; ?>" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>" data-interval="month" disabled>UPDATE</button>
 												</div>
@@ -552,10 +552,10 @@ border-color: #000;
 											<div class="p-a-15 text-md-right">
 											<span class="h5">Affiliate quarterly compliance for <?php echo $quarterArray[$quarter]; ?></span>
 
-											<a class="btn btn-round-ib btn-lbl ml-3 <?php if($quarterly_compliance == 8) echo "btn-primary"; ?>" data-status="8" data-rel="tooltip" data-placement="bottom" title="Compliance"><i class="i i-compliant"></i><span class="sr-only">Compliance</span></a>
-											<a class="btn btn-round-ib btn-lbl <?php if($quarterly_compliance == 9) echo "btn-primary"; ?>" data-status="9" data-rel="tooltip" data-placement="bottom" title="Non Compliance"><i class="i i-non-compliant"></i><span class="sr-only">Non Compliance</span></a>
-											<a class="btn btn-round-ib btn-lbl <?php if($quarterly_compliance == 10) echo "btn-primary"; ?>" data-status="10" data-rel="tooltip" data-placement="bottom" title="Waiting"><i class="i i-waiting"></i><span class="sr-only">Waiting</span></a>
-											<a class="btn btn-round-ib btn-lbl <?php if($quarterly_compliance == 11) echo "btn-primary"; ?>" data-status="11" data-rel="tooltip" data-placement="bottom" title="Indeterminate"><i class="i i-Indeterminate"></i><span class="sr-only">Indeterminate</span></a>
+											<a class="btn btn-round-ib btn-lbl ml-3 <?php if($quarterly_compliance == 8) echo "active"; ?>" data-status="8" data-rel="tooltip" data-placement="bottom" title="Compliance"><i class="i i-compliant cmplt"></i><span class="sr-only">Compliance</span></a>
+											<a class="btn btn-round-ib btn-lbl <?php if($quarterly_compliance == 9) echo "active"; ?>" data-status="9" data-rel="tooltip" data-placement="bottom" title="Non Compliance"><i class="i i-non-compliant n-cmplt"></i><span class="sr-only">Non Compliance</span></a>
+											<a class="btn btn-round-ib btn-lbl <?php if($quarterly_compliance == 10) echo "active"; ?>" data-status="10" data-rel="tooltip" data-placement="bottom" title="Waiting"><i class="i i-waiting wait"></i><span class="sr-only">Waiting</span></a>
+											<a class="btn btn-round-ib btn-lbl <?php if($quarterly_compliance == 11) echo "active"; ?>" data-status="11" data-rel="tooltip" data-placement="bottom" title="Indeterminate"><i class="i i-Indeterminate inter"></i><span class="sr-only">Indeterminate</span></a>
 
 											<button class="btn btn-primary btn-rounded min w-100px status-update-btn" data-compliance="<?php echo $quarterly_compliance; ?>" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>" data-interval="quarter" disabled>UPDATE</button>
 											</div>
@@ -786,10 +786,10 @@ border-color: #000;
 											<div class="p-a-15 text-md-right">
 											<span class="h5">Affiliate yearly compliance for <?php echo strtoupper(date('M', strtotime($affiliate['year_start'])))." ".$yearly_year; ?> - <?php echo strtoupper(date('M Y', strtotime("+11 month", mktime(0, 0, 0, $startMonth, 1, $yearly_year)))); ?></span>
 
-											<a class="btn btn-round-ib btn-lbl ml-3 <?php if($yearly_compliance == 8) echo "btn-primary"; ?>" data-status="8" data-rel="tooltip" data-placement="bottom" title="Compliance"><i class="i i-compliant"></i><span class="sr-only">Compliance</span></a>
-											<a class="btn btn-round-ib btn-lbl <?php if($yearly_compliance == 9) echo "btn-primary"; ?>" data-status="9" data-rel="tooltip" data-placement="bottom" title="Non Compliance"><i class="i i-non-compliant"></i><span class="sr-only">Non Compliance</span></a>
-											<a class="btn btn-round-ib btn-lbl <?php if($yearly_compliance == 10) echo "btn-primary"; ?>" data-status="10" data-rel="tooltip" data-placement="bottom" title="Waiting"><i class="i i-waiting"></i><span class="sr-only">Waiting</span></a>
-											<a class="btn btn-round-ib btn-lbl <?php if($yearly_compliance == 11) echo "btn-primary"; ?>" data-status="11" data-rel="tooltip" data-placement="bottom" title="Indeterminate"><i class="i i-Indeterminate"></i><span class="sr-only">Indeterminate</span></a>
+											<a class="btn btn-round-ib btn-lbl ml-3 <?php if($yearly_compliance == 8) echo "active"; ?>" data-status="8" data-rel="tooltip" data-placement="bottom" title="Compliance"><i class="i i-compliant cmplt"></i><span class="sr-only">Compliance</span></a>
+											<a class="btn btn-round-ib btn-lbl <?php if($yearly_compliance == 9) echo "active"; ?>" data-status="9" data-rel="tooltip" data-placement="bottom" title="Non Compliance"><i class="i i-non-compliant n-cmplt"></i><span class="sr-only">Non Compliance</span></a>
+											<a class="btn btn-round-ib btn-lbl <?php if($yearly_compliance == 10) echo "active"; ?>" data-status="10" data-rel="tooltip" data-placement="bottom" title="Waiting"><i class="i i-waiting wait"></i><span class="sr-only">Waiting</span></a>
+											<a class="btn btn-round-ib btn-lbl <?php if($yearly_compliance == 11) echo "active"; ?>" data-status="11" data-rel="tooltip" data-placement="bottom" title="Indeterminate"><i class="i i-Indeterminate inter"></i><span class="sr-only">Indeterminate</span></a>
 
 											<button class="btn btn-primary btn-rounded min w-100px status-update-btn" data-compliance="<?php echo $yearly_compliance; ?>" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>" data-interval="year" disabled>UPDATE</button>
 											</div>
@@ -1823,14 +1823,14 @@ border-color: #000;
 									<li class="wrapIn">
 										<div class="d-flex align-items-center">
 											<div>Liquidity $</div>
-											<div class="innControll"><input type="text" name="liquidity" class="form-control" value="<?php echo isset($key_indicators['liquidity']) ? $key_indicators['liquidity'] : ""; ?>"/> </div>
+											<div class="innControll"><input type="text" name="liquidity" id="liquidity_v" class="form-control liquidity_v_blur" value="<?php echo isset($key_indicators['liquidity']) ? $key_indicators['liquidity'] : ""; ?>" readonly/> </div>
 										</div>
 										<div class="d-flex align-items-center">
 											<div>(Definition of Liquidity - Financial assets available to meet cash needs for general expenditures within one year).</div>
 										</div>
 										<div class="d-flex align-items-center">
 											<div>Financial assets $ </div>
-											<div class="innControll"><input type="text" name="liquidity_assets_available" class="form-control" value="<?php echo isset($key_indicators['liquidity_assets_available']) ? $key_indicators['liquidity_assets_available'] : ""; ?>" /> </div>
+											<div class="innControll"><input type="text" name="liquidity_assets_available" id="liquidity_assets_available_v" class="form-control liquidity_v_blur" value="<?php echo isset($key_indicators['liquidity_assets_available']) ? $key_indicators['liquidity_assets_available'] : ""; ?>" /> </div>
 										</div>
 										<div class="d-flex align-items-center">
 											<div>Less those unavailable for general expenditures within one year, due to: </div>
@@ -1838,52 +1838,52 @@ border-color: #000;
 
 										<div class="d-flex align-items-center">
 											<div>(1) Contractual or donor-imposed restrictions: $</div>
-											<div class="innControll"><input type="text" name="liquidity_contractual_restrictions" class="form-control" value="<?php echo isset($key_indicators['liquidity_contractual_restrictions']) ? $key_indicators['liquidity_contractual_restrictions'] : ""; ?>" /> </div>
+											<div class="innControll"><input type="text" name="liquidity_contractual_restrictions" id="liquidity_contractual_restrictions_v" class="form-control liquidity_v_blur" value="<?php echo isset($key_indicators['liquidity_contractual_restrictions']) ? $key_indicators['liquidity_contractual_restrictions'] : ""; ?>" /> </div>
 										</div>
 
 										<div class="d-flex align-items-center">
 											<div>(2) Restricted by donor with time or purpose restrictions: $</div>
-											<div class="innControll"><input type="text" name="liquidity_restrictions_by_donor" class="form-control" value="<?php echo isset($key_indicators['liquidity_restrictions_by_donor']) ? $key_indicators['liquidity_restrictions_by_donor'] : ""; ?>" /> </div>
+											<div class="innControll"><input type="text" name="liquidity_restrictions_by_donor" id="liquidity_restrictions_by_donor_v" class="form-control liquidity_v_blur" value="<?php echo isset($key_indicators['liquidity_restrictions_by_donor']) ? $key_indicators['liquidity_restrictions_by_donor'] : ""; ?>" /> </div>
 										</div>
 									</li>
 									<li class="wrapIn">
 										<div class="d-flex align-items-center">
 											<div>Current Ratio</div>
-											<div class="innControll"><input type="text" name="current_ratio" class="form-control" value="<?php echo isset($key_indicators['current_ratio']) ? $key_indicators['current_ratio'] : ""; ?>" /> </div>
+											<div class="innControll"><input type="text" name="current_ratio" id="current_ratio_v" class="form-control current_ratio_blur" value="<?php echo isset($key_indicators['current_ratio']) ? $key_indicators['current_ratio'] : ""; ?>" readonly/> </div>
 											<div>% (Current Assets $</div>
-											<div class="innControll"><input type="text" name="current_assets" class="form-control" value="<?php echo isset($key_indicators['current_assets']) ? $key_indicators['current_assets'] : ""; ?>" /> </div>
+											<div class="innControll"><input type="text" name="current_assets" id="current_assets_v" class="form-control current_ratio_blur" value="<?php echo isset($key_indicators['current_assets']) ? $key_indicators['current_assets'] : ""; ?>" /> </div>
 											<div>/ Current Liabilities $</div>
-											<div class="innControll"><input type="text" name="current_liabilities" class="form-control" value="<?php echo isset($key_indicators['current_liabilities']) ? $key_indicators['current_liabilities'] : ""; ?>" /> </div>)
+											<div class="innControll"><input type="text" name="current_liabilities" id="current_liabilities_v" class="form-control current_ratio_blur" value="<?php echo isset($key_indicators['current_liabilities']) ? $key_indicators['current_liabilities'] : ""; ?>" /> </div>)
 										</div>
 									</li>
 
 									<li class="wrapIn">
 										<div class="d-flex align-items-center">
 											<div>Current Debt Ratio (Compared to LYYTD) - </div>
-											<div class="innControll"><input type="text" name="current_debt_ratio" class="form-control" value="<?php echo isset($key_indicators['current_debt_ratio']) ? $key_indicators['current_debt_ratio'] : ""; ?>" /></div>
+											<div class="innControll"><input type="text" name="current_debt_ratio" id="current_debt_ratio_v" class="form-control current_debt_ratio_blur" value="<?php echo isset($key_indicators['current_debt_ratio']) ? $key_indicators['current_debt_ratio'] : ""; ?>" readonly/></div>
 											<div>% (Total Liabilities $</div>
-											<div class="innControll"><input type="text" name="total_liabilities" class="form-control" value="<?php echo isset($key_indicators['total_liabilities']) ? $key_indicators['total_liabilities'] : ""; ?>" /></div>
+											<div class="innControll"><input type="text" name="total_liabilities" id="total_liabilities_v" class="form-control current_debt_ratio_blur" value="<?php echo isset($key_indicators['total_liabilities']) ? $key_indicators['total_liabilities'] : ""; ?>" /></div>
 											<div>/ Total Assets $</div>
-											<div class="innControll"><input type="text" name="total_assets" class="form-control" value="<?php echo isset($key_indicators['total_assets']) ? $key_indicators['total_assets'] : ""; ?>" /></div>)
+											<div class="innControll"><input type="text" name="total_assets"  id="total_assets_v" class="form-control current_debt_ratio_blur" value="<?php echo isset($key_indicators['total_assets']) ? $key_indicators['total_assets'] : ""; ?>" /></div>)
 										</div>
 									</li>
 
 									<li class="wrapIn">
 										<div class="d-flex align-items-center">
 											<div>Change in Cash YTD	$</div>
-											<div class="innControll"><input type="text" name="change_in_cash_ytd" class="form-control" value="<?php echo isset($key_indicators['change_in_cash_ytd']) ? $key_indicators['change_in_cash_ytd'] : ""; ?>" /></div>
+											<div class="innControll"><input type="text" name="change_in_cash_ytd" id="change_in_cash_ytd_v" class="form-control change_in_cash_ytd_blur" value="<?php echo isset($key_indicators['change_in_cash_ytd']) ? $key_indicators['change_in_cash_ytd'] : ""; ?>" readonly/></div>
 										</div>
 										<div class="d-flex align-items-center">
 											<div>From Operations: $</div>
-											<div class="innControll"><input type="text" name="from_operations" class="form-control" value="<?php echo isset($key_indicators['from_operations']) ? $key_indicators['from_operations'] : ""; ?>" /></div>
+											<div class="innControll"><input type="text" name="from_operations" id="from_operations_v" class="form-control change_in_cash_ytd_blur" value="<?php echo isset($key_indicators['from_operations']) ? $key_indicators['from_operations'] : ""; ?>" /></div>
 										</div>
 										<div class="d-flex align-items-center">
 											<div>From Financing: $</div>
-											<div class="innControll"><input type="text" name="from_financing" class="form-control" value="<?php echo isset($key_indicators['from_financing']) ? $key_indicators['from_financing'] : ""; ?>" /></div>
+											<div class="innControll"><input type="text" name="from_financing" id="from_financing_v" class="form-control change_in_cash_ytd_blur" value="<?php echo isset($key_indicators['from_financing']) ? $key_indicators['from_financing'] : ""; ?>" /></div>
 										</div>
 										<div class="d-flex align-items-center">
 											<div>From Investing: $</div>
-											<div class="innControll"><input type="text" name="from_investing" class="form-control" value="<?php echo isset($key_indicators['from_investing']) ? $key_indicators['from_investing'] : ""; ?>" /></div>
+											<div class="innControll"><input type="text" name="from_investing" id="from_investing_v" class="form-control change_in_cash_ytd_blur" value="<?php echo isset($key_indicators['from_investing']) ? $key_indicators['from_investing'] : ""; ?>" /></div>
 										</div>
 									</li>
 									
@@ -1893,34 +1893,34 @@ border-color: #000;
 										</div>
 										<div class="d-flex align-items-center">
 											<div>Program</div>
-											<div class="innControll"><input type="text" name="operating_efficiency_program_value" class="form-control" value="<?php echo isset($key_indicators['operating_efficiency_program_value']) ? $key_indicators['operating_efficiency_program_value'] : ""; ?>" /> </div>
+											<div class="innControll"><input type="text" name="operating_efficiency_program_value" id="operating_efficiency_program_value_v" class="form-control operating_efficiency_program_value_blur" value="<?php echo isset($key_indicators['operating_efficiency_program_value']) ? $key_indicators['operating_efficiency_program_value'] : ""; ?>" readonly/> </div>
 											<div>% (Program Expense $</div>
-											<div class="innControll"><input type="text" name="operating_efficiency_program_expense" class="form-control" value="<?php echo isset($key_indicators['operating_efficiency_program_expense']) ? $key_indicators['operating_efficiency_program_expense'] : ""; ?>" /> </div>
+											<div class="innControll"><input type="text" name="operating_efficiency_program_expense" id="operating_efficiency_program_expense_v" class="form-control operating_efficiency_program_value_blur" value="<?php echo isset($key_indicators['operating_efficiency_program_expense']) ? $key_indicators['operating_efficiency_program_expense'] : ""; ?>" /> </div>
 											<div>/ Total Expense $ </div>
-											<div class="innControll"><input type="text" name="operating_efficiency_program_total_expense" class="form-control" value="<?php echo isset($key_indicators['operating_efficiency_program_total_expense']) ? $key_indicators['operating_efficiency_program_total_expense'] : ""; ?>" /> </div>)
+											<div class="innControll"><input type="text" name="operating_efficiency_program_total_expense" id="operating_efficiency_program_total_expense_v" class="form-control operating_efficiency_program_value_blur" value="<?php echo isset($key_indicators['operating_efficiency_program_total_expense']) ? $key_indicators['operating_efficiency_program_total_expense'] : ""; ?>" /> </div>)
 										</div>
 										<div class="d-flex align-items-center">
 											<div>Admin</div>
-											<div class="innControll"><input type="text" name="operating_efficiency_admin_value" class="form-control" value="<?php echo isset($key_indicators['operating_efficiency_admin_value']) ? $key_indicators['operating_efficiency_admin_value'] : ""; ?>" /> </div>
+											<div class="innControll"><input type="text" name="operating_efficiency_admin_value" id="operating_efficiency_admin_value_v" class="form-control operating_efficiency_admin_value_blur" value="<?php echo isset($key_indicators['operating_efficiency_admin_value']) ? $key_indicators['operating_efficiency_admin_value'] : ""; ?>" readonly/> </div>
 											<div>% (Admin Expense $</div>
-											<div class="innControll"><input type="text" name="operating_efficiency_admin_expense" class="form-control" value="<?php echo isset($key_indicators['operating_efficiency_admin_expense']) ? $key_indicators['operating_efficiency_admin_expense'] : ""; ?>" /> </div>
+											<div class="innControll"><input type="text" name="operating_efficiency_admin_expense" id="operating_efficiency_admin_expense_v" class="form-control operating_efficiency_admin_value_blur" value="<?php echo isset($key_indicators['operating_efficiency_admin_expense']) ? $key_indicators['operating_efficiency_admin_expense'] : ""; ?>" /> </div>
 											<div>/ Total Expense $ </div>
-											<div class="innControll"><input type="text" name="operating_efficiency_admin_total_expense" class="form-control" value="<?php echo isset($key_indicators['operating_efficiency_admin_total_expense']) ? $key_indicators['operating_efficiency_admin_total_expense'] : ""; ?>" /> </div>)
+											<div class="innControll"><input type="text" name="operating_efficiency_admin_total_expense" id="operating_efficiency_admin_total_expense_v" class="form-control operating_efficiency_admin_value_blur" value="<?php echo isset($key_indicators['operating_efficiency_admin_total_expense']) ? $key_indicators['operating_efficiency_admin_total_expense'] : ""; ?>" /> </div>)
 										</div>
 										<div class="d-flex align-items-center">
 											<div>Fundraising</div>
-											<div class="innControll"><input type="text" name="operating_efficiency_fundraising_value" class="form-control" value="<?php echo isset($key_indicators['operating_efficiency_fundraising_value']) ? $key_indicators['operating_efficiency_fundraising_value'] : ""; ?>" /> </div>
+											<div class="innControll"><input type="text" name="operating_efficiency_fundraising_value" id="operating_efficiency_fundraising_value_v" class="form-control operating_efficiency_fundraising_value_blur" value="<?php echo isset($key_indicators['operating_efficiency_fundraising_value']) ? $key_indicators['operating_efficiency_fundraising_value'] : ""; ?>" readonly/> </div>
 											<div>% (Fundraising Expense $</div>
-											<div class="innControll"><input type="text" name="operating_efficiency_fundraising_expense" class="form-control" value="<?php echo isset($key_indicators['operating_efficiency_fundraising_expense']) ? $key_indicators['operating_efficiency_fundraising_expense'] : ""; ?>" /> </div>
+											<div class="innControll"><input type="text" name="operating_efficiency_fundraising_expense" id="operating_efficiency_fundraising_expense_v" class="form-control operating_efficiency_fundraising_value_blur" value="<?php echo isset($key_indicators['operating_efficiency_fundraising_expense']) ? $key_indicators['operating_efficiency_fundraising_expense'] : ""; ?>" /> </div>
 											<div>/ Total Expense $ </div>
-											<div class="innControll"><input type="text" name="operating_efficiency_fundraising_total_expense" class="form-control" value="<?php echo isset($key_indicators['operating_efficiency_fundraising_total_expense']) ? $key_indicators['operating_efficiency_fundraising_total_expense'] : ""; ?>" /> </div>)
+											<div class="innControll"><input type="text" name="operating_efficiency_fundraising_total_expense" id="operating_efficiency_fundraising_total_expense_v" class="form-control operating_efficiency_fundraising_value_blur" value="<?php echo isset($key_indicators['operating_efficiency_fundraising_total_expense']) ? $key_indicators['operating_efficiency_fundraising_total_expense'] : ""; ?>" /> </div>)
 										</div>
 									</li>
 
 									<li class="wrapIn">
 										<div class="d-flex align-items-center">
 											<div>Change in N/A without donor restrictions (Quarter) $</div>
-											<div class="innControll"><input type="text" name="change_in_net_assets_in_quarter" class="form-control" value="<?php echo isset($key_indicators['change_in_net_assets_in_quarter']) ? $key_indicators['change_in_net_assets_in_quarter'] : ""; ?>" /> </div>
+											<div class="innControll"><input type="text" name="change_in_net_assets_in_quarter" id="change_in_net_assets_in_quarter_v" class="form-control change_in_net_assets_in_quarter_blur" value="<?php echo isset($key_indicators['change_in_net_assets_in_quarter']) ? $key_indicators['change_in_net_assets_in_quarter'] : ""; ?>" readonly/> </div>
 										</div>
 
 										<div class="d-flex align-items-center">
@@ -1932,7 +1932,7 @@ border-color: #000;
 												</div>
 											</div>
 											<div>$</div>
-											<div class="innControll"><input type="text" class="form-control" name="net_assets_in_last_quarter_value" value="<?php echo isset($key_indicators['net_assets_in_last_quarter_value']) ? $key_indicators['net_assets_in_last_quarter_value'] : ""; ?>" /> </div>
+											<div class="innControll"><input type="text" class="form-control change_in_net_assets_in_quarter_blur" name="net_assets_in_last_quarter_value" id="net_assets_in_last_quarter_value_v" value="<?php echo isset($key_indicators['net_assets_in_last_quarter_value']) ? $key_indicators['net_assets_in_last_quarter_value'] : ""; ?>" /> </div>
 											<div>,Less</div>
 										</div>
 
@@ -1945,7 +1945,7 @@ border-color: #000;
 												</div>
 											</div>
 											<div>$</div>
-											<div class="innControll"><input type="text" class="form-control" name="less_net_assets_in_last_quarter_value" value="<?php echo isset($key_indicators['less_net_assets_in_last_quarter_value']) ? $key_indicators['less_net_assets_in_last_quarter_value'] : ""; ?>" /> </div>
+											<div class="innControll"><input type="text" class="form-control change_in_net_assets_in_quarter_blur" name="less_net_assets_in_last_quarter_value" id="less_net_assets_in_last_quarter_value_v" value="<?php echo isset($key_indicators['less_net_assets_in_last_quarter_value']) ? $key_indicators['less_net_assets_in_last_quarter_value'] : ""; ?>" /> </div>
 										</div>
 									</li>
 
@@ -1963,7 +1963,7 @@ border-color: #000;
 									<li class="wrapIn">
 										<div class="d-flex align-items-center">
 										<div>Current Grants TY YTD</div>
-										<div class="innControll"><input type="text" class="form-control" name="change_in_grant_ty_ytd" value="<?php echo isset($key_indicators['change_in_grant_ty_ytd']) ? $key_indicators['change_in_grant_ty_ytd'] : ""; ?>" /> </div>
+										<div class="innControll"><input type="text" class="form-control" name="change_in_grant_ty_ytd" value="<?php echo isset($key_indicators['change_in_grant_ty_ytd']) ? $key_indicators['change_in_grant_ty_ytd'] : ""; ?>"/> </div>
 										<div>and $</div>
 										<div class="innControll"><input type="text" class="form-control" name="change_in_grant_ty_ytd_value" value="<?php echo isset($key_indicators['change_in_grant_ty_ytd_value']) ? $key_indicators['change_in_grant_ty_ytd_value'] : ""; ?>" /> </div>
 										<div>VS LY YTD</div>
@@ -1988,23 +1988,25 @@ border-color: #000;
 
 									<li class="wrapIn">
 										<div class="d-flex align-items-center">
-											<div>Board Giving – YTD Direct Board Contributions $</div>
-											<div class="innControll"><input type="text" name="borad_giving" class="form-control" value="<?php echo isset($key_indicators['borad_giving']) ? $key_indicators['borad_giving'] : ""; ?>" /> </div>
-											<div>, Total Annual Board Commitment $</div>
-											<div class="innControll"><input type="text" name="borad_commitment" class="form-control" value="<?php echo isset($key_indicators['borad_commitment']) ? $key_indicators['borad_commitment'] : ""; ?>" /> </div>
+											<div>Board Giving </div>
+											<div class="innControll"><input type="text" name="borad_giving" id="borad_giving_v" class="form-control borad_giving_blur" value="<?php echo isset($key_indicators['borad_giving']) ? $key_indicators['borad_giving'] : ""; ?>" readonly/> </div>
+											<div> YTD Direct Board Contributions $</div>
+											<div class="innControll"><input type="text" name="direct_borad_giving" id="direct_borad_giving_v" class="form-control borad_giving_blur" value="<?php echo isset($key_indicators['direct_borad_giving']) ? $key_indicators['direct_borad_giving'] : ""; ?>" /> </div>
+											<div>/ Total Annual Board Commitment $</div>
+											<div class="innControll"><input type="text" name="borad_commitment" id="borad_commitment_v" class="form-control borad_giving_blur" value="<?php echo isset($key_indicators['borad_commitment']) ? $key_indicators['borad_commitment'] : ""; ?>" /> </div>
 										</div>
 									</li>
 									<li class="wrapIn">
 										<div class="d-flex align-items-center">
 											<div>Operating Reserves </div>
-											<div class="innControll"><input type="text" name="operating_reserves_percentage" class="form-control" value="<?php echo isset($key_indicators['operating_reserves_percentage']) ? $key_indicators['operating_reserves_percentage'] : ""; ?>" /> </div>
+											<div class="innControll"><input type="text" name="operating_reserves_percentage" id="operating_reserves_percentage_v" class="form-control operating_reserves_percentage_blur" value="<?php echo isset($key_indicators['operating_reserves_percentage']) ? $key_indicators['operating_reserves_percentage'] : ""; ?>" readonly/> </div>
 											<div class="after">%</div>
 										</div>
 										<div class="d-flex align-items-center">
 											<div>Operating Reserves $</div>
-											<div class="innControll"><input type="text" name="operating_reserves_amount" class="form-control" value="<?php echo isset($key_indicators['operating_reserves_amount']) ? $key_indicators['operating_reserves_amount'] : ""; ?>" /> </div>
+											<div class="innControll"><input type="text" name="operating_reserves_amount" id="operating_reserves_amount_v" class="form-control operating_reserves_percentage_blur" value="<?php echo isset($key_indicators['operating_reserves_amount']) ? $key_indicators['operating_reserves_amount'] : ""; ?>" /> </div>
 											<div> / Three Months of annual expenses $</div>
-											<div class="innControll"><input type="text" name="three_months_annual_expenses" class="form-control" value="<?php echo isset($key_indicators['three_months_annual_expenses']) ? $key_indicators['three_months_annual_expenses'] : ""; ?>" /> </div>
+											<div class="innControll"><input type="text" name="three_months_annual_expenses" id="three_months_annual_expenses_v" class="form-control operating_reserves_percentage_blur" value="<?php echo isset($key_indicators['three_months_annual_expenses']) ? $key_indicators['three_months_annual_expenses'] : ""; ?>" /> </div>
 										</div>
 									</li>
 								</ul>

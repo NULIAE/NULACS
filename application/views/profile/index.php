@@ -103,7 +103,7 @@
 
 					<div class="foot">
 						<a class="btn btn-dark btn-rounded min w-100px mr-2" href="<?php echo base_url('/user/edit-profile/').$this->session->user_id; ?>">EDIT</a>
-						<a class="btn btn-primary btn-rounded min w-100px">CANCEL</a>
+						<a class="btn btn-primary btn-rounded min w-100px" onclick="window.history.back();">CANCEL</a>
 					</div>
                 </form>
 			</div>
