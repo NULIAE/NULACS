@@ -26,7 +26,7 @@
 			
 						<div class="col-lg-5 col-md-6 col-sm-24 d-row">
 								<label for="affiliate">Affiliate</label>
-								<select name="affiliate" id="affiliate" aria-labelledby="affiliate" data-all="true" data-type="selector" data-search="true" class="SumoSelect CaptionCont d-none" data-placeholder="Affiliate">
+								<select name="affiliate" id="affiliate" data-type="selector" data-placeholder="Affiliate">
 									<option value="">Affiliate</option>
 									<?php
 											$sAffiliate = isset($_GET['affiliate']) ? $_GET['affiliate'] : '';
