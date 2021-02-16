@@ -2123,12 +2123,10 @@ $quarterArray = array(
 </script>
 <script id="template-performance-filter" type="x-tmpl-mustache">
 {{#documents}}
-{{#filename}}
 <div class="row">
 	<div class="col-14 col-md-18"><span class="text-primary"><a href="{{documentPath}}">{{filename}}</a></span></div>
 	<div class="col-10 col-md-6"><span class="statround">{{submittedTime}}</span></div>
 </div>
-{{/filename}}
 {{/documents}}
 {{^documents}}
 <div class="row">
