@@ -16,7 +16,7 @@
 					<div class="row align-items-end">
 						<div class="col-lg-5 col-md-6 col-sm-24 d-row">
 							<label for="region" class="rowLabel">Region</label>
-							<select name="region_id" data-placeholder="Region" data-type="selector">
+							<select id="region" name="region_id" data-placeholder="Region" data-type="selector">
 								<option value="">All Region</option>
 								<?php foreach($regions as $region): ?>
 								<option value="<?php echo $region['region_id']; ?>" <?php if(isset($_GET['region_id']) && $region['region_id'] == $_GET['region_id']) echo "selected"; ?>><?php echo $region['name']; ?></option>
@@ -28,11 +28,8 @@
 								<label for="affiliate">Affiliate</label>
 								<select name="affiliate" id="affiliate" data-type="selector" data-placeholder="Affiliate">
 									<option value="">Affiliate</option>
-									<?php
-											$sAffiliate = isset($_GET['affiliate']) ? $_GET['affiliate'] : '';
-									?>
+									<?php $sAffiliate = isset($_GET['affiliate']) ? $_GET['affiliate'] : ''; ?>
 									<?php foreach($affiliate_details as $key => $affiliate): ?>
-								
 										<option value="<?php echo $affiliate['affiliate_id']; ?>" <?php if($affiliate['affiliate_id'] == $sAffiliate) echo "selected"; ?>><?php echo $affiliate['city'].','.$affiliate['stateabbreviation'] ; ?></option>
 									<?php endforeach; ?>
 								</select>

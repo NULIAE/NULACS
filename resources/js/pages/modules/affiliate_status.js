@@ -7,6 +7,26 @@ $(function () {
 	$('.pagination').removeClass('justify-content-end').addClass('justify-content-center');
 
 	openTab($("#input-interval").val());
+
+	$("#region").on("change", function(){
+		$('#affiliate').children('option:not(:first)').remove();
+		$.ajax({
+			url	 : base_url + 'module/affiliate/filter/?page_items=1000&region='+$(this).val(),
+			dataType : 'json'
+		}).done(function(data) {
+
+			if(data.affiliates.length != 0) {
+				console.log(data.affiliates);
+				$(data.affiliates).each(function(i, item){
+					$('#affiliate')
+					.append($("<option></option>")
+					.attr("value",item.affiliate_id)
+					.text(item.city+","+item.state));
+				});
+			}
+			$('#affiliate')[0].sumo.reload();
+		});
+	});
 	
 	function getAffiliates(url) {
 		//$('#page-items').val($('#select-page-items').val());

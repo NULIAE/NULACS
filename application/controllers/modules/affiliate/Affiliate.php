@@ -244,6 +244,11 @@ class Affiliate extends MY_Controller
 
 	public function status()
 	{
+		//XSS Filter all the input post fields
+		$data = $this->input->get(NULL, TRUE);
+
+		$where = (isset($data["region_id"]) && ($data["region_id"] !="")) ? array("affiliate.region_id" => $data["region_id"]) : NULL;
+
 		$data['content'] = array(
 			'monthly_status' => $this->get_monthly_status(TRUE),
 			'quarterly_status' => $this->get_quarterly_status(TRUE),
@@ -253,7 +258,7 @@ class Affiliate extends MY_Controller
 			'yearly_documents' => $this->Document_model->get_documents(3, array(14)),
 			'regions' => $this->User_model->get_all_regions(),
 			'compliance_status' => $this->Affiliate_model->get_compliance_status_flags(),
-			'affiliate_details' => $this->Affiliate_model->get_all_affiliates_list(null,null.null),
+			'affiliate_details' => $this->Affiliate_model->get_all_affiliates_list(null,null,$where),
 		);
 		
 		//Name of the view file
