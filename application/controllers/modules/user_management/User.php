@@ -1,8 +1,14 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+require_once APPPATH.'third_party/excel/autoload.php';
+
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
 class User extends MY_Controller 
 {
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -185,5 +191,67 @@ class User extends MY_Controller
 		);
 
 		echo json_encode($response);
+	}
+
+	/**
+	 * Export all/filtered users list
+	 *
+	 * @return excel file
+	 */
+	public function export_user_list()
+	{
+		//XSS Filter all the input post fields
+		$data = $this->input->get(NULL, TRUE);
+
+		$filters = array();
+
+		if( isset($data['region']) && ($data['region'] !== '') )
+			$filters['users.region_id'] =  $data['region'];
+
+		if( isset($data['role']) && ($data['role'] !== '') )
+			$filters['users.role_id'] =  $data['role'];
+
+		if( isset($data['status']) && ($data['status'] !== '') )
+			$filters['users.user_status'] =  $data['status'];
+
+		if( empty($filters) )
+			$filters = NULL;
+
+		$result = $this->_get_paginated_users(0, $filters, 1000);
+		
+		$spreadsheet = new Spreadsheet();
+		$sheet = $spreadsheet->getActiveSheet();
+		$sheet->setCellValue('A1', 'User ID');
+		$sheet->setCellValue('B1', 'Name');
+		$sheet->setCellValue('C1', 'Organization');
+		$sheet->setCellValue('D1', 'City');
+		$sheet->setCellValue('E1', 'State');
+		$sheet->setCellValue('F1', 'Title');
+		$sheet->setCellValue('G1', 'Role');
+
+		$i = 2;
+		
+		foreach($result["users"] as $row)
+		{
+			$sheet->setCellValue('A'.$i , $row['name']);
+			$sheet->setCellValue('B'.$i , $row['first_name']." ".$row['last_name']);
+			$sheet->setCellValue('C'.$i , $row['organization']);
+			$sheet->setCellValue('D'.$i , $row['city']);
+			$sheet->setCellValue('E'.$i , $row['state']);
+			$sheet->setCellValue('F'.$i , $row['user_title']);
+			$sheet->setCellValue('G'.$i , $row['role_description']);
+			$i++;
+		}
+		
+		
+		header('Content-Type: application/vnd.ms-excel');
+		header('Content-Disposition: attachment;filename="UsersList.xlsx"');
+		header('Cache-Control: max-age=0');
+
+		$writer = new Xlsx($spreadsheet);
+		$writer->save('php://output');
+
+		$spreadsheet->disconnectWorksheets();
+		unset($spreadsheet);
 	}
 }

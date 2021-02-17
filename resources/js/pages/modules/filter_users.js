@@ -20,6 +20,12 @@ $(function () {
 	
 	$( "#search-btn").click();
 	
+	$( "#export-btn").click(function(){
+		var export_url = base_url + 'module/user/export?' + $( "#filter-form" ).serialize();
+		window.location = export_url;
+	});
+
+	
 	function getUsers(url) {
 		$('#page-items').val($('#select-page-items').val());
 		$.ajax({

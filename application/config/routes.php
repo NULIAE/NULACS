@@ -130,3 +130,4 @@ $route['module/affiliate/key-indicators/approve'] = 'modules/affiliate/affiliate
 
 
 $route['module/affiliate/document/delete_upload'] = 'modules/affiliate/affiliate/delete_upload';
+$route['module/user/export'] = 'modules/user_management/user/export_user_list';

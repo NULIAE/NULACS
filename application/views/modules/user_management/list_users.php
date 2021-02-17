@@ -43,8 +43,11 @@
 							</select>
 						</div>
 						<input type="hidden" id="page-items" name="page_items" value="">
-						<div class="col-lg-3 col-md-3 col-sm-24 ">
+						<div class="col-lg-3 col-md-3 col-sm-12 ">
 						<div class="t-c"><button id="search-btn" type="submit" class="btn btn-primary btn-rounded min w-100px">SEARCH</button> </div>
+						</div>
+						<div class="col-lg-3 col-md-3 col-sm-12 mt-2">
+						<div class="t-c"><button id="export-btn" class="btn btn-primary btn-rounded min w-100px">EXPORT</button> </div>
 						</div>
 					
 					</div>
