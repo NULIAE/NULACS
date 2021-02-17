@@ -1956,11 +1956,19 @@ $quarterArray = array(
 									<li class="wrapIn">
 										<div class="d-flex align-items-center">
 											<div>Days in Cash</div>
-											<div class="innControll"><input type="text" class="form-control" name="days_in_cash" value="<?php echo isset($key_indicators['days_in_cash']) ? $key_indicators['days_in_cash'] : ""; ?>" /> </div>
+											<div class="innControll"><input type="text" class="form-control days_in_cash_blur" id="days_in_cash_v" name="days_in_cash" value="<?php echo isset($key_indicators['days_in_cash']) ? $key_indicators['days_in_cash'] : ""; ?>" readonly/> </div>
 											<div>days.</div>
 										</div>
 										<div class="d-flex align-items-center">
-											<div> Unrestricted Cash and Equivalents divided by Avg. daily cost of operations, excluding depreciation.</div>
+											<div> Unrestricted Cash and Equivalents 
+											</div>
+											<div class="innControll">
+											<input type="text" class="form-control days_in_cash_blur" name="Equivalents" id="Equivalents_v" value="<?php echo isset($key_indicators['Equivalents']) ? $key_indicators['Equivalents'] : ""; ?>" />
+											 </div>
+											<div>/ Avg. daily cost of operations, </div>
+											<div class="innControll"><input type="text" class="form-control days_in_cash_blur" id="daily_cost_operation_v" name="daily_cost_operation" value="<?php echo isset($key_indicators['daily_cost_operation']) ? $key_indicators['daily_cost_operation'] : ""; ?>" /> </div>
+											
+											<div> excluding depreciation.</div>
 										</div>
 									</li>
 
