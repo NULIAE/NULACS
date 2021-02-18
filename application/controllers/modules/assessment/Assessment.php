@@ -284,11 +284,10 @@ class Assessment extends MY_Controller
 
 		require_once APPPATH.'third_party/vendor/autoload.php';
 		$mpdf = new \Mpdf\Mpdf();
-		print_r($mpdf);exit;
-		// $html = $this->load->view('modules/performance_assessment/assessment_pdf',$data,true);
-		// $mpdf->WriteHTML($html);
-		// $mpdf->Output('assessment.pdf','D'); 
-		// $this->load->view('template', $data);	
+		$html = $this->load->view('modules/performance_assessment/assessment_pdf',$data,true);
+		$mpdf->WriteHTML($html);
+		$mpdf->Output('assessment.pdf','D'); 
+		
 	
 	}
 
