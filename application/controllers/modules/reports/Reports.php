@@ -25,21 +25,23 @@ class Reports extends MY_Controller
 	 */
 	public function index()
 	{
-        $quarter = '';
-        $year = '';
-        $get = $this->input->get();
-        if(isset($get['quarter'])){
-            $quarter = $get['quarter'];
+        //XSS Filter all the input post fields
+		$data = $this->input->get(NULL, TRUE);
+
+        if(isset($data['quarter']) && ($data['quarter'] != "")){
+            $quarter = $data['quarter'];
         } else {
 			$quarter = date("n", strtotime("-1 month", time()));
 		}
-        if(isset($get['choose_yr'])){
-            $year = $get['choose_yr'];
+        
+		if(isset($data['year']) && ($data['year'] != "")){
+            $year = $data['choose_yr'];
 		} else {
 			$year = date("Y", strtotime("-1 month", time()));
 		}
-		if(isset($get['choose_affiliate_tb'])){
-			$ind_affiliate = $get['choose_affiliate_tb'];
+		
+		if(isset($data['choose_affiliate_tb'])){
+			$ind_affiliate = $data['choose_affiliate_tb'];
 		}else{
 			$ind_affiliate = '';
 		}
