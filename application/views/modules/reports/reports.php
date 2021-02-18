@@ -1,3 +1,17 @@
+<style>
+.all-affiliates .mainTabAll .tab-content .pane113 table thead tr th, .tab-pane .cdnWrap .pane1Qty table thead tr th{
+transform: rotate(-60deg);
+-webkit-transform: rotate(-60deg);
+-moz-transform: rotate(-60deg);
+-ms-transform: rotate(-60deg);
+-o-transform: rotate(-60deg);
+padding:50px 5px !important;
+line-height:16px !important;
+}
+.SumoSelect{
+  width:100% !important;
+}
+</style>
 <main class="all-affiliates">
     <div class="container">
       <div class="Wrapper">
@@ -32,55 +46,40 @@
 
           <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade <?=$secondTbab==0?' active show':''?> " id="nav-x1" role="tabpanel" aria-labelledby="nav-x1-tab">
-
-            <form  action="<?php echo base_url('module/filter/reports'); ?>">
-                <div class="row m-y-20">
-                  <div class="d-flex align-items-center ml-2">Quarter</div>
-                  <div class="col-2 col-md-2 col-lg-2"><span class="sub">
-                    
-                      <select class="form-control selectp-r" name="choose_affiliate" data-type="selector">
-                        <option value="">Choose Quarter</option>
-                        <!-- <?php foreach($affiliates as $aff) { ?>
-                            <option value="<?=$aff['affiliate_id']?>"><?=$aff['name']?></option>
-                        <?php } ?> -->
-                        <option <?php if(isset($_GET['choose_affiliate'])){
-                          if($_GET['choose_affiliate'] == 1){
-                            echo "selected";
-                          }
-                        } ?> value="1">Q1</option>
-                        <option <?php if(isset($_GET['choose_affiliate'])){
-                          if($_GET['choose_affiliate'] == 2){
-                            echo "selected";
-                          }
-                        } ?> value="2">Q2</option>
-                        <option <?php if(isset($_GET['choose_affiliate'])){
-                          if($_GET['choose_affiliate'] == 3){
-                            echo "selected";
-                          }
-                        } ?> value="3">Q3</option>
-                        <option <?php if(isset($_GET['choose_affiliate'])){
-                          if($_GET['choose_affiliate'] == 4){
-                            echo "selected";
-                          }
-                        } ?> value="4">Q4</option>
-                      </select>
-    
-                    </span></div>
-                  <div class="col-6 col-md-6 col-lg-3">
-                    <div class="yearPick">
-                      <i class="i i-year-pick"></i>
-                      <input class="yearpick form-control" value="<?php if(isset($_GET['choose_yr'])){
-                          echo $_GET['choose_yr'];
-                        } ?>" name="choose_yr"  type="text">
-                    </div>
-                  </div>
-    
-                  <div class="col-12  col-md-6 col-lg-3">
-                  <input type="submit" class="btn btn-primary btn-rounded min w-100px" value="SEARCH">
-                  </div>
+              <div class="row align-items-center mt-3">
+                <div class="col-lg-12">
+                <div class="h5 f-bold"><?php echo "QUARTER 0".$quarter." - ".$year; ?></div>
                 </div>
-              </form>
-
+                <div class="col-lg-12">
+                  <form  action="<?php echo base_url('module/filter/reports'); ?>">
+                    <div class="row">
+                      <div class="col-2 col-md-6 col-lg-8 secondSelection"><span class="sub">
+                          <select class="form-control" name="quarter" data-type="selector">
+                            <option value="">Choose Quarter</option>
+                            <option value="1" <?php if($quarter == 1) echo "selected"; ?>>Q1</option>
+                            <option value="2" <?php if($quarter == 2) echo "selected"; ?>>Q2</option>
+                            <option value="3" <?php if($quarter == 3) echo "selected"; ?>>Q3</option>
+                            <option value="4" <?php if($quarter == 4) echo "selected"; ?>>Q4</option>
+                          </select>
+        
+                        </span></div>
+                      <div class="col-6 col-md-6 col-lg-5 t-r">
+                        <div class="yearPick">
+                          <i class="i i-year-pick"></i>
+                          <input class="yearpick form-control" value="<?php echo $year;?>" name="choose_yr"  type="text">
+                        </div>
+                      </div>
+        
+                      <div class="col-12  col-md-6 col-lg-5 t-r">
+                      <input type="submit" class="btn btn-primary btn-rounded min w-100px" value="SEARCH">
+                      </div>
+                      <div class="col-12  col-md-6 col-lg-4 t-r">
+                      <a href="<?php echo base_url("module/reports/export")."?quarter=$quarter&year=$year"; ?>" class="btn btn-primary btn-rounded min w-100px">EXPORT</a>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
               <div class="row">
 
                 <div class="pane113 w-100">
@@ -108,7 +107,7 @@
                     <tbody>
                     <?php foreach($key_indicators as $ki){ $indicators = json_decode($ki['indicators'], true); ?>
                             <tr>
-                              <td scope="row" class="t-l-c"><?=$ki['name']?></td>
+                              <td scope="row" class="t-l-c"><a class="d-block" href="<?php echo base_url('module/filter/reports')."?choose_affiliate_tb=".$ki['affiliate_id']; ?>"><?=$ki['name']?></a></td>
                               <td><?=isset($indicators['liquidity']) ? $indicators['liquidity'] : 0; ?></td>
                               <td><?=isset($indicators['current_ratio']) ? $indicators['current_ratio'] : 0;?></td>
                               <td><?=isset($indicators['current_debt_ratio']) ? $indicators['current_debt_ratio'] : 0;?></td>

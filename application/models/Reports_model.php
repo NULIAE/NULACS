@@ -30,7 +30,7 @@ class Reports_model extends CI_Model
 	 * @return int
      */
     public function get_key_indicators($affiliate, $year){
-        $this->db->select('*, CONCAT(affiliate.city, '.', state.stateabbreviation) AS name, key_indicators.affiliate_id as affiliate_id');
+        $this->db->select('*, CONCAT(affiliate.city,",",state.stateabbreviation) AS name, key_indicators.affiliate_id as affiliate_id');
         $this->db->from('key_indicators');
         $this->db->join('affiliate', 'affiliate.affiliate_id = key_indicators.affiliate_id');
         $this->db->join('state', 'state.stateid = affiliate.state');
