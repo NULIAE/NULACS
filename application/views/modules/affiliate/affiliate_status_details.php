@@ -1965,10 +1965,10 @@ $quarterArray = array(
 											<div class="innControll">
 											<input type="text" class="form-control days_in_cash_blur" name="Equivalents" id="Equivalents_v" value="<?php echo isset($key_indicators['Equivalents']) ? $key_indicators['Equivalents'] : ""; ?>" />
 											 </div>
-											<div>/ Avg. daily cost of operations, </div>
+											<div>/ Avg. Daily Cost of Operations </div>
 											<div class="innControll"><input type="text" class="form-control days_in_cash_blur" id="daily_cost_operation_v" name="daily_cost_operation" value="<?php echo isset($key_indicators['daily_cost_operation']) ? $key_indicators['daily_cost_operation'] : ""; ?>" /> </div>
 											
-											<div> excluding depreciation.</div>
+											<div> (excluding depreciation)</div>
 										</div>
 									</li>
 

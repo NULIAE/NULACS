@@ -1088,7 +1088,7 @@ $('.current_ratio_blur').on('blur', function() {
 	}
 	if(current_assets_v && current_liabilities_v){
 
-		var current_ratio_s =  ((current_assets_v) / (current_liabilities_v))   ;
+		var current_ratio_s  = ((current_assets_v) / (current_liabilities_v)) * 100 ;
 		var f_current_ratio_s = parseFloat(current_ratio_s).toFixed(2); 
 		if($.isNumeric(f_current_ratio_s) && f_current_ratio_s > 0) { 
 			$("#current_ratio_v").val(f_current_ratio_s);
@@ -1122,7 +1122,7 @@ $('.current_debt_ratio_blur').on('blur', function() {
 	}
 	if(total_liabilities_v && total_assets_v){
 
-		var current_debt_ratio_s =  ((total_liabilities_v) / (total_assets_v))   ;
+		var current_debt_ratio_s =  ((total_liabilities_v) / (total_assets_v)) * 100   ;
 		var f_current_debt_ratio_s = parseFloat(current_debt_ratio_s).toFixed(2); 
 
 		if($.isNumeric(f_current_debt_ratio_s)  && f_current_debt_ratio_s > 0) { 
@@ -1190,7 +1190,7 @@ $('.operating_efficiency_program_value_blur').on('blur', function() {
 	}
 	if(operating_efficiency_program_expense_v && operating_efficiency_program_total_expense_v){
 
-		var operating_efficiency_program_value_s =  ((operating_efficiency_program_expense_v) / (operating_efficiency_program_total_expense_v))   ;
+		var operating_efficiency_program_value_s =  ((operating_efficiency_program_expense_v) / (operating_efficiency_program_total_expense_v)) * 100  ;
 		var f_operating_efficiency_program_value_s = parseFloat(operating_efficiency_program_value_s).toFixed(2); 
 
 		if($.isNumeric(f_operating_efficiency_program_value_s) && f_operating_efficiency_program_value_s > 0) { 
@@ -1225,7 +1225,7 @@ $('.operating_efficiency_admin_value_blur').on('blur', function() {
 	}
 	if(operating_efficiency_admin_expense_v && operating_efficiency_admin_total_expense_v){
 
-		var operating_efficiency_admin_value_s =  ((operating_efficiency_admin_expense_v) / (operating_efficiency_admin_total_expense_v))   ;
+		var operating_efficiency_admin_value_s =  ((operating_efficiency_admin_expense_v) / (operating_efficiency_admin_total_expense_v)) * 100  ;
 
 		var f_operating_efficiency_admin_value_s= parseFloat(operating_efficiency_admin_value_s).toFixed(2); 
 
@@ -1261,7 +1261,7 @@ $('.operating_efficiency_fundraising_value_blur').on('blur', function() {
 	}
 	if(operating_efficiency_fundraising_expense_v && operating_efficiency_fundraising_total_expense_v){
 
-		var operating_efficiency_fundraising_value_s =  ((operating_efficiency_fundraising_expense_v) / (operating_efficiency_fundraising_total_expense_v))   ;
+		var operating_efficiency_fundraising_value_s =  ((operating_efficiency_fundraising_expense_v) / (operating_efficiency_fundraising_total_expense_v)) * 100  ;
 
 		var f_operating_efficiency_fundraising_value_s = parseFloat(operating_efficiency_fundraising_value_s).toFixed(2); 
 
@@ -1335,7 +1335,7 @@ $('.days_in_cash_blur').on('blur', function() {
 
 	if(Equivalents_v && daily_cost_operation_v){
 
-		var days_in_cash_s =  (Equivalents_v / daily_cost_operation_v)  ;
+		var days_in_cash_s =  (Equivalents_v / daily_cost_operation_v) * 100 ;
 
 		var f_days_in_cash_s = parseFloat(days_in_cash_s).toFixed(2); 
 
@@ -1373,7 +1373,7 @@ $('.borad_giving_blur').on('blur', function() {
 
 	if(direct_borad_giving_v && borad_commitment_v){
 
-		var borad_giving_s =  (direct_borad_giving_v / borad_commitment_v)  ;
+		var borad_giving_s =  (direct_borad_giving_v / borad_commitment_v) * 100  ;
 		var f_borad_giving_s = parseFloat(borad_giving_s).toFixed(2); 
 
 		if($.isNumeric(f_borad_giving_s) && f_borad_giving_s > 0) { 
@@ -1409,7 +1409,7 @@ $('.operating_reserves_percentage_blur').on('blur', function() {
 
 	if(operating_reserves_amount_v && three_months_annual_expenses_v){
 
-		var operating_reserves_percentage_s =  (operating_reserves_amount_v / three_months_annual_expenses_v)  ;
+		var operating_reserves_percentage_s =  (operating_reserves_amount_v / three_months_annual_expenses_v) * 100  ;
 
 		var f_operating_reserves_percentage_s = parseFloat(operating_reserves_percentage_s).toFixed(2); 
 
