@@ -28,7 +28,7 @@ line-height:16px !important;
           </div>
         </div>
         <?php
-        if (strpos($_SERVER['REQUEST_URI'], "choose_affiliate_tb") !== false){
+        if (strpos($_SERVER['REQUEST_URI'], "affiliate") !== false){
           $secondTbab = 1;
         }else{
           $secondTbab = 0;
@@ -107,21 +107,21 @@ line-height:16px !important;
                     <tbody>
                     <?php foreach($key_indicators as $ki){ $indicators = json_decode($ki['indicators'], true); ?>
                             <tr>
-                              <td scope="row" class="t-l-c"><a class="d-block" href="<?php echo base_url('module/filter/reports')."?choose_affiliate_tb=".$ki['affiliate_id']; ?>"><?=$ki['name']?></a></td>
-                              <td><?=isset($indicators['liquidity']) ? $indicators['liquidity'] : 0; ?></td>
-                              <td><?=isset($indicators['current_ratio']) ? $indicators['current_ratio'] : 0;?></td>
-                              <td><?=isset($indicators['current_debt_ratio']) ? $indicators['current_debt_ratio'] : 0;?></td>
-                              <td><?=isset($indicators['change_in_cash_ytd']) ? $indicators['change_in_cash_ytd'] : 0;?></td>
-                              <td><?=isset($indicators['operating_efficiency_program_value']) ? $indicators['operating_efficiency_program_value'] : 0; ?></td>
-                              <td><?=isset($indicators['operating_efficiency_admin_value']) ? $indicators['operating_efficiency_admin_value'] : 0; ?></td>
-                              <td><?=isset($indicators['operating_efficiency_fundraising_value']) ? $indicators['operating_efficiency_fundraising_value'] : 0; ?></td>
-                              <td><?=isset($indicators['change_in_net_assets_in_quarter']) ? $indicators['change_in_net_assets_in_quarter'] : 0; ?></td>
-                              <td><?=isset($indicators['days_in_cash']) ? $indicators['days_in_cash'] : 0; ?></td>
-                              <td><?=isset($indicators['change_in_grant_ty_ytd']) ? $indicators['change_in_grant_ty_ytd'] : 0; ?></td>
-                              <td><?=isset($indicators['change_in_grant_ly_ytd']) ? $indicators['change_in_grant_ly_ytd'] : 0; ?></td>
-                              <td><?=isset($indicators['change_in_net_assets_in_quarter']) ? $indicators['change_in_net_assets_in_quarter'] : 0; ?></td>
-                              <td><?=isset($indicators['borad_giving']) ? $indicators['borad_giving'] : 0; ?></td>
-                              <td><?=isset($indicators['operating_reserves_amount']) ? $indicators['operating_reserves_amount'] : 0; ?></td>
+                              <td scope="row" class="t-l-c"><a class="d-block" href="<?php echo base_url('module/filter/reports')."?affiliate=".$ki['affiliate_id']."&choose_yr=".$year; ?>"><?=$ki['name']?></a></td>
+                              <td><?=isset($indicators['liquidity']) && $indicators['liquidity'] != NULL ? number_format($indicators['liquidity'], 2) : 0; ?></td>
+                              <td><?=isset($indicators['current_ratio']) && $indicators['current_ratio'] != NULL ? number_format($indicators['current_ratio'], 2) : 0;?></td>
+                              <td><?=isset($indicators['current_debt_ratio']) && $indicators['current_debt_ratio'] != NULL ? number_format($indicators['current_debt_ratio'], 2) : 0;?></td>
+                              <td><?=isset($indicators['change_in_cash_ytd']) && $indicators['change_in_cash_ytd'] != NULL ? number_format($indicators['change_in_cash_ytd'], 2) : 0;?></td>
+                              <td><?=isset($indicators['operating_efficiency_program_value']) && $indicators['operating_efficiency_program_value'] != NULL ? number_format($indicators['operating_efficiency_program_value'], 2) : 0; ?></td>
+                              <td><?=isset($indicators['operating_efficiency_admin_value']) && $indicators['operating_efficiency_admin_value'] != NULL ? number_format($indicators['operating_efficiency_admin_value'], 2) : 0; ?></td>
+                              <td><?=isset($indicators['operating_efficiency_fundraising_value']) && $indicators['operating_efficiency_fundraising_value'] != NULL ? number_format($indicators['operating_efficiency_fundraising_value'], 2) : 0; ?></td>
+                              <td><?=isset($indicators['change_in_net_assets_in_quarter']) && $indicators['change_in_net_assets_in_quarter'] != NULL ? number_format($indicators['change_in_net_assets_in_quarter'], 2) : 0; ?></td>
+                              <td><?=isset($indicators['days_in_cash']) && $indicators['days_in_cash'] != NULL ? number_format($indicators['days_in_cash'], 2) : 0; ?></td>
+                              <td><?=isset($indicators['change_in_grant_ty_ytd']) && $indicators['change_in_grant_ty_ytd'] != NULL ? number_format($indicators['change_in_grant_ty_ytd'], 2) : 0; ?></td>
+                              <td><?=isset($indicators['change_in_grant_ly_ytd']) && $indicators['change_in_grant_ly_ytd'] != NULL ? number_format($indicators['change_in_grant_ly_ytd'], 2) : 0; ?></td>
+                              <td><?=isset($indicators['change_in_net_assets_in_quarter']) && $indicators['change_in_net_assets_in_quarter'] != NULL ? number_format($indicators['change_in_net_assets_in_quarter'], 2) : 0; ?></td>
+                              <td><?=isset($indicators['borad_giving']) && $indicators['borad_giving'] != NULL ? number_format($indicators['borad_giving'], 2) : 0; ?></td>
+                              <td><?=isset($indicators['operating_reserves_amount']) && $indicators['operating_reserves_amount'] != NULL ? number_format($indicators['operating_reserves_amount'], 2) : 0; ?></td>
                             </tr>
                             <?php } ?>
                       
@@ -148,20 +148,13 @@ line-height:16px !important;
 
             <div class="tab-pane fade active <?=$secondTbab==1?'show':''?>" id="nav-x2" role="tabpanel" aria-labelledby="nav-x2-tab">
 
-
-              
-
               <div class="row m-y-20">
                 <div class="col-4 col-md-4 col-lg-4 secondSelection">
                   <span class="sub">
-                  <select onchange="window.location.href = '<?php echo base_url();?>/module/filter/reports?choose_affiliate_tb=' + this.value;" class="form-control selectp-r" data-type="selector">
+                  <select onchange="window.location.href = '<?php echo base_url();?>/module/filter/reports?affiliate=' + this.value;" class="form-control selectp-r" data-type="selector">
                     <option>Choose Affiliate</option>
                     <?php foreach($affiliates as $aff) { ?>
-                        <option <?php if(isset($_GET['choose_affiliate_tb'])){
-                          if($_GET['choose_affiliate_tb'] == $aff['affiliate_id']){
-                            echo "selected";
-                          }
-                        } ?>   value="<?=$aff['affiliate_id']?>"><?=$aff['name']?></option>
+                        <option value="<?=$aff['affiliate_id']?>" <?php if($affiliate == $aff['affiliate_id']) echo "selected";?>><?=$aff['name']?></option>
                     <?php } ?>
                   </select>
                   
@@ -209,20 +202,6 @@ line-height:16px !important;
                           <?php echo $iay['year']; ?>   
                           <!-- <i class="i i-downarrow"></i> -->
                           </td>
-                          <!-- <td>1</td>
-                          <td>2</td>
-                          <td>3</td>
-                          <td>5</td>
-                          <td>2</td>
-                          <td>2</td>
-                          <td>6</td>
-                          <td>3</td>
-                          <td>2</td>
-                          <td>5</td>
-                          <td>9</td>
-                          <td>6</td>
-                          <td>12</td>
-                          <td>13</td> -->
                       </tr>
                       <tr>
                           <td colspan="24" class="hiddenRow p-a-0">
@@ -254,7 +233,7 @@ line-height:16px !important;
                                       $report = json_decode($ia['indicators'], true);
                                     ?>
                                     <tr>
-                                        <td><?php $arrayForChart[0][$index] = "Q".$ia['quarter']; echo $arrayForChart[0][$index]; ?></td>
+                                        <td><?php $arrayForChart[0][$index] = "Q".$ia['quarter']; ?><a href="<?php echo base_url('module/filter/reports').'?affiliate='.$affiliate."&choose_yr=".$iay['year']; ?>"><?php echo $arrayForChart[0][$index]; ?></a></td>
                                         <td><?php $arrayForChart[1][$index] = isset($report['liquidity']) ? (int)$report['liquidity'] : 0; echo $arrayForChart[1][$index]; ?></td>
                                         <td><?php $arrayForChart[2][$index] = isset($report['current_ratio']) ? (int)$report['current_ratio'] : 0; echo $arrayForChart[2][$index]; ?></td>
                                         <td><?php $arrayForChart[3][$index] = isset($report['current_debt_ratio']) ? (int)$report['current_debt_ratio'] : 0; echo $arrayForChart[3][$index]; ?></td>

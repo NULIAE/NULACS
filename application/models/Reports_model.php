@@ -74,12 +74,13 @@ class Reports_model extends CI_Model
 	 * Detail report of affiliate key indicator
 	 * list
 	 */
-	public function get_ind_affiliate_report($affiliate){
+	public function get_ind_affiliate_report($affiliate, $year = NULL){
 		if($affiliate){
 			$this->db->select('*');
 			$this->db->from('key_indicators');
 			$this->db->where('key_indicators.affiliate_id', $affiliate);
-			// $this->db->group_by('key_indicators.year'); 
+			if(isset($year))
+				$this->db->where('key_indicators.year', $year); 
 			$this->db->order_by("quarter", "asc");
 			$query = $this->db->get();
 			return  $query->result_array();
@@ -90,11 +91,13 @@ class Reports_model extends CI_Model
 	 * Detail report of affiliate key indicator year
 	 * list
 	 */
-	public function get_ind_affiliate_yr_report($affiliate){
+	public function get_ind_affiliate_yr_report($affiliate, $year = NULL){
 		if($affiliate){
 			$this->db->select('year');
 			$this->db->from('key_indicators');
 			$this->db->where('key_indicators.affiliate_id', $affiliate);
+			if(isset($year))
+				$this->db->where('key_indicators.year', $year); 
 			$this->db->group_by('key_indicators.year'); 
 			$query = $this->db->get();
 			return  $query->result_array();
