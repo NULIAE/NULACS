@@ -135,33 +135,32 @@ class Reports extends MY_Controller
 		foreach($result as $record)
 		{
 			$row = json_decode($record["indicators"], TRUE);
-			$is_net_assets_positive = isset($row["is_net_assets_positive"]) ? $row["is_net_assets_positive"] : "N";
 
 			$sheet->setCellValue('A'.$i , $record["name"]);
-			$sheet->setCellValue('B'.$i , $row["liquidity"]);
+			$sheet->setCellValue('B'.$i , ($row["liquidity"] != "") ? $row["liquidity"] : "");
 			$sheet->getStyle('B'.$i)->getNumberFormat()->setFormatCode($currency_format);
-			$sheet->setCellValue('C'.$i , $row["current_ratio"]);
-			$sheet->setCellValue('D'.$i , $row["current_debt_ratio"]);
-			$sheet->setCellValue('E'.$i , $row["from_operations"]);
+			$sheet->setCellValue('C'.$i , ($row["current_ratio"] != "") ? $row["current_ratio"] : "");
+			$sheet->setCellValue('D'.$i , ($row["current_debt_ratio"] != "") ? $row["current_debt_ratio"] : "");
+			$sheet->setCellValue('E'.$i , ($row["from_operations"] != "") ? $row["from_operations"] : "");
 			$sheet->getStyle('E'.$i)->getNumberFormat()->setFormatCode($currency_format);
-			$sheet->setCellValue('F'.$i , $row["from_financing"]);
+			$sheet->setCellValue('F'.$i , ($row["from_financing"] != "") ? $row["from_financing"] : "");
 			$sheet->getStyle('F'.$i)->getNumberFormat()->setFormatCode($currency_format);
-			$sheet->setCellValue('G'.$i , $row["from_investing"]);
+			$sheet->setCellValue('G'.$i , ($row["from_investing"] != "") ? $row["from_investing"] : "");
 			$sheet->getStyle('G'.$i)->getNumberFormat()->setFormatCode($currency_format);
-			$sheet->setCellValue('H'.$i , $row["operating_efficiency_program_value"]."%");
-			$sheet->setCellValue('I'.$i , $row["operating_efficiency_admin_value"]."%");
-			$sheet->setCellValue('J'.$i , $row["operating_efficiency_fundraising_value"]."%");
-			$sheet->setCellValue('K'.$i , $row["change_in_net_assets_in_quarter"]);
-			$sheet->setCellValue('L'.$i , $row["days_in_cash"]);
+			$sheet->setCellValue('H'.$i , ($row["operating_efficiency_program_value"] != "") ? $row["operating_efficiency_program_value"]."%" : "");
+			$sheet->setCellValue('I'.$i , ($row["operating_efficiency_admin_value"] != "") ? $row["operating_efficiency_admin_value"]."%" : "");
+			$sheet->setCellValue('J'.$i , ($row["operating_efficiency_fundraising_value"] != "") ? $row["operating_efficiency_fundraising_value"]."%" : "");
+			$sheet->setCellValue('K'.$i , ($row["change_in_net_assets_in_quarter"] != "") ? $row["change_in_net_assets_in_quarter"] : "");
+			$sheet->setCellValue('L'.$i , ($row["days_in_cash"] != "") ? $row["days_in_cash"] : "");
 			$sheet->setCellValue('M'.$i , $row["change_in_grant_ty_ytd"].":".$row["change_in_grant_ty_ytd_value"]);
 			$sheet->setCellValue('N'.$i , $row["change_in_grant_ly_ytd"].":".$row["change_in_grant_ly_ytd_value"]);
-			$sheet->setCellValue('O'.$i , $is_net_assets_positive);
-			$sheet->setCellValue('P'.$i , $row["borad_giving"]."%");
-			$sheet->setCellValue('Q'.$i , $row["operating_reserves_percentage"]."%");
+			$sheet->setCellValue('O'.$i , isset($row["is_net_assets_positive"]) ? $row["is_net_assets_positive"] : "N");
+			$sheet->setCellValue('P'.$i , ($row["borad_giving"] != "") ? $row["borad_giving"]."%" : "");
+			$sheet->setCellValue('Q'.$i , ($row["operating_reserves_percentage"] != "") ? $row["operating_reserves_percentage"]."%" : "");
 			$i++;
 		}
 
-		header('Content-Type: application/vnd.ms-excel');
+		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 		header('Content-Disposition: attachment;filename="'.$OutputFilename.'"');
 		header('Cache-Control: max-age=0');
 
