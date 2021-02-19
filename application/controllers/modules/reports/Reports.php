@@ -91,59 +91,59 @@ class Reports extends MY_Controller
 		$OutputFilename .= ".xlsx";
 		
 		$inputFileName = './resources/template/KPIReport.xlsx';
+		
+		/**  Identify the type of $inputFileName  **/
+		$inputFileType = IOFactory::identify($inputFileName);
 
-		echo file_get_contents($inputFileName);
-		/* try 
+		/**  Create a new Reader of the type that has been identified  **/
+		$reader = IOFactory::createReader($inputFileType);
+
+		/**  Load $inputFileName to a Spreadsheet Object  **/
+		$spreadsheet = $reader->load($inputFileName);
+		//$spreadsheet = IOFactory::load($inputFileName);
+		$sheet = $spreadsheet->getActiveSheet();
+
+		$sheetData = $sheet->toArray();
+
+		echo "<pre>";
+		print_r($sheetData);
+		
+		/* $result = $this->Reports_model->get_key_indicators($data['quarter'], $data['year']);
+		
+		$i = 4;
+		foreach($result as $record)
 		{
-			
-			$spreadsheet = IOFactory::load($inputFileName);
-			$sheet = $spreadsheet->getActiveSheet();
+			$row = json_decode($record["indicators"], TRUE);
+			$is_net_assets_positive = isset($row["is_net_assets_positive"]) ? $row["is_net_assets_positive"] : "N";
 
-			$sheetData = $sheet->toArray();
-
-			echo "<pre>";
-			print_r($sheetData); */
-			
-			/* $result = $this->Reports_model->get_key_indicators($data['quarter'], $data['year']);
-			
-			$i = 4;
-			foreach($result as $record)
-			{
-				$row = json_decode($record["indicators"], TRUE);
-				$is_net_assets_positive = isset($row["is_net_assets_positive"]) ? $row["is_net_assets_positive"] : "N";
-
-				$sheet->setCellValue('A'.$i , $record["name"]);
-				$sheet->setCellValue('B'.$i , $row["liquidity"]);
-				$sheet->setCellValue('C'.$i , $row["current_ratio"]);
-				$sheet->setCellValue('D'.$i , $row["current_debt_ratio"]);
-				$sheet->setCellValue('E'.$i , $row["from_operations"]);
-				$sheet->setCellValue('F'.$i , $row["from_financing"]);
-				$sheet->setCellValue('G'.$i , $row["from_investing"]);
-				$sheet->setCellValue('H'.$i , $row["operating_efficiency_program_value"]);
-				$sheet->setCellValue('I'.$i , $row["operating_efficiency_admin_value"]);
-				$sheet->setCellValue('J'.$i , $row["operating_efficiency_fundraising_value"]);
-				$sheet->setCellValue('K'.$i , $row["change_in_net_assets_in_quarter"]);
-				$sheet->setCellValue('L'.$i , $row["days_in_cash"]);
-				$sheet->setCellValue('M'.$i , $row["change_in_grant_ty_ytd"].":".$row["change_in_grant_ty_ytd_value"]);
-				$sheet->setCellValue('N'.$i , $row["change_in_grant_ly_ytd"].":".$row["change_in_grant_ly_ytd_value"]);
-				$sheet->setCellValue('O'.$i , $is_net_assets_positive);
-				$sheet->setCellValue('P'.$i , $row["borad_giving"]);
-				$sheet->setCellValue('Q'.$i , $row["operating_reserves_percentage"]);
-				$i++;
-			}
-
-			header('Content-Type: application/vnd.ms-excel');
-			header('Content-Disposition: attachment;filename="'.$OutputFilename.'"');
-			header('Cache-Control: max-age=0');
-
-			$writer = new Xlsx($spreadsheet);
-			$writer->save('php://output');
-			$spreadsheet->disconnectWorksheets();
-			unset($spreadsheet);
+			$sheet->setCellValue('A'.$i , $record["name"]);
+			$sheet->setCellValue('B'.$i , $row["liquidity"]);
+			$sheet->setCellValue('C'.$i , $row["current_ratio"]);
+			$sheet->setCellValue('D'.$i , $row["current_debt_ratio"]);
+			$sheet->setCellValue('E'.$i , $row["from_operations"]);
+			$sheet->setCellValue('F'.$i , $row["from_financing"]);
+			$sheet->setCellValue('G'.$i , $row["from_investing"]);
+			$sheet->setCellValue('H'.$i , $row["operating_efficiency_program_value"]);
+			$sheet->setCellValue('I'.$i , $row["operating_efficiency_admin_value"]);
+			$sheet->setCellValue('J'.$i , $row["operating_efficiency_fundraising_value"]);
+			$sheet->setCellValue('K'.$i , $row["change_in_net_assets_in_quarter"]);
+			$sheet->setCellValue('L'.$i , $row["days_in_cash"]);
+			$sheet->setCellValue('M'.$i , $row["change_in_grant_ty_ytd"].":".$row["change_in_grant_ty_ytd_value"]);
+			$sheet->setCellValue('N'.$i , $row["change_in_grant_ly_ytd"].":".$row["change_in_grant_ly_ytd_value"]);
+			$sheet->setCellValue('O'.$i , $is_net_assets_positive);
+			$sheet->setCellValue('P'.$i , $row["borad_giving"]);
+			$sheet->setCellValue('Q'.$i , $row["operating_reserves_percentage"]);
+			$i++;
 		}
-		catch(Exception $e) {
-			die('Error loading file: '.$e->getMessage());
-		} */
+
+		header('Content-Type: application/vnd.ms-excel');
+		header('Content-Disposition: attachment;filename="'.$OutputFilename.'"');
+		header('Cache-Control: max-age=0');
+
+		$writer = new Xlsx($spreadsheet);
+		$writer->save('php://output');
+		$spreadsheet->disconnectWorksheets();
+		unset($spreadsheet); */
 
 	}
 }
