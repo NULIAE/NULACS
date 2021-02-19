@@ -6,6 +6,7 @@ require_once APPPATH.'third_party/excel/autoload.php';
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Reader\Exception;
 
 class Reports extends MY_Controller 
 {
@@ -94,8 +95,13 @@ class Reports extends MY_Controller
 			$inputFileName = './resources/template/KPIReport.xlsx';
 			$spreadsheet = IOFactory::load($inputFileName);
 			$sheet = $spreadsheet->getActiveSheet();
+
+			$sheetData = $sheet->toArray();
+
+			echo "<pre>";
+			print_r($sheetData);
 			
-			$result = $this->Reports_model->get_key_indicators($data['quarter'], $data['year']);
+			/* $result = $this->Reports_model->get_key_indicators($data['quarter'], $data['year']);
 			
 			$i = 4;
 			foreach($result as $record)
@@ -128,14 +134,13 @@ class Reports extends MY_Controller
 			header('Cache-Control: max-age=0');
 
 			$writer = new Xlsx($spreadsheet);
-			$writer->save('php://output');
+			$writer->save('php://output'); */
 
 			$spreadsheet->disconnectWorksheets();
 			unset($spreadsheet);
 		}
-		catch(Exception $e)
-		{
-			die('Error: '.$e->getMessage());
+		catch(Exception $e) {
+			die('Error loading file: '.$e->getMessage());
 		}
 	}
 }
