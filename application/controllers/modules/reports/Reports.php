@@ -90,26 +90,47 @@ class Reports extends MY_Controller
 
 		$OutputFilename .= ".xlsx";
 		
-		$inputFileName = './resources/template/KPIReports.xlsx';
-		
-		/**  Identify the type of $inputFileName  **/
-		$inputFileType = IOFactory::identify($inputFileName);
-
-		/**  Create a new Reader of the type that has been identified  **/
-		$reader = IOFactory::createReader($inputFileType);
-
-		/**  Load $inputFileName to a Spreadsheet Object  **/
-		$spreadsheet = $reader->load($inputFileName);
-		//$spreadsheet = IOFactory::load($inputFileName);
+		$spreadsheet = new Spreadsheet();
 		$sheet = $spreadsheet->getActiveSheet();
 
-		$sheetData = $sheet->toArray();
+		$sheet->setCellValue('B2', 'Liquidity');
+		$sheet->setCellValue('C2', 'Curren Ratio (S/B Greater than 1)');
+		$sheet->setCellValue('D2', 'Current Debt Ratio (Lower is better)');
+		$sheet->setCellValue('E2', 'Change in Cash - Operations');
+		$sheet->setCellValue('F2', 'Change in Cash - Financing');
+		$sheet->setCellValue('G2', 'Change in Cash - Investing');
+		$sheet->setCellValue('H2', 'Program Efficiency - Program Expense');
+		$sheet->setCellValue('I2', 'Program Efficiency - Mgmt/General Expense');
+		$sheet->setCellValue('J2', 'Program Efficiency - Fundraising Expense');
+		$sheet->setCellValue('K2', 'Change in Net Assets w/o donor restrictions');
+		$sheet->setCellValue('L2', 'Days in cash');
+		$sheet->setCellValue('M2', 'Number of Grants This Year/Last Year');
+		$sheet->setCellValue('N2', '$ Volume of Grants  This Year/Last Year');
+		$sheet->setCellValue('O2', 'Positive Net Assets  w/o donor restrictions Y/N?');
+		$sheet->setCellValue('P2', '% YTD Board Giving  toAnnual Commitment');
+		$sheet->setCellValue('Q2', '% Operating Reserves to 3 months admin expenses');
 
-		echo "<pre>";
-		print_r($sheetData);
+		$sheet->getStyle('B2')->getAlignment()->setTextRotation(90)->setWrapText(true)->setHorizontal('center')->setVertical('center');
+		$sheet->getStyle('C2')->getAlignment()->setTextRotation(90)->setWrapText(true)->setHorizontal('center')->setVertical('center');
+		$sheet->getStyle('D2')->getAlignment()->setTextRotation(90)->setWrapText(true)->setHorizontal('center')->setVertical('center');
+		$sheet->getStyle('E2')->getAlignment()->setTextRotation(90)->setWrapText(true)->setHorizontal('center')->setVertical('center');
+		$sheet->getStyle('F2')->getAlignment()->setTextRotation(90)->setWrapText(true)->setHorizontal('center')->setVertical('center');
+		$sheet->getStyle('G2')->getAlignment()->setTextRotation(90)->setWrapText(true)->setHorizontal('center')->setVertical('center');
+		$sheet->getStyle('H2')->getAlignment()->setTextRotation(90)->setWrapText(true)->setHorizontal('center')->setVertical('center');
+		$sheet->getStyle('I2')->getAlignment()->setTextRotation(90)->setWrapText(true)->setHorizontal('center')->setVertical('center');
+		$sheet->getStyle('J2')->getAlignment()->setTextRotation(90)->setWrapText(true)->setHorizontal('center')->setVertical('center');
+		$sheet->getStyle('K2')->getAlignment()->setTextRotation(90)->setWrapText(true)->setHorizontal('center')->setVertical('center');
+		$sheet->getStyle('L2')->getAlignment()->setTextRotation(90)->setWrapText(true)->setHorizontal('center')->setVertical('center');
+		$sheet->getStyle('M2')->getAlignment()->setTextRotation(90)->setWrapText(true)->setHorizontal('center')->setVertical('center');
+		$sheet->getStyle('N2')->getAlignment()->setTextRotation(90)->setWrapText(true)->setHorizontal('center')->setVertical('center');
+		$sheet->getStyle('O2')->getAlignment()->setTextRotation(90)->setWrapText(true)->setHorizontal('center')->setVertical('center');
+		$sheet->getStyle('P2')->getAlignment()->setTextRotation(90)->setWrapText(true)->setHorizontal('center')->setVertical('center');
+		$sheet->getStyle('Q2')->getAlignment()->setTextRotation(90)->setWrapText(true)->setHorizontal('center')->setVertical('center');
 		
-		/* $result = $this->Reports_model->get_key_indicators($data['quarter'], $data['year']);
-		
+		$result = $this->Reports_model->get_key_indicators($data['quarter'], $data['year']);
+
+		$currency_format = PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_CURRENCY_USD_SIMPLE;
+
 		$i = 4;
 		foreach($result as $record)
 		{
@@ -118,21 +139,25 @@ class Reports extends MY_Controller
 
 			$sheet->setCellValue('A'.$i , $record["name"]);
 			$sheet->setCellValue('B'.$i , $row["liquidity"]);
+			$sheet->getStyle('B'.$i)->getNumberFormat()->setFormatCode($currency_format);
 			$sheet->setCellValue('C'.$i , $row["current_ratio"]);
 			$sheet->setCellValue('D'.$i , $row["current_debt_ratio"]);
 			$sheet->setCellValue('E'.$i , $row["from_operations"]);
+			$sheet->getStyle('E'.$i)->getNumberFormat()->setFormatCode($currency_format);
 			$sheet->setCellValue('F'.$i , $row["from_financing"]);
+			$sheet->getStyle('F'.$i)->getNumberFormat()->setFormatCode($currency_format);
 			$sheet->setCellValue('G'.$i , $row["from_investing"]);
-			$sheet->setCellValue('H'.$i , $row["operating_efficiency_program_value"]);
-			$sheet->setCellValue('I'.$i , $row["operating_efficiency_admin_value"]);
-			$sheet->setCellValue('J'.$i , $row["operating_efficiency_fundraising_value"]);
+			$sheet->getStyle('G'.$i)->getNumberFormat()->setFormatCode($currency_format);
+			$sheet->setCellValue('H'.$i , $row["operating_efficiency_program_value"]."%");
+			$sheet->setCellValue('I'.$i , $row["operating_efficiency_admin_value"]."%");
+			$sheet->setCellValue('J'.$i , $row["operating_efficiency_fundraising_value"]."%");
 			$sheet->setCellValue('K'.$i , $row["change_in_net_assets_in_quarter"]);
 			$sheet->setCellValue('L'.$i , $row["days_in_cash"]);
 			$sheet->setCellValue('M'.$i , $row["change_in_grant_ty_ytd"].":".$row["change_in_grant_ty_ytd_value"]);
 			$sheet->setCellValue('N'.$i , $row["change_in_grant_ly_ytd"].":".$row["change_in_grant_ly_ytd_value"]);
 			$sheet->setCellValue('O'.$i , $is_net_assets_positive);
-			$sheet->setCellValue('P'.$i , $row["borad_giving"]);
-			$sheet->setCellValue('Q'.$i , $row["operating_reserves_percentage"]);
+			$sheet->setCellValue('P'.$i , $row["borad_giving"]."%");
+			$sheet->setCellValue('Q'.$i , $row["operating_reserves_percentage"]."%");
 			$i++;
 		}
 
@@ -143,7 +168,7 @@ class Reports extends MY_Controller
 		$writer = new Xlsx($spreadsheet);
 		$writer->save('php://output');
 		$spreadsheet->disconnectWorksheets();
-		unset($spreadsheet); */
+		unset($spreadsheet);
 
 	}
 }
