@@ -994,22 +994,27 @@ class Affiliate_model extends CI_Model
 
 	public function recent_affiliate_data($affiliate_id)
 	{
-		$query = $this->db->query("SELECT MAX(`month`) AS `month`, MAX(`year`) AS `year` FROM `affiliate_compliance_status_monthly` WHERE `affiliate_id` = '$affiliate_id' AND `year` IN (SELECT MAX(`year`) AS `year` FROM `affiliate_compliance_status_monthly` WHERE `affiliate_id` = '$affiliate_id')");
+		$query = $this->db->query("SELECT MAX(`document_month`) AS `month`, MAX(`document_year`) AS `year` FROM `monthly_document_status` WHERE `affiliate_id` = '$affiliate_id' AND `document_year` IN (SELECT MAX(`document_year`) AS `year` FROM `monthly_document_status` WHERE `affiliate_id` = '$affiliate_id')");
 	
 		$recent_month = $query->row_array();
 		
-		$query = $this->db->query("SELECT MAX(`quarter`) AS `quarter`, MAX(`year`) AS `year` FROM `affiliate_compliance_status_quarterly` WHERE `affiliate_id` = '$affiliate_id' AND `year` IN (SELECT MAX(`year`) AS `year` FROM `affiliate_compliance_status_quarterly` WHERE `affiliate_id` = '$affiliate_id')");
+		$query = $this->db->query("SELECT MAX(`document_month`) AS `quarter`, MAX(`document_year`) AS `year` FROM `quarterly_document_status` WHERE `affiliate_id` = '$affiliate_id' AND `document_year` IN (SELECT MAX(`document_year`) AS `year` FROM `quarterly_document_status` WHERE `affiliate_id` = '$affiliate_id')");
 		
 		$recent_quarter = $query->row_array();
 		
-		$query = $this->db->query("SELECT MAX(`year`) AS `year` FROM `affiliate_compliance_status_yearly` WHERE `affiliate_id` = '$affiliate_id'");
+		$query = $this->db->query("SELECT MAX(`document_year`) AS `year` FROM `yearly_document_status` WHERE `affiliate_id` = '$affiliate_id'");
 
 		$recent_year = $query->row_array();
+
+		$query = $this->db->query("SELECT MAX(`quarter`) AS `quarter`, MAX(`year`) AS `year` FROM `key_indicators` WHERE `affiliate_id` = '$affiliate_id' AND `year` IN (SELECT MAX(`year`) AS `year` FROM `key_indicators` WHERE `affiliate_id` = '$affiliate_id')");
+		
+		$recent_key_indicator = $query->row_array();
 
 		return array(
 			'monthly' => $recent_month,
 			'quarterly' => $recent_quarter,
-			'yearly' => $recent_year
+			'yearly' => $recent_year,
+			'key_indicator' => $recent_key_indicator
 		);
 	}
 

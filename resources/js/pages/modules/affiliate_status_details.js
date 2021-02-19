@@ -449,6 +449,8 @@ $(function () {
 			year: $("#key-year").val()
 		}
 
+		$("#label-duration").html("QUARTER 0"+inputData.quarter+" - "+inputData.year);
+
 		$.ajax({
 			type: 'POST',
 			url: base_url + 'module/affiliate/key-indicators/search',

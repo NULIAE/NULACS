@@ -1796,23 +1796,28 @@ $quarterArray = array(
 					</div>
 					<div class="tab-pane fade" id="nav-x3" role="tabpanel" aria-labelledby="nav-x3-tab">
 						<form id="form-search-key-indicators" method="post" action="#" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>">
-							<div class="row m-y-20 justify-content-center">
-								<div class="col-6 col-md-6 col-lg-3"><span class="sub">
+							<div class="row m-y-20 align-items-center">
+
+								<div class="col-lg-15 col-md-6 col-sm-24">
+									<div id="label-duration" class="h5 f-bold"><?php echo "QUARTER 0".$key_quarter." - ".$key_year; ?></div>
+								</div>
+								
+								<div class="col-12 col-md-6 col-lg-3"><span class="sub">
 									<select id="key-quarter" name="quarter" class="form-control selectp-r">
-										<option value="1" <?php if($quarter == "1") echo "selected"; ?>>Q 1</option>
-										<option value="2" <?php if($quarter == "2") echo "selected"; ?>>Q 2</option>
-										<option value="3" <?php if($quarter == "3") echo "selected"; ?>>Q 3</option>
-										<option value="4" <?php if($quarter == "4") echo "selected"; ?>>Q 4</option>
+										<option value="1" <?php if($key_quarter == "1") echo "selected"; ?>>Q 1</option>
+										<option value="2" <?php if($key_quarter == "2") echo "selected"; ?>>Q 2</option>
+										<option value="3" <?php if($key_quarter == "3") echo "selected"; ?>>Q 3</option>
+										<option value="4" <?php if($key_quarter == "4") echo "selected"; ?>>Q 4</option>
 									</select>
 								</span></div>
-								<div class="col-6 col-md-6 col-lg-3">
+								<div class="col-12 col-md-6 col-lg-3">
 									<div class="yearPick">
 										<i class="i i-year-pick"></i>
-										<input id="key-year" class="yearpick form-control" name="year" type="text" value="<?php echo $quarterly_year; ?>" />
+										<input id="key-year" class="yearpick form-control" name="year" type="text" value="<?php echo $key_year; ?>" />
 									</div>
 								</div>
 
-								<div class="col-12  col-md-6 col-lg-3 t-r">
+								<div class="col-24  col-md-6 col-lg-3 t-c">
 									<button class="btn btn-primary btn-rounded min w-100px" type="submit">SEARCH</button>
 								</div>
 							</div>
