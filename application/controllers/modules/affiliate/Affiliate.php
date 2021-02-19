@@ -536,6 +536,12 @@ class Affiliate extends MY_Controller
 
 		$recent_data = $this->Affiliate_model->recent_affiliate_data($affiliate_id);
 
+		if(!isset($recent_data['key_indicator']['quarter']))
+			$recent_data['key_indicator']['quarter'] = ceil(date("m", strtotime("-1 month", time()))/3);
+
+		if(!isset($recent_data['key_indicator']['year']))
+			$recent_data['key_indicator']['year'] = date("Y", strtotime("-1 month", time()));
+
 		//Monthly Document Filter
 		$monthly_filter = array();
 		
