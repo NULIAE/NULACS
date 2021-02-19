@@ -90,7 +90,7 @@ class Reports extends MY_Controller
 
 		$OutputFilename .= ".xlsx";
 		
-		$inputFileName = './resources/template/KPIReport.xlsx';
+		$inputFileName = './resources/template/KPIReports.xlsx';
 		
 		/**  Identify the type of $inputFileName  **/
 		$inputFileType = IOFactory::identify($inputFileName);
