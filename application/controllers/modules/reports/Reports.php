@@ -89,17 +89,20 @@ class Reports extends MY_Controller
 			$data['year'] = '';
 
 		$OutputFilename .= ".xlsx";
+		
+		$inputFileName = './resources/template/KPIReport.xlsx';
 
-		try 
+		echo file_get_contents($inputFileName);
+		/* try 
 		{
-			$inputFileName = './resources/template/KPIReport.xlsx';
+			
 			$spreadsheet = IOFactory::load($inputFileName);
 			$sheet = $spreadsheet->getActiveSheet();
 
 			$sheetData = $sheet->toArray();
 
 			echo "<pre>";
-			print_r($sheetData);
+			print_r($sheetData); */
 			
 			/* $result = $this->Reports_model->get_key_indicators($data['quarter'], $data['year']);
 			
@@ -134,13 +137,13 @@ class Reports extends MY_Controller
 			header('Cache-Control: max-age=0');
 
 			$writer = new Xlsx($spreadsheet);
-			$writer->save('php://output'); */
-
+			$writer->save('php://output');
 			$spreadsheet->disconnectWorksheets();
 			unset($spreadsheet);
 		}
 		catch(Exception $e) {
 			die('Error loading file: '.$e->getMessage());
-		}
+		} */
+
 	}
 }
