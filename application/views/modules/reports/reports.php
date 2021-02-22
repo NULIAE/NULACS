@@ -117,8 +117,8 @@ line-height:16px !important;
                               <td><?=isset($indicators['operating_efficiency_fundraising_value']) && $indicators['operating_efficiency_fundraising_value'] != NULL ? number_format($indicators['operating_efficiency_fundraising_value'], 2) : 0; ?></td>
                               <td><?=isset($indicators['change_in_net_assets_in_quarter']) && $indicators['change_in_net_assets_in_quarter'] != NULL ? number_format($indicators['change_in_net_assets_in_quarter'], 2) : 0; ?></td>
                               <td><?=isset($indicators['days_in_cash']) && $indicators['days_in_cash'] != NULL ? number_format($indicators['days_in_cash'], 2) : 0; ?></td>
-                              <td><?=isset($indicators['change_in_grant_ty_ytd']) && $indicators['change_in_grant_ty_ytd'] != NULL ? number_format($indicators['change_in_grant_ty_ytd'], 2) : 0; ?></td>
-                              <td><?=isset($indicators['change_in_grant_ly_ytd']) && $indicators['change_in_grant_ly_ytd'] != NULL ? number_format($indicators['change_in_grant_ly_ytd'], 2) : 0; ?></td>
+                              <td><?="TY".($indicators['change_in_grant_ty_ytd'] != NULL ? $indicators['change_in_grant_ty_ytd'] : 0).":LY".($indicators['change_in_grant_ly_ytd'] != NULL ? $indicators['change_in_grant_ly_ytd'] : 0); ?></td>
+                              <td><?=($indicators['change_in_grant_ty_ytd_value'] != NULL ? $indicators['change_in_grant_ty_ytd_value'] : 0).":".($indicators['change_in_grant_ly_ytd_value'] != NULL ? $indicators['change_in_grant_ly_ytd_value'] : 0); ?></td>
                               <td><?=isset($indicators['change_in_net_assets_in_quarter']) && $indicators['change_in_net_assets_in_quarter'] != NULL ? number_format($indicators['change_in_net_assets_in_quarter'], 2) : 0; ?></td>
                               <td><?=isset($indicators['borad_giving']) && $indicators['borad_giving'] != NULL ? number_format($indicators['borad_giving'], 2) : 0; ?></td>
                               <td><?=isset($indicators['operating_reserves_amount']) && $indicators['operating_reserves_amount'] != NULL ? number_format($indicators['operating_reserves_amount'], 2) : 0; ?></td>
@@ -218,8 +218,10 @@ line-height:16px !important;
 																	['OE Fundraising'],
 																	['Change in N/A'],
 																	['Days in Cash'],
-																	['Change in # of Grants TY YTD-LY YTD'],
-																	['Change in $ of Grants TY YTD -LY YTD'],
+																	['# of Grants TY YTD'],
+                                  ['# of Grants LY YTD'],
+																	['$ of Grants TY YTD'],
+																	['$ of Grants LY YTD'],
 																	['Net assets'],
 																	['Board Giving variance commitment - YTD'],
 																	['Operating Reserves']
@@ -243,11 +245,15 @@ line-height:16px !important;
                                         <td><?php $arrayForChart[7][$index] = isset($report['operating_efficiency_fundraising_value']) ? (int)$report['operating_efficiency_fundraising_value'] : 0; echo $arrayForChart[7][$index]; ?></td>
                                         <td><?php $arrayForChart[8][$index] = isset($report['change_in_net_assets_in_quarter']) ? (int)$report['change_in_net_assets_in_quarter'] : 0; echo $arrayForChart[8][$index]; ?></td>
                                         <td><?php $arrayForChart[9][$index] = isset($report['days_in_cash']) ? (int)$report['days_in_cash'] : 0; echo $arrayForChart[9][$index]; ?></td>
-                                        <td><?php $arrayForChart[10][$index] = isset($report['change_in_grant_ty_ytd']) ? (int)$report['change_in_grant_ty_ytd'] : 0; echo $arrayForChart[10][$index]; ?></td>
-                                        <td><?php $arrayForChart[11][$index] = isset($report['change_in_grant_ly_ytd']) ? (int)$report['change_in_grant_ly_ytd'] : 0; echo $arrayForChart[11][$index]; ?></td>
-                                        <td><?php $arrayForChart[12][$index] = isset($report['change_in_net_assets_in_quarter']) ? (int)$report['change_in_net_assets_in_quarter'] : 0; echo $arrayForChart[12][$index]; ?></td>
-                                        <td><?php $arrayForChart[13][$index] = isset($report['borad_giving']) ? (int)$report['borad_giving'] : 0; echo $arrayForChart[13][$index]; ?></td>
-                                        <td><?php $arrayForChart[14][$index] = isset($report['operating_reserves_amount']) ? (int)$report['operating_reserves_amount'] : 0; echo $arrayForChart[14][$index]; ?></td>
+                                        <?php $arrayForChart[10][$index] = isset($report['change_in_grant_ty_ytd']) ? $report['change_in_grant_ty_ytd'] : 0; ?>
+                                        <?php $arrayForChart[11][$index] = isset($report['change_in_grant_ly_ytd']) ? (int)$report['change_in_grant_ly_ytd'] : 0; ?>
+                                        <td><?php echo "TY".$arrayForChart[10][$index].":LY".$arrayForChart[11][$index]; ?></td>
+                                        <?php $arrayForChart[12][$index] = isset($report['change_in_grant_ty_ytd_value']) ? $report['change_in_grant_ty_ytd_value'] : 0; ?>
+                                        <?php $arrayForChart[13][$index] = isset($report['change_in_grant_ly_ytd_value']) ? (int)$report['change_in_grant_ly_ytd_value'] : 0; ?>
+                                        <td><?php echo $arrayForChart[12][$index].":".$arrayForChart[13][$index]; ?></td>
+                                        <td><?php $arrayForChart[14][$index] = isset($report['change_in_net_assets_in_quarter']) ? (int)$report['change_in_net_assets_in_quarter'] : 0; echo $arrayForChart[12][$index]; ?></td>
+                                        <td><?php $arrayForChart[15][$index] = isset($report['borad_giving']) ? (int)$report['borad_giving'] : 0; echo $arrayForChart[13][$index]; ?></td>
+                                        <td><?php $arrayForChart[16][$index] = isset($report['operating_reserves_amount']) ? (int)$report['operating_reserves_amount'] : 0; echo $arrayForChart[14][$index]; ?></td>
                                     </tr>
                                     <?php
                                   }}

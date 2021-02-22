@@ -152,8 +152,8 @@ class Reports extends MY_Controller
 			$sheet->setCellValue('J'.$i , ($row["operating_efficiency_fundraising_value"] != "") ? number_format($row["operating_efficiency_fundraising_value"], 2)."%" : "");
 			$sheet->setCellValue('K'.$i , ($row["change_in_net_assets_in_quarter"] != "") ? number_format($row["change_in_net_assets_in_quarter"], 2) : "");
 			$sheet->setCellValue('L'.$i , ($row["days_in_cash"] != "") ? number_format($row["days_in_cash"], 2) : "");
-			$sheet->setCellValue('M'.$i , $row["change_in_grant_ty_ytd"].":".$row["change_in_grant_ty_ytd_value"]);
-			$sheet->setCellValue('N'.$i , $row["change_in_grant_ly_ytd"].":".$row["change_in_grant_ly_ytd_value"]);
+			$sheet->setCellValue('M'.$i , "TY".$row["change_in_grant_ty_ytd"].":LY".$row["change_in_grant_ly_ytd"]);
+			$sheet->setCellValue('N'.$i , $row["change_in_grant_ty_ytd_value"].":".$row["change_in_grant_ly_ytd_value"]);
 			$sheet->setCellValue('O'.$i , isset($row["is_net_assets_positive"]) ? $row["is_net_assets_positive"] : "N");
 			$sheet->setCellValue('P'.$i , ($row["borad_giving"] != "") ? number_format($row["borad_giving"], 2)."%" : "");
 			$sheet->setCellValue('Q'.$i , ($row["operating_reserves_percentage"] != "") ? number_format($row["operating_reserves_percentage"], 2)."%" : "");
