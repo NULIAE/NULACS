@@ -23,7 +23,8 @@
                     </div>
                 </div>
                 <div class="row chartBody">
-                    <canvas id="myChart2" width="300" height="200"></canvas>
+                    <div id="myChart2" style="width: 600px; height: 410px;"></div>
+                    <!-- <canvas id="myChart2" width="300" height="200"></canvas> -->
                 </div>
              </div>
              <div class="col-lg-11">
@@ -33,7 +34,7 @@
                     </div>
                 </div>
                 <div class="row chartBody">
-                    <canvas id="myChart" width="300" height="200"></canvas>
+                    <div id="myChart" style="width: 600px; height: 410px;"></div>
                 </div>
             </div>
          </div>
@@ -121,6 +122,53 @@
     </div>
     
 </main>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+  google.charts.load("current", {packages:["corechart"]});
+  google.charts.setOnLoadCallback(drawDonutChart);
+  google.charts.setOnLoadCallback(drawBarChart);
+  function drawDonutChart() {
+    var data = google.visualization.arrayToDataTable([
+      ['Task', '# of Votes'],
+      ['Complaint - Stable 60 ',     60],
+      ['Probation-Unstable 10',      10],
+      ['Non-Complaint - Watchlist 20',  20],
+      ['Crisis List - Merger - Disaffiliation 10', 10]
+    ]);
+
+    var options = {
+      pieHole: 0.4,
+      colors: ['#60c76e','#4eb8f7', '#eae870', '#f0594d'],
+      legend:{position: 'top', maxLines: 3}
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('myChart2'));
+    chart.draw(data, options);
+  }
+  
+  function drawBarChart() {
+      var data = google.visualization.arrayToDataTable([
+        ["", "Votes", { role: "style" } ],
+        ["60-100", 50, "#60c76e"],
+        ["40-60", 10, "#4eb8f7"],
+        ["20-40", 30, "#eae870"],
+        ["0-20", 10, "#f0594d"]
+      ]);
+
+      var options = {
+        title: "# of Votes",
+        orientation: 'horizontal',
+        legend: { position: "none" },
+        animation:{
+          duration: 1000,
+          easing: 'out',
+          startup: true
+        }
+      };
+      var chart = new google.visualization.BarChart(document.getElementById("myChart"));
+      chart.draw(data, options);
+  }
+</script>
 <script id="template" type="x-tmpl-mustache">
 {{#affiliates}}
 <tr>
