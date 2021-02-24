@@ -1213,7 +1213,7 @@ $quarterArray = array(
 														<div class="btn wrdiv">
 															<div class="row  align-items-center">
 																<div class="col-3 col-md-3"><span class="sub"><?php echo $key++; ?></span></div>
-																<div class="col-10 col-md-10"><span class="sub "><a href="<?php echo base_url($document['document_path']); ?>"><?php echo $document['document_name']; ?></a></span></div>
+																<div class="col-10 col-md-10"><span class="sub "><a  target="_blank" href="<?php echo base_url($document['document_path']); ?>"><?php echo $document['document_name']; ?></a></span></div>
 																<div class="col-3 col-md-3"><span class="sub"><?php echo $document['assessment_start_year']; ?></span></div>
 																<div class="col-3 col-md-3"><span class="sub"><?php echo $document['assessment_end_year']; ?></span></div>
 																<div class="col-4 col-md-4"><span class="sub"><?php echo date('m/d/Y', strtotime($document['created_date'])); ?></span></div>

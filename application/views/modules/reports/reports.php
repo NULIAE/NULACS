@@ -11,6 +11,14 @@ line-height:16px !important;
 .SumoSelect{
   width:100% !important;
 }
+.all-affiliates .mainTabAll .tab-content .affiliateQty .cdnWrap .pane1Qty table tbody tr td{
+text-align:left;
+}
+.all-affiliates .mainTabAll .tab-content .affiliateQty .cdnWrap .pane1Qty table thead tr th{
+vertical-align:middle;
+width:90px;
+font-size:15px;
+}
 </style>
 <main class="all-affiliates">
     <div class="container">
@@ -235,25 +243,25 @@ line-height:16px !important;
                                       $report = json_decode($ia['indicators'], true);
                                     ?>
                                     <tr>
-                                        <td><?php $arrayForChart[0][$index] = "Q".$ia['quarter']; ?><a href="<?php echo base_url('module/filter/reports').'?affiliate='.$affiliate."&choose_yr=".$iay['year']; ?>"><?php echo $arrayForChart[0][$index]; ?></a></td>
-                                        <td><?php $arrayForChart[1][$index] = isset($report['liquidity']) ? (int)$report['liquidity'] : 0; echo $arrayForChart[1][$index]; ?></td>
-                                        <td><?php $arrayForChart[2][$index] = isset($report['current_ratio']) ? (int)$report['current_ratio'] : 0; echo $arrayForChart[2][$index]; ?></td>
-                                        <td><?php $arrayForChart[3][$index] = isset($report['current_debt_ratio']) ? (int)$report['current_debt_ratio'] : 0; echo $arrayForChart[3][$index]; ?></td>
-                                        <td><?php $arrayForChart[4][$index] = isset($report['change_in_cash_ytd']) ? (int)$report['change_in_cash_ytd'] : 0; echo $arrayForChart[4][$index]; ?></td>
-                                        <td><?php $arrayForChart[5][$index] = isset($report['operating_efficiency_program_value']) ? (int)$report['operating_efficiency_program_value'] : 0; echo $arrayForChart[5][$index]; ?></td>
-                                        <td><?php $arrayForChart[6][$index] = isset($report['operating_efficiency_admin_value']) ? (int)$report['operating_efficiency_admin_value'] : 0; echo $arrayForChart[6][$index]; ?></td>
-                                        <td><?php $arrayForChart[7][$index] = isset($report['operating_efficiency_fundraising_value']) ? (int)$report['operating_efficiency_fundraising_value'] : 0; echo $arrayForChart[7][$index]; ?></td>
-                                        <td><?php $arrayForChart[8][$index] = isset($report['change_in_net_assets_in_quarter']) ? (int)$report['change_in_net_assets_in_quarter'] : 0; echo $arrayForChart[8][$index]; ?></td>
-                                        <td><?php $arrayForChart[9][$index] = isset($report['days_in_cash']) ? (int)$report['days_in_cash'] : 0; echo $arrayForChart[9][$index]; ?></td>
+                                        <td class="t-l"><?php $arrayForChart[0][$index] = "Q".$ia['quarter']; ?><a href="<?php echo base_url('module/filter/reports').'?affiliate='.$affiliate."&choose_yr=".$iay['year']; ?>"><?php echo $arrayForChart[0][$index]; ?></a></td>
+                                        <td class="t-l"><?php $arrayForChart[1][$index] = isset($report['liquidity']) ? (int)$report['liquidity'] : 0; echo $arrayForChart[1][$index]; ?></td>
+                                        <td class="t-l"><?php $arrayForChart[2][$index] = isset($report['current_ratio']) ? (int)$report['current_ratio'] : 0; echo $arrayForChart[2][$index]; ?></td>
+                                        <td class="t-l"><?php $arrayForChart[3][$index] = isset($report['current_debt_ratio']) ? (int)$report['current_debt_ratio'] : 0; echo $arrayForChart[3][$index]; ?></td>
+                                        <td class="t-l"><?php $arrayForChart[4][$index] = isset($report['change_in_cash_ytd']) ? (int)$report['change_in_cash_ytd'] : 0; echo $arrayForChart[4][$index]; ?></td>
+                                        <td class="t-l"><?php $arrayForChart[5][$index] = isset($report['operating_efficiency_program_value']) ? (int)$report['operating_efficiency_program_value'] : 0; echo $arrayForChart[5][$index]; ?></td>
+                                        <td class="t-l"><?php $arrayForChart[6][$index] = isset($report['operating_efficiency_admin_value']) ? (int)$report['operating_efficiency_admin_value'] : 0; echo $arrayForChart[6][$index]; ?></td>
+                                        <td class="t-l"><?php $arrayForChart[7][$index] = isset($report['operating_efficiency_fundraising_value']) ? (int)$report['operating_efficiency_fundraising_value'] : 0; echo $arrayForChart[7][$index]; ?></td>
+                                        <td class="t-l"><?php $arrayForChart[8][$index] = isset($report['change_in_net_assets_in_quarter']) ? (int)$report['change_in_net_assets_in_quarter'] : 0; echo $arrayForChart[8][$index]; ?></td>
+                                        <td class="t-l"><?php $arrayForChart[9][$index] = isset($report['days_in_cash']) ? (int)$report['days_in_cash'] : 0; echo $arrayForChart[9][$index]; ?></td>
                                         <?php $arrayForChart[10][$index] = isset($report['change_in_grant_ty_ytd']) ? $report['change_in_grant_ty_ytd'] : 0; ?>
                                         <?php $arrayForChart[11][$index] = isset($report['change_in_grant_ly_ytd']) ? (int)$report['change_in_grant_ly_ytd'] : 0; ?>
-                                        <td><?php echo "TY".$arrayForChart[10][$index].":LY".$arrayForChart[11][$index]; ?></td>
+                                        <td class="t-l"><?php echo "TY".$arrayForChart[10][$index].":LY".$arrayForChart[11][$index]; ?></td>
                                         <?php $arrayForChart[12][$index] = isset($report['change_in_grant_ty_ytd_value']) ? $report['change_in_grant_ty_ytd_value'] : 0; ?>
                                         <?php $arrayForChart[13][$index] = isset($report['change_in_grant_ly_ytd_value']) ? (int)$report['change_in_grant_ly_ytd_value'] : 0; ?>
-                                        <td><?php echo $arrayForChart[12][$index].":".$arrayForChart[13][$index]; ?></td>
-                                        <td><?php $arrayForChart[14][$index] = isset($report['change_in_net_assets_in_quarter']) ? (int)$report['change_in_net_assets_in_quarter'] : 0; echo $arrayForChart[12][$index]; ?></td>
-                                        <td><?php $arrayForChart[15][$index] = isset($report['borad_giving']) ? (int)$report['borad_giving'] : 0; echo $arrayForChart[13][$index]; ?></td>
-                                        <td><?php $arrayForChart[16][$index] = isset($report['operating_reserves_amount']) ? (int)$report['operating_reserves_amount'] : 0; echo $arrayForChart[14][$index]; ?></td>
+                                        <td class="t-l"><?php echo $arrayForChart[12][$index].":".$arrayForChart[13][$index]; ?></td>
+                                        <td class="t-l"><?php $arrayForChart[14][$index] = isset($report['change_in_net_assets_in_quarter']) ? (int)$report['change_in_net_assets_in_quarter'] : 0; echo $arrayForChart[12][$index]; ?></td>
+                                        <td class="t-l"><?php $arrayForChart[15][$index] = isset($report['borad_giving']) ? (int)$report['borad_giving'] : 0; echo $arrayForChart[13][$index]; ?></td>
+                                        <td class="t-l"><?php $arrayForChart[16][$index] = isset($report['operating_reserves_amount']) ? (int)$report['operating_reserves_amount'] : 0; echo $arrayForChart[14][$index]; ?></td>
                                     </tr>
                                     <?php
                                   }}

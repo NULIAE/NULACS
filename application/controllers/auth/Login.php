@@ -90,13 +90,15 @@ class Login extends CI_Controller
 
 						
 						redirect(base_url('/'));
+						exit;
 					}
 					else
 					{
 						//Invalid password. Back to login
 						$this->session->set_flashdata('error', 'Invalid username or password.');
 				
-						redirect(base_url('/login'));							
+						redirect(base_url('/login'));
+						exit;							
 					}
 				}
 				else
@@ -105,6 +107,7 @@ class Login extends CI_Controller
 					$this->session->set_flashdata('error', 'Invalid username or password.');
 			
 					redirect(base_url('/login'));
+					exit;
 				}
 			}
 			else
@@ -113,14 +116,14 @@ class Login extends CI_Controller
 				$this->session->set_flashdata('error', 'Username and Password are required.');
 		
 				redirect(base_url('/login'));
+				exit;
 			}
 		}
-		else
-		{
-			$this->session->set_flashdata('error', 'Invalid username or password.');
-		
-			redirect(base_url('/login'));
-		}
+
+		$this->session->set_flashdata('error', 'Invalid username or password.');
+	
+		redirect(base_url('/login'));
+		exit;
 	}
 	
 	/**

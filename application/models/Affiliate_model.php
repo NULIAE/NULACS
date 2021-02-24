@@ -580,6 +580,7 @@ class Affiliate_model extends CI_Model
 		$this->db->join('status_flags', 'status_flags.id = cys.compliance_status');
 		
 		if(isset($filter['affiliate'])){
+			$this->db->where('affiliate.affiliate_id',$filter['affiliate']);
 			unset($filter['affiliate']);
 		}
 		if( $filter !== NULL )

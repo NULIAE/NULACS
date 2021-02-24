@@ -215,7 +215,7 @@
                             </div>
                         </div>
                 <div class="col ">
-                  <!-- <div class="t-r"><a  target="_blank" href="</?php echo base_url('module/assessment/assessment-pdf?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>"  class="btn btn-dark btn-rounded min w-100px">EXPORT</a> </div> -->
+                  <div class="t-r"><a  target="_blank" href="<?php echo base_url('module/assessment/assessment-pdf?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>"  class="btn btn-dark btn-rounded min w-100px">EXPORT</a> </div>
                 </div>
 
              

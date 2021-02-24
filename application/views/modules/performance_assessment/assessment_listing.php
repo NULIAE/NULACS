@@ -105,7 +105,7 @@
                     <td><?=isset($listing['assessment_start_year'])?$listing['assessment_start_year']:''?></td>
                     <td><?=isset($listing['assessment_end_year'])?$listing['assessment_end_year']:''?></td>
                     <td><?=isset($listing['last_update'])?$listing['last_update']:''?></td>
-                    <td><?=isset($listing['document_name'])?$listing['document_name']:''?></td>
+                    <td> <a target="_blank" href="<?=isset($listing['document_path'])?base_url().$listing['document_path']:''?>"><?=isset($listing['document_name'])?$listing['document_name']:''?></a></td>
                   
 
                   </tr>

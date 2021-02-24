@@ -277,14 +277,20 @@ class Affiliate extends MY_Controller
 		//XSS Filter all the input post fields
 		$data = $this->input->get(NULL, TRUE);
 
-		$compliance_filter = $document_filter = array();
+		$compliance_filter = $document_filter = $count_filter = array();
 
 		//Compliance Filter
 		if( isset($data['region_id']) && ($data['region_id'] !== '') )
+		{
 			$compliance_filter['affiliate.region_id'] =  $data['region_id'];
+			$count_filter['affiliate.region_id'] =  $data['region_id'];
+		}
 
 		if( isset($data['affiliate']) && ($data['affiliate'] !== '') )
+		{
 			$compliance_filter['affiliate'] =  $data['affiliate'];
+			$count_filter['affiliate_id'] =  $data['affiliate'];
+		}
 
 		if( isset($data['month']) && ($data['month'] !== '') )
 			$compliance_filter['month'] =  $data['month'];
@@ -320,10 +326,10 @@ class Affiliate extends MY_Controller
 		//Override necessary configurations for pagination
 		$config['base_url'] = base_url('module/affiliate/status/monthly/get');
 
-		if( isset($compliance_filter['compliance_status']) || isset($compliance_filter['affiliate'])){
+		if( isset($compliance_filter['compliance_status'])){
 			$config['total_rows'] = $this->Affiliate_model->monthly_compliance_status_count($compliance_filter);
 		}else{
-			$config['total_rows'] = $this->Affiliate_model->get_affiliate_count();
+			$config['total_rows'] = $this->Affiliate_model->get_affiliate_count($count_filter);
 		}
 		$this->pagination->initialize($config);
 
@@ -332,7 +338,7 @@ class Affiliate extends MY_Controller
 		if( isset($compliance_filter['compliance_status']) ){
 			$affiliates = $this->Affiliate_model->monthly_compliance_status($config['per_page'], $page_number, $compliance_filter);
 
-		}else{
+		}else{ 
 			$affiliates = $this->Affiliate_model->get_all_affiliates_list($config['per_page'], $page_number, $compliance_filter);
 		}
 
@@ -362,14 +368,20 @@ class Affiliate extends MY_Controller
 		//XSS Filter all the input post fields
 		$data = $this->input->get(NULL, TRUE);
 
-		$compliance_filter = $document_filter = array();
+		$compliance_filter = $document_filter = $count_filter = array();
 
 		//Compliance Filter
 		if( isset($data['region_id']) && ($data['region_id'] !== '') )
+		{
 			$compliance_filter['affiliate.region_id'] =  $data['region_id'];
+			$count_filter['affiliate.region_id'] =  $data['region_id'];
+		}
 
 		if( isset($data['affiliate']) && ($data['affiliate'] !== '') )
-			$compliance_filter['affiliate'] =  $data['affiliate']; 
+		{
+			$compliance_filter['affiliate'] =  $data['affiliate'];
+			$count_filter['affiliate_id'] =  $data['affiliate'];
+		}
 
 		if( !isset($data['month']) || ($data['month'] == '') )
 			$data['month'] =  date("m", strtotime("-1 month", time()));
@@ -405,10 +417,10 @@ class Affiliate extends MY_Controller
 		//Override necessary configurations for pagination
 		$config['base_url'] = base_url('module/affiliate/status/quarterly/get');
 	
-		if( isset($compliance_filter['compliance_status']) || isset($compliance_filter['affiliate'])){
+		if( isset($compliance_filter['compliance_status'])){
 			$config['total_rows'] = $this->Affiliate_model->quarterly_compliance_status_count($compliance_filter);
-		}else{
-			$config['total_rows'] = $this->Affiliate_model->get_affiliate_count();
+		}else{ 
+			$config['total_rows'] = $this->Affiliate_model->get_affiliate_count($count_filter);
 		}
 
 		$this->pagination->initialize($config);
@@ -450,13 +462,21 @@ class Affiliate extends MY_Controller
 		//XSS Filter all the input post fields
 		$data = $this->input->get(NULL, TRUE);
 
-		$compliance_filter = $document_filter = array();
+		$compliance_filter = $document_filter = $count_filter = array();
 
 		//Compliance Filter
 		if( isset($data['region_id']) && ($data['region_id'] !== '') )
+		{
 			$compliance_filter['affiliate.region_id'] =  $data['region_id'];
+			$count_filter['affiliate.region_id'] =  $data['region_id'];
+		}
+
 		if( isset($data['affiliate']) && ($data['affiliate'] !== '') )
+		{
 			$compliance_filter['affiliate'] =  $data['affiliate'];
+			$count_filter['affiliate_id'] =  $data['affiliate'];
+		}
+
 		if( !isset($data['month']) || ($data['month'] == '') )
 			$data['month'] =  date("m", strtotime("-1 month", time()));
 		
@@ -485,7 +505,7 @@ class Affiliate extends MY_Controller
 		if( isset($compliance_filter['compliance_status']) || isset($compliance_filter['affiliate'])){
 			$config['total_rows'] = $this->Affiliate_model->yearly_compliance_status_count($compliance_filter);
 		}else{
-			$config['total_rows'] = $this->Affiliate_model->get_affiliate_count();
+			$config['total_rows'] = $this->Affiliate_model->get_affiliate_count($count_filter);
 		}
 
 		$this->pagination->initialize($config);
