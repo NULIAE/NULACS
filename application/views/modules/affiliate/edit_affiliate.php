@@ -19,7 +19,7 @@
 							<div class="col-lg-6 col-md-12 form-group">
 								<div>
 									<label>Name</label>
-									<input type="text" class="form-control" name="organization" value="<?php echo $affiliate['organization']; ?>" disabled />
+									<input type="text" class="form-control" name="organization" value="<?php echo $affiliate['organization']; ?>" />
 								</div>
 							</div>
 						

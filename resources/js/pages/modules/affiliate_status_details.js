@@ -257,7 +257,7 @@ $(function () {
 								var docName = $('#document-name-' + elemId + ' span').html();
 								if(docName != "Others") {
 									$('#submitted-' + elemId).html('<span class="sub">' + moment().format("MM/DD/YYYY") + '</span>');
-									$('#document-name-' + elemId).html('<a href="' + base_url + response.upload_data.full_path + '" class="float-left"><span class="sub text-primary link">' + docName + '</span></a> <a href="#" data-document="'+elemId+'" data-interval="'+interval+'" class="reupload"><span class="sub"><i class="i i-create"></i></span></a>');
+									$('#document-name-' + elemId).html('<a href="' + base_url + response.upload_data.full_path + '" class="float-left" target="_blank"><span class="sub text-primary link">' + docName + '</span></a> <a href="#" data-document="'+elemId+'" data-interval="'+interval+'" class="reupload"><span class="sub"><i class="i i-create"></i></span></a>');
 									
 									if($("#doc-status-" + elemId).length){
 										$("#doc-status-" + elemId).toggleClass("d-none");

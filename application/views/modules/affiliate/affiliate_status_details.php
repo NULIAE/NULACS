@@ -126,7 +126,7 @@ $quarterArray = array(
 																<div class="col-3 col-md-2"><span class="sub"><?php echo $key+1; ?></span></div>
 																<div class="col-14 col-md-6" id="document-name-<?php echo $document['document_id']; ?>">
 																	<?php if(isset($currentDoc)) : ?>
-																		<a href="<?php echo base_url($currentDoc['monthly_upload_file']); ?>" class="float-left"><span class="sub text-primary link"><?php echo $document['document_name']; ?></span></a> <a href="#" data-document="<?php echo $document['document_id']; ?>" data-interval="month" class="reupload"><span class="sub"><i class="i i-create"></i></span></a>
+																		<a href="<?php echo base_url($currentDoc['monthly_upload_file']); ?>" class="float-left" target="_blank"><span class="sub text-primary link"><?php echo $document['document_name']; ?></span></a> <a href="#" data-document="<?php echo $document['document_id']; ?>" data-interval="month" class="reupload"><span class="sub"><i class="i i-create"></i></span></a>
 																	<?php else: ?>
 																		<span class="sub"><?php echo $document['document_name']; ?></span>
 																	<?php endif; ?>
@@ -259,7 +259,7 @@ $quarterArray = array(
 																<div class="intab" >
 																<?php foreach($monthly_other as $index => $ref): ?>
 																	<div class="row w-100" <?php if($index==0) echo 'style="border-top:0;"'; ?>>
-																		<div class="col-14 col-md-18"><span class="text-primary"><a href="<?php echo base_url($ref['monthly_upload_file']);?>"><?php echo $ref['monthly_upload_file_name']; ?></a></span></div>
+																		<div class="col-14 col-md-18"><span class="text-primary"><a href="<?php echo base_url($ref['monthly_upload_file']);?>" target="_blank"><?php echo $ref['monthly_upload_file_name']; ?></a></span></div>
 																		<div class="col-10 col-md-6"><span class="statround"><?php echo date('m/d/Y', strtotime($ref['monthly_submitted_date'])); ?></span></div>
 																	</div>
 																<?php endforeach; ?>
@@ -365,7 +365,7 @@ $quarterArray = array(
 																<div class="col-3 col-md-2"><span class="sub"><?php echo $key+1; ?></span></div>
 																<div class="col-14 col-md-6" id="document-name-<?php echo $document['document_id']; ?>">
 																<?php if(isset($currentDoc)) : ?>
-																		<a href="<?php echo base_url($currentDoc['quarterly_upload_file']); ?>" class="float-left"><span class="sub text-primary link"><?php echo $document['document_name']; ?></span></a> <a href="#" data-document="<?php echo $document['document_id']; ?>" data-interval="quarter" class="reupload"><span class="sub"><i class="i i-create"></i></span></a>
+																		<a href="<?php echo base_url($currentDoc['quarterly_upload_file']); ?>" class="float-left" target="_blank"><span class="sub text-primary link"><?php echo $document['document_name']; ?></span></a> <a href="#" data-document="<?php echo $document['document_id']; ?>" data-interval="quarter" class="reupload"><span class="sub"><i class="i i-create"></i></span></a>
 																	<?php else: ?>
 																		<span class="sub"><?php echo $document['document_name']; ?></span>
 																	<?php endif; ?>
@@ -495,7 +495,7 @@ $quarterArray = array(
 																<div class="intab">
 																<?php foreach($quarterly_other as $index => $ref): ?>
 																	<div class="row w-100" <?php if($index==0) echo 'style="border-top:0;"'; ?>>
-																		<div class="col-14 col-md-18"><span class="text-primary"><a href="<?php echo base_url($ref['quarterly_upload_file']);?>"><?php echo $ref['quarterly_upload_file_name']; ?></a></span></div>
+																		<div class="col-14 col-md-18"><span class="text-primary"><a href="<?php echo base_url($ref['quarterly_upload_file']);?>" target="_blank"><?php echo $ref['quarterly_upload_file_name']; ?></a></span></div>
 																		<div class="col-10 col-md-6"><span class="statround"><?php echo date('m/d/Y', strtotime($ref['quarterly_submitted_date'])); ?></span></div>
 																	</div>
 																<?php endforeach; ?>
@@ -598,7 +598,7 @@ $quarterArray = array(
 																<div class="col-3 col-md-2"><span class="sub"><?php echo $key+1; ?></span></div>
 																<div class="col-14 col-md-6" id="document-name-<?php echo $document['document_id']; ?>">
 																	<?php if(isset($currentDoc)) : ?>
-																		<a href="<?php echo base_url($currentDoc['yearly_upload_file']); ?>" class="float-left"><span class="sub text-primary link"><?php echo $document['document_name']; ?></span></a> <a href="#" data-document="<?php echo $document['document_id']; ?>" data-interval="year" class="reupload"><span class="sub"><i class="i i-create"></i></span></a>
+																		<a href="<?php echo base_url($currentDoc['yearly_upload_file']); ?>" class="float-left" target="_blank"><span class="sub text-primary link"><?php echo $document['document_name']; ?></span></a> <a href="#" data-document="<?php echo $document['document_id']; ?>" data-interval="year" class="reupload"><span class="sub"><i class="i i-create"></i></span></a>
 																	<?php else: ?>
 																		<span class="sub"><?php echo $document['document_name']; ?></span>
 																	<?php endif; ?>
@@ -731,7 +731,7 @@ $quarterArray = array(
 																<div class="intab">
 																<?php foreach($yearly_other as $index => $ref): ?>
 																	<div class="row w-100" <?php if($index==0) echo 'style="border-top:0;"'; ?>>
-																		<div class="col-14 col-md-18"><span class="text-primary"><a href="<?php echo base_url($ref['yearly_upload_file']);?>"><?php echo $ref['yearly_upload_file_name']; ?></a></span></div>
+																		<div class="col-14 col-md-18"><span class="text-primary"><a href="<?php echo base_url($ref['yearly_upload_file']);?>" target="_blank"><?php echo $ref['yearly_upload_file_name']; ?></a></span></div>
 																		<div class="col-10 col-md-6"><span class="statround"><?php echo date('m/d/Y', strtotime($ref['yearly_submitted_date'])); ?></span></div>
 																	</div>
 																<?php endforeach; ?>
@@ -884,7 +884,7 @@ $quarterArray = array(
 														<div class="btn wrdiv <?php if($i%2==0) echo "odd"; ?>">
 															<div class="row  align-items-center">
 																<div class="col-3 col-md-3"><span class="sub"><?=$i++?></span></div>
-																<div class="col-24 col-md-10"><span class="sub"><a href="<?= base_url().$legal['quarterly_upload_file'].$legal['quarterly_upload_file_name']?>"><?=isset($legal['quarterly_upload_file_name'])?$legal['quarterly_upload_file_name']:''?></a>
+																<div class="col-24 col-md-10"><span class="sub"><a href="<?= base_url().$legal['quarterly_upload_file'].$legal['quarterly_upload_file_name']?>" target="_blank"><?=isset($legal['quarterly_upload_file_name'])?$legal['quarterly_upload_file_name']:''?></a>
 																	<a href="javascript:reupload('legal', <?php echo $legal['legal_d_id']; ?>);">
 																	<span><i class="i i-create"></i> 
 																	</span>
@@ -1050,7 +1050,7 @@ $quarterArray = array(
 														<div class="btn wrdiv <?php if($i%2==0) echo "odd"; ?>">
 															<div class="row  align-items-center">
 																<div class="col-3 col-md-3"><span class="sub"><?=$i++?></span></div>
-																<div class="col-24 col-md-10"><span class="sub"><a href="<?= base_url().$other['other_upload_file'].$other['other_upload_file_name']?>"><?=isset($other['other_upload_file_name'])?$other['other_upload_file_name']:''?></a>
+																<div class="col-24 col-md-10"><span class="sub"><a href="<?= base_url().$other['other_upload_file'].$other['other_upload_file_name']?>" target="_blank"><?=isset($other['other_upload_file_name'])?$other['other_upload_file_name']:''?></a>
 																	<a href="javascript:reupload('com-other', <?php echo $other['id']; ?>);">
 																	<span><i class="i i-create"></i>
 																	</span></a>
@@ -1279,7 +1279,7 @@ $quarterArray = array(
 																			<?php $check_flag = true; ?>
 																			<?php foreach($currentDoc['document'] as $ref): ?>
 																				<div class="row">
-																					<div class="col-14 col-md-18"><span class="text-primary"><a href="<?php echo base_url($ref['performance_org_doc_upload_file']);?>"><?php echo $ref['performance_org_doc_upload_file_name']; ?></a></span></div>
+																					<div class="col-14 col-md-18"><span class="text-primary"><a href="<?php echo base_url($ref['performance_org_doc_upload_file']);?>" target="_blank"><?php echo $ref['performance_org_doc_upload_file_name']; ?></a></span></div>
 																					<div class="col-10 col-md-6"><span class="statround"><?php echo date('m/d/Y', strtotime($ref['performance_org_doc_submitted_date'])); ?></span></div>
 																				</div>
 																			<?php endforeach; ?>
@@ -1289,12 +1289,12 @@ $quarterArray = array(
 																			<?php foreach($currentDoc['ref_documents'] as $ref): ?>
 																				<?php if($document['document_name'] == "Board Roster"): ?>
 																				<div class="row">
-																					<div class="col-14 col-md-18"><span class="text-primary"><a href="<?php echo base_url($ref['yearly_upload_file']);?>"><?php echo $ref['yearly_upload_file_name']; ?></a></span></div>
+																					<div class="col-14 col-md-18"><span class="text-primary"><a href="<?php echo base_url($ref['yearly_upload_file']);?>" target="_blank"><?php echo $ref['yearly_upload_file_name']; ?></a></span></div>
 																					<div class="col-10 col-md-6"><span class="statround"><?php echo date('m/d/Y', strtotime($ref['yearly_submitted_date'])); ?></span></div>
 																				</div>
 																				<?php else: ?>
 																					<div class="row">
-																						<div class="col-14 col-md-18"><span class="text-primary"><a href="<?php echo base_url($ref['monthly_upload_file']);?>"><?php echo $ref['monthly_upload_file_name']; ?></a></span></div>
+																						<div class="col-14 col-md-18"><span class="text-primary"><a href="<?php echo base_url($ref['monthly_upload_file']);?>" target="_blank"><?php echo $ref['monthly_upload_file_name']; ?></a></span></div>
 																						<div class="col-10 col-md-6"><span class="statround"><?php echo date('m/d/Y', strtotime($ref['monthly_submitted_date'])); ?></span></div>
 																					</div>
 																				<?php endif; ?>
@@ -1413,7 +1413,7 @@ $quarterArray = array(
 																				<?php $check_flag = true;?>
 																				<?php foreach($currentDoc['document'] as $ref): ?>
 																					<div class="row">
-																						<div class="col-14 col-md-18"><span class="text-primary"><a href="<?php echo base_url($ref['performance_vitality_upload_file']);?>"><?php echo $ref['performance_vitality_upload_file_name']; ?></a></span></div>
+																						<div class="col-14 col-md-18"><span class="text-primary"><a href="<?php echo base_url($ref['performance_vitality_upload_file']);?>" target="_blank"><?php echo $ref['performance_vitality_upload_file_name']; ?></a></span></div>
 																						<div class="col-10 col-md-6"><span class="statround"><?php echo date('m/d/Y', strtotime($ref['performance_vitality_submitted_date'])); ?></span></div>
 																					</div>
 																				<?php endforeach; ?>
@@ -1423,17 +1423,17 @@ $quarterArray = array(
 																				<?php foreach($currentDoc['ref_documents'] as $ref): ?>
 																					<?php if($document['document_name'] == "Form 990" || $document['document_name'] == "Current Operating Budget"): ?>
 																					<div class="row">
-																						<div class="col-14 col-md-18"><span class="text-primary"><a href="<?php echo base_url($ref['yearly_upload_file']);?>"><?php echo $ref['yearly_upload_file_name']; ?></a></span></div>
+																						<div class="col-14 col-md-18"><span class="text-primary"><a href="<?php echo base_url($ref['yearly_upload_file']);?>" target="_blank"><?php echo $ref['yearly_upload_file_name']; ?></a></span></div>
 																						<div class="col-10 col-md-6"><span class="statround"><?php echo date('m/d/Y', strtotime($ref['yearly_submitted_date'])); ?></span></div>
 																					</div>
 																					<?php elseif($document['document_name'] == "Form 941" || $document['document_name'] == "Audited Financial Statements"): ?>
 																					<div class="row">
-																						<div class="col-14 col-md-18"><span class="text-primary"><a href="<?php echo base_url($ref['quarterly_upload_file']);?>"><?php echo $ref['quarterly_upload_file_name']; ?></a></span></div>
+																						<div class="col-14 col-md-18"><span class="text-primary"><a href="<?php echo base_url($ref['quarterly_upload_file']);?>" target="_blank"><?php echo $ref['quarterly_upload_file_name']; ?></a></span></div>
 																						<div class="col-10 col-md-6"><span class="statround"><?php echo date('m/d/Y', strtotime($ref['quarterly_submitted_date'])); ?></span></div>
 																					</div>
 																					<?php else: ?>
 																						<div class="row">
-																							<div class="col-14 col-md-18"><span class="text-primary"><a href="<?php echo base_url($ref['monthly_upload_file']);?>"><?php echo $ref['monthly_upload_file_name']; ?></a></span></div>
+																							<div class="col-14 col-md-18"><span class="text-primary"><a href="<?php echo base_url($ref['monthly_upload_file']);?>" target="_blank"><?php echo $ref['monthly_upload_file_name']; ?></a></span></div>
 																							<div class="col-10 col-md-6"><span class="statround"><?php echo date('m/d/Y', strtotime($ref['monthly_submitted_date'])); ?></span></div>
 																						</div>
 																					<?php endif; ?>
@@ -1549,7 +1549,7 @@ $quarterArray = array(
 																		<?php if(!empty($currentDoc['document'])): ?>
 																			<?php foreach($currentDoc['document'] as $ref): ?>
 																				<div class="row">
-																					<div class="col-14 col-md-18"><span class="text-primary"><a href="<?php echo base_url($ref['performance_im_mi_upload_file']);?>"><?php echo $ref['performance_im_mi_upload_file_name']; ?></a></span></div>
+																					<div class="col-14 col-md-18"><span class="text-primary"><a href="<?php echo base_url($ref['performance_im_mi_upload_file']);?>" target="_blank"><?php echo $ref['performance_im_mi_upload_file_name']; ?></a></span></div>
 																					<div class="col-10 col-md-6"><span class="statround"><?php echo date('m/d/Y', strtotime($ref['performance_im_mi_submitted_date'])); ?></span></div>
 																				</div>
 																			<?php endforeach; ?>
@@ -1706,7 +1706,7 @@ $quarterArray = array(
 														<div class="btn wrdiv <?php if($i%2==0) echo "odd"; ?>">
 															<div class="row  align-items-center">
 																<div class="col-3 col-md-3"><span class="sub"><?=$i++?></span></div>
-																<div class="col-24 col-md-10"><span class="sub"><a href="<?= base_url().$other['performance_other_upload_file'].$other['performance_other_upload_file_name']?>"><?=isset($other['performance_other_upload_file_name'])?$other['performance_other_upload_file_name']:''?></a>
+																<div class="col-24 col-md-10"><span class="sub"><a href="<?= base_url().$other['performance_other_upload_file'].$other['performance_other_upload_file_name']?>" target="_blank"><?=isset($other['performance_other_upload_file_name'])?$other['performance_other_upload_file_name']:''?></a>
 																	<a href="javascript:reupload('per-other', <?php echo $other['performance_o_id']; ?>);">
 																	<span><i class="i i-create"></i> 
 																	</span>
@@ -2111,7 +2111,7 @@ $quarterArray = array(
 </script>
 <script id="template-other-row" type="x-tmpl-mustache">
 <div class="row w-100" {{#isEmpty}}style="border-top:0;"{{/isEmpty}}>
-	<div class="col-14 col-md-18"><span class="text-primary"><a href="{{documentPath}}">{{filename}}</a></span></div>
+	<div class="col-14 col-md-18"><span class="text-primary"><a href="{{documentPath}}" target="_blank">{{filename}}</a></span></div>
 	<div class="col-10 col-md-6"><span class="statround">{{submittedTime}}</span></div>
 </div>
 </script>
@@ -2128,7 +2128,7 @@ $quarterArray = array(
 			</div>
 		</div> -->
 		<div class="row">
-			<div class="col-14 col-md-18"><span class="text-primary"><a href="{{documentPath}}">{{document.file_name}}</a></span></div>
+			<div class="col-14 col-md-18"><span class="text-primary"><a href="{{documentPath}}" target="_blank">{{document.file_name}}</a></span></div>
 			<div class="col-10 col-md-6"><span class="statround">{{submittedTime}}</span></div>
 		</div>
 <!-- 	</div>
@@ -2137,7 +2137,7 @@ $quarterArray = array(
 <script id="template-performance-filter" type="x-tmpl-mustache">
 {{#documents}}
 <div class="row">
-	<div class="col-14 col-md-18"><span class="text-primary"><a href="{{documentPath}}">{{filename}}</a></span></div>
+	<div class="col-14 col-md-18"><span class="text-primary"><a href="{{documentPath}}" target="_blank">{{filename}}</a></span></div>
 	<div class="col-10 col-md-6"><span class="statround">{{submittedTime}}</span></div>
 </div>
 {{/documents}}
@@ -2150,7 +2150,7 @@ $quarterArray = array(
 <script id="template-self-assessment" type="x-tmpl-mustache">
 {{#documents}}
 <div class="row">
-	<div class="col-14 col-md-18"><span class="text-primary"><a href="{{documentPath}}">{{filename}}</a></span></div>
+	<div class="col-14 col-md-18"><span class="text-primary"><a href="{{documentPath}}" target="_blank">{{filename}}</a></span></div>
 	<div class="col-10 col-md-6"><span class="statround">{{submittedTime}}</span></div>
 </div>
 <div class="card">
@@ -2159,7 +2159,7 @@ $quarterArray = array(
 			<div class="btn wrdiv">
 				<div class="row  align-items-center">
 					<div class="col-3 col-md-3"><span class="sub">{{key}}</span></div>
-					<div class="col-10 col-md-10"><span class="sub "><a href="{{documentPath}}">{{document_name}}</a></span></div>
+					<div class="col-10 col-md-10"><span class="sub "><a href="{{documentPath}}" target="_blank">{{document_name}}</a></span></div>
 					<div class="col-3 col-md-3"><span class="sub">{{assessment_start_year}}</span></div>
 					<div class="col-3 col-md-3"><span class="sub">{{assessment_end_year}}</span></div>
 					<div class="col-4 col-md-4"><span class="sub">{{createdDate}}</span></div>
@@ -2179,7 +2179,7 @@ $quarterArray = array(
 			<div class="btn wrdiv">
 				<div class="row  align-items-center">
 					<div class="col-3 col-md-3"><span class="sub" >{{count}}</span></div>
-					<div class="col-10 col-md-10"><span class="sub"><a href="{{documentPath}}">{{quarterly_upload_file_name}}</a>
+					<div class="col-10 col-md-10"><span class="sub"><a href="{{documentPath}}" target="_blank">{{quarterly_upload_file_name}}</a>
 					<a href="javascript:reupload('legal', {{legal_d_id}});">
 																	<span><i class="i i-create"></i>
 																	</span>
@@ -2260,7 +2260,7 @@ $quarterArray = array(
 			<div class="btn wrdiv">
 				<div class="row  align-items-center">
 					<div class="col-3 col-md-3"><span class="sub" >{{count}}</span></div>
-					<div class="col-10 col-md-10"><span class="sub"><a href="{{documentPath}}">{{other_upload_file_name}}</a>
+					<div class="col-10 col-md-10"><span class="sub"><a href="{{documentPath}}" target="_blank">{{other_upload_file_name}}</a>
 					<a href="javascript:reupload('com-other', {{id}});">
 																	<span><i class="i i-create"></i>
 																	</span>
@@ -2341,7 +2341,7 @@ $quarterArray = array(
 			<div class="btn wrdiv">
 				<div class="row  align-items-center">
 					<div class="col-3 col-md-3"><span class="sub" >{{count}}</span></div>
-					<div class="col-10 col-md-10"><span class="sub"><a href="{{documentPath}}">{{performance_other_upload_file_name}}</a>
+					<div class="col-10 col-md-10"><span class="sub"><a href="{{documentPath}}" target="_blank">{{performance_other_upload_file_name}}</a>
 					<a href="javascript:reupload('com-other', {{id}});">
 																	<span><i class="i i-create"></i>
 																	</span>
