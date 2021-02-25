@@ -137,21 +137,17 @@ class Reports extends MY_Controller
 			$row = json_decode($record["indicators"], TRUE);
 
 			$sheet->setCellValue('A'.$i , $record["name"]);
-			$sheet->setCellValue('B'.$i , ($row["liquidity"] != "") ? number_format($row["liquidity"], 2) : "");
-			$sheet->getStyle('B'.$i)->getNumberFormat()->setFormatCode($currency_format);
+			$sheet->setCellValue('B'.$i , ($row["liquidity"] != "") ? "$".$row["liquidity"] : "");
 			$sheet->setCellValue('C'.$i , ($row["current_ratio"] != "") ? number_format($row["current_ratio"], 2) : "");
 			$sheet->setCellValue('D'.$i , ($row["current_debt_ratio"] != "") ? number_format($row["current_debt_ratio"], 2) : "");
-			$sheet->setCellValue('E'.$i , ($row["from_operations"] != "") ? number_format($row["from_operations"], 2) : "");
-			$sheet->getStyle('E'.$i)->getNumberFormat()->setFormatCode($currency_format);
-			$sheet->setCellValue('F'.$i , ($row["from_financing"] != "") ? number_format($row["from_financing"], 2) : "");
-			$sheet->getStyle('F'.$i)->getNumberFormat()->setFormatCode($currency_format);
-			$sheet->setCellValue('G'.$i , ($row["from_investing"] != "") ? number_format($row["from_investing"], 2) : "");
-			$sheet->getStyle('G'.$i)->getNumberFormat()->setFormatCode($currency_format);
+			$sheet->setCellValue('E'.$i , ($row["from_operations"] != "") ? "$".$row["from_operations"] : "");
+			$sheet->setCellValue('F'.$i , ($row["from_financing"] != "") ? "$".$row["from_financing"] : "");
+			$sheet->setCellValue('G'.$i , ($row["from_investing"] != "") ? "$".$row["from_investing"] : "");
 			$sheet->setCellValue('H'.$i , ($row["operating_efficiency_program_value"] != "") ? number_format($row["operating_efficiency_program_value"], 2)."%" : "");
 			$sheet->setCellValue('I'.$i , ($row["operating_efficiency_admin_value"] != "") ? number_format($row["operating_efficiency_admin_value"], 2)."%" : "");
 			$sheet->setCellValue('J'.$i , ($row["operating_efficiency_fundraising_value"] != "") ? number_format($row["operating_efficiency_fundraising_value"], 2)."%" : "");
 			$sheet->setCellValue('K'.$i , ($row["change_in_net_assets_in_quarter"] != "") ? number_format($row["change_in_net_assets_in_quarter"], 2) : "");
-			$sheet->setCellValue('L'.$i , ($row["days_in_cash"] != "") ? number_format($row["days_in_cash"], 2) : "");
+			$sheet->setCellValue('L'.$i , ($row["days_in_cash"] != "") ? $row["days_in_cash"] : "");
 			$sheet->setCellValue('M'.$i , "TY".$row["change_in_grant_ty_ytd"].":LY".$row["change_in_grant_ly_ytd"]);
 			$sheet->setCellValue('N'.$i , $row["change_in_grant_ty_ytd_value"].":".$row["change_in_grant_ly_ytd_value"]);
 			$sheet->setCellValue('O'.$i , isset($row["is_net_assets_positive"]) ? $row["is_net_assets_positive"] : "N");

@@ -12,12 +12,16 @@ line-height:16px !important;
   width:100% !important;
 }
 .all-affiliates .mainTabAll .tab-content .affiliateQty .cdnWrap .pane1Qty table tbody tr td{
-text-align:left;
+  border:1px solid #ccc !important;
+  text-align:left;
 }
 .all-affiliates .mainTabAll .tab-content .affiliateQty .cdnWrap .pane1Qty table thead tr th{
 vertical-align:middle;
 width:90px;
 font-size:15px;
+}
+.pane113 table tbody tr td{
+  border:1px solid #ccc !important;
 }
 </style>
 <main class="all-affiliates">
@@ -92,21 +96,23 @@ font-size:15px;
 
                 <div class="pane113 w-100">
 
-                  <table class="table table1" id="#table11">
+                  <table class="table table1 table-bordered" id="#table11">
                     <thead>
                       <tr>
                         <th scope="col">Affiliates </th>
                         <th scope="col">Liquidity</th>
                         <th scope="col">Current Ratio</th>
                         <th scope="col">Current Debt Ratio</th>
-                        <th scope="col">Change in Cash YTD</th>
+                        <th scope="col">Change in Cash- Operations</th>
+                        <th scope="col">Change in Cash- Financing</th>
+                        <th scope="col">Change in Cash- Investing</th>
                         <th scope="col">OE Program</th>
                         <th scope="col">OE Admin</th>
                         <th scope="col">OE Fundraising</th>
                         <th scope="col">Change in N/A</th>
                         <th scope="col">Days in Cash</th>
-                        <th scope="col">Change in # of Grants TY YTD-LY YTD</th>
-                        <th scope="col">Change in $ of Grants TY YTD -LY YTD</th>
+                        <th scope="col"># of Grants TY YTD-LY YTD</th>
+                        <th scope="col">$ of Grants TY YTD -LY YTD</th>
                         <th scope="col">Net assets</th>
                         <th scope="col">Board Giving variance commitment - YTD</th>
                         <th scope="col">Operating Reserves</th>
@@ -116,20 +122,22 @@ font-size:15px;
                     <?php foreach($key_indicators as $ki){ $indicators = json_decode($ki['indicators'], true); ?>
                             <tr>
                               <td scope="row" class="t-l-c"><a class="d-block" href="<?php echo base_url('module/filter/reports')."?affiliate=".$ki['affiliate_id']."&choose_yr=".$year; ?>"><?=$ki['name']?></a></td>
-                              <td><?=isset($indicators['liquidity']) && $indicators['liquidity'] != NULL ? number_format($indicators['liquidity'], 2) : 0; ?></td>
+                              <td><?=isset($indicators['liquidity']) && $indicators['liquidity'] != NULL ? "$".$indicators['liquidity'] : 0; ?></td>
                               <td><?=isset($indicators['current_ratio']) && $indicators['current_ratio'] != NULL ? number_format($indicators['current_ratio'], 2) : 0;?></td>
                               <td><?=isset($indicators['current_debt_ratio']) && $indicators['current_debt_ratio'] != NULL ? number_format($indicators['current_debt_ratio'], 2) : 0;?></td>
-                              <td><?=isset($indicators['change_in_cash_ytd']) && $indicators['change_in_cash_ytd'] != NULL ? number_format($indicators['change_in_cash_ytd'], 2) : 0;?></td>
-                              <td><?=isset($indicators['operating_efficiency_program_value']) && $indicators['operating_efficiency_program_value'] != NULL ? number_format($indicators['operating_efficiency_program_value'], 2) : 0; ?></td>
-                              <td><?=isset($indicators['operating_efficiency_admin_value']) && $indicators['operating_efficiency_admin_value'] != NULL ? number_format($indicators['operating_efficiency_admin_value'], 2) : 0; ?></td>
-                              <td><?=isset($indicators['operating_efficiency_fundraising_value']) && $indicators['operating_efficiency_fundraising_value'] != NULL ? number_format($indicators['operating_efficiency_fundraising_value'], 2) : 0; ?></td>
+                              <td><?=isset($indicators['from_operations']) && $indicators['from_operations'] != NULL ? "$".$indicators['from_operations'] : 0;?></td>
+                              <td><?=isset($indicators['from_financing']) && $indicators['from_financing'] != NULL ? "$".$indicators['from_financing'] : 0;?></td>
+                              <td><?=isset($indicators['from_investing']) && $indicators['from_investing'] != NULL ? "$".$indicators['from_investing'] : 0;?></td>
+                              <td><?=isset($indicators['operating_efficiency_program_value']) && $indicators['operating_efficiency_program_value'] != NULL ? number_format($indicators['operating_efficiency_program_value'], 2) : 0; ?>%</td>
+                              <td><?=isset($indicators['operating_efficiency_admin_value']) && $indicators['operating_efficiency_admin_value'] != NULL ? number_format($indicators['operating_efficiency_admin_value'], 2) : 0; ?>%</td>
+                              <td><?=isset($indicators['operating_efficiency_fundraising_value']) && $indicators['operating_efficiency_fundraising_value'] != NULL ? number_format($indicators['operating_efficiency_fundraising_value'], 2) : 0; ?>%</td>
                               <td><?=isset($indicators['change_in_net_assets_in_quarter']) && $indicators['change_in_net_assets_in_quarter'] != NULL ? number_format($indicators['change_in_net_assets_in_quarter'], 2) : 0; ?></td>
-                              <td><?=isset($indicators['days_in_cash']) && $indicators['days_in_cash'] != NULL ? number_format($indicators['days_in_cash'], 2) : 0; ?></td>
+                              <td><?=isset($indicators['days_in_cash']) && $indicators['days_in_cash'] != NULL ? $indicators['days_in_cash'] : 0; ?></td>
                               <td><?="TY".($indicators['change_in_grant_ty_ytd'] != NULL ? $indicators['change_in_grant_ty_ytd'] : 0).":LY".($indicators['change_in_grant_ly_ytd'] != NULL ? $indicators['change_in_grant_ly_ytd'] : 0); ?></td>
                               <td><?=($indicators['change_in_grant_ty_ytd_value'] != NULL ? $indicators['change_in_grant_ty_ytd_value'] : 0).":".($indicators['change_in_grant_ly_ytd_value'] != NULL ? $indicators['change_in_grant_ly_ytd_value'] : 0); ?></td>
                               <td><?=isset($indicators['change_in_net_assets_in_quarter']) && $indicators['change_in_net_assets_in_quarter'] != NULL ? number_format($indicators['change_in_net_assets_in_quarter'], 2) : 0; ?></td>
-                              <td><?=isset($indicators['borad_giving']) && $indicators['borad_giving'] != NULL ? number_format($indicators['borad_giving'], 2) : 0; ?></td>
-                              <td><?=isset($indicators['operating_reserves_amount']) && $indicators['operating_reserves_amount'] != NULL ? number_format($indicators['operating_reserves_amount'], 2) : 0; ?></td>
+                              <td><?=isset($indicators['borad_giving']) && $indicators['borad_giving'] != NULL ? number_format($indicators['borad_giving'], 2) : 0; ?>%</td>
+                              <td><?=isset($indicators['operating_reserves_amount']) && $indicators['operating_reserves_amount'] != NULL ? number_format($indicators['operating_reserves_amount'], 2) : 0; ?>%</td>
                             </tr>
                             <?php } ?>
                       
@@ -187,14 +195,16 @@ font-size:15px;
                               <th scope="col">Liquidity</th>
                               <th scope="col">Current Ratio</th>
                               <th scope="col">Current Debt Ratio</th>
-                              <th scope="col">Change in Cash YTD</th>
+                              <th scope="col">CIC- Operations</th>
+                              <th scope="col">CIC- Financing</th>
+                              <th scope="col">CIC- Investing</th>
                               <th scope="col">OE Program</th>
                               <th scope="col">OE Admin</th>
                               <th scope="col">OE Fundraising</th>
                               <th scope="col">Change in N/A</th>
                               <th scope="col">Days in Cash</th>
-                              <th scope="col">Change in # of Grants TY YTD-LY YTD</th>
-                              <th scope="col">Change in $ of Grants TY YTD -LY YTD</th>
+                              <th scope="col"># of Grants TY YTD-LY YTD</th>
+                              <th scope="col">$ of Grants TY YTD -LY YTD</th>
                               <th scope="col">Net assets</th>
                               <th scope="col">Board Giving variance commitment - YTD</th>
                               <th scope="col">Operating Reserves</th>
@@ -220,7 +230,9 @@ font-size:15px;
 																	['Liquidity'],
 																	['Current Ratio'],
 																	['Current Debt Ratio'],
-																	['Change in Cash YTD'],
+																	['Change in Cash- Operations'],
+                                  ['Change in Cash- Financing'],
+                                  ['Change in Cash- Investing'],
 																	['OE Program'],
 																	['OE Admin'],
 																	['OE Fundraising'],
@@ -244,24 +256,26 @@ font-size:15px;
                                     ?>
                                     <tr>
                                         <td class="t-l"><?php $arrayForChart[0][$index] = "Q".$ia['quarter']; ?><a href="<?php echo base_url('module/filter/reports').'?affiliate='.$affiliate."&choose_yr=".$iay['year']; ?>"><?php echo $arrayForChart[0][$index]; ?></a></td>
-                                        <td class="t-l"><?php $arrayForChart[1][$index] = isset($report['liquidity']) ? (int)$report['liquidity'] : 0; echo $arrayForChart[1][$index]; ?></td>
+                                        <td class="t-l"><?php $arrayForChart[1][$index] = isset($report['liquidity']) ? (int)$report['liquidity'] : 0; echo "$".$arrayForChart[1][$index]; ?></td>
                                         <td class="t-l"><?php $arrayForChart[2][$index] = isset($report['current_ratio']) ? (int)$report['current_ratio'] : 0; echo $arrayForChart[2][$index]; ?></td>
                                         <td class="t-l"><?php $arrayForChart[3][$index] = isset($report['current_debt_ratio']) ? (int)$report['current_debt_ratio'] : 0; echo $arrayForChart[3][$index]; ?></td>
-                                        <td class="t-l"><?php $arrayForChart[4][$index] = isset($report['change_in_cash_ytd']) ? (int)$report['change_in_cash_ytd'] : 0; echo $arrayForChart[4][$index]; ?></td>
-                                        <td class="t-l"><?php $arrayForChart[5][$index] = isset($report['operating_efficiency_program_value']) ? (int)$report['operating_efficiency_program_value'] : 0; echo $arrayForChart[5][$index]; ?></td>
-                                        <td class="t-l"><?php $arrayForChart[6][$index] = isset($report['operating_efficiency_admin_value']) ? (int)$report['operating_efficiency_admin_value'] : 0; echo $arrayForChart[6][$index]; ?></td>
-                                        <td class="t-l"><?php $arrayForChart[7][$index] = isset($report['operating_efficiency_fundraising_value']) ? (int)$report['operating_efficiency_fundraising_value'] : 0; echo $arrayForChart[7][$index]; ?></td>
-                                        <td class="t-l"><?php $arrayForChart[8][$index] = isset($report['change_in_net_assets_in_quarter']) ? (int)$report['change_in_net_assets_in_quarter'] : 0; echo $arrayForChart[8][$index]; ?></td>
-                                        <td class="t-l"><?php $arrayForChart[9][$index] = isset($report['days_in_cash']) ? (int)$report['days_in_cash'] : 0; echo $arrayForChart[9][$index]; ?></td>
-                                        <?php $arrayForChart[10][$index] = isset($report['change_in_grant_ty_ytd']) ? $report['change_in_grant_ty_ytd'] : 0; ?>
-                                        <?php $arrayForChart[11][$index] = isset($report['change_in_grant_ly_ytd']) ? (int)$report['change_in_grant_ly_ytd'] : 0; ?>
-                                        <td class="t-l"><?php echo "TY".$arrayForChart[10][$index].":LY".$arrayForChart[11][$index]; ?></td>
-                                        <?php $arrayForChart[12][$index] = isset($report['change_in_grant_ty_ytd_value']) ? $report['change_in_grant_ty_ytd_value'] : 0; ?>
-                                        <?php $arrayForChart[13][$index] = isset($report['change_in_grant_ly_ytd_value']) ? (int)$report['change_in_grant_ly_ytd_value'] : 0; ?>
-                                        <td class="t-l"><?php echo $arrayForChart[12][$index].":".$arrayForChart[13][$index]; ?></td>
-                                        <td class="t-l"><?php $arrayForChart[14][$index] = isset($report['change_in_net_assets_in_quarter']) ? (int)$report['change_in_net_assets_in_quarter'] : 0; echo $arrayForChart[12][$index]; ?></td>
-                                        <td class="t-l"><?php $arrayForChart[15][$index] = isset($report['borad_giving']) ? (int)$report['borad_giving'] : 0; echo $arrayForChart[13][$index]; ?></td>
-                                        <td class="t-l"><?php $arrayForChart[16][$index] = isset($report['operating_reserves_amount']) ? (int)$report['operating_reserves_amount'] : 0; echo $arrayForChart[14][$index]; ?></td>
+                                        <td class="t-l"><?php $arrayForChart[4][$index] = isset($report['from_operations']) ? (int)$report['from_operations'] : 0; echo "$".$arrayForChart[4][$index]; ?></td>
+                                        <td class="t-l"><?php $arrayForChart[5][$index] = isset($report['from_financing']) ? (int)$report['from_financing'] : 0; echo "$".$arrayForChart[5][$index]; ?></td>
+                                        <td class="t-l"><?php $arrayForChart[6][$index] = isset($report['from_investing']) ? (int)$report['from_investing'] : 0; echo "$".$arrayForChart[6][$index]; ?></td>
+                                        <td class="t-l"><?php $arrayForChart[7][$index] = isset($report['operating_efficiency_program_value']) ? (int)$report['operating_efficiency_program_value'] : 0; echo $arrayForChart[7][$index]; ?>%</td>
+                                        <td class="t-l"><?php $arrayForChart[8][$index] = isset($report['operating_efficiency_admin_value']) ? (int)$report['operating_efficiency_admin_value'] : 0; echo $arrayForChart[8][$index]; ?>%</td>
+                                        <td class="t-l"><?php $arrayForChart[9][$index] = isset($report['operating_efficiency_fundraising_value']) ? (int)$report['operating_efficiency_fundraising_value'] : 0; echo $arrayForChart[9][$index]; ?>%</td>
+                                        <td class="t-l"><?php $arrayForChart[10][$index] = isset($report['change_in_net_assets_in_quarter']) ? (int)$report['change_in_net_assets_in_quarter'] : 0; echo $arrayForChart[10][$index]; ?></td>
+                                        <td class="t-l"><?php $arrayForChart[11][$index] = isset($report['days_in_cash']) ? (int)$report['days_in_cash'] : 0; echo $arrayForChart[11][$index]; ?></td>
+                                        <?php $arrayForChart[12][$index] = isset($report['change_in_grant_ty_ytd']) ? $report['change_in_grant_ty_ytd'] : 0; ?>
+                                        <?php $arrayForChart[13][$index] = isset($report['change_in_grant_ly_ytd']) ? (int)$report['change_in_grant_ly_ytd'] : 0; ?>
+                                        <td class="t-l"><?php echo "TY".$arrayForChart[12][$index].":LY".$arrayForChart[13][$index]; ?></td>
+                                        <?php $arrayForChart[14][$index] = isset($report['change_in_grant_ty_ytd_value']) ? $report['change_in_grant_ty_ytd_value'] : 0; ?>
+                                        <?php $arrayForChart[15][$index] = isset($report['change_in_grant_ly_ytd_value']) ? (int)$report['change_in_grant_ly_ytd_value'] : 0; ?>
+                                        <td class="t-l"><?php echo $arrayForChart[14][$index].":".$arrayForChart[15][$index]; ?></td>
+                                        <td class="t-l"><?php $arrayForChart[16][$index] = isset($report['change_in_net_assets_in_quarter']) ? (int)$report['change_in_net_assets_in_quarter'] : 0; echo $arrayForChart[16][$index]; ?></td>
+                                        <td class="t-l"><?php $arrayForChart[17][$index] = isset($report['borad_giving']) ? (int)$report['borad_giving'] : 0; echo $arrayForChart[17][$index]; ?>%</td>
+                                        <td class="t-l"><?php $arrayForChart[18][$index] = isset($report['operating_reserves_amount']) ? (int)$report['operating_reserves_amount'] : 0; echo $arrayForChart[18][$index]; ?>%</td>
                                     </tr>
                                     <?php
                                   }}
