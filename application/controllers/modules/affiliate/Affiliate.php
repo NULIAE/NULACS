@@ -844,6 +844,14 @@ class Affiliate extends MY_Controller
 			$this->User_model->user_log($log_data);
 			
 			$message = ucfirst($data["interval"]).'ly compliance status updated.';
+
+			$email_data = array(
+				"role_id"	=> $this->session->role_id,
+				"affiliate_id" => $data['affiliate_id'],
+				"message" => $message
+			);
+
+			send_email_noification($email_data);
 		}
 		else
 		{
@@ -903,6 +911,14 @@ class Affiliate extends MY_Controller
 
 			$this->Document_model->add_comment($comment_data);
 
+			$email_data = array(
+				"role_id"	=> $this->session->role_id,
+				"affiliate_id" => $data['affiliate_id'],
+				"message" => $comment_data['notification']
+			);
+
+			send_email_noification($email_data);
+
 			//Log user activities
 			$log_data = array(
 				'user_id' => $this->session->user_id,
@@ -942,6 +958,14 @@ class Affiliate extends MY_Controller
 
 		if ( $inserted_comment !== FALSE )
 		{
+			$email_data = array(
+				"role_id"	=> $this->session->role_id,
+				"affiliate_id" => $data['affiliate_id'],
+				"message" => $data['notification']
+			);
+
+			send_email_noification($email_data);
+
 			$log_data = array(
 				'user_id' => $this->session->user_id,
 				'affiliate_id' => $this->session->affiliate_id,
@@ -1328,17 +1352,25 @@ class Affiliate extends MY_Controller
 				$uploadStatus = TRUE;
 				$data["added_document_id"] = $added_document_id;
 				
-				if($data["interval"] == "month" || $data["interval"] == "quarter" || $data["interval"] == "year"){
+				//if($data["interval"] == "month" || $data["interval"] == "quarter" || $data["interval"] == "year"){
 					$comment_data = array(
 						'document_id' => $added_document_id,
 						'document_type_id' => $data['document_type_id'],
 						'affiliate_id'	=> $data['affiliate_id'],
-						'notification'	=> 'Compliance status '.$data['interval'].'ly document is uploaded',
+						'notification'	=> 'Compliance status '.$data['interval'].' document is uploaded',
 						'created_by'	=> $this->session->affiliate_id
 					);
 
 					$inserted_comment = $this->Document_model->add_comment($comment_data);
-				}
+					
+					$email_data = array(
+						"role_id"	=> $this->session->role_id,
+						"affiliate_id" => $data['affiliate_id'],
+						"message" => $comment_data['notification']
+					);
+
+					send_email_noification($email_data);
+				//}
 			}
 
 			return array(
@@ -1446,6 +1478,14 @@ class Affiliate extends MY_Controller
 				
 				$uploadResponse = $this->Affiliate_model->get_other_performance_documents($_POST['affiliate_id'], $_POST['document_type_id']);
 			}
+
+			$email_data = array(
+				"role_id"	=> $this->session->role_id,
+				"affiliate_id" => $comment_data['affiliate_id'],
+				"message" => $comment_data['notification']
+			);
+
+			send_email_noification($email_data);
 
             echo json_encode($uploadResponse);
         }

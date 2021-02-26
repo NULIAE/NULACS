@@ -995,21 +995,85 @@ class Affiliate_model extends CI_Model
 
 	public function recent_affiliate_data($affiliate_id)
 	{
+		$query = $this->db->query("SELECT * FROM `settings` WHERE `type`='global'");
+
+		$result = $query->result_array();
+		foreach($result as $row)
+		{
+			$settings[$row['label']] = $row['value'];
+		}
+		//echo "<pre>";print_r($settings);
+
+		$date = explode('-', $settings['limit_date']);
+		$limit = array(
+			'month' => (int)$date[1],
+			'quarter' => ceil($date[1]/3),
+			'year' => $date[0]
+		);
+		//echo "<pre>";print_r($limit);
+
 		$query = $this->db->query("SELECT MAX(`document_month`) AS `month`, MAX(`document_year`) AS `year` FROM `monthly_document_status` WHERE `affiliate_id` = '$affiliate_id' AND `document_year` IN (SELECT MAX(`document_year`) AS `year` FROM `monthly_document_status` WHERE `affiliate_id` = '$affiliate_id')");
 	
 		$recent_month = $query->row_array();
+
+		if($recent_month['year'] < $limit['year'])
+		{
+			$recent_month['month'] = $limit['month'];
+			$recent_month['year'] = $limit['year'];
+
+		}
+		else if($recent_month['year'] == $limit['year'])
+		{
+			if($recent_month['month'] < $limit['month'])
+			{
+				$recent_month['month'] = $limit['month'];
+			}
+		}
 		
 		$query = $this->db->query("SELECT MAX(`document_month`) AS `quarter`, MAX(`document_year`) AS `year` FROM `quarterly_document_status` WHERE `affiliate_id` = '$affiliate_id' AND `document_year` IN (SELECT MAX(`document_year`) AS `year` FROM `quarterly_document_status` WHERE `affiliate_id` = '$affiliate_id')");
 		
 		$recent_quarter = $query->row_array();
+
+		if($recent_quarter['year'] < $limit['year'])
+		{
+			$recent_quarter['quarter'] = $limit['quarter'];
+			$recent_quarter['year'] = $limit['year'];
+
+		}
+		else if($recent_quarter['year'] == $limit['year'])
+		{
+			if($recent_quarter['quarter'] < $limit['quarter'])
+			{
+				$recent_quarter['quarter'] = $limit['quarter'];
+			}
+		}
 		
 		$query = $this->db->query("SELECT MAX(`document_year`) AS `year` FROM `yearly_document_status` WHERE `affiliate_id` = '$affiliate_id'");
 
 		$recent_year = $query->row_array();
 
+		if($recent_year['year'] < $limit['year'])
+		{
+			$recent_year['year'] = $limit['year'];
+		}
+
 		$query = $this->db->query("SELECT MAX(`quarter`) AS `quarter`, MAX(`year`) AS `year` FROM `key_indicators` WHERE `affiliate_id` = '$affiliate_id' AND `year` IN (SELECT MAX(`year`) AS `year` FROM `key_indicators` WHERE `affiliate_id` = '$affiliate_id')");
 		
 		$recent_key_indicator = $query->row_array();
+
+		if($recent_key_indicator['year'] < $limit['year'])
+		{
+			$recent_key_indicator['quarter'] = $limit['quarter'];
+			$recent_key_indicator['year'] = $limit['year'];
+
+		}
+		else if($recent_key_indicator['year'] == $limit['year'])
+		{
+			if($recent_key_indicator['quarter'] < $limit['quarter'])
+			{
+				$recent_key_indicator['quarter'] = $limit['quarter'];
+			}
+		}
 
 		return array(
 			'monthly' => $recent_month,
