@@ -20,7 +20,7 @@ if ( ! function_exists('send_email_noification'))
         //echo "<pre>"; print_r($affiliate); echo "</pre>"; 
 
         //Get receiver email addresses based on the role
-        if($data["role_id"] == 1)
+        /* if($data["role_id"] == 1)
         {
             $where = array(
                 'users.affiliate_id' => $data["affiliate_id"],
@@ -29,12 +29,12 @@ if ( ! function_exists('send_email_noification'))
             );
         }
         else
-        {
+        { */
             $where = array(
                 'users.role_id' => 1,
                 'users.user_status' => 1
             );
-        }
+        //}
 
         $receivers = "";
         
@@ -70,8 +70,8 @@ if ( ! function_exists('send_email_noification'))
         //$ci->email->initialize($config);
 
         $ci->email->from("noreply@nul.org", "National Urban League");
-        //$ci->email->to($receivers);
-        $ci->email->to("nulapplication@gmail.com");
+        $ci->email->to($receivers);
+        //$ci->email->to("nulapplication@gmail.com");
     
         $ci->email->subject("New notification from NUL");
 
