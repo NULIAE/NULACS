@@ -132,3 +132,7 @@ $route['module/affiliate/key-indicators/approve'] = 'modules/affiliate/affiliate
 $route['module/affiliate/document/delete_upload'] = 'modules/affiliate/affiliate/delete_upload';
 $route['module/user/export'] = 'modules/user_management/user/export_user_list';
 $route['module/reports/export'] = 'modules/reports/reports/export_kpi_reports';
+
+$route['module/notification/emails/add'] = 'modules/notification_center/email_template/add_form';
+$route['module/notification/emails/save'] = 'modules/notification_center/email_template/save';
+$route['module/notification/emails/preview/(:num)'] = 'modules/notification_center/email_template/preview/$1';

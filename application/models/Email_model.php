@@ -15,6 +15,31 @@ class Email_model extends CI_Model
 
 		return $query->result_array();
 	}
+
+	/**
+	 * Get a email templates
+	 *
+	 * @return array
+	 */
+	public function get_template($temp_id)
+	{
+		$this->db->where('temp_id', $temp_id);
+
+		$query = $this->db->get('email_template');
+
+		return $query->row_array();
+	}
+	
+	/**
+	 * Insert an email template
+	 * 
+	 * @param  array $data
+	 * @return bool
+	 */
+	public function add($data)
+	{
+		return $this->db->insert('email_template', $data);
+	}
 	
 	/**
 	 * Update an email template

@@ -49,7 +49,7 @@ if ( ! function_exists('send_email_noification'))
         //echo "<pre>";echo $receivers; echo "</pre>"; 
 
         //Get SMTP settings
-        /* $settings = array();
+        $settings = array();
         
         $result = $ci->Settings_model->get_all_settings();
 
@@ -63,11 +63,11 @@ if ( ! function_exists('send_email_noification'))
         $config['smtp_pass'] = $settings['smtp_pass'];
         $config['smtp_port'] = $settings['smtp_port'];
 
-        echo "<pre>"; print_r($config); echo "</pre>"; */
+        //echo "<pre>"; print_r($config); echo "</pre>";
         
         $ci->load->library('email');
         
-        //$ci->email->initialize($config);
+        $ci->email->initialize($config);
 
         $ci->email->from("noreply@nul.org", "National Urban League");
         $ci->email->to($receivers);

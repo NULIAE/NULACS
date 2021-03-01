@@ -18,6 +18,8 @@ $(function () {
 			},
 			submitHandler: function(form) { 
 				var nameElement = $("input[name='name']",form);
+				var subjectElement = $("input[name='subject']",form);
+				var typeElement = $("select[name='type']",form);
 				var textareaElement = $("textarea[name='content']",form);
 				if(textareaElement.val() == ""){
 					textareaElement.parent().append("<div class='error'>This field is required</div>");
@@ -29,7 +31,7 @@ $(function () {
 				$.ajax({
 					type : 'POST',
 					url	 : postURL,
-					data : {name: nameElement.val(), 'content': CKEDITOR.instances[ 'content'+id ].getData()},
+					data : {name: nameElement.val(), 'content': CKEDITOR.instances[ 'content'+id ].getData(), 'subject': subjectElement.val(), 'type': typeElement.val()},
 					dataType : 'json'
 				}).done(function(data) {
 					var toastConfig = {

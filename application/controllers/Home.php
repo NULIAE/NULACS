@@ -33,7 +33,7 @@ class Home extends MY_Controller
 			'pages/dashboard.js'
 		);
 		$data['notifications'] = $this->Document_model->get_notifications();
-		if($this->session->role_id == 2){
+		if($this->session->role_id == 2 || $this->session->role_id == 3){
 			$filterWYear='';
 			$filterWMonth='';
 				if(isset($_REQUEST['year'])){

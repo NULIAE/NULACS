@@ -488,7 +488,8 @@ $config['csrf_exclude_uris'] = array(
 	'module/affiliate/document/doupload',
 	'module/documents/export',
 	'module/assessment/form-data',
-	'module/affiliate/document/delete_upload'
+	'module/affiliate/document/delete_upload',
+	'module/notification/emails/save'
 );
 
 /*
