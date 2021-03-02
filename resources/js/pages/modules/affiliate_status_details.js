@@ -992,18 +992,22 @@ function reupload(type, docId){
 function openTab(val) {
 	$('#tab-inner a[href="#' + val + '"]').tab('show');
 	if(val == 'nav-y1'){
+		$("#btn-year-pick").removeClass('d-inline').addClass('d-none');
+		$("#btn-year-pick").attr('disabled', 'disabled');
 		$("#monthpicker").removeAttr('disabled');
 		$("#btn-month-pick").removeClass('d-none').addClass('d-inline');
 		$("#quarter-dropdown").removeClass('d-inline').addClass('d-none');
 		$("#quarterpicker").attr('disabled', 'disabled');
 		$("#yearpicker").attr('name', 'monthly_year');
 	} else if(val == 'nav-y2'){
+		$("#btn-year-pick").removeClass('d-none').addClass('d-inline');
 		$("#btn-month-pick").removeClass('d-inline').addClass('d-none');
 		$("#monthpicker").attr('disabled', 'disabled');
 		$("#quarterpicker").removeAttr('disabled');
 		$("#quarter-dropdown").removeClass('d-none').addClass('d-inline');
 		$("#yearpicker").attr('name', 'quarterly_year');
 	} else {
+		$("#btn-year-pick").removeClass('d-none').addClass('d-inline');
 		$("#btn-month-pick").removeClass('d-inline').addClass('d-none');
 		$("#quarter-dropdown").removeClass('d-inline').addClass('d-none');
 		$("#monthpicker").attr('disabled', 'disabled');

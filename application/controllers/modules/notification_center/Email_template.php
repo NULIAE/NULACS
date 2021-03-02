@@ -128,6 +128,11 @@ class Email_template extends MY_Controller
 
 		$template = $this->Email_model->get_template($template_id);
 
+		if(!isset($data['user']) || $data['user'] == "")
+		{
+			$data['user'] = NULL;
+		}
+
 		if(isset($data['month']) && $data['month'] != "")
 			$month = $data['month'];
 		else
@@ -153,12 +158,15 @@ class Email_template extends MY_Controller
 		$data['quarter'] = $quarterArray[$quarter];
 		$data['year'] = $year;
 
+		$users = $this->Email_model->get_target_users($template["type"], $month, $quarter, $year, $data["user"]);
+
 		$data['last_date'] = date("l, F t, Y", strtotime("+1 month", $target_date));
 
 		$this->load->library('parser');
 
 		$preview_data = array(
-			"message" => $this->parser->parse_string($template['html_code'], $data, TRUE)
+			"message" => $this->parser->parse_string($template['html_code'], $data, TRUE),
+			"preview" => TRUE
 		);
 		
 		$preview = $this->load->view('layout/mail_template', $preview_data, TRUE);
@@ -169,13 +177,16 @@ class Email_template extends MY_Controller
 			'preview' => $preview,
 			'month' => $month,
 			'year' => $year,
+			'users' => $users,
 			'roles' => $this->User_model->get_user_roles()
 		);
 		
 		//Name of the view file
 		$data['view_name'] = 'modules/notification_center/preview';
 		//Page specific javascript files
-		$data['footer']['js'] = array();
+		$data['footer']['js'] = array(
+			'pages/modules/email_preview.js'
+		);
 
 		$this->load->view('template', $data);
 	}

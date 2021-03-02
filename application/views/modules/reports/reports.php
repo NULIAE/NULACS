@@ -5,8 +5,9 @@ transform: rotate(-60deg);
 -moz-transform: rotate(-60deg);
 -ms-transform: rotate(-60deg);
 -o-transform: rotate(-60deg);
-padding:50px 5px !important;
+padding:35px 5px !important;
 line-height:16px !important;
+vertical-align: middle;
 }
 .SumoSelect{
   width:100% !important;
@@ -137,7 +138,7 @@ font-size:15px;
                               <td><?=($indicators['change_in_grant_ty_ytd_value'] != NULL ? $indicators['change_in_grant_ty_ytd_value'] : 0).":".($indicators['change_in_grant_ly_ytd_value'] != NULL ? $indicators['change_in_grant_ly_ytd_value'] : 0); ?></td>
                               <td><?=isset($indicators['change_in_net_assets_in_quarter']) && $indicators['change_in_net_assets_in_quarter'] != NULL ? number_format($indicators['change_in_net_assets_in_quarter'], 2) : 0; ?></td>
                               <td><?=isset($indicators['borad_giving']) && $indicators['borad_giving'] != NULL ? number_format($indicators['borad_giving'], 2) : 0; ?>%</td>
-                              <td><?=isset($indicators['operating_reserves_amount']) && $indicators['operating_reserves_amount'] != NULL ? number_format($indicators['operating_reserves_amount'], 2) : 0; ?>%</td>
+                              <td><?=isset($indicators['operating_reserves_percentage']) && $indicators['operating_reserves_percentage'] != NULL ? number_format($indicators['operating_reserves_percentage'], 2) : 0; ?>%</td>
                             </tr>
                             <?php } ?>
                       
@@ -275,7 +276,7 @@ font-size:15px;
                                         <td class="t-l"><?php echo $arrayForChart[14][$index].":".$arrayForChart[15][$index]; ?></td>
                                         <td class="t-l"><?php $arrayForChart[16][$index] = isset($report['change_in_net_assets_in_quarter']) ? (int)$report['change_in_net_assets_in_quarter'] : 0; echo $arrayForChart[16][$index]; ?></td>
                                         <td class="t-l"><?php $arrayForChart[17][$index] = isset($report['borad_giving']) ? (int)$report['borad_giving'] : 0; echo $arrayForChart[17][$index]; ?>%</td>
-                                        <td class="t-l"><?php $arrayForChart[18][$index] = isset($report['operating_reserves_amount']) ? (int)$report['operating_reserves_amount'] : 0; echo $arrayForChart[18][$index]; ?>%</td>
+                                        <td class="t-l"><?php $arrayForChart[18][$index] = isset($report['operating_reserves_percentage']) ? (int)$report['operating_reserves_percentage'] : 0; echo $arrayForChart[18][$index]; ?>%</td>
                                     </tr>
                                     <?php
                                   }}

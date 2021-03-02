@@ -42,6 +42,7 @@
                             <?php $user = isset($_GET["user"]) ? $_GET["user"] : ""; ?>
                             <label for="">Target Audience</label>
                             <select name="user" data-placeholder="Users" data-type="selector">
+                                <option value="">Both</option>
                                 <?php foreach($roles as $row): ?>
                                 <?php if($row['role_id'] == 1) continue; ?>
                                 <option value="<?php echo $row['role_id']; ?>" <?php if($row['role_id'] == $user) echo "selected"; ?>><?php echo $row['role_name']; ?></option>
@@ -54,6 +55,47 @@
 						</div>
 					</div>
 				</form>
+                </div>
+            </div>
+            <div class="row nulAccordian">
+                <div class="col-24">
+                    <div id="accordion" class="w-100">
+                        <div class="card">
+                            <div class="card-header nul-header" id="heading">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link btn-new" data-toggle="collapse" data-target="#collapse" aria-expanded="false" aria-controls="collapse">
+                                    <div class="accordianHead">User List
+                                        <div class="f-right"><i class="i i-downarrow"></i></div>
+                                    </div>
+                                    </button>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="collapse" class="collapse" aria-labelledby="heading" data-parent="#accordion">
+                        <div class="card-body">
+                            <table class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                <th scope="col"><input type="checkbox" name="checkall" id="checkall" value="1" checked /></th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Title</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach($users as $user): ?>
+                                <tr>
+                                <th scope="row"><input type="checkbox" name="usercheckbox[]" class="usercheckbox" value="<?php echo $user["user_id"]; ?>" checked /></th>
+                                <td><?php echo $user["name"]; ?></td>
+                                <td><?php echo $user["user_email_address_1"]; ?></td>
+                                <td><?php echo $user["user_title"]; ?></td>
+                                </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row ">
