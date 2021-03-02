@@ -1034,6 +1034,8 @@ function openTab(val) {
 	if(isNaN(val)){
 		alert_msg("Enter vaild number");
 		$('#'+$(this).attr('id')).val('');
+		$("#liquidity_v").val('');
+
 		document.getElementById($(this).attr('id')).style.borderColor = "#ff002b"; 
 	}else{
 		document.getElementById($(this).attr('id')).style.borderColor = "#ced4da"; 
@@ -1061,6 +1063,8 @@ function openTab(val) {
 	var f_liquidity_s = 	parseFloat(liquidity_s).toFixed(2);
 		if($.isNumeric(f_liquidity_s) ) { 
 			$("#liquidity_v").val(f_liquidity_s);
+		}else{
+			$("#liquidity_v").val('');
 		}	
 	}
 });
@@ -1070,9 +1074,10 @@ $('.current_ratio_blur').on('blur', function() {
 	var get_val = $('#'+$(this).attr('id')).val();
 
 	var val = +get_val.replace(/,/g, "");
-	if(isNaN(val) || val < 0 ){
+	if(isNaN(val) || val <= 0 ){
 		alert_msg("Enter vaild number");
 		$('#'+$(this).attr('id')).val('');
+		$("#current_ratio_v").val('');
 		document.getElementById($(this).attr('id')).style.borderColor = "#ff002b"; 
 	}else{
 		document.getElementById($(this).attr('id')).style.borderColor = "#ced4da"; 
@@ -1094,6 +1099,9 @@ $('.current_ratio_blur').on('blur', function() {
 		var f_current_ratio_s = parseFloat(current_ratio_s).toFixed(2); 
 		if($.isNumeric(f_current_ratio_s) && f_current_ratio_s > 0) { 
 			$("#current_ratio_v").val(f_current_ratio_s);
+		}else{
+			$("#current_ratio_v").val('');
+
 		}
 		
 	}
@@ -1104,9 +1112,10 @@ $('.current_debt_ratio_blur').on('blur', function() {
 	var get_val = $('#'+$(this).attr('id')).val();
 
 	var val = +get_val.replace(/,/g, "");
-	if(isNaN(val) ||  val < 0 ){
+	if(isNaN(val) ||  val <= 0 ){
 		alert_msg("Enter vaild number");
 		$('#'+$(this).attr('id')).val('');
+		$("#current_debt_ratio_v").val('');
 		document.getElementById($(this).attr('id')).style.borderColor = "#ff002b"; 
 	}else{
 		document.getElementById($(this).attr('id')).style.borderColor = "#ced4da"; 
@@ -1129,6 +1138,9 @@ $('.current_debt_ratio_blur').on('blur', function() {
 
 		if($.isNumeric(f_current_debt_ratio_s)  && f_current_debt_ratio_s > 0) { 
 			$("#current_debt_ratio_v").val(f_current_debt_ratio_s);
+		}else{
+			$("#current_debt_ratio_v").val('');
+
 		}
 		
 	}
@@ -1143,6 +1155,8 @@ $('.change_in_cash_ytd_blur').on('blur', function() {
 	if(isNaN(val)){
 		alert_msg("Enter vaild number");
 		$('#'+$(this).attr('id')).val('');
+		$("#change_in_cash_ytd_v").val('');
+
 		document.getElementById($(this).attr('id')).style.borderColor = "#ff002b"; 
 	}else{
 		document.getElementById($(this).attr('id')).style.borderColor = "#ced4da"; 
@@ -1163,6 +1177,9 @@ $('.change_in_cash_ytd_blur').on('blur', function() {
 
 		if($.isNumeric(f_change_in_cash_ytd_s)) { 
 			$("#change_in_cash_ytd_v").val(f_change_in_cash_ytd_s);
+		}else{
+			$("#change_in_cash_ytd_v").val('');
+
 		}
 	}
 });
@@ -1172,9 +1189,11 @@ $('.operating_efficiency_program_value_blur').on('blur', function() {
 	var get_val = $('#'+$(this).attr('id')).val();
 
 	var val = +get_val.replace(/,/g, "");
-	if(isNaN(val) || val < 0){
+	if(isNaN(val) || val <= 0){
 		alert_msg("Enter vaild number");
 		$('#'+$(this).attr('id')).val('');
+		$("#operating_efficiency_program_value_v").val('');
+
 		document.getElementById($(this).attr('id')).style.borderColor = "#ff002b"; 
 	}else{
 		document.getElementById($(this).attr('id')).style.borderColor = "#ced4da"; 
@@ -1197,6 +1216,9 @@ $('.operating_efficiency_program_value_blur').on('blur', function() {
 
 		if($.isNumeric(f_operating_efficiency_program_value_s) && f_operating_efficiency_program_value_s > 0) { 
 			$("#operating_efficiency_program_value_v").val(f_operating_efficiency_program_value_s);
+		}else{
+			$("#operating_efficiency_program_value_v").val('');
+
 		}
 		
 	}
@@ -1207,9 +1229,10 @@ $('.operating_efficiency_admin_value_blur').on('blur', function() {
 	var get_val = $('#'+$(this).attr('id')).val();
 
 	var val = +get_val.replace(/,/g, "");
-	if(isNaN(val) || val < 0 ){
+	if(isNaN(val) || val <= 0 ){
 		alert_msg("Enter vaild number");
 		$('#'+$(this).attr('id')).val('');
+		$("#operating_efficiency_admin_value_v").val('');
 		document.getElementById($(this).attr('id')).style.borderColor = "#ff002b"; 
 	}else{
 		document.getElementById($(this).attr('id')).style.borderColor = "#ced4da"; 
@@ -1233,6 +1256,9 @@ $('.operating_efficiency_admin_value_blur').on('blur', function() {
 
 		if($.isNumeric(f_operating_efficiency_admin_value_s) && f_operating_efficiency_admin_value_s > 0) { 
 			$("#operating_efficiency_admin_value_v").val(f_operating_efficiency_admin_value_s);
+		}else{
+			$("#operating_efficiency_admin_value_v").val('');
+
 		}
 		
 	}
@@ -1243,9 +1269,11 @@ $('.operating_efficiency_fundraising_value_blur').on('blur', function() {
 	var get_val = $('#'+$(this).attr('id')).val();
 
 	var val = +get_val.replace(/,/g, "");
-	if(isNaN(val) || val < 0){
+	if(isNaN(val) || val <= 0){
 		alert_msg("Enter vaild number");
 		$('#'+$(this).attr('id')).val('');
+		$("#operating_efficiency_fundraising_value_v").val('');
+
 		document.getElementById($(this).attr('id')).style.borderColor = "#ff002b"; 
 	}else{
 		document.getElementById($(this).attr('id')).style.borderColor = "#ced4da"; 
@@ -1269,6 +1297,9 @@ $('.operating_efficiency_fundraising_value_blur').on('blur', function() {
 
 		if($.isNumeric(f_operating_efficiency_fundraising_value_s)  && f_operating_efficiency_fundraising_value_s > 0) { 
 			$("#operating_efficiency_fundraising_value_v").val(f_operating_efficiency_fundraising_value_s);
+		}else{
+			$("#operating_efficiency_fundraising_value_v").val('');
+
 		}
 		
 	}
@@ -1282,6 +1313,8 @@ $('.change_in_net_assets_in_quarter_blur').on('blur', function() {
 	if(isNaN(val)){
 		alert_msg("Enter vaild number");
 		$('#'+$(this).attr('id')).val('');
+		$("#change_in_net_assets_in_quarter_v").val('');
+
 		document.getElementById($(this).attr('id')).style.borderColor = "#ff002b"; 
 	}else{
 		document.getElementById($(this).attr('id')).style.borderColor = "#ced4da"; 
@@ -1307,6 +1340,9 @@ $('.change_in_net_assets_in_quarter_blur').on('blur', function() {
 
 		if($.isNumeric(f_change_in_net_assets_in_quarter_s)) { 
 			$("#change_in_net_assets_in_quarter_v").val(f_change_in_net_assets_in_quarter_s);
+		}else{
+			$("#change_in_net_assets_in_quarter_v").val('');
+
 		}
 	}
 });
@@ -1316,9 +1352,11 @@ $('.days_in_cash_blur').on('blur', function() {
 	var get_val = $('#'+$(this).attr('id')).val();
 
 	var val = +get_val.replace(/,/g, "");
-	if(isNaN(val)){
+	if(isNaN(val)  || val <= 0 ){
 		alert_msg("Enter vaild number");
 		$('#'+$(this).attr('id')).val('');
+		$("#days_in_cash_v").val('');
+
 		document.getElementById($(this).attr('id')).style.borderColor = "#ff002b"; 
 	}else{
 		document.getElementById($(this).attr('id')).style.borderColor = "#ced4da"; 
@@ -1344,6 +1382,9 @@ $('.days_in_cash_blur').on('blur', function() {
 
 		if($.isNumeric(f_days_in_cash_s)) { 
 			$("#days_in_cash_v").val(f_days_in_cash_s);
+		}else{
+			$("#days_in_cash_v").val('');
+
 		}
 	}
 });
@@ -1356,6 +1397,8 @@ $('.borad_giving_blur').on('blur', function() {
 	if(isNaN(val) || val < 0){
 		alert_msg("Enter vaild number");
 		$('#'+$(this).attr('id')).val('');
+		$("#borad_giving_v").val('');
+
 		document.getElementById($(this).attr('id')).style.borderColor = "#ff002b"; 
 	}else{
 		document.getElementById($(this).attr('id')).style.borderColor = "#ced4da"; 
@@ -1380,6 +1423,9 @@ $('.borad_giving_blur').on('blur', function() {
 
 		if($.isNumeric(f_borad_giving_s) && f_borad_giving_s > 0) { 
 			$("#borad_giving_v").val(f_borad_giving_s);
+		}else{
+			$("#borad_giving_v").val('');
+
 		}
 	}
 });
@@ -1389,9 +1435,11 @@ $('.operating_reserves_percentage_blur').on('blur', function() {
 	var get_val = $('#'+$(this).attr('id')).val();
 
 	var val = +get_val.replace(/,/g, "");
-	if(isNaN(val) || val < 0 ){
+	if(isNaN(val) || val <= 0 ){
 		alert_msg("Enter vaild number");
 		$('#'+$(this).attr('id')).val('');
+		$("#operating_reserves_percentage_v").val('');
+
 		document.getElementById($(this).attr('id')).style.borderColor = "#ff002b"; 
 	}else{
 		document.getElementById($(this).attr('id')).style.borderColor = "#ced4da"; 
@@ -1417,6 +1465,9 @@ $('.operating_reserves_percentage_blur').on('blur', function() {
 
 		if($.isNumeric(f_operating_reserves_percentage_s) && f_operating_reserves_percentage_s > 0) { 
 			$("#operating_reserves_percentage_v").val(f_operating_reserves_percentage_s);
+		}else{
+			$("#operating_reserves_percentage_v").val('');
+
 		}
 	}
 });

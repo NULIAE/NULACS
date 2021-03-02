@@ -32,7 +32,7 @@ class Reports extends MY_Controller
         if(isset($data['quarter']) && ($data['quarter'] != "")){
             $quarter = $data['quarter'];
         } else {
-			$quarter = date("n", strtotime("-1 month", time()));
+			$quarter = ceil(date("m", strtotime("-1 month", time()))/3);
 		}
         
 		if(isset($data['choose_yr']) && ($data['choose_yr'] != "")){
