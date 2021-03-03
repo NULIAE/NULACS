@@ -205,7 +205,7 @@ class Email_template extends MY_Controller
 		foreach($user_mails as $key => $row)
 		{
 			$target_mails .= ($key == 0) ? "" : ",";
-			$target_mails .= $row["user_email_address_1"];
+			$target_mails .= $row["name"];
 		}
 
 		$quarter = ceil($data["month"]/3);
