@@ -81,24 +81,6 @@
 						<?php endforeach; ?>
                     </div>
 						</div>
-						
-						<div class="row document-mdata">
-              <div class="head">
-                  <h3>reminders</h3>
-              </div>
-            </div>
-
-            <div class="row nul-reminders">
-                <div class="col-lg-7 col-md-7 remindBox">
-                  <i class="i i-monthly-reminder"></i>send Monthly reminder
-                </div>
-                <div class="col-lg-7 col-md-7 remindBox remindBox2">
-                  <i class="i i-quarterly-reminder"></i>send quarterly reminder
-                </div>
-                <div class="col-lg-7 col-md-7 remindBox">
-                  <i class="i i-yearly-reminder"></i>send yearly reminder
-                </div>
-            </div>
 
        </div>
     </div>

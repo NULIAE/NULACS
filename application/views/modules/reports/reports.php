@@ -5,10 +5,28 @@ transform: rotate(-60deg);
 -moz-transform: rotate(-60deg);
 -ms-transform: rotate(-60deg);
 -o-transform: rotate(-60deg);
-padding:35px 5px !important;
+padding:35px 11px !important;
 line-height:16px !important;
 vertical-align: middle;
+font-size: 10px!important;
 }
+
+@media only screen and (max-width:1440px){
+  .all-affiliates .mainTabAll .tab-content .pane113 table thead tr th, .tab-pane .cdnWrap .pane1Qty table thead tr th{
+
+  padding:35px 2px !important;
+
+}
+}
+
+@media only screen and (max-width:1200px){
+  .all-affiliates .mainTabAll .tab-content .pane113 table thead tr th, .tab-pane .cdnWrap .pane1Qty table thead tr th{
+
+  padding:12px 2px !important;
+  font-size: 9px!important;
+}
+}
+
 .SumoSelect{
   width:100% !important;
 }
@@ -60,13 +78,13 @@ font-size:15px;
           <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade <?=$secondTbab==0?' active show':''?> " id="nav-x1" role="tabpanel" aria-labelledby="nav-x1-tab">
               <div class="row align-items-center mt-3">
-                <div class="col-lg-12">
+                <div class="col-xl-12 col-lg-8 mt-3">
                 <div class="h5 f-bold"><?php echo "QUARTER 0".$quarter." - ".$year; ?></div>
                 </div>
-                <div class="col-lg-12">
+                <div class="col-xl-12 col-lg-16">
                   <form  action="<?php echo base_url('module/filter/reports'); ?>">
                     <div class="row">
-                      <div class="col-2 col-md-6 col-lg-8 secondSelection"><span class="sub">
+                      <div class="col-12 col-md-12 col-lg-8 mt-3 secondSelection"><span class="sub">
                           <select class="form-control" name="quarter" data-type="selector">
                             <option value="">Choose Quarter</option>
                             <option value="1" <?php if($quarter == 1) echo "selected"; ?>>Q1</option>
@@ -76,17 +94,17 @@ font-size:15px;
                           </select>
         
                         </span></div>
-                      <div class="col-6 col-md-6 col-lg-5 t-r">
+                      <div class="col-12 col-md-12 col-lg-5 t-r mt-3">
                         <div class="yearPick">
                           <i class="i i-year-pick"></i>
                           <input class="yearpick form-control" value="<?php echo $year;?>" name="choose_yr"  type="text">
                         </div>
                       </div>
         
-                      <div class="col-12  col-md-6 col-lg-5 t-r">
+                      <div class="col-12  col-md-12 col-lg-5 t-l mt-3 pl-3">
                       <input type="submit" class="btn btn-primary btn-rounded min w-100px" value="SEARCH">
                       </div>
-                      <div class="col-12  col-md-6 col-lg-4 t-r">
+                      <div class="col-12  col-md-12 col-lg-4 t-l mt-3">
                       <a href="<?php echo base_url("module/reports/export")."?quarter=$quarter&year=$year"; ?>" class="btn btn-primary btn-rounded min w-100px">EXPORT</a>
                       </div>
                     </div>

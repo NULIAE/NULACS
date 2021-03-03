@@ -1859,7 +1859,7 @@ $quarterArray = array(
 										<div class="d-flex align-items-center">
 											<div>Current Ratio</div>
 											<div class="innControll"><input type="text" name="current_ratio" id="current_ratio_v" class="form-control current_ratio_blur" value="<?php echo isset($key_indicators['current_ratio']) ? $key_indicators['current_ratio'] : ""; ?>" readonly/> </div>
-											<div>% (Current Assets $</div>
+											<div> (Current Assets $</div>
 											<div class="innControll"><input type="text" name="current_assets" id="current_assets_v" class="form-control current_ratio_blur" value="<?php echo isset($key_indicators['current_assets']) ? $key_indicators['current_assets'] : ""; ?>" /> </div>
 											<div>/ Current Liabilities $</div>
 											<div class="innControll"><input type="text" name="current_liabilities" id="current_liabilities_v" class="form-control current_ratio_blur" value="<?php echo isset($key_indicators['current_liabilities']) ? $key_indicators['current_liabilities'] : ""; ?>" /> </div>)
@@ -1870,7 +1870,7 @@ $quarterArray = array(
 										<div class="d-flex align-items-center">
 											<div>Current Debt Ratio (Compared to LYYTD) - </div>
 											<div class="innControll"><input type="text" name="current_debt_ratio" id="current_debt_ratio_v" class="form-control current_debt_ratio_blur" value="<?php echo isset($key_indicators['current_debt_ratio']) ? $key_indicators['current_debt_ratio'] : ""; ?>" readonly/></div>
-											<div>% (Total Liabilities $</div>
+											<div> (Total Liabilities $</div>
 											<div class="innControll"><input type="text" name="total_liabilities" id="total_liabilities_v" class="form-control current_debt_ratio_blur" value="<?php echo isset($key_indicators['total_liabilities']) ? $key_indicators['total_liabilities'] : ""; ?>" /></div>
 											<div>/ Total Assets $</div>
 											<div class="innControll"><input type="text" name="total_assets"  id="total_assets_v" class="form-control current_debt_ratio_blur" value="<?php echo isset($key_indicators['total_assets']) ? $key_indicators['total_assets'] : ""; ?>" /></div>)
@@ -2007,7 +2007,7 @@ $quarterArray = array(
 										<div class="d-flex align-items-center">
 											<div>Board Giving </div>
 											<div class="innControll"><input type="text" name="borad_giving" id="borad_giving_v" class="form-control borad_giving_blur" value="<?php echo isset($key_indicators['borad_giving']) ? $key_indicators['borad_giving'] : ""; ?>" readonly/> </div>
-											<div> YTD Direct Board Contributions $</div>
+											<div>% YTD Direct Board Contributions $</div>
 											<div class="innControll"><input type="text" name="direct_borad_giving" id="direct_borad_giving_v" class="form-control borad_giving_blur" value="<?php echo isset($key_indicators['direct_borad_giving']) ? $key_indicators['direct_borad_giving'] : ""; ?>" /> </div>
 											<div>/ Total Annual Board Commitment $</div>
 											<div class="innControll"><input type="text" name="borad_commitment" id="borad_commitment_v" class="form-control borad_giving_blur" value="<?php echo isset($key_indicators['borad_commitment']) ? $key_indicators['borad_commitment'] : ""; ?>" /> </div>

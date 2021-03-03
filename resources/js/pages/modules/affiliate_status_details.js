@@ -1064,7 +1064,7 @@ function openTab(val) {
 
 		var liquidity_s =  ((liquidity_assets_available_v) - ((+liquidity_contractual_restrictions_v) + (+liquidity_restrictions_by_donor_v)) )  ;
 
-	var f_liquidity_s = 	parseFloat(liquidity_s).toFixed(2);
+	var f_liquidity_s = 	parseFloat(liquidity_s).toFixed(0);
 		if($.isNumeric(f_liquidity_s) ) { 
 			$("#liquidity_v").val(f_liquidity_s);
 		}else{
@@ -1099,8 +1099,8 @@ $('.current_ratio_blur').on('blur', function() {
 	}
 	if(current_assets_v && current_liabilities_v){
 
-		var current_ratio_s  = ((current_assets_v) / (current_liabilities_v)) * 100 ;
-		var f_current_ratio_s = parseFloat(current_ratio_s).toFixed(2); 
+		var current_ratio_s  = ((current_assets_v) / (current_liabilities_v)) ;
+		var f_current_ratio_s = parseFloat(current_ratio_s).toFixed(0); 
 		if($.isNumeric(f_current_ratio_s) && f_current_ratio_s > 0) { 
 			$("#current_ratio_v").val(f_current_ratio_s);
 		}else{
@@ -1137,8 +1137,8 @@ $('.current_debt_ratio_blur').on('blur', function() {
 	}
 	if(total_liabilities_v && total_assets_v){
 
-		var current_debt_ratio_s =  ((total_liabilities_v) / (total_assets_v)) * 100   ;
-		var f_current_debt_ratio_s = parseFloat(current_debt_ratio_s).toFixed(2); 
+		var current_debt_ratio_s =  ((total_liabilities_v) / (total_assets_v))   ;
+		var f_current_debt_ratio_s = parseFloat(current_debt_ratio_s).toFixed(0); 
 
 		if($.isNumeric(f_current_debt_ratio_s)  && f_current_debt_ratio_s > 0) { 
 			$("#current_debt_ratio_v").val(f_current_debt_ratio_s);
@@ -1177,7 +1177,7 @@ $('.change_in_cash_ytd_blur').on('blur', function() {
 	if(from_operations_v && from_financing_v && from_investing_v){
 
 		var change_in_cash_ytd_s =  ((+from_financing_v) + (+from_operations_v) + (+from_investing_v))   ;
-		var f_change_in_cash_ytd_s = parseFloat(change_in_cash_ytd_s).toFixed(2); 
+		var f_change_in_cash_ytd_s = parseFloat(change_in_cash_ytd_s).toFixed(0); 
 
 		if($.isNumeric(f_change_in_cash_ytd_s)) { 
 			$("#change_in_cash_ytd_v").val(f_change_in_cash_ytd_s);
@@ -1216,7 +1216,7 @@ $('.operating_efficiency_program_value_blur').on('blur', function() {
 	if(operating_efficiency_program_expense_v && operating_efficiency_program_total_expense_v){
 
 		var operating_efficiency_program_value_s =  ((operating_efficiency_program_expense_v) / (operating_efficiency_program_total_expense_v)) * 100  ;
-		var f_operating_efficiency_program_value_s = parseFloat(operating_efficiency_program_value_s).toFixed(2); 
+		var f_operating_efficiency_program_value_s = parseFloat(operating_efficiency_program_value_s).toFixed(0); 
 
 		if($.isNumeric(f_operating_efficiency_program_value_s) && f_operating_efficiency_program_value_s > 0) { 
 			$("#operating_efficiency_program_value_v").val(f_operating_efficiency_program_value_s);
@@ -1256,7 +1256,7 @@ $('.operating_efficiency_admin_value_blur').on('blur', function() {
 
 		var operating_efficiency_admin_value_s =  ((operating_efficiency_admin_expense_v) / (operating_efficiency_admin_total_expense_v)) * 100  ;
 
-		var f_operating_efficiency_admin_value_s= parseFloat(operating_efficiency_admin_value_s).toFixed(2); 
+		var f_operating_efficiency_admin_value_s= parseFloat(operating_efficiency_admin_value_s).toFixed(0); 
 
 		if($.isNumeric(f_operating_efficiency_admin_value_s) && f_operating_efficiency_admin_value_s > 0) { 
 			$("#operating_efficiency_admin_value_v").val(f_operating_efficiency_admin_value_s);
@@ -1297,7 +1297,7 @@ $('.operating_efficiency_fundraising_value_blur').on('blur', function() {
 
 		var operating_efficiency_fundraising_value_s =  ((operating_efficiency_fundraising_expense_v) / (operating_efficiency_fundraising_total_expense_v)) * 100  ;
 
-		var f_operating_efficiency_fundraising_value_s = parseFloat(operating_efficiency_fundraising_value_s).toFixed(2); 
+		var f_operating_efficiency_fundraising_value_s = parseFloat(operating_efficiency_fundraising_value_s).toFixed(0); 
 
 		if($.isNumeric(f_operating_efficiency_fundraising_value_s)  && f_operating_efficiency_fundraising_value_s > 0) { 
 			$("#operating_efficiency_fundraising_value_v").val(f_operating_efficiency_fundraising_value_s);
@@ -1339,7 +1339,7 @@ $('.change_in_net_assets_in_quarter_blur').on('blur', function() {
 
 		var change_in_net_assets_in_quarter_s =  (net_assets_in_last_quarter_value_v - less_net_assets_in_last_quarter_value_v)  ;
 
-		var f_change_in_net_assets_in_quarter_s = parseFloat(change_in_net_assets_in_quarter_s).toFixed(2); 
+		var f_change_in_net_assets_in_quarter_s = parseFloat(change_in_net_assets_in_quarter_s).toFixed(0); 
 
 
 		if($.isNumeric(f_change_in_net_assets_in_quarter_s)) { 
@@ -1379,9 +1379,9 @@ $('.days_in_cash_blur').on('blur', function() {
 
 	if(Equivalents_v && daily_cost_operation_v){
 
-		var days_in_cash_s =  (Equivalents_v / daily_cost_operation_v) * 100 ;
+		var days_in_cash_s =  (Equivalents_v / daily_cost_operation_v) ;
 
-		var f_days_in_cash_s = parseFloat(days_in_cash_s).toFixed(2); 
+		var f_days_in_cash_s = parseFloat(days_in_cash_s).toFixed(0); 
 
 
 		if($.isNumeric(f_days_in_cash_s)) { 
@@ -1398,7 +1398,7 @@ $('.borad_giving_blur').on('blur', function() {
 	var get_val = $('#'+$(this).attr('id')).val();
 
 	var val = +get_val.replace(/,/g, "");
-	if(isNaN(val) || val < 0){
+	if(isNaN(val) || val <= 0){
 		alert_msg("Enter vaild number");
 		$('#'+$(this).attr('id')).val('');
 		$("#borad_giving_v").val('');
@@ -1422,8 +1422,8 @@ $('.borad_giving_blur').on('blur', function() {
 
 	if(direct_borad_giving_v && borad_commitment_v){
 
-		var borad_giving_s =  (direct_borad_giving_v / borad_commitment_v) * 100  ;
-		var f_borad_giving_s = parseFloat(borad_giving_s).toFixed(2); 
+		var borad_giving_s =  (direct_borad_giving_v / borad_commitment_v)  ;
+		var f_borad_giving_s = parseFloat(borad_giving_s).toFixed(0); 
 
 		if($.isNumeric(f_borad_giving_s) && f_borad_giving_s > 0) { 
 			$("#borad_giving_v").val(f_borad_giving_s);
@@ -1465,7 +1465,7 @@ $('.operating_reserves_percentage_blur').on('blur', function() {
 
 		var operating_reserves_percentage_s =  (operating_reserves_amount_v / three_months_annual_expenses_v) * 100  ;
 
-		var f_operating_reserves_percentage_s = parseFloat(operating_reserves_percentage_s).toFixed(2); 
+		var f_operating_reserves_percentage_s = parseFloat(operating_reserves_percentage_s).toFixed(0); 
 
 		if($.isNumeric(f_operating_reserves_percentage_s) && f_operating_reserves_percentage_s > 0) { 
 			$("#operating_reserves_percentage_v").val(f_operating_reserves_percentage_s);

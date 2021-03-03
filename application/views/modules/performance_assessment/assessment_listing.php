@@ -53,6 +53,14 @@
               <button type="submit" class="btn btn-primary  min w-120px mr-2" href="javascript:;">SEARCH</a>
             </div>
                   </form>
+
+                  <?php $def_icon ='';
+                  if(isset($this->session->role_id ) && $this->session->role_id == 3 ){ 
+                      $def_icon = 'i i-remove_red_eye';
+                  }else{
+                      $def_icon = 'i i i-create';
+                  } 
+                  ?>
             <div class="tabil-box">
               <table class="table table-bordered ">
                 <thead>
@@ -82,7 +90,7 @@
                       <?php
                         if(isset($listing['answers']) && !empty($listing['answers'] )){
                           ?>
-                     <a class="link m-x-10" href="<?php echo base_url('module/assessment/assessment?sid='.$listing['sid'].'&aid='.$listing['affiliate_id']); ?>"><i class="i i-create"></i></a>
+                     <a class="link m-x-10" href="<?php echo base_url('module/assessment/assessment?sid='.$listing['sid'].'&aid='.$listing['affiliate_id']); ?>"><i class="<?=$def_icon?>"></i></a>
                     <a class="iconLink ib-m" style="color:black;" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$listing['sid'].'&aid='.$listing['affiliate_id']); ?>">
                         <i class="i i-timer"></i>
                       </a>

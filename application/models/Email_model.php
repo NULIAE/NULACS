@@ -75,7 +75,7 @@ class Email_model extends CI_Model
 			$exclude = $query->result_array();
 		}
 
-		$this->db->select("user_id, CONCAT(prifix, first_name, ' ' , last_name) AS name, user_email_address_1, user_title");
+		$this->db->select("user_id, role_id, CONCAT(prifix, first_name, ' ' , last_name) AS fullname, name, user_title, is_adm_uploader");
 		$this->db->from("users");
 		$this->db->where("user_status", 1);
 		
@@ -98,5 +98,15 @@ class Email_model extends CI_Model
 
 		return $query->result_array();
 
+	}
+
+	public function get_user_emails($user_ids)
+	{
+		$this->db->select("name");
+		$this->db->where_in("user_id", $user_ids);
+
+		$query = $this->db->get("users");
+
+		return $query->result_array();
 	}
 }

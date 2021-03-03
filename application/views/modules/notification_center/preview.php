@@ -1,3 +1,9 @@
+<style>
+button.remindBox, button.remindBox:focus{
+    border:none !important;
+    outline:none;
+}
+</style>
 <main class="Meta-data emailTemplate">
     <div class="container">
        <div class="Wrapper">
@@ -85,12 +91,13 @@
                             </thead>
                             <tbody>
                                 <?php foreach($users as $user): ?>
-                                <tr>
-                                <th scope="row"><input type="checkbox" name="usercheckbox[]" class="usercheckbox" value="<?php echo $user["user_id"]; ?>" checked /></th>
-                                <td><?php echo $user["name"]; ?></td>
-                                <td><?php echo $user["user_email_address_1"]; ?></td>
-                                <td><?php echo $user["user_title"]; ?></td>
-                                </tr>
+                                    <?php if($user["role_id"] == 2 && $user["is_adm_uploader"] == 0) continue; ?>
+                                    <tr>
+                                        <th scope="row"><input type="checkbox" name="usercheckbox[]" class="usercheckbox" value="<?php echo $user["user_id"]; ?>" checked /></th>
+                                        <td><?php echo $user["fullname"]; ?></td>
+                                        <td><?php echo $user["name"]; ?></td>
+                                        <td><?php echo $user["user_title"]; ?></td>
+                                    </tr>
                                 <?php endforeach; ?>
                             </tbody>
                             </table>
@@ -101,7 +108,20 @@
             <div class="row ">
                 <?php echo $preview; ?>
 			</div>
-						
+            <div id="message-box" class="alert alert-danger text-center p-2 d-none" role="alert"></div>
+            <div class="row nul-reminders justify-content-center">
+                <input type="hidden" name="template" value="<?php echo $template_id; ?>" />
+                <button class="col-lg-7 remindBox">
+                  <i class="i i-monthly-reminder"></i>send reminder
+                </button>
+                <!-- <div class="col-lg-7 col-md-7 remindBox remindBox2">
+                  <i class="i i-quarterly-reminder"></i>send quarterly reminder
+                </div>
+                <div class="col-lg-7 col-md-7 remindBox">
+                  <i class="i i-yearly-reminder"></i>send yearly reminder
+                </div> -->
+            </div>
+		
        </div>
     </div>
   </main>

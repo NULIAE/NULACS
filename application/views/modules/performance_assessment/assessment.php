@@ -1,6 +1,18 @@
 
 <?php
-if(isset($_GET['sid']) && isset($_GET['aid']) && !empty($_GET['sid']) && !empty($_GET['aid']) ){ ?>
+if(isset($_GET['sid']) && isset($_GET['aid']) && !empty($_GET['sid']) && !empty($_GET['aid']) ){ 
+if(isset($this->session->role_id ) && $this->session->role_id == 3 ){    ?>
+<input type="hidden" value="<?=$this->session->role_id?>" id="role_id_def">
+<style>
+.checkbox {
+  pointer-events: none;
+} 
+.display-none{
+  display: none!important;
+}
+
+<?php } ?>
+</style>
 
 <?php 
 foreach($form_data  as $formVal){
@@ -176,7 +188,7 @@ foreach($criteria_answers_view as $answers){
           
                     </div>
                      
-                      <div class="d-flex justify-content-end">
+                      <div class="d-flex justify-content-end display-none">
                         <button class="btn btn-dark btn-rounded min w-100px mr-2"  onclick="c_one_s_one(); savebtn();" type="submit">Save</button>
                         <button class="btn btn-primary btn-rounded min w-100px" onclick="c_one_s_one();" id="saveContinue" type="submit">SAVE AND CONTINUE</button>
                       </div>
@@ -253,7 +265,7 @@ foreach($criteria_answers_view as $answers){
   
   </div>
 
-  <div class="d-flex justify-content-end">
+  <div class="d-flex justify-content-end display-none">
 
   <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_one_s_two(); savebtn();" type="submit">Save</button>
  <button class="btn btn-primary btn-rounded min w-100px" onclick="c_one_s_two();" id="saveContinue2" type="submit">SAVE AND CONTINUE</button>
@@ -328,7 +340,7 @@ foreach($criteria_answers_view as $answers){
       </div>
     
     
-       <div class="d-flex justify-content-end">
+       <div class="d-flex justify-content-end display-none">
        <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_one_s_three(); savebtn();" type="submit">Save</button>
        <button class="btn btn-primary btn-rounded min w-100px" onclick="c_one_s_three();" id="saveContinue3" type="submit">SAVE AND CONTINUE</button>
 
@@ -409,7 +421,7 @@ foreach($criteria_answers_view as $answers){
     </div>
     
     
-     <div class="d-flex justify-content-end">
+     <div class="d-flex justify-content-end display-none">
      <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_one_s_four(); savebtn();" type="submit">Save</button>
       <button class="btn btn-primary btn-rounded min w-100px" onclick="c_one_s_four();" id="saveContinue4" type="submit">SAVE AND CONTINUE</button>
 
@@ -487,7 +499,7 @@ foreach($criteria_answers_view as $answers){
       
       </div>
 
-      <div class="d-flex justify-content-end">
+      <div class="d-flex justify-content-end display-none">
        
       <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_one_s_five(); savebtn();" type="submit">Save</button>
       <button class="btn btn-primary btn-rounded min w-100px" onclick="c_one_s_five();" id="saveContinue5" type="submit">SAVE AND CONTINUE</button>
@@ -579,7 +591,7 @@ foreach($criteria_answers_view as $answers){
       
       </div>
 
-      <div class="d-flex justify-content-end">
+      <div class="d-flex justify-content-end display-none">
       <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_one_s_six(); savebtn();" type="submit">Save</button>
       <button class="btn btn-primary btn-rounded min w-100px" onclick="c_one_s_six();" id="saveContinue6" type="submit">SAVE AND CONTINUE</button>
       
@@ -740,7 +752,7 @@ foreach($criteria_answers_view as $answers){
         </div>
 
 
-        <div class="d-flex justify-content-end">
+        <div class="d-flex justify-content-end display-none">
       <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_two_s_one(); savebtn();" type="submit">Save</button>
       <button class="btn btn-primary btn-rounded min w-100px" onclick="c_two_s_one();" id="saveContinue-x1" type="submit">SAVE AND CONTINUE</button>
 
@@ -838,7 +850,7 @@ foreach($criteria_answers_view as $answers){
             </div></div>
 
 
-        <div class="d-flex justify-content-end">
+        <div class="d-flex justify-content-end display-none">
         <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_two_s_two(); savebtn();" type="submit">Save</button>
        <button class="btn btn-primary btn-rounded min w-100px" onclick="c_two_s_two();" id="saveContinue-x2" type="submit">SAVE AND CONTINUE</button>
         </div>
@@ -926,7 +938,7 @@ foreach($criteria_answers_view as $answers){
                           </div>
                           </div></div>
                 
-                        <div class="d-flex justify-content-end">
+                        <div class="d-flex justify-content-end display-none">
                         <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_two_s_three(); savebtn();" type="submit">Save</button>
                         <button class="btn btn-primary btn-rounded min w-100px" onclick="c_two_s_three();" id="saveContinue-x3" type="submit">SAVE AND CONTINUE</button>
                          
@@ -1025,7 +1037,7 @@ foreach($criteria_answers_view as $answers){
         </div>
       </div>
 
-        <div class="d-flex justify-content-end">
+        <div class="d-flex justify-content-end display-none">
         <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_two_s_four(); savebtn();" type="submit">Save</button>
         <button class="btn btn-primary btn-rounded min w-100px" onclick="c_two_s_four();" id="saveContinue-x4" type="submit">SAVE AND CONTINUE</button>
                          
@@ -1121,7 +1133,7 @@ foreach($criteria_answers_view as $answers){
     
     </div></div>
   
-        <div class="d-flex justify-content-end">
+        <div class="d-flex justify-content-end display-none">
          <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_two_s_five(); savebtn();" type="submit">Save</button>
         <button class="btn btn-primary btn-rounded min w-100px" onclick="c_two_s_five();" id="saveContinue-x5" type="submit">SAVE AND CONTINUE</button>
        
@@ -1219,7 +1231,7 @@ foreach($criteria_answers_view as $answers){
   
   </div></div>  
   
-        <div class="d-flex justify-content-end">
+        <div class="d-flex justify-content-end display-none">
 
         <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_two_s_six(); savebtn();" type="submit">Save</button>
         <button class="btn btn-primary btn-rounded min w-100px" onclick="c_two_s_six();" id="saveContinue-x6" type="submit">SAVE AND CONTINUE</button>
@@ -1314,7 +1326,7 @@ foreach($criteria_answers_view as $answers){
           </div>
       </div>
   
-        <div class="d-flex justify-content-end">
+        <div class="d-flex justify-content-end display-none">
         <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_two_s_seven(); savebtn();" type="submit">Save</button>
         <button class="btn btn-primary btn-rounded min w-100px" onclick="c_two_s_seven();" id="saveContinue-x7" type="submit">SAVE AND CONTINUE</button>
          
@@ -1443,7 +1455,7 @@ foreach($criteria_answers_view as $answers){
         </div>
       </div>
   
-        <div class="d-flex justify-content-end">
+        <div class="d-flex justify-content-end display-none">
           <a  class="btn btn-dark btn-rounded min w-100px mr-2"  onclick="c_two_s_eight();">SAVE</a>
         </div>
   
@@ -1575,7 +1587,7 @@ foreach($criteria_answers_view as $answers){
 
      </div>
       
-       <div class="d-flex justify-content-end">
+       <div class="d-flex justify-content-end display-none">
 
        <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_three_s_one(); savebtn();" type="submit">Save</button>
        <button class="btn btn-primary btn-rounded min w-100px" onclick="c_three_s_one();" id="saveContinue-s1" type="submit">SAVE AND CONTINUE</button>
@@ -1650,7 +1662,7 @@ foreach($criteria_answers_view as $answers){
 
 </div>
 
-<div class="d-flex justify-content-end">
+<div class="d-flex justify-content-end display-none">
 <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_three_s_two(); savebtn();" type="submit">Save</button>
 <button class="btn btn-primary btn-rounded min w-100px" onclick="c_three_s_two();" id="saveContinue-s2" type="submit">SAVE AND CONTINUE</button>
        
@@ -1721,7 +1733,7 @@ foreach($criteria_answers_view as $answers){
 </div>
 
 
- <div class="d-flex justify-content-end">
+ <div class="d-flex justify-content-end display-none">
  <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_three_s_three(); savebtn();" type="submit">Save</button>
 <button class="btn btn-primary btn-rounded min w-100px" onclick="c_three_s_three();" id="saveContinue-s3" type="submit">SAVE AND CONTINUE</button>
   
@@ -1795,7 +1807,7 @@ foreach($criteria_answers_view as $answers){
 </div>
 
 
-<div class="d-flex justify-content-end">
+<div class="d-flex justify-content-end display-none">
 
 <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_three_s_four(); savebtn();" type="submit">Save</button>
 <button class="btn btn-primary btn-rounded min w-100px" onclick="c_three_s_four();" id="saveContinue-s4" type="submit">SAVE AND CONTINUE</button>
@@ -1866,7 +1878,7 @@ foreach($criteria_answers_view as $answers){
       
       </div>
 
-      <div class="d-flex justify-content-end">
+      <div class="d-flex justify-content-end display-none">
       <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_three_s_five(); savebtn();" type="submit">Save</button>
       <button class="btn btn-primary btn-rounded min w-100px" onclick="c_three_s_five();" id="saveContinue-s5" type="submit">SAVE AND CONTINUE</button>
       </div>
@@ -1933,7 +1945,7 @@ foreach($criteria_answers_view as $answers){
       
       </div>
 
-      <div class="d-flex justify-content-end">
+      <div class="d-flex justify-content-end display-none">
       <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_three_s_six(); savebtn();" type="submit">Save</button>
       <button class="btn btn-primary btn-rounded min w-100px" onclick="c_three_s_six();" id="saveContinue-s6" type="submit">SAVE AND CONTINUE</button>
 
@@ -2002,7 +2014,7 @@ foreach($criteria_answers_view as $answers){
       
       </div>
 
-      <div class="d-flex justify-content-end">
+      <div class="d-flex justify-content-end display-none">
       <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_three_s_seven(); savebtn();" type="submit">Save</button>
       <button class="btn btn-primary btn-rounded min w-100px" onclick="c_three_s_seven();" id="saveContinue-s7" type="submit">SAVE AND CONTINUE</button>
 
@@ -2088,7 +2100,7 @@ foreach($criteria_answers_view as $answers){
       
       </div>
 
-      <div class="d-flex justify-content-end">
+      <div class="d-flex justify-content-end display-none">
       <!-- <button class="btn btn-dark btn-rounded min w-100px mr-2" onclick="c_three_s_eight();" type="submit">Save</button> -->
       <button class="btn btn-primary btn-rounded min w-100px" onclick="c_three_s_eight();" id="saveContinue-s8" type="submit">SAVE</button>
 
