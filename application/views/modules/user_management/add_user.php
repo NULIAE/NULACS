@@ -14,9 +14,12 @@
 				<form class="w-100" id="add-form" method="post" action="<?php echo base_url('module/user/insert'); ?>">
 					<div class="row mb-3">
 						<div class="col-lg-24 col-md-24 col-sm-24 ">
-							<select name="affiliate_id" data-placeholder="Affiliate" data-type="selector" required>
+							<select name="affiliate_id" data-placeholder="Affiliate" data-type="selector" required >
+								<?php if($this->session->role_id==1): ?>
 								<option value="">Choose Affiliate</option>
+								<?php endif; ?>
 								<?php foreach($affiliates as $affiliate): ?>
+									<?php if($this->session->role_id != 1 && $affiliate['affiliate_id'] != $this->session->affiliate_id) continue; ?>
 									<option value="<?php echo $affiliate['affiliate_id']; ?>">
 										<?php echo $affiliate['organization'].' - '.$affiliate['city'].','.$affiliate['state']; ?>
 									</option>
@@ -30,7 +33,7 @@
 							<div class="col-lg-8 col-md-8 form-group">
 								<div>
 									<label>User ID</label>
-									<input type="text" name="name" class="form-control" placeholder="userid@nul.org" value="" required />
+									<input type="email" name="name" class="form-control" placeholder="userid@nul.org" value="" required />
 								</div>
 							</div>
 						
@@ -86,6 +89,7 @@
 									<select name="role_id" class="form-control" data-placeholder="Role" data-type="selector" required>
 										<option value="">Select role</option>
 										<?php foreach($roles as $role): ?>
+											<?php if($this->session->role_id != 1 && $role['role_id'] == 1) continue; ?>
 											<option value="<?php echo $role['role_id']; ?>">
 												<?php echo $role['role_description']; ?>
 											</option>
@@ -124,7 +128,7 @@
 								</div>
 							</div>
 						</div>
-
+						<?php if($this->session->role_id==1): ?>
 						<div class="col-lg-8 col-md-8 form-group">
 							<div>
 								<label>Is user super administrator?</label>
@@ -135,7 +139,7 @@
 								</div>
 							</div>
 						</div>
-					
+						<?php endif; ?>
                 	</div>
 
 					<div class="foot">

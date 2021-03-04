@@ -40,7 +40,7 @@
                 <li class="nav-item">
                   <a class="nav-link" href="<?php echo base_url('/user/view-profile/').$this->session->user_id; ?>"><i class="i i-admin"></i><span class="sr-only">Profile</span></a>
 								</li>
-								<?php if($this->session->role_id==1): ?>
+								<?php if($this->session->role_id==1 || $this->session->role_id==3): ?>
                 <li class="nav-item">
                   <a class="nav-link" href="<?php echo base_url('/user/profile/modules'); ?>"><i class="i i-setting"></i><span class="sr-only">Modules</span></a>
 								</li>

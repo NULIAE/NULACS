@@ -81,6 +81,7 @@
 								</div>
 							</div>
 						</div>
+						<?php if($this->session->role_id==1): ?>
 						<div class="col-lg-8 col-md-8 form-group">
 							<div>
 								<label>Is user super administrator?</label>
@@ -91,6 +92,7 @@
 								</div>
 							</div>
 						</div>
+						<?php endif; ?>
 						<div class="col-lg-8 col-md-8 form-group">
 							<label>Is user active?</label>
 							<div>

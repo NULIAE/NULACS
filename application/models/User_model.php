@@ -13,9 +13,7 @@ class User_model extends CI_Model
 	public function check_user($email)
 	{
 		$this->db->select('user_id, affiliate_id, role_id, name, user_status, user_password');
-		$this->db->where('user_email_address_1', $email);
-		$this->db->or_where('user_email_address_2', $email);
-		$this->db->or_where('user_email_address_3', $email);
+		$this->db->where('name', $email);
 
 		$query = $this->db->get('users');
 
@@ -36,9 +34,7 @@ class User_model extends CI_Model
 		$this->db->join('affiliate', 'affiliate.affiliate_id = users.affiliate_id');
 		$this->db->where('users.user_status', '1');
 		$this->db->where('affiliate.organization', $location);
-		$this->db->where('users.user_email_address_1', $email);
-		$this->db->or_where('users.user_email_address_2', $email);
-		$this->db->or_where('users.user_email_address_3', $email);
+		$this->db->where('users.name', $email);
 
 		$query = $this->db->get();
 

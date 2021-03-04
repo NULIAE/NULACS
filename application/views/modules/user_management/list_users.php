@@ -12,6 +12,7 @@
 			<div class="rel">
 				<form class="filter" id="filter-form" action="<?php echo base_url('module/user/filter'); ?>">
 					<div class="row align-items-end">
+						<?php if($this->session->role_id==1): ?>
 						<div class="col-lg-4 col-md-6 col-sm-24 ">
 							<label for="region">Region</label>
 							<select name="region" data-placeholder="Region" data-type="selector">
@@ -23,11 +24,13 @@
 							<?php endforeach;?>
 							</select>
 						</div>
+						<?php endif; ?>
 						<div class="col-lg-4 col-md-6 col-sm-24 ">
 							<label for="role">Role</label>
 							<select name="role" data-placeholder="Role" data-type="selector">
 								<option value="">All Roles</option>
 								<?php foreach($roles as $role): ?>
+									<?php if($this->session->role_id != 1 && $role['role_id'] == 1) continue; ?>
 									<option value="<?php echo $role['role_id']; ?>">
 										<?php echo $role['role_description']; ?>
 									</option>
@@ -46,10 +49,13 @@
 						<div class="col-lg-3 col-md-3 col-sm-12 ">
 						<div class="t-c"><button id="search-btn" type="submit" class="btn btn-primary btn-rounded min w-100px">SEARCH</button> </div>
 						</div>
-						<div class="col-lg-3 col-md-3 col-sm-12 mt-2">
-						<div class="t-c"><button id="export-btn" class="btn btn-primary btn-rounded min w-100px">EXPORT</button> </div>
-						</div>
-					
+						<?php if($this->session->role_id==1): ?>
+							<div class="col-lg-3 col-md-3 col-sm-12 mt-2">
+							<div class="t-c"><button id="export-btn" class="btn btn-primary btn-rounded min w-100px">EXPORT</button> </div>
+							</div>
+						<?php else: ?>
+							<input type="hidden" name="affiliate" value="<?php echo $this->session->affiliate_id; ?>">
+						<?php endif; ?>
 					</div>
 				</form>
 				<a  href="<?php echo base_url('module/user/add'); ?>" class="btn btn-primary m-l-auto btn-rounded btn-action btn-fix"><i class="i i-add"></i></a>
@@ -191,7 +197,7 @@
 								</div>
 							</div>
 						</div>
-						
+						<?php if($this->session->role_id==1): ?>
                         <div class="col-lg-6 col-md-12 form-group">
 							<div>
 								<label>Is user super administrator?</label>
@@ -202,6 +208,7 @@
 								</div>
 							</div>
 						</div>
+						<?php endif; ?>
 
 						<div class="col-lg-8 col-md-8 form-group">
 							<label>Active</label>

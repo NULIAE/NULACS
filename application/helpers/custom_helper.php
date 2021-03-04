@@ -43,7 +43,7 @@ if ( ! function_exists('send_email_noification'))
         foreach($users as $key => $user)
         {
             $receivers .= ($key == 0) ? "" : ",";
-            $receivers .= $user["user_email_address_1"];
+            $receivers .= $user["name"];
         }
 
         //echo "<pre>";echo $receivers; echo "</pre>"; 

@@ -150,6 +150,7 @@
 
 					<div class="foot fend">
 						<button class="btn btn-dark btn-rounded min w-100px mr-2" type="submit">SAVE</button>
+						<a class="btn btn-primary btn-rounded min w-100px" onclick="window.history.back();">CANCEL</a>
 					</div>
 					<input type="hidden" name="affiliate_id" value="<?php echo $affiliate['affiliate_id']; ?>" />
             	</form>

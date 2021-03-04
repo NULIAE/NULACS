@@ -23,7 +23,7 @@ class User extends MY_Controller
 	 */
 	public function index()
 	{
-
+		
 		$data['content'] = array(
 			'roles' => $this->User_model->get_user_roles(),
 			'locations' => $this->Affiliate_model->get_all_affiliates(),
@@ -62,7 +62,10 @@ class User extends MY_Controller
 
 		if( isset($data['status']) && ($data['status'] !== '') )
 			$filters['users.user_status'] =  $data['status'];
-
+			
+		if( isset($data['affiliate']) && ($data['affiliate'] !== '') )
+			$filters['users.affiliate_id'] =  $data['affiliate'];
+		
 		if( empty($filters) )
 			$filters = NULL;
 
@@ -140,7 +143,7 @@ class User extends MY_Controller
 		$data = $this->input->post(NULL, TRUE);
 
 		//Check whether user with the email id exists on `users` table
-		$user_data = $this->User_model->check_user($data['user_email_address_1']);
+		$user_data = $this->User_model->check_user($data['name']);
 
 		$status = $message = NULL;
 
@@ -148,7 +151,7 @@ class User extends MY_Controller
 		{
 			//User already exists
 			$status = FALSE;
-			$message = 'User with the given Email ID already exists';
+			$message = 'User with the given User ID already exists';
 		}
 		else
 		{

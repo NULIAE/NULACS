@@ -23,7 +23,7 @@ class Profile extends MY_Controller {
 		if ( empty($user) )
 			redirect('/');
 
-		if( ($this->session->user_id != $user_id) && ($this->session->role_id != 1) )
+		if( ($this->session->user_id != $user_id) && ($this->session->role_id == 2) )
 			redirect('/');
 
 		$data['content'] = array(
@@ -51,7 +51,7 @@ class Profile extends MY_Controller {
 		if ( empty($user) )
 			redirect('/');
 
-		if( ($this->session->user_id != $user_id) && ($this->session->role_id != 1) )
+		if( ($this->session->user_id != $user_id) && ($this->session->role_id == 2) )
 			redirect('/');
 
 		$data['content'] = array(

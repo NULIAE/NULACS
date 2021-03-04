@@ -21,7 +21,6 @@ $(function () {
 				data : $(form).serialize(), // our data object
 				dataType : 'json'
 			}).done(function(data) {
-				if ( ! data.success ) {
 					var toastConfig = {
 						timeout: 5000,
 						position: 'top',
@@ -29,12 +28,8 @@ $(function () {
 						message: data.message,
 						//actionHandler: someCallbackFunction
 					};
-					setTimeout(function(){
-						$('#snackbar').NitroToast(toastConfig);
-					}, 2000);
-				} else {
-					window.location.href = base_url + "module/affiliate";
-				}
+					
+					$('#snackbar').NitroToast(toastConfig);
 			});
 		}
 	});

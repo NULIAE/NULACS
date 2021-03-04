@@ -224,8 +224,6 @@ class Affiliate extends MY_Controller
 			//New affiliate added
 			$status = TRUE;
 			$message = 'Affiliate details updated successfully.';
-
-			$this->session->set_flashdata("message", $message);
 		}
 		else
 		{

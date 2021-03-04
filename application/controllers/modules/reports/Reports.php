@@ -129,7 +129,7 @@ class Reports extends MY_Controller
 		
 		$result = $this->Reports_model->get_key_indicators($data['quarter'], $data['year']);
 
-		$currency_format = PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_CURRENCY_USD_SIMPLE;
+		$number_format = PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_NUMBER_00;
 
 		$i = 4;
 		foreach($result as $record)
@@ -137,22 +137,24 @@ class Reports extends MY_Controller
 			$row = json_decode($record["indicators"], TRUE);
 
 			$sheet->setCellValue('A'.$i , $record["name"]);
-			$sheet->setCellValue('B'.$i , ($row["liquidity"] != "") ? "$".$row["liquidity"] : "");
-			$sheet->setCellValue('C'.$i , ($row["current_ratio"] != "") ? number_format($row["current_ratio"], 2) : "");
-			$sheet->setCellValue('D'.$i , ($row["current_debt_ratio"] != "") ? number_format($row["current_debt_ratio"], 2) : "");
-			$sheet->setCellValue('E'.$i , ($row["from_operations"] != "") ? "$".$row["from_operations"] : "");
-			$sheet->setCellValue('F'.$i , ($row["from_financing"] != "") ? "$".$row["from_financing"] : "");
-			$sheet->setCellValue('G'.$i , ($row["from_investing"] != "") ? "$".$row["from_investing"] : "");
-			$sheet->setCellValue('H'.$i , ($row["operating_efficiency_program_value"] != "") ? number_format($row["operating_efficiency_program_value"], 2)."%" : "");
-			$sheet->setCellValue('I'.$i , ($row["operating_efficiency_admin_value"] != "") ? number_format($row["operating_efficiency_admin_value"], 2)."%" : "");
-			$sheet->setCellValue('J'.$i , ($row["operating_efficiency_fundraising_value"] != "") ? number_format($row["operating_efficiency_fundraising_value"], 2)."%" : "");
-			$sheet->setCellValue('K'.$i , ($row["change_in_net_assets_in_quarter"] != "") ? number_format($row["change_in_net_assets_in_quarter"], 2) : "");
+			$sheet->setCellValue('B'.$i , ($row["liquidity"] != "") ? "$".number_format($row["liquidity"], 0, '.', ',') : "");
+			$sheet->setCellValue('C'.$i , ($row["current_ratio"] != "") ? $row["current_ratio"] : "");
+			$sheet->getStyle('C'.$i)->getNumberFormat()->setFormatCode($number_format);
+			$sheet->setCellValue('D'.$i , ($row["current_debt_ratio"] != "") ? $row["current_debt_ratio"] : "");
+			$sheet->getStyle('D'.$i)->getNumberFormat()->setFormatCode($number_format);
+			$sheet->setCellValue('E'.$i , ($row["from_operations"] != "") ? "$".number_format($row["from_operations"], 0, '.', ',') : "");
+			$sheet->setCellValue('F'.$i , ($row["from_financing"] != "") ? "$".number_format($row["from_financing"], 0, '.', ',') : "");
+			$sheet->setCellValue('G'.$i , ($row["from_investing"] != "") ? "$".number_format($row["from_investing"], 0, '.', ',') : "");
+			$sheet->setCellValue('H'.$i , ($row["operating_efficiency_program_value"] != "") ? $row["operating_efficiency_program_value"]."%" : "");
+			$sheet->setCellValue('I'.$i , ($row["operating_efficiency_admin_value"] != "") ? $row["operating_efficiency_admin_value"]."%" : "");
+			$sheet->setCellValue('J'.$i , ($row["operating_efficiency_fundraising_value"] != "") ? $row["operating_efficiency_fundraising_value"]."%" : "");
+			$sheet->setCellValue('K'.$i , ($row["change_in_net_assets_in_quarter"] != "") ? number_format($row["change_in_net_assets_in_quarter"], 0, '.', ',') : "");
 			$sheet->setCellValue('L'.$i , ($row["days_in_cash"] != "") ? $row["days_in_cash"] : "");
 			$sheet->setCellValue('M'.$i , "TY".$row["change_in_grant_ty_ytd"].":LY".$row["change_in_grant_ly_ytd"]);
 			$sheet->setCellValue('N'.$i , $row["change_in_grant_ty_ytd_value"].":".$row["change_in_grant_ly_ytd_value"]);
 			$sheet->setCellValue('O'.$i , isset($row["is_net_assets_positive"]) ? $row["is_net_assets_positive"] : "N");
-			$sheet->setCellValue('P'.$i , ($row["borad_giving"] != "") ? number_format($row["borad_giving"], 2)."%" : "");
-			$sheet->setCellValue('Q'.$i , ($row["operating_reserves_percentage"] != "") ? number_format($row["operating_reserves_percentage"], 2)."%" : "");
+			$sheet->setCellValue('P'.$i , ($row["borad_giving"] != "") ? $row["borad_giving"]."%" : "");
+			$sheet->setCellValue('Q'.$i , ($row["operating_reserves_percentage"] != "") ? $row["operating_reserves_percentage"]."%" : "");
 			$i++;
 		}
 

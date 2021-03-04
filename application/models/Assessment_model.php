@@ -121,7 +121,9 @@ class Assessment_model extends CI_Model
 		$this->db->join('users u', 'u.affiliate_id = sa.affiliate_id','left');
 		$this->db->join('affiliate a', 'a.affiliate_id = u.affiliate_id','left');
 		$this->db->join('state s', 's.stateid = a.state','left');
-
+		if(isset($this->session->role_id ) && $this->session->role_id == 3 ){ 
+			$this->db->where('sa.affiliate_id', $this->session->affiliate_id);
+		}
 		if(isset($data['affiliate_id']) && !empty($data['affiliate_id'])){
 			$this->db->where('sa.affiliate_id', $data['affiliate_id']);
 		}
@@ -154,6 +156,9 @@ class Assessment_model extends CI_Model
 		$this->db->join('users u', 'u.affiliate_id = sa.affiliate_id','left');
 		$this->db->join('affiliate a', 'a.affiliate_id = u.affiliate_id','left');
 		$this->db->join('state s', 's.stateid = a.state','left');
+		if(isset($this->session->role_id ) && $this->session->role_id == 3 ){ 
+			$this->db->where('sa.affiliate_id', $this->session->affiliate_id);
+		}
 		// if(isset($data['aid']) && !empty($data['aid'])){
 		// 	$this->db->where('sa.affiliate_id',   $data['aid']);
 		// }

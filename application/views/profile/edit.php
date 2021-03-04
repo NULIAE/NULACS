@@ -64,12 +64,13 @@
 							<div class="col-lg-6 col-md-12 form-group">
 								<div>
 								<label>Role</label>
-									<?php if($role_id != '1'):?>
+									<?php if($role_id == 2):?>
 										<input type="text" name="role_id" class="form-control" value="<?php echo $user['role_description']; ?>" disabled />
 									<?php else: ?>
 										<select name="role_id" class="form-control" data-placeholder="User Prefix" data-type="selector" required>
 											<option value="">Select role</option>
 											<?php foreach($roles as $role): ?>
+												<?php if($this->session->role_id != 1 && $role['role_id'] == 1) continue; ?>
 												<option value="<?php echo $role['role_id']; ?>" <?php if($role['role_id'] == $user['role_id']) echo "selected"; ?>>
 													<?php echo $role['role_description']; ?>
 												</option>
@@ -114,7 +115,7 @@
 								</div>
 							</div>
 						</div>
-						
+						<?php if($this->session->role_id==1): ?>
                         <div class="col-lg-6 col-md-12 form-group">
 							<div>
 								<label>Is user super administrator?</label>
@@ -125,7 +126,7 @@
 								</div>
 							</div>
 						</div>
-						
+						<?php endif; ?>
 						<div class="col-lg-6 col-md-12 form-group">
 							<label for="pu-1">Is user active?</label>
 							<div>

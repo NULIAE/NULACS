@@ -19,7 +19,9 @@
               <div class="ib-m p-t-15">
                 <select data-control="material" data-type="selector" name="affiliate_id">         
                  <?php  if(isset($affiliate_details) && !empty($affiliate_details)){?>
-                  <option>Choose Affiliate</option>
+                  <?php 	if(isset($this->session->role_id ) && $this->session->role_id != 3 ){ ?> 
+                      <option>Choose Affiliate</option>
+                  <?php  } ?>
                    <?php foreach ($affiliate_details as $details){ 
                      if($details['affiliate_id'] == $assessment_listing_date['affiliate_id']){ ?>
                      
