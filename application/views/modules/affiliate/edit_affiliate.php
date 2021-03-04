@@ -118,7 +118,7 @@
 							</div>
 						</div>
 					</div>
-
+					<?php if($this->session->role_id == 1): ?>
 					<div class="settingWrap">
 						<div class="row w-100 mb-3">
 							
@@ -147,6 +147,7 @@
 
 						</div>
 					</div>
+					<?php endif; ?>
 
 					<div class="foot fend">
 						<button class="btn btn-dark btn-rounded min w-100px mr-2" type="submit">SAVE</button>
