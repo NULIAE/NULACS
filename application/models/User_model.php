@@ -270,4 +270,14 @@ class User_model extends CI_Model
 
 		return $query->result_array();
 	}
+
+	public function get_region_from_affiliate($affiliate_id)
+	{
+		$this->db->select("region_id");
+		$this->db->where("affiliate_id", $affiliate_id);
+		
+		$query = $this->db->get('affiliate');
+
+		return $query->row_array();
+	}
 }

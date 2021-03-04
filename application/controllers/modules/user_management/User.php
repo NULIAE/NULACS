@@ -14,6 +14,7 @@ class User extends MY_Controller
 		parent::__construct();
 		$this->load->model('Affiliate_model');
 		$this->load->model('Document_model');
+		$this->load->model('Settings_model');
 		//$this->output->enable_profiler(TRUE);
 	}	
 	/**
@@ -23,7 +24,7 @@ class User extends MY_Controller
 	 */
 	public function index()
 	{
-		
+
 		$data['content'] = array(
 			'roles' => $this->User_model->get_user_roles(),
 			'locations' => $this->Affiliate_model->get_all_affiliates(),
@@ -155,23 +156,54 @@ class User extends MY_Controller
 		}
 		else
 		{
-			$affiliate = $this->Affiliate_model->get_affiliate_by_id($data['affiliate_id']);
+			$affiliate = $this->User_model->get_region_from_affiliate($data['affiliate_id']);
 
 			$data['region_id'] = $affiliate['region_id'];
+			$token = $data['reset_password_token'] = bin2hex(random_bytes(32));
 			
 			//Add new user
 			$user_id = $this->User_model->new_user($data);
 
 			if ( $user_id !== FALSE )
 			{
+				$content = '<p><strong>Dear '.$data["first_name"].' '.$data["last_name"].'</strong></p>';
+				$content .= '<p>Your account has been created on National Urban League website.</p>';
+				$content .= '<p>To access your account, you need to change the password first by clicking the link below.</p>';
+				$content .= '<p><a href="'.base_url("/reset-password/$token").'">Reset Password</a></p>';
+				$content .= '<p>Thanks</p>';
+				
+				$mail_content = $this->load->view('layout/mail_template', array("message" => $content), TRUE);
+
+				$subject = "Welcome ".$data["first_name"]." ".$data["first_name"].", You are a NUL Member!";
+
+				//Get SMTP settings
+				$settings = array();
+				$result = $this->Settings_model->get_all_settings();
+				foreach ( $result as $row)
+				{
+					$settings[$row['label']] = $row['value'];
+				}
+		
+				$config['smtp_host'] = $settings['smtp_host'];
+				$config['smtp_user'] = $settings['smtp_user'];
+				$config['smtp_pass'] = $settings['smtp_pass'];
+				$config['smtp_port'] = $settings['smtp_port'];
+
+				$this->load->library('email');
+				$this->email->initialize($config);
+				$this->email->from("noreply@nul.org", "National Urban League");
+				$this->email->to($data["name"]);
+				$this->email->subject($subject);
+				$this->email->message($mail_content);
+				$this->email->send();
+		
+				//Log user activities
 				$log_data = array(
 					'user_id' => $this->session->user_id,
 					'affiliate_id' => $this->session->affiliate_id,
 					'record_id'	=> $user_id,
 					'note' => 'New user added'
 				);
-		
-				//Log user activities
 				$this->User_model->user_log($log_data);
 				
 				//New user added

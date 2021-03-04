@@ -11,6 +11,7 @@ class Reset_password extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('User_model');
+		$this->load->model('Settings_model');
 		//$this->output->enable_profiler(TRUE);
 	}
 
@@ -80,19 +81,35 @@ class Reset_password extends CI_Controller
 			if ( $this->User_model->save_password_token($user_data['user_id'], $token) )
 			{
 				//Token generated and saved successfully. Send reset link to user's email
-				$mail_content = 'Hi<br />';
-				$mail_content .= '<p>To change your account password, click the link below.</p>';
-				$mail_content .= '<p><a href="'.base_url("/reset-password/$token").'">Reset Password</a></p>';
-				$mail_content .= '<p>Thanks</p>';
+				$content = 'Dear Member<br />';
+				$content .= '<p>Request for reset the password for your NUL account on http://nul.org received. </p>';
+				$content .= '<p>If you did not perform this request, you can safely ignore this email.</p>';
+				$content .= '<p>To change your account password, click the link below.</p>';
+				$content .= '<p><a href="'.base_url("/reset-password/$token").'">Reset Password</a></p>';
+				$content .= '<p>Thanks</p>';
+
+				$mail_content = $this->load->view('layout/mail_template', array("message" => $content), TRUE);
 
 				//echo $mail_content.'<br />';
 
+				//Get SMTP settings
+				$settings = array();
+				$result = $this->Settings_model->get_all_settings();
+				foreach ( $result as $row)
+				{
+					$settings[$row['label']] = $row['value'];
+				}
+		
+				$config['smtp_host'] = $settings['smtp_host'];
+				$config['smtp_user'] = $settings['smtp_user'];
+				$config['smtp_pass'] = $settings['smtp_pass'];
+				$config['smtp_port'] = $settings['smtp_port'];
+
 				$this->load->library('email');
-
-				$this->email->from('noreply@nul.com', 'NUL');
+				$this->email->initialize($config);
+				$this->email->from("noreply@nul.org", "National Urban League");
 				$this->email->to($data['email']);
-
-				$this->email->subject('Reset your password');
+				$this->email->subject('Reset Password Instructions');
 				$this->email->message($mail_content);
 
 				if ( $this->email->send() )
