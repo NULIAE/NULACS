@@ -1337,7 +1337,7 @@ $('.change_in_net_assets_in_quarter_blur').on('blur', function() {
 
 	if(net_assets_in_last_quarter_value_v && less_net_assets_in_last_quarter_value_v){
 
-		var change_in_net_assets_in_quarter_s =  (net_assets_in_last_quarter_value_v - less_net_assets_in_last_quarter_value_v)  ;
+		var change_in_net_assets_in_quarter_s =  ( less_net_assets_in_last_quarter_value_v - net_assets_in_last_quarter_value_v) ;
 
 		var f_change_in_net_assets_in_quarter_s = parseFloat(change_in_net_assets_in_quarter_s).toFixed(0); 
 
