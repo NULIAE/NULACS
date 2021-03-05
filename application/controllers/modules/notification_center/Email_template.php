@@ -138,21 +138,24 @@ class Email_template extends MY_Controller
 			$month = $data['month'];
 		else
 			$month = date("m", strtotime("-1 month", time()));
+
+		if(isset($data['quarter']) && $data['quarter'] != "")
+			$quarter = $data['quarter'];
+		else
+			$quarter =  ceil($month/3);
 		
 		if(isset($data['year']) && $data['year'] != "")
 			$year = $data['year'];
 		else
 			$year = date("Y", strtotime("-1 month", time()));
 
-		$quarter = ceil($month/3);
-
 		$target_date = mktime(0, 0, 0, $month, 1, $year);
 
 		$quarterArray = array(
-			'1' => 'January - March '.$year,
-			'2' => 'April - June '.$year,
-			'3' => 'July - September '.$year,
-			'4' => 'October - December '.$year,
+			'1' => 'January - March',
+			'2' => 'April - June',
+			'3' => 'July - September',
+			'4' => 'October - December',
 		);
 
 		$data['month'] = date("F", $target_date);
@@ -173,10 +176,10 @@ class Email_template extends MY_Controller
 		$preview = $this->load->view('layout/mail_template', $preview_data, TRUE);
 		
 		$data['content'] = array(
-			'template_id' => $template_id,
-			'name' => $template['name'],
+			'template' => $template,
 			'preview' => $preview,
 			'month' => $month,
+			'quarter' => $quarter,
 			'year' => $year,
 			'users' => $users,
 			'roles' => $this->User_model->get_user_roles()
@@ -213,10 +216,10 @@ class Email_template extends MY_Controller
 		$target_date = mktime(0, 0, 0, $data["month"], 1, $data["year"]);
 
 		$quarterArray = array(
-			'1' => 'January - March '.$data["year"],
-			'2' => 'April - June '.$data["year"],
-			'3' => 'July - September '.$data["year"],
-			'4' => 'October - December '.$data["year"],
+			'1' => 'January - March',
+			'2' => 'April - June',
+			'3' => 'July - September',
+			'4' => 'October - December',
 		);
 
 		$data['month'] = date("F", $target_date);

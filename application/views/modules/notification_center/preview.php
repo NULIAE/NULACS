@@ -12,13 +12,14 @@ button.remindBox, button.remindBox:focus{
             </div>
             <div class="row document-mdata">
                 <div class="head">
-                    <h3><?php echo $name; ?></h3>
+                    <h3><?php echo $template["name"]; ?></h3>
                 </div>
             </div>
             <div class="row">
                 <div class="col-24">
-                <form class="filter" id="filter-form" action="<?php echo base_url('module/notification/emails/preview/').$template_id; ?>">
-					<div class="row mt-5 align-items-end">
+                <form class="filter" id="filter-form" action="<?php echo base_url('module/notification/emails/preview/').$template["temp_id"]; ?>">
+                    <div class="row mt-5 align-items-end">
+					    <?php if($template["type"] == "monthly" || $template["type"] == "combined"): ?>
                         <div id="div-month-select" class="col-lg-4">
                             <?php
                             // set the month array
@@ -33,7 +34,18 @@ button.remindBox, button.remindBox:focus{
                                 <?php endforeach; ?>
                             </select>
                         </div>
-                    
+                        <?php endif; ?>
+                        <?php if($template["type"] == "quarterly" || $template["type"] == "combined"): ?>
+                        <div class="col-lg-4">
+                            <label for="">Quarter</label>
+                            <select name="quarter" data-placeholder="Quarter" data-type="selector">
+                                <option value="1" <?php if($quarter == 1) echo "selected"; ?>>January - March</option>
+                                <option value="2" <?php if($quarter == 2) echo "selected"; ?>>April - June</option>
+                                <option value="3" <?php if($quarter == 3) echo "selected"; ?>>July - September</option>
+                                <option value="4" <?php if($quarter == 4) echo "selected"; ?>>October - December</option>
+                            </select>
+                        </div>
+                        <?php endif; ?>
                         <div class="col-lg-4">
                             <?php $yearArray = range(date('Y'), 2000);?>
                             <label for="">Year</label>
@@ -110,7 +122,7 @@ button.remindBox, button.remindBox:focus{
 			</div>
             <div id="message-box" class="alert alert-danger text-center p-2 d-none" role="alert"></div>
             <div class="row nul-reminders justify-content-center">
-                <input type="hidden" name="template" value="<?php echo $template_id; ?>" />
+                <input type="hidden" name="template" value="<?php echo $template["temp_id"]; ?>" />
                 <button class="col-lg-7 remindBox">
                   <i class="i i-monthly-reminder"></i>send reminder
                 </button>
