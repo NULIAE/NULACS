@@ -27,7 +27,7 @@ class User extends MY_Controller
 
 		$data['content'] = array(
 			'roles' => $this->User_model->get_user_roles(),
-			'locations' => $this->Affiliate_model->get_all_affiliates(),
+			'affiliates' => $this->Affiliate_model->get_all_affiliates(),
 			'regions' => $this->User_model->get_all_regions()
 		);
 		
@@ -242,6 +242,9 @@ class User extends MY_Controller
 
 		if( isset($data['region']) && ($data['region'] !== '') )
 			$filters['users.region_id'] =  $data['region'];
+
+		if( isset($data['affiliate']) && ($data['affiliate'] !== '') )
+			$filters['users.affiliate_id'] =  $data['affiliate'];
 
 		if( isset($data['role']) && ($data['role'] !== '') )
 			$filters['users.role_id'] =  $data['role'];

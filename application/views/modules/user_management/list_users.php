@@ -15,11 +15,22 @@
 						<?php if($this->session->role_id==1): ?>
 						<div class="col-lg-4 col-md-6 col-sm-24 ">
 							<label for="region">Region</label>
-							<select name="region" data-placeholder="Region" data-type="selector">
+							<select name="region" id="region" data-placeholder="Region" data-type="selector">
 							<option value="">All Regions</option>
 							<?php foreach($regions as $region): ?>
 								<option value="<?php echo $region['region_id']; ?>">
 									<?php echo $region['name']; ?>
+								</option>
+							<?php endforeach;?>
+							</select>
+						</div>
+						<div class="col-lg-4 col-md-6 col-sm-24 ">
+							<label for="affiliate">Affiliate</label>
+							<select name="affiliate" id="affiliate" data-placeholder="Affiliate" data-type="selector">
+							<option value="">All Affiliates</option>
+							<?php foreach($affiliates as $row): ?>
+								<option value="<?php echo $row['affiliate_id']; ?>">
+									<?php echo $row['city'].", ".$row['stateabbreviation']; ?>
 								</option>
 							<?php endforeach;?>
 							</select>
