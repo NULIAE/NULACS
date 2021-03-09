@@ -244,8 +244,8 @@ class Reports extends MY_Controller
 				$sheet->getStyle('L'.$i)->getNumberFormat()->setFormatCode($number_format);
 			}
 
-			$sheet->setCellValue('M'.$i , "TY".(isset($row["change_in_grant_ty_ytd"]) ? $row["change_in_grant_ty_ytd"] : 0).":LY".(isset($row["change_in_grant_ly_ytd"]) ? $row["change_in_grant_ly_ytd"] : 0));
-			$sheet->setCellValue('N'.$i , (isset($row["change_in_grant_ty_ytd_value"]) ? $row["change_in_grant_ty_ytd_value"] : 0).":".(isset($row["change_in_grant_ly_ytd_value"]) ? $row["change_in_grant_ly_ytd_value"] : 0));
+			$sheet->setCellValue('M'.$i , "TY".(($row["change_in_grant_ty_ytd"] != "") ? $row["change_in_grant_ty_ytd"] : 0).":LY".(($row["change_in_grant_ly_ytd"] != "") ? $row["change_in_grant_ly_ytd"] : 0));
+			$sheet->setCellValue('N'.$i , (($row["change_in_grant_ty_ytd_value"] != "") ? $row["change_in_grant_ty_ytd_value"] : 0).":".(($row["change_in_grant_ly_ytd_value"] != "") ? $row["change_in_grant_ly_ytd_value"] : 0));
 			$sheet->setCellValue('O'.$i , isset($row["is_net_assets_positive"]) ? $row["is_net_assets_positive"] : "N");
 
 			$row["borad_giving"] = ($row["borad_giving"] != "") ? $row["borad_giving"] : 0;
