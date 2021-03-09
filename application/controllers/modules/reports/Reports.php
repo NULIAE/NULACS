@@ -131,11 +131,11 @@ class Reports extends MY_Controller
 
 
 		$number_format = '0.00';
-		$usd_format = '$#,##0_-';
+		$usd_format = '$#,##0';
 		$percent_format = "0\\%";
 		
 		$negative_number_format = '(0.00)';
-		$negative_usd_format = '($#,##0_-)';
+		$negative_usd_format = '($#,##0)';
 		$negative_percent_format = "(0\\%)";
 
 		$color_red = PhpOffice\PhpSpreadsheet\Style\Color::COLOR_RED;
