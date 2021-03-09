@@ -25,7 +25,7 @@ class Reports extends MY_Controller
 	 * @return view 'modules/reports/reports.php'
 	 */
 	public function index()
-	{
+	{																			
         //XSS Filter all the input post fields
 		$data = $this->input->get(NULL, TRUE);
 
@@ -129,7 +129,16 @@ class Reports extends MY_Controller
 		
 		$result = $this->Reports_model->get_key_indicators($data['quarter'], $data['year']);
 
-		$number_format = PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_NUMBER_00;
+
+		$number_format = '0.00';
+		$usd_format = '$#,##0_-';
+		$percent_format = "0\\%";
+		
+		$negative_number_format = '(0.00)';
+		$negative_usd_format = '($#,##0_-)';
+		$negative_percent_format = "(0\\%)";
+
+		$color_red = PhpOffice\PhpSpreadsheet\Style\Color::COLOR_RED;
 
 		$i = 4;
 		foreach($result as $record)
@@ -137,24 +146,126 @@ class Reports extends MY_Controller
 			$row = json_decode($record["indicators"], TRUE);
 
 			$sheet->setCellValue('A'.$i , $record["name"]);
-			$sheet->setCellValue('B'.$i , ($row["liquidity"] != "") ? "$".number_format($row["liquidity"], 0, '.', ',') : "");
-			$sheet->setCellValue('C'.$i , ($row["current_ratio"] != "") ? $row["current_ratio"] : "");
-			$sheet->getStyle('C'.$i)->getNumberFormat()->setFormatCode($number_format);
-			$sheet->setCellValue('D'.$i , ($row["current_debt_ratio"] != "") ? $row["current_debt_ratio"] : "");
-			$sheet->getStyle('D'.$i)->getNumberFormat()->setFormatCode($number_format);
-			$sheet->setCellValue('E'.$i , ($row["from_operations"] != "") ? "$".number_format($row["from_operations"], 0, '.', ',') : "");
-			$sheet->setCellValue('F'.$i , ($row["from_financing"] != "") ? "$".number_format($row["from_financing"], 0, '.', ',') : "");
-			$sheet->setCellValue('G'.$i , ($row["from_investing"] != "") ? "$".number_format($row["from_investing"], 0, '.', ',') : "");
-			$sheet->setCellValue('H'.$i , ($row["operating_efficiency_program_value"] != "") ? $row["operating_efficiency_program_value"]."%" : "");
-			$sheet->setCellValue('I'.$i , ($row["operating_efficiency_admin_value"] != "") ? $row["operating_efficiency_admin_value"]."%" : "");
-			$sheet->setCellValue('J'.$i , ($row["operating_efficiency_fundraising_value"] != "") ? $row["operating_efficiency_fundraising_value"]."%" : "");
-			$sheet->setCellValue('K'.$i , ($row["change_in_net_assets_in_quarter"] != "") ? number_format($row["change_in_net_assets_in_quarter"], 0, '.', ',') : "");
-			$sheet->setCellValue('L'.$i , ($row["days_in_cash"] != "") ? $row["days_in_cash"] : "");
-			$sheet->setCellValue('M'.$i , "TY".$row["change_in_grant_ty_ytd"].":LY".$row["change_in_grant_ly_ytd"]);
-			$sheet->setCellValue('N'.$i , $row["change_in_grant_ty_ytd_value"].":".$row["change_in_grant_ly_ytd_value"]);
+			
+			$row["liquidity"] = ($row["liquidity"] != "") ? $row["liquidity"] : 0;
+			$sheet->setCellValue('B'.$i , abs($row["liquidity"]));
+			if(($row["liquidity"] < 0)){
+				$sheet->getStyle('B'.$i)->getNumberFormat()->setFormatCode($negative_usd_format);
+				$sheet->getStyle('B'.$i)->getFont()->getColor()->setARGB($color_red);
+			}else{
+				$sheet->getStyle('B'.$i)->getNumberFormat()->setFormatCode($usd_format);
+			}
+
+			$row["current_ratio"] = ($row["current_ratio"] != "") ? $row["current_ratio"] : 0;
+			if(($row["current_ratio"] < 0)){
+				$sheet->setCellValue('C'.$i , "(".number_format(abs($row["current_ratio"]), 2).")");
+				$sheet->getStyle('C'.$i)->getFont()->getColor()->setARGB($color_red);
+			}else{
+				$sheet->setCellValue('C'.$i , number_format($row["current_ratio"], 2));
+			}
+
+			$row["current_debt_ratio"] = ($row["current_debt_ratio"] != "") ? $row["current_debt_ratio"] : 0;
+			if(($row["current_debt_ratio"] < 0)){
+				$sheet->setCellValue('D'.$i , "(".number_format(abs($row["current_debt_ratio"]), 2).")");
+				$sheet->getStyle('D'.$i)->getFont()->getColor()->setARGB($color_red);
+			}else{
+				$sheet->setCellValue('D'.$i , number_format($row["current_debt_ratio"], 2));
+			}
+
+			$row["from_operations"] = ($row["from_operations"] != "") ? $row["from_operations"] : 0;
+			$sheet->setCellValue('E'.$i , abs($row["from_operations"]));
+			if(($row["from_operations"] < 0)){
+				$sheet->getStyle('E'.$i)->getNumberFormat()->setFormatCode($negative_usd_format);
+				$sheet->getStyle('E'.$i)->getFont()->getColor()->setARGB($color_red);
+			}else{
+				$sheet->getStyle('E'.$i)->getNumberFormat()->setFormatCode($usd_format);
+			}
+			
+			$row["from_financing"] = ($row["from_financing"] != "") ? $row["from_financing"] : 0;
+			$sheet->setCellValue('F'.$i , abs($row["from_financing"]));
+			if(($row["from_financing"] < 0)){
+				$sheet->getStyle('F'.$i)->getNumberFormat()->setFormatCode($negative_usd_format);
+				$sheet->getStyle('F'.$i)->getFont()->getColor()->setARGB($color_red);
+			}else{
+				$sheet->getStyle('F'.$i)->getNumberFormat()->setFormatCode($usd_format);
+			}
+			
+			$row["from_investing"] = ($row["from_investing"] != "") ? $row["from_investing"] : 0;
+			$sheet->setCellValue('G'.$i , abs($row["from_investing"]));
+			if(($row["from_investing"] < 0)){
+				$sheet->getStyle('G'.$i)->getNumberFormat()->setFormatCode($negative_usd_format);
+				$sheet->getStyle('G'.$i)->getFont()->getColor()->setARGB($color_red);
+			}else{
+				$sheet->getStyle('G'.$i)->getNumberFormat()->setFormatCode($usd_format);
+			}
+			
+			$row["operating_efficiency_program_value"] = ($row["operating_efficiency_program_value"] != "") ? $row["operating_efficiency_program_value"] : 0;
+			$sheet->setCellValue('H'.$i , abs($row["operating_efficiency_program_value"]));
+			if(($row["operating_efficiency_program_value"] < 0)){
+				$sheet->getStyle('H'.$i)->getNumberFormat()->setFormatCode($negative_percent_format);
+				$sheet->getStyle('H'.$i)->getFont()->getColor()->setARGB($color_red);
+			}else{
+				$sheet->getStyle('H'.$i)->getNumberFormat()->setFormatCode($percent_format);
+			}
+			
+			$row["operating_efficiency_admin_value"] = ($row["operating_efficiency_admin_value"] != "") ? $row["operating_efficiency_admin_value"] : 0;
+			$sheet->setCellValue('I'.$i , abs($row["operating_efficiency_admin_value"]));
+			if(($row["operating_efficiency_admin_value"] < 0)){
+				$sheet->getStyle('I'.$i)->getNumberFormat()->setFormatCode($negative_percent_format);
+				$sheet->getStyle('I'.$i)->getFont()->getColor()->setARGB($color_red);
+			}else{
+				$sheet->getStyle('I'.$i)->getNumberFormat()->setFormatCode($percent_format);
+			}
+			
+			$row["operating_efficiency_fundraising_value"] = ($row["operating_efficiency_fundraising_value"] != "") ? $row["operating_efficiency_fundraising_value"] : 0;
+			$sheet->setCellValue('J'.$i , abs($row["operating_efficiency_fundraising_value"]));
+			if(($row["operating_efficiency_fundraising_value"] < 0)){
+				$sheet->getStyle('J'.$i)->getNumberFormat()->setFormatCode($negative_percent_format);
+				$sheet->getStyle('J'.$i)->getFont()->getColor()->setARGB($color_red);
+			}else{
+				$sheet->getStyle('J'.$i)->getNumberFormat()->setFormatCode($percent_format);
+			}
+			
+			$row["change_in_net_assets_in_quarter"] = ($row["change_in_net_assets_in_quarter"] != "") ? $row["change_in_net_assets_in_quarter"] : 0;
+			$sheet->setCellValue('K'.$i , abs($row["change_in_net_assets_in_quarter"]));
+			if(($row["change_in_net_assets_in_quarter"] < 0)){
+				$sheet->getStyle('K'.$i)->getNumberFormat()->setFormatCode($negative_usd_format);
+				$sheet->getStyle('K'.$i)->getFont()->getColor()->setARGB($color_red);
+			}else{
+				$sheet->getStyle('K'.$i)->getNumberFormat()->setFormatCode($usd_format);
+			}
+			
+			$row["days_in_cash"] = ($row["days_in_cash"] != "") ? $row["days_in_cash"] : 0;
+			$sheet->setCellValue('L'.$i , abs($row["days_in_cash"]));
+			if(($row["days_in_cash"] < 0)){
+				$sheet->getStyle('L'.$i)->getNumberFormat()->setFormatCode($negative_number_format);
+				$sheet->getStyle('L'.$i)->getFont()->getColor()->setARGB($color_red);
+			}else{
+				$sheet->getStyle('L'.$i)->getNumberFormat()->setFormatCode($number_format);
+			}
+
+			$sheet->setCellValue('M'.$i , "TY".(isset($row["change_in_grant_ty_ytd"]) ? $row["change_in_grant_ty_ytd"] : 0).":LY".(isset($row["change_in_grant_ly_ytd"]) ? $row["change_in_grant_ly_ytd"] : 0));
+			$sheet->setCellValue('N'.$i , (isset($row["change_in_grant_ty_ytd_value"]) ? $row["change_in_grant_ty_ytd_value"] : 0).":".(isset($row["change_in_grant_ly_ytd_value"]) ? $row["change_in_grant_ly_ytd_value"] : 0));
 			$sheet->setCellValue('O'.$i , isset($row["is_net_assets_positive"]) ? $row["is_net_assets_positive"] : "N");
-			$sheet->setCellValue('P'.$i , ($row["borad_giving"] != "") ? $row["borad_giving"]."%" : "");
-			$sheet->setCellValue('Q'.$i , ($row["operating_reserves_percentage"] != "") ? $row["operating_reserves_percentage"]."%" : "");
+
+			$row["borad_giving"] = ($row["borad_giving"] != "") ? $row["borad_giving"] : 0;
+			$sheet->setCellValue('P'.$i , abs($row["borad_giving"]));
+			if(($row["borad_giving"] < 0)){
+				$sheet->getStyle('P'.$i)->getNumberFormat()->setFormatCode($negative_percent_format);
+				$sheet->getStyle('P'.$i)->getFont()->getColor()->setARGB($color_red);
+			}else{
+				$sheet->getStyle('P'.$i)->getNumberFormat()->setFormatCode($percent_format);
+			}
+			
+			$row["operating_reserves_percentage"] = ($row["operating_reserves_percentage"] != "") ? $row["operating_reserves_percentage"] : 0;
+			$sheet->setCellValue('Q'.$i , abs($row["operating_reserves_percentage"]));
+			if(($row["operating_reserves_percentage"] < 0)){
+				$sheet->getStyle('Q'.$i)->getNumberFormat()->setFormatCode("(0.00\\%)");
+				$sheet->getStyle('Q'.$i)->getFont()->getColor()->setARGB($color_red);
+			}else{
+				$sheet->getStyle('Q'.$i)->getNumberFormat()->setFormatCode("0.00\\%");
+			}
+			
 			$i++;
 		}
 
