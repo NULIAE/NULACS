@@ -1101,7 +1101,7 @@ $('.current_ratio_blur').on('blur', function() {
 
 		var current_ratio_s  = ((current_assets_v) / (current_liabilities_v)) ;
 		var f_current_ratio_s = parseFloat(current_ratio_s).toFixed(1); 
-		if($.isNumeric(f_current_ratio_s) && f_current_ratio_s > 0) { 
+		if($.isNumeric(f_current_ratio_s)) { 
 			$("#current_ratio_v").val(f_current_ratio_s);
 		}else{
 			$("#current_ratio_v").val('');
@@ -1140,7 +1140,7 @@ $('.current_debt_ratio_blur').on('blur', function() {
 		var current_debt_ratio_s =  ((total_liabilities_v) / (total_assets_v))   ;
 		var f_current_debt_ratio_s = parseFloat(current_debt_ratio_s).toFixed(1); 
 
-		if($.isNumeric(f_current_debt_ratio_s)  && f_current_debt_ratio_s > 0) { 
+		if($.isNumeric(f_current_debt_ratio_s) ) { 
 			$("#current_debt_ratio_v").val(f_current_debt_ratio_s);
 		}else{
 			$("#current_debt_ratio_v").val('');
