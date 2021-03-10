@@ -1,15 +1,31 @@
 $(function () {
+	var p = document.getElementById('password').value;
+	$.validator.addMethod("pwcheck", function(p) {
+		return /[ !#$%&@_-]/.test(p);
+	  });
+	  $.validator.addMethod("checkdigit", function(p) {
+		return /[0-9]/.test(p);
+	  });
 	$( "#reset-pwd-form" ).validate({
 		rules: {
 			password: {
 				required: true,
-				minlength : 6
+				minlength : 8,
+				checkdigit: true,
+				pwcheck: true,
 			},
 			confirm_pwd: {
-				minlength : 6,
+				minlength : 8,
 				equalTo: "#password"
 			}
 		},
+		messages: {
+			new_password: {
+			  pwcheck: "Your password must contain a special character !#$%&@_- ",
+			  checkdigit: "Your password must contain at least one digit"
+			 
+			}
+		  },
 		errorElement: "div",
 		errorPlacement: function(error, element) {
 			error.insertAfter( element.parent() ).addClass('invalid-feedback');

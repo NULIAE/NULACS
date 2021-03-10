@@ -67,6 +67,30 @@ class Profile extends MY_Controller {
 		$data['notifications'] = $this->Document_model->get_notifications();
 		$this->load->view('template', $data);
 	}
+
+		/**
+	 * delete  profile  page
+	 *
+	 * @return view 'profile/edit.php'
+	 */
+	public function delete_profile($user_id)
+	{
+		
+
+		if ($this->session->role_id == 1 ){
+			
+
+		$user = $this->User_model->delete_user_by_id($user_id);
+		if($user){
+			redirect('/module/user');
+			}else{
+				redirect('/');
+			}
+		
+		}else{
+			redirect('/');
+		}
+	}
 	
 	/**
 	 * Update the user profile details

@@ -19,9 +19,9 @@
 
 			<div class="row nul-settings">
 				<div class="row align-items-end justify-content-end w-100 mb-4 mx-0">
-					<div class="col-lg-5 col-md-5 col-sm-24 t-r p-0">
-						<a href="<?php echo base_url('user/profile/change_password'); ?>" class="btn btn-dark btn-rounded min w-100px mr-2">CHANGE PASSWORD</a>
-					</div>
+					<!-- <div class="col-lg-5 col-md-5 col-sm-24 t-r p-0">
+						<a href="</?php echo base_url('user/profile/change_password'); ?>" class="btn btn-dark btn-rounded min w-100px mr-2">CHANGE PASSWORD</a>
+					</div> -->
 				</div>
 
 				<form class="w-100" id="profile-form" method="post" action="<?php echo base_url('user/profile/update/'); ?>">

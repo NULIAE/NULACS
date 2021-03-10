@@ -57,6 +57,9 @@ $(function () {
 				"update_url": function () {
 					return base_url + "user/edit-profile/" + this.user_id;
 				},
+				"delete_url": function () {
+					return base_url + "user/delete-profile/" + this.user_id;
+				},
 			}));
 			if(data.pagination)
 				$('#page-links').html(data.pagination);
@@ -83,3 +86,32 @@ $(function () {
 		});
 	}
 });
+
+	function delete_user (id) {
+
+		 
+		$('#dialog').NitroDialog({
+			action: "open",
+			backdrop: true,
+			message: '<h4 class="bold m-b-15"><i class="i i-warning text-warning m-r-10"></i>Confirm</h4><p>Do you want to Delete this User?</p>',
+			buttons: [
+				{
+					
+					label: 'Delete',
+					class: "btn btn-primary mr-1",
+					action: function () {
+						window.location = $('#'+id).attr('href');
+						$('#dialog').NitroDialog({ action: "close" });
+					}
+				},
+				{
+					label: 'Cancel',
+					class: "btn btn-secondary",
+					action: function () {
+						$('#dialog').NitroDialog({ action: "close" });
+					}
+				}
+			]
+		});
+		return false;
+	}

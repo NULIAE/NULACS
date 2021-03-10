@@ -243,6 +243,7 @@ class User_model extends CI_Model
 		$this->db->join('affiliate', 'affiliate.affiliate_id = users.affiliate_id');
 		$this->db->join('roles', 'roles.role_id = users.role_id');
 		$this->db->join('state', 'stateid = affiliate.state');
+		$this->db->where('is_deleted',0);
 
 		if( $where !== NULL)
 		{
@@ -279,5 +280,15 @@ class User_model extends CI_Model
 		$query = $this->db->get('affiliate');
 
 		return $query->row_array();
+	}
+
+	public function delete_user_by_id($id){
+		$this->db->where('user_id', $id);
+		$this->db->set('user_status', 0);
+		$this->db->set('is_deleted', 1);
+
+		return $this->db->update('users');
+	
+
 	}
 }

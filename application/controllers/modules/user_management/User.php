@@ -174,7 +174,7 @@ class User extends MY_Controller
 				
 				$mail_content = $this->load->view('layout/mail_template', array("message" => $content), TRUE);
 
-				$subject = "Welcome ".$data["first_name"]." ".$data["first_name"].", You are a NUL Member!";
+				$subject = "Welcome ".$data["first_name"]." ".$data["last_name"].", You are a NUL Member!";
 
 				//Get SMTP settings
 				$settings = array();

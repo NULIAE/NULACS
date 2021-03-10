@@ -1078,7 +1078,7 @@ $('.current_ratio_blur').on('blur', function() {
 	var get_val = $('#'+$(this).attr('id')).val();
 
 	var val = +get_val.replace(/,/g, "");
-	if(isNaN(val) || val <= 0 ){
+	if(isNaN(val)  ){
 		alert_msg("Enter vaild number");
 		$('#'+$(this).attr('id')).val('');
 		$("#current_ratio_v").val('');
@@ -1100,7 +1100,7 @@ $('.current_ratio_blur').on('blur', function() {
 	if(current_assets_v && current_liabilities_v){
 
 		var current_ratio_s  = ((current_assets_v) / (current_liabilities_v)) ;
-		var f_current_ratio_s = parseFloat(current_ratio_s).toFixed(0); 
+		var f_current_ratio_s = parseFloat(current_ratio_s).toFixed(1); 
 		if($.isNumeric(f_current_ratio_s) && f_current_ratio_s > 0) { 
 			$("#current_ratio_v").val(f_current_ratio_s);
 		}else{
@@ -1116,7 +1116,7 @@ $('.current_debt_ratio_blur').on('blur', function() {
 	var get_val = $('#'+$(this).attr('id')).val();
 
 	var val = +get_val.replace(/,/g, "");
-	if(isNaN(val) ||  val <= 0 ){
+	if(isNaN(val) ){
 		alert_msg("Enter vaild number");
 		$('#'+$(this).attr('id')).val('');
 		$("#current_debt_ratio_v").val('');
@@ -1138,7 +1138,7 @@ $('.current_debt_ratio_blur').on('blur', function() {
 	if(total_liabilities_v && total_assets_v){
 
 		var current_debt_ratio_s =  ((total_liabilities_v) / (total_assets_v))   ;
-		var f_current_debt_ratio_s = parseFloat(current_debt_ratio_s).toFixed(0); 
+		var f_current_debt_ratio_s = parseFloat(current_debt_ratio_s).toFixed(1); 
 
 		if($.isNumeric(f_current_debt_ratio_s)  && f_current_debt_ratio_s > 0) { 
 			$("#current_debt_ratio_v").val(f_current_debt_ratio_s);

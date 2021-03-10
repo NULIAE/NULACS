@@ -71,6 +71,7 @@ $route['document/get-document-metadata/(:num)'] = 'application_management/Docume
 $route['user/view-profile/(:num)'] = 'profile/index/$1';
 $route['user/edit-profile/(:num)'] = 'profile/edit/$1';
 $route['user/profile/update'] = 'profile/update';
+$route['user/delete-profile/(:num)'] = 'profile/delete_profile/$1';
 $route['user/profile/change_password'] = 'profile/change_password';
 $route['user/password/update'] = 'profile/update_password';
 $route['user/profile/modules'] = 'profile/modules';

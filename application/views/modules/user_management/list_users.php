@@ -232,7 +232,10 @@
 					</div>
 				</div>
 				<div class="foot">
-					<a class="btn btn-dark btn-rounded min w-100px update-btn" href="{{update_url}}">UPDATE</a>
+				<?php if(isset($this->session->role_id ) && $this->session->role_id == 1 ){ ?>
+					<a class="btn btn-primary btn-rounded min w-100px" id="delete_user{{user_id}}" onclick="return delete_user(this.id);" href="{{delete_url}}">DELETE</a>
+				 <?php } ?>
+					<a class="btn btn-dark btn-rounded min w-100px update-btn" href="{{update_url}}">EDIT</a>
 					<a  class="btn btn-primary btn-rounded min w-100px" data-toggle="collapse" data-target="#collapse{{user_id}}" aria-expanded="true" aria-controls="collapse{{user_id}}">CANCEL</a>
 				</div>
 			</form>
