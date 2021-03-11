@@ -60,6 +60,9 @@ $(function () {
 				"delete_url": function () {
 					return base_url + "user/delete-profile/" + this.user_id;
 				},
+				"is_super_admin": function () {
+					return  this.isuser_super_administrator == 0?true:false;
+				},
 			}));
 			if(data.pagination)
 				$('#page-links').html(data.pagination);
