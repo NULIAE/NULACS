@@ -128,7 +128,7 @@ font-size:15px;
                         <th scope="col">OE Program</th>
                         <th scope="col">OE Admin</th>
                         <th scope="col">OE Fundraising</th>
-                        <th scope="col">Change in N/A</th>
+                        <th scope="col">Change in N/A without restrictions</th>
                         <th scope="col">Days in Cash</th>
                         <th scope="col"># of Grants TY YTD-LY YTD</th>
                         <th scope="col">$ of Grants TY YTD -LY YTD</th>
@@ -141,22 +141,139 @@ font-size:15px;
                     <?php foreach($key_indicators as $ki){ $indicators = json_decode($ki['indicators'], true); ?>
                             <tr>
                               <td scope="row" class="t-l-c"><a class="d-block" href="<?php echo base_url('module/filter/reports')."?affiliate=".$ki['affiliate_id']."&choose_yr=".$year; ?>"><?=$ki['name']?></a></td>
-                              <td><?=isset($indicators['liquidity']) && $indicators['liquidity'] != NULL ? "$".number_format($indicators['liquidity'], 0, '.', ',') : 0; ?></td>
-                              <td><?=isset($indicators['current_ratio']) && $indicators['current_ratio'] != NULL ? number_format($indicators['current_ratio'], 2) : 0;?></td>
-                              <td><?=isset($indicators['current_debt_ratio']) && $indicators['current_debt_ratio'] != NULL ? number_format($indicators['current_debt_ratio'], 2) : 0;?></td>
-                              <td><?=isset($indicators['from_operations']) && $indicators['from_operations'] != NULL ? "$".number_format($indicators['from_operations'], 0, '.', ',') : 0;?></td>
-                              <td><?=isset($indicators['from_financing']) && $indicators['from_financing'] != NULL ? "$".number_format($indicators['from_financing'], 0, '.', ',') : 0;?></td>
-                              <td><?=isset($indicators['from_investing']) && $indicators['from_investing'] != NULL ? "$".number_format($indicators['from_investing'], 0, '.', ',') : 0;?></td>
-                              <td><?=isset($indicators['operating_efficiency_program_value']) && $indicators['operating_efficiency_program_value'] != NULL ? $indicators['operating_efficiency_program_value'] : 0; ?>%</td>
-                              <td><?=isset($indicators['operating_efficiency_admin_value']) && $indicators['operating_efficiency_admin_value'] != NULL ? $indicators['operating_efficiency_admin_value'] : 0; ?>%</td>
-                              <td><?=isset($indicators['operating_efficiency_fundraising_value']) && $indicators['operating_efficiency_fundraising_value'] != NULL ? $indicators['operating_efficiency_fundraising_value'] : 0; ?>%</td>
-                              <td><?=isset($indicators['change_in_net_assets_in_quarter']) && $indicators['change_in_net_assets_in_quarter'] != NULL ? number_format($indicators['change_in_net_assets_in_quarter'], 0, '.', ',') : 0; ?></td>
-                              <td><?=isset($indicators['days_in_cash']) && $indicators['days_in_cash'] != NULL ? $indicators['days_in_cash'] : 0; ?></td>
+                              <td>
+                              <?php if(isset($indicators['liquidity']) && $indicators['liquidity'] != NULL){
+                                if($indicators['liquidity'] < 0)
+                                  echo '<span class="text-danger">($'.number_format(abs($indicators['liquidity']), 0, '.', ',').')</span>';
+                                else
+                                  echo "$".number_format($indicators['liquidity'], 0, '.', ',');
+                              } else {
+                                echo "$0";
+                              } ?>
+                              </td>
+                              <td>
+                              <?php if(isset($indicators['current_ratio']) && $indicators['current_ratio'] != NULL){
+                                if($indicators['current_ratio'] < 0)
+                                  echo '<span class="text-danger">('.number_format(abs($indicators['current_ratio']), 2).')</span>';
+                                else
+                                  echo number_format($indicators['current_ratio'], 2);
+                              } else {
+                                echo "0";
+                              } ?>
+                              </td>
+                              <td>
+                              <?php if(isset($indicators['current_debt_ratio']) && $indicators['current_debt_ratio'] != NULL){
+                                if($indicators['current_debt_ratio'] < 0)
+                                  echo '<span class="text-danger">('.number_format(abs($indicators['current_debt_ratio']), 2).')</span>';
+                                else
+                                  echo number_format($indicators['current_debt_ratio'], 2);
+                              } else {
+                                echo "0";
+                              } ?>
+                              </td>
+                              <td>
+                              <?php if(isset($indicators['from_operations']) && $indicators['from_operations'] != NULL){
+                                if($indicators['from_operations'] < 0)
+                                  echo '<span class="text-danger">($'.number_format(abs($indicators['from_operations']), 0, '.', ',').')</span>';
+                                else
+                                  echo "$".number_format($indicators['from_operations'], 0, '.', ',');
+                              } else {
+                                echo "$0";
+                              } ?>
+                              </td>
+                              <td>
+                              <?php if(isset($indicators['from_financing']) && $indicators['from_financing'] != NULL){
+                                if($indicators['from_financing'] < 0)
+                                  echo '<span class="text-danger">($'.number_format(abs($indicators['from_financing']), 0, '.', ',').')</span>';
+                                else
+                                  echo "$".number_format($indicators['from_financing'], 0, '.', ',');
+                              } else {
+                                echo "$0";
+                              } ?>
+                              </td>
+                              <td>
+                              <?php if(isset($indicators['from_investing']) && $indicators['from_investing'] != NULL){
+                                if($indicators['from_investing'] < 0)
+                                  echo '<span class="text-danger">($'.number_format(abs($indicators['from_investing']), 0, '.', ',').')</span>';
+                                else
+                                  echo "$".number_format($indicators['from_investing'], 0, '.', ',');
+                              } else {
+                                echo "$0";
+                              } ?>
+                              </td>
+                              <td>
+                              <?php if(isset($indicators['operating_efficiency_program_value']) && $indicators['operating_efficiency_program_value'] != NULL){
+                                if($indicators['operating_efficiency_program_value'] < 0)
+                                  echo '<span class="text-danger">('.abs($indicators['operating_efficiency_program_value']).'%)</span>';
+                                else
+                                  echo $indicators['operating_efficiency_program_value']."%";
+                              } else {
+                                echo "0%";
+                              } ?>
+                              </td>
+                              <td>
+                              <?php if(isset($indicators['operating_efficiency_admin_value']) && $indicators['operating_efficiency_admin_value'] != NULL){
+                                if($indicators['operating_efficiency_admin_value'] < 0)
+                                  echo '<span class="text-danger">('.abs($indicators['operating_efficiency_admin_value']).'%)</span>';
+                                else
+                                  echo $indicators['operating_efficiency_admin_value']."%";
+                              } else {
+                                echo "0%";
+                              } ?>
+                              </td>
+                              <td>
+                              <?php if(isset($indicators['operating_efficiency_fundraising_value']) && $indicators['operating_efficiency_fundraising_value'] != NULL){
+                                if($indicators['operating_efficiency_fundraising_value'] < 0)
+                                  echo '<span class="text-danger">('.abs($indicators['operating_efficiency_fundraising_value']).'%)</span>';
+                                else
+                                  echo $indicators['operating_efficiency_fundraising_value']."%";
+                              } else {
+                                echo "0%";
+                              } ?>
+                              </td>
+                              <td>
+                              <?php if(isset($indicators['change_in_net_assets_in_quarter']) && $indicators['change_in_net_assets_in_quarter'] != NULL){
+                                if($indicators['change_in_net_assets_in_quarter'] < 0)
+                                  echo '<span class="text-danger">($'.number_format(abs($indicators['change_in_net_assets_in_quarter']), 0, '.', ',').')</span>';
+                                else
+                                  echo "$".number_format($indicators['change_in_net_assets_in_quarter'], 0, '.', ',');
+                              } else {
+                                echo "$0";
+                              } ?>
+                              </td>
+                              <td>
+                              <?php if(isset($indicators['days_in_cash']) && $indicators['days_in_cash'] != NULL){
+                                if($indicators['days_in_cash'] < 0)
+                                  echo '<span class="text-danger">('.number_format(abs($indicators['days_in_cash']), 2).')</span>';
+                                else
+                                  echo number_format($indicators['days_in_cash'], 2);
+                              } else {
+                                echo "0";
+                              } ?>
+                              </td>
                               <td><?="TY".($indicators['change_in_grant_ty_ytd'] != NULL ? $indicators['change_in_grant_ty_ytd'] : 0).":LY".($indicators['change_in_grant_ly_ytd'] != NULL ? $indicators['change_in_grant_ly_ytd'] : 0); ?></td>
                               <td><?=($indicators['change_in_grant_ty_ytd_value'] != NULL ? $indicators['change_in_grant_ty_ytd_value'] : 0).":".($indicators['change_in_grant_ly_ytd_value'] != NULL ? $indicators['change_in_grant_ly_ytd_value'] : 0); ?></td>
                               <td><?=isset($indicators['is_net_assets_positive']) ? $indicators['is_net_assets_positive'] : "N"; ?></td>
-                              <td><?=isset($indicators['borad_giving']) && $indicators['borad_giving'] != NULL ? $indicators['borad_giving'] : 0; ?>%</td>
-                              <td><?=isset($indicators['operating_reserves_percentage']) && $indicators['operating_reserves_percentage'] != NULL ? $indicators['operating_reserves_percentage'] : 0; ?>%</td>
+                              <td>
+                              <?php if(isset($indicators['borad_giving']) && $indicators['borad_giving'] != NULL){
+                                if($indicators['borad_giving'] < 0)
+                                  echo '<span class="text-danger">('.abs($indicators['borad_giving']).'%)</span>';
+                                else
+                                  echo $indicators['borad_giving']."%";
+                              } else {
+                                echo "0%";
+                              } ?>
+                              </td>
+                              <td>
+                              <?php if(isset($indicators['operating_reserves_percentage']) && $indicators['operating_reserves_percentage'] != NULL){
+                                if($indicators['operating_reserves_percentage'] < 0)
+                                  echo '<span class="text-danger">('.number_format(abs($indicators['operating_reserves_percentage']), 2).')</span>';
+                                else
+                                  echo number_format($indicators['operating_reserves_percentage'], 2);
+                              } else {
+                                echo "0";
+                              } ?>
+                              </td>
                             </tr>
                             <?php } ?>
                       
@@ -220,7 +337,7 @@ font-size:15px;
                               <th scope="col">OE Program</th>
                               <th scope="col">OE Admin</th>
                               <th scope="col">OE Fundraising</th>
-                              <th scope="col">Change in N/A</th>
+                              <th scope="col">Change in N/A without restrictions</th>
                               <th scope="col">Days in Cash</th>
                               <th scope="col"># of Grants TY YTD-LY YTD</th>
                               <th scope="col">$ of Grants TY YTD -LY YTD</th>
@@ -255,7 +372,7 @@ font-size:15px;
 																	['OE Program'],
 																	['OE Admin'],
 																	['OE Fundraising'],
-																	['Change in N/A'],
+																	['Change in N/A without restrictions'],
 																	['Days in Cash'],
 																	['# of Grants TY YTD'],
                                   ['# of Grants LY YTD'],
@@ -274,17 +391,105 @@ font-size:15px;
                                     ?>
                                     <tr>
                                         <td class="t-l"><?php $arrayForChart[0][$index] = "Q".$ia['quarter']; ?><a href="<?php echo base_url('module/filter/reports').'?affiliate='.$affiliate."&choose_yr=".$iay['year']; ?>"><?php echo $arrayForChart[0][$index]; ?></a></td>
-                                        <td class="t-l"><?php $arrayForChart[1][$index] = isset($report['liquidity']) ? (int)$report['liquidity'] : 0; echo "$".number_format($arrayForChart[1][$index], 0, '.', ','); ?></td>
-                                        <td class="t-l"><?php $arrayForChart[2][$index] = isset($report['current_ratio']) ? (int)$report['current_ratio'] : 0; echo number_format($arrayForChart[2][$index], 2); ?></td>
-                                        <td class="t-l"><?php $arrayForChart[3][$index] = isset($report['current_debt_ratio']) ? (int)$report['current_debt_ratio'] : 0; echo number_format($arrayForChart[3][$index], 2); ?></td>
-                                        <td class="t-l"><?php $arrayForChart[4][$index] = isset($report['from_operations']) ? (int)$report['from_operations'] : 0; echo "$".number_format($arrayForChart[4][$index], 0, '.', ','); ?></td>
-                                        <td class="t-l"><?php $arrayForChart[5][$index] = isset($report['from_financing']) ? (int)$report['from_financing'] : 0; echo "$".number_format($arrayForChart[5][$index], 0, '.', ','); ?></td>
-                                        <td class="t-l"><?php $arrayForChart[6][$index] = isset($report['from_investing']) ? (int)$report['from_investing'] : 0; echo "$".number_format($arrayForChart[6][$index], 0, '.', ','); ?></td>
-                                        <td class="t-l"><?php $arrayForChart[7][$index] = isset($report['operating_efficiency_program_value']) ? (int)$report['operating_efficiency_program_value'] : 0; echo $arrayForChart[7][$index]; ?>%</td>
-                                        <td class="t-l"><?php $arrayForChart[8][$index] = isset($report['operating_efficiency_admin_value']) ? (int)$report['operating_efficiency_admin_value'] : 0; echo $arrayForChart[8][$index]; ?>%</td>
-                                        <td class="t-l"><?php $arrayForChart[9][$index] = isset($report['operating_efficiency_fundraising_value']) ? (int)$report['operating_efficiency_fundraising_value'] : 0; echo $arrayForChart[9][$index]; ?>%</td>
-                                        <td class="t-l"><?php $arrayForChart[10][$index] = isset($report['change_in_net_assets_in_quarter']) ? (int)$report['change_in_net_assets_in_quarter'] : 0; echo number_format($arrayForChart[10][$index], 0, '.', ','); ?></td>
-                                        <td class="t-l"><?php $arrayForChart[11][$index] = isset($report['days_in_cash']) ? (int)$report['days_in_cash'] : 0; echo $arrayForChart[11][$index]; ?></td>
+                                        <td class="t-l">
+                                        <?php 
+                                        $arrayForChart[1][$index] = isset($report['liquidity']) ? (int)$report['liquidity'] : 0; 
+                                        if($arrayForChart[1][$index] < 0)
+                                          echo '<span class="text-danger">($'.number_format(abs($arrayForChart[1][$index]), 0, '.', ',').')</span>';
+                                        else
+                                          echo "$".number_format($arrayForChart[1][$index], 0, '.', ',');
+                                        ?>
+                                        </td>
+                                        <td class="t-l">
+                                        <?php 
+                                        $arrayForChart[2][$index] = isset($report['current_ratio']) ? (int)$report['current_ratio'] : 0;
+                                        if($arrayForChart[2][$index] < 0)
+                                          echo '<span class="text-danger">('.number_format(abs($arrayForChart[2][$index]), 2).')</span>';
+                                        else
+                                          echo number_format($arrayForChart[2][$index], 2); 
+                                        ?>
+                                        </td>
+                                        <td class="t-l">
+                                        <?php 
+                                        $arrayForChart[3][$index] = isset($report['current_debt_ratio']) ? (int)$report['current_debt_ratio'] : 0;
+                                        if($arrayForChart[3][$index] < 0)
+                                          echo '<span class="text-danger">('.number_format(abs($arrayForChart[3][$index]), 2).')</span>';
+                                        else
+                                          echo number_format($arrayForChart[3][$index], 2);
+                                        ?>
+                                        </td>
+                                        <td class="t-l">
+                                        <?php
+                                        $arrayForChart[4][$index] = isset($report['from_operations']) ? (int)$report['from_operations'] : 0;
+                                        if($arrayForChart[4][$index] < 0)
+                                          echo '<span class="text-danger">($'.number_format(abs($arrayForChart[4][$index]), 0, '.', ',').')</span>';
+                                        else
+                                          echo "$".number_format($arrayForChart[4][$index], 0, '.', ',');
+                                        ?>
+                                        </td>
+                                        <td class="t-l">
+                                        <?php
+                                        $arrayForChart[5][$index] = isset($report['from_financing']) ? (int)$report['from_financing'] : 0;
+                                        if($arrayForChart[5][$index] < 0)
+                                          echo '<span class="text-danger">($'.number_format(abs($arrayForChart[5][$index]), 0, '.', ',').')</span>';
+                                        else
+                                          echo "$".number_format($arrayForChart[5][$index], 0, '.', ',');
+                                        ?>
+                                        </td>
+                                        <td class="t-l">
+                                        <?php
+                                        $arrayForChart[6][$index] = isset($report['from_investing']) ? (int)$report['from_investing'] : 0;
+                                        if($arrayForChart[6][$index] < 0)
+                                          echo '<span class="text-danger">($'.number_format(abs($arrayForChart[6][$index]), 0, '.', ',').')</span>';
+                                        else
+                                          echo "$".number_format($arrayForChart[6][$index], 0, '.', ',');
+                                        ?>
+                                        </td>
+                                        <td class="t-l">
+                                        <?php
+                                        $arrayForChart[7][$index] = isset($report['operating_efficiency_program_value']) ? (int)$report['operating_efficiency_program_value'] : 0;
+                                        if($arrayForChart[7][$index] < 0)
+                                          echo '<span class="text-danger">('.abs($arrayForChart[7][$index]).'%)</span>';
+                                        else
+                                          echo $arrayForChart[7][$index]."%";
+                                        ?>
+                                        </td>
+                                        <td class="t-l">
+                                        <?php
+                                        $arrayForChart[8][$index] = isset($report['operating_efficiency_admin_value']) ? (int)$report['operating_efficiency_admin_value'] : 0;
+                                        if($arrayForChart[8][$index] < 0)
+                                          echo '<span class="text-danger">('.abs($arrayForChart[8][$index]).'%)</span>';
+                                        else
+                                          echo $arrayForChart[8][$index]."%";
+                                        ?>
+                                        </td>
+                                        <td class="t-l">
+                                        <?php
+                                        $arrayForChart[9][$index] = isset($report['operating_efficiency_fundraising_value']) ? (int)$report['operating_efficiency_fundraising_value'] : 0;
+                                        if($arrayForChart[9][$index] < 0)
+                                          echo '<span class="text-danger">('.abs($arrayForChart[9][$index]).'%)</span>';
+                                        else
+                                          echo $arrayForChart[9][$index]."%";
+                                        ?>
+                                        </td>
+                                        <td class="t-l">
+                                        <?php
+                                        $arrayForChart[10][$index] = isset($report['change_in_net_assets_in_quarter']) ? (int)$report['change_in_net_assets_in_quarter'] : 0;
+                                        if($arrayForChart[10][$index] < 0)
+                                          echo '<span class="text-danger">($'.number_format(abs($arrayForChart[10][$index]), 0, '.', ',').')</span>';
+                                        else
+                                          echo "$".number_format($arrayForChart[10][$index], 0, '.', ','); 
+                                        ?>
+                                        </td>
+                                        <td class="t-l">
+                                        <?php
+                                        $arrayForChart[11][$index] = isset($report['days_in_cash']) ? (int)$report['days_in_cash'] : 0;
+                                        if($arrayForChart[11][$index] < 0)
+                                          echo '<span class="text-danger">($'.number_format(abs($arrayForChart[11][$index]), 2).')</span>';
+                                        else
+                                          echo number_format($arrayForChart[11][$index], 2);
+                                        ?>
+                                        </td>
                                         <?php $arrayForChart[12][$index] = isset($report['change_in_grant_ty_ytd']) ? (int)$report['change_in_grant_ty_ytd'] : 0; ?>
                                         <?php $arrayForChart[13][$index] = isset($report['change_in_grant_ly_ytd']) ? (int)$report['change_in_grant_ly_ytd'] : 0; ?>
                                         <td class="t-l"><?php echo "TY".$arrayForChart[12][$index].":LY".$arrayForChart[13][$index]; ?></td>
@@ -292,8 +497,24 @@ font-size:15px;
                                         <?php $arrayForChart[15][$index] = isset($report['change_in_grant_ly_ytd_value']) ? (int)$report['change_in_grant_ly_ytd_value'] : 0; ?>
                                         <td class="t-l"><?php echo $arrayForChart[14][$index].":".$arrayForChart[15][$index]; ?></td>
                                         <td class="t-l"><?php echo isset($report['is_net_assets_positive']) ? $report['is_net_assets_positive'] : "N"; ?></td>
-                                        <td class="t-l"><?php $arrayForChart[16][$index] = isset($report['borad_giving']) ? (int)$report['borad_giving'] : 0; echo $arrayForChart[16][$index]; ?>%</td>
-                                        <td class="t-l"><?php $arrayForChart[17][$index] = isset($report['operating_reserves_percentage']) ? (int)$report['operating_reserves_percentage'] : 0; echo $arrayForChart[17][$index]; ?>%</td>
+                                        <td class="t-l">
+                                        <?php
+                                        $arrayForChart[16][$index] = isset($report['borad_giving']) ? (int)$report['borad_giving'] : 0;
+                                        if($arrayForChart[16][$index] < 0)
+                                          echo '<span class="text-danger">('.abs($arrayForChart[16][$index]).'%)</span>';
+                                        else
+                                          echo $arrayForChart[16][$index]."%";
+                                        ?>
+                                        </td>
+                                        <td class="t-l">
+                                        <?php
+                                        $arrayForChart[17][$index] = isset($report['operating_reserves_percentage']) ? (int)$report['operating_reserves_percentage'] : 0;
+                                        if($arrayForChart[17][$index] < 0)
+                                          echo '<span class="text-danger">('.number_format(abs($arrayForChart[17][$index]), 2).'%)</span>';
+                                        else
+                                          echo number_format($arrayForChart[17][$index], 2)."%";
+                                        ?>
+                                        </td>
                                     </tr>
                                     <?php
                                   }}
@@ -313,11 +534,24 @@ font-size:15px;
 
               </div>
               
-             
-              <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-              <div id="chart_divnul" style="width: 1400px; height: 500px;" ></div>
-              <br><br><br><br><br><br><br><br>
-
+              <?php if($affiliate != ""): ?>
+              <div class="row mt-5 m-y-20">
+                <div class="col-4 col-md-4 col-lg-4 secondSelection mt-5 mb-3">
+                  <span class="sub">
+                  <select onchange="window.location.href = '<?php echo base_url();?>/module/filter/reports?affiliate=<?php echo $affiliate; ?>&group=' + this.value;" class="form-control selectp-r" data-type="selector">
+                    <option value="group1" <?php if($group == "group1") echo "selected"; ?>>Liquidity Group</option>
+                    <option value="group2" <?php if($group == "group2") echo "selected"; ?>>Ratio Group</option>
+                    <option value="group3" <?php if($group == "group3") echo "selected"; ?>>Operating Efficiency Group</option>
+                  </select>
+                  
+                  </span>
+                </div>
+                <div class="col-24">  
+                  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                  <div id="chart_divnul" ></div>
+                </div>
+              </div>
+              <?php endif; ?>
 
             </div>
 
@@ -331,43 +565,33 @@ font-size:15px;
 
   </main>
 
-
+  <?php if($affiliate != ""): ?>
   <script>
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawVisualization);
+    google.charts.load('current', {'packages':['line']});
+    google.charts.setOnLoadCallback(drawChart);
 
-      function drawVisualization() {
-        // Some raw data (not necessarily accurate)
-        /* var data = google.visualization.arrayToDataTable([
-          ['Month', 'Q1', 'Q2', 'Q3', 'Q4'],
-          ['Liquidity',  165,      938,         522,             998],
-          ['Current Ratio',  135,      1120,        599,             1268],
-          ['Current Debt Ratio',  157,      1167,        587,             807],
-          ['Change in Cash YTD',  139,      1110,        615,             968],
-          ['OE Program',  136,      691,         629,             1026],
-          ['OE Admin',  165,      938,         522,             998],
-          ['OE Fundraising',  135,      1120,        599,             1268],
-          ['Change in N/A',  157,      1167,        587,             807],
-          ['Days in Cash',  139,      1110,        615,             968],
-          ['Change in # of Grants TY YTD-LY YTD',  136,      691,         629,             1026],
-          ['Change in $ of Grants TY YTD -LY YTD',  135,      1120,        599,             1268],
-          ['Net assets',  157,      1167,        587,             807],
-          ['Board Giving variance commitment - YTD',  139,      1110,        615,             968],
-          ['Operating Reserves',  136,      691,         629,             1026]
-				]); */
-				
-				var data = google.visualization.arrayToDataTable(<?php echo json_encode($arrayForChart, JSON_PRETTY_PRINT); ?>);
+    function drawChart() {
 
-        var options = {
-          title : 'KPI Reports',
-          vAxis: {title: 'Values'},
-          hAxis: {title: 'Labels'},
-          seriesType: 'bars',
-          series: {5: {type: 'line'}}
-        };
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Quarter');
+      <?php foreach($graph_data["columns"] as $column): ?>
+      <?php echo 'data.addColumn("number", "'.$column.'");'; ?>
+      <?php endforeach; ?>
 
-        var chart = new google.visualization.ComboChart(document.getElementById('chart_divnul'));
-        chart.draw(data, options);
-      }
+      data.addRows(<?php echo json_encode($graph_data["rows"], JSON_PRETTY_PRINT); ?>);
+
+      var options = {
+        /* chart: {
+          title: 'Box Office Earnings in First Two Weeks of Opening',
+          subtitle: 'in millions of dollars (USD)'
+        }, */
+        width: "100%",
+        height: 500
+      };
+
+      var chart = new google.charts.Line(document.getElementById('chart_divnul'));
+
+      chart.draw(data, google.charts.Line.convertOptions(options));
+    }
   </script>
-
+  <?php endif; ?>

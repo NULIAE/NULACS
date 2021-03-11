@@ -34,6 +34,8 @@ class Reports extends MY_Controller
         } else {
 			$quarter = ceil(date("m", strtotime("-1 month", time()))/3);
 		}
+
+		$month = $quarter * 3;
         
 		if(isset($data['choose_yr']) && ($data['choose_yr'] != "")){
             $year = $data['choose_yr'];
@@ -41,9 +43,89 @@ class Reports extends MY_Controller
 			$year = date("Y", strtotime("-1 month", time()));
 			$data['choose_yr'] = NULL;
 		}
+
+		if(!isset($data['group'])){
+			$data['group'] = "group1";
+		}
+
+		$graphData = array();
+
+		if($data['group'] == "group1"){
+			$graphData["columns"] = array(
+				"Liquidity",
+				"Change in Cash - Operations",
+				"Change in Cash - Financing",
+				"Change in Cash - Investing",
+				"Change in Net Assets w/o donor restrictions"
+			);
+		} else if($data['group'] == "group2"){
+			$graphData["columns"] = array(
+				"Current Ratio (S/B Greater than 1)",
+				"Current Debt Ratio (Lower is better)",
+				"Days in cash"
+			);
+		} else if($data['group'] == "group3"){
+			$graphData["columns"] = array(
+				"Operating Efficiency - Program Expense",
+				"Operating Efficiency  - Mgmt/General Expense ",
+				"Operating Efficiency - Fundraising Expense",
+				"% YTD Board Giving  toAnnual Commitment",
+				"% Operating Reserves to 3 months admin expenses"
+			);
+		}
+
+		$graphData["rows"] = array();
 		
 		if(isset($data['affiliate'])){
 			$ind_affiliate = $data['affiliate'];
+
+			$currentTime = mktime(0,0,0, $month, 1, $year);
+
+			$index = 0;
+			for($i = 3; $i >= 0; $i--)
+			{
+				$monthValue = $i * -3;
+				
+				$date = explode("-", date("Y-n", strtotime("$monthValue months", $currentTime)));
+
+				$quarterValue = ceil($date[1]/3);
+
+				$yearValue = $date[0];
+
+				$key_row = $this->Affiliate_model->get_key_indicators($data['affiliate'], $quarterValue, $yearValue);
+
+				$key_indicators = isset($key_row["key_indicators"]) ? $key_row["key_indicators"] : NULL;
+
+				if($data['group'] == "group1"){
+					$graphData["rows"][] = array(
+						"Q".$quarterValue."-".$yearValue,
+						isset($key_indicators["liquidity"]) ? floatval($key_indicators["liquidity"]) : 0,
+						isset($key_indicators["from_operations"]) ? floatval($key_indicators["from_operations"]) : 0,
+						isset($key_indicators["from_financing"]) ? floatval($key_indicators["from_financing"]) : 0,
+						isset($key_indicators["from_investing"]) ? floatval($key_indicators["from_investing"]) : 0,
+						isset($key_indicators["change_in_net_assets_in_quarter"]) ? floatval($key_indicators["change_in_net_assets_in_quarter"]) : 0
+					);
+				} else if($data['group'] == "group2"){
+					$graphData["rows"][] = array(
+						"Q".$quarterValue."-".$yearValue,
+						isset($key_indicators["current_ratio"]) ? floatval($key_indicators["current_ratio"]) : 0,
+						isset($key_indicators["current_debt_ratio"]) ? floatval($key_indicators["current_debt_ratio"]) : 0,
+						isset($key_indicators["days_in_cash"]) ? floatval($key_indicators["days_in_cash"]) : 0
+					);
+				} else if($data['group'] == "group3"){
+					$graphData["rows"][] = array(
+						"Q".$quarterValue."-".$yearValue,
+						isset($key_indicators["operating_efficiency_program_value"]) ? floatval($key_indicators["operating_efficiency_program_value"]) : 0,
+						isset($key_indicators["operating_efficiency_admin_value"]) ? floatval($key_indicators["operating_efficiency_admin_value"]) : 0,
+						isset($key_indicators["operating_efficiency_fundraising_value"]) ? floatval($key_indicators["operating_efficiency_fundraising_value"]) : 0,
+						isset($key_indicators["borad_giving"]) ? floatval($key_indicators["borad_giving"]) : 0,
+						isset($key_indicators["operating_reserves_percentage"]) ? floatval($key_indicators["operating_reserves_percentage"]) : 0
+					);
+				}
+		
+			}
+			
+			//echo "<pre>";print_r($graphData);echo "</pre>";
 		}else{
 			$ind_affiliate = '';
 		}
@@ -56,7 +138,9 @@ class Reports extends MY_Controller
 			'ind_affiliate_yr'  => $this->Reports_model->get_ind_affiliate_yr_report($ind_affiliate, $data['choose_yr']),
 			'affiliate' => $ind_affiliate,
 			'quarter' => $quarter,
-			'year' => $year
+			'year' => $year,
+			'graph_data' => $graphData,
+			"group" => $data["group"]
         );
 		//print_r($data);
 		//Name of the view file
