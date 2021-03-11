@@ -60,8 +60,8 @@ class Reports extends MY_Controller
 			);
 		} else if($data['group'] == "group2"){
 			$graphData["columns"] = array(
-				"Current Ratio (S/B Greater than 1)",
-				"Current Debt Ratio (Lower is better)",
+				"Current Ratio",
+				"Current Debt Ratio",
 				"Days in cash"
 			);
 		} else if($data['group'] == "group3"){
@@ -69,7 +69,7 @@ class Reports extends MY_Controller
 				"Operating Efficiency - Program Expense",
 				"Operating Efficiency  - Mgmt/General Expense ",
 				"Operating Efficiency - Fundraising Expense",
-				"% YTD Board Giving  toAnnual Commitment",
+				"% YTD Board Giving  to Annual Commitment",
 				"% Operating Reserves to 3 months admin expenses"
 			);
 		}

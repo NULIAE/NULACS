@@ -141,7 +141,7 @@
 		<div class="mb-0">
 			<a class="btn action" data-toggle="collapse" data-target="#collapse{{user_id}}" aria-expanded="false" aria-controls="collapse{{user_id}}">
 			<div class="row ">
-				<div class="col-24 col-md-8"><span class="sub text-primary">{{user_email_address_1}}</span></div>
+				<div class="col-24 col-md-8"><span class="sub text-primary">{{name}}</span></div>
 				<div class="col-8 col-md-5"><span class="sub">{{prifix}} {{first_name}} {{last_name}}</span></div>
 				<div class="col-8 col-md-5"><span class="sub">{{city}},{{stateabbreviation}}</span></div>
 				<div class="col-8 col-md-5"><span class="sub">{{role_description}}</span></div>

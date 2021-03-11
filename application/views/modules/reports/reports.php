@@ -548,7 +548,7 @@ font-size:15px;
                 </div>
                 <div class="col-24">  
                   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-                  <div id="chart_divnul" ></div>
+                  <div id="chart_divnul" class="p-5 bg-white"></div>
                 </div>
               </div>
               <?php endif; ?>
