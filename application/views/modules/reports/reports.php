@@ -535,7 +535,7 @@ font-size:15px;
               </div>
               
               <?php if($affiliate != ""): ?>
-              <div class="row mt-5 m-y-20">
+              <div class="row mt-5 m-y-20" id="page_scroll">
                 <div class="col-4 col-md-4 col-lg-4 secondSelection mt-5 mb-3">
                   <span class="sub">
                   <select onchange="window.location.href = '<?php echo base_url();?>/module/filter/reports?affiliate=<?php echo $affiliate; ?>&group=' + this.value;" class="form-control selectp-r" data-type="selector">
@@ -571,7 +571,9 @@ font-size:15px;
     google.charts.setOnLoadCallback(drawChart);
 
     function drawChart() {
-
+      $('html, body').animate({
+        scrollTop: $("#page_scroll").offset().top
+    }, 2000);
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'Quarter');
       <?php foreach($graph_data["columns"] as $column): ?>

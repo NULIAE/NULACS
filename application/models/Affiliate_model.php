@@ -993,9 +993,9 @@ class Affiliate_model extends CI_Model
 		}
 	}
 
-	public function recent_affiliate_data($affiliate_id)
+	public function recent_affiliate_data($affiliate_id, $role_id)
 	{
-		$query = $this->db->query("SELECT * FROM `settings` WHERE `type`='global'");
+		/* $query = $this->db->query("SELECT * FROM `settings` WHERE `type`='global'");
 
 		$result = $query->result_array();
 		foreach($result as $row)
@@ -1010,70 +1010,143 @@ class Affiliate_model extends CI_Model
 			'quarter' => ceil($date[1]/3),
 			'year' => $date[0]
 		);
-		//echo "<pre>";print_r($limit);
+		//echo "<pre>";print_r($limit); */
 
-		$query = $this->db->query("SELECT MAX(`document_month`) AS `month`, MAX(`document_year`) AS `year` FROM `monthly_document_status` WHERE `affiliate_id` = '$affiliate_id' AND `document_year` IN (SELECT MAX(`document_year`) AS `year` FROM `monthly_document_status` WHERE `affiliate_id` = '$affiliate_id')");
+		if($role_id == 1) // For Administrator
+		{
+			//Check for affiliate monthly compliance status
+			$this->db->where("affiliate_id", $affiliate_id);
+			$this->db->where("compliance_status !=", 8);
+			$this->db->order_by("year", "DESC");
+			$this->db->order_by("month", "DESC");
+			$this->db->limit(1);
+			$query = $this->db->get('affiliate_compliance_status_monthly');
+
+			$recent_month = $query->row_array();
+
+			//Check for affiliate quarterly compliance status
+			$this->db->where("affiliate_id", $affiliate_id);
+			$this->db->where("compliance_status !=", 8);
+			$this->db->order_by("year", "DESC");
+			$this->db->order_by("quarter", "DESC");
+			$this->db->limit(1);
+			$query = $this->db->get('affiliate_compliance_status_quarterly');
+
+			$recent_quarter = $query->row_array();
+
+			//Check for affiliate yearly compliance status
+			$this->db->where("affiliate_id", $affiliate_id);
+			$this->db->where("compliance_status !=", 8);
+			$this->db->order_by("year", "DESC");
+			$this->db->limit(1);
+			$query = $this->db->get('affiliate_compliance_status_yearly');
+
+			$recent_year = $query->row_array();
+
+			//Check for affiliate key indicators
+			$this->db->where("affiliate_id", $affiliate_id);
+			$this->db->where("status", 0);
+			$this->db->order_by("year", "DESC");
+			$this->db->order_by("quarter", "DESC");
+			$this->db->limit(1);
+			$query = $this->db->get('key_indicators');
+
+			$recent_key_indicator = $query->row_array();
+		}
+		else
+		{
+			//Check for affiliate monthly document status
+			$this->db->select("document_month AS month, document_year AS year");
+			$this->db->where("affiliate_id", $affiliate_id);
+			$this->db->order_by("document_year", "DESC");
+			$this->db->order_by("document_month", "DESC");
+			$this->db->limit(1);
+			$query = $this->db->get('monthly_document_status');
+
+			$recent_month = $query->row_array();
+
+			if(isset($recent_month))
+			{
+				$this->db->where("affiliate_id", $affiliate_id);
+				$this->db->where("document_month", $recent_month["month"]);
+				$this->db->where("document_year", $recent_month["year"]);
+				$this->db->where_in("document_id", array(1, 2, 3, 4, 5));
+
+				if($this->db->count_all_results('monthly_document_status') == 5)
+				{
+					$currentTime = mktime(0,0,0, $recent_month["month"], 1, $recent_month["year"]);
+					$date = explode("-", date("Y-n", strtotime("+1 months", $currentTime)));
+					$recent_month["year"] = $date[0];
+					$recent_month["month"] = $date[1];
+				}
+			} 
+			
+			//Check for affiliate quarterly document status
+			$this->db->select("document_month AS quarter, document_year AS year");
+			$this->db->where("affiliate_id", $affiliate_id);
+			$this->db->order_by("document_year", "DESC");
+			$this->db->order_by("document_month", "DESC");
+			$this->db->limit(1);
+			$query = $this->db->get('quarterly_document_status');
+			
+			$recent_quarter = $query->row_array();
+
+			if(isset($recent_quarter))
+			{
+				$this->db->where("affiliate_id", $affiliate_id);
+				$this->db->where("document_month", $recent_quarter["quarter"]);
+				$this->db->where("document_year", $recent_quarter["year"]);
+				$this->db->where_in("document_id", array(7));
+
+				if($this->db->count_all_results('quarterly_document_status') == 1)
+				{
+					$month = $recent_quarter["quarter"] * 3;
+					$currentTime = mktime(0,0,0, $month, 1, $recent_quarter["year"]);
+					$date = explode("-", date("Y-n", strtotime("+1 months", $currentTime)));
+					$recent_quarter["year"] = $date[0];
+					$recent_quarter["quarter"] = ceil($date[1]/3);
+				}
+			}
+			
+			//Check for affiliate yearly document status
+			$this->db->select("document_year AS year");
+			$this->db->where("affiliate_id", $affiliate_id);
+			$this->db->order_by("year", "DESC");
+			$this->db->limit(1);
+			$query = $this->db->get('yearly_document_status');
+			
+			$recent_year = $query->row_array();
+
+			if(isset($recent_year))
+			{
+				$this->db->where("affiliate_id", $affiliate_id);
+				$this->db->where("document_year", $recent_year["year"]);
+				$this->db->where_in("document_id", array(9,10,11,12,13));
+
+				if($this->db->count_all_results('yearly_document_status') == 5)
+				{
+					$recent_year["year"] += 1;
+				}
+			}
 	
-		$recent_month = $query->row_array();
+			//Check for affiliate key indicators
+			$this->db->where("affiliate_id", $affiliate_id);
+			$this->db->order_by("year", "DESC");
+			$this->db->order_by("quarter", "DESC");
+			$this->db->limit(1);
+			$query = $this->db->get('key_indicators');
+			
+			$recent_key_indicator = $query->row_array();
 
-		if($recent_month['year'] < $limit['year'])
-		{
-			$recent_month['month'] = $limit['month'];
-			$recent_month['year'] = $limit['year'];
-
-		}
-		else if($recent_month['year'] == $limit['year'])
-		{
-			if($recent_month['month'] < $limit['month'])
+			if(isset($recent_key_indicator))
 			{
-				$recent_month['month'] = $limit['month'];
+				$month = $recent_key_indicator["quarter"] * 3;
+				$currentTime = mktime(0,0,0, $month, 1, $recent_key_indicator["year"]);
+				$date = explode("-", date("Y-n", strtotime("+1 months", $currentTime)));
+				$recent_key_indicator["year"] = $date[0];
+				$recent_key_indicator["quarter"] = ceil($date[1]/3);
 			}
-		}
-		
-		$query = $this->db->query("SELECT MAX(`document_month`) AS `quarter`, MAX(`document_year`) AS `year` FROM `quarterly_document_status` WHERE `affiliate_id` = '$affiliate_id' AND `document_year` IN (SELECT MAX(`document_year`) AS `year` FROM `quarterly_document_status` WHERE `affiliate_id` = '$affiliate_id')");
-		
-		$recent_quarter = $query->row_array();
-
-		if($recent_quarter['year'] < $limit['year'])
-		{
-			$recent_quarter['quarter'] = $limit['quarter'];
-			$recent_quarter['year'] = $limit['year'];
-
-		}
-		else if($recent_quarter['year'] == $limit['year'])
-		{
-			if($recent_quarter['quarter'] < $limit['quarter'])
-			{
-				$recent_quarter['quarter'] = $limit['quarter'];
-			}
-		}
-		
-		$query = $this->db->query("SELECT MAX(`document_year`) AS `year` FROM `yearly_document_status` WHERE `affiliate_id` = '$affiliate_id'");
-
-		$recent_year = $query->row_array();
-
-		if($recent_year['year'] < $limit['year'])
-		{
-			$recent_year['year'] = $limit['year'];
-		}
-
-		$query = $this->db->query("SELECT MAX(`quarter`) AS `quarter`, MAX(`year`) AS `year` FROM `key_indicators` WHERE `affiliate_id` = '$affiliate_id' AND `year` IN (SELECT MAX(`year`) AS `year` FROM `key_indicators` WHERE `affiliate_id` = '$affiliate_id')");
-		
-		$recent_key_indicator = $query->row_array();
-
-		if($recent_key_indicator['year'] < $limit['year'])
-		{
-			$recent_key_indicator['quarter'] = $limit['quarter'];
-			$recent_key_indicator['year'] = $limit['year'];
-
-		}
-		else if($recent_key_indicator['year'] == $limit['year'])
-		{
-			if($recent_key_indicator['quarter'] < $limit['quarter'])
-			{
-				$recent_key_indicator['quarter'] = $limit['quarter'];
-			}
-		}
+		} 
 
 		return array(
 			'monthly' => $recent_month,

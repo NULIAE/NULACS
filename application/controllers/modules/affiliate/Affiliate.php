@@ -552,7 +552,7 @@ class Affiliate extends MY_Controller
 		//XSS Filter all the input post fields
 		$data = $this->input->get(NULL, TRUE);
 
-		$recent_data = $this->Affiliate_model->recent_affiliate_data($affiliate_id);
+		$recent_data = $this->Affiliate_model->recent_affiliate_data($affiliate_id, $this->session->role_id);
 
 		if(!isset($recent_data['key_indicator']['quarter']))
 			$recent_data['key_indicator']['quarter'] = ceil(date("m", strtotime("-1 month", time()))/3);
