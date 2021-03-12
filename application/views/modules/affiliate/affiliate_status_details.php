@@ -83,10 +83,16 @@ $quarterArray = array(
 											<button class="dropdown-item <?php if($quarter == 4) echo "active"; ?>" data-quarter="4">Q4</button>
 										</div>
 									</div>
+									<?php $interval = isset($_GET['interval'])?$_GET['interval']:"nav-y1"; ?>
+									<input type="hidden" id="tempyearpicker" name="tempyear" value="<?php echo ($interval == 'nav-y2') ? $quarterly_year : $yearly_year; ?>" />
+									<input type="hidden" id="tempmonthpicker" name="tempmonth" value="<?php echo $month.'/'.$monthly_year; ?>" />
+									<input type="hidden" id="tempquarterpicker" name="tempquarter" value="<?php echo $quarter; ?>" />
 									<a href="javascript:;" class="btn btn-primary btn-rounded btn-action-sm" id="btn-filter-date" data-rel="tooltip" data-placement="top" title="Search"><i class="i i-search"></i><span class="sr-only">Filter</span></a>
 									<form id="filter-date" class="d-none" action="<?php echo current_url(); ?>">
-										<input type="hidden" id="input-interval" name="interval" value="<?php echo isset($_GET['interval'])?$_GET['interval']:"nav-y1"; ?>" />
-										<input type="hidden" id="yearpicker" name="monthly_year" value="<?php echo $year; ?>" />
+										<input type="hidden" id="input-interval" name="interval" value="<?php echo $interval; ?>" />
+										<input type="hidden" id="monthyearpicker" name="monthly_year" value="<?php echo $monthly_year; ?>" />
+										<input type="hidden" id="quarteryearpicker" name="quarterly_year" value="<?php echo $quarterly_year; ?>" />
+										<input type="hidden" id="yearpicker" name="yearly_year" value="<?php echo $yearly_year; ?>" />
 										<input type="hidden" id="monthpicker" name="month" value="<?php echo $month; ?>" />
 										<input type="hidden" id="quarterpicker" name="quarter" value="<?php echo $quarter; ?>" />
 									</form>

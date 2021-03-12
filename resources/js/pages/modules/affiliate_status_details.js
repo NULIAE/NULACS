@@ -44,7 +44,8 @@ $(function () {
 	var $btnMonth = $('#btn-month-pick');
 	openTab($("#input-interval").val());
 
-	$('#yearpicker').datetimepicker({
+	$('#tempyearpicker').datetimepicker({
+		useCurrent: false,
 		widgetParent: $btnYear,
 		format: 'YYYY',
 		viewMode: 'years',
@@ -57,12 +58,13 @@ $(function () {
 			horizontal: 'right'
 		}
 	}).on('dp.hide', function (e) {
-		$('#yearpicker').val(e.date.format('YYYY'));
+		$('#tempyearpicker').val(e.date.format('YYYY'));
 	});
 
-	$('#monthpicker').datetimepicker({
+	$('#tempmonthpicker').datetimepicker({
+		useCurrent: false,
 		widgetParent: $btnMonth,
-		format: 'M',
+		format: 'M/YYYY',
 		viewMode: 'months',
 		maxDate: moment().subtract(1,'months').endOf('month').format('YYYY-MM-DD'),
 		icons: {
@@ -73,20 +75,30 @@ $(function () {
 			horizontal: 'right'
 		}
 	}).on('dp.hide', function (e) {
-		$('#monthpicker').val(e.date.format('M'));
-		$('#yearpicker').val(e.date.format('YYYY'));
+		$('#tempmonthpicker').val(e.date.format('M/YYYY'));
 	});
 
 	$btnYear.click(function () {
-		$('#yearpicker').data('DateTimePicker').toggle();
+		$('#tempyearpicker').data('DateTimePicker').toggle();
 	});
 
 	$btnMonth.click(function () {
-		$('#monthpicker').data('DateTimePicker').toggle();
+		$('#tempmonthpicker').data('DateTimePicker').toggle();
 	});
 
 	$('#btn-filter-date').on('click', function (e) {
 		e.preventDefault();
+		var interval = $("#input-interval").val();
+		if(interval == 'nav-y1'){
+			var selectedDate = $("#tempmonthpicker").val().split('/');
+			$("#monthpicker").val(selectedDate[0]);
+			$("#monthyearpicker").val(selectedDate[1]);
+		} else if(interval == 'nav-y2'){
+			$("#quarterpicker").val($("#tempquarterpicker").val());
+			$("#quarteryearpicker").val($("#tempyearpicker").val());
+		} else {
+			$("#yearpicker").val($("#tempyearpicker").val());
+		}
 		$('#filter-date').submit();
 	});
 
@@ -102,7 +114,7 @@ $(function () {
 	$("#quarter-dropdown button.dropdown-item").on('click', function(){
 		$("#quarter-dropdown button.dropdown-item").removeClass('active');
 		$(this).addClass('active');
-		$("#quarterpicker").val($(this).data('quarter'));
+		$("#tempquarterpicker").val($(this).data('quarter'));
 	});
 
 
@@ -125,12 +137,20 @@ $(function () {
 		var statusBtn = $(this);
 		var selectedStatusElement = statusBtn.siblings('a.active');
 		if (selectedStatusElement.length == 1) {
+			var interval = $(this).data('interval');
+			if(interval == "month"){
+				$yearValue = $('#monthyearpicker').val();
+			} else if(interval == "quarter"){
+				$yearValue = $('#quarteryearpicker').val();
+			} else {
+				$yearValue = $('#yearpicker').val();
+			}
 			var inputData = {
 				interval: $(this).data('interval'),
 				affiliate_id: $(this).data('affiliate'),
 				month: $('#monthpicker').val(),
 				quarter: $('#quarterpicker').val(),
-				year: $('#yearpicker').val(),
+				year: $yearValue,
 				status: $(selectedStatusElement).data('status')
 			}
 			$.ajax({
@@ -997,24 +1017,34 @@ function openTab(val) {
 		$("#btn-year-pick").removeClass('d-inline').addClass('d-none');
 		$("#btn-year-pick").attr('disabled', 'disabled');
 		$("#monthpicker").removeAttr('disabled');
+		$("#monthyearpicker").removeAttr('disabled');
 		$("#btn-month-pick").removeClass('d-none').addClass('d-inline');
 		$("#quarter-dropdown").removeClass('d-inline').addClass('d-none');
 		$("#quarterpicker").attr('disabled', 'disabled');
-		$("#yearpicker").attr('name', 'monthly_year');
+		$("#quarteryearpicker").attr('disabled', 'disabled');
+		$("#yearpicker").attr('disabled', 'disabled');
+		$("#tempmonthpicker").val($("#monthpicker").val()+"/"+$("#monthyearpicker").val());
 	} else if(val == 'nav-y2'){
 		$("#btn-year-pick").removeClass('d-none').addClass('d-inline');
 		$("#btn-month-pick").removeClass('d-inline').addClass('d-none');
 		$("#monthpicker").attr('disabled', 'disabled');
+		$("#monthyearpicker").attr('disabled', 'disabled');
 		$("#quarterpicker").removeAttr('disabled');
+		$("#quarteryearpicker").removeAttr('disabled');
+		$("#yearpicker").attr('disabled', 'disabled');
 		$("#quarter-dropdown").removeClass('d-none').addClass('d-inline');
-		$("#yearpicker").attr('name', 'quarterly_year');
+		$("#tempquarterpicker").val($("#quarterpicker").val());
+		$("#tempyearpicker").val($("#quarteryearpicker").val());
 	} else {
 		$("#btn-year-pick").removeClass('d-none').addClass('d-inline');
 		$("#btn-month-pick").removeClass('d-inline').addClass('d-none');
 		$("#quarter-dropdown").removeClass('d-inline').addClass('d-none');
+		$("#yearpicker").removeAttr('disabled');
 		$("#monthpicker").attr('disabled', 'disabled');
+		$("#monthyearpicker").attr('disabled', 'disabled');
 		$("#quarterpicker").attr('disabled', 'disabled');
-		$("#yearpicker").attr('name', 'yearly_year');
+		$("#quarteryearpicker").attr('disabled', 'disabled');
+		$("#tempyearpicker").val($("#yearpicker").val());
 	}
 	$("#input-interval").val(val);
   }

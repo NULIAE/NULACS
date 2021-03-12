@@ -1016,7 +1016,6 @@ class Affiliate_model extends CI_Model
 		{
 			//Check for affiliate monthly compliance status
 			$this->db->where("affiliate_id", $affiliate_id);
-			$this->db->where("compliance_status !=", 8);
 			$this->db->order_by("year", "DESC");
 			$this->db->order_by("month", "DESC");
 			$this->db->limit(1);
@@ -1024,9 +1023,19 @@ class Affiliate_model extends CI_Model
 
 			$recent_month = $query->row_array();
 
+			if(isset($recent_month))
+			{
+				if($recent_month["compliance_status"] == 8)
+				{
+					$currentTime = mktime(0,0,0, $recent_month["month"], 1, $recent_month["year"]);
+					$date = explode("-", date("Y-n", strtotime("+1 months", $currentTime)));
+					$recent_month["year"] = $date[0];
+					$recent_month["month"] = $date[1];
+				}
+			} 
+
 			//Check for affiliate quarterly compliance status
 			$this->db->where("affiliate_id", $affiliate_id);
-			$this->db->where("compliance_status !=", 8);
 			$this->db->order_by("year", "DESC");
 			$this->db->order_by("quarter", "DESC");
 			$this->db->limit(1);
@@ -1034,24 +1043,54 @@ class Affiliate_model extends CI_Model
 
 			$recent_quarter = $query->row_array();
 
+			if(isset($recent_quarter))
+			{
+				if($recent_quarter["compliance_status"] == 8)
+				{
+					$month = $recent_quarter["quarter"] * 3;
+					$currentTime = mktime(0,0,0, $month, 1, $recent_quarter["year"]);
+					$date = explode("-", date("Y-n", strtotime("+1 months", $currentTime)));
+					$recent_quarter["year"] = $date[0];
+					$recent_quarter["quarter"] = ceil($date[1]/3);
+				}
+			}
+
 			//Check for affiliate yearly compliance status
 			$this->db->where("affiliate_id", $affiliate_id);
-			$this->db->where("compliance_status !=", 8);
 			$this->db->order_by("year", "DESC");
 			$this->db->limit(1);
 			$query = $this->db->get('affiliate_compliance_status_yearly');
 
 			$recent_year = $query->row_array();
 
+			if(isset($recent_year))
+			{
+				if($recent_year["compliance_status"] == 8)
+				{
+					$recent_year["year"] += 1;
+				}
+			}
+
 			//Check for affiliate key indicators
 			$this->db->where("affiliate_id", $affiliate_id);
-			$this->db->where("status", 0);
 			$this->db->order_by("year", "DESC");
 			$this->db->order_by("quarter", "DESC");
 			$this->db->limit(1);
 			$query = $this->db->get('key_indicators');
 
 			$recent_key_indicator = $query->row_array();
+
+			if(isset($recent_key_indicator))
+			{
+				if($recent_key_indicator["status"] == 1)
+				{
+					$month = $recent_key_indicator["quarter"] * 3;
+					$currentTime = mktime(0,0,0, $month, 1, $recent_key_indicator["year"]);
+					$date = explode("-", date("Y-n", strtotime("+1 months", $currentTime)));
+					$recent_key_indicator["year"] = $date[0];
+					$recent_key_indicator["quarter"] = ceil($date[1]/3);
+				}
+			}
 		}
 		else
 		{
