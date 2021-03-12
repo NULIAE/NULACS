@@ -1,4 +1,5 @@
 $(function () {
+	page.loader(true);
 	var key_indicators_status = $('#key_indicators_status').val();
 
 	if(key_indicators_status == '1'){
@@ -73,6 +74,7 @@ $(function () {
 		}
 	}).on('dp.hide', function (e) {
 		$('#monthpicker').val(e.date.format('M'));
+		$('#yearpicker').val(e.date.format('YYYY'));
 	});
 
 	$btnYear.click(function () {
