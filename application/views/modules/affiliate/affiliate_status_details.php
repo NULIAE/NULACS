@@ -318,7 +318,7 @@ $quarterArray = array(
 										<!--Monthly other files end-->
 									</div>
 									
-									<?php if($this->session->role_id == 1): ?>
+									
 										<div class="row align-items-center ">
 
 											<div class="col-lg-12">
@@ -326,17 +326,17 @@ $quarterArray = array(
 												<span class="h5">Affiliate monthly compliance for <?php echo strtoupper(date('M', mktime(0, 0, 0, $month, 10))).' '.$monthly_year; ?></span>
 												</div>
 											</div>
-											<div class="col-lg-12 update-status">
+											<div class="col-lg-12 <?php if($this->session->role_id == 1) echo "update-status"; ?>">
 												<a class="btn btn-round-ib btn-lbl ml-3 <?php if($monthly_compliance == 8) echo "active"; ?>" data-status="8" data-rel="tooltip" data-placement="bottom" title="Compliance"><i class="i i-compliant cmplt"></i><span class="sr-only">Compliance</span></a>
 												<a class="btn btn-round-ib btn-lbl <?php if($monthly_compliance == 9) echo "active"; ?>" data-status="9" data-rel="tooltip" data-placement="bottom" title="Non Compliance"><i class="i i-non-compliant n-cmplt"></i><span class="sr-only">Non Compliance</span></a>
 												<a class="btn btn-round-ib btn-lbl <?php if($monthly_compliance == 10) echo "active"; ?>" data-status="10" data-rel="tooltip" data-placement="bottom" title="Waiting"><i class="i i-waiting wait"></i><span class="sr-only">Waiting</span></a>
 												<a class="btn btn-round-ib btn-lbl <?php if($monthly_compliance == 11) echo "active"; ?>" data-status="11" data-rel="tooltip" data-placement="bottom" title="Indeterminate"><i class="i i-Indeterminate inter"></i><span class="sr-only">Indeterminate</span></a>
-
-												<button class="btn btn-primary btn-rounded min w-100px status-update-btn mt-2" data-compliance="<?php echo $monthly_compliance; ?>" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>" data-interval="month" disabled>UPDATE</button>
+												<?php if($this->session->role_id == 1): ?>
+													<button class="btn btn-primary btn-rounded min w-100px status-update-btn mt-2" data-compliance="<?php echo $monthly_compliance; ?>" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>" data-interval="month" disabled>UPDATE</button>
+												<?php endif; ?>
 								
 											</div>
 										</div>
-									<?php endif; ?>
 								</div>
 
 							</div>
@@ -553,7 +553,6 @@ $quarterArray = array(
 										</div>
 										<!--Quarterly other files end-->
 									</div>
-									<?php if($this->session->role_id == 1): ?>
 									<div class="row align-items-center ">
 
 										<div class="col-lg-12">
@@ -561,16 +560,17 @@ $quarterArray = array(
 											<span class="h5">Affiliate quarterly compliance for <?php echo $quarterArray[$quarter]; ?></span>
 											</div>
 										</div>
-										<div class="col-lg-12 update-status">
+										<div class="col-lg-12 <?php if($this->session->role_id == 1) echo "update-status"; ?>">
 											<a class="btn btn-round-ib btn-lbl ml-3 <?php if($quarterly_compliance == 8) echo "active"; ?>" data-status="8" data-rel="tooltip" data-placement="bottom" title="Compliance"><i class="i i-compliant cmplt"></i><span class="sr-only">Compliance</span></a>
 											<a class="btn btn-round-ib btn-lbl <?php if($quarterly_compliance == 9) echo "active"; ?>" data-status="9" data-rel="tooltip" data-placement="bottom" title="Non Compliance"><i class="i i-non-compliant n-cmplt"></i><span class="sr-only">Non Compliance</span></a>
 											<a class="btn btn-round-ib btn-lbl <?php if($quarterly_compliance == 10) echo "active"; ?>" data-status="10" data-rel="tooltip" data-placement="bottom" title="Waiting"><i class="i i-waiting wait"></i><span class="sr-only">Waiting</span></a>
 											<a class="btn btn-round-ib btn-lbl <?php if($quarterly_compliance == 11) echo "active"; ?>" data-status="11" data-rel="tooltip" data-placement="bottom" title="Indeterminate"><i class="i i-Indeterminate inter"></i><span class="sr-only">Indeterminate</span></a>
 
-											<button class="btn btn-primary btn-rounded min w-100px mt-2 status-update-btn" data-compliance="<?php echo $quarterly_compliance; ?>" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>" data-interval="quarter" disabled>UPDATE</button>
+											<?php if($this->session->role_id == 1): ?>
+												<button class="btn btn-primary btn-rounded min w-100px mt-2 status-update-btn" data-compliance="<?php echo $quarterly_compliance; ?>" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>" data-interval="quarter" disabled>UPDATE</button>
+											<?php endif; ?>
 										</div>
 									</div>
-									<?php endif; ?>
 								</div>
 							</div>
 							<div class="tab-pane fade" id="nav-y3" role="tabpanel" aria-labelledby="nav-y3-tab">
@@ -788,7 +788,6 @@ $quarterArray = array(
 										</div>
 										<!--Yearly other files end-->
 									</div>
-									<?php if($this->session->role_id == 1): ?>
 									<div class="row align-items-center ">
 
 										<div class="col-lg-12">
@@ -796,16 +795,17 @@ $quarterArray = array(
 											<span class="h5">Affiliate yearly compliance for <?php echo strtoupper(date('M', strtotime($affiliate['year_start'])))." ".$yearly_year; ?> - <?php echo strtoupper(date('M Y', strtotime("+11 month", mktime(0, 0, 0, $startMonth, 1, $yearly_year)))); ?></span>
 											</div>
 										</div>
-										<div class="col-lg-12 update-status">
+										<div class="col-lg-12 <?php if($this->session->role_id == 1) echo "update-status"; ?>">
 											<a class="btn btn-round-ib btn-lbl ml-3 <?php if($yearly_compliance == 8) echo "active"; ?>" data-status="8" data-rel="tooltip" data-placement="bottom" title="Compliance"><i class="i i-compliant cmplt"></i><span class="sr-only">Compliance</span></a>
 											<a class="btn btn-round-ib btn-lbl <?php if($yearly_compliance == 9) echo "active"; ?>" data-status="9" data-rel="tooltip" data-placement="bottom" title="Non Compliance"><i class="i i-non-compliant n-cmplt"></i><span class="sr-only">Non Compliance</span></a>
 											<a class="btn btn-round-ib btn-lbl <?php if($yearly_compliance == 10) echo "active"; ?>" data-status="10" data-rel="tooltip" data-placement="bottom" title="Waiting"><i class="i i-waiting wait"></i><span class="sr-only">Waiting</span></a>
 											<a class="btn btn-round-ib btn-lbl <?php if($yearly_compliance == 11) echo "active"; ?>" data-status="11" data-rel="tooltip" data-placement="bottom" title="Indeterminate"><i class="i i-Indeterminate inter"></i><span class="sr-only">Indeterminate</span></a>
 
-											<button class="btn btn-primary btn-rounded min w-100px mt-2 status-update-btn" data-compliance="<?php echo $yearly_compliance; ?>" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>" data-interval="year" disabled>UPDATE</button>
+											<?php if($this->session->role_id == 1): ?>
+												<button class="btn btn-primary btn-rounded min w-100px mt-2 status-update-btn" data-compliance="<?php echo $yearly_compliance; ?>" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>" data-interval="year" disabled>UPDATE</button>
+											<?php endif; ?>
 										</div>
 									</div>
-									<?php endif; ?>
 								</div>
 							</div>
 							<!--  UPLOAD SECTION -->
@@ -2036,8 +2036,20 @@ $quarterArray = array(
 							</div>
 
 							</fieldset>
+
+							<?php if(isset($key_indicators_details['status']) && $key_indicators_details['status'] == 1){ 
+										$btn_s = "btn btn-success";
+										$btn_s_name="Approved"; 
+									}else{
+										$btn_s = "btn btn-primary";
+										$btn_s_name="SAVE"; 
+									}?>
 							<div class="d-flex p-b-20">
-								<button class="btn btn-primary btn-rounded min w-100px ml-auto" type="submit" id='key_indicators_save_btn'>SAVE</button>
+							<?php if($this->session->role_id != 1 ){ ?>
+								<button class="<?=$btn_s?> btn-rounded min w-100px ml-auto" type="submit" id='key_indicators_save_btn_u'><span class ="key_indicators_save_btn_u_s"><?=$btn_s_name?></span></button>
+							<?php }else{ ?>
+								<button class="<?=$btn_s?> btn-rounded min w-100px ml-auto" type="submit" id='key_indicators_save_btn'><span class ="key_indicators_save_btn_u_s"><?=$btn_s_name?></span></button>
+							<?php } ?>
 								<input type="hidden" id="affiliate_id_val" value="<?php echo $affiliate['affiliate_id']; ?>" />
 								<?php if($this->session->role_id == 1 ){ ?>
 

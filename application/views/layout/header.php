@@ -35,7 +35,7 @@
             <div class="collapse navbar-collapse" id="mainMenuDark">
               <ul class="navbar-nav ml-auto">
                 <li class="nav-item affiliatehead active">
-                  <a class="nav-link"><span>Affiliate Data Management </span></a>
+                  <a class="nav-link"><span>Affiliate Compliance Management</span></a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="<?php echo base_url('/user/view-profile/').$this->session->user_id; ?>"><i class="i i-admin"></i><span class="sr-only">Profile</span></a>

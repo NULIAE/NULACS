@@ -15,7 +15,7 @@ $(function () {
 	$('.chatBoxinn').scrollTop($('.chatBoxinn')[0].scrollHeight);
 	}
 	var toastConfig = {
-		timeout: 5000,
+		timeout: 60*60*1000,
 		position: 'top',
 		actionText: 'OK',
 		message: ''
@@ -483,12 +483,22 @@ $(function () {
 				$.each(data.key_indicators, function (key, value) {
 				
 					if(data.status == '1'){
+						$(".key_indicators_save_btn_u_s").text("Approved");
+						$("#key_indicators_save_btn_u").text("Approved");
 						$('.key_indicators_approve_btn').val('Approved');
 						$(".key_indicators_approve_btn").addClass("btn btn-success");
 						// $('.key_indicators_approve_btn').prop('disabled', true);
 						$('#key_indicators_save_btn').prop('disabled', true);
+						$('#key_indicators_save_btn_u').prop('disabled', true);
+						$("#key_indicators_save_btn_u").addClass("btn btn-success");
+						
 						document.getElementById("fieldset_disable").disabled = true;
 					}else{
+						$('#key_indicators_save_btn_u').removeClass("btn btn-success");
+						$('#key_indicators_save_btn_u').removeAttr('disabled');
+						$("#key_indicators_save_btn_u").text("SAVE");
+						$("#key_indicators_save_btn_u").addClass("btn btn-primary");
+						$(".key_indicators_save_btn_u_s").text("SAVE");
 						$('.key_indicators_approve_btn').val('Approve');
 						$(".key_indicators_approve_btn").removeClass("btn btn-success");
 						$(".key_indicators_approve_btn").addClass("btn btn-primary");
@@ -515,6 +525,11 @@ $(function () {
 				$(".key_indicators_approve_btn").addClass("btn btn-primary");
 				$('.key_indicators_approve_btn').removeAttr('disabled');
 				$('#key_indicators_save_btn').removeAttr('disabled');
+				$('#key_indicators_save_btn_u').removeClass("btn btn-success");
+				$('#key_indicators_save_btn_u').removeAttr('disabled');
+				$("#key_indicators_save_btn_u").text("SAVE");
+				$("#key_indicators_save_btn_u").addClass("btn btn-primary");
+
 				document.getElementById("fieldset_disable").disabled = false;
 				$("#form-key-indicators-approve").removeClass("d-block");
 				$("#form-key-indicators-approve").addClass(" d-none");
@@ -592,6 +607,7 @@ $(function () {
 					$(".key_indicators_approve_btn").removeClass("btn btn-success");
 					$(".key_indicators_approve_btn").addClass("btn btn-primary");
 					$('#key_indicators_save_btn').removeAttr('disabled');
+					$('#key_indicators_save_btn_s').removeAttr('disabled');
 					document.getElementById("fieldset_disable").disabled = false;
 				}		
 				setTimeout(function () {
@@ -1051,7 +1067,7 @@ function openTab(val) {
 
   function alert_msg(message_val){
 	var toastConfig = {
-		timeout: 5000,
+		timeout: 60*60*1000,
 		position: 'top',
 		actionText: 'OK',
 		message: ''

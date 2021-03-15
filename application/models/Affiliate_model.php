@@ -1110,6 +1110,7 @@ class Affiliate_model extends CI_Model
 				$this->db->where("document_month", $recent_month["month"]);
 				$this->db->where("document_year", $recent_month["year"]);
 				$this->db->where_in("document_id", array(1, 2, 3, 4, 5));
+				$this->db->where("monthly_compliance_status !=", 4);
 
 				if($this->db->count_all_results('monthly_document_status') == 5)
 				{
@@ -1136,6 +1137,7 @@ class Affiliate_model extends CI_Model
 				$this->db->where("document_month", $recent_quarter["quarter"]);
 				$this->db->where("document_year", $recent_quarter["year"]);
 				$this->db->where_in("document_id", array(7));
+				$this->db->where("quarterly_compliance_status !=", 4);
 
 				if($this->db->count_all_results('quarterly_document_status') == 1)
 				{
@@ -1161,6 +1163,7 @@ class Affiliate_model extends CI_Model
 				$this->db->where("affiliate_id", $affiliate_id);
 				$this->db->where("document_year", $recent_year["year"]);
 				$this->db->where_in("document_id", array(9,10,11,12,13));
+				$this->db->where("yearly_compliance_status !=", 4);
 
 				if($this->db->count_all_results('yearly_document_status') == 5)
 				{

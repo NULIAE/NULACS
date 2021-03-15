@@ -564,18 +564,33 @@ class Affiliate extends MY_Controller
 		$monthly_filter = array();
 		
 		if( isset($data['month']) && ($data['month'] !== '') )
-			$monthly_filter['document_month'] =  $recent_data['monthly']['month'] = $data['month'];
-		else if(isset($recent_data['monthly']['month']))
-			$monthly_filter['document_month'] =  $recent_data['monthly']['month'];
+			$monthly_filter['document_month'] =  $data['month'];
 		else
-			$monthly_filter['document_month'] = $recent_data['monthly']['month'] = date("m", strtotime("-1 month", time()));
+			$monthly_filter['document_month'] = date("m", strtotime("-1 month", time()));
 
 		if( isset($data['monthly_year']) && ($data['monthly_year'] !== '') )
-			$monthly_filter['document_year'] = $recent_data['monthly']['year'] = $data['monthly_year'];
-		else if(isset($recent_data['monthly']['year']))
-			$monthly_filter['document_year'] =  $recent_data['monthly']['year'];
+			$monthly_filter['document_year'] = $data['monthly_year'];
 		else
-			$monthly_filter['document_year'] = $recent_data['monthly']['year'] = date("Y", strtotime("-1 month", time()));
+			$monthly_filter['document_year'] = date("Y", strtotime("-1 month", time()));
+
+		if(isset($recent_data['monthly']['month']) && isset($recent_data['monthly']['year']))
+		{
+			if($monthly_filter['document_year'] > $recent_data['monthly']['year'])
+			{
+				$monthly_filter['document_month'] =  $recent_data['monthly']['month'];
+				$monthly_filter['document_year'] =  $recent_data['monthly']['year'];
+			}
+			else if($monthly_filter['document_year'] == $recent_data['monthly']['year'])
+			{
+				if($monthly_filter['document_month'] > $recent_data['monthly']['month'])
+				{
+					$monthly_filter['document_month'] =  $recent_data['monthly']['month'];
+				}
+			}
+		}
+
+		$recent_data['monthly']['month'] = $monthly_filter['document_month'];
+		$recent_data['monthly']['year'] = $monthly_filter['document_year'];
 
 		//Monthly document status
 		$monthly_document_status = $this->Affiliate_model->monthly_document_status($affiliate_id, $monthly_filter);
@@ -594,18 +609,33 @@ class Affiliate extends MY_Controller
 		$quarterly_filter = array();
 
 		if( isset($data['quarter']) && ($data['quarter'] !== '') )
-			$quarterly_filter['document_month'] = $recent_data['quarterly']['quarter'] = $data['quarter'];
-		else if(isset($recent_data['quarterly']['quarter']))
-			$quarterly_filter['document_month'] =  $recent_data['quarterly']['quarter'];
+			$quarterly_filter['document_month'] = $data['quarter'];
 		else
-			$quarterly_filter['document_month'] = $recent_data['quarterly']['quarter'] = ceil(date("m", strtotime("-1 month", time()))/3);
+			$quarterly_filter['document_month'] = ceil(date("m", strtotime("-1 month", time()))/3);
 
 		if( isset($data['quarterly_year']) && ($data['quarterly_year'] !== '') )
-			$quarterly_filter['document_year'] = $recent_data['quarterly']['year'] = $data['quarterly_year'];
-		else if(isset($recent_data['quarterly']['year']))
-			$quarterly_filter['document_year'] = $recent_data['quarterly']['year'];
+			$quarterly_filter['document_year'] = $data['quarterly_year'];
 		else
-			$quarterly_filter['document_year'] = $recent_data['quarterly']['year'] = date("Y", strtotime("-1 month", time()));
+			$quarterly_filter['document_year'] = date("Y", strtotime("-1 month", time()));
+
+		if(isset($recent_data['quarterly']['quarter']) && isset($recent_data['quarterly']['year']))
+		{
+			if($quarterly_filter['document_year'] > $recent_data['quarterly']['year'])
+			{
+				$quarterly_filter['document_month'] =  $recent_data['quarterly']['quarter'];
+				$quarterly_filter['document_year'] =  $recent_data['quarterly']['year'];
+			}
+			else if($quarterly_filter['document_year'] == $recent_data['quarterly']['year'])
+			{
+				if($quarterly_filter['document_month'] > $recent_data['quarterly']['quarter'])
+				{
+					$quarterly_filter['document_month'] =  $recent_data['quarterly']['quarter'];
+				}
+			}
+		}
+
+		$recent_data['quarterly']['quarter'] = $quarterly_filter['document_month'];
+		$recent_data['quarterly']['year'] = $quarterly_filter['document_year'];
 
 		//Quarterly document status
 		$quarterly_document_status = $this->Affiliate_model->quarterly_document_status($affiliate_id, $quarterly_filter);
@@ -624,11 +654,19 @@ class Affiliate extends MY_Controller
 		$yearly_filter = array();
 
 		if( isset($data['yearly_year']) && ($data['yearly_year'] !== '') )
-			$yearly_filter['document_year'] = $recent_data['yearly']['year'] = $data['yearly_year'];
-		else if(isset($recent_data['yearly']['year']))
-			$yearly_filter['document_year'] = $recent_data['yearly']['year'];
+			$yearly_filter['document_year'] = $data['yearly_year'];
 		else
-			$yearly_filter['document_year'] = $recent_data['yearly']['year'] = date("Y", strtotime("-1 month", time()));
+			$yearly_filter['document_year'] = date("Y", strtotime("-1 month", time()));
+
+		if(isset($recent_data['yearly']['year']))
+		{
+			if($yearly_filter['document_year'] > $recent_data['yearly']['year'])
+			{
+				$yearly_filter['document_year'] = $recent_data['yearly']['year'];
+			}
+		}
+
+		$recent_data['yearly']['year'] = $yearly_filter['document_year'];
 
 		
 		//Yearly document status

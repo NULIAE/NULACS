@@ -319,7 +319,7 @@
         //             }).done(function(data) {
         //                 // if ( ! data.success ) {
         //                 // 	var toastConfig = {
-        //                 // 		timeout: 5000,
+        //                 // 		timeout: 60*60*1000,
         //                 // 		position: 'top',
         //                 // 		actionText: 'OK',
         //                 // 		message: data.message,
@@ -581,7 +581,7 @@ var val  = rating.value;
 if(!/^[0-9]+$/.test(val)){
     $('#'+rating.id).val("");
     var toastConfig = {
-        timeout: 5000,
+        timeout: 60*60*1000,
         position: 'top',
         actionText: 'OK',
         message: "Rating must be a number",
@@ -591,7 +591,7 @@ if(!/^[0-9]+$/.test(val)){
     if(val >= 6){ 
         $('#'+rating.id).val("");
         var toastConfig = {
-            timeout: 5000,
+            timeout: 60*60*1000,
             position: 'top',
             actionText: 'OK',
             message: "Rating must be 5 or below 5",
@@ -659,7 +659,7 @@ function c_one_s_one()
                 // location.reload();
 				// if ( ! data.success ) {
 				// 	var toastConfig = {
-				// 		timeout: 5000,
+				// 		timeout: 60*60*1000,
 				// 		position: 'top',
 				// 		actionText: 'OK',
 				// 		message: data.message,
@@ -703,7 +703,7 @@ function c_one_s_two()
                  update_rating();
 				// if ( ! data.success ) {
 				// 	var toastConfig = {
-				// 		timeout: 5000,
+				// 		timeout: 60*60*1000,
 				// 		position: 'top',
 				// 		actionText: 'OK',
 				// 		message: data.message,
@@ -828,7 +828,7 @@ function c_one_s_three()
                  update_rating();
 				// if ( ! data.success ) {
 				// 	var toastConfig = {
-				// 		timeout: 5000,
+				// 		timeout: 60*60*1000,
 				// 		position: 'top',
 				// 		actionText: 'OK',
 				// 		message: data.message,
@@ -885,7 +885,7 @@ function c_one_s_four(){
                  update_rating();
 				// if ( ! data.success ) {
 				// 	var toastConfig = {
-				// 		timeout: 5000,
+				// 		timeout: 60*60*1000,
 				// 		position: 'top',
 				// 		actionText: 'OK',
 				// 		message: data.message,
@@ -960,7 +960,7 @@ function c_one_s_five(){
                     update_rating();
                    // if ( ! data.success ) {
                    // 	var toastConfig = {
-                   // 		timeout: 5000,
+                   // 		timeout: 60*60*1000,
                    // 		position: 'top',
                    // 		actionText: 'OK',
                    // 		message: data.message,
@@ -1003,7 +1003,7 @@ function c_one_s_five(){
                     $('a[href="#nav-x2"]').tab('show');
                    // if ( ! data.success ) {
                    // 	var toastConfig = {
-                   // 		timeout: 5000,
+                   // 		timeout: 60*60*1000,
                    // 		position: 'top',
                    // 		actionText: 'OK',
                    // 		message: data.message,
@@ -1073,7 +1073,7 @@ function c_one_s_five(){
                     update_rating();
                    // if ( ! data.success ) {
                    // 	var toastConfig = {
-                   // 		timeout: 5000,
+                   // 		timeout: 60*60*1000,
                    // 		position: 'top',
                    // 		actionText: 'OK',
                    // 		message: data.message,
@@ -1156,7 +1156,7 @@ function c_one_s_five(){
                     update_rating();
                    // if ( ! data.success ) {
                    // 	var toastConfig = {
-                   // 		timeout: 5000,
+                   // 		timeout: 60*60*1000,
                    // 		position: 'top',
                    // 		actionText: 'OK',
                    // 		message: data.message,
@@ -1306,7 +1306,7 @@ function c_one_s_five(){
                     update_rating();
                    // if ( ! data.success ) {
                    // 	var toastConfig = {
-                   // 		timeout: 5000,
+                   // 		timeout: 60*60*1000,
                    // 		position: 'top',
                    // 		actionText: 'OK',
                    // 		message: data.message,
@@ -1429,7 +1429,7 @@ function c_one_s_five(){
                     update_rating();
                    // if ( ! data.success ) {
                    // 	var toastConfig = {
-                   // 		timeout: 5000,
+                   // 		timeout: 60*60*1000,
                    // 		position: 'top',
                    // 		actionText: 'OK',
                    // 		message: data.message,
@@ -1488,7 +1488,7 @@ function c_one_s_five(){
                     update_rating();
                    // if ( ! data.success ) {
                    // 	var toastConfig = {
-                   // 		timeout: 5000,
+                   // 		timeout: 60*60*1000,
                    // 		position: 'top',
                    // 		actionText: 'OK',
                    // 		message: data.message,
@@ -1533,7 +1533,7 @@ function c_one_s_five(){
                     update_rating();
                    // if ( ! data.success ) {
                    // 	var toastConfig = {
-                   // 		timeout: 5000,
+                   // 		timeout: 60*60*1000,
                    // 		position: 'top',
                    // 		actionText: 'OK',
                    // 		message: data.message,
@@ -1584,7 +1584,7 @@ function c_one_s_five(){
                     update_rating();
                    // if ( ! data.success ) {
                    // 	var toastConfig = {
-                   // 		timeout: 5000,
+                   // 		timeout: 60*60*1000,
                    // 		position: 'top',
                    // 		actionText: 'OK',
                    // 		message: data.message,
@@ -1635,7 +1635,7 @@ function c_one_s_five(){
                 $('a[href="#nav-x3"]').tab('show');
                    // if ( ! data.success ) {
                    // 	var toastConfig = {
-                   // 		timeout: 5000,
+                   // 		timeout: 60*60*1000,
                    // 		position: 'top',
                    // 		actionText: 'OK',
                    // 		message: data.message,
@@ -1692,7 +1692,7 @@ function c_one_s_five(){
                     update_rating();
                    // if ( ! data.success ) {
                    // 	var toastConfig = {
-                   // 		timeout: 5000,
+                   // 		timeout: 60*60*1000,
                    // 		position: 'top',
                    // 		actionText: 'OK',
                    // 		message: data.message,
@@ -1738,7 +1738,7 @@ function c_one_s_five(){
                     update_rating();
                    // if ( ! data.success ) {
                    // 	var toastConfig = {
-                   // 		timeout: 5000,
+                   // 		timeout: 60*60*1000,
                    // 		position: 'top',
                    // 		actionText: 'OK',
                    // 		message: data.message,
@@ -1784,7 +1784,7 @@ function c_one_s_five(){
                     update_rating();
                    // if ( ! data.success ) {
                    // 	var toastConfig = {
-                   // 		timeout: 5000,
+                   // 		timeout: 60*60*1000,
                    // 		position: 'top',
                    // 		actionText: 'OK',
                    // 		message: data.message,
@@ -1841,7 +1841,7 @@ function c_one_s_five(){
                     update_rating();
                    // if ( ! data.success ) {
                    // 	var toastConfig = {
-                   // 		timeout: 5000,
+                   // 		timeout: 60*60*1000,
                    // 		position: 'top',
                    // 		actionText: 'OK',
                    // 		message: data.message,
@@ -1896,7 +1896,7 @@ function c_one_s_five(){
                     update_rating();
                    // if ( ! data.success ) {
                    // 	var toastConfig = {
-                   // 		timeout: 5000,
+                   // 		timeout: 60*60*1000,
                    // 		position: 'top',
                    // 		actionText: 'OK',
                    // 		message: data.message,
@@ -1944,7 +1944,7 @@ function c_one_s_five(){
                     update_rating();
                    // if ( ! data.success ) {
                    // 	var toastConfig = {
-                   // 		timeout: 5000,
+                   // 		timeout: 60*60*1000,
                    // 		position: 'top',
                    // 		actionText: 'OK',
                    // 		message: data.message,
@@ -1985,7 +1985,7 @@ function c_one_s_five(){
                     update_rating();
                    // if ( ! data.success ) {
                    // 	var toastConfig = {
-                   // 		timeout: 5000,
+                   // 		timeout: 60*60*1000,
                    // 		position: 'top',
                    // 		actionText: 'OK',
                    // 		message: data.message,
@@ -2173,7 +2173,7 @@ $.ajax({
 
     function savebtn(){
         var toastConfig = {
-                    timeout: 5000,
+                    timeout: 60*60*1000,
                     position: 'top',
                     actionText: 'OK',
                     message: "You have successfully saved the answers.",

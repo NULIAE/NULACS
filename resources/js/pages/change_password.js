@@ -55,7 +55,7 @@ $(function () {
 					form.reset();
 				}
 				var toastConfig = {
-					timeout: 5000,
+					timeout: 60*60*1000,
 					position: 'top',
 					actionText: 'OK',
 					message: data.message,

@@ -263,7 +263,7 @@ class Email_template extends MY_Controller
 
         $this->email->message($message);
     
-        /* if($this->email->send())
+        if($this->email->send())
 		{
 			$response = array(
 				"success" => TRUE,
@@ -276,12 +276,7 @@ class Email_template extends MY_Controller
 				"success" => FALSE,
 				"message" => "Failed to send the emails. Please try again later."
 			);
-		} */
-
-		$response = array(
-			"success" => FALSE,
-			"message" => "Please enable the mail function"
-		);
+		}
 
 		echo json_encode($response);
 	}

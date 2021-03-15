@@ -91,8 +91,10 @@ class Email_model extends CI_Model
 			$this->db->where("role_id !=", 1);
 		}
 
-		if(!empty($exclude))
+		if(isset($exclude) && !empty($exclude))
+		{
 			$this->db->where_not_in("affiliate_id", $exclude);
+		}
 		
 		$query = $this->db->get();
 
