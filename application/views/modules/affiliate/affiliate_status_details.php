@@ -104,7 +104,7 @@ $quarterArray = array(
 
 								<div class=" m-y-20">
 									<div class="h5 t-c f-bold">MONTHLY (<?php echo strtoupper(date('M', mktime(0, 0, 0, $month, 10))).' '.$monthly_year; ?>)</div>
-									<div class="h6">Due Date: 01/31/2021</div>
+									<!-- <div class="h6">Due Date: 01/31/2021</div> -->
 
 								</div>
 
@@ -344,7 +344,7 @@ $quarterArray = array(
 
 								<div class=" m-y-20">
 									<div class="h5 t-c f-bold">Q<?php echo $quarter; ?> (<?php echo $quarterArray[$quarter]; ?>)</div>
-									<div class="h6">Due Date: 01/31/2021</div>
+									<!-- <div class="h6">Due Date: 01/31/2021</div> -->
 
 								</div>
 
@@ -577,7 +577,7 @@ $quarterArray = array(
 								<div class=" m-y-20">
 									<?php $startMonth = date('m', strtotime($affiliate['year_start'])); ?>
 									<div class="h5 t-c f-bold">YEARLY (<?php echo strtoupper(date('M', strtotime($affiliate['year_start'])))." ".$yearly_year; ?> - <?php echo strtoupper(date('M Y', strtotime("+11 month", mktime(0, 0, 0, $startMonth, 1, $yearly_year)))); ?>)</div>
-									<div class="h6">Due Date: 01/31/2021</div>
+									<!-- <div class="h6">Due Date: 01/31/2021</div> -->
 
 								</div>
 
