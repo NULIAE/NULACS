@@ -62,17 +62,22 @@ class Email_model extends CI_Model
 		if($type == "monthly")
 		{
 			$query = $this->db->query("SELECT DISTINCT(`affiliate_id`) FROM `affiliate_compliance_status_monthly` WHERE `month`='$month' AND `year`='$year' AND `compliance_status`='8'");
-			$exclude = $query->result_array();
+			$result = $query->result_array();
 		}
 		else if($type == "quarterly")
 		{
 			$query = $this->db->query("SELECT DISTINCT(`affiliate_id`) FROM `affiliate_compliance_status_quarterly` WHERE `quarter`='$quarter' AND `year`='$year' AND `compliance_status`='8'");
-			$exclude = $query->result_array();
+			$result = $query->result_array();
 		}
 		else if($type == "yearly")
 		{
 			$query = $this->db->query("SELECT DISTINCT(`affiliate_id`) FROM `affiliate_compliance_status_yearly` WHERE `year`='$year' AND `compliance_status`='8'");
-			$exclude = $query->result_array();
+			$result = $query->result_array();
+		}
+
+		foreach($result as $row)
+		{
+			$exclude[] = $row["affiliate_id"];
 		}
 
 		$this->db->select("user_id, role_id, CONCAT(prifix, first_name, ' ' , last_name) AS fullname, name, user_title, is_adm_uploader");
