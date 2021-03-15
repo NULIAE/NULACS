@@ -2048,7 +2048,7 @@ $quarterArray = array(
 							<?php if($this->session->role_id != 1 ){ ?>
 								<button class="<?=$btn_s?> btn-rounded min w-100px ml-auto" type="submit" id='key_indicators_save_btn_u'><span class ="key_indicators_save_btn_u_s"><?=$btn_s_name?></span></button>
 							<?php }else{ ?>
-								<button class="<?=$btn_s?> btn-rounded min w-100px ml-auto" type="submit" id='key_indicators_save_btn'><span class ="key_indicators_save_btn_u_s"><?=$btn_s_name?></span></button>
+								<button class="btn btn-primary btn-rounded min w-100px ml-auto" type="submit" id='key_indicators_save_btn'>SAVE</button>
 							<?php } ?>
 								<input type="hidden" id="affiliate_id_val" value="<?php echo $affiliate['affiliate_id']; ?>" />
 								<?php if($this->session->role_id == 1 ){ ?>
