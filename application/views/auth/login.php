@@ -69,16 +69,6 @@
 			<input class="input100 form-control" id="reset-email" type="email" name="email" placeholder="(e.g.yourmail@domain.com)" required />
 		</div>
 
-		<div class="mb-2">
-			<label class="label-input100" for="selectnul">Affiliate Location Name</label>
-			<select class="input100 form-control" name="selectnul" id="selectnul" required>
-				<option value="">Select Location Name</option>
-				<?php foreach ($affiliate_locations as $location): ?>
-					<option value="<?php echo $location; ?>"><?php echo $location; ?></option>
-				<?php endforeach; ?>
-			</select>
-		</div>
-
 		<div class="d-flex justify-content-around mt-3">
 			<a href="#" id="resetButton" class="getPass">get password</a>
 			<a href="javascript:;" class="getPass cancel" data-hide="popupName">cancel</a>

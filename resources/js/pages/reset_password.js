@@ -20,7 +20,7 @@ $(function () {
 			}
 		},
 		messages: {
-			new_password: {
+			password: {
 			  pwcheck: "Your password must contain a special character !#$%&@_- ",
 			  checkdigit: "Your password must contain at least one digit"
 			 

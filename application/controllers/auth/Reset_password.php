@@ -68,8 +68,8 @@ class Reset_password extends CI_Controller
 		//XSS Filter all the input post fields
 		$data = $this->input->post(NULL, TRUE);
 
-		//Check whether user with the email id and affiliate location exists on `users` table
-		$user_data = $this->User_model->check_affiliate_user($data['email'], $data['location']);
+		//Check whether user with the email id exists on `users` table
+		$user_data = $this->User_model->check_user($data['email']);
 
 		$status = $message = NULL;
 
@@ -81,11 +81,11 @@ class Reset_password extends CI_Controller
 			if ( $this->User_model->save_password_token($user_data['user_id'], $token) )
 			{
 				//Token generated and saved successfully. Send reset link to user's email
-				$content = 'Dear Member<br />';
-				$content .= '<p>Request for reset the password for your NUL account on http://nul.org received. </p>';
+				$content = '<p>Dear Member,</p>';
+				$content .= '<p>Request for reset the password for your NUL account on <a href="'.base_url().'">Affiliate Compliance System</a> received. </p>';
 				$content .= '<p>If you did not perform this request, you can safely ignore this email.</p>';
 				$content .= '<p>To change your account password, click the link below.</p>';
-				$content .= '<p><a href="'.base_url("/reset-password/$token").'">Reset Password</a></p>';
+				$content .= '<p><a href="'.base_url().'/reset-password/'.$token.'">Reset Password</a></p>';
 				$content .= '<p>Thanks</p>';
 
 				$mail_content = $this->load->view('layout/mail_template', array("message" => $content), TRUE);

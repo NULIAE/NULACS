@@ -35,18 +35,18 @@
             <div class="collapse navbar-collapse" id="mainMenuDark">
               <ul class="navbar-nav ml-auto">
                 <li class="nav-item affiliatehead active">
-                  <a class="nav-link"><span>Affiliate Compliance Management</span></a>
+                  <a class="nav-link"><span>Affiliate Compliance System</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="<?php echo base_url('/user/view-profile/').$this->session->user_id; ?>"><i class="i i-admin"></i><span class="sr-only">Profile</span></a>
+                  <a class="nav-link" title="Profile" href="<?php echo base_url('/user/view-profile/').$this->session->user_id; ?>"><i class="i i-admin"></i><span class="sr-only">Profile</span></a>
 								</li>
 								<?php if($this->session->role_id==1 || $this->session->role_id==3): ?>
                 <li class="nav-item">
-                  <a class="nav-link" href="<?php echo base_url('/user/profile/modules'); ?>"><i class="i i-setting"></i><span class="sr-only">Modules</span></a>
+                  <a class="nav-link" title="Settings" href="<?php echo base_url('/user/profile/modules'); ?>"><i class="i i-setting"></i><span class="sr-only">Modules</span></a>
 								</li>
 								<?php endif; ?>
                 <li class="nav-item dropdown">
-									<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<a class="nav-link dropdown-toggle" title="Notifications" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 										<i class="i i-notification"></i>
 										<div class="rounded_notification"><?=isset($notifications)?count($notifications):'0'?></div>
 									</a>
@@ -84,7 +84,7 @@
                   </div>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" id="btn-logout" href="<?php echo base_url('/logout'); ?>"><i class="i i-download_left"></i><span class="sr-only">Sign out</span></a>
+                  <a class="nav-link" title="Log out" id="btn-logout" href="<?php echo base_url('/logout'); ?>"><i class="i i-download_left"></i><span class="sr-only">Sign out</span></a>
                 </li>
               </ul>
             </div>

@@ -21,27 +21,6 @@ class User_model extends CI_Model
 	}
 	
 	/**
-	 * Check whether user with the email id and affiliate location exists on `users` table
-	 *
-	 * @param  mixed $email
-	 * @param  mixed $location
-	 * @return array
-	 */
-	public function check_affiliate_user($email, $location)
-	{
-		$this->db->select('users.user_id, users.affiliate_id');
-		$this->db->from('users');
-		$this->db->join('affiliate', 'affiliate.affiliate_id = users.affiliate_id');
-		$this->db->where('users.user_status', '1');
-		$this->db->where('affiliate.organization', $location);
-		$this->db->where('users.name', $email);
-
-		$query = $this->db->get();
-
-		return $query->row_array();
-	}
-	
-	/**
 	 * Save reset password token in `users` table for the user with given `user_id`
 	 *
 	 * @param  mixed $user_id
@@ -108,21 +87,6 @@ class User_model extends CI_Model
 		//Invalid reset password token or password updation failed
 		return FALSE;
 
-	}
-	
-	/**
-	 * Get all the affiliate locations
-	 *
-	 * @return array
-	 */
-	public function get_affiliate_locations()
-	{
-		$this->db->select('organization');
-		$this->db->from('affiliate');
-		
-		$query = $this->db->get();
-
-		return $query->row_array();
 	}
 	
 	/**

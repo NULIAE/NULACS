@@ -16,7 +16,7 @@ $(function () {
 
 	//Forgot password popup
 	$('#f-pass').on('click', function () {
-		popup.open('#popupPass', 400, 300, { // 540 + 40
+		popup.open('#popupPass', 400, 250, { // 540 + 40
 		  units: 'px',
 		  block: true,
 		  animateIn: 'fadeIn',
@@ -44,16 +44,7 @@ $(function () {
 			$(element).removeClass('is-invalid').addClass(validClass);
 			$(element).next().removeClass('invalid-feedback').addClass(validClass);
 		},
-		invalidHandler: function(event, validator) {
-			// 'this' refers to the form
-			var errors = validator.numberOfInvalids();
-			if (errors) {
-				var height = 300 + (errors * 20);
-				$('#popupPass').height(height);
-			}
-		},
-		submitHandler: function(form) { 
-			$('#popupPass').height(300);
+		submitHandler: function(form) {
 			$.ajax({
 				type : 'POST',
 				url	 : $(form).prop('action'),
@@ -71,10 +62,7 @@ $(function () {
 					form.reset();
 					popup.close('#popupPass');
 				}
-				setTimeout(function(){
-					$('#snackbar').NitroToast(toastConfig);
-				}, 2000);
-
+				$('#snackbar').NitroToast(toastConfig);
 			});
 		}
 	});

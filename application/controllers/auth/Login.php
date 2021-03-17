@@ -26,14 +26,10 @@ class Login extends CI_Controller
 		{
 			redirect(base_url('/'));
 		}
-
-		//Get all the affiliate locations for reset password
-		$affiliate_locations = $this->User_model->get_affiliate_locations();
 		
 		$data['content'] = array(
 			'csrf_name' => $this->security->get_csrf_token_name(),
-			'csrf_hash' => $this->security->get_csrf_hash(),
-			'affiliate_locations' => $affiliate_locations
+			'csrf_hash' => $this->security->get_csrf_hash()
 		);
 
 		//Name of the view file

@@ -2,7 +2,7 @@
 
 $config = Array(
     'protocol' => 'smtp',
-    'smtp_crypto' =>"ssl",
+    'smtp_crypto' =>"tls",
     'newline' => "\r\n",							
     'priority' => 1,
     'smtp_timeout' => 20,
