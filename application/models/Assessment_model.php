@@ -153,8 +153,7 @@ class Assessment_model extends CI_Model
 	{
 		$this->db->select('*');
 		$this->db->from('self_assessment sa');
-		$this->db->join('users u', 'u.affiliate_id = sa.affiliate_id','left');
-		$this->db->join('affiliate a', 'a.affiliate_id = u.affiliate_id','left');
+		$this->db->join('affiliate a', 'a.affiliate_id = sa.affiliate_id','left');
 		$this->db->join('state s', 's.stateid = a.state','left');
 		if(isset($this->session->role_id ) && $this->session->role_id == 3 ){ 
 			$this->db->where('sa.affiliate_id', $this->session->affiliate_id);
