@@ -1,5 +1,6 @@
 
    $(function() {
+    page.loader(true);
 	$('[data-toggle="popover"]').popover();
  
 })
