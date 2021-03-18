@@ -24,7 +24,7 @@
 							</select>
 						</div>
 						<div class="col-lg-4 col-md-6 col-sm-24">
-							<label for="aname">Affiliate Name</label>
+							<label for="aname">Affiliate Name/Location</label>
 							<input type="text" class="form-control" name="aname" id="aname" value="" />
 						</div>
 					

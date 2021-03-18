@@ -12,19 +12,28 @@ class Affiliate_model extends CI_Model
 	 */
 	public function get_affiliate_count($where = NULL) 
 	{
-		if(isset($where['affiliate.organization']))
+		$sql = "SELECT * FROM `affiliate` ";
+
+		if(isset($where['affiliate.region_id']) && isset($where['affiliate.organization']))
 		{
-			$aname = $where['affiliate.organization'];
-			$this->db->like('affiliate.organization', $aname);
-			unset($where['affiliate.organization']);
+			$sql .= "WHERE `region_id`=".$where['affiliate.region_id']." AND `affiliate_id` IN (SELECT `affiliate_id` FROM `affiliate` WHERE `organization` LIKE '%" .
+			$this->db->escape_like_str($where['affiliate.organization'])."%' ESCAPE '!' OR `city` LIKE '%" .
+			$this->db->escape_like_str($where['affiliate.organization'])."%' ESCAPE '!')";
+		} 
+		else if(isset($where['affiliate.region_id']))
+		{
+			$sql .= "WHERE `region_id`=".$where['affiliate.region_id'];
+		}
+		else if(isset($where['affiliate.organization']))
+		{
+			$sql .= "WHERE `affiliate_id` IN (SELECT `affiliate_id` FROM `affiliate` WHERE `organization` LIKE '%" .
+			$this->db->escape_like_str($where['affiliate.organization'])."%' ESCAPE '!' OR `city` LIKE '%" .
+			$this->db->escape_like_str($where['affiliate.organization'])."%' ESCAPE '!')";
 		}
 		
-		if( $where !== NULL)
-		{
-			$this->db->where($where);
-		}
+		$query = $this->db->query($sql);
 
-        return $this->db->count_all_results('affiliate');
+		return $query->num_rows();
 	}
 	
 	/**
@@ -37,34 +46,38 @@ class Affiliate_model extends CI_Model
 	 */
 	public function get_all_affiliates($limit = NULL, $start = NULL, $where = NULL, $isYearNeeded = FALSE)
 	{
-		$this->db->select('*, region.name AS region');
-		$this->db->from('affiliate');
-		$this->db->join('region', 'region.region_id = affiliate.region_id');
-		$this->db->join('state', 'state.stateid = affiliate.state');
+		$sql = "SELECT *, region.name AS region FROM `affiliate` ";
+		$sql .= "JOIN region ON region.region_id = affiliate.region_id ";
+		$sql .= "JOIN state ON state.stateid = affiliate.state ";
 
 		if( $isYearNeeded )
 		{
-			$this->db->join('financial_year', 'financial_year.affiliate_id = affiliate.affiliate_id');
+			$sql .= "JOIN financial_year ON financial_year.affiliate_id = affiliate.affiliate_id ";
 		}
 
-		if(isset($where['affiliate.organization']))
+		if(isset($where['affiliate.region_id']) && isset($where['affiliate.organization']))
 		{
-			$aname = $where['affiliate.organization'];
-			$this->db->like('affiliate.organization', $aname);
-			unset($where['affiliate.organization']);
+			$sql .= "WHERE `region`.`region_id`=".$where['affiliate.region_id']." AND `affiliate`.`affiliate_id` IN (SELECT `affiliate_id` FROM `affiliate` WHERE `organization` LIKE '%" .
+			$this->db->escape_like_str($where['affiliate.organization'])."%' ESCAPE '!' OR `city` LIKE '%" .
+			$this->db->escape_like_str($where['affiliate.organization'])."%' ESCAPE '!') ";
+		} 
+		else if(isset($where['affiliate.region_id']))
+		{
+			$sql .= "WHERE `region`.`region_id`=".$where['affiliate.region_id']." ";
 		}
-
-		if( $where !== NULL)
+		else if(isset($where['affiliate.organization']))
 		{
-			$this->db->where($where);
+			$sql .= "WHERE `affiliate`.`affiliate_id` IN (SELECT `affiliate_id` FROM `affiliate` WHERE `organization` LIKE '%" .
+			$this->db->escape_like_str($where['affiliate.organization'])."%' ESCAPE '!' OR `city` LIKE '%" .
+			$this->db->escape_like_str($where['affiliate.organization'])."%' ESCAPE '!') ";
 		}
 
 		if( ($limit !== NULL) && ($start !== NULL) )
 		{
-			$this->db->limit($limit, $start);
+			$sql .= "LIMIT $limit OFFSET $start";
 		}
-		$this->db->group_by('affiliate.affiliate_id'); 
-		$query = $this->db->get();
+		
+		$query = $this->db->query($sql);
 
 		$affiliates =  $query->result_array();
 
