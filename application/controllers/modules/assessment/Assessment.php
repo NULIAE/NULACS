@@ -345,7 +345,7 @@ class Assessment extends MY_Controller
 	 *
 	 * @return view 'assessment.php'
 	 */
-	public function rating($dSelfAssessmentId=NULL,$dAffiliateId=NULL,$userId)
+	public function rating($dSelfAssessmentId=NULL,$dAffiliateId=NULL,$userId=NULL)
 	{
 		if(isset($_POST) && !empty($_POST)){
 			$selfAssessmentId = $_POST['selfAssessmentId'];

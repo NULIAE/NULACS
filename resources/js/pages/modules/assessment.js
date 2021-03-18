@@ -2211,7 +2211,7 @@ $.ajax({
 
         $(function() {
             var role_id=  $('#role_id_def').val();
-            if(role_id == 3){
+            if(role_id == 3 || role_id == 2){
                    $('input[type="text"]').prop('readonly', true);
             }
  
