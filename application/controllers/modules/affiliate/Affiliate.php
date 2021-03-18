@@ -8,6 +8,7 @@ class Affiliate extends MY_Controller
 		parent::__construct();
 		$this->load->model('Affiliate_model');
 		$this->load->model('Document_model');
+		$this->load->model('Assessment_model');
 		//$this->output->enable_profiler(TRUE);
 	}
 
@@ -789,6 +790,10 @@ class Affiliate extends MY_Controller
 			'year'	=> $recent_data['yearly']['year'],
 			'affiliate.affiliate_id' => $affiliate_id
 		);
+
+		$assessment_filter = array(
+			'affiliate_id' => $affiliate_id
+		);
 		$yearly_compliance_status = $this->Affiliate_model->yearly_compliance_status(NULL, NULL, $compliance_filter);
 
 		$data['content'] = array(
@@ -803,6 +808,7 @@ class Affiliate extends MY_Controller
 			'quarterly_compliance' => empty($quarterly_compliance_status) ? 11 : $quarterly_compliance_status[0]['compliance_status'],
 			'yearly_compliance' => empty($yearly_compliance_status) ? 11 : $yearly_compliance_status[0]['compliance_status'],
 			'self_assessment_documents' => $this->Affiliate_model->get_self_assessment_documents($affiliate_id),
+			'assessment_listing' => $this->Assessment_model->assessment_listing($assessment_filter),
 			'soundness_document_status' => $soundness_document_status,
 			'vitality_document_status' => $vitality_document_status,
 			'mission_document_status' => $mission_document_status,

@@ -187,12 +187,17 @@
 
           
             $def_icon ='';
-            if(isset($this->session->role_id ) && $this->session->role_id == 3 ){ 
+            if(isset($this->session->role_id ) && $this->session->role_id == 3 || $this->session->role_id == 2){ 
                 $def_icon = 'i i-remove_red_eye';
             }else{
                 $def_icon = 'i i i-create';
             } 
 
+            if(isset($_GET['uid']) && !empty($_GET['uid'])){
+              $userId = '&uid='.$_GET['uid'];
+           }else{
+              $userId='';
+           }
        ?>
         <form class="m-y-20">
             <div class="row align-items-end">
@@ -217,7 +222,7 @@
                             </div>
                         </div>
                 <div class="col ">
-                  <div class="t-r"><a  target="_blank" href="<?php echo base_url('module/assessment/assessment-pdf?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>"  class="btn btn-dark btn-rounded min w-100px">EXPORT</a> </div>
+                  <div class="t-r"><a  target="_blank" href="<?php echo base_url('module/assessment/assessment-pdf?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId); ?>"  class="btn btn-dark btn-rounded min w-100px">EXPORT</a> </div>
                 </div>
 
              
@@ -254,7 +259,7 @@
                         <div class="row align-items-center">
                             <div class="col-14"><h5>Administration and 
                                 Governance   
-                                <a href="<?php echo base_url('module/assessment/assessment?sid='.$_GET['sid'].'&aid='.$_GET['aid'].'&tid=nav-x1&stid=os-1'); ?>" class="btn">
+                                <a href="<?php echo base_url('module/assessment/assessment?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId.'&tid=nav-x1&stid=os-1'); ?>" class="btn">
                                 <i class="<?=$def_icon?>"> </i></a>
                             
                             </h5></div>
@@ -303,7 +308,7 @@
                     <div class="head dark">
                         <div class="row align-items-center">
                             <div class="col-14"><h5>Affiliate Policies and Procedures 
-                            <a href="<?php echo base_url('module/assessment/assessment?sid='.$_GET['sid'].'&aid='.$_GET['aid'].'&tid=nav-x1&stid=os-4'); ?>" class="btn">
+                            <a href="<?php echo base_url('module/assessment/assessment?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId.'&tid=nav-x1&stid=os-4'); ?>" class="btn">
                                 <i class="<?=$def_icon?>"> </i></a>
                             </h5></div>
                             <div class="col-10">
@@ -356,7 +361,7 @@
                     <div class="head dark">
                         <div class="row align-items-center">
                             <div class="col-14"><h5>Annual Reports
-                            <a href="<?php echo base_url('module/assessment/assessment?sid='.$_GET['sid'].'&aid='.$_GET['aid'].'&tid=nav-x1&stid=os-2'); ?>" class="btn">
+                            <a href="<?php echo base_url('module/assessment/assessment?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId.'&tid=nav-x1&stid=os-2'); ?>" class="btn">
                                 <i class="<?=$def_icon?>"> </i></a>
                             </h5></div>
                             <div class="col-10">
@@ -404,7 +409,7 @@
                     <div class="head">
                         <div class="row align-items-center">
                             <div class="col-14"><h5>Strategic Planning
-                            <a href="<?php echo base_url('module/assessment/assessment?sid='.$_GET['sid'].'&aid='.$_GET['aid'].'&tid=nav-x1&stid=os-5'); ?>" class="btn">
+                            <a href="<?php echo base_url('module/assessment/assessment?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId.'&tid=nav-x1&stid=os-5'); ?>" class="btn">
                                 <i class="<?=$def_icon?>"> </i></a>        
                         </h5></div>
                             <div class="col-10">
@@ -455,7 +460,7 @@
                     <div class="head dark">
                         <div class="row align-items-center">
                             <div class="col-14"><h5>Public Affairs and Public Policy
-                            <a href="<?php echo base_url('module/assessment/assessment?sid='.$_GET['sid'].'&aid='.$_GET['aid'].'&tid=nav-x1&stid=os-6'); ?>" class="btn">
+                            <a href="<?php echo base_url('module/assessment/assessment?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId.'&tid=nav-x1&stid=os-6'); ?>" class="btn">
                                 <i class="<?=$def_icon?>"> </i></a>
                             </h5></div>
                             <div class="col-10">
@@ -508,7 +513,7 @@
                     <div class="head">
                         <div class="row align-items-center">
                             <div class="col-14"><h5>Board of Directors 
-                            <a href="<?php echo base_url('module/assessment/assessment?sid='.$_GET['sid'].'&aid='.$_GET['aid'].'&tid=nav-x1&stid=os-3'); ?>" class="btn">
+                            <a href="<?php echo base_url('module/assessment/assessment?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId.'&tid=nav-x1&stid=os-3'); ?>" class="btn">
                                 <i class="<?=$def_icon?>"> </i></a>
                             </h5></div>
                             <div class="col-10">
@@ -585,7 +590,7 @@
                     <div class="head dark">
                         <div class="row align-items-center">
                             <div class="col-14"><h5>Personnel Policies
-                            <a href="<?php echo base_url('module/assessment/assessment?sid='.$_GET['sid'].'&aid='.$_GET['aid'].'&tid=nav-x2&stid=qs-1'); ?>" class="btn">
+                            <a href="<?php echo base_url('module/assessment/assessment?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId.'&tid=nav-x2&stid=qs-1'); ?>" class="btn">
                                 <i class="<?=$def_icon?>"> </i></a>
                             </h5></div>
                             <div class="col-10">
@@ -634,7 +639,7 @@
                     <div class="head ">
                         <div class="row align-items-center">
                             <div class="col-14"><h5>Internal Controls
-                            <a href="<?php echo base_url('module/assessment/assessment?sid='.$_GET['sid'].'&aid='.$_GET['aid'].'&tid=nav-x2&stid=qs-4'); ?>" class="btn">
+                            <a href="<?php echo base_url('module/assessment/assessment?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId.'&tid=nav-x2&stid=qs-4'); ?>" class="btn">
                                 <i class="<?=$def_icon?>"> </i></a>
                             </h5></div>
                             <div class="col-10">
@@ -685,7 +690,7 @@
                     <div class="head ">
                         <div class="row align-items-center">
                             <div class="col-14"><h5>Fundraising
-                            <a href="<?php echo base_url('module/assessment/assessment?sid='.$_GET['sid'].'&aid='.$_GET['aid'].'&tid=nav-x2&stid=qs-2'); ?>" class="btn">
+                            <a href="<?php echo base_url('module/assessment/assessment?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId.'&tid=nav-x2&stid=qs-2'); ?>" class="btn">
                                 <i class="<?=$def_icon?>"> </i></a>
                             </h5></div>
                             <div class="col-10">
@@ -734,7 +739,7 @@
                     <div class="head dark">
                         <div class="row align-items-center">
                             <div class="col-14"><h5>Fiscal Policies and Procedures
-                            <a href="<?php echo base_url('module/assessment/assessment?sid='.$_GET['sid'].'&aid='.$_GET['aid'].'&tid=nav-x2&stid=qs-5'); ?>" class="btn">
+                            <a href="<?php echo base_url('module/assessment/assessment?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId.'&tid=nav-x2&stid=qs-5'); ?>" class="btn">
                                 <i class="<?=$def_icon?>"> </i></a>
                             </h5></div>
                             <div class="col-10">
@@ -784,7 +789,7 @@
                     <div class="head ">
                         <div class="row align-items-center">
                             <div class="col-14"><h5>Endowments
-                            <a href="<?php echo base_url('module/assessment/assessment?sid='.$_GET['sid'].'&aid='.$_GET['aid'].'&tid=nav-x2&stid=qs-6'); ?>" class="btn">
+                            <a href="<?php echo base_url('module/assessment/assessment?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId.'&tid=nav-x2&stid=qs-6'); ?>" class="btn">
                                 <i class="<?=$def_icon?>"> </i></a>
                             </h5></div>
                             <div class="col-10">
@@ -835,7 +840,7 @@
                     <div class="head dark">
                         <div class="row align-items-center">
                             <div class="col-14"><h5>Corporate Goals
-                            <a href="<?php echo base_url('module/assessment/assessment?sid='.$_GET['sid'].'&aid='.$_GET['aid'].'&tid=nav-x2&stid=qs-7'); ?>" class="btn">
+                            <a href="<?php echo base_url('module/assessment/assessment?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId.'&tid=nav-x2&stid=qs-7'); ?>" class="btn">
                                 <i class="<?=$def_icon?>"> </i></a>
                             </h5></div>
                             <div class="col-10">
@@ -887,7 +892,7 @@
                     <div class="head dark">
                         <div class="row align-items-center">
                             <div class="col-14"><h5>Fiscal/Financial Management 
-                            <a href="<?php echo base_url('module/assessment/assessment?sid='.$_GET['sid'].'&aid='.$_GET['aid'].'&tid=nav-x2&stid=qs-3'); ?>" class="btn">
+                            <a href="<?php echo base_url('module/assessment/assessment?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId.'&tid=nav-x2&stid=qs-3'); ?>" class="btn">
                                 <i class="<?=$def_icon?>"> </i></a>
                             </h5></div>
                             <div class="col-10">
@@ -937,7 +942,7 @@
                     <div class="head ">
                         <div class="row align-items-center">
                             <div class="col-14"><h5>Legal, Compliance and Accountability
-                            <a href="<?php echo base_url('module/assessment/assessment?sid='.$_GET['sid'].'&aid='.$_GET['aid'].'&tid=nav-x2&stid=qs-8'); ?>" class="btn">
+                            <a href="<?php echo base_url('module/assessment/assessment?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId.'&tid=nav-x2&stid=qs-8'); ?>" class="btn">
                                 <i class="<?=$def_icon?>"> </i></a>
                                   </h5></div>
                             <div class="col-10">
@@ -1012,7 +1017,7 @@
                     <div class="head">
                         <div class="row align-items-center">
                             <div class="col-14"><h5>Operational Standards
-                            <a href="<?php echo base_url('module/assessment/assessment?sid='.$_GET['sid'].'&aid='.$_GET['aid'].'&tid=nav-x3&stid=dt-1'); ?>" class="btn">
+                            <a href="<?php echo base_url('module/assessment/assessment?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId.'&tid=nav-x3&stid=dt-1'); ?>" class="btn">
                                 <i class="<?=$def_icon?>"> </i></a>
                             </h5></div>
                             <div class="col-10">
@@ -1060,7 +1065,7 @@
                     <div class="head dark">
                         <div class="row align-items-center">
                             <div class="col-14"><h5>Operational Standards
-                            <a href="<?php echo base_url('module/assessment/assessment?sid='.$_GET['sid'].'&aid='.$_GET['aid'].'&tid=nav-x3&stid=dt-4'); ?>" class="btn">
+                            <a href="<?php echo base_url('module/assessment/assessment?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId.'&tid=nav-x3&stid=dt-4'); ?>" class="btn">
                                 <i class="<?=$def_icon?>"> </i></a>
                             </h5></div>
                             <div class="col-10">
@@ -1111,7 +1116,7 @@
                     <div class="head dark">
                         <div class="row align-items-center">
                             <div class="col-14"><h5>Program Quality 
-                            <a href="<?php echo base_url('module/assessment/assessment?sid='.$_GET['sid'].'&aid='.$_GET['aid'].'&tid=nav-x3&stid=dt-2'); ?>" class="btn">
+                            <a href="<?php echo base_url('module/assessment/assessment?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId.'&tid=nav-x3&stid=dt-2'); ?>" class="btn">
                                 <i class="<?=$def_icon?>"> </i></a>
                             </h5></div>
                             <div class="col-10">
@@ -1161,7 +1166,7 @@
                     <div class="head">
                         <div class="row align-items-center">
                             <div class="col-14"><h5>Operational Standards
-                            <a href="<?php echo base_url('module/assessment/assessment?sid='.$_GET['sid'].'&aid='.$_GET['aid'].'&tid=nav-x3&stid=dt-5'); ?>" class="btn">
+                            <a href="<?php echo base_url('module/assessment/assessment?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId.'&tid=nav-x3&stid=dt-5'); ?>" class="btn">
                                 <i class="<?=$def_icon?>"> </i></a>
                             </h5></div>
                             <div class="col-10">
@@ -1210,7 +1215,7 @@
                     <div class="head ">
                         <div class="row align-items-center">
                             <div class="col-14"><h5>Operational Standards
-                            <a href="<?php echo base_url('module/assessment/assessment?sid='.$_GET['sid'].'&aid='.$_GET['aid'].'&tid=nav-x3&stid=dt-7'); ?>" class="btn">
+                            <a href="<?php echo base_url('module/assessment/assessment?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId.'&tid=nav-x3&stid=dt-7'); ?>" class="btn">
                                 <i class="<?=$def_icon?>"> </i></a>
                             </h5></div>
                             <div class="col-10">
@@ -1262,7 +1267,7 @@
                     <div class="head">
                         <div class="row align-items-center">
                             <div class="col-14"><h5>Program Quality
-                            <a href="<?php echo base_url('module/assessment/assessment?sid='.$_GET['sid'].'&aid='.$_GET['aid'].'&tid=nav-x3&stid=dt-3'); ?>" class="btn">
+                            <a href="<?php echo base_url('module/assessment/assessment?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId.'&tid=nav-x3&stid=dt-3'); ?>" class="btn">
                                 <i class="<?=$def_icon?>"> </i></a>
                              </h5></div>
                             <div class="col-10">
@@ -1315,7 +1320,7 @@
                     <div class="head dark">
                         <div class="row align-items-center">
                             <div class="col-14"><h5>Operational Standards 
-                            <a href="<?php echo base_url('module/assessment/assessment?sid='.$_GET['sid'].'&aid='.$_GET['aid'].'&tid=nav-x3&stid=dt-6'); ?>" class="btn">
+                            <a href="<?php echo base_url('module/assessment/assessment?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId.'&tid=nav-x3&stid=dt-6'); ?>" class="btn">
                                 <i class="<?=$def_icon?>"> </i></a>
                             </h5></div>
                             <div class="col-10">
@@ -1369,7 +1374,7 @@
                     <div class="head ">
                         <div class="row align-items-center">
                             <div class="col-14"><h5>Program Quality 
-                            <a href="<?php echo base_url('module/assessment/assessment?sid='.$_GET['sid'].'&aid='.$_GET['aid'].'&tid=nav-x3&stid=dt-8'); ?>" class="btn">
+                            <a href="<?php echo base_url('module/assessment/assessment?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId.'&tid=nav-x3&stid=dt-8'); ?>" class="btn">
                                 <i class="<?=$def_icon?>"> </i></a>
 
                             </h5></div>

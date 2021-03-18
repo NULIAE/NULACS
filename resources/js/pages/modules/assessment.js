@@ -362,6 +362,7 @@
         //   });
         var selfAssessmentId = {
             "selfAssessmentId":$('#self_assessment_id').val(),
+            "userId":$('#user_id').val(),
             "affiliateId":$('#affiliate_id').val(),
         }
 
@@ -400,6 +401,7 @@
 
         var selfAssessmentData = {
             "selfAssessmentId":$('#self_assessment_id').val(),
+            "userId":$('#user_id').val(),
             "affiliateId":$('#affiliate_id').val(),
         }
 
@@ -609,6 +611,7 @@ function c_one_s_one()
 
     var criteriaOneStandardOne = {
                  "selfAssessmentId":$('#self_assessment_id').val(),
+                 "userId":$('#user_id').val(),
                  "affiliateId":$('#affiliate_id').val(),
                  "criteriaId":$('#criteriaOneStandardOneId').val(),
                  "c1_s1_1_1_comment_1":$('#c1_s1_1_1_comment_1').val(),
@@ -683,6 +686,7 @@ function c_one_s_two()
  
  var criteriaOneStandardTwo = {
                 "selfAssessmentId":$('#self_assessment_id').val(),
+                "userId":$('#user_id').val(),
                 "affiliateId":$('#affiliate_id').val(),
                  "criteriaId":$('#criteriaOneStandardTwoId').val(),
                  "c1_s2_2_1_comment_1":$('#c1_s2_2_1_comment_1').val(),
@@ -725,6 +729,7 @@ function c_one_s_three()
  
  var criteriaOneStandardThree = {
                 "selfAssessmentId":$('#self_assessment_id').val(),
+                "userId":$('#user_id').val(),
                 "affiliateId":$('#affiliate_id').val(),
                  "criteriaId":$('#criteriaOneStandardThreeId').val(),
                  "c1_s3_3_1_comment_1":$('#c1_s3_3_1_comment_1').val(),
@@ -849,6 +854,7 @@ function c_one_s_four(){
  
  var criteriaOneStandardfour = { 
                  "selfAssessmentId":$('#self_assessment_id').val(),
+                 "userId":$('#user_id').val(),
                 "affiliateId":$('#affiliate_id').val(),
                  "criteriaId":$('#criteriaOneStandardFourId').val(),
                  "c1_s4_4_1_comment_1":$('#c1_s4_4_1_comment_1').val(),
@@ -906,6 +912,7 @@ function c_one_s_five(){
  
     var criteriaOneStandardFive = {
                     "selfAssessmentId":$('#self_assessment_id').val(),
+                    "userId":$('#user_id').val(),
                     "affiliateId":$('#affiliate_id').val(),
                     "criteriaId":$('#criteriaOneStandardFiveId').val(),
                     "c1_s5_5_1_comment_1":$('#c1_s5_5_1_comment_1').val(),
@@ -981,6 +988,7 @@ function c_one_s_five(){
  
     var criteriaOneStandardSix = {
                     "selfAssessmentId":$('#self_assessment_id').val(),
+                    "userId":$('#user_id').val(),
                     "affiliateId":$('#affiliate_id').val(),
                     "criteriaId":$('#criteriaOneStandardSixId').val(),
                     "c1_s6_6_1_comment_1":$('#c1_s6_6_1_comment_1').val(),
@@ -1024,6 +1032,7 @@ function c_one_s_five(){
  
     var criteriaTwoStandardOne = {
                     "selfAssessmentId":$('#self_assessment_id').val(),
+                    "userId":$('#user_id').val(),
                     "affiliateId":$('#affiliate_id').val(),
                     "criteriaId":$('#criteriaTwoStandardOneId').val(),
                     "c2_s1_1_1_date_1":$('#c2_s1_1_1_date_1').val(),
@@ -1094,6 +1103,7 @@ function c_one_s_five(){
  
     var criteriaTwoStandardTwo = {
                     "selfAssessmentId":$('#self_assessment_id').val(),
+                    "userId":$('#user_id').val(),
                     "affiliateId":$('#affiliate_id').val(),
                     "criteriaId":$('#criteriaTwoStandardTwoId').val(),
                     "c2_s2_2_1_comment_1":$('#c2_s2_2_1_comment_1').val(),
@@ -1177,6 +1187,7 @@ function c_one_s_five(){
  
     var criteriaTwoStandardThree = {
                     "selfAssessmentId":$('#self_assessment_id').val(),
+                    "userId":$('#user_id').val(),
                     "affiliateId":$('#affiliate_id').val(),
                     "criteriaId":$('#criteriaTwoStandardThreeId').val(),
                     "c2_s3_3_1_comment_1":$('#c2_s3_3_1_comment_1').val(),
@@ -1327,6 +1338,7 @@ function c_one_s_five(){
  
     var criteriaTwoStandardFour = {
                     "selfAssessmentId":$('#self_assessment_id').val(),
+                    "userId":$('#user_id').val(),
                     "affiliateId":$('#affiliate_id').val(),
                     "criteriaId":$('#criteriaTwoStandardFourId').val(),
                     "c2_s4_4_1_comment_1":$('#c2_s4_4_1_comment_1').val(),
@@ -1450,6 +1462,7 @@ function c_one_s_five(){
  
     var criteriaTwoStandardFive = {
                     "selfAssessmentId":$('#self_assessment_id').val(),
+                    "userId":$('#user_id').val(),
                     "affiliateId":$('#affiliate_id').val(),
                     "criteriaId":$('#criteriaTwoStandardFiveId').val(),
                     "c2_s5_5_1_comment_1":$('#c2_s5_5_1_comment_1').val(),
@@ -1510,6 +1523,7 @@ function c_one_s_five(){
  
     var criteriaTwoStandardSix = {
                     "selfAssessmentId":$('#self_assessment_id').val(),
+                    "userId":$('#user_id').val(),
                     "affiliateId":$('#affiliate_id').val(),
                     "criteriaId":$('#criteriaTwoStandardSixId').val(),
                     "c2_s6_6_1_comment_1":$('#c2_s6_6_1_comment_1').val(),
@@ -1554,6 +1568,7 @@ function c_one_s_five(){
  
     var criteriaTwoStandardSeven = {
                     "selfAssessmentId":$('#self_assessment_id').val(),
+                    "userId":$('#user_id').val(),
                     "affiliateId":$('#affiliate_id').val(),
                     "criteriaId":$('#criteriaTwoStandardSevenId').val(),
                     "c2_s7_7_1_comment_1":$('#c2_s7_7_1_comment_1').val(),
@@ -1605,6 +1620,7 @@ function c_one_s_five(){
  
     var criteriaTwoStandardEight = {
                     "selfAssessmentId":$('#self_assessment_id').val(),
+                    "userId":$('#user_id').val(),
                     "affiliateId":$('#affiliate_id').val(),
                     "criteriaId":$('#criteriaTwoStandardEightId').val(),
                     "c2_s8_8_1_comment_1":$('#c2_s8_8_1_comment_1').val(),
@@ -1656,6 +1672,7 @@ function c_one_s_five(){
  
     var criteriaThreeStandardOne = {
                     "selfAssessmentId":$('#self_assessment_id').val(),
+                    "userId":$('#user_id').val(),
                     "affiliateId":$('#affiliate_id').val(),
                     "criteriaId":$('#criteriaThreeStandardOneId').val(),
                     "c3_s1_1_1_comment_1":$('#c3_s1_1_1_comment_1').val(),
@@ -1713,6 +1730,7 @@ function c_one_s_five(){
  
     var criteriaThreeStandardTwo = {
                     "selfAssessmentId":$('#self_assessment_id').val(),
+                    "userId":$('#user_id').val(),
                     "affiliateId":$('#affiliate_id').val(),
                     "criteriaId":$('#criteriaThreeStandardTwoId').val(),
                     "c3_s2_2_1_comment_1":$('#c3_s2_2_1_comment_1').val(),
@@ -1760,6 +1778,7 @@ function c_one_s_five(){
  
     var criteriaThreeStandardThree = {
                     "selfAssessmentId":$('#self_assessment_id').val(),
+                    "userId":$('#user_id').val(),
                     "affiliateId":$('#affiliate_id').val(),
                     "criteriaId":$('#criteriaThreeStandardThreeId').val(),
                     "c3_s3_3_1_comment_1":$('#c3_s3_3_1_comment_1').val(),
@@ -1805,6 +1824,7 @@ function c_one_s_five(){
  
     var criteriaThreeStandardFour = {
                     "selfAssessmentId":$('#self_assessment_id').val(),
+                    "userId":$('#user_id').val(),
                     "affiliateId":$('#affiliate_id').val(),
                     "criteriaId":$('#criteriaThreeStandardFourId').val(),
                     "c3_s4_4_1_comment_1":$('#c3_s4_4_1_comment_1').val(),
@@ -1862,6 +1882,7 @@ function c_one_s_five(){
  
     var criteriaThreeStandardFive = {
                     "selfAssessmentId":$('#self_assessment_id').val(),
+                    "userId":$('#user_id').val(),
                     "affiliateId":$('#affiliate_id').val(),
                     "criteriaId":$('#criteriaThreeStandardFiveId').val(),
                     "c3_s5_5_1_comment_1":$('#c3_s5_5_1_comment_1').val(),
@@ -1917,6 +1938,7 @@ function c_one_s_five(){
  
     var criteriaThreeStandardSix = {
                     "selfAssessmentId":$('#self_assessment_id').val(),
+                    "userId":$('#user_id').val(),
                     "affiliateId":$('#affiliate_id').val(),
                     "criteriaId":$('#criteriaThreeStandardSixId').val(),
                     "c3_s6_6_1_comment_1":$('#c3_s6_6_1_comment_1').val(),
@@ -1965,6 +1987,7 @@ function c_one_s_five(){
  
     var criteriaThreeStandardSeven = {
                     "selfAssessmentId":$('#self_assessment_id').val(),
+                    "userId":$('#user_id').val(),
                     "affiliateId":$('#affiliate_id').val(),
                     "criteriaId":$('#criteriaThreeStandardSevenId').val(),
                     "c3_s7_7_1_comment_1":$('#c3_s7_7_1_comment_1').val(),
@@ -2009,6 +2032,7 @@ function c_one_s_five(){
  
     var criteriaThreeStandardEight = {
                     "selfAssessmentId":$('#self_assessment_id').val(),
+                    "userId":$('#user_id').val(),
                     "affiliateId":$('#affiliate_id').val(),
                     "criteriaId":$('#criteriaThreeStandardEightId').val(),
                     "c3_s8_8_1_comment_1":$('#c3_s8_8_1_comment_1').val(),
@@ -2033,6 +2057,7 @@ function c_one_s_five(){
 
                     var dataId = {
                         "selfAssessmentId":$('#self_assessment_id').val(),
+                        "userId":$('#user_id').val(),
                         "affiliateId":$('#affiliate_id').val(),                                              
                    }
 
@@ -2075,6 +2100,7 @@ function update_rating(){
 
     var selfAssessmentData = {
         "selfAssessmentId":$('#self_assessment_id').val(),
+        "userId":$('#user_id').val(),
         "affiliateId":$('#affiliate_id').val(),
     }
 

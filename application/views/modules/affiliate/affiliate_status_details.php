@@ -1159,6 +1159,7 @@ $quarterArray = array(
 									aria-controls="nav-z5" aria-selected="false"><i class="i i-other"></i> Others</a>
 							</div>
 						</nav>
+						<form action="<?php echo base_url('module/assessment/add_self_assessment_data'); ?>" method="POST">
 
 						<div class="tab-content" id="nav-tabContent-nner-z">
 							<div class="tab-pane fade show active" id="nav-z1" role="tabpanel" aria-labelledby="nav-z1-tab">
@@ -1167,15 +1168,22 @@ $quarterArray = array(
 										<span class="col-md-6">Assessment Year: Period covered from</span>
 										<span class="col-md-3"><div class="yearPick">
 											<i class="i i-year-pick"></i>
-											<input id="assessment_from_year" class="yearpick form-control" placeholder="From" type="text">
+											<input id="assessment_from_year" name="assessment_from_year" class="yearpick form-control" placeholder="From" type="text">
 										</div></span>
 										<span class="col-md-1">to</span>
 										<span class="col-md-3"><div class="yearPick">
 											<i class="i i-year-pick"></i>
-											<input id="assessment_end_year" class="yearpick form-control" placeholder="To" type="text">
-										</div></span>
+											<input id="assessment_end_year" name="assessment_end_year" class="yearpick form-control" placeholder="To" type="text">
+											<input name="affiliate_id"  type="hidden" value="<?=$affiliate['affiliate_id'];?>">
+
+										</div>
+					
+										</span>
+										<button  class="btn btn-primary  btn-rounded btn-action" data-rel="tooltip" data-placement="top" title="Add"><i class="i i-add"></i></button>
 									</div>
-									<div class="row m-y-20 justify-content-center align-items-center">
+								</form>
+							
+									<!-- <div class="row m-y-20 justify-content-center align-items-center">
 										<div class="col-10 col-md-6">
 											<input type="text" id="assessment_document_name" class="form-control" placeholder="Document Name" required />
 										</div>
@@ -1191,38 +1199,61 @@ $quarterArray = array(
 												</form>
 											</div></span>
 										</div>
-									</div>
-									<div class="row m-y-20 justify-content-center">
+									</div> -->
+									<!-- <div class="row m-y-20 justify-content-center">
 										<div class="col-14 col-md-6 text-center">
 											<a id="btn-upload-self-assessment-doc" class="btn btn-primary btn-rounded min w-100px">UPLOAD</a>
 										</div>
-									</div>
+									</div> -->
 								<?php //endif; ?>
 
-								<div class="head">
+								<div class="head d-block">
 									<div class="row align-items-center">
-										<div class="col-3 col-md-3"><span class="sub">NO</span></div>
-										<div class="col-10 col-md-10"><span class="sub">DOCUMENT NAME</span></div>
-										<div class="col-3 col-md-3"><span class="sub">ASSESSMENT PERIOD START</span></div>
-										<div class="col-3 col-md-3"><span class="sub">ASSESSMENT PERIOD END</span></div>
-										<div class="col-4 col-md-4"><span class="sub">SUBMITTED ON</span></div>
+										<div class="col-3 "><span class="sub text-center">NO</span></div>
+									
+										<div class="col-5 "><span class="sub text-center">ASSESSMENT PERIOD START</span></div>
+										<div class="col-4 "><span class="sub text-center">ASSESSMENT PERIOD END</span></div>
+										<div class="col-4 "><span class="sub text-center">LAST EDITED</span></div>
+										<div class="col-4 "><span class="sub text-center">SELF ASSESSMENT</span></div>
+
+										<div class="col-4"><span class="sub text-center">FINAL ASSESSMENT </span></div>
+
 									</div>
 								</div>
 
 								<div class="cdnWrap">
 									<div class="accordion" id="self-assessment-list">
 										<?php $key = 1; ?>
-										<?php foreach($self_assessment_documents as $document): ?>
+										<?php
+									
+									 $def_icon ='';
+									if(isset($this->session->role_id ) && $this->session->role_id == 3 || $this->session->role_id == 2 ){ 
+										$def_icon = 'i i-remove_red_eye';
+									}else{
+										$def_icon = 'i i i-create';
+									} 
+									
+										foreach($assessment_listing as $listing): 
+	
+										?>
 											<div class="card">
 												<div class="card-header">
 													<div class="mb-0">
 														<div class="btn wrdiv">
 															<div class="row  align-items-center">
-																<div class="col-3 col-md-3"><span class="sub"><?php echo $key++; ?></span></div>
-																<div class="col-10 col-md-10"><span class="sub "><a  target="_blank" href="<?php echo base_url($document['document_path']); ?>"><?php echo $document['document_name']; ?></a></span></div>
-																<div class="col-3 col-md-3"><span class="sub"><?php echo $document['assessment_start_year']; ?></span></div>
-																<div class="col-3 col-md-3"><span class="sub"><?php echo $document['assessment_end_year']; ?></span></div>
-																<div class="col-4 col-md-4"><span class="sub"><?php echo date('m/d/Y', strtotime($document['created_date'])); ?></span></div>
+																<div class="col-3"><span class="sub text-center"><?php echo $key++; ?></span></div>
+										
+																<div class="col-5"><span class="sub text-center"><?=isset($listing['assessment_start_year'])?$listing['assessment_start_year']:''?></span></div>
+																<div class="col-4"><span class="sub text-center"><?=isset($listing['assessment_end_year'])?$listing['assessment_end_year']:''?></span></div>
+																<div class="col-4"><span class="sub text-center"><?=isset($listing['last_update'])?$listing['last_update']:''?></span></div>
+																<div class="col-4"><span class="sub text-center">
+																<a class="link m-x-10 text-dark" href="<?php echo base_url('module/assessment/assessment?sid='.$listing['sid'].'&aid='.$listing['affiliate_id'].'&uid='.$listing['user_id_check']); ?>"><i class="i i i-create"></i></a>
+																</span></div>
+																<div class="col-4 "><span class="sub text-center"> 
+																<?php if(isset($listing['answers']) && !empty($listing['answers'] )){ ?>
+                    												 <a class="link m-x-10 text-dark" href="<?php echo base_url('module/assessment/assessment?sid='.$listing['sid'].'&aid='.$listing['affiliate_id']); ?>"><i class="i i-remove_red_eye"></i></a>
+                    
+                    											 <?php  } ?></span></div>
 															</div>
 														</div>
 													</div>

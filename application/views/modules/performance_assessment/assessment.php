@@ -1,20 +1,63 @@
 
 <?php
 if(isset($_GET['sid']) && isset($_GET['aid']) && !empty($_GET['sid']) && !empty($_GET['aid']) ){ 
-if(isset($this->session->role_id ) && $this->session->role_id == 3 ){    ?>
-<input type="hidden" value="<?=$this->session->role_id?>" id="role_id_def">
-<style>
-.checkbox {
-  pointer-events: none;
-} 
-.display-none{
-  display: none!important;
-}
+if(isset($this->session->role_id ) && $this->session->role_id == 3 || $this->session->role_id == 2 ){  
+  if(isset($_GET['uid']) && !empty($_GET['uid'])){ ?>
 
-<?php } ?>
+
+<?php  }else{ ?>
+    <input type="hidden" value="<?=$this->session->role_id?>" id="role_id_def">
+    <style>
+    .checkbox {
+      pointer-events: none;
+    } 
+    .display-none{
+      display: none!important;
+    }
+<?php } } ?>
 </style>
 
 <?php 
+ if(isset($_GET['uid']) && !empty($_GET['uid'])){
+ $userId = '&uid='.$_GET['uid'];
+}else{
+  $userId='';
+}
+
+
+
+
+
+// $string = $userId;
+//   $key = "MAL_979805"; //key to encrypt and decrypts.
+//   $result = '';
+//   $test = "";
+//    for($i=0; $i<strlen($string); $i++) {
+//      $char = substr($string, $i, 1);
+//      $keychar = substr($key, ($i % strlen($key))-1, 1);
+//      $char = chr(ord($char)+ord($keychar));
+
+//      $test[$char]= ord($char)+ord($keychar);
+//      $result.=$char;
+//    }
+
+//     print_r(urlencode(base64_encode($result)));
+
+
+// function decrypt_url($string) {
+//     $key = "MAL_979805"; //key to encrypt and decrypts.
+//     $result = '';
+//     $string = base64_decode(urldecode($string));
+//    for($i=0; $i<strlen($string); $i++) {
+//      $char = substr($string, $i, 1);
+//      $keychar = substr($key, ($i % strlen($key))-1, 1);
+//      $char = chr(ord($char)-ord($keychar));
+//      $result.=$char;
+//    }
+//    return $result;
+// }
+
+
 foreach($form_data  as $formVal){
   if($formVal['qId'] == $criteria_one_standard_one->cid){if($formVal['totalcount'] == $formVal['count']){ $bgc1s1= "formactive"; }}
   if($formVal['qId'] == $criteria_one_standard_two->cid){if($formVal['totalcount'] == $formVal['count']){ $bgc1s2= "formactive"; }}
@@ -85,6 +128,7 @@ foreach($criteria_answers_view as $answers){
            <div class="tab-content" id="nav-tabContent">
               <input type="hidden" value="<?=isset($_GET['sid'])?$_GET['sid']:''?>" id="self_assessment_id">
               <input type="hidden" value="<?=isset($_GET['aid'])?$_GET['aid']:''?>" id="affiliate_id">
+              <input type="hidden" value="<?=isset($_GET['uid'])?$_GET['uid']:''?>" id="user_id">
 
    <div class="tab-pane fade show active" id="nav-x1" role="tabpanel" aria-labelledby="nav-x1-tab">
 
@@ -134,7 +178,7 @@ foreach($criteria_answers_view as $answers){
                       <div class="headOuter">
                           <div class="head">
                           <h3 class="ib-m">Criteria 1: Organizational Soundness </h3>
-                      <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>">
+                      <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId); ?>">
                         <i class="i i-timer"></i>
                       </a>
                           </div>
@@ -209,7 +253,7 @@ foreach($criteria_answers_view as $answers){
         <div class="headOuter">
             <div class="head">
             <h3 class="ib-m">Criteria 1: Organizational Soundness </h3>
-                      <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>">
+                      <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId); ?>">
                         <i class="i i-timer"></i>
                       </a>
             </div>
@@ -285,7 +329,7 @@ foreach($criteria_answers_view as $answers){
             <div class="headOuter">
                 <div class="head">
                     <h3 class="ib-m">Criteria 1: Organizational Soundness </h3>
-                      <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>">
+                      <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId); ?>">
                         <i class="i i-timer"></i>
                       </a>
                 </div>
@@ -363,7 +407,7 @@ foreach($criteria_answers_view as $answers){
           <div class="headOuter">
               <div class="head">
                   <h3 class="ib-m">Criteria 1: Organizational Soundness </h3>
-                      <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>">
+                      <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId); ?>">
                         <i class="i i-timer"></i>
                       </a>
               </div>
@@ -443,7 +487,7 @@ foreach($criteria_answers_view as $answers){
       <div class="headOuter">
           <div class="head">
               <h3 class="ib-m">Criteria 1: Organizational Soundness </h3>
-                      <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>">
+                      <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId); ?>">
                         <i class="i i-timer"></i>
                       </a>
           </div>
@@ -519,7 +563,7 @@ foreach($criteria_answers_view as $answers){
       <div class="headOuter">
           <div class="head">
               <h3 class="ib-m">Criteria 1: Organizational Soundness </h3>
-                      <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>">
+                      <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId); ?>">
                         <i class="i i-timer"></i>
                       </a>
           </div>
@@ -675,7 +719,7 @@ foreach($criteria_answers_view as $answers){
         <div class="headOuter">
             <div class="head">
                 <h3 class="ib-m">Criteria 2: Organizational Vitality </h3>
-                      <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>">
+                      <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId); ?>">
                         <i class="i i-timer"></i>
                       </a>
             </div>
@@ -776,7 +820,7 @@ foreach($criteria_answers_view as $answers){
         <div class="headOuter">
             <div class="head">
                 <h3 class="ib-m">Criteria 2: Organizational Vitality </h3>
-                      <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>">
+                      <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId); ?>">
                         <i class="i i-timer"></i>
                       </a>
             </div>
@@ -871,7 +915,7 @@ foreach($criteria_answers_view as $answers){
                         <div class="headOuter">
                             <div class="head">
                                 <h3 class="ib-m">Criteria 2: Organizational Vitality </h3>
-                      <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>">
+                      <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId); ?>">
                         <i class="i i-timer"></i>
                       </a>
                             </div>
@@ -964,7 +1008,7 @@ foreach($criteria_answers_view as $answers){
         <div class="headOuter">
             <div class="head">
             <h3 class="ib-m">Criteria 2: Organizational Vitality </h3>
-                      <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>">
+                      <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId); ?>">
                         <i class="i i-timer"></i>
                       </a>
             </div>
@@ -1062,7 +1106,7 @@ foreach($criteria_answers_view as $answers){
         <div class="headOuter">
             <div class="head">
                 <h3 class="ib-m">Criteria 2: Organizational Vitality </h3>
-                      <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>">
+                      <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId); ?>">
                         <i class="i i-timer"></i>
                       </a>
             </div>
@@ -1156,7 +1200,7 @@ foreach($criteria_answers_view as $answers){
         <div class="headOuter">
             <div class="head">
                 <h3 class="ib-m">Criteria 2: Organizational Vitality </h3>
-                      <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>">
+                      <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId); ?>">
                         <i class="i i-timer"></i>
                       </a>
             </div>
@@ -1256,7 +1300,7 @@ foreach($criteria_answers_view as $answers){
         <div class="headOuter">
             <div class="head">
             <h3 class="ib-m">Criteria 2: Organizational Vitality </h3>
-                      <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>">
+                      <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId); ?>">
                         <i class="i i-timer"></i>
                       </a>
             </div>
@@ -1352,7 +1396,7 @@ foreach($criteria_answers_view as $answers){
             <div class="head">
                
             <h3 class="ib-m">Criteria 2: Organizational Vitality </h3>
-                <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>">
+                <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId); ?>">
                 <i class="i i-timer"></i>
                 </a>
             </div>
@@ -1537,7 +1581,7 @@ foreach($criteria_answers_view as $answers){
            <div class="head">
              
                <h3 class="ib-m">Criteria 3: Implementation of Mission  </h3>
-                <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>">
+                <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId); ?>">
                 <i class="i i-timer"></i>
                 </a>
            </div>
@@ -1608,7 +1652,7 @@ foreach($criteria_answers_view as $answers){
       <div class="headOuter">
           <div class="head">
           <h3 class="ib-m">Criteria 3: Implementation of Mission  </h3>
-                <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>">
+                <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId); ?>">
                 <i class="i i-timer"></i>
                 </a>
           </div>
@@ -1680,7 +1724,7 @@ foreach($criteria_answers_view as $answers){
       <div class="headOuter">
           <div class="head">
           <h3 class="ib-m">Criteria 3: Implementation of Mission  </h3>
-                <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>">
+                <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId); ?>">
                 <i class="i i-timer"></i>
                 </a>
           </div>
@@ -1752,7 +1796,7 @@ foreach($criteria_answers_view as $answers){
     <div class="headOuter">
         <div class="head">
         <h3 class="ib-m">Criteria 3: Implementation of Mission  </h3>
-                <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>">
+                <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId); ?>">
                 <i class="i i-timer"></i>
                 </a>
         </div>
@@ -1826,7 +1870,7 @@ foreach($criteria_answers_view as $answers){
       <div class="headOuter">
           <div class="head">
           <h3 class="ib-m">Criteria 3: Implementation of Mission  </h3>
-                <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>">
+                <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId); ?>">
                 <i class="i i-timer"></i>
                 </a>
           </div>
@@ -1898,7 +1942,7 @@ foreach($criteria_answers_view as $answers){
       <div class="headOuter">
           <div class="head">
           <h3 class="ib-m">Criteria 3: Implementation of Mission  </h3>
-                <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>">
+                <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId); ?>">
                 <i class="i i-timer"></i>
                 </a>
           </div>
@@ -1964,7 +2008,7 @@ foreach($criteria_answers_view as $answers){
       <div class="headOuter">
           <div class="head">
           <h3 class="ib-m">Criteria 3: Implementation of Mission  </h3>
-                <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>">
+                <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId); ?>">
                 <i class="i i-timer"></i>
                 </a>
           </div>
@@ -2033,7 +2077,7 @@ foreach($criteria_answers_view as $answers){
       <div class="headOuter">
           <div class="head">
           <h3 class="ib-m">Criteria 3: Implementation of Mission  </h3>
-                <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid']); ?>">
+                <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId); ?>">
                 <i class="i i-timer"></i>
                 </a>
           </div>

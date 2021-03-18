@@ -1,4 +1,4 @@
-<main class="document-search">
+<main class="document-search"> 
     <div class="container">
       <div class="Wrapper">
         <div class="row justify-content-end date">
@@ -57,7 +57,7 @@
                   </form>
 
                   <?php $def_icon ='';
-                  if(isset($this->session->role_id ) && $this->session->role_id == 3 ){ 
+                  if(isset($this->session->role_id ) && $this->session->role_id == 3 || $this->session->role_id == 2 ){ 
                       $def_icon = 'i i-remove_red_eye';
                   }else{
                       $def_icon = 'i i i-create';
@@ -90,20 +90,17 @@
                     <td> <?=isset($listing['city'])?$listing['city']:''?>, <?=isset($listing['stateabbreviation'])?$listing['stateabbreviation']:''?></td>
                     <td>
                       <?php
-                        if(isset($listing['answers']) && !empty($listing['answers'] )){
-                          ?>
-                     <a class="link m-x-10" href="<?php echo base_url('module/assessment/assessment?sid='.$listing['sid'].'&aid='.$listing['affiliate_id']); ?>"><i class="<?=$def_icon?>"></i></a>
-                    <a class="iconLink ib-m" style="color:black;" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$listing['sid'].'&aid='.$listing['affiliate_id']); ?>">
-                        <i class="i i-timer"></i>
-                      </a>
-                     <?php }  
-                   
-                 if(empty($listing['self_assessment_id']) ){ ?>
-                
-                  <a class="link  m-x-10" href="<?php echo base_url('module/assessment/assessment?sid='.$listing['sid'].'&aid='.$listing['affiliate_id']); ?>"  >
-                  <i class="i i-add"></i></a>
+                         if($listing['flag'] == 0 ){ ?>
+                          <a class="link  m-x-10" href="<?php echo base_url('module/assessment/assessment?sid='.$listing['sid'].'&aid='.$listing['affiliate_id']); ?>"  >
+                          <i class="i i-add"></i></a>
                   
-                <?php  }
+                      <?php  }else{ ?>
+                        <a class="link m-x-10" href="<?php echo base_url('module/assessment/assessment?sid='.$listing['sid'].'&aid='.$listing['affiliate_id']); ?>"><i class="<?=$def_icon?>"></i></a>
+                          <a class="iconLink ib-m" style="color:black;" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$listing['sid'].'&aid='.$listing['affiliate_id']); ?>">
+                              <i class="i i-timer"></i>
+                            </a>
+                      <?php } 
+                      
                  if(!empty($listing['formstatus']) && $listing['formstatus'] =='yes' ){ ?>
                 
                 <a class="checkLink  m-x-10" href="javascript:;"><i class="i i-check"></i></a>
@@ -115,7 +112,8 @@
                     <td><?=isset($listing['assessment_start_year'])?$listing['assessment_start_year']:''?></td>
                     <td><?=isset($listing['assessment_end_year'])?$listing['assessment_end_year']:''?></td>
                     <td><?=isset($listing['last_update'])?$listing['last_update']:''?></td>
-                    <td> <a target="_blank" href="<?=isset($listing['document_path'])?base_url().$listing['document_path']:''?>"><?=isset($listing['document_name'])?$listing['document_name']:''?></a></td>
+                    <td> <a class="link  m-x-10" href="<?php echo base_url('module/assessment/assessment?sid='.$listing['sid'].'&aid='.$listing['affiliate_id'].'&uid='.$listing['user_id_check']); ?>"  >
+                            Self Assessment</a></td>
                   
 
                   </tr>

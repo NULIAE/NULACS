@@ -124,6 +124,8 @@ $route['module/assessment/rating'] = 'modules/assessment/assessment/rating';
 $route['module/assessment/assessment-summary'] = 'modules/assessment/assessment/assessment_summary';	
 $route['module/assessment/assessment-pdf'] = 'modules/assessment/assessment/assessment_pdf';	
 $route['module/assessment/form-data'] = 'modules/assessment/assessment/formData';
+$route['module/assessment/add_self_assessment_data'] = 'modules/assessment/assessment/add_self_assessment_data';
+
 $route['module/documents/export'] = 'modules/documents/DocumentsSearch/export';
 $route['module/affiliate/document/doupload'] = 'modules/affiliate/affiliate/doupload';
 $route['module/affiliate/edit/(:num)'] = 'modules/affiliate/affiliate/edit_form/$1';
