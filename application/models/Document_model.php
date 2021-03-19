@@ -223,10 +223,9 @@ class Document_model extends CI_Model
 	 */
 	public function get_document_comments($document_id, $document_type_id, $filter = NULL)
 	{
-		$this->db->select('ns.*, a.city,s.stateabbreviation as state');
+		$this->db->select('ns.*,u.first_name,u.last_name');
 		$this->db->from('notification_summary ns');
-		$this->db->join('affiliate a', 'a.affiliate_id = ns.created_by');
-		$this->db->join('state s', 's.stateid = a.state');
+		$this->db->join('users u', 'u.user_id = ns.created_by');
 		$this->db->where('ns.document_id', $document_id);
 		$this->db->where('ns.document_type_id', $document_type_id);
 		

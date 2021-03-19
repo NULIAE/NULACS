@@ -161,11 +161,11 @@ $quarterArray = array(
 																				<?php if(isset($currentDoc['comments'])): ?>
 																					<?php foreach($currentDoc['comments'] as $comment): ?>
 																					<div class="chatrow">
-																						<span class="user <?php echo ($comment['created_by'] === $this->session->userdata('affiliate_id')) ? 'send' : 'rec'; ?>"><?php echo strtoupper($comment['city'][0].$comment['state'][0]); ?></span>
+																						<span class="user <?php echo ($comment['created_by'] === $this->session->userdata('user_id')) ? 'send' : 'rec'; ?>"><?php echo strtoupper($comment['first_name'][0].$comment['last_name'][0]); ?></span>
 																						<div class="chatline">
 																							<div class="h6"><?php echo $comment['notification']; ?></div>
 																							<span class="text-primary">
-																								<?php echo $comment['city'].', '.$comment['state']; ?>
+																								<?php echo $comment['first_name'].' '.$comment['last_name']; ?>
 																							</span>
 																							<span class="ml-auto text-secondary">
 																							<?php echo date("jS M,Y | H:i", strtotime($comment['created'])); ?>
@@ -399,11 +399,11 @@ $quarterArray = array(
 																			<?php if(isset($currentDoc['comments'])): ?>
 																				<?php foreach($currentDoc['comments'] as $comment): ?>
 																				<div class="chatrow">
-																					<span class="user <?php echo ($comment['created_by'] === $this->session->userdata('affiliate_id')) ? 'send' : 'rec'; ?>"><?php echo strtoupper($comment['city'][0].$comment['state'][0]); ?></span>
+																					<span class="user <?php echo ($comment['created_by'] === $this->session->userdata('user_id')) ? 'send' : 'rec'; ?>"><?php echo strtoupper($comment['first_name'][0].$comment['last_name'][0]); ?></span>
 																					<div class="chatline">
 																						<div class="h6"><?php echo $comment['notification']; ?></div>
 																						<span class="text-primary">
-																							<?php echo $comment['city'].', '.$comment['state']; ?>
+																							<?php echo $comment['first_name'].' '.$comment['last_name']; ?>
 																						</span>
 																						<span class="ml-auto text-secondary">
 																						<?php echo date("jS M,Y | H:i", strtotime($comment['created'])); ?>
@@ -633,11 +633,11 @@ $quarterArray = array(
 																				<?php if(isset($currentDoc['comments'])): ?>
 																					<?php foreach($currentDoc['comments'] as $comment): ?>
 																					<div class="chatrow">
-																						<span class="user <?php echo ($comment['created_by'] === $this->session->userdata('affiliate_id')) ? 'send' : 'rec'; ?>"><?php echo strtoupper($comment['city'][0].$comment['state'][0]); ?></span>
+																						<span class="user <?php echo ($comment['created_by'] === $this->session->userdata('user_id')) ? 'send' : 'rec'; ?>"><?php echo strtoupper($comment['first_name'][0].$comment['last_name'][0]); ?></span>
 																						<div class="chatline">
 																							<div class="h6"><?php echo $comment['notification']; ?></div>
 																							<span class="text-primary">
-																								<?php echo $comment['city'].', '.$comment['state']; ?>
+																								<?php echo $comment['first_name'].' '.$comment['last_name']; ?>
 																							</span>
 																							<span class="ml-auto text-secondary">
 																							<?php echo date("jS M,Y | H:i", strtotime($comment['created'])); ?>
@@ -907,11 +907,11 @@ $quarterArray = array(
 																			<?php if(isset($legal['comments'])): ?>
 																				<?php foreach($legal['comments'] as $comment): ?>
 																				<div class="chatrow">
-																					<span class="user <?php echo ($comment['created_by'] === $this->session->userdata('affiliate_id')) ? 'send' : 'rec'; ?>"><?php echo strtoupper($comment['city'][0].$comment['state'][0]); ?></span>
+																					<span class="user <?php echo ($comment['created_by'] === $this->session->userdata('user_id')) ? 'send' : 'rec'; ?>"><?php echo strtoupper($comment['first_name'][0].$comment['last_name'][0]); ?></span>
 																					<div class="chatline">
 																						<div class="h6"><?php echo $comment['notification']; ?></div>
 																						<span class="text-primary">
-																							<?php echo $comment['city'].', '.$comment['state']; ?>
+																							<?php echo $comment['first_name'].' '.$comment['last_name']; ?>
 																						</span>
 																						<span class="ml-auto text-secondary">
 																						<?php echo date("jS M,Y | H:i", strtotime($comment['created'])); ?>
@@ -1073,11 +1073,11 @@ $quarterArray = array(
 																			<?php if(isset($other['comments'])): ?>
 																				<?php foreach($other['comments'] as $comment): ?>
 																				<div class="chatrow">
-																					<span class="user <?php echo ($comment['created_by'] === $this->session->userdata('affiliate_id')) ? 'send' : 'rec'; ?>"><?php echo strtoupper($comment['city'][0].$comment['state'][0]); ?></span>
+																					<span class="user <?php echo ($comment['created_by'] === $this->session->userdata('user_id')) ? 'send' : 'rec'; ?>"><?php echo strtoupper($comment['first_name'][0].$comment['last_name'][0]); ?></span>
 																					<div class="chatline">
 																						<div class="h6"><?php echo $comment['notification']; ?></div>
 																						<span class="text-primary">
-																							<?php echo $comment['city'].', '.$comment['state']; ?>
+																							<?php echo $comment['first_name'].' '.$comment['last_name']; ?>
 																						</span>
 																						<span class="ml-auto text-secondary">
 																						<?php echo date("jS M,Y | H:i", strtotime($comment['created'])); ?>
@@ -1760,11 +1760,11 @@ $quarterArray = array(
 																			<?php if(isset($other['comments'])): ?>
 																				<?php foreach($other['comments'] as $comment): ?>
 																				<div class="chatrow">
-																					<span class="user <?php echo ($comment['created_by'] === $this->session->userdata('affiliate_id')) ? 'send' : 'rec'; ?>"><?php echo strtoupper($comment['city'][0].$comment['state'][0]); ?></span>
+																					<span class="user <?php echo ($comment['created_by'] === $this->session->userdata('user_id')) ? 'send' : 'rec'; ?>"><?php echo strtoupper($comment['first_name'][0].$comment['last_name'][0]); ?></span>
 																					<div class="chatline">
 																						<div class="h6"><?php echo $comment['notification']; ?></div>
 																						<span class="text-primary">
-																							<?php echo $comment['city'].', '.$comment['state']; ?>
+																							<?php echo $comment['first_name'].' '.$comment['last_name']; ?>
 																						</span>
 																						<span class="ml-auto text-secondary">
 																						<?php echo date("jS M,Y | H:i", strtotime($comment['created'])); ?>
@@ -2110,7 +2110,7 @@ $quarterArray = array(
 	
 	<div class="chatline">
 		<div class="h6">{{notification}}</div>
-		<span class="text-primary">{{city}}, {{state}}</span>
+		<span class="text-primary">{{first_name}} {{last_name}}</span>
 		<span class="ml-auto text-secondary">{{commentTime}}</span>
 	</div>
 </div>
@@ -2141,7 +2141,7 @@ $quarterArray = array(
 				
 				<div class="chatline">
 					<div class="h6">{{notification}}</div>
-					<span class="text-primary">{{city}}, {{state}}</span>
+					<span class="text-primary">{{first_name}} {{last_name}}</span>
 					<span class="ml-auto text-secondary">{{commentTime}}</span>
 				</div>
 			</div>
@@ -2245,7 +2245,7 @@ $quarterArray = array(
 									
 									<div class="chatline">
 										<div class="h6">{{notification}}</div>
-										<span class="text-primary">{{city}}, {{state}}</span>
+										<span class="text-primary">{{first_name}} {{last_name}}</span>
 										<span class="ml-auto text-secondary">{{commentTime}}</span>
 									</div>
 								</div>
@@ -2326,7 +2326,7 @@ $quarterArray = array(
 									
 									<div class="chatline">
 										<div class="h6">{{notification}}</div>
-										<span class="text-primary">{{city}}, {{state}}</span>
+										<span class="text-primary">{{first_name}} {{last_name}}</span>
 										<span class="ml-auto text-secondary">{{commentTime}}</span>
 									</div>
 								</div>
@@ -2407,7 +2407,7 @@ $quarterArray = array(
 									
 									<div class="chatline">
 										<div class="h6">{{notification}}</div>
-										<span class="text-primary">{{city}}, {{state}}</span>
+										<span class="text-primary">{{first_name}} {{last_name}}</span>
 										<span class="ml-auto text-secondary">{{commentTime}}</span>
 									</div>
 								</div>

@@ -109,7 +109,7 @@ class Email_model extends CI_Model
 
 	public function get_user_emails($user_ids)
 	{
-		$this->db->select("name");
+		$this->db->select("user_email_address_1");
 		$this->db->where_in("user_id", $user_ids);
 
 		$query = $this->db->get("users");

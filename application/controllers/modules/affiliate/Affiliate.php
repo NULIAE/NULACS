@@ -958,7 +958,7 @@ class Affiliate extends MY_Controller
 				'document_type_id' => $data['document_type_id'],
 				'affiliate_id'	=> $data['affiliate_id'],
 				'notification'	=> 'Compliance status '.$data['interval'].'ly document is '.$doc_status[$data['status']],
-				'created_by'	=> $this->session->affiliate_id
+				'created_by'	=> $this->session->user_id
 			);
 
 			$this->Document_model->add_comment($comment_data);
@@ -1002,7 +1002,7 @@ class Affiliate extends MY_Controller
 		//XSS Filter all the input post fields
 		$data = $this->input->post(NULL, TRUE);
 		
-		$data['created_by'] = $this->session->affiliate_id;
+		$data['created_by'] = $this->session->user_id;
 		
 		$status = $message = NULL;
 
@@ -1410,7 +1410,7 @@ class Affiliate extends MY_Controller
 						'document_type_id' => $data['document_type_id'],
 						'affiliate_id'	=> $data['affiliate_id'],
 						'notification'	=> 'Compliance status '.$data['interval'].' document is uploaded',
-						'created_by'	=> $this->session->affiliate_id
+						'created_by'	=> $this->session->user_id
 					);
 
 					$inserted_comment = $this->Document_model->add_comment($comment_data);
@@ -1485,7 +1485,7 @@ class Affiliate extends MY_Controller
 				'document_type_id' =>$_POST['document_type_id'],
 				'affiliate_id'	=> $_POST['affiliate_id'],
 				'notification'	=> $_POST['notification'],
-				'created_by'	=> $this->session->affiliate_id
+				'created_by'	=> $this->session->user_id
 			);
 			
 			if($_POST['document_type'] == 'legal_compliance_document')

@@ -9,7 +9,7 @@ class MY_Controller extends CI_Controller
 		 
 		 //Checking whether userdata logged_in not set ... if true redirecting to login screen
 		 if(!$this->session->has_userdata('logged_in') || !$this->session->logged_in){
-			redirect(base_url('/login'));
+			redirect(base_url('/login')."?return_url=".$this->uri->uri_string());
 		 }
 	}
 }

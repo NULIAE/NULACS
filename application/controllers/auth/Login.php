@@ -26,10 +26,15 @@ class Login extends CI_Controller
 		{
 			redirect(base_url('/'));
 		}
+
+		$return_url = $this->input->get('return_url');
+		if(isset($return_url) &&  $return_url != "")
+			$return_url = "?return_url=".$return_url;
 		
 		$data['content'] = array(
 			'csrf_name' => $this->security->get_csrf_token_name(),
-			'csrf_hash' => $this->security->get_csrf_hash()
+			'csrf_hash' => $this->security->get_csrf_hash(),
+			'return_url' => $return_url
 		);
 
 		//Name of the view file
@@ -50,6 +55,12 @@ class Login extends CI_Controller
 	 */
 	public function authenticate()
 	{
+		$return = $this->input->get('return_url');
+		if(isset($return) &&  $return != "")
+			$return_url = "?return_url=".$return;
+		else
+			$return_url = "";
+		
 		if(isset($_POST))
 		{
 			//XSS Filter all the input post fields
@@ -84,8 +95,10 @@ class Login extends CI_Controller
 						
 						$this->session->set_userdata($user_data);
 
-						
-						redirect(base_url('/'));
+						if(isset($return) &&  $return != "")
+							redirect(base_url($return));
+						else
+							redirect(base_url('/'));
 						exit;
 					}
 					else
@@ -93,7 +106,7 @@ class Login extends CI_Controller
 						//Invalid password. Back to login
 						$this->session->set_flashdata('error', 'Invalid username or password.');
 				
-						redirect(base_url('/login'));
+						redirect(base_url('/login').$return_url);
 						exit;							
 					}
 				}
@@ -102,7 +115,7 @@ class Login extends CI_Controller
 					//User with email id doesn't exists or invalid password. Back to login
 					$this->session->set_flashdata('error', 'Invalid username or password.');
 			
-					redirect(base_url('/login'));
+					redirect(base_url('/login').$return_url);
 					exit;
 				}
 			}
@@ -111,14 +124,14 @@ class Login extends CI_Controller
 				//User with email and password required. Back to login
 				$this->session->set_flashdata('error', 'Username and Password are required.');
 		
-				redirect(base_url('/login'));
+				redirect(base_url('/login').$return_url);
 				exit;
 			}
 		}
 
 		$this->session->set_flashdata('error', 'Invalid username or password.');
 	
-		redirect(base_url('/login'));
+		redirect(base_url('/login').$return_url);
 		exit;
 	}
 	

@@ -288,7 +288,7 @@ $(function () {
 										$(chatBox).append(Mustache.render($("#template-comment").html(), {
 											"comment": response.comment,
 											"avatar": function () {
-												return this.city.charAt(0) + this.state.charAt(0);
+												return (this.first_name.charAt(0) + this.last_name.charAt(0)).toUpperCase();
 											},
 											"commentTime": function () {
 												return moment().format("Do MMM YYYY | HH:mm");
@@ -299,7 +299,7 @@ $(function () {
 											document: response.upload_data,
 											"comment": response.comment,
 											"avatar": function () {
-												return this.city.charAt(0) + this.state.charAt(0);
+												return (this.first_name.charAt(0) + this.last_name.charAt(0)).toUpperCase();
 											},
 											"commentTime": function () {
 												return moment().format("Do MMM YYYY | HH:mm");
@@ -564,9 +564,7 @@ $(function () {
 			dataType: 'json'
 		}).done(function (data) {
 			toastConfig.message = data.message;
-			setTimeout(function () {
-				$('#snackbar').NitroToast(toastConfig);
-			}, 2000);
+			$('#snackbar').NitroToast(toastConfig);
 		});
 	});
 
@@ -610,9 +608,8 @@ $(function () {
 					$('#key_indicators_save_btn_s').removeAttr('disabled');
 					document.getElementById("fieldset_disable").disabled = false;
 				}		
-				setTimeout(function () {
-					$('#snackbar').NitroToast(toastConfig);
-				}, 2000);
+				
+				$('#snackbar').NitroToast(toastConfig);
 			});
 		});
 	
@@ -647,7 +644,7 @@ $(function () {
 						$(chatBox).append(Mustache.render($("#template-comment").html(), {
 							"comment": data.comment,
 							"avatar": function () {
-								return this.city.charAt(0) + this.state.charAt(0);
+								return (this.first_name.charAt(0) + this.last_name.charAt(0)).toUpperCase();
 							},
 							"commentTime": function () {
 								return moment().format("Do MMM YYYY | HH:mm");
@@ -655,9 +652,7 @@ $(function () {
 						}));
 					} else {
 						toastConfig.message = data.message;
-						setTimeout(function () {
-							$('#snackbar').NitroToast(toastConfig);
-						}, 2000);
+						$('#snackbar').NitroToast(toastConfig);
 					}
 				});
 			}
@@ -696,9 +691,7 @@ $(function () {
 								dataType: 'json'
 							}).done(function (data) {
 								toastConfig.message = data.message;
-								setTimeout(function () {
-									$('#snackbar').NitroToast(toastConfig);
-								}, 2000);
+								$('#snackbar').NitroToast(toastConfig);
 							});
 						}
 					},
@@ -745,9 +738,7 @@ $(function () {
 					message: ''
 				};
 				toastConfig.message = "Uploaded";
-				setTimeout(function () {
-					$('#snackbar').NitroToast(toastConfig);
-				}, 1000);
+				$('#snackbar').NitroToast(toastConfig);
 
 				var resp = JSON.parse(response);
 
@@ -762,7 +753,7 @@ $(function () {
 					},
 					"comments": this.comments,
 					"avatar": function () {
-						return this.city.charAt(0) + this.state.charAt(0);
+						return (this.first_name.charAt(0) + this.last_name.charAt(0)).toUpperCase();
 					},
 					"commentTime": function () {
 						return moment().format("Do MMM YYYY | HH:mm");
@@ -815,9 +806,7 @@ $(function () {
 					message: ''
 				};
 				toastConfig.message = "Uploaded";
-				setTimeout(function () {
-					$('#snackbar').NitroToast(toastConfig);
-				}, 1000);
+				$('#snackbar').NitroToast(toastConfig);
 
 				var resp = JSON.parse(response);
 				
@@ -850,7 +839,7 @@ $(function () {
 					},
 					"comments": this.comments,
 					"avatar": function () {
-						return this.city.charAt(0) + this.state.charAt(0);
+						return (this.first_name.charAt(0) + this.last_name.charAt(0)).toUpperCase();
 					},
 					"commentTime": function () {
 						return moment().format("Do MMM YYYY | HH:mm");
@@ -910,9 +899,7 @@ $(function () {
 					message: ''
 				};
 				toastConfig.message = "Deleted";
-				setTimeout(function () {
-					$('#snackbar').NitroToast(toastConfig);
-				}, 1000);
+				$('#snackbar').NitroToast(toastConfig);
 				var resp = response;
 				
 				if(docType == 'legal_compliance_document'){
@@ -928,7 +915,7 @@ $(function () {
 					},
 					"comments": this.comments,
 					"avatar": function () {
-						return this.city.charAt(0) + this.state.charAt(0);
+						return (this.first_name.charAt(0) + this.last_name.charAt(0)).toUpperCase();
 					},
 					"commentTime": function () {
 						return moment().format("Do MMM YYYY | HH:mm");
@@ -958,7 +945,7 @@ $(function () {
 					},
 					"comments": this.comments,
 					"avatar": function () {
-						return this.city.charAt(0) + this.state.charAt(0);
+						return (this.first_name.charAt(0) + this.last_name.charAt(0)).toUpperCase();
 					},
 					"commentTime": function () {
 						return moment().format("Do MMM YYYY | HH:mm");
@@ -987,7 +974,7 @@ $(function () {
 					},
 					"comments": this.comments,
 					"avatar": function () {
-						return this.city.charAt(0) + this.state.charAt(0);
+						return (this.first_name.charAt(0) + this.last_name.charAt(0)).toUpperCase();
 					},
 					"commentTime": function () {
 						return moment().format("Do MMM YYYY | HH:mm");
@@ -1073,9 +1060,7 @@ function openTab(val) {
 		message: ''
 	};
 	toastConfig.message = message_val;
-	setTimeout(function () {
-		$('#snackbar').NitroToast(toastConfig);
-	}, 1000);
+	$('#snackbar').NitroToast(toastConfig);
 }
 
   $('.liquidity_v_blur').on('blur', function() {
