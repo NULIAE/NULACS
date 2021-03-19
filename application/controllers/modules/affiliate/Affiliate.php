@@ -547,6 +547,16 @@ class Affiliate extends MY_Controller
 	 */
 	public function affiliate_status_details($affiliate_id)
 	{
+		if(!isset($affiliate_id))
+		{
+			redirect(base_url('/'));
+		}
+
+		if($this->session->role_id != 1 && $affiliate_id != $this->session->affiliate_id)
+		{
+			redirect(base_url('/'));
+		}
+
 		if(isset($_REQUEST['id'])){
 			$monthly_document_status = $this->Document_model->change_flag($_REQUEST['id']);
 		}

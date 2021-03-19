@@ -1,4 +1,4 @@
-<main class="user-add">
+<main class="user-add"> 
 	<div class="container">
 		<div class="Wrapper">
 			<div class="row justify-content-end date">
