@@ -1168,12 +1168,12 @@ $quarterArray = array(
 										<span class="col-md-6">Assessment Year: Period covered from</span>
 										<span class="col-md-3"><div class="yearPick">
 											<i class="i i-year-pick"></i>
-											<input id="assessment_from_year" name="assessment_from_year" class="yearpick form-control" placeholder="From" type="text">
+											<input id="assessment_from_year" name="assessment_from_year" class="yearpick form-control" placeholder="From" type="text" required>
 										</div></span>
 										<span class="col-md-1">to</span>
 										<span class="col-md-3"><div class="yearPick">
 											<i class="i i-year-pick"></i>
-											<input id="assessment_end_year" name="assessment_end_year" class="yearpick form-control" placeholder="To" type="text">
+											<input id="assessment_end_year" name="assessment_end_year" class="yearpick form-control" placeholder="To" type="text" required>
 											<input name="affiliate_id"  type="hidden" value="<?=$affiliate['affiliate_id'];?>">
 
 										</div>
