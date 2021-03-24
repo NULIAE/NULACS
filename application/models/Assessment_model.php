@@ -181,7 +181,7 @@ class Assessment_model extends CI_Model
 	*
 	* @return array affiliate_details 
 	*/
-	public function affiliate_details()
+	public function affiliate_details($data)
 	{
 		$this->db->select('*');
 		$this->db->from('self_assessment sa');
@@ -190,9 +190,12 @@ class Assessment_model extends CI_Model
 		if(isset($this->session->role_id ) && $this->session->role_id == 3 || $this->session->role_id == 2 ){ 
 			$this->db->where('sa.affiliate_id', $this->session->affiliate_id);
 		}
-		// if(isset($data['aid']) && !empty($data['aid'])){
-		// 	$this->db->where('sa.affiliate_id',   $data['aid']);
-		// }
+		if(isset($data['aid']) && !empty($data['aid'])){
+			$this->db->where('sa.affiliate_id',   $data['aid']);
+		}
+		if(isset($data['sid']) && !empty($data['sid'])){
+			$this->db->where('sa.self_assessment_id',   $data['sid']);
+		}
 		$this->db->group_by('sa.affiliate_id');
 		$query = $this->db->get(); 
 		return $query->result_array();

@@ -1250,10 +1250,11 @@ $quarterArray = array(
 																<a class="link m-x-10 text-dark" href="<?php echo base_url('module/assessment/assessment?sid='.$listing['sid'].'&aid='.$listing['affiliate_id'].'&uid='.$listing['user_id_check']); ?>"><i class="i i i-create"></i></a>
 																</span></div>
 																<div class="col-4 "><span class="sub text-center"> 
-																<?php if(isset($listing['answers']) && !empty($listing['answers'] )){ ?>
+																<?php if(isset($listing['answers']) && !empty($listing['answers'] )){ 
+																	if(isset($listing['flag']) && ($listing['flag'] ==1 )){ ?>
                     												 <a class="link m-x-10 text-dark" href="<?php echo base_url('module/assessment/assessment?sid='.$listing['sid'].'&aid='.$listing['affiliate_id']); ?>"><i class="i i-remove_red_eye"></i></a>
                     
-                    											 <?php  } ?></span></div>
+                    											 <?php } } ?></span></div>
 															</div>
 														</div>
 													</div>

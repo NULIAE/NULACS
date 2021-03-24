@@ -147,7 +147,7 @@ class Assessment extends MY_Controller
 			'affiliates' => $this->Affiliate_model->home_affiliate_filter(10, 0, NULL, NULL)
 		);
 		$data['assessment_listing'] = $this->Assessment_model->assessment_listing($_POST);
-		$data['affiliate_details'] = $this->Assessment_model->affiliate_details();
+		$data['affiliate_details'] = $this->Assessment_model->affiliate_details(NULL);
 		$data['get_assessement_answers_details'] = $this->Assessment_model->get_assessement_answers_details();
 
 		$data['assessment_listing_date'] = $_POST;
