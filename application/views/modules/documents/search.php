@@ -86,9 +86,11 @@
 								<label for="affiliate">Affiliate</label>
 								<select name="affiliate" id="affiliate" aria-labelledby="affiliate" data-all="true" data-type="selector" data-search="true" class="SumoSelect CaptionCont d-none" data-placeholder="Affiliate">
 									<option value="">Affiliate</option>
-									<?php foreach($affiliate_details as $affiliate): ?>
-										<option value="<?php echo $affiliate['affiliate_id']; ?>"><?php echo $affiliate['first_name']; ?></option>
-									<?php endforeach; ?>
+									<?php foreach($affiliates as $row): ?>
+										<option value="<?php echo $row['affiliate_id']; ?>">
+											<?php echo $row['city'].", ".$row['stateabbreviation']; ?>
+										</option>
+									<?php endforeach;?>
 								</select>
 							</div>
 							<div class="col-lg-8 col-md-12 form-group">

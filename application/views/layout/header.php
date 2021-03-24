@@ -58,18 +58,19 @@
                     </div>
                     <ul>
                       <div class="dropContent">
+                        <?php $now = time(); ?>
                         <?php foreach($notifications as $notification){ 
-                            $curr_time=$notification['created']; 
-                            $time_ago =strtotime($curr_time); ?>
+                            $curr_time= human_to_unix($notification['created']); 
+                            $time_ago = explode(",", timespan($curr_time, $now)); ?>
                           <li>
                             <div class="col-lg-4 col-md-4 col-4 d-flex justify-content-center align-items-center border-right pr-2">
                               <i class="i i-upload-line"></i>
                             </div>
                             <div class="col-lg-18 col-md-18 col-18 ml-3">
-                              <a href="<?php echo base_url('module/affiliate/status/details/'.$notification["affiliate_id"].'?&id='.$notification['notification_id'].'&year='.$notification['document_year'].'&month='.$notification['document_month']); ?>"><?=$notification['notification']?></a>
+                              <a href="<?php echo base_url('module/affiliate/status/details/'.$notification["affiliate_id"].'?&id='.$notification['notification_id']); ?>"><?=$notification['notification']?></a>
                                 <p class="status">Upload</p>
                                 <?php if(isset($time_ago) && !empty($time_ago)){ ?>
-                                  <p class="time"><?php echo time_Ago($time_ago); ?></p>
+                                  <p class="time"><?php echo $time_ago[0]; ?> ago</p>
                               <?php  } ?>
                             </div>
                           </li>

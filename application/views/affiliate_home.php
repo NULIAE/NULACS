@@ -72,14 +72,14 @@
                      <?php if (isset($user_notifications) && !empty($user_notifications)) {
                       foreach ($user_notifications as $notification) {
                           $formatedDate = date('d M, Y | H:i', strtotime($notification['created']));
-                          if ($notification['created_by'] == 1) { ?>
+                          if ($notification['created_by'] != $this->session->user_id) { ?>
                          <div class="msgPosition">
                              <div class="msg">
-                                 <div class="dp">AD</div>
+                                 <div class="dp"><?php echo strtoupper($notification['first_name'][0].$notification['last_name'][0]); ?></div>
                                  <div class="msgBox">
                                      <div class="textMsg"><?=isset($notification['notification']) ? $notification['notification'] : '' ?></div>
                                      <div class="Details">
-                                         <span>Admin</span>
+                                         <span><?php echo $notification['first_name'].' '.$notification['last_name']; ?></span>
                                          <date>&nbsp; <?=isset($formatedDate) ? $formatedDate : '' ?></date>
                                      </div>
                                  </div>
@@ -92,13 +92,11 @@
                                  <div class="msgBox2">
                                      <div class="textMsg2"><?=isset($notification['notification']) ? $notification['notification'] : '' ?></div>
                                      <div class="Details2">
-                                         <span><?=isset($notification['first_name']) ? $notification['first_name'] : '' ?>
-                                         <?=isset($notification['last_name']) ? $notification['last_name'] : '' ?>
-                                        </span>
+                                         <span><?php echo $notification['first_name'].' '.$notification['last_name']; ?></span>
                                          <date>&nbsp; <?=isset($formatedDate) ? $formatedDate : '' ?></date>
                                      </div>
                                  </div>
-                                 <div class="dp2"><?=isset($notification['stateabbreviation']) ? $notification['stateabbreviation'] : '' ?></div>
+                                 <div class="dp2"><?php echo strtoupper($notification['first_name'][0].$notification['last_name'][0]); ?></div>
                              </div>
                          </div>
                          <?php

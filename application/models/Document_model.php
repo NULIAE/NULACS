@@ -105,16 +105,16 @@ class Document_model extends CI_Model
 	public function get_notifications()
 	{
 		$this->db->select('*');
-		$this->db->join('monthly_document_status as mds', 'mds.monthly_document_id = notification_summary.document_id');
-
-		if($this->session->affiliate_id == 1){
-			$this->db->where('notification_summary.created_by !=', 1);
-		}else{
-			$this->db->where('notification_summary.created_by !=',$this->session->affiliate_id);
-			$this->db->where('notification_summary.affiliate_id =',$this->session->affiliate_id);
+		$this->db->where('created_by !=', $this->session->user_id);
+		$this->db->where('flag', 1);
+		
+		if($this->session->role_id != 1)
+		{
+			$this->db->where('affiliate_id =',$this->session->affiliate_id);
 		}
-		$this->db->where('notification_summary.flag', 1);
+		
 		$query = $this->db->get('notification_summary'); 
+		
 		return $query->result_array();
 	}
 
@@ -155,20 +155,20 @@ class Document_model extends CI_Model
 	 */
 	public function user_notifications()
 	{
-		$affiliateId = $this->session->affiliate_id;
 		$this->db->select('*');
-		$this->db->join('users as u', 'u.affiliate_id = ns.affiliate_id');
+		$this->db->join('users as u', 'u.user_id = ns.created_by');
 		$this->db->join('affiliate as a', 'a.affiliate_id = ns.affiliate_id');
 		$this->db->join('state as s', 's.stateid = a.state');
 		
-		if($affiliateId == 1){
-			$this->db->where('ns.created_by !=', 1);
-		}else{
+		if($this->session->affiliate_id != 1)
+		{
 			$this->db->where('ns.affiliate_id =',$this->session->affiliate_id);
 		}
+
 		$this->db->group_by('ns.notification_id');
 
 		$query = $this->db->get('notification_summary as ns'); 
+		
 		return $query->result_array();
 	}
 	

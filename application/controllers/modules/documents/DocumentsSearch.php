@@ -8,6 +8,7 @@ class DocumentsSearch extends MY_Controller
 		parent::__construct();
 		$this->load->model('Document_model');
 		$this->load->model('DocumentSearch_model');
+		$this->load->model('Affiliate_model');
 		// $this->output->enable_profiler(TRUE);	
 	}
 
@@ -21,8 +22,7 @@ class DocumentsSearch extends MY_Controller
 		$data['content'] = array(
 			'document_types' => $this->Document_model->get_document_types(),
 			'document_status' => $this->Document_model->get_document_status_flags(),
-			'affiliate_details' => $this->Document_model->get_affiliate_details(),
-
+			'affiliates' => $this->Affiliate_model->get_all_affiliates()
 		);
 		
 		//Name of the view file
