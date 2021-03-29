@@ -167,7 +167,6 @@
                 </div>
                 <div class="bg-light">
 					<div class="row">
-
                         <div class="col-lg-8 col-md-8 form-group">
 							<div>
 								<label>Board Chair</label>
@@ -193,8 +192,6 @@
                 </div>
 
                 <div class="row">
-					
-				
 					<div class="col-lg-8 col-md-8 form-group">
 						<div>
 							<label>Compliance Dues</label>
@@ -206,20 +203,13 @@
 					</div>
 
 					<div class="col-lg-8 col-md-8 form-group">
-						<label>Current Compliance Status</label>
-						<input type="text" class="form-control" placeholder="Current Compliance Status" disabled>
+						<label>UL Census</label>
+						<select name="ul_census" id="ul_census{{affiliate_id}}" data-placeholder="UL Census" data-type="selector" disabled>
+							<option value="1">Completed</option>
+							<option value="0">Incompleted</option>
+						</select>
 					</div>
-					<div class="col-lg-8 col-md-8 form-group">
-						<label>Last site visit</label>
-						<input type="text" class="form-control" placeholder="Last site visit" disabled>
-					</div>
-                </div>
-                <div class="row">
-					
-					<div class="col-lg-8 col-md-8 form-group">
-						<label>Performance Score</label>
-						<input type="text" class="form-control" placeholder="Performance Score" disabled>
-					</div>
+
 					<div class="col-lg-8 col-md-8 form-group">
 						<span class="label">Report Available</span>
 						
@@ -229,8 +219,25 @@
 						</label>
 						</div>
 					</div>
+                </div>
+                <div class="row">
+					<div class="col-lg-8 col-md-8 form-group">
+						<label>Current Compliance Status</label>
+						<input type="text" class="form-control" placeholder="Current Compliance Status" disabled>
+					</div>
 
 					<div class="col-lg-8 col-md-8 form-group">
+						<label>Last site visit</label>
+						<input type="text" class="form-control" placeholder="Last site visit" disabled>
+					</div>
+
+					<div class="col-lg-8 col-md-8 form-group">
+						<label>Performance Score</label>
+						<input type="text" class="form-control" placeholder="Performance Score" disabled>
+					</div>
+				</div>
+                <div class="row">
+					<div class="col-lg-12 col-md-12 form-group">
 						<span class="label">Active</span>
 						<div>
 						<label class="checkbox switch bool disabled" id="status-label{{affiliate_id}}">

@@ -16,14 +16,14 @@
 					<div class="settingWrap">
 
 						<div class="row w-100 mb-3">
-							<div class="col-lg-6 col-md-12 form-group">
+							<div class="col-lg-8 col-md-8 form-group">
 								<div>
 									<label>Name</label>
 									<input type="text" class="form-control" name="organization" value="<?php echo $affiliate['organization']; ?>" />
 								</div>
 							</div>
 						
-							<div class="col-lg-6 col-md-12 form-group">
+							<div class="col-lg-8 col-md-8 form-group">
 								<div>
 									<label>Region ID</label>
 									<select name="region_id" data-placeholder="East" data-type="selector" required>
@@ -35,17 +35,10 @@
 								</div>
 							</div>
 							
-							<div class="col-lg-6 col-md-12 form-group">
+							<div class="col-lg-8 col-md-8 form-group">
 								<div>
 									<label>Year ending date?</label>
 									<input type="text" class="form-control" name="year_end" value="<?php echo $affiliate['year_end']; ?>" placeholder="YYYY-MM-DD" required />
-								</div>
-							</div>
-							
-							<div class="col-lg-6 col-md-12 form-group">
-								<div>
-									<label>City</label>
-									<input type="text" class="form-control" name="city" value="<?php echo $affiliate['city']; ?>" placeholder="City" required />
 								</div>
 							</div>
 								
@@ -53,7 +46,14 @@
 
 						<div class="row w-100 mb-3">
 							
-							<div class="col-lg-6 col-md-12 form-group">
+							<div class="col-lg-8 col-md-8 form-group">
+								<div>
+									<label>City</label>
+									<input type="text" class="form-control" name="city" value="<?php echo $affiliate['city']; ?>" placeholder="City" required />
+								</div>
+							</div>
+							
+							<div class="col-lg-8 col-md-8 form-group">
 								<div>
 									<label>State</label>
 									<select name="state" data-placeholder="State" data-type="selector" required>
@@ -65,21 +65,23 @@
 								</div>
 							</div>
 
-							<div class="col-lg-6 col-md-12 form-group">
+							<div class="col-lg-8 col-md-8 form-group">
 								<div>
 									<label>Phone</label>
 									<input type="text" class="form-control" name="phone" value="<?php echo $affiliate['phone']; ?>" placeholder="000-000-0000" required />
 								</div>
 							</div>
+						</div>
 
-							<div class="col-lg-6 col-md-12 form-group">
+						<div class="row w-100 mb-3">
+							<div class="col-lg-8 col-md-8 form-group">
 								<div>
 									<label>Frequency of Board Meeting</label>
 									<input type="text" class="form-control" name="board_meeting_frequency" value="<?php echo $affiliate['board_meeting_frequency']; ?>" placeholder="Frequency of Board Meeting" required />
 								</div>
 							</div>
 
-							<div class="col-lg-6 col-md-12 form-group">
+							<div class="col-lg-8 col-md-8 form-group">
 								<div>
 									<label>Compliance Dues</label>
 									<select name="compliance_dues" id="compliance_dues" data-placeholder="Compliance Dues" data-type="selector" required>
@@ -89,11 +91,21 @@
 								</div>
 							</div>
 
+							<div class="col-lg-8 col-md-8 form-group">
+								<div>
+									<label>UL Census</label>
+									<select name="ul_census" id="ul_census" data-placeholder="UL Census" data-type="selector" required>
+										<option value="1" <?php if($affiliate['ul_census']=="1") echo "selected"; ?>>Completed</option>
+										<option value="0" <?php if($affiliate['ul_census']=="0") echo "selected"; ?>>Incompleted</option>
+									</select>
+								</div>
+							</div>
+
 						</div>
 					</div>
 
 					<div class="row w-100 my-5">
-						<div class="col-lg-6 col-md-8 form-group">
+						<div class="col-lg-8 col-md-8 form-group">
 							<div>
 								<label>Board Chair</label>
 								<select name="board_chair" id="board_chair{{affiliate_id}}" data-placeholder="State" data-type="selector">
@@ -104,14 +116,14 @@
 								</select>
 							</div>
                         </div>
-						<div class="col-lg-6 col-md-8 form-group">
+						<div class="col-lg-8 col-md-8 form-group">
 							<div>
 								<label>Email</label>
 								<input type="email" class="form-control" name="email" value="<?php echo $affiliate['email']; ?>" placeholder="y.bailey@nvul.org" required />
 							</div>
 						</div>
 
-						<div class="col-lg-6 col-md-8 form-group">
+						<div class="col-lg-8 col-md-8 form-group">
 							<div>
 								<label>Term Expiration</label>
 								<input type="text" class="form-control" placeholder="Term Expiration" value=""  />
@@ -122,12 +134,12 @@
 					<div class="settingWrap">
 						<div class="row w-100 mb-3">
 							
-							<div class="col-lg-6 col-md-8 form-group">
+							<div class="col-lg-8 col-md-8 form-group">
 								<label>Current Compliance Status</label>
 								<input type="text" class="form-control" placeholder="Current Compliance Status" value="Complaint" disabled />
 							</div>
 
-							<div class="col-lg-6 col-md-8 form-group">
+							<div class="col-lg-8 col-md-8 form-group">
 								<label class="label">Report Available</label>
 								<div>
 								<label class="checkbox switch bool" for="report-label{{affiliate_id}}">
@@ -136,7 +148,7 @@
 								</div>
 							</div>
 							
-							<div class="col-lg-6 col-md-8 form-group">
+							<div class="col-lg-8 col-md-8 form-group">
 								<label>Active</label>
 								<div>
 									<label class="checkbox switch bool <?php if($affiliate['affiliate_status'] == "1") echo "checked"; ?>" for="affiliate_status">

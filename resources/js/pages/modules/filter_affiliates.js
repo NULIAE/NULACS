@@ -39,6 +39,7 @@ $(function () {
 				$(data.affiliates).each(function(i, item){
 					$('#region'+item.affiliate_id)[0].sumo.selectItem(item.region_id);
 					$('#compliance_dues'+item.affiliate_id)[0].sumo.selectItem(item.compliance_dues);
+					$('#ul_census'+item.affiliate_id)[0].sumo.selectItem(item.ul_census);
 					if(item.affiliate_status == "1"){
 						$('#status-label'+item.affiliate_id).addClass('checked');
 						$('#status'+item.affiliate_id).attr('checked','checked');
