@@ -96,7 +96,7 @@
 									<label>UL Census</label>
 									<select name="ul_census" id="ul_census" data-placeholder="UL Census" data-type="selector" required>
 										<option value="1" <?php if($affiliate['ul_census']=="1") echo "selected"; ?>>Completed</option>
-										<option value="0" <?php if($affiliate['ul_census']=="0") echo "selected"; ?>>Incompleted</option>
+										<option value="0" <?php if($affiliate['ul_census']=="0") echo "selected"; ?>>Not Completed</option>
 									</select>
 								</div>
 							</div>

@@ -206,7 +206,7 @@
 						<label>UL Census</label>
 						<select name="ul_census" id="ul_census{{affiliate_id}}" data-placeholder="UL Census" data-type="selector" disabled>
 							<option value="1">Completed</option>
-							<option value="0">Incompleted</option>
+							<option value="0">Not Completed</option>
 						</select>
 					</div>
 
