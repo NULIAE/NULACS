@@ -102,8 +102,9 @@ $(function () {
 				}
 				},
 				"currentDate": function () {
+					var date = new Date(data.year, data.month-1 , 1);
 					if(data.status == "monthly")
-						return Intl.DateTimeFormat('en', { month: 'short' }).format(data.month).toUpperCase()+ "-" + data.year;
+						return date.toLocaleString('en-us', { month: 'short' }).toUpperCase() +"-" + data.year;
 					else if(data.status == "quarterly")
 						return "Q" + data.quarter + "-" + data.year;
 					else

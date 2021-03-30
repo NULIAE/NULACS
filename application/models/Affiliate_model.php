@@ -23,6 +23,14 @@ class Affiliate_model extends CI_Model
 			$flag = 1;
 		} 
 		
+		if(isset($where['affiliate_id']))
+		{
+			$sql .= ($flag == 0) ? "WHERE " : " AND ";
+			$sql .= "`affiliate_id`=".$where['affiliate_id'];
+
+			$flag = 1;
+		} 
+		
 		if(isset($where['affiliate.organization']))
 		{
 			$sql .= ($flag == 0) ? "WHERE " : " AND ";
