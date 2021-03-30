@@ -122,10 +122,7 @@ class Reports extends MY_Controller
 						isset($key_indicators["operating_reserves_percentage"]) ? floatval($key_indicators["operating_reserves_percentage"]) : 0
 					);
 				}
-		
 			}
-			
-			//echo "<pre>";print_r($graphData);echo "</pre>";
 		}else{
 			$ind_affiliate = '';
 		}
@@ -135,14 +132,13 @@ class Reports extends MY_Controller
 			'key_indicators' 	=> $this->Reports_model->get_key_indicators($quarter, $year),
 			'kpi_report'     	=> $this->Reports_model->get_kpi_report($quarter, $year),
 			'ind_affiliate'  	=> $this->Reports_model->get_ind_affiliate_report($ind_affiliate, $data['choose_yr']),
-			'ind_affiliate_yr'  => $this->Reports_model->get_ind_affiliate_yr_report($ind_affiliate, $data['choose_yr']),
 			'affiliate' => $ind_affiliate,
 			'quarter' => $quarter,
 			'year' => $year,
 			'graph_data' => $graphData,
 			"group" => $data["group"]
         );
-		//print_r($data);
+		
 		//Name of the view file
 		$data['view_name'] = 'modules/reports/reports';
 		//Page specific javascript files
