@@ -35,6 +35,7 @@ $(function(){
 			}
 		}).on('dp.hide', function(e) {
 			$('#monthpicker').val(e.date.format('M'));
+			$('#yearpicker').val(e.date.format('YYYY'));
 		});
 	
 		$btnYear.click(function () {
@@ -103,7 +104,7 @@ function openTab(val) {
 	  });
   
 	if(val == 'monthly'){
-	  $(".year").show();
+	  $(".year").hide();
 	  $(".month").show();
 	}
 	if(val == 'quarterly'){

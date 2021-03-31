@@ -165,17 +165,14 @@
                           <tr>
                             <th>MONTH</th>
                             <?php if(isset($_GET['month']) && isset($_GET['year'])){ ?>
-                                <td><?= date('M-Y', strtotime('-1 months', strtotime($_GET['year'].'-'.$_GET['month'].'-01'))); ?></td>
-                                <td><?= date('M-Y', strtotime('-2 months', strtotime($_GET['year'].'-'.$_GET['month'].'-01'))); ?></td>
-                                <td><?= date('M-Y', strtotime('-3 months', strtotime($_GET['year'].'-'.$_GET['month'].'-01'))); ?></td>
-                                <td><?= date('M-Y', strtotime('-4 months', strtotime($_GET['year'].'-'.$_GET['month'].'-01'))); ?></td>
+                                <?php $base = strtotime($_GET['year'].'-'.$_GET['month'].'-01'); ?>
                             <?php }else{?>
-                                <td><?=date("M-Y", strtotime("-1 Months")); ?></td>
-                                <td><?=date("M-Y", strtotime("-2 Months")); ?></td>
-                                <td><?=date("M-Y", strtotime("-3 Months")); ?></td>
-                                <td><?=date("M-Y", strtotime("-4 Months")); ?></td>
-                        <?php  } ?>
-                            
+                                <?php $base = strtotime(date('Y-m',time()) . '-01 00:00:01'); ?>
+                            <?php  } ?>
+                            <td><?=date("M-Y", strtotime("-1 Months", $base)); ?></td>
+                            <td><?=date("M-Y", strtotime("-2 Months", $base)); ?></td>
+                            <td><?=date("M-Y", strtotime("-3 Months", $base)); ?></td>
+                            <td><?=date("M-Y", strtotime("-4 Months", $base)); ?></td>
                           </tr>
                         </thead>
                         <tbody>
@@ -196,7 +193,7 @@
                                    <td><div class="icon-rounded" data-rel="tooltip" data-placement="top" title="<?=isset($data[0]['name']) ? $data[0]['name'] :'Submission Pending'?>"><?=isset($data[0]['icon']) ? $data[0]['icon'] : '<i class="i i-document-status d-status"></i>' ?></div></td>
 
                                    <?php } else { ?>
-                                      <td><div class="icon-rounded" title="Submission Pending"><i class="i i-document-status d-status"></i></div></td>
+                                      <td><div class="icon-rounded" data-rel="tooltip" data-placement="top" title="Submission Pending"><i class="i i-document-status d-status"></i></div></td>
                                 <?php } 
                                     }
                                    } ?>

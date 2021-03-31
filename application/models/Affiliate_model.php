@@ -1046,7 +1046,7 @@ class Affiliate_model extends CI_Model
 
 			if(isset($recent_month))
 			{
-				if($recent_month["compliance_status"] == 8)
+				if($recent_month["compliance_status"] != 11)
 				{
 					$currentTime = mktime(0,0,0, $recent_month["month"], 1, $recent_month["year"]);
 					$date = explode("-", date("Y-n", strtotime("+1 months", $currentTime)));
@@ -1066,7 +1066,7 @@ class Affiliate_model extends CI_Model
 
 			if(isset($recent_quarter))
 			{
-				if($recent_quarter["compliance_status"] == 8)
+				if($recent_quarter["compliance_status"] != 11)
 				{
 					$month = $recent_quarter["quarter"] * 3;
 					$currentTime = mktime(0,0,0, $month, 1, $recent_quarter["year"]);
@@ -1086,7 +1086,7 @@ class Affiliate_model extends CI_Model
 
 			if(isset($recent_year))
 			{
-				if($recent_year["compliance_status"] == 8)
+				if($recent_year["compliance_status"] != 11)
 				{
 					$recent_year["year"] += 1;
 				}

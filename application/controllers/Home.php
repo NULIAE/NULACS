@@ -75,21 +75,19 @@ class Home extends MY_Controller
 	public function get_monthly_compliance($filterWMonth,$filterWYear){
 
 		if($filterWMonth && $filterWYear){
-			$oneMB = ltrim(date("m",strtotime("-1 Months")), "0");  //oneMb means One month before
-			$twoMB = ltrim(date("m",strtotime("-2 Months")), "0"); 
-			$threeMB = ltrim(date("m",strtotime("-3 Months")), "0"); 
-			$fourMB = ltrim(date("m",strtotime("-4 Months")), "0");
+			$base = strtotime($filterWYear.'-'.$filterWMonth.'-01 00:00:01');
 		}else{
-			$oneMB = ltrim(date("m",strtotime("-1 Months")), "0");  //oneMb means One month before
-			$twoMB = ltrim(date("m",strtotime("-2 Months")), "0"); 
-			$threeMB = ltrim(date("m",strtotime("-3 Months")), "0"); 
-			$fourMB = ltrim(date("m",strtotime("-4 Months")), "0");
+			$base = strtotime(date('Y-m',time()) . '-01 00:00:01');
 		}
+		$oneMB = explode("-", date("n-Y",strtotime("-1 Months", $base)));  //oneMb means One month before
+		$twoMB = explode("-", date("n-Y",strtotime("-2 Months", $base))); 
+		$threeMB = explode("-", date("n-Y",strtotime("-3 Months", $base))); 
+		$fourMB = explode("-", date("n-Y",strtotime("-4 Months", $base)));
 		
-		$get_monthly_compliance['status'][$oneMB] = $this->Document_model->monthly_compliance_status($oneMB,$filterWYear);
-		$get_monthly_compliance['status'][$twoMB] = $this->Document_model->monthly_compliance_status($twoMB,$filterWYear);
-		$get_monthly_compliance['status'][$threeMB] = $this->Document_model->monthly_compliance_status($threeMB,$filterWYear);
-		$get_monthly_compliance['status'][$fourMB] = $this->Document_model->monthly_compliance_status($fourMB,$filterWYear);
+		$get_monthly_compliance['status'][$oneMB[0]] = $this->Document_model->monthly_compliance_status($oneMB[0],$oneMB[1]);
+		$get_monthly_compliance['status'][$twoMB[0]] = $this->Document_model->monthly_compliance_status($twoMB[0],$twoMB[1]);
+		$get_monthly_compliance['status'][$threeMB[0]] = $this->Document_model->monthly_compliance_status($threeMB[0],$threeMB[1]);
+		$get_monthly_compliance['status'][$fourMB[0]] = $this->Document_model->monthly_compliance_status($fourMB[0],$fourMB[1]);
 
 		return $get_monthly_compliance;
 	}
@@ -101,17 +99,16 @@ class Home extends MY_Controller
 	 */
 	public function get_quarterly_compliance_status($filterWYear){
 		
-		if($filterWYear){
-			$filterWYear = $filterWYear;
-		}else{
-			$filterWYear='';
+		if(!isset($filterWYear)){
+			$filterWYear = date("Y",strtotime("-4 Months"));
 		}
+
 		$get_quarterly_compliance_status['status'][1] = $this->Document_model->quarterly_compliance_status(1,$filterWYear);
 		$get_quarterly_compliance_status['status'][2] = $this->Document_model->quarterly_compliance_status(2,$filterWYear);
 		$get_quarterly_compliance_status['status'][3] = $this->Document_model->quarterly_compliance_status(3,$filterWYear);
 	    $get_quarterly_compliance_status['status'][4] = $this->Document_model->quarterly_compliance_status(4,$filterWYear);
-		return $get_quarterly_compliance_status;
 
+		return $get_quarterly_compliance_status;
 	}
 
 	/**
@@ -122,7 +119,6 @@ class Home extends MY_Controller
 	public function get_yearly_compliance_status($filterWYear){
 
 		if($filterWYear){
-
 			$oneYB = date('Y', strtotime('-1 year', strtotime($filterWYear.'-01-01')));
 			$twoYB = date('Y', strtotime('-2 year', strtotime($filterWYear.'-01-01')));
 			$threeYB = date('Y', strtotime('-3 year', strtotime($filterWYear.'-01-01')));
@@ -152,29 +148,23 @@ class Home extends MY_Controller
 	public function document_listing($filterWMonth,$filterWYear){
 
 		if($filterWMonth && $filterWYear){
-			$oneMB = ltrim(date("m",strtotime("-1 Months")), "0");  //oneMb means One month before
-			$twoMB = ltrim(date("m",strtotime("-2 Months")), "0"); 
-			$threeMB = ltrim(date("m",strtotime("-3 Months")), "0"); 
-			$fourMB = ltrim(date("m",strtotime("-4 Months")), "0");
+			$base = strtotime($filterWYear.'-'.$filterWMonth.'-01 00:00:01');
 		}else{
-			$oneMB = ltrim(date("m",strtotime("-1 Months")), "0");  //oneMb means One month before
-			$twoMB = ltrim(date("m",strtotime("-2 Months")), "0"); 
-			$threeMB = ltrim(date("m",strtotime("-3 Months")), "0"); 
-			$fourMB = ltrim(date("m",strtotime("-4 Months")), "0");
+			$base = strtotime(date('Y-m',time()) . '-01 00:00:01');
 		}
+		$oneMB = explode("-", date("n-Y",strtotime("-1 Months", $base)));  //oneMb means One month before
+		$twoMB = explode("-", date("n-Y",strtotime("-2 Months", $base))); 
+		$threeMB = explode("-", date("n-Y",strtotime("-3 Months", $base))); 
+		$fourMB = explode("-", date("n-Y",strtotime("-4 Months", $base)));
 
-		$oneMB = ltrim(date("m",strtotime("-1 Months")), "0");  //OneMB means one month before
-		$twoMB = ltrim(date("m",strtotime("-2 Months")), "0"); 
-		$threeMB = ltrim(date("m",strtotime("-3 Months")), "0"); 
-		$fourMB = ltrim(date("m",strtotime("-4 Months")), "0");
 		$document_listing = $this->Document_model->get_documents(1, array(6));
 
 		foreach( $document_listing as $key=>$listing){
 			
-			$document_listing[$key]['status'][$oneMB] = $this->Document_model->monthly_status($oneMB,$filterWYear,$listing['document_id']);
-			$document_listing[$key]['status'][$twoMB] = $this->Document_model->monthly_status($twoMB,$filterWYear,$listing['document_id']);
-			$document_listing[$key]['status'][$threeMB] = $this->Document_model->monthly_status($threeMB,$filterWYear,$listing['document_id']);
-			$document_listing[$key]['status'][$fourMB] = $this->Document_model->monthly_status($fourMB,$filterWYear,$listing['document_id']);
+			$document_listing[$key]['status'][$oneMB[0]] = $this->Document_model->monthly_status($oneMB[0],$oneMB[1],$listing['document_id']);
+			$document_listing[$key]['status'][$twoMB[0]] = $this->Document_model->monthly_status($twoMB[0],$twoMB[1],$listing['document_id']);
+			$document_listing[$key]['status'][$threeMB[0]] = $this->Document_model->monthly_status($threeMB[0],$threeMB[1],$listing['document_id']);
+			$document_listing[$key]['status'][$fourMB[0]] = $this->Document_model->monthly_status($fourMB[0],$fourMB[1],$listing['document_id']);
 
 		}
 		return $document_listing;
@@ -188,21 +178,20 @@ class Home extends MY_Controller
 	 */
 	public function quarterly_document_listing($filterWYear){
 
-		if($filterWYear){
-			$filterWYear = $filterWYear;
-		}else{
-			$filterWYear='';
+		if(!isset($filterWYear)){
+			$filterWYear = date("Y",strtotime("-4 Months"));
 		}
+
 		$quarterly_document_listing = $this->Document_model->get_documents(2, array(8));
 
-		   foreach($quarterly_document_listing as $key=>$listing){
-				$quarterly_document_listing[$key]['status'][1] = $this->Document_model->get_quarter_status(1,$filterWYear,$listing['document_id']);
-				$quarterly_document_listing[$key]['status'][2] = $this->Document_model->get_quarter_status(2,$filterWYear,$listing['document_id']);
-				$quarterly_document_listing[$key]['status'][3] = $this->Document_model->get_quarter_status(3,$filterWYear,$listing['document_id']);
-				$quarterly_document_listing[$key]['status'][4] = $this->Document_model->get_quarter_status(4,$filterWYear,$listing['document_id']);
-			}
-		return $quarterly_document_listing;
+		foreach($quarterly_document_listing as $key=>$listing){
+			$quarterly_document_listing[$key]['status'][1] = $this->Document_model->get_quarter_status(1,$filterWYear,$listing['document_id']);
+			$quarterly_document_listing[$key]['status'][2] = $this->Document_model->get_quarter_status(2,$filterWYear,$listing['document_id']);
+			$quarterly_document_listing[$key]['status'][3] = $this->Document_model->get_quarter_status(3,$filterWYear,$listing['document_id']);
+			$quarterly_document_listing[$key]['status'][4] = $this->Document_model->get_quarter_status(4,$filterWYear,$listing['document_id']);
+		}
 
+		return $quarterly_document_listing;
 	}
 
 	/**

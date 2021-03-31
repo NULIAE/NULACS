@@ -571,18 +571,11 @@ class Document_model extends CI_Model
 	 */
 	public function monthly_compliance_status($filterWMonth,$filterWyear)
 	{
-		$year = date("Y",strtotime("-4 Months"));
-
 		$this->db->select('*');
 		$this->db->from('affiliate_compliance_status_monthly as acsm');
 		$this->db->join('status_flags as sf', 'sf.id = acsm.compliance_status');
 		$this->db->where('acsm.affiliate_id =',$this->session->affiliate_id);
-		if($filterWyear){
-			$this->db->where('acsm.year',$filterWyear);
-		}else{
-			$this->db->where('acsm.year >=',$year);
-		}
-		
+		$this->db->where('acsm.year',$filterWyear);
 		$this->db->where('acsm.month',$filterWMonth);
 		$this->db->order_by('acsm.month' , 'desc');
 		$query = $this->db->get(); 
@@ -598,18 +591,11 @@ class Document_model extends CI_Model
 	 */
 	public function quarterly_compliance_status($quarter,$filterWyear)
 	{
-		$year = date("Y",strtotime("-4 Months"));
-
 		$this->db->select('*');
 		$this->db->from('affiliate_compliance_status_quarterly as acsq');
 		$this->db->join('status_flags as sf', 'sf.id = acsq.compliance_status');
 		$this->db->where('acsq.affiliate_id =',$this->session->affiliate_id);
-		if($filterWyear){
-			$this->db->where('acsq.year', $filterWyear);
-		}else{
-			$this->db->where('acsq.year >=', $year);
-		}
-	
+		$this->db->where('acsq.year', $filterWyear);
 		$this->db->where('acsq.quarter', $quarter);
 		$this->db->order_by('acsq.quarter' , 'desc');
 		$query = $this->db->get(); 
@@ -643,8 +629,6 @@ class Document_model extends CI_Model
 	 */
 	public function monthly_status($filterWMonth, $filterWyear,$documentId)
 	{
-		$year = date("Y",strtotime("-4 Months"));
-
 		$this->db->select('*');
 		$this->db->from('documents');
 		$this->db->join('monthly_document_status as mds', 'mds.document_id = documents.document_id', 'left');
@@ -652,11 +636,7 @@ class Document_model extends CI_Model
 		$this->db->where('mds.affiliate_id', $this->session->affiliate_id);
 		$this->db->where('documents.document_id !=', 6);
 		$this->db->where('documents.document_id ', $documentId);
-		if($filterWyear){
-			$this->db->where('mds.document_year',$filterWyear);
-		}else{
-			$this->db->where('mds.document_year >=', $year);
-		}
+		$this->db->where('mds.document_year',$filterWyear);
 		$this->db->where_in('mds.document_month', $filterWMonth);
 		$this->db->order_by('mds.document_month' , 'desc');
 		$query = $this->db->get(); 
@@ -671,9 +651,7 @@ class Document_model extends CI_Model
 	 * @return array quarter status
 	 */
 	public function get_quarter_status($month,$filterWyear,$documentId)
-	{	 
-		$year = date("Y",strtotime("-4 Months"));
-
+	{
 		$this->db->select('*');  
 		$this->db->from('documents');
 		$this->db->join('quarterly_document_status as qds', 'qds.document_id = documents.document_id', 'left');
@@ -681,11 +659,7 @@ class Document_model extends CI_Model
 		$this->db->where('qds.affiliate_id', $this->session->affiliate_id);
 		$this->db->where('qds.document_month =', $month);
 		$this->db->where('documents.document_id ', $documentId);
-		if($filterWyear){
-			$this->db->where('qds.document_year ', $filterWyear);
-		}else{
-			$this->db->where('qds.document_year >=', $year);
-		}
+		$this->db->where('qds.document_year ', $filterWyear);
 		$this->db->group_by('qds.document_month' , 'desc');
 		$query = $this->db->get(); 
 		

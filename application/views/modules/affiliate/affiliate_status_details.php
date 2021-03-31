@@ -103,9 +103,15 @@ $quarterArray = array(
 							<div class="tab-pane fade show active" id="nav-y1" role="tabpanel" aria-labelledby="nav-y1-tab">
 
 								<div class=" m-y-20">
-									<div class="h5 t-c f-bold">MONTHLY (<?php echo strtoupper(date('M', mktime(0, 0, 0, $month, 10))).' '.$monthly_year; ?>)</div>
-									<!-- <div class="h6">Due Date: 01/31/2021</div> -->
-
+									<?php $monthly_date = mktime(0, 0, 0, $month, 1, $monthly_year); ?>
+									<?php $previous_date = explode("-", date("m-Y", strtotime("-1 months", $monthly_date))); ?>
+									<?php $next_date = explode("-", date("m-Y", strtotime("+1 months", $monthly_date))); ?>
+									<div class="h5 t-c f-bold">
+										<a class="mr-3" href="<?php echo current_url().'?interval=nav-y1&month='.$previous_date[0].'&monthly_year='.$previous_date[1]; ?>" data-rel="tooltip" data-placement="top" title="Previous"><i class="i i-arrow_back"></i></a>
+										MONTHLY (<?php echo strtoupper(date('M Y', $monthly_date)); ?>)
+										<a class="ml-3" href="<?php echo current_url().'?interval=nav-y1&month='.$next_date[0].'&monthly_year='.$next_date[1]; ?>" data-rel="tooltip" data-placement="top" title="Next"><i class="i i-arrow_forward"></i></a>
+										<!-- <div class="h6">Due Date: 01/31/2021</div> -->
+									</div>
 								</div>
 
 								<div class="head">
@@ -323,7 +329,7 @@ $quarterArray = array(
 
 											<div class="col-lg-12">
 												<div class="p-a-15 text-lg-right">
-												<span class="h5">Affiliate monthly compliance for <?php echo strtoupper(date('M', mktime(0, 0, 0, $month, 10))).' '.$monthly_year; ?></span>
+												<span class="h5">Affiliate monthly compliance for <?php echo strtoupper(date('M Y', $monthly_date)); ?></span>
 												</div>
 											</div>
 											<div class="col-lg-12 <?php if($this->session->role_id == 1) echo "update-status"; ?>">
@@ -343,9 +349,17 @@ $quarterArray = array(
 							<div class="tab-pane fade" id="nav-y2" role="tabpanel" aria-labelledby="nav-y2-tab">
 
 								<div class=" m-y-20">
-									<div class="h5 t-c f-bold">Q<?php echo $quarter; ?> (<?php echo $quarterArray[$quarter]; ?>)</div>
-									<!-- <div class="h6">Due Date: 01/31/2021</div> -->
-
+									<?php $quarterly_date = mktime(0, 0, 0, $quarter*3, 1, $quarterly_year); ?>
+									<?php $previous_date = explode("-", date("m-Y", strtotime("-3 months", $quarterly_date))); ?>
+									<?php $prev_quarter = ceil($previous_date[0]/3); ?>
+									<?php $next_date = explode("-", date("m-Y", strtotime("+3 months", $quarterly_date))); ?>
+									<?php $next_quarter = ceil($next_date[0]/3); ?>
+									<div class="h5 t-c f-bold">
+										<a class="mr-3" href="<?php echo current_url().'?interval=nav-y2&quarter='.$prev_quarter.'&quarterly_year='.$previous_date[1]; ?>" data-rel="tooltip" data-placement="top" title="Previous"><i class="i i-arrow_back"></i></a>
+										Q<?php echo $quarter; ?> (<?php echo $quarterArray[$quarter]; ?>)
+										<a class="ml-3" href="<?php echo current_url().'?interval=nav-y2&quarter='.$next_quarter.'&quarterly_year='.$next_date[1]; ?>" data-rel="tooltip" data-placement="top" title="Next"><i class="i i-arrow_forward"></i></a>
+										<!-- <div class="h6">Due Date: 01/31/2021</div> -->
+									</div>
 								</div>
 
 								<div class="head">
@@ -576,9 +590,12 @@ $quarterArray = array(
 							<div class="tab-pane fade" id="nav-y3" role="tabpanel" aria-labelledby="nav-y3-tab">
 								<div class=" m-y-20">
 									<?php $startMonth = date('m', strtotime($affiliate['year_start'])); ?>
-									<div class="h5 t-c f-bold">YEARLY (<?php echo strtoupper(date('M', strtotime($affiliate['year_start'])))." ".$yearly_year; ?> - <?php echo strtoupper(date('M Y', strtotime("+11 month", mktime(0, 0, 0, $startMonth, 1, $yearly_year)))); ?>)</div>
-									<!-- <div class="h6">Due Date: 01/31/2021</div> -->
-
+									<div class="h5 t-c f-bold">
+										<a class="mr-3" href="<?php echo current_url().'?interval=nav-y3&yearly_year='.($yearly_year-1); ?>" data-rel="tooltip" data-placement="top" title="Previous"><i class="i i-arrow_back"></i></a>
+										YEARLY (<?php echo strtoupper(date('M', strtotime($affiliate['year_start'])))." ".$yearly_year; ?> - <?php echo strtoupper(date('M Y', strtotime("+11 month", mktime(0, 0, 0, $startMonth, 1, $yearly_year)))); ?>)
+										<a class="ml-3" href="<?php echo current_url().'?interval=nav-y3&yearly_year='.($yearly_year+1); ?>" data-rel="tooltip" data-placement="top" title="Next"><i class="i i-arrow_forward"></i></a>
+										<!-- <div class="h6">Due Date: 01/31/2021</div> -->
+									</div>
 								</div>
 
 								<div class="head">
