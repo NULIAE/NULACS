@@ -258,12 +258,17 @@ class User_model extends CI_Model
 
 	public function get_board_member($affiliate_id)
 	{
-		$this->db->select('CONCAT(prifix, first_name, " ", last_name) as name');
+		$this->db->select('prifix, first_name, last_name');
 		$this->db->from('users');
 		$this->db->where('affiliate_id', $affiliate_id);
 
 		$query = $this->db->get();
 
-		return $query->row_array();
+		$row = $query->row_array();
+
+		if(isset($row))
+			return $row["prifix"].$row["first_name"]." ".$row["last_name"];
+		else
+			return NULL;
 	}
 }

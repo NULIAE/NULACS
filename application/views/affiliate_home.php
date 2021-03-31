@@ -16,7 +16,7 @@
                  <div class="col-md-12 form-group">
 
                   <label for="b-chair">Board Chair</label>
-                  <input type="text" class="form-control" id="b-chair" aria-describedby="b-chair" placeholder="Board Chair" value="<?= isset($affiliate['board_member']['name']) ? $affiliate['board_member']['name'] : ''; ?>" readonly>
+                  <input type="text" class="form-control" id="b-chair" aria-describedby="b-chair" placeholder="Board Chair" value="<?= isset($affiliate['board_member']) ? $affiliate['board_member'] : ''; ?>" readonly>
                  </div>
                  <div class="col-md-12 form-group">
                   <?php $startMonth = date('m', strtotime($affiliate['year_start'])); ?>
