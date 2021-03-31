@@ -16,26 +16,23 @@
                  <div class="col-md-12 form-group">
 
                   <label for="b-chair">Board Chair</label>
-                  <input type="text" class="form-control" id="b-chair" aria-describedby="b-chair" placeholder="Board Chair" readonly>
+                  <input type="text" class="form-control" id="b-chair" aria-describedby="b-chair" placeholder="Board Chair" value="<?= isset($affiliate['board_member']['name']) ? $affiliate['board_member']['name'] : ''; ?>" readonly>
                  </div>
                  <div class="col-md-12 form-group">
+                  <?php $startMonth = date('m', strtotime($affiliate['year_start'])); ?>
                   <label for="t-expiration">Term Expiration</label>
-                  <input type="text" class="form-control" id="t-expiration" aria-describedby="t-expiration" placeholder="Term Expiration" readonly>
+                  <input type="text" class="form-control" id="t-expiration" aria-describedby="t-expiration" placeholder="Term Expiration" value="<?php echo date('F Y', strtotime("+11 month", mktime(0, 0, 0, $startMonth, 1, date("Y")))); ?>" readonly>
                  </div></div>
                <div class="row">
                  <div class="col-md-12 form-group">
-                  <label for="adm">ADM Uploader</label>
-                  <input type="text" class="form-control" id="adm" aria-describedby="adm" placeholder="ADM Uploader" readonly>
+                  <label for="adm">Compliance Dues</label>
+                  <input type="text" class="form-control" placeholder="Compliance Dues" value="<?= ($affiliate['compliance_dues']==1) ? 'Yes' : 'No'; ?>" readonly>
                  </div>
                  <div class="col-md-12 form-group">
-                  <label for="b-chair">Last site visit </label>
-                  <?php 
-                  if($user_data->last_login && !empty($user_data->last_login)){
-                     $formatedDateLastV = date('m-d-Y H:i:s', strtotime($user_data->last_login));
-                  }
-                  ?>
-                  <input type="text" class="form-control" id="l-visit"  value="<?=isset($formatedDateLastV )?$formatedDateLastV :''?>"aria-describedby="l-visit " placeholder="Last site visit " readonly>
-                 </div></div>
+                  <label for="b-chair">UL Census </label>
+                  <input type="text" class="form-control" id="ul-census"  value="<?= ($affiliate['ul_census']==1) ? 'Completed' : 'Not Completed'; ?>" placeholder="UL Census" readonly>
+                 </div>
+                </div>
                <div class="row">
                  <div class="col-md-12 form-group">
                   <label for="ccs">Current Compliance Status</label>
@@ -54,7 +51,17 @@
                       <input id="px-15" type="checkbox" name="px-15" readonly>
                     </label>
                   </div>
-                 </div></div>
+                 </div>
+                 <div class="col-md-12 form-group">
+                  <label for="b-chair">Last site visit </label>
+                  <?php 
+                  if($user_data->last_login && !empty($user_data->last_login)){
+                     $formatedDateLastV = date('m-d-Y H:i:s', strtotime($user_data->last_login));
+                  }
+                  ?>
+                  <input type="text" class="form-control" id="l-visit"  value="<?=isset($formatedDateLastV )?$formatedDateLastV :''?>"aria-describedby="l-visit " placeholder="Last site visit " readonly>
+                 </div>
+                </div>
 
                 </div>
              </div>
