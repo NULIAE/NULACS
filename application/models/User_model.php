@@ -256,19 +256,19 @@ class User_model extends CI_Model
 		return $this->db->update('users');
 	}
 
-	public function get_board_member($affiliate_id)
-	{
-		$this->db->select('prifix, first_name, last_name');
-		$this->db->from('users');
-		$this->db->where('affiliate_id', $affiliate_id);
+	// public function get_board_member($affiliate_id)
+	// {
+	// 	$this->db->select('prifix, first_name, last_name');
+	// 	$this->db->from('users');
+	// 	$this->db->where('affiliate_id', $affiliate_id);
 
-		$query = $this->db->get();
+	// 	$query = $this->db->get();
 
-		$row = $query->row_array();
+	// 	$row = $query->row_array();
 
-		if(isset($row))
-			return $row["prifix"].$row["first_name"]." ".$row["last_name"];
-		else
-			return NULL;
-	}
+	// 	if(isset($row))
+	// 		return $row["prifix"].$row["first_name"]." ".$row["last_name"];
+	// 	else
+	// 		return NULL;
+	// }
 }

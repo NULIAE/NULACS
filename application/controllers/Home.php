@@ -55,7 +55,7 @@ class Home extends MY_Controller
 			$data['user_notifications'] = $this->Document_model->user_notifications();
 			$data['user_data'] = $this->Document_model->user_data();
 			$data['affiliate'] = $this->Affiliate_model->get_affiliate_by_id($this->session->affiliate_id);
-			$data['affiliate']['board_member'] = $this->User_model->get_board_member($this->session->affiliate_id);
+			// $data['affiliate']['board_member'] = $this->User_model->get_board_member($this->session->affiliate_id);
 			//Name of the view file
 			$data['view_name'] = 'affiliate_home.php';
 
