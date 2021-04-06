@@ -58,9 +58,9 @@
                         <i class="i i-search" aria-hidden="true"></i>
                       </div>
                     </div>
-                    <div class="search-box d-block d-sm-none m-b-20">
+                    <!-- <div class="search-box d-block d-sm-none m-b-20">
                    <input type="text" placeholder="Search" class="form-control input mob" id="input-search" name="search" >
-                 </div>
+                 </div> -->
 								</form>
               </div>
          </div>

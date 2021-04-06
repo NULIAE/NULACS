@@ -144,9 +144,7 @@ class Reports extends MY_Controller
 		//Page specific javascript files
 		$data['footer']['js'] = array(
 			'https://canvasjs.com/assets/script/canvasjs.min.js',
-            'https://www.gstatic.com/charts/loader.js',
-            '/vendor/moment.js',
-            '/vendor/bootstrap-datetimepicker.js'
+            'https://www.gstatic.com/charts/loader.js'
 		);
 		$this->load->view('template', $data);
 	}

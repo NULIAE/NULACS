@@ -24,7 +24,8 @@
   <script src="<?php echo base_url('/resources/js/vendor/bootstrap.min.js'); ?>"></script>
   <script src="<?php echo base_url('/resources/js/vendor/jquery.validate.min.js'); ?>"></script>
   <!-- <script src="./js/vendor/owl.carousel.min.js"></script> -->
-  <!-- <script src="./js/vendor/bootstrap-datetimepicker.js"></script> -->
+  <script src="<?php echo base_url('/resources/js/vendor/moment.js'); ?>"></script>
+  <script src="<?php echo base_url('/resources/js/vendor/bootstrap-datetimepicker.js'); ?>"></script>
   <script src="<?php echo base_url('/resources/js/vendor/sumoselect.min.js'); ?>"></script>
   <script src="<?php echo base_url('/resources/js/plugins.js'); ?>"></script>
   <script src="<?php echo base_url('/resources/js/main.js'); ?>"></script>

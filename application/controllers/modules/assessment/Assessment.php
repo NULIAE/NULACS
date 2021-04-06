@@ -71,9 +71,7 @@ class Assessment extends MY_Controller
 			$data['footer']['js'] = array(
 				'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js',
 				'https://unpkg.com/mustache@latest',
-				'vendor/moment.js',
 				'vendor/dropzone.js',
-				'vendor/bootstrap-datetimepicker.js',
 				'pages/modules/assessment.js',
 			);
 
@@ -157,10 +155,8 @@ class Assessment extends MY_Controller
 		$data['footer']['js'] = array(
 			'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js',
 			'https://unpkg.com/mustache@latest',
-			'vendor/moment.js',
 			'vendor/dropzone.js',
-			'pages/modules/assessment.js',
-			'vendor/bootstrap-datetimepicker.js',
+			'pages/modules/assessment.js'
 		);
 
 	$this->load->view('template', $data);
@@ -230,10 +226,8 @@ class Assessment extends MY_Controller
 		$data['footer']['js'] = array(
 			'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js',
 			'https://unpkg.com/mustache@latest',
-			'vendor/moment.js',
 			'vendor/dropzone.js',
-			'pages/modules/assessment.js',
-			'vendor/bootstrap-datetimepicker.js',
+			'pages/modules/assessment.js'
 		);
 
 	$this->load->view('template', $data);

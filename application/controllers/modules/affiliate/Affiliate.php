@@ -849,9 +849,7 @@ class Affiliate extends MY_Controller
 		//Page specific javascript files
 		$data['footer']['js'] = array(
 			'https://unpkg.com/mustache@latest',
-			'vendor/moment.js',
 			'vendor/dropzone.js',
-			'vendor/bootstrap-datetimepicker.js',
 			'pages/modules/affiliate_status_details.js'
 		);
 		$data['notifications'] = $this->Document_model->get_notifications();

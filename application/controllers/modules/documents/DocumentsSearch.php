@@ -30,8 +30,6 @@ class DocumentsSearch extends MY_Controller
 		//Page specific javascript files
 		$data['footer']['js'] = array(
 			'https://unpkg.com/mustache@latest',
-			'vendor/moment.js',
-			'vendor/bootstrap-datetimepicker.js',
 			'pages/modules/documents_search.js'
 		);
 		

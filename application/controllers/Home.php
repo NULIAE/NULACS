@@ -28,8 +28,6 @@ class Home extends MY_Controller
 		$data['footer']['js'] = array(
 			'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js',
 			'https://unpkg.com/mustache@latest',
-			'vendor/moment.js',
-			'vendor/bootstrap-datetimepicker.js',
 			'pages/dashboard.js'
 		);
 		$data['notifications'] = $this->Document_model->get_notifications();
