@@ -5,7 +5,7 @@ $(function () {
 		if(i <= 5){
 			$('#dynamic_fields').append('<span class="appending" id="row'+i+'">'+
 				'<div class="col-lg-8 col-md-12 form-group nulselect">'+
-				'<select data-placeholder="data type" name="data-type['+i+'] "class="data-type" data-type="selector" data-class="CaptionCont">'+
+				'<select data-placeholder="data type" name="data-type['+i+'] "class="data-type" data-type="selector" data-class="CaptionCont" required>'+
 					'<option value="">Data type</option>'+
 					'<option value="number"' +(value.datatype == "number" ? 'selected' : '')+'>Number</option>'+
 					'<option value="text"' +(value.datatype == "text" ? 'selected' : '')+'>Text</option>'+
@@ -29,7 +29,7 @@ $(function () {
 	}
 
 	$('#add').click(function(){
-		add_dynamic_input("");
+		add_dynamic_input({datatype:"",metadata:""});
 	});
 
 	$(document).on('click','.btn_remove', function(){
@@ -105,19 +105,18 @@ $(function () {
 		},
 		submitHandler: function(form) {
 			var val = [], meta = [] , values=[];
-			  $(".meta-data-value").map(function(){
-				return val.push($(this).val());
-				
+			
+			$(".meta-data-value").map(function(){
+				return val.push($(this).val());	
 			}).get();
 			
-		 $(".data-type").map(function(){
+		 	$(".data-type").map(function(){
 				return meta.push($(this).val());
 			}).get();
 
-for (var i = 0; i < val.length; i++) {
-
-	values.push({metadata:val[i], datatype: meta[i]});
-  }
+			for (var i = 0; i < val.length; i++) {
+				values.push({metadata:val[i], datatype: meta[i]});
+			}
 
 			$.ajax({
 				type : 'POST',
@@ -132,9 +131,7 @@ for (var i = 0; i < val.length; i++) {
 					message: data.message,
 					//actionHandler: someCallbackFunction
 				};
-				setTimeout(function(){
-					$('#snackbar').NitroToast(toastConfig);
-				}, 2000);
+				$('#snackbar').NitroToast(toastConfig);
 			});
 		}
 	});

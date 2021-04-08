@@ -198,6 +198,7 @@ $(function () {
 			paramName: "document",
 			acceptedFiles: formElement.data('doctype'),
 			maxFiles: 1,
+			maxFilesize: 20,
 			init: function () {
 
 				var myDropzone = this;
@@ -386,7 +387,8 @@ $(function () {
 
 				this.on("error", function (file, errorMessage, xhr) {
 					myDropzone.removeFile(file);
-					alert(errorMessage);
+					toastConfig.message = errorMessage;
+					$('#snackbar').NitroToast(toastConfig);
 				});
 			}
 		});
@@ -716,6 +718,7 @@ $(function () {
 			autoProcessQueue: false,
 			url: base_url + 'module/affiliate/document/doupload',
 			addRemoveLinks: true,
+			maxFilesize: 20,
 			init: function () {
 				var myDropzone = this;
 				$(".btn-upload-l").click(function (e) {
@@ -726,7 +729,11 @@ $(function () {
 				this.on("addedfile", function (file) {
 					$('.collapsedoc').collapse('show');
 				});
-
+				this.on("error", function (file, errorMessage, xhr) {
+					myDropzone.removeFile(file);
+					toastConfig.message = errorMessage;
+					$('#snackbar').NitroToast(toastConfig);
+				});
 			},
 			success: function (file, response) {
 				// myDropzone.removeFile(file);
@@ -784,6 +791,7 @@ $(function () {
 			autoProcessQueue: false,
 			url: base_url + 'module/affiliate/document/doupload',
 			addRemoveLinks: true,
+			maxFilesize: 20,
 			init: function () {
 				var myDropzone = this;
 				$(".btn-upload-o").click(function (e) {
@@ -794,7 +802,11 @@ $(function () {
 				this.on("addedfile", function (file) {
 					$('.collapsedoc').collapse('show');
 				});
-
+				this.on("error", function (file, errorMessage, xhr) {
+					myDropzone.removeFile(file);
+					toastConfig.message = errorMessage;
+					$('#snackbar').NitroToast(toastConfig);
+				});
 			},
 			success: function (file, response) {
 				// myDropzone.removeFile(file);
