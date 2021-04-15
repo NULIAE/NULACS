@@ -243,8 +243,29 @@ class Affiliate extends MY_Controller
 
 	public function status()
 	{
-		//XSS Filter all the input post fields
-		$data = $this->input->get(NULL, TRUE);
+		if(!empty($_GET))
+		{
+			//XSS Filter all the input post fields
+			$data = $this->input->get(NULL, TRUE);
+
+			$this->session->set_userdata('status_params', $data);
+		}
+		else if(!empty($this->session->userdata('status_params')))
+		{
+			$url = base_url('module/affiliate/status').'?';
+			
+			$params = $this->session->userdata("status_params");
+
+			$flag = 0;
+			foreach($params as $key => $value)
+			{
+				$url .= ($flag == 0) ? '' : '&';
+				$url .= $key . '='. $value;
+				$flag = 1;
+			}
+
+			redirect($url);
+		}
 
 		$where = (isset($data["region_id"]) && ($data["region_id"] !="")) ? array("affiliate.region_id" => $data["region_id"]) : NULL;
 

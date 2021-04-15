@@ -38,6 +38,18 @@
                   <a class="nav-link"><span>Affiliate Compliance System</span></a>
                 </li>
                 <li class="nav-item">
+                  <a class="nav-link" title="Home" href="<?php echo base_url(); ?>"><i class="i i-home"></i><span class="sr-only">Home</span></a>
+								</li>
+                <?php if($this->session->role_id == 1): ?>
+                  <li class="nav-item">
+                    <a class="nav-link" title="Affiliate Status" href="<?php echo base_url('/module/affiliate/status'); ?>"><i class="i i-legal-compliance"></i><span class="sr-only">Affiliate Status</span></a>
+                  </li>
+                <?php else: ?>
+                  <li class="nav-item">
+                    <a class="nav-link" title="Uploads" href="<?php echo base_url('/module/affiliate/status/details/').$this->session->affiliate_id; ?>"><i class="i i-upload_file"></i><span class="sr-only">Uploads</span></a>
+                  </li>
+                <?php endif; ?>
+                <li class="nav-item">
                   <a class="nav-link" title="Profile" href="<?php echo base_url('/user/view-profile/').$this->session->user_id; ?>"><i class="i i-admin"></i><span class="sr-only">Profile</span></a>
 								</li>
 								<?php if($this->session->role_id==1 || $this->session->role_id==3): ?>

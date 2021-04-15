@@ -35,18 +35,24 @@
 							</div>
 
 							<div class="appending-section">
-								<div id="dynamic_fields">
-								<div class="col-lg-3 col-md-12 form-group pl-0 d-flex">
-                                  <select data-placeholder="data type" class="data-type" name="data-type[1]" data-type="selector" data-class="CaptionCont">
-                                    <option value="">Data type</option>
-									<option value="text">Text</option>
-									<option value="nummber">Number</option>
-                                  </select>
-                                </div>
-									<div class="form-group outer-wrap" >
-										<input type="text" name="metadata[1]" class="col-20 form-control meta-data-value" placeholder="Meta Data" required>
-										<button type="button" name="add" id="add" class="btn btn-success add-btn"><i class="i i-add"></i></button>
+								<div class="row">
+									<div class="col-24">
+									Add Metadata Field
+										<button type="button" name="add" id="add" class="btn btn-success btn-rounded btn-add ml-auto"><i class="i i-add"></i></button>
 									</div>
+								</div>
+								<div id="dynamic_fields">
+									<span class="appending" id="row1">
+										<div class="col-lg-8 col-md-12 form-group nulselect">
+										<select data-placeholder="data type" class="data-type" name="data-type[1]" data-type="selector" data-class="CaptionCont">
+											<option value="">Data type</option>
+											<option value="text">Text</option>
+											<option value="nummber">Number</option>
+										</select>
+										</div>
+										<input type="text" name="metadata[1]" class="col-20 form-control meta-data-value" placeholder="Meta Data" required>
+										<button name="remove" id="1" class="btn btn_remove"><i class="i i-minus"></i></button>
+									</span>
 								</div>
 								<div class="row justify-content-center mt-2">
 									<button type="submit" class="btn btn-submit">Submit</button>

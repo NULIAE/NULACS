@@ -24,8 +24,8 @@ $(function () {
 	function remove_all_dynamic_input() {
 		$('.appending').remove();
 		$('.meta-data-value').val("");
-		$('.data-type')[0].sumo.selectItem("");
-		i = 1;
+		//$('.data-type')[0].sumo.selectItem("");
+		i = 0;
 	}
 
 	$('#add').click(function(){
@@ -75,12 +75,13 @@ $(function () {
 			if(data.success) {
 				var metadata = JSON.parse(data.metadata);
 		   		$(metadata).each(function(i, item){
-					if(i !== 0){
+					add_dynamic_input(item);
+					/* if(i !== 0){
 						add_dynamic_input(item);
 					} else {
 						$('.meta-data-value:first').val(item.metadata);
 						$('.data-type:first')[0].sumo.selectItem(item.datatype);
-					}
+					} */
 				});
 			}
 		});

@@ -108,13 +108,13 @@
             
           </div>
 
-            <div class="row justify-content-end w-100 pt-3 pb-5 m-0">
+            <!-- <div class="row justify-content-end w-100 pt-3 pb-5 m-0">
                
                 <a href="<?php echo base_url('module/affiliate/status');?>" class="btn btn-primary btn-rounded btn-action-lg" data-rel="tooltip" data-placement="bottom" title="All Affiliates">
 								<i class="i i-right"></i><span class="sr-only">All Affiliates</span>
 								</a> 
               
-            </div>
+            </div> -->
 
          </div>
 

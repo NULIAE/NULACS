@@ -69,7 +69,7 @@
           <div class="col-lg-11">
              <div class="row headOuter">
                  <div class="head">
-                     <h3>Notification</h3>
+                     <h3>Notifications (<?=isset($notifications)?count($notifications):0?>)</h3>
                  </div>
              </div>
              <div class="row chartBody2">
@@ -115,24 +115,26 @@
              </div>
          </div>
       </div>
-      <div class="mr-auto t-r mt-5">
-									<span></span>
-                  <div class="year btn btn-secondary  btn-rounded btn-action-sm" id="btn-year-pick" data-rel="tooltip" data-placement="top" title="Year" style="position:relative;margin-right: 10px;" >
-                    <i class="i i-date-o"></i>
-                  </div>
-                  <div class="month btn btn-secondary  btn-rounded btn-action-sm" id="btn-month-pick" data-rel="tooltip" data-placement="top" title="Month" style="position:relative;margin-right: 10px;">
-                    <i class="i i-month-31"></i>
-                  </div><a href="javascript:;"
-									class="btn btn-primary btn-rounded btn-action-sm" id="btn-filter-date" style="margin-right: 35px;" data-rel="tooltip" data-placement="top" title="Search"><i class="i i-right"></i></a>
-									<form id="filter-date" class="d-none" action="">
-                  <input type="hidden" id="yearpicker" name="year" value="<?php echo isset($_GET['year']) ? $_GET['year'] : date('Y'); ?>" />
-									<input type="hidden" id="monthpicker" name="month" value="<?php echo isset($_GET['month']) ? $_GET['month'] : date('m'); ?>" />
-                  </form>
-              
-                  <a  href="<?php echo base_url('module/affiliate/status/details/'.$this->session->affiliate_id.''); ?>" class="btn btn-primary m-l-auto btn-rounded btn-action" data-rel="tooltip" data-placement="top" title="Add"><i class="i i-add"></i></a>
-                </div>
-
-
+      <div class="row justify-content-between">
+        <div class="col-24 col-lg-12 col-md-24 col-sm-24 mt-5">
+          <a href="<?php echo base_url('/module/affiliate/status/details/').$this->session->affiliate_id; ?>?tab=1" class="btn btn-link text-dark">Compliance Documents</a> |
+          <a href="<?php echo base_url('/module/affiliate/status/details/').$this->session->affiliate_id; ?>?tab=2" class="btn btn-link text-dark">Performance Assessments Documents</a> |
+          <a href="<?php echo base_url('/module/affiliate/status/details/').$this->session->affiliate_id; ?>?tab=3" class="btn btn-link text-dark">Key Indicators</a>
+        </div>
+        <div class="col-24 col-lg-12 col-md-24 col-sm-24 mr-auto t-r mt-5">
+          <div class="year btn btn-secondary  btn-rounded btn-action-sm" id="btn-year-pick" data-rel="tooltip" data-placement="top" title="Year" style="position:relative;margin-right: 10px;" >
+            <i class="i i-date-o"></i>
+          </div>
+          <div class="month btn btn-secondary  btn-rounded btn-action-sm" id="btn-month-pick" data-rel="tooltip" data-placement="top" title="Month" style="position:relative;margin-right: 10px;">
+            <i class="i i-month-31"></i>
+          </div><a href="javascript:;" class="btn btn-primary btn-rounded btn-action-sm" id="btn-filter-date" data-rel="tooltip" data-placement="top" title="Search"><i class="i i-right"></i></a>
+          <form id="filter-date" class="d-none" action="">
+            <input type="hidden" id="yearpicker" name="year" value="<?php echo isset($_GET['year']) ? $_GET['year'] : date('Y'); ?>" />
+            <input type="hidden" id="monthpicker" name="month" value="<?php echo isset($_GET['month']) ? $_GET['month'] : date('m'); ?>" />
+          </form>
+          <!-- <a  href="<?php echo base_url('module/affiliate/status/details/'.$this->session->affiliate_id.''); ?>" class="btn btn-primary m-l-auto btn-rounded btn-action" data-rel="tooltip" data-placement="top" title="Add"><i class="i i-add"></i></a> -->
+        </div>
+      </div>
                
 
                 

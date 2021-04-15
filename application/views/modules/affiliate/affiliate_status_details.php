@@ -42,19 +42,20 @@ $quarterArray = array(
 					<h3><?php echo $affiliate['organization'].' - '.$affiliate['city'].', '.$affiliate['stateabbreviation']; ?></h3>
 				</div>
 			</div>
+			<?php $tabSelected = isset($_GET["tab"]) ? $_GET["tab"] : 1; ?>
 			<div class="mainTab mb-5">
 				<nav>
 					<div class="nav justify-content-center" id="nav-tab" role="tablist">
-						<a class="nav-item nav-link active" id="nav-x1-tab" data-toggle="tab" href="#nav-x1" role="tab"
-							aria-controls="nav-x1" aria-selected="true">Compliance Documents</a>
-						<a class="nav-item nav-link" id="nav-x2-tab" data-toggle="tab" href="#nav-x2" role="tab"
-							aria-controls="nav-x2" aria-selected="false">Performance Assessment Documents</a>
-						<a class="nav-item nav-link" id="nav-x3-tab" data-toggle="tab" href="#nav-x3" role="tab"
-							aria-controls="nav-x3" aria-selected="false">Key Indicators</a>
+						<a class="nav-item nav-link <?php if($tabSelected==1) echo 'active'; ?>" id="nav-x1-tab" data-toggle="tab" href="#nav-x1" role="tab"
+							aria-controls="nav-x1" aria-selected="<?= ($tabSelected==1) ? 'true' : 'false'; ?>">Compliance Documents</a>
+						<a class="nav-item nav-link <?php if($tabSelected==2) echo 'active'; ?>" id="nav-x2-tab" data-toggle="tab" href="#nav-x2" role="tab"
+							aria-controls="nav-x2" aria-selected="<?= ($tabSelected==2) ? 'true' : 'false'; ?>">Performance Assessment Documents</a>
+						<a class="nav-item nav-link <?php if($tabSelected==3) echo 'active'; ?>" id="nav-x3-tab" data-toggle="tab" href="#nav-x3" role="tab"
+							aria-controls="nav-x3" aria-selected="<?= ($tabSelected==3) ? 'true' : 'false'; ?>">Key Indicators</a>
 					</div>
 				</nav>
 				<div class="tab-content" id="nav-tabContent">
-					<div class="tab-pane fade show active" id="nav-x1" role="tabpanel" aria-labelledby="nav-x1-tab">
+					<div class="tab-pane fade <?php if($tabSelected==1) echo 'show active'; ?>" id="nav-x1" role="tabpanel" aria-labelledby="nav-x1-tab">
 						<nav>
 							<div class="nav b-b-1 p-b-0" id="tab-inner" role="tablist">
 								<a class="nav-item nav-link active" id="nav-y1-tab" data-toggle="tab" href="#nav-y1" role="tab"
@@ -1159,7 +1160,7 @@ $quarterArray = array(
 							</div>
 						</div>
 					</div>
-					<div class="tab-pane fade" id="nav-x2" role="tabpanel" aria-labelledby="nav-x2-tab">
+					<div class="tab-pane fade <?php if($tabSelected==2) echo 'show active'; ?>" id="nav-x2" role="tabpanel" aria-labelledby="nav-x2-tab">
 						<nav>
 							<div class="nav b-b-1 p-b-0" id="tab-inner-z" role="tablist">
 								<a class="nav-item nav-link active" id="nav-z1-tab" data-toggle="tab" href="#nav-z1" role="tab"
@@ -1849,7 +1850,7 @@ $quarterArray = array(
 						</div>
 
 					</div>
-					<div class="tab-pane fade" id="nav-x3" role="tabpanel" aria-labelledby="nav-x3-tab">
+					<div class="tab-pane fade <?php if($tabSelected==3) echo 'show active'; ?>" id="nav-x3" role="tabpanel" aria-labelledby="nav-x3-tab">
 						<form id="form-search-key-indicators" method="post" action="#" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>">
 							<div class="row m-y-20 align-items-center">
 
