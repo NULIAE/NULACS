@@ -12720,7 +12720,42 @@ input[type="checkbox"].custom + label {
 :root .i-flip-horizontal,
 :root .i-flip-vertical {
   filter: none; }
+@font-face {
+  font-family: 'icomoon';
+  src:  url('../fonts/icon/icomoon.eot?ylrzs4');
+  src:  url('../fonts/icon/icomoon.eot?ylrzs4#iefix') format('embedded-opentype'),
+    url('../fonts/icon/icomoon.ttf?ylrzs4') format('truetype'),
+    url('../fonts/icon/icomoon.woff?ylrzs4') format('woff'),
+    url('../fonts/icon/icomoon.svg?ylrzs4#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
 
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-affiliate_list:before {
+  content: "\e900";
+}
+.icon-settings:before {
+  content: "\e901";
+}
+.icon-upload:before {
+  content: "\e902";
+}
 @font-face {
   font-family: "icon";
   src: url("../fonts/icon/icon.eot?hs22a6");

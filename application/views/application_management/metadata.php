@@ -35,13 +35,11 @@
 							</div>
 
 							<div class="appending-section">
-								<div class="row">
-									<div class="col-24">
-									Add Metadata Field
-										<button type="button" name="add" id="add" class="btn btn-success btn-rounded btn-add ml-auto"><i class="i i-add"></i></button>
-									</div>
-								</div>
+								
 								<div id="dynamic_fields">
+									<div class="outer-wrap w-100">
+											<button type="button" name="add" id="add" class="btn btn-success btn-rounded add-btn ml-auto" title="Add Metadata Field"><i class="i i-add"></i></button>
+									</div>
 									<span class="appending" id="row1">
 										<div class="col-lg-8 col-md-12 form-group nulselect">
 										<select data-placeholder="data type" class="data-type" name="data-type[1]" data-type="selector" data-class="CaptionCont">

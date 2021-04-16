@@ -13,6 +13,22 @@
   <meta name="msapplication-TileColor" content="#AA1B20">
   <meta name="msapplication-navbutton-color" content="#ffffff">
   <meta name="apple-mobile-web-app-status-bar-style" content="#AA1B20">
+  <style>
+  header.header .navbar-nav .nav-item .nav-link i.i-b-o-d{
+    font-size: 46px;
+    margin-top: 5px;
+  }
+  @media only screen and (max-width: 991px) {
+    header.header .navbar-nav .nav-item .nav-link i.i-b-o-d{
+    margin-top: 0;
+    }
+  }
+  @media only screen and (max-width: 450px){
+    header.header .navbar-nav .nav-item .nav-link i.i-b-o-d{
+    font-size: 36px;
+    }
+  }
+  </style>
 </head>
 
 <body>
@@ -42,11 +58,11 @@
 								</li>
                 <?php if($this->session->role_id == 1): ?>
                   <li class="nav-item">
-                    <a class="nav-link" title="Affiliate Status" href="<?php echo base_url('/module/affiliate/status'); ?>"><i class="i i-legal-compliance"></i><span class="sr-only">Affiliate Status</span></a>
+                    <a class="nav-link" title="All Affiliate Status" href="<?php echo base_url('/module/affiliate/status'); ?>"><i class="i i-b-o-d"></i><span class="sr-only">All Affiliate Status</span></a>
                   </li>
                 <?php else: ?>
                   <li class="nav-item">
-                    <a class="nav-link" title="Uploads" href="<?php echo base_url('/module/affiliate/status/details/').$this->session->affiliate_id; ?>"><i class="i i-upload_file"></i><span class="sr-only">Uploads</span></a>
+                    <a class="nav-link" title="Upload Documents" href="<?php echo base_url('/module/affiliate/status/details/').$this->session->affiliate_id; ?>"><i class="icon-upload"></i><span class="sr-only">Documents Upload</span></a>
                   </li>
                 <?php endif; ?>
                 <li class="nav-item">
@@ -54,7 +70,7 @@
 								</li>
 								<?php if($this->session->role_id==1 || $this->session->role_id==3): ?>
                 <li class="nav-item">
-                  <a class="nav-link" title="Settings" href="<?php echo base_url('/user/profile/modules'); ?>"><i class="i i-setting"></i><span class="sr-only">Modules</span></a>
+                  <a class="nav-link" title="Settings" href="<?php echo base_url('/user/profile/modules'); ?>"><i class="i i-settings"></i><span class="sr-only">Modules</span></a>
 								</li>
 								<?php endif; ?>
                 <li class="nav-item dropdown">
