@@ -1,4 +1,4 @@
-<main class="Meta-data">
+<main class="Meta-data document-search">
 	<div class="container">
 		<div class="Wrapper">
 			<div class="row justify-content-end date align-items-center">
@@ -60,6 +60,39 @@
 					</div>
 				</div>
 			</div>
+			<div class="row">
+				<div class="Maincontent">
+					<input type="hidden" id="selected-document"  value=""/>
+					<div id="documents-list">
+						<div class="contentData">
+							<div class="col-lg-4 innerColumn"><b>NO.</b></div>
+							<div class="col-lg-8 innerColumn"><b>DOCUMENT NAME</b></div>
+							<div class="col-lg-5 innerColumn"><b>DOCUMENT TYPE</b></div>
+							<div class="col-lg-5 innerColumn"></div>
+						</div>
+						<?php if(isset($documents_list)): ?>
+							<?php foreach($documents_list as $key => $row): ?>
+								<div class="contentData">
+									<div class="col-lg-4 innerColumn"><?php echo $key + 1; ?></div>
+									<div class="col-lg-8 innerColumn"><?php echo $row['document_name']; ?></div>
+									<div class="col-lg-5 innerColumn"><?php echo $row['document_type']; ?></div>
+									<div class="col-lg-5 innerColumn">
+										<a href="javascript:show_metadata(<?php echo $row['document_type_id']; ?>,<?php echo $row['document_id']; ?>);">
+											<i class="i i-remove_red_eye"></i>
+										</a>
+
+									</div>
+								</div>
+							<?php endforeach; ?>
+						<?php else: ?>
+							<div class="contentData">
+								<div class="col-lg-24 innerColumn text-center">No Document found with metadata.</div>
+							</div>
+						<?php endif; ?>
+					</div>
+				</div>
+			</div>
+
 		</div>
 	</div>
 </main>

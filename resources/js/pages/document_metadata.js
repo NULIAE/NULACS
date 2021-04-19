@@ -23,8 +23,6 @@ $(function () {
 
 	function remove_all_dynamic_input() {
 		$('.appending').remove();
-		$('.meta-data-value').val("");
-		//$('.data-type')[0].sumo.selectItem("");
 		i = 0;
 	}
 
@@ -60,6 +58,8 @@ $(function () {
 			});
 			$('#select-document')[0].sumo.reload();
 			$(".SumoSelect").addClass("nulSelector");
+			$('#select-document')[0].sumo.selectItem($('#selected-document').val());
+			$('#selected-document').val("");
 		});
 	});
 
@@ -76,12 +76,6 @@ $(function () {
 				var metadata = JSON.parse(data.metadata);
 		   		$(metadata).each(function(i, item){
 					add_dynamic_input(item);
-					/* if(i !== 0){
-						add_dynamic_input(item);
-					} else {
-						$('.meta-data-value:first').val(item.metadata);
-						$('.data-type:first')[0].sumo.selectItem(item.datatype);
-					} */
 				});
 			}
 		});
@@ -136,4 +130,13 @@ $(function () {
 			});
 		}
 	});
+
 });
+function show_metadata(document_type_id, document_id) {
+	if($('#select-document-type').val() == document_type_id){
+		$('#select-document')[0].sumo.selectItem(document_id.toString());
+	} else {
+		$('#selected-document').val(document_id);
+		$('#select-document-type')[0].sumo.selectItem(document_type_id.toString());
+	}
+}

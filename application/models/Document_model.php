@@ -691,20 +691,20 @@ class Document_model extends CI_Model
 
 
     /**
-	 * get document_listing
+	 * get document_metadata_listing
 	 *
-	 * @return array document_listing 
+	 * @return array documents 
 	 */
-	public function document_listing()
+	public function document_metadata_listing()
 	{
-		$this->db->select('*');
-		$this->db->from('documents');
-		$this->db->join('document_type as dt', 'dt.document_type_id = documents.document_id', 'left');
-		$this->db->where('documents.document_type_id =', 1);
-		$this->db->where('documents.document_id !=', 6);
+		$this->db->select('d.document_id, d.document_type_id, d.document_name, dt.document_type');
+		$this->db->from('documents d');
+		$this->db->join('document_type dt', 'dt.document_type_id = d.document_type_id');
+		$this->db->where('d.metadata !=', NULL);
 	
 		$query = $this->db->get(); 
-	    return $query->result_array();;
+	    
+		return $query->result_array();;
 	}
 	
 

@@ -65,9 +65,6 @@
                     <a class="nav-link" title="Upload Documents" href="<?php echo base_url('/module/affiliate/status/details/').$this->session->affiliate_id; ?>"><i class="icon-upload"></i><span class="sr-only">Documents Upload</span></a>
                   </li>
                 <?php endif; ?>
-                <li class="nav-item">
-                  <a class="nav-link" title="Profile" href="<?php echo base_url('/user/view-profile/').$this->session->user_id; ?>"><i class="i i-admin"></i><span class="sr-only">Profile</span></a>
-								</li>
 								<?php if($this->session->role_id==1 || $this->session->role_id==3): ?>
                 <li class="nav-item">
                   <a class="nav-link" title="Settings" href="<?php echo base_url('/user/profile/modules'); ?>"><i class="i i-settings"></i><span class="sr-only">Modules</span></a>
@@ -112,6 +109,9 @@
                     <?php } ?>
                   </div>
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link" title="Profile" href="<?php echo base_url('/user/view-profile/').$this->session->user_id; ?>"><i class="i i-admin"></i><span class="sr-only">Profile</span></a>
+								</li>
                 <li class="nav-item">
                   <a class="nav-link" title="Log out" id="btn-logout" href="<?php echo base_url('/logout'); ?>"><i class="i i-download_left"></i><span class="sr-only">Sign out</span></a>
                 </li>

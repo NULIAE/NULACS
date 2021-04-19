@@ -18,7 +18,8 @@ class DocumentMetaData extends MY_Controller
 	public function index()
 	{
 		$data['content'] = array(
-			'document_types' => $this->Document_model->get_document_types()
+			'document_types' => $this->Document_model->get_document_types(),
+			'documents_list' => $this->Document_model->document_metadata_listing()
 		);
 		$data['notifications'] = $this->Document_model->get_notifications();
 		//Name of the view file
@@ -69,8 +70,10 @@ class DocumentMetaData extends MY_Controller
 		//XSS Filter all the input post fields
 		$data = $this->input->post(NULL, TRUE);
 
+		$metadata = json_decode($data['metadata']);
+
 		$update_data =  array(
-			'metadata' => $data['metadata']
+			'metadata' => count($metadata) > 0 ? $data['metadata'] : NULL
 		);
 
 		$status = $message = NULL;
