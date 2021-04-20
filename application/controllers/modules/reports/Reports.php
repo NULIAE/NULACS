@@ -78,27 +78,15 @@ class Reports extends MY_Controller
 		
 		if(isset($data['affiliate'])){
 			$ind_affiliate = $data['affiliate'];
+			$ind_reports = $this->Reports_model->get_ind_affiliate_report($ind_affiliate, $data['choose_yr']);
 
-			$currentTime = mktime(0,0,0, $month, 1, $year);
-
-			$index = 0;
-			for($i = 3; $i >= 0; $i--)
+			foreach($ind_reports as $key_row)
 			{
-				$monthValue = $i * -3;
-				
-				$date = explode("-", date("Y-n", strtotime("$monthValue months", $currentTime)));
-
-				$quarterValue = ceil($date[1]/3);
-
-				$yearValue = $date[0];
-
-				$key_row = $this->Affiliate_model->get_key_indicators($data['affiliate'], $quarterValue, $yearValue);
-
-				$key_indicators = isset($key_row["key_indicators"]) ? $key_row["key_indicators"] : NULL;
+				$key_indicators = isset($key_row["indicators"]) ? json_decode($key_row["indicators"], TRUE) : NULL;
 
 				if($data['group'] == "group1"){
 					$graphData["rows"][] = array(
-						"Q".$quarterValue."-".$yearValue,
+						"Q".$key_row["quarter"]."-".$key_row["year"],
 						isset($key_indicators["liquidity"]) ? floatval($key_indicators["liquidity"]) : 0,
 						isset($key_indicators["from_operations"]) ? floatval($key_indicators["from_operations"]) : 0,
 						isset($key_indicators["from_financing"]) ? floatval($key_indicators["from_financing"]) : 0,
@@ -107,14 +95,14 @@ class Reports extends MY_Controller
 					);
 				} else if($data['group'] == "group2"){
 					$graphData["rows"][] = array(
-						"Q".$quarterValue."-".$yearValue,
+						"Q".$key_row["quarter"]."-".$key_row["year"],
 						isset($key_indicators["current_ratio"]) ? floatval($key_indicators["current_ratio"]) : 0,
 						isset($key_indicators["current_debt_ratio"]) ? floatval($key_indicators["current_debt_ratio"]) : 0,
 						isset($key_indicators["days_in_cash"]) ? floatval($key_indicators["days_in_cash"]) : 0
 					);
 				} else if($data['group'] == "group3"){
 					$graphData["rows"][] = array(
-						"Q".$quarterValue."-".$yearValue,
+						"Q".$key_row["quarter"]."-".$key_row["year"],
 						isset($key_indicators["operating_efficiency_program_value"]) ? floatval($key_indicators["operating_efficiency_program_value"]) : 0,
 						isset($key_indicators["operating_efficiency_admin_value"]) ? floatval($key_indicators["operating_efficiency_admin_value"]) : 0,
 						isset($key_indicators["operating_efficiency_fundraising_value"]) ? floatval($key_indicators["operating_efficiency_fundraising_value"]) : 0,
@@ -131,7 +119,7 @@ class Reports extends MY_Controller
             'affiliates'	 	=> $this->Reports_model->get_all_affiliates(),
 			'key_indicators' 	=> $this->Reports_model->get_key_indicators($quarter, $year),
 			'kpi_report'     	=> $this->Reports_model->get_kpi_report($quarter, $year),
-			'ind_affiliate'  	=> $this->Reports_model->get_ind_affiliate_report($ind_affiliate, $data['choose_yr']),
+			'ind_affiliate'  	=> $ind_reports,
 			'affiliate' => $ind_affiliate,
 			'quarter' => $quarter,
 			'year' => $year,
