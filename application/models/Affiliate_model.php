@@ -2,7 +2,7 @@
 /**
  * Affiliate_model
  */
-class Affiliate_model extends CI_Model 
+class Affiliate_model extends CI_Model  
 {	
 	/**
 	 * Get the count of all affiliate using the filters
