@@ -116,12 +116,12 @@
          </div>
       </div>
       <div class="row justify-content-between">
-        <div class="col-24 col-lg-12 col-md-24 col-sm-24 mt-5">
+        <!-- <div class="col-24 col-lg-12 col-md-24 col-sm-24 mt-5">
           <a href="<?php echo base_url('/module/affiliate/status/details/').$this->session->affiliate_id; ?>?tab=1" class="btn btn-link text-dark">Compliance Documents</a> |
           <a href="<?php echo base_url('/module/affiliate/status/details/').$this->session->affiliate_id; ?>?tab=2" class="btn btn-link text-dark">Performance Assessments Documents</a> |
           <a href="<?php echo base_url('/module/affiliate/status/details/').$this->session->affiliate_id; ?>?tab=3" class="btn btn-link text-dark">Key Indicators</a>
-        </div>
-        <div class="col-24 col-lg-12 col-md-24 col-sm-24 mr-auto t-r mt-5">
+        </div> -->
+        <div class="col-24 mr-auto t-r mt-5">
           <div class="year btn btn-secondary  btn-rounded btn-action-sm" id="btn-year-pick" data-rel="tooltip" data-placement="top" title="Year" style="position:relative;margin-right: 10px;" >
             <i class="i i-date-o"></i>
           </div>
@@ -161,6 +161,7 @@
                   aria-controls="nav-w2" aria-selected="false"><i class="i i-quater"></i> View Quarterly Status</a>
                 <a class="nav-item nav-link" onclick="openTab('yearly')" id="nav-w3-tab" data-toggle="tab" href="#nav-w3" role="tab"
                   aria-controls="nav-w3" aria-selected="false"><i class="i i-date-o"></i> View Yearly Status</a>
+                <a class="nav-item nav-link" href="<?php echo base_url('module/affiliate/status/details/'.$this->session->affiliate_id.''); ?>" aria-selected="false"><i class="icon-upload"></i> Upload Documents</a>
               </div>
             </nav>
             <div class="v-tabWrap">

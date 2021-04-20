@@ -41,6 +41,7 @@ font-size: 10px!important;
         }
         ?>
         <div class="mainTabAll">
+          <?php if($this->session->role_id==1): ?>
           <nav>
             <div class="nav" id="nav-tab" role="tablist">
               <a class="nav-item nav-link <?=$secondTbab==0?'active':''?>" id="nav-x1-tab" data-toggle="tab" href="#nav-x1" role="tab"
@@ -49,6 +50,7 @@ font-size: 10px!important;
                 aria-controls="nav-x2" aria-selected="false">Individual Affiliate</a>
             </div>
           </nav>
+          <?php endif; ?>
 
           <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade <?=$secondTbab==0?' active show':''?> " id="nav-x1" role="tabpanel" aria-labelledby="nav-x1-tab">
@@ -262,7 +264,7 @@ font-size: 10px!important;
             </div>
 
             <div class="tab-pane fade active <?=$secondTbab==1?'show':''?>" id="nav-x2" role="tabpanel" aria-labelledby="nav-x2-tab">
-
+              <?php if($this->session->role_id==1): ?>
               <div class="row mt-5">
                 <div class="col-4 col-md-4 col-lg-4 secondSelection">
                   <span class="sub">
@@ -276,6 +278,7 @@ font-size: 10px!important;
                   </span>
                 </div>
               </div>
+              <?php endif; ?>
               <div class="row">
                 <div class="pane113 w-100">
                   <table class="table table1 table-condensed table-striped">

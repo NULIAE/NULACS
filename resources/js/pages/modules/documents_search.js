@@ -132,15 +132,28 @@ $(function () {
 				documents : data.documents, 
 				"documentPath": function () {
 					return base_url + this.file_path;
-			  	}
+			  	},
+				index: function() {
+					return data.documents.indexOf(this);
+				}
 			}));
 			
-			if(data.pagination)
-				$("#page-links").html(data.pagination);
-			else {
-				$("#page-links").html(Mustache.render($('#template-empty-page').html(), { }));
+			initCheckboxes();
+		});
+	}
+	
+	function initCheckboxes() {
+		
+		$( '#checkall' ).on('click', function () {
+			$( 'input[type="checkbox"]' ).prop('checked', this.checked);
+		});
+		
+		$(".checkbox").on('change', function(){
+			if ($('.checkbox:checked').length == $('.checkbox').length) {
+				$( '#checkall' ).prop('checked', this.checked)
+			}else{
+				$( '#checkall' ).prop('checked', false)
 			}
-			$('.pagination').removeClass('justify-content-end').addClass('justify-content-center');
 		});
 	}
 });

@@ -53,7 +53,7 @@
 									</span>
 								</div>
 								<div class="row justify-content-center mt-2">
-									<button type="submit" class="btn btn-submit">Submit</button>
+									<button type="submit" class="btn btn-submit">Save</button>
 								</div>
 							</div>
 						</form>

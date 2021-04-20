@@ -143,10 +143,7 @@
 					<div id="documents-list">
 						<div class="contentData">
 							<div class="col-lg-4 innerColumn">
-								<!-- <label class="checkbox" for="docx-1">
-									<input type="checkbox" id="docx-1" name="docx-1" aria-labelledby="docx-1">
-								</label> -->
-								<input type="checkbox" id="docx-1" name="docx-1" aria-labelledby="docx-1" class="checkbox">
+								<input type="checkbox" id="checkall" name="checkall" />
 							</div>
 							<div class="col-lg-6 innerColumn"><b>AFFILIATE NAME</b></div>
 							<div class="col-lg-6 innerColumn"><b>DOCUMENT NAME</b></div>
@@ -157,37 +154,6 @@
 							<div class="col-lg-24 innerColumn text-center">Document list will be shown here.</div>
 						</div>
 				</div>
-				<!-- Pagination Section
-				<div class="contentData border-top">
-					<div class="col-lg-4 innerColumn">
-						Show
-						<div class="ib-m">
-							<select id="select-page-items" name="pages">
-								<option value="10">10 Rows</option>
-								<option value="25">25 Rows</option>
-								<option value="50">50 Rows</option>
-								<option value="100">100 Rows</option>
-							</select>
-						</div>
-					</div>
-					<div class="col-lg-7 innerColumn"></div>
-					<div class="col-lg-7 innerColumn"></div>
-					<div class="col-lg-6 innerColumn">
-						<nav id="page-links">
-							<ul class="pagination justify-content-end">
-								<li class="page-item disabled">
-									<a href="#" class="page-link" data-ci-pagination-page="1" rel="prev">First</a>
-								</li>
-								<li class="page-item disabled">
-									<a href="#" class="page-link" data-ci-pagination-page="1" rel="start">1</a>
-								</li>
-								<li class="page-item disabled">
-									<a href="#" class="page-link" data-ci-pagination-page="1" rel="next">Last</a>
-								</li>
-							</ul>
-						</nav>
-					</div>
-				</div> -->
 
           	</div>
         </div>
@@ -211,10 +177,7 @@
 <script id="template-document-list" type="x-tmpl-mustache">
 <div class="contentData">
 	<div class="col-lg-4 innerColumn">
-		<!-- <label class="checkbox" for="docx-1">
-			<input type="checkbox" id="docx-1" name="docx-1" aria-labelledby="docx-1">
-		</label> -->
-		<input type="checkbox" id="docx-1" name="docx-1" aria-labelledby="docx-1" class="checkbox">
+		<input type="checkbox" id="checkall" name="checkall" />
 	</div>
 	<div class="col-lg-6 innerColumn">
 		<b>AFFILIATE NAME</b>
@@ -229,10 +192,7 @@
 {{#documents}}
 	<div class="contentData">
 		<div class="col-lg-4 innerColumn">
-			<!-- <label class="checkbox" for="docx-2">
-				<input type="checkbox" id="docx-2" name="docx-2">
-			</label> -->
-			<input type="checkbox" id="docx-2" name="docx-2" aria-labelledby="docx-2" class="checkbox">
+			<input type="checkbox" id="doc-{{index}}" name="doc-{{index}}" class="checkbox">
 		</div>
 		<div class="col-lg-6 innerColumn">
 			{{city}}, {{state}}
@@ -241,7 +201,7 @@
 			{{document_name}}
 		</div>
 		<div class="col-lg-6 innerColumn">
-			<a href="{{documentPath}}">
+			<a href="{{documentPath}}" target="_blank">
 				<i class="i i-download-u"></i>
 			</a>
 

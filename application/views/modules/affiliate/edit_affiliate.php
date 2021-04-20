@@ -84,7 +84,7 @@
 							<div class="col-lg-8 col-md-8 form-group">
 								<div>
 									<label>Compliance Dues</label>
-									<select name="compliance_dues" id="compliance_dues" data-placeholder="Compliance Dues" data-type="selector" required>
+									<select name="compliance_dues" id="compliance_dues" data-placeholder="Compliance Dues" data-type="selector" <?php echo ($this->session->role_id == 1)? "required" : "disabled"; ?>>
 										<option value="1" <?php if($affiliate['compliance_dues']=="1") echo "selected"; ?>>Yes</option>
 										<option value="0" <?php if($affiliate['compliance_dues']=="0") echo "selected"; ?>>No</option>
 									</select>
@@ -94,7 +94,7 @@
 							<div class="col-lg-8 col-md-8 form-group">
 								<div>
 									<label>UL Census</label>
-									<select name="ul_census" id="ul_census" data-placeholder="UL Census" data-type="selector" required>
+									<select name="ul_census" id="ul_census" data-placeholder="UL Census" data-type="selector" <?php echo ($this->session->role_id == 1)? "required" : "disabled"; ?>>
 										<option value="1" <?php if($affiliate['ul_census']=="1") echo "selected"; ?>>Completed</option>
 										<option value="0" <?php if($affiliate['ul_census']=="0") echo "selected"; ?>>Not Completed</option>
 									</select>

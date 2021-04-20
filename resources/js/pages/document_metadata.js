@@ -31,10 +31,14 @@ $(function () {
 	});
 
 	$(document).on('click','.btn_remove', function(){
-		var button_id = $(this).attr("id");
-		$("#row"+button_id+"").remove();
-		$('#add').removeAttr('disabled');
-		i--;
+		var c = confirm("Do you want to remove this metadata field?");
+		if(c){
+			var button_id = $(this).attr("id");
+			$("#row"+button_id+"").remove();
+			$('#add').removeAttr('disabled');
+			i--;
+		}
+		return false;
 	});
 
 	$('#select-document-type').change(function(){
