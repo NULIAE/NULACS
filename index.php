@@ -1,4 +1,5 @@
 <?php
+echo"here";exit;
 /**
  * CodeIgniter
  *
