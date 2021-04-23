@@ -74,16 +74,19 @@ class Reports_model extends CI_Model
 	 * Detail report of affiliate key indicator
 	 * list
 	 */
-	public function get_ind_affiliate_report($affiliate, $year = NULL){
-		if($affiliate){
-			$this->db->select('*');
-			$this->db->from('key_indicators');
-			$this->db->where('key_indicators.affiliate_id', $affiliate);
-			if(isset($year))
-				$this->db->where('key_indicators.year', $year); 
-			$this->db->order_by("year");
-			$this->db->order_by("quarter");
-			$query = $this->db->get();
+	public function get_ind_affiliate_report($filter = NULL){
+		if(isset($filter['affiliate']) && ($filter['affiliate'] != "")){
+            $sql = "SELECT * FROM key_indicators WHERE affiliate_id=".$filter['affiliate'];
+            if(isset($filter['from_quarter']) && ($filter['from_quarter'] != "") && isset($filter['from_year']) && ($filter['from_year'] != ""))
+            {
+                $sql .= " AND quarter >= ".$filter['from_quarter']." AND year >= ".$filter['from_year'];
+            }
+            if(isset($filter['to_quarter']) && ($filter['to_quarter'] != "") && isset($filter['to_year']) && ($filter['to_year'] != ""))
+            {
+                $sql .= " AND id IN (SELECT id FROM key_indicators WHERE affiliate_id=".$filter['affiliate']." AND quarter <= ".$filter['to_quarter']." AND year <= ".$filter['to_year'].")";
+            }
+            $sql .= " ORDER BY year DESC, quarter DESC";
+			$query = $this->db->query($sql);
 			return  $query->result_array();
 		}	
 	}

@@ -48,6 +48,7 @@ class Home extends MY_Controller
 				'document_listing' => $this->document_listing($filterWMonth,$filterWYear),
 				'quarterly_document_listing' => $this->quarterly_document_listing($filterWYear),
 				'yearly_document_listing' => $this->yearly_document_listing($filterWMonth,$filterWYear),
+				'current_compliance_status' => $this->Affiliate_model->current_compliance_status($this->session->affiliate_id)
 			);
 
 			$data['user_notifications'] = $this->Document_model->user_notifications();

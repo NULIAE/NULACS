@@ -14,6 +14,9 @@
   <meta name="msapplication-navbutton-color" content="#ffffff">
   <meta name="apple-mobile-web-app-status-bar-style" content="#AA1B20">
   <style>
+  header.header .navbar-nav .nav-item .nav-link span{
+    opacity: 1 !important;
+  }
   header.header .navbar-nav .nav-item .nav-link i.i-b-o-d{
     font-size: 46px;
     margin-top: 5px;

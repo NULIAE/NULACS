@@ -28,6 +28,7 @@ class Profile extends MY_Controller {
 
 		$data['content'] = array(
 			'user' => $user,
+			'affiliates' => $this->Affiliate_model->get_all_affiliates(),
 			'role_id' => $this->session->role_id 	//Logged in user role for edit
 		);
 		
@@ -56,6 +57,7 @@ class Profile extends MY_Controller {
 
 		$data['content'] = array(
 			'user' => $user,
+			'affiliates' => $this->Affiliate_model->get_all_affiliates(),
 			'roles' => $this->User_model->get_user_roles(),
 			'role_id' => $this->session->role_id 	//Logged in user role for edit
 		);
@@ -106,6 +108,9 @@ class Profile extends MY_Controller {
 
 		$user = $this->User_model->get_user_by_id($data['user_id']);
 
+		$redirect = $data["redirect"];
+		unset($data["redirect"]);
+
 		if(!empty($user))
 		{
 			if( $this->session->role_id == 1 )
@@ -130,6 +135,9 @@ class Profile extends MY_Controller {
 				//User profile updated
 				$status = TRUE;
 				$message = 'User profile updated successfully.';
+
+				if($redirect == "1")
+					$this->session->set_flashdata('message', $message);
 			}
 			else
 			{

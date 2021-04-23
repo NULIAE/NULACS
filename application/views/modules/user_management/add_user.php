@@ -42,6 +42,7 @@
 									<label>User Prefix</label>
 									<select name="prifix" class="form-control" data-placeholder="User Prefix" data-type="selector" required>
 										<option value="">Select prifix</option>
+										<option value="Dr.">Dr</option>
 										<option value="Mr.">Mr</option>
 										<option value="Mrs.">Mrs</option>
 										<option value="Ms.">Ms</option>
@@ -129,7 +130,7 @@
 							</div>
 						</div>
 						<?php if($this->session->role_id==1): ?>
-						<div class="col-lg-8 col-md-8 form-group">
+						<div class="col-lg-8 col-md-8 form-group d-none">
 							<div>
 								<label>Is user super administrator?</label>
 								<div>

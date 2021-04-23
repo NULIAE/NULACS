@@ -182,6 +182,9 @@ class Affiliate extends MY_Controller
 	 */
 	public function edit_form($affiliate_id)
 	{
+		if($this->session->role_id != 1 && $affiliate_id != $this->session->affiliate_id)
+				redirect(base_url('module/affiliate/edit/'.$this->session->affiliate_id));
+
 		$data['content'] = array(
 			'affiliate' => $this->Affiliate_model->get_affiliate_by_id($affiliate_id),
 			'users' => $this->Affiliate_model->get_affiliate_users($affiliate_id),
@@ -586,10 +589,14 @@ class Affiliate extends MY_Controller
 
 		$recent_data = $this->Affiliate_model->recent_affiliate_data($affiliate_id, $this->session->role_id);
 
-		if(!isset($recent_data['key_indicator']['quarter']))
+		if(isset($data['key_quarter']))
+			$recent_data['key_indicator']['quarter'] = $data['key_quarter'];
+		else if(!isset($recent_data['key_indicator']['quarter']))
 			$recent_data['key_indicator']['quarter'] = ceil(date("m", strtotime("-1 month", time()))/3);
 
-		if(!isset($recent_data['key_indicator']['year']))
+		if(isset($data['key_year']))
+			$recent_data['key_indicator']['year'] = $data['key_year'];
+		else if(!isset($recent_data['key_indicator']['year']))
 			$recent_data['key_indicator']['year'] = date("Y", strtotime("-1 month", time()));
 
 		//Monthly Document Filter
@@ -1434,13 +1441,13 @@ class Affiliate extends MY_Controller
 
 					$inserted_comment = $this->Document_model->add_comment($comment_data);
 					
-					$email_data = array(
+					/* $email_data = array(
 						"role_id"	=> $this->session->role_id,
 						"affiliate_id" => $data['affiliate_id'],
 						"message" => $comment_data['notification']
 					);
 
-					send_email_noification($email_data);
+					send_email_noification($email_data); */
 				//}
 			}
 
@@ -1550,13 +1557,13 @@ class Affiliate extends MY_Controller
 				$uploadResponse = $this->Affiliate_model->get_other_performance_documents($_POST['affiliate_id'], $_POST['document_type_id']);
 			}
 
-			$email_data = array(
+			/* $email_data = array(
 				"role_id"	=> $this->session->role_id,
 				"affiliate_id" => $comment_data['affiliate_id'],
 				"message" => $comment_data['notification']
 			);
 
-			send_email_noification($email_data);
+			send_email_noification($email_data); */
 
             echo json_encode($uploadResponse);
         }

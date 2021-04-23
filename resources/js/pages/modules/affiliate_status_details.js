@@ -473,7 +473,17 @@ $(function () {
 			year: $("#key-year").val()
 		}
 
-		$("#label-duration").html("QUARTER 0"+inputData.quarter+" - "+inputData.year);
+		var quarterName ='';
+		if(inputData.quarter == 1)
+			quarterName = 'JAN - MAR '+inputData.year;
+		else if(inputData.quarter == 2)
+			quarterName = 'APR - JUN '+inputData.year;
+		else if(inputData.quarter == 3)
+			quarterName = 'JUL - SEP '+inputData.year;
+		else
+			quarterName = 'OCT - DEC '+inputData.year;
+
+		$("#label-duration").html(quarterName);
 
 		$.ajax({
 			type: 'POST',

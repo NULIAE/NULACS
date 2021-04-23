@@ -5,11 +5,11 @@
                 <div class="col t-r pr-0"> <i class="i i-date ib-m p-r-5"></i> <span class="ib-m"><?php echo date('l F d, Y'); ?></span></div>
 			</div>
 
-			<div class="document-mdata mb-5">
+			<!-- <div class="document-mdata mb-5">
 				<div class="mnHead">
 					<h3><?php echo $user['organization'].' - '.$user['city'].', '.$user['stateabbreviation']; ?></h3>
 				</div>
-			</div>
+			</div> -->
 
 			<div class="row headOuter">
                 <div class="head">
@@ -25,6 +25,22 @@
 				</div>
 
 				<form class="w-100" id="profile-form" method="post" action="<?php echo base_url('user/profile/update/'); ?>">
+					<div class="row mb-3">
+						<div class="col-lg-24 col-md-24 col-sm-24 mb-3">
+							<label for="affiliate_id">Affiliate</label>
+							<select name="affiliate_id" id="affiliate_id" data-placeholder="Affiliates" data-type="selector" disabled >
+								<?php if($this->session->role_id==1): ?>
+								<option value="">Choose Affiliate</option>
+								<?php endif; ?>
+								<?php foreach($affiliates as $affiliate): ?>
+										<?php if($this->session->role_id != 1 && $affiliate['affiliate_id'] != $this->session->affiliate_id) continue; ?>
+									<option value="<?php echo $affiliate['affiliate_id']; ?>" <?php if($affiliate['affiliate_id'] == $this->session->affiliate_id) echo "selected"; ?>>
+										<?php echo $affiliate['organization'].' - '.$affiliate['city'].','.$affiliate['state']; ?>
+									</option>
+								<?php endforeach;?>
+							</select>
+						</div>
+					</div>
                     <div class="settingWrap">
 						<div class="row w-100 mb-3">
 							<div class="col-lg-8 col-md-8 form-group">
@@ -82,7 +98,7 @@
 							</div>
 						</div>
 						<?php if($this->session->role_id==1): ?>
-						<div class="col-lg-8 col-md-8 form-group">
+						<div class="col-lg-8 col-md-8 form-group d-none">
 							<div>
 								<label>Is user super administrator?</label>
 								<div>

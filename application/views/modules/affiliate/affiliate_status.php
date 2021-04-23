@@ -17,7 +17,7 @@
 						<div class="col-lg-5 col-md-6 col-sm-24 d-row">
 							<label for="region" class="rowLabel">Region</label>
 							<select id="region" name="region_id" data-placeholder="Region" data-type="selector">
-								<option value="">All Region</option>
+								<option value="">All Regions</option>
 								<?php foreach($regions as $region): ?>
 								<option value="<?php echo $region['region_id']; ?>" <?php if(isset($_GET['region_id']) && $region['region_id'] == $_GET['region_id']) echo "selected"; ?>><?php echo $region['name']; ?></option>
 								<?php endforeach;?>

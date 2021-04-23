@@ -93,6 +93,19 @@ class Affiliate_model extends CI_Model
 		foreach( $affiliates as $key => $affiliate )
 		{
 			$affiliates[$key]['users'] = $this->get_affiliate_users($affiliate['affiliate_id']);
+			$affiliates[$key]['current_compliance_status'] = $this->current_compliance_status($affiliate['affiliate_id']);
+
+			$this->db->select('last_login');
+			$this->db->where('affiliate_id', $affiliate['affiliate_id']);
+			$this->db->where('last_login !=', NULL);
+			$this->db->order_by('last_login', 'DESC');
+			$this->db->limit(1);
+
+			$query = $this->db->get('users');
+
+			$last_login = $query->row_array();
+
+			$affiliates[$key]['last_login'] = empty($last_login) ? "NA" : $last_login['last_login'];
 		}
 
 		return $affiliates;
@@ -1482,6 +1495,29 @@ class Affiliate_model extends CI_Model
 			$this->db->where($filter);
 		}
 		$query = $this->db->get();
+		return $query->row_array();
+	}
+
+	/**
+	 * Get the current compliance status
+	 *
+	 * @param  int $limit
+	 * @param  int $start
+	 * @param  array $filter
+	 * @return void
+	 */
+	public function current_compliance_status($affiliate_id)
+	{
+		$this->db->select('compliance_status,status_flags.name as status_name,icon');
+		$this->db->from('affiliate_compliance_status_quarterly cqs');
+		$this->db->join('status_flags', 'status_flags.id = cqs.compliance_status');
+		$this->db->where('cqs.affiliate_id', $affiliate_id);
+		$this->db->order_by('year', 'DESC');
+		$this->db->order_by('quarter', 'DESC');
+		$this->db->limit(1);
+
+		$query = $this->db->get();
+
 		return $query->row_array();
 	}
 }

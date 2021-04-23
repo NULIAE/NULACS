@@ -29,6 +29,12 @@ class Reports extends MY_Controller
         //XSS Filter all the input post fields
 		$data = $this->input->get(NULL, TRUE);
 
+		if(isset($data['affiliate']))
+		{
+			if($this->session->role_id != 1 && $data['affiliate'] != $this->session->affiliate_id)
+				redirect(base_url('module/reports?affiliate='.$this->session->affiliate_id));
+		}
+
         if(isset($data['quarter']) && ($data['quarter'] != "")){
             $quarter = $data['quarter'];
         } else {
@@ -75,10 +81,10 @@ class Reports extends MY_Controller
 		}
 
 		$graphData["rows"] = array();
-		
+		$ind_affiliate = $ind_reports = NULL;
 		if(isset($data['affiliate'])){
 			$ind_affiliate = $data['affiliate'];
-			$ind_reports = $this->Reports_model->get_ind_affiliate_report($ind_affiliate, $data['choose_yr']);
+			$ind_reports = $this->Reports_model->get_ind_affiliate_report($data);
 
 			foreach($ind_reports as $key_row)
 			{
@@ -111,8 +117,6 @@ class Reports extends MY_Controller
 					);
 				}
 			}
-		}else{
-			$ind_affiliate = '';
 		}
 
 		$data['content'] = array(

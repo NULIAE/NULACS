@@ -21,16 +21,18 @@ $(function () {
 				data : $(form).serialize(), // our data object
 				dataType : 'json'
 			}).done(function(data) {
-				var toastConfig = {
-					timeout: 60*60*1000,
-					position: 'top',
-					actionText: 'OK',
-					message: data.message,
-					//actionHandler: someCallbackFunction
-				};
-				setTimeout(function(){
+				if($("#redirect").val() == "1" & data.success == true){
+					window.location = base_url + 'module/user';
+				} else {
+					var toastConfig = {
+						timeout: 60*60*1000,
+						position: 'top',
+						actionText: 'OK',
+						message: data.message,
+						//actionHandler: someCallbackFunction
+					};
 					$('#snackbar').NitroToast(toastConfig);
-				}, 2000);
+				}
 			});
 		}
 	});

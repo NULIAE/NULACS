@@ -1265,7 +1265,7 @@ $quarterArray = array(
 																<div class="col-4"><span class="sub text-center"><?=isset($listing['assessment_end_year'])?$listing['assessment_end_year']:''?></span></div>
 																<div class="col-4"><span class="sub text-center"><?=isset($listing['last_update'])?$listing['last_update']:''?></span></div>
 																<div class="col-4"><span class="sub text-center">
-																<a class="link m-x-10 text-dark" href="<?php echo base_url('module/assessment/assessment?sid='.$listing['sid'].'&aid='.$listing['affiliate_id'].'&uid='.$listing['user_id_check']); ?>"><i class="i i i-create"></i></a>
+																<a class="link m-x-10 text-dark" data-rel="tooltip" data-placement="bottom" title="Edit" href="<?php echo base_url('module/assessment/assessment?sid='.$listing['sid'].'&aid='.$listing['affiliate_id'].'&uid='.$listing['user_id_check']); ?>"><i class="i i i-create"></i></a>
 																</span></div>
 																<div class="col-4 "><span class="sub text-center"> 
 																<?php if(isset($listing['answers']) && !empty($listing['answers'] )){ 
@@ -1855,7 +1855,17 @@ $quarterArray = array(
 							<div class="row m-y-20 align-items-center">
 
 								<div class="col-lg-15 col-md-6 col-sm-24">
-									<div id="label-duration" class="h5 f-bold"><?php echo "QUARTER 0".$key_quarter." - ".$key_year; ?></div>
+									<?php
+									if($key_quarter == 1)
+										$quarterName = 'JAN - MAR '.$key_year;
+									else if($key_quarter == 2)
+										$quarterName = 'APR - JUN '.$key_year;
+									else if($key_quarter == 3)
+										$quarterName = 'JUL - SEP '.$key_year;
+									else
+										$quarterName = 'OCT - DEC '.$key_year;
+									?>
+									<div id="label-duration" class="h5 f-bold"><?php echo $quarterName; ?></div>
 								</div>
 								
 								<div class="col-12 col-md-6 col-lg-3"><span class="sub">

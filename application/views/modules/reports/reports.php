@@ -1,3 +1,11 @@
+<?php
+$quarterArray = array(
+	'1' => 'JAN - MAR '.$year,
+	'2' => 'APR - JUN '.$year,
+	'3' => 'JUL - SEP '.$year,
+	'4' => 'OCT - DEC '.$year,
+);
+?>
 <style>
 .all-affiliates .mainTabAll .tab-content .pane113 table thead tr th{
 transform: rotate(-60deg);
@@ -56,7 +64,7 @@ font-size: 10px!important;
             <div class="tab-pane fade <?=$secondTbab==0?' active show':''?> " id="nav-x1" role="tabpanel" aria-labelledby="nav-x1-tab">
               <div class="row align-items-center mt-3">
                 <div class="col-xl-12 col-lg-8 mt-3">
-                <div class="h5 f-bold"><?php echo "QUARTER 0".$quarter." - ".$year; ?></div>
+                <div class="h5 f-bold"><?php echo $quarterArray[$quarter]; ?></div>
                 </div>
                 <div class="col-xl-12 col-lg-16">
                   <form  action="<?php echo base_url('module/filter/reports'); ?>">
@@ -265,10 +273,11 @@ font-size: 10px!important;
 
             <div class="tab-pane fade active <?=$secondTbab==1?'show':''?>" id="nav-x2" role="tabpanel" aria-labelledby="nav-x2-tab">
               <?php if($this->session->role_id==1): ?>
+              <form action="">
               <div class="row mt-5">
-                <div class="col-4 col-md-4 col-lg-4 secondSelection">
+                <div class="col-4 col-md-4 col-lg-3 secondSelection">
                   <span class="sub">
-                  <select onchange="window.location.href = '<?php echo base_url();?>/module/filter/reports?affiliate=' + this.value;" class="form-control selectp-r" data-type="selector">
+                  <select name="affiliate" class="form-control selectp-r" data-type="selector">
                     <option>Choose Affiliate</option>
                     <?php foreach($affiliates as $aff): ?>
                         <option value="<?=$aff['affiliate_id']?>" <?php if($affiliate == $aff['affiliate_id']) echo "selected";?>><?=$aff['name']?></option>
@@ -277,7 +286,51 @@ font-size: 10px!important;
                   
                   </span>
                 </div>
+                <div class="col-1 col-md-1 col-lg-1 ml-auto align-self-center"><strong>From</strong></div>
+                <div class="col-2 col-md-2 col-lg-2">
+                  <?php $from_quarter = isset($_GET['from_quarter'])? $_GET['from_quarter'] : ''; ?>
+                  <span class="sub">
+                    <select name="from_quarter" class="form-control selectp-r">
+                      <option value="">Quarter</option>
+                      <option value="1" <?php if($from_quarter == 1) echo "selected"; ?>>Q 1</option>
+                      <option value="2" <?php if($from_quarter == 2) echo "selected"; ?>>Q 2</option>
+                      <option value="3" <?php if($from_quarter == 3) echo "selected"; ?>>Q 3</option>
+                      <option value="4" <?php if($from_quarter == 4) echo "selected"; ?>>Q 4</option>
+                    </select>
+                  </span>
+                </div>
+								<div class="col-2 col-md-2 col-lg-2">
+                  <?php $from_year = isset($_GET['from_year'])? $_GET['from_year'] : ''; ?>
+									<div class="yearPick">
+										<i class="i i-year-pick"></i>
+										<input class="yearpick form-control" name="from_year" type="text" value="<?= $from_year; ?>" />
+									</div>
+								</div>
+                <div class="col-1 col-md-1 col-lg-1 text-center align-self-center"><strong>To</strong></div>
+                <div class="col-2 col-md-2 col-lg-2">
+                  <?php $to_quarter = isset($_GET['to_quarter'])? $_GET['to_quarter'] : ''; ?>
+                  <span class="sub">
+                    <select name="to_quarter" class="form-control selectp-r">
+                      <option value="">Quarter</option>
+                      <option value="1" <?php if($to_quarter == 1) echo "selected"; ?>>Q 1</option>
+                      <option value="2" <?php if($to_quarter == 2) echo "selected"; ?>>Q 2</option>
+                      <option value="3" <?php if($to_quarter == 3) echo "selected"; ?>>Q 3</option>
+                      <option value="4" <?php if($to_quarter == 4) echo "selected"; ?>>Q 4</option>
+                    </select>
+                  </span>
+                </div>
+								<div class="col-2 col-md-2 col-lg-2">
+                  <?php $to_year = isset($_GET['to_year'])? $_GET['to_year'] : ''; ?>
+									<div class="yearPick">
+										<i class="i i-year-pick"></i>
+										<input class="yearpick form-control" name="to_year" type="text" value="<?= $to_year; ?>" />
+									</div>
+								</div>
+								<div class="col-3 col-md-3 col-lg-3 t-c">
+									<button class="btn btn-primary btn-rounded min w-100px" type="submit">SEARCH</button>
+								</div>
               </div>
+              </form>
               <?php endif; ?>
               <div class="row">
                 <div class="pane113 w-100">
@@ -332,7 +385,7 @@ font-size: 10px!important;
                           <?php $report = json_decode($ia['indicators'], true); ?>
                           <?php $index++; ?>
                           <tr>
-                              <td class="t-l"><?php $arrayForChart[0][$index] = $ia['year']." Q".$ia['quarter']; ?><a class="pl-0 text-center" href="<?php echo base_url('module/filter/reports').'?affiliate='.$affiliate."&choose_yr=".$ia['year']; ?>"><?php echo $arrayForChart[0][$index]; ?></a></td>
+                              <td class="t-l"><?php $arrayForChart[0][$index] = $ia['year']." Q".$ia['quarter']; ?><a class="pl-0 text-center" href="<?php echo base_url('module/affiliate/status/details/').$affiliate.'?tab=3&key_quarter='.$ia['quarter'].'&key_year='.$ia['year']; ?>" target="_blank"><?php echo $arrayForChart[0][$index]; ?></a></td>
                               <td class="t-l">
                               <?php 
                               $arrayForChart[1][$index] = isset($report['liquidity']) ? (int)$report['liquidity'] : 0; 

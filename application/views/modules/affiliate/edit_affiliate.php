@@ -139,7 +139,7 @@
 								<input type="text" class="form-control" placeholder="Current Compliance Status" value="Complaint" disabled />
 							</div>
 
-							<div class="col-lg-8 col-md-8 form-group">
+							<div class="col-lg-8 col-md-8 form-group d-none">
 								<label class="label">Report Available</label>
 								<div>
 								<label class="checkbox switch bool" for="report-label{{affiliate_id}}">

@@ -211,6 +211,15 @@
 					</div>
 
 					<div class="col-lg-8 col-md-8 form-group">
+						<span class="label">Active</span>
+						<div>
+						<label class="checkbox switch bool disabled" id="status-label{{affiliate_id}}">
+						<input id="status{{affiliate_id}}" type="checkbox" name="affiliate_status" value="1" disabled />
+						</label>
+						</div>
+					</div>
+
+					<div class="col-lg-8 col-md-8 form-group d-none">
 						<span class="label">Report Available</span>
 						
 						<div>
@@ -223,29 +232,19 @@
                 <div class="row">
 					<div class="col-lg-8 col-md-8 form-group">
 						<label>Current Compliance Status</label>
-						<input type="text" class="form-control" placeholder="Current Compliance Status" disabled>
+						<input type="text" class="form-control" placeholder="Current Compliance Status" value="{{compliance_status}}" disabled>
 					</div>
 
 					<div class="col-lg-8 col-md-8 form-group">
 						<label>Last site visit</label>
-						<input type="text" class="form-control" placeholder="Last site visit" disabled>
+						<input type="text" class="form-control" placeholder="Last site visit" value="{{last_visit}}" disabled>
 					</div>
 
 					<div class="col-lg-8 col-md-8 form-group">
 						<label>Performance Score</label>
-						<input type="text" class="form-control" placeholder="Performance Score" disabled>
+						<input type="text" class="form-control" placeholder="Performance Score" value="{{performance_score}}" disabled>
 					</div>
 				</div>
-                <div class="row">
-					<div class="col-lg-12 col-md-12 form-group">
-						<span class="label">Active</span>
-						<div>
-						<label class="checkbox switch bool disabled" id="status-label{{affiliate_id}}">
-						<input id="status{{affiliate_id}}" type="checkbox" name="affiliate_status" value="1" disabled />
-						</label>
-						</div>
-					</div>
-                </div>
 
 				<div class="foot">
 					<a class="btn btn-dark btn-rounded min w-100px update-btn" href="{{update_url}}">UPDATE</a>

@@ -27,6 +27,18 @@ $(function () {
 				"update_url": function () {
 					return base_url + "module/affiliate/edit/" + this.affiliate_id;
 				},
+				"compliance_status": function () {
+					if(this.current_compliance_status == null)
+						return "Indeterminate";
+					else
+						return this.current_compliance_status.status_name;
+				},
+				"last_visit": function() {
+					return (this.last_login != "NA") ? moment(this.last_login).format("MMMM Do YYYY, h:mm:ss a") : this.last_login;
+				},
+				"performance_score": function() {
+					return  (Math.random() * 4 + 1).toFixed(1);
+				}
 			}));
 			if(data.pagination)
 				$('#page-links').html(data.pagination);
