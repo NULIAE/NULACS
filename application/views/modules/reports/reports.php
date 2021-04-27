@@ -277,7 +277,7 @@ font-size: 10px!important;
               <div class="row mt-5">
                 <div class="col-4 col-md-4 col-lg-3 secondSelection">
                   <span class="sub">
-                  <select name="affiliate" class="form-control selectp-r" data-type="selector">
+                  <select name="affiliate" onchange="window.location.href = '<?php echo base_url();?>/module/filter/reports?affiliate=' + this.value;" class="form-control selectp-r" data-type="selector">
                     <option>Choose Affiliate</option>
                     <?php foreach($affiliates as $aff): ?>
                         <option value="<?=$aff['affiliate_id']?>" <?php if($affiliate == $aff['affiliate_id']) echo "selected";?>><?=$aff['name']?></option>

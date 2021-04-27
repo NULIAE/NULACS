@@ -39,13 +39,13 @@
             </div>
          </div>
 
-         <div class="row justify-content-between py-3">
+         <div class="row justify-content-between mt-3 py-3">
                 <div class="col-sm-18 p-0">
                   <div class="textIcons">
-                    <a class="btn btn-round-ib ml-0 btnSort" href="<?php echo base_url('home/filter_affiliates?compliance_status=11');?>" data-rel="tooltip" data-placement="bottom" title="Indeterminate"><i class="i i-Indeterminate inter"></i><span class="sr-only">Indeterminate</span></a>
-                    <a class="btn btn-round-ib btnSort" href="<?php echo base_url('home/filter_affiliates?compliance_status=8');?>" data-rel="tooltip" data-placement="bottom" title="Compliance"><i class="i i-compliant cmplt"></i><span class="sr-only">Compliance</span></a>
-                    <a class="btn btn-round-ib btnSort" href="<?php echo base_url('home/filter_affiliates?compliance_status=9');?>" data-rel="tooltip" data-placement="bottom" title="Non Compliance"><i class="i i-non-compliant n-cmplt"></i><span class="sr-only">Non Compliance</span></a>
-                    <a class="btn btn-round-ib btnSort" href="<?php echo base_url('home/filter_affiliates?compliance_status=10');?>" data-rel="tooltip" data-placement="bottom" title="Waiting"><i class="i i-waiting wait"></i><span class="sr-only">Waiting</span></a>
+                    <a class="btn btn-round-ib ml-0 btnSort" data-status="Indeterminate" data-rel="tooltip" data-placement="bottom" title="Indeterminate"><i class="i i-Indeterminate inter"></i><span class="sr-only">Indeterminate</span></a>
+                    <a class="btn btn-round-ib btnSort" data-status="i-compliant" data-rel="tooltip" data-placement="bottom" title="Compliance"><i class="i i-compliant cmplt"></i><span class="sr-only">Compliance</span></a>
+                    <a class="btn btn-round-ib btnSort" data-status="Non-Compliant" data-rel="tooltip" data-placement="bottom" title="Non Compliance"><i class="i i-non-compliant n-cmplt"></i><span class="sr-only">Non Compliance</span></a>
+                    <a class="btn btn-round-ib btnSort" data-status="Waiting" data-rel="tooltip" data-placement="bottom" title="Waiting"><i class="i i-waiting wait"></i><span class="sr-only">Waiting</span></a>
                     
                  </div>
               </div>
@@ -67,19 +67,22 @@
 
          <div class="row">
 
-          <div class="pane112 w-100">
+          <div class="pane112 w-100 pt-0">
            <?php // set the month array
-						$monthArray = array(
-							"1" => "JAN", "2" => "FEB", "3" => "MAR", "4" => "APR", "5" => "MAY", "6" => "JUN", "7" => "JUL", "8" => "AUG","9" => "SEP", "10" => "OCT", "11" => "NOV", "12" => "DEC"); 
-						?>
-            <table class="table table1" id="#table11">
+						$quarterArray = array(
+              '1' => 'JAN - MAR',
+              '2' => 'APR - JUN',
+              '3' => 'JUL - SEP',
+              '4' => 'OCT - DEC',
+            );?>
+            <table class="table table1" id="table11">
               <thead>
                 <tr>
-                  <th scope="col">AFFILIATE NAME</th>
+                  <th scope="col" class="text-left">AFFILIATE NAME</th>
                   <!-- <th scope="col">Contact Name</th> -->
-                  <th scope="col">Month</th>
+                  <th scope="col" data-orderable="false">Quarter</th>
                   <th scope="col">Year</th>
-                  <th scope="col">Compliance Status</th>
+                  <th scope="col" data-orderable="false">Compliance Status</th>
                   <th scope="col">Performance Score</th>
                   <th scope="col" class="pl-0">last Site Visit</th>
                 </tr>
@@ -90,10 +93,14 @@
 									<tr>
 									<td scope="row" class="t-l-c"><a href="<?php echo base_url('module/affiliate/status/details/'.$row["affiliate_id"]); ?>"><?php echo $row['city'].', '.$row['state']; ?></a></td>
 									<!-- <td>Ms. A BCD</td> -->
-									<td><?php echo $monthArray[$row['month']]; ?></td>
-									<td><?php echo $row['year']; ?></td>
-									<td><div class="icon-rounded" data-rel="tooltip" data-placement="bottom" title="<?php echo $row['status_name']; ?>"><?php echo $row['icon']; ?></div></td>
-									<td class="f-b"></td>
+									<td><?php if(isset($row['compliance_status'])) echo $quarterArray[$row['compliance_status']['quarter']]; ?></td>
+									<td><?php if(isset($row['compliance_status'])) echo $row['compliance_status']['year']; ?></td>
+                  <?php if(isset($row['compliance_status'])): ?>
+									  <td><div class="icon-rounded" data-rel="tooltip" data-placement="bottom" title="<?php echo $row['compliance_status']['status_name']; ?>"><?php echo $row['compliance_status']['icon']; ?></div></td>
+                  <?php else: ?>
+                    <td><div class="icon-rounded" data-rel="tooltip" data-placement="bottom" title="Indeterminate"><i class="i i-Indeterminate inter"></i></div></td>
+									<?php endif; ?>
+                  <td class="f-b"></td>
 									<td><?php echo isset($row['last_login']) ? date("m-d-Y | H:i", strtotime($row['last_login'])) : ""; ?></td>
 									</tr>
 									<?php endforeach; ?>
@@ -173,9 +180,9 @@
 {{#affiliates}}
 <tr>
 	<td scope="row" class="t-l-c"><a href="{{link}}">{{city}},{{state}}</a></td>
-	<td>{{currentMonth}}</td>
-	<td>{{year}}</td>
-	<td><div class="icon-rounded" data-rel="tooltip" data-placement="bottom" title="{{status_name}}">{{{icon}}}</div></td>
+	<td>{{currentQuarter}}</td>
+	<td>{{currentYear}}</td>
+	<td><div class="icon-rounded" data-rel="tooltip" data-placement="bottom" title="{{statusName}}">{{{statusIcon}}}</div></td>
 	<td></td>
 	<td>{{lastLogin}}</td>
 </tr>

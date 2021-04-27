@@ -8,7 +8,7 @@
         <div class=" document-mdata">
 
           <div class="mnHead">
-            <h3>Performance Assessment summary</h3>
+            <h3><a onclick="javascript:window.history.back();" class="text-white">Performance Assessment summary</a></h3>
           </div>
         </div>
        <?php

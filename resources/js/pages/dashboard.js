@@ -1,4 +1,13 @@
+
 $(function(){
+	
+	var sortTable = $('#table11').DataTable();
+	$('#table11').parent('div').removeAttr('class').addClass('col-24');
+	$('#table11_length').parent('div').hide();
+	$('#table11_filter').parent('div').hide();
+	$('#table11_info').parent('div').removeAttr('class').addClass('col-12');
+	$('#table11_paginate').parent('div').removeAttr('class').addClass('col-12');
+
 	$('.chartBody2').scrollTop($('.chartBody2')[0].scrollHeight);
 	var activeTab = window.localStorage.getItem('activeTab');
 	if(activeTab){
@@ -52,12 +61,10 @@ $(function(){
 	
 	$(".btn2").click(function(){
 		var searchVal = $(".input").val();
+		sortTable.search(searchVal).draw();
 		if(searchVal == ""){
 			$(".input").toggleClass("active").focus;
 			$(this).toggleClass("animate");
-		} else {
-			var formUrl = $("#search-form").prop('action');
-			getAffiliates(formUrl, {search:searchVal});
 		}
 	});
 	
@@ -65,7 +72,8 @@ $(function(){
 		e.preventDefault();
 		$(this).siblings('a.active').removeClass('active');
 		$(this).addClass('active');
-		getAffiliates($(this).prop('href'), {});
+		//getAffiliates($(this).prop('href'), {});
+		sortTable.draw();
 	});
 
 	function getAffiliates(url, data){
@@ -76,8 +84,28 @@ $(function(){
 		}).done(function(data) {
 			$("#table-body").html(Mustache.render($("#template").html(), { 
 				affiliates : data.affiliates, 
-				"currentMonth": function () {
-					return Intl.DateTimeFormat('en', { month: 'short' }).format(data.month).toUpperCase();
+				"currentQuarter": function () {
+					quarterName = '';
+					if(this.compliance_status){
+						if(this.compliance_status.quarter == 1)
+							quarterName = 'JAN - MAR';
+						else if(this.compliance_status.quarter == 2)
+							quarterName = 'APR - JUN';
+						else if(this.compliance_status.quarter == 3)
+							quarterName = 'JUL - SEP';
+						else
+							quarterName = 'OCT - DEC';
+					}
+					return quarterName;
+				},
+				"currentYear": function () {
+					return (this.compliance_status) ? this.compliance_status.year : '';
+				},
+				"statusName": function () {
+					return (this.compliance_status) ? this.compliance_status.status_name : 'Indeterminate';
+				},
+				"statusIcon": function () {
+					return (this.compliance_status) ? this.compliance_status.icon : '<i class="i i-Indeterminate inter"></i>';
 				},
 				"lastLogin": function () {
 					if(this.last_login)
@@ -92,6 +120,19 @@ $(function(){
 			$('[data-rel="tooltip"]').tooltip();
 		});
 	}
+
+	$.fn.dataTable.ext.search.push(
+		function( settings, data, dataIndex ) {
+			var status = $("a.btnSort").siblings(".active").data("status");
+			var content = sortTable.cell(dataIndex, 3).data().toString();
+			console.log(content);
+			if(status){
+				return content.includes(status);
+			} else {
+				return true;
+			}
+		}
+	);
 });
 
 function openTab(val) {

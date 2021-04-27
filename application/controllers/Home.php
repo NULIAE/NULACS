@@ -28,6 +28,8 @@ class Home extends MY_Controller
 		$data['footer']['js'] = array(
 			'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js',
 			'https://unpkg.com/mustache@latest',
+			'https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js',
+			'https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js',
 			'pages/dashboard.js'
 		);
 		$data['notifications'] = $this->Document_model->get_notifications();

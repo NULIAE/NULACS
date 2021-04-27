@@ -170,7 +170,7 @@
                         <div class="col-lg-8 col-md-8 form-group">
 							<div>
 								<label>Board Chair</label>
-								<input type="text" class="form-control" name="board_chair" id="board_chair{{affiliate_id}}" value="" disabled />
+								<input type="text" class="form-control" name="board_chair" id="board_chair{{affiliate_id}}" value="{{board_chair}}" disabled />
 							</div>
                         </div>
 

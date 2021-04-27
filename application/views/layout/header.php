@@ -8,7 +8,8 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>National Urban League</title>
   <link rel="stylesheet" href="<?php echo base_url('/resources/css/style.css'); ?>">
-
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
+  
   <meta name="theme-color" content="#AA1B20">
   <meta name="msapplication-TileColor" content="#AA1B20">
   <meta name="msapplication-navbutton-color" content="#ffffff">
@@ -16,6 +17,7 @@
   <style>
   header.header .navbar-nav .nav-item .nav-link span{
     opacity: 1 !important;
+    color: #322b2b;
   }
   header.header .navbar-nav .nav-item .nav-link i.i-b-o-d{
     font-size: 46px;
@@ -52,10 +54,12 @@
             </button>
       
             <div class="collapse navbar-collapse" id="mainMenuDark">
-              <ul class="navbar-nav ml-auto">
-                <li class="nav-item affiliatehead active">
+              <ul class="navbar-nav flex-grow-1 justify-content-center">
+              <li class="nav-item affiliatehead active">
                   <a class="nav-link"><span>Affiliate Compliance System</span></a>
-                </li>
+              </li>
+              </ul>
+              <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                   <a class="nav-link" title="Home" href="<?php echo base_url(); ?>"><i class="i i-home"></i><span class="sr-only">Home</span></a>
 								</li>

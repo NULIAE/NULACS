@@ -187,7 +187,7 @@ class Affiliate extends MY_Controller
 
 		$data['content'] = array(
 			'affiliate' => $this->Affiliate_model->get_affiliate_by_id($affiliate_id),
-			'users' => $this->Affiliate_model->get_affiliate_users($affiliate_id),
+			//'users' => $this->Affiliate_model->get_affiliate_users($affiliate_id),
 			'regions' => $this->User_model->get_all_regions(),
 			'states' => $this->Affiliate_model->get_all_states()
 		);

@@ -108,12 +108,7 @@
 						<div class="col-lg-8 col-md-8 form-group">
 							<div>
 								<label>Board Chair</label>
-								<select name="board_chair" id="board_chair{{affiliate_id}}" data-placeholder="State" data-type="selector">
-									<option value="">Select User</option>
-									<?php foreach($users as $user): ?>
-										<option value="<?php echo $user['user_id']; ?>" <?php if($user['is_board_chair'] == "1") echo "selected"; ?>><?php echo $user['prifix'].$user['first_name']." ".$user['last_name']; ?></option>
-									<?php endforeach; ?>
-								</select>
+								<input type="text" class="form-control" name="board_chair" value="<?php echo $affiliate['board_chair']; ?>" />
 							</div>
                         </div>
 						<div class="col-lg-8 col-md-8 form-group">

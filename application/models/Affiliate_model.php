@@ -155,11 +155,11 @@ class Affiliate_model extends CI_Model
 	{
 		$affiliate_id = $data['affiliate_id'];
 		$year_end = $data['year_end'];
-		$board_chair = isset($data['board_chair']) ? $data['board_chair'] : "";
+		//$board_chair = isset($data['board_chair']) ? $data['board_chair'] : "";
 		$adm_uploader = isset($data['adm_uploader']) ? $data['adm_uploader'] : "";
 
 		unset($data['year_end']);
-		unset($data['board_chair']);
+		//unset($data['board_chair']);
 		unset($data['adm_uploader']);
 
 		//Update Affiliate details
@@ -182,7 +182,7 @@ class Affiliate_model extends CI_Model
 			}
 
 			//Update board chair user
-			if( isset($board_chair) && ($board_chair !== "") )
+			/* if( isset($board_chair) && ($board_chair !== "") )
 			{
 				$this->db->where('user_id', $board_chair);
 				$this->db->update('users', array('is_board_chair' => '1'));
@@ -191,7 +191,7 @@ class Affiliate_model extends CI_Model
 			{
 				$this->db->where('affiliate_id', $affiliate_id);
 				$this->db->update('users', array('is_board_chair' => '0'));
-			}
+			} */
 			
 			//Update ADM Uploader user
 			if( isset($adm_uploader) && ($adm_uploader !== "") )
@@ -310,16 +310,18 @@ class Affiliate_model extends CI_Model
 	 */
 	public function home_affiliate_filter($limit = NULL, $start = NULL, $status = NULL, $search = NULL)
 	{
+		$this->db->select('affiliate.affiliate_id,city,stateabbreviation as state');
+		$this->db->from('affiliate');
+		$this->db->join('state', 'state.stateid = affiliate.state');
+		
 		if( $search !== NULL )
 		{
-			$this->db->select('affiliate.affiliate_id');
-			$this->db->from('affiliate');
-			$this->db->join('state', 'state.stateid = affiliate.state');
 			$this->db->like('city', $search);
 			$this->db->or_like('state.state', $search);
 			$this->db->or_like('state.stateabbreviation', $search);
-
-			$query = $this->db->get();
+		}
+		
+		/* $query = $this->db->get();
 
 			$affiliates = array();
 
@@ -329,7 +331,6 @@ class Affiliate_model extends CI_Model
 			{
 				array_push($affiliates, $res['affiliate_id']);
 			}
-		}
 
 		$this->db->select('affiliate.affiliate_id,email,phone,city,stateabbreviation as state,cms.month,cms.year,cms.compliance_status,status_flags.name as status_name,icon,cms.id');
 		$this->db->from('affiliate');
@@ -354,7 +355,7 @@ class Affiliate_model extends CI_Model
 		}
 
 		$this->db->group_by('affiliate.affiliate_id');
-		$this->db->order_by('cms.year', "DESC");
+		$this->db->order_by('cms.year', "DESC"); */
 
 		$query = $this->db->get();
 
@@ -362,6 +363,8 @@ class Affiliate_model extends CI_Model
 
 		foreach($affiliate_list as $key => $row)
 		{
+			$affiliate_list[$key]['compliance_status'] = $this->current_compliance_status($row['affiliate_id']);
+
 			$this->db->select('last_login');
 			$this->db->where('affiliate_id', $row['affiliate_id']);
 			$this->db->where('last_login !=', NULL);
@@ -1508,7 +1511,7 @@ class Affiliate_model extends CI_Model
 	 */
 	public function current_compliance_status($affiliate_id)
 	{
-		$this->db->select('compliance_status,status_flags.name as status_name,icon');
+		$this->db->select('quarter,year,compliance_status,status_flags.name as status_name,icon');
 		$this->db->from('affiliate_compliance_status_quarterly cqs');
 		$this->db->join('status_flags', 'status_flags.id = cqs.compliance_status');
 		$this->db->where('cqs.affiliate_id', $affiliate_id);

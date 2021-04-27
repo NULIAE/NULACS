@@ -100,6 +100,12 @@
 						<div class="row w-100 mb-3">
 							<div class="col-lg-8 col-md-8 form-group">
 								<div>
+									<label>Board Chair</label>
+									<input type="text" class="form-control" name="board_chair" placeholder="Board Chair" value="" />
+								</div>
+							</div>
+							<div class="col-lg-8 col-md-8 form-group">
+								<div>
 									<label>Compliance Dues</label>
 									<select name="compliance_dues" id="compliance_dues" data-placeholder="Compliance Dues" data-type="selector" required>
 										<option value="1">Yes</option>

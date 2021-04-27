@@ -111,9 +111,9 @@ foreach($criteria_answers_view as $answers){
         <div class=" document-mdata">
 
           <div class="mnHead">
-            <h3><?= ($this->session->role_id == 1)? "AFFILIATE Performance Assessment" : "Affiliate Self-Assessment";?> (<?=isset($affiliate_details[0]['assessment_start_year'])?$affiliate_details[0]['assessment_start_year']:''?> - <?=isset($affiliate_details[0]['assessment_end_year'])?$affiliate_details[0]['assessment_end_year']:''?>) -  
+            <h3><a href="<?= base_url('module/assessment/assessment-listing'); ?>" class="text-white"><?= ($userId == '')? "AFFILIATE Performance Assessment" : "Affiliate Self-Assessment";?> (<?=isset($affiliate_details[0]['assessment_start_year'])?$affiliate_details[0]['assessment_start_year']:''?> - <?=isset($affiliate_details[0]['assessment_end_year'])?$affiliate_details[0]['assessment_end_year']:''?>) -  
              <?=isset($affiliate_details[0]['city'])?$affiliate_details[0]['city']:''?>, <?=isset($affiliate_details[0]['stateabbreviation'])?$affiliate_details[0]['stateabbreviation']:''?>
-             <a onclick="javascript:window.history.back()" class="text-white float-right mr-3"><i class="i i-arrow_back"></i>Back</a>
+             </a>
             </h3>
           </div>
         </div>
