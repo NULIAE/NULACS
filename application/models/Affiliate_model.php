@@ -94,6 +94,7 @@ class Affiliate_model extends CI_Model
 		{
 			$affiliates[$key]['users'] = $this->get_affiliate_users($affiliate['affiliate_id']);
 			$affiliates[$key]['current_compliance_status'] = $this->current_compliance_status($affiliate['affiliate_id']);
+			$affiliates[$key]['performance_score'] = $this->get_performance_score($affiliate['affiliate_id']);
 
 			$this->db->select('last_login');
 			$this->db->where('affiliate_id', $affiliate['affiliate_id']);
@@ -320,42 +321,6 @@ class Affiliate_model extends CI_Model
 			$this->db->or_like('state.state', $search);
 			$this->db->or_like('state.stateabbreviation', $search);
 		}
-		
-		/* $query = $this->db->get();
-
-			$affiliates = array();
-
-			$result = $query->result_array();
-
-			foreach($result as $res)
-			{
-				array_push($affiliates, $res['affiliate_id']);
-			}
-
-		$this->db->select('affiliate.affiliate_id,email,phone,city,stateabbreviation as state,cms.month,cms.year,cms.compliance_status,status_flags.name as status_name,icon,cms.id');
-		$this->db->from('affiliate');
-		$this->db->join('affiliate_compliance_status_monthly cms', 'cms.affiliate_id = affiliate.affiliate_id');
-		$this->db->join('state', 'state.stateid = affiliate.state');
-		$this->db->join('status_flags', 'status_flags.id = cms.compliance_status');
-		$this->db->where_in('cms.year', array(2017,2018,2019,2020,2021));
-
-		if( $search !== NULL )
-		{
-			$this->db->where_in('affiliate.affiliate_id', $affiliates);
-		}
-		
-		if( $status !== NULL )
-		{
-			$this->db->where('cms.compliance_status', $status);
-		}
-
-		if( ($limit !== NULL) && ($start !== NULL) )
-		{
-			$this->db->limit($limit, $start);
-		}
-
-		$this->db->group_by('affiliate.affiliate_id');
-		$this->db->order_by('cms.year', "DESC"); */
 
 		$query = $this->db->get();
 
@@ -364,6 +329,7 @@ class Affiliate_model extends CI_Model
 		foreach($affiliate_list as $key => $row)
 		{
 			$affiliate_list[$key]['compliance_status'] = $this->current_compliance_status($row['affiliate_id']);
+			$affiliate_list[$key]['performance_score'] = $this->get_performance_score($row['affiliate_id']);
 
 			$this->db->select('last_login');
 			$this->db->where('affiliate_id', $row['affiliate_id']);
@@ -1503,11 +1469,6 @@ class Affiliate_model extends CI_Model
 
 	/**
 	 * Get the current compliance status
-	 *
-	 * @param  int $limit
-	 * @param  int $start
-	 * @param  array $filter
-	 * @return void
 	 */
 	public function current_compliance_status($affiliate_id)
 	{
@@ -1522,5 +1483,25 @@ class Affiliate_model extends CI_Model
 		$query = $this->db->get();
 
 		return $query->row_array();
+	}
+
+	/**
+	 * Get the performance score
+	 */
+	public function get_performance_score($affiliate_id)
+	{
+		$this->db->select('pa.performance_score');
+		$this->db->from('self_assessment sa');
+		$this->db->join('performance_assesment_answers pa', 'pa.self_assessment_id = sa.self_assessment_id');
+		$this->db->where('sa.affiliate_id', $affiliate_id);
+		$this->db->where('pa.user_id', NULL);
+		$this->db->order_by('sa.assessment_end_year', 'DESC');
+		$this->db->limit(1);
+
+		$query = $this->db->get();
+
+		$result = $query->row_array();
+
+		return isset($result['performance_score']) ? $result['performance_score'] : '';
 	}
 }

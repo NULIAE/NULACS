@@ -35,9 +35,6 @@ $(function () {
 				},
 				"last_visit": function() {
 					return (this.last_login != "NA") ? moment(this.last_login).format("MMMM Do YYYY, h:mm:ss a") : this.last_login;
-				},
-				"performance_score": function() {
-					return  (Math.random() * 4 + 1).toFixed(1);
 				}
 			}));
 			if(data.pagination)

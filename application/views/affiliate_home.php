@@ -40,7 +40,7 @@
                  </div>
                  <div class="col-md-12 form-group">
                   <label for="p-score">Performance Score</label>
-                  <input type="text" class="form-control" id="p-score" aria-describedby="p-score" placeholder="Performance Score" value="3.2" readonly>
+                  <input type="text" class="form-control" id="p-score" aria-describedby="p-score" placeholder="Performance Score" value="<?php echo ($performance_score != "") ? $performance_score : "NA"; ?>" readonly>
                  </div></div>
                <div class="row">
                  <div class="col-md-12 form-group">

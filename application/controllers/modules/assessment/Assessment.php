@@ -314,7 +314,56 @@ class Assessment extends MY_Controller
 	public function criteria_answers()
 	{
 
-		$data['criteria_one_save'] = $this->Assessment_model->criteria_answers($_POST);
+		$data = $this->Assessment_model->criteria_answers($_POST);
+
+
+		$dSelfAssessmentId= $_POST['selfAssessmentId'];
+		$dAffiliateId= $_POST['affiliateId'];
+		if(isset($_POST['userId'])){
+			$userId = $_POST['userId'];
+		}else{
+			$userId = NULL;
+		}
+
+		$data['totalrating'] = $this->ratingToStore($dSelfAssessmentId,$dAffiliateId,$userId);
+
+		$data['standard_rating_c1_s1'] = $this->standard_rating($dSelfAssessmentId,$dAffiliateId,$userId,'c1_s1',1);
+		$data['standard_rating_c1_s2'] = $this->standard_rating($dSelfAssessmentId,$dAffiliateId,$userId,'c1_s2',2);
+		$data['standard_rating_c1_s3'] = $this->standard_rating($dSelfAssessmentId,$dAffiliateId,$userId,'c1_s3',3);
+		$data['standard_rating_c1_s4'] = $this->standard_rating($dSelfAssessmentId,$dAffiliateId,$userId,'c1_s4',4);
+		$data['standard_rating_c1_s5'] = $this->standard_rating($dSelfAssessmentId,$dAffiliateId,$userId,'c1_s5',5);
+		$data['standard_rating_c1_s6'] = $this->standard_rating($dSelfAssessmentId,$dAffiliateId,$userId,'c1_s6',6);
+		$data['standard_rating_c1_s7'] = $this->standard_rating($dSelfAssessmentId,$dAffiliateId,$userId,'c1_s7',7);
+
+		$data['standard_rating_c2_s1'] = $this->standard_rating($dSelfAssessmentId,$dAffiliateId,$userId,'c2_s1',1);
+		$data['standard_rating_c2_s2'] = $this->standard_rating($dSelfAssessmentId,$dAffiliateId,$userId,'c2_s2',2);
+		$data['standard_rating_c2_s3'] = $this->standard_rating($dSelfAssessmentId,$dAffiliateId,$userId,'c2_s3',3);
+		$data['standard_rating_c2_s4'] = $this->standard_rating($dSelfAssessmentId,$dAffiliateId,$userId,'c2_s4',4);
+		$data['standard_rating_c2_s5'] = $this->standard_rating($dSelfAssessmentId,$dAffiliateId,$userId,'c2_s5',5);
+		$data['standard_rating_c2_s6'] = $this->standard_rating($dSelfAssessmentId,$dAffiliateId,$userId,'c2_s6',6);
+		$data['standard_rating_c2_s7'] = $this->standard_rating($dSelfAssessmentId,$dAffiliateId,$userId,'c2_s7',7);
+		$data['standard_rating_c2_s8'] = $this->standard_rating($dSelfAssessmentId,$dAffiliateId,$userId,'c2_s8',8);
+
+		$data['standard_rating_c3_s1'] = $this->standard_rating($dSelfAssessmentId,$dAffiliateId,$userId,'c3_s1',1);
+		$data['standard_rating_c3_s2'] = $this->standard_rating($dSelfAssessmentId,$dAffiliateId,$userId,'c3_s2',2);
+		$data['standard_rating_c3_s3'] = $this->standard_rating($dSelfAssessmentId,$dAffiliateId,$userId,'c3_s3',3);
+		$data['standard_rating_c3_s4'] = $this->standard_rating($dSelfAssessmentId,$dAffiliateId,$userId,'c3_s4',4);
+		$data['standard_rating_c3_s5'] = $this->standard_rating($dSelfAssessmentId,$dAffiliateId,$userId,'c3_s5',5);
+		$data['standard_rating_c3_s6'] = $this->standard_rating($dSelfAssessmentId,$dAffiliateId,$userId,'c3_s6',6);
+		$data['standard_rating_c3_s7'] = $this->standard_rating($dSelfAssessmentId,$dAffiliateId,$userId,'c3_s7',7);
+		$data['standard_rating_c3_s8'] = $this->standard_rating($dSelfAssessmentId,$dAffiliateId,$userId,'c3_s8',8);
+
+
+		$data['criteriaRatingOne'] = $this->criteria_rating($data['totalrating']['criteriaOne'], 6);
+		$data['criteriaRatingTwo'] = $this->criteria_rating($data['totalrating']['criteriaTwo'],8);
+		$data['criteriaRatingThree'] = $this->criteria_rating($data['totalrating']['criteriaThree'],8);
+
+
+		$overallrating =  (round((($data['criteriaRatingOne'] + $data['criteriaRatingTwo'] +$data['criteriaRatingThree']) / 3),1,PHP_ROUND_HALF_ODD));  
+		// print_r($overallrating);exit;
+
+	    $this->Assessment_model->performance_score($overallrating,$dSelfAssessmentId);
+
 		echo true;
 
 	
@@ -334,6 +383,35 @@ class Assessment extends MY_Controller
 	
 	}
 
+	/**
+	 * Show the data in assessment page
+	 *
+	 * @return view 'assessment.php'
+	 */
+	public function ratingToStore($dSelfAssessmentId=NULL,$dAffiliateId=NULL,$userId=NULL)
+	{
+		if(isset($_POST) && !empty($_POST)){
+			$selfAssessmentId = $_POST['selfAssessmentId'];
+			$affiliateId = $_POST['affiliateId'];
+		}else{
+			$selfAssessmentId =$dSelfAssessmentId;
+			$affiliateId = $dAffiliateId;
+		}
+	
+		$criteria_answers_view = $this->Assessment_model->rating($selfAssessmentId,$affiliateId,$userId);
+		$criteriaOne = $this->ratingC1($criteria_answers_view);
+		$criteriaTwo = $this->ratingC2($criteria_answers_view);
+		$criteriaThree = $this->ratingC3($criteria_answers_view);
+				
+
+	$response = array(
+		'criteriaOne' => $criteriaOne,
+		'criteriaTwo' => $criteriaTwo,
+		'criteriaThree' => $criteriaThree,
+	);
+
+			return $response;
+	}
 	/**
 	 * Show the data in assessment page
 	 *

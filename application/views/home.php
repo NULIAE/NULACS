@@ -100,7 +100,7 @@
                   <?php else: ?>
                     <td><div class="icon-rounded" data-rel="tooltip" data-placement="bottom" title="Indeterminate"><i class="i i-Indeterminate inter"></i></div></td>
 									<?php endif; ?>
-                  <td class="f-b"></td>
+                  <td class="f-b"><?php echo $row['performance_score']; ?></td>
 									<td><?php echo isset($row['last_login']) ? date("m-d-Y | H:i", strtotime($row['last_login'])) : ""; ?></td>
 									</tr>
 									<?php endforeach; ?>
