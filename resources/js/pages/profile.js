@@ -23,15 +23,10 @@ $(function () {
 			}).done(function(data) {
 				if($("#redirect").val() == "1" & data.success == true){
 					window.location = base_url + 'module/user';
+				} else if(data.success){		
+					showDialogBox('success', data.message);
 				} else {
-					var toastConfig = {
-						timeout: 60*60*1000,
-						position: 'top',
-						actionText: 'OK',
-						message: data.message,
-						//actionHandler: someCallbackFunction
-					};
-					$('#snackbar').NitroToast(toastConfig);
+					showDialogBox('error', data.message);
 				}
 			});
 		}

@@ -51,18 +51,13 @@ $(function () {
 				data : {email : $('#reset-email').val(), location : $('#selectnul').val()},
 				dataType : 'json'
 			}).done(function(data) {
-				var toastConfig = {
-					timeout: 60*60*1000,
-					position: 'top',
-					actionText: 'OK',
-					message: data.message,
-					//actionHandler: someCallbackFunction
-				};
 				if ( data.success ) {
 					form.reset();
 					popup.close('#popupPass');
+					showDialogBox('success', data.message);
+				} else {
+					showDialogBox('error', data.message);
 				}
-				$('#snackbar').NitroToast(toastConfig);
 			});
 		}
 	});

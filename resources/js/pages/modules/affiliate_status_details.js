@@ -14,12 +14,6 @@ $(function () {
 	if($('.chatBoxinn').length){
 	$('.chatBoxinn').scrollTop($('.chatBoxinn')[0].scrollHeight);
 	}
-	var toastConfig = {
-		timeout: 60*60*1000,
-		position: 'top',
-		actionText: 'OK',
-		message: ''
-	};
 
 	initCommentBox();
 
@@ -161,14 +155,14 @@ $(function () {
 			}).done(function (data) {
 				if (data.success) {
 					//$(selectedStatusElement).removeClass('active');
-					statusBtn.attr('disabled', 'disabled').data('compliance', $(selectedStatusElement).data('status'));
+					statusBtn.attr('disabled', 'disabled').data('compliance', $(selectedStatusElement).data('status'));		
+					showDialogBox('success', data.message);
+				} else {
+					showDialogBox('error', data.message);
 				}
-				toastConfig.message = data.message;
-				$('#snackbar').NitroToast(toastConfig);
 			});
 		} else {
-			toastConfig.message = "Please select a status";
-			$('#snackbar').NitroToast(toastConfig);
+			showDialogBox('error', 'Please select a compliance status');
 		}
 	});
 	//---End compliance status updation
@@ -265,6 +259,7 @@ $(function () {
 					var response = JSON.parse(data);
 					if (!response.success) {
 						file.status = Dropzone.QUEUED;
+						showDialogBox('error', response.message);
 					} else {
 						myDropzone.removeFile(file);
 
@@ -379,16 +374,13 @@ $(function () {
 							$('#assessment_end_year').val('');
 							$('#assessment_document_name').val('');
 						}
+						showDialogBox('success', response.message);
 					}
-
-					toastConfig.message = response.message;
-					$('#snackbar').NitroToast(toastConfig);
 				});
 
 				this.on("error", function (file, errorMessage, xhr) {
 					myDropzone.removeFile(file);
-					toastConfig.message = errorMessage;
-					$('#snackbar').NitroToast(toastConfig);
+					showDialogBox('error', errorMessage);
 				});
 			}
 		});
@@ -575,8 +567,11 @@ $(function () {
 			data: inputData,
 			dataType: 'json'
 		}).done(function (data) {
-			toastConfig.message = data.message;
-			$('#snackbar').NitroToast(toastConfig);
+			if(data.success){		
+				showDialogBox('success', data.message);
+			} else {
+				showDialogBox('error', data.message);
+			}
 		});
 	});
 
@@ -606,7 +601,6 @@ $(function () {
 				data: inputData,
 				dataType: 'json'
 			}).done(function (data) {
-				toastConfig.message = data.message;
 				if(statusval == '1'){
 					document.getElementById("fieldset_disable").disabled = true;
 					$('.key_indicators_approve_btn').val('Approved');
@@ -621,7 +615,11 @@ $(function () {
 					document.getElementById("fieldset_disable").disabled = false;
 				}		
 				
-				$('#snackbar').NitroToast(toastConfig);
+				if(data.success){		
+					showDialogBox('success', data.message);
+				} else {
+					showDialogBox('error', data.message);
+				}
 			});
 		});
 	
@@ -661,10 +659,10 @@ $(function () {
 							"commentTime": function () {
 								return moment().format("Do MMM YYYY | HH:mm");
 							}
-						}));
+						}));	
+						showDialogBox('success', data.message);
 					} else {
-						toastConfig.message = data.message;
-						$('#snackbar').NitroToast(toastConfig);
+						showDialogBox('error', data.message);
 					}
 				});
 			}
@@ -702,8 +700,11 @@ $(function () {
 								data: inputData,
 								dataType: 'json'
 							}).done(function (data) {
-								toastConfig.message = data.message;
-								$('#snackbar').NitroToast(toastConfig);
+								if(data.success){		
+									showDialogBox('success', data.message);
+								} else {
+									showDialogBox('error', data.message);
+								}
 							});
 						}
 					},
@@ -741,21 +742,14 @@ $(function () {
 				});
 				this.on("error", function (file, errorMessage, xhr) {
 					myDropzone.removeFile(file);
-					toastConfig.message = errorMessage;
-					$('#snackbar').NitroToast(toastConfig);
+					showDialogBox('error', errorMessage);
 				});
 			},
 			success: function (file, response) {
 				// myDropzone.removeFile(file);
 				this.removeAllFiles(true);
-				var toastConfig = {
-					timeout: 1000,
-					position: 'top',
-					actionText: 'OK',
-					message: ''
-				};
-				toastConfig.message = "Uploaded";
-				$('#snackbar').NitroToast(toastConfig);
+
+				showDialogBox('success', 'Document has been uploaded!');
 
 				var resp = JSON.parse(response);
 
@@ -814,21 +808,13 @@ $(function () {
 				});
 				this.on("error", function (file, errorMessage, xhr) {
 					myDropzone.removeFile(file);
-					toastConfig.message = errorMessage;
-					$('#snackbar').NitroToast(toastConfig);
+					showDialogBox('error', errorMessage);
 				});
 			},
 			success: function (file, response) {
 				// myDropzone.removeFile(file);
 				this.removeAllFiles(true);
-				var toastConfig = {
-					timeout: 1000,
-					position: 'top',
-					actionText: 'OK',
-					message: ''
-				};
-				toastConfig.message = "Uploaded";
-				$('#snackbar').NitroToast(toastConfig);
+				showDialogBox('success', 'Document has been uploaded!');
 
 				var resp = JSON.parse(response);
 				
@@ -914,14 +900,8 @@ $(function () {
 			dataType: 'json'
 		}).done(function (response) {
 	
-				var toastConfig = {
-					timeout: 1000,
-					position: 'top',
-					actionText: 'OK',
-					message: ''
-				};
-				toastConfig.message = "Deleted";
-				$('#snackbar').NitroToast(toastConfig);
+			showDialogBox('success', 'Document has been deleted!');
+
 				var resp = response;
 				
 				if(docType == 'legal_compliance_document'){
@@ -1074,24 +1054,13 @@ function openTab(val) {
 	$("#input-interval").val(val);
   }
 
-  function alert_msg(message_val){
-	var toastConfig = {
-		timeout: 60*60*1000,
-		position: 'top',
-		actionText: 'OK',
-		message: ''
-	};
-	toastConfig.message = message_val;
-	$('#snackbar').NitroToast(toastConfig);
-}
-
   $('.liquidity_v_blur').on('blur', function() {
 
 	var get_val = $('#'+$(this).attr('id')).val();
 
 	var val = +get_val.replace(/,/g, "");
 	if(isNaN(val)){
-		alert_msg("Enter vaild number");
+		showDialogBox('error', 'Enter a valid number');
 		$('#'+$(this).attr('id')).val('');
 		$("#liquidity_v").val('');
 
@@ -1134,7 +1103,7 @@ $('.current_ratio_blur').on('blur', function() {
 
 	var val = +get_val.replace(/,/g, "");
 	if(isNaN(val)  ){
-		alert_msg("Enter vaild number");
+		showDialogBox('error', 'Enter a valid number');
 		$('#'+$(this).attr('id')).val('');
 		$("#current_ratio_v").val('');
 		document.getElementById($(this).attr('id')).style.borderColor = "#ff002b"; 
@@ -1172,7 +1141,7 @@ $('.current_debt_ratio_blur').on('blur', function() {
 
 	var val = +get_val.replace(/,/g, "");
 	if(isNaN(val) ){
-		alert_msg("Enter vaild number");
+		showDialogBox('error', 'Enter a valid number');
 		$('#'+$(this).attr('id')).val('');
 		$("#current_debt_ratio_v").val('');
 		document.getElementById($(this).attr('id')).style.borderColor = "#ff002b"; 
@@ -1212,7 +1181,7 @@ $('.change_in_cash_ytd_blur').on('blur', function() {
 
 	var val = +get_val.replace(/,/g, "");
 	if(isNaN(val)){
-		alert_msg("Enter vaild number");
+		showDialogBox('error', 'Enter a valid number');
 		$('#'+$(this).attr('id')).val('');
 		$("#change_in_cash_ytd_v").val('');
 
@@ -1249,7 +1218,7 @@ $('.operating_efficiency_program_value_blur').on('blur', function() {
 
 	var val = +get_val.replace(/,/g, "");
 	if(isNaN(val) || val <= 0){
-		alert_msg("Enter vaild number");
+		showDialogBox('error', 'Enter a valid number');
 		$('#'+$(this).attr('id')).val('');
 		$("#operating_efficiency_program_value_v").val('');
 
@@ -1289,7 +1258,7 @@ $('.operating_efficiency_admin_value_blur').on('blur', function() {
 
 	var val = +get_val.replace(/,/g, "");
 	if(isNaN(val) || val <= 0 ){
-		alert_msg("Enter vaild number");
+		showDialogBox('error', 'Enter a valid number');
 		$('#'+$(this).attr('id')).val('');
 		$("#operating_efficiency_admin_value_v").val('');
 		document.getElementById($(this).attr('id')).style.borderColor = "#ff002b"; 
@@ -1329,7 +1298,7 @@ $('.operating_efficiency_fundraising_value_blur').on('blur', function() {
 
 	var val = +get_val.replace(/,/g, "");
 	if(isNaN(val) || val <= 0){
-		alert_msg("Enter vaild number");
+		showDialogBox('error', 'Enter a valid number');
 		$('#'+$(this).attr('id')).val('');
 		$("#operating_efficiency_fundraising_value_v").val('');
 
@@ -1370,7 +1339,7 @@ $('.change_in_net_assets_in_quarter_blur').on('blur', function() {
 
 	var val = +get_val.replace(/,/g, "");
 	if(isNaN(val)){
-		alert_msg("Enter vaild number");
+		showDialogBox('error', 'Enter a valid number');
 		$('#'+$(this).attr('id')).val('');
 		$("#change_in_net_assets_in_quarter_v").val('');
 
@@ -1412,7 +1381,7 @@ $('.days_in_cash_blur').on('blur', function() {
 
 	var val = +get_val.replace(/,/g, "");
 	if(isNaN(val)  || val <= 0 ){
-		alert_msg("Enter vaild number");
+		showDialogBox('error', 'Enter a valid number');
 		$('#'+$(this).attr('id')).val('');
 		$("#days_in_cash_v").val('');
 
@@ -1454,7 +1423,7 @@ $('.borad_giving_blur').on('blur', function() {
 
 	var val = +get_val.replace(/,/g, "");
 	if(isNaN(val) || val <= 0){
-		alert_msg("Enter vaild number");
+		showDialogBox('error', 'Enter a valid number');
 		$('#'+$(this).attr('id')).val('');
 		$("#borad_giving_v").val('');
 
@@ -1495,7 +1464,7 @@ $('.operating_reserves_percentage_blur').on('blur', function() {
 
 	var val = +get_val.replace(/,/g, "");
 	if(isNaN(val) || val <= 0 ){
-		alert_msg("Enter vaild number");
+		showDialogBox('error', 'Enter a valid number');
 		$('#'+$(this).attr('id')).val('');
 		$("#operating_reserves_percentage_v").val('');
 

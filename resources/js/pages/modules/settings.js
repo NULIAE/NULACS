@@ -22,16 +22,11 @@ $(function () {
 					data : $(form).serialize(), 
 					dataType : 'json'
 				}).done(function(data) {
-					var toastConfig = {
-						timeout: 60*60*1000,
-						position: 'top',
-						actionText: 'OK',
-						message: data.message,
-						//actionHandler: someCallbackFunction
-					};
-					setTimeout(function(){
-						$('#snackbar').NitroToast(toastConfig);
-					}, 2000);
+					if(data.success){		
+						showDialogBox('success', data.message);
+					} else {
+						showDialogBox('error', data.message);
+					}
 				});
 			}
 		});

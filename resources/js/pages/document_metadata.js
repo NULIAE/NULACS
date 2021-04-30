@@ -31,14 +31,32 @@ $(function () {
 	});
 
 	$(document).on('click','.btn_remove', function(){
-		var c = confirm("Do you want to remove this metadata field?");
-		if(c){
-			var button_id = $(this).attr("id");
-			$("#row"+button_id+"").remove();
-			$('#add').removeAttr('disabled');
-			i--;
-		}
-		return false;
+		var button_id = $(this).attr("id");
+		$('#dialog').NitroDialog({
+			action: "open",
+			backdrop: true,
+			message: '<h4 class="bold m-b-15"><i class="i i-warning text-warning m-r-10"></i>Confirm</h4><p>Do you want to remove this metadata field?</p>',
+			buttons: [
+				{
+					label: 'Proceed',
+					class: "btn btn-primary mr-1",
+					action: function () {
+						
+						$("#row"+button_id+"").remove();
+						$('#add').removeAttr('disabled');
+						i--;
+            			$('#dialog').NitroDialog({ action: "close" });
+					}
+				},
+				{
+					label: 'Cancel',
+					class: "btn btn-secondary",
+					action: function () {
+						$('#dialog').NitroDialog({ action: "close" });
+					}
+				}
+			]
+		});
 	});
 
 	$('#select-document-type').change(function(){
@@ -123,14 +141,11 @@ $(function () {
 				data : {document_type_id : $('#select-document-type').val(),document_id : $('#select-document').val(),metadata : JSON.stringify(values)},
 				dataType : 'json'
 			}).done(function(data) {
-				var toastConfig = {
-					timeout: 60*60*1000,
-					position: 'top',
-					actionText: 'OK',
-					message: data.message,
-					//actionHandler: someCallbackFunction
-				};
-				$('#snackbar').NitroToast(toastConfig);
+				if(data.success){		
+					showDialogBox('success', data.message);
+				} else {
+					showDialogBox('error', data.message);
+				}
 			});
 		}
 	});

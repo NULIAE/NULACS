@@ -52,18 +52,11 @@ $(function () {
 				dataType : 'json'
 			}).done(function(data) {
 				if(data.success) {
-					form.reset();
+					form.reset();	
+					showDialogBox('success', data.message);
+				} else {
+					showDialogBox('error', data.message);
 				}
-				var toastConfig = {
-					timeout: 60*60*1000,
-					position: 'top',
-					actionText: 'OK',
-					message: data.message,
-					//actionHandler: someCallbackFunction
-				};
-				setTimeout(function(){
-					$('#snackbar').NitroToast(toastConfig);
-				}, 2000);
 			});
 		}
 	});

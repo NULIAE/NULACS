@@ -22,16 +22,7 @@ $(function () {
 				dataType : 'json'
 			}).done(function(data) {
 				if ( ! data.success ) {
-					var toastConfig = {
-						timeout: 60*60*1000,
-						position: 'top',
-						actionText: 'OK',
-						message: data.message,
-						//actionHandler: someCallbackFunction
-					};
-					setTimeout(function(){
-						$('#snackbar').NitroToast(toastConfig);
-					}, 2000);
+					showDialogBox('error', data.message);
 				} else {
 					window.location.href = base_url + "module/affiliate";
 				}

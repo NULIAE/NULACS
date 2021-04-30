@@ -1,12 +1,5 @@
 $(function () {
 
-	var toastConfig = {
-		timeout: 60*60*1000,
-		position: 'top',
-		actionText: 'OK',
-		message: ''
-	};
-
 	$('.datepick').datetimepicker({
         format: 'DD-MM-YYYY',
         icons: {
@@ -90,13 +83,11 @@ $(function () {
 	function getDocumentsList(url){
 
 		if($('#doctype').val() == ""){
-			toastConfig.message = "Please select a document type.";
-			$('#snackbar').NitroToast(toastConfig);
+			showDialogBox('error', 'Please select a document type.');
 			return;
 		}
 		if($('#document').val() == ""){
-			toastConfig.message = "Please select a document.";
-			$('#snackbar').NitroToast(toastConfig);
+			showDialogBox('error', 'Please select a document.');
 			return;
 		}
 		

@@ -210,3 +210,30 @@ $(document).ajaxStop(function () {
 		page.loader(false);
 	}, 2000);
 });
+
+function showDialogBox(type, message) {
+  var content;
+  if(type == "success")
+    content = '<h4 class="bold m-b-15 text-success"><i class="i i-check_circle m-r-10"></i>Success</h4><p>'+message+'</p>';
+  else if(type == "warning")
+    content = '<h4 class="bold text-warning m-b-15"><i class="i i-warning m-r-10"></i>Warning</h4><p>'+message+'</p>';
+  else if(type == "info")
+    content = '<h4 class="bold text-info m-b-15"><i class="i i-info_outline m-r-10"></i>Info</h4><p>'+message+'</p>';
+  else
+    content = '<h4 class="bold text-danger m-b-15"><i class="i i-error m-r-10"></i>Error</h4><p>'+message+'</p>'
+
+  $('#dialog').NitroDialog({
+    action: "open",
+    backdrop: true,
+    message: content,
+    buttons: [
+      {
+        label: 'DONE',
+        class: "btn btn-primary",
+        action: function () {
+          $('#dialog').NitroDialog({ action: "close" });
+        }
+      }
+    ]
+  });
+}

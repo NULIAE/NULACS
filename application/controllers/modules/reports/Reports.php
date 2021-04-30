@@ -130,7 +130,7 @@ class Reports extends MY_Controller
 			'graph_data' => $graphData,
 			"group" => $data["group"]
         );
-		
+		$data['notifications'] = $this->Document_model->get_notifications();
 		//Name of the view file
 		$data['view_name'] = 'modules/reports/reports';
 		//Page specific javascript files

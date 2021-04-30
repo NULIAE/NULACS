@@ -618,12 +618,24 @@ class Affiliate extends MY_Controller
 			{
 				$monthly_filter['document_month'] =  $recent_data['monthly']['month'];
 				$monthly_filter['document_year'] =  $recent_data['monthly']['year'];
+
+				if(isset($data['interval']) && $data['interval'] == 'nav-y1')
+				{
+					$errorMsg = ($this->session->role_id == 1) ? 'Please update the compliance status for this month.' : 'Please upload all documents for this month';
+					$this->session->set_flashdata('error', $errorMsg);
+				}
 			}
 			else if($monthly_filter['document_year'] == $recent_data['monthly']['year'])
 			{
 				if($monthly_filter['document_month'] > $recent_data['monthly']['month'])
 				{
 					$monthly_filter['document_month'] =  $recent_data['monthly']['month'];
+					
+					if(isset($data['interval']) && $data['interval'] == 'nav-y1')
+					{
+						$errorMsg = ($this->session->role_id == 1) ? 'Please update the compliance status for this month.' : 'Please upload all documents for this month';
+						$this->session->set_flashdata('error', $errorMsg);
+					}
 				}
 			}
 		}
@@ -663,12 +675,24 @@ class Affiliate extends MY_Controller
 			{
 				$quarterly_filter['document_month'] =  $recent_data['quarterly']['quarter'];
 				$quarterly_filter['document_year'] =  $recent_data['quarterly']['year'];
+
+				if(isset($data['interval']) && $data['interval'] == 'nav-y2')
+				{
+					$errorMsg = ($this->session->role_id == 1) ? 'Please update the compliance status for this quarter.' : 'Please upload all documents for this quarter';
+					$this->session->set_flashdata('error', $errorMsg);
+				}
 			}
 			else if($quarterly_filter['document_year'] == $recent_data['quarterly']['year'])
 			{
 				if($quarterly_filter['document_month'] > $recent_data['quarterly']['quarter'])
 				{
 					$quarterly_filter['document_month'] =  $recent_data['quarterly']['quarter'];
+
+					if(isset($data['interval']) && $data['interval'] == 'nav-y2')
+					{
+						$errorMsg = ($this->session->role_id == 1) ? 'Please update the compliance status for this quarter.' : 'Please upload all documents for this quarter';
+						$this->session->set_flashdata('error', $errorMsg);
+					}
 				}
 			}
 		}
@@ -702,6 +726,12 @@ class Affiliate extends MY_Controller
 			if($yearly_filter['document_year'] > $recent_data['yearly']['year'])
 			{
 				$yearly_filter['document_year'] = $recent_data['yearly']['year'];
+
+				if(isset($data['interval']) && $data['interval'] == 'nav-y3')
+				{
+					$errorMsg = ($this->session->role_id == 1) ? 'Please update the compliance status for this year.' : 'Please upload all documents for this year';
+					$this->session->set_flashdata('error', $errorMsg);
+				}
 			}
 		}
 

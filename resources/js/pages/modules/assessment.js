@@ -300,44 +300,6 @@
 
         });
     
-
-        // function performance_assessment_search()
-        // {
-         
-        //  var data = {
-        //                  "performance_assessment_from":$('#performance_assessment_from').val(),
-        //                  "performance_assessment_to":$('#performance_assessment_to').val(),
-                   
-                
-        //             }
-        //             // $('#message-box').fadeOut();
-        //             $.ajax({
-        //                 type : 'POST', // define the type of HTTP verb we want to use (POST for our form)
-        //                 url	 : base_url+'module/assessment/assessment-listing', // the url where we want to POST
-                       
-        //                 data : data, // our data object
-        //                 dataType : 'json'
-        //             }).done(function(data) {
-        //                 // if ( ! data.success ) {
-        //                 // 	var toastConfig = {
-        //                 // 		timeout: 60*60*1000,
-        //                 // 		position: 'top',
-        //                 // 		actionText: 'OK',
-        //                 // 		message: data.message,
-        //                 // 		//actionHandler: someCallbackFunction
-        //                 // 	};
-        //                 // 	setTimeout(function(){
-        //                 // 		$('#snackbar').NitroToast(toastConfig);
-        //                 // 	}, 2000);
-        //                 // } else {
-        //                 // 	window.location.href = base_url + "module/user";
-        //                 // }
-        //                 // alert("success");
-        //             });
-        
-        // }
-    
-    // page.loader(true);
     $(function () {
 
 
@@ -583,24 +545,12 @@ var val  = rating.value;
 
 if(!/^[0-9]+$/.test(val)){
     $('#'+rating.id).val("");
-    var toastConfig = {
-        timeout: 60*60*1000,
-        position: 'top',
-        actionText: 'OK',
-        message: "Rating must be a number",
-        };
-    $('#snackbar').NitroToast(toastConfig);
+    showDialogBox('error', 'Rating should be a number!');
 }else{
     if(val >= 6){ 
         $('#'+rating.id).val("");
-        var toastConfig = {
-            timeout: 60*60*1000,
-            position: 'top',
-            actionText: 'OK',
-            message: "Rating must be 5 or below 5",
-            };
-        $('#snackbar').NitroToast(toastConfig);
-       }
+        showDialogBox('error', 'Rating should be  5 or below 5!');
+    }
 }
 
 
@@ -660,22 +610,6 @@ function c_one_s_one()
 				dataType : 'json'
 			}).done(function(data) {
                 update_rating();
-                // location.reload();
-				// if ( ! data.success ) {
-				// 	var toastConfig = {
-				// 		timeout: 60*60*1000,
-				// 		position: 'top',
-				// 		actionText: 'OK',
-				// 		message: data.message,
-				// 		//actionHandler: someCallbackFunction
-				// 	};
-				// 	setTimeout(function(){
-				// 		$('#snackbar').NitroToast(toastConfig);
-				// 	}, 2000);
-				// } else {
-				// 	window.location.href = base_url + "module/user";
-                // }
-                // alert("success");
 			});
 
 }
@@ -706,21 +640,6 @@ function c_one_s_two()
 				dataType : 'json'
 			}).done(function(data) {
                  update_rating();
-				// if ( ! data.success ) {
-				// 	var toastConfig = {
-				// 		timeout: 60*60*1000,
-				// 		position: 'top',
-				// 		actionText: 'OK',
-				// 		message: data.message,
-				// 		//actionHandler: someCallbackFunction
-				// 	};
-				// 	setTimeout(function(){
-				// 		$('#snackbar').NitroToast(toastConfig);
-				// 	}, 2000);
-				// } else {
-				// 	window.location.href = base_url + "module/user";
-                // }
-                // alert("success");
 			});
 
 }
@@ -832,21 +751,6 @@ function c_one_s_three()
 				dataType : 'json'
 			}).done(function(data) {
                  update_rating();
-				// if ( ! data.success ) {
-				// 	var toastConfig = {
-				// 		timeout: 60*60*1000,
-				// 		position: 'top',
-				// 		actionText: 'OK',
-				// 		message: data.message,
-				// 		//actionHandler: someCallbackFunction
-				// 	};
-				// 	setTimeout(function(){
-				// 		$('#snackbar').NitroToast(toastConfig);
-				// 	}, 2000);
-				// } else {
-				// 	window.location.href = base_url + "module/user";
-                // }
-                // alert("success");
 			});
 
 }
@@ -890,21 +794,6 @@ function c_one_s_four(){
 				dataType : 'json'
 			}).done(function(data) {
                  update_rating();
-				// if ( ! data.success ) {
-				// 	var toastConfig = {
-				// 		timeout: 60*60*1000,
-				// 		position: 'top',
-				// 		actionText: 'OK',
-				// 		message: data.message,
-				// 		//actionHandler: someCallbackFunction
-				// 	};
-				// 	setTimeout(function(){
-				// 		$('#snackbar').NitroToast(toastConfig);
-				// 	}, 2000);
-				// } else {
-				// 	window.location.href = base_url + "module/user";
-                // }
-                // alert("success");
 			});
 
 }
@@ -966,21 +855,6 @@ function c_one_s_five(){
                    dataType : 'json'
                }).done(function(data) {
                     update_rating();
-                   // if ( ! data.success ) {
-                   // 	var toastConfig = {
-                   // 		timeout: 60*60*1000,
-                   // 		position: 'top',
-                   // 		actionText: 'OK',
-                   // 		message: data.message,
-                   // 		//actionHandler: someCallbackFunction
-                   // 	};
-                   // 	setTimeout(function(){
-                   // 		$('#snackbar').NitroToast(toastConfig);
-                   // 	}, 2000);
-                   // } else {
-                   // 	window.location.href = base_url + "module/user";
-                   // }
-                   // alert("success");
                });
    
  }
@@ -1010,21 +884,6 @@ function c_one_s_five(){
                 $(".tab-pane").removeClass("active in");
                     $("#nav-x2").addClass("active in");
                     $('a[href="#nav-x2"]').tab('show');
-                   // if ( ! data.success ) {
-                   // 	var toastConfig = {
-                   // 		timeout: 60*60*1000,
-                   // 		position: 'top',
-                   // 		actionText: 'OK',
-                   // 		message: data.message,
-                   // 		//actionHandler: someCallbackFunction
-                   // 	};
-                   // 	setTimeout(function(){
-                   // 		$('#snackbar').NitroToast(toastConfig);
-                   // 	}, 2000);
-                   // } else {
-                   // 	window.location.href = base_url + "module/user";
-                   // }
-                   // alert("success");
                });
    
  }
@@ -1081,21 +940,6 @@ function c_one_s_five(){
                    dataType : 'json'
                }).done(function(data) {
                     update_rating();
-                   // if ( ! data.success ) {
-                   // 	var toastConfig = {
-                   // 		timeout: 60*60*1000,
-                   // 		position: 'top',
-                   // 		actionText: 'OK',
-                   // 		message: data.message,
-                   // 		//actionHandler: someCallbackFunction
-                   // 	};
-                   // 	setTimeout(function(){
-                   // 		$('#snackbar').NitroToast(toastConfig);
-                   // 	}, 2000);
-                   // } else {
-                   // 	window.location.href = base_url + "module/user";
-                   // }
-                   // alert("success");
                });
    
  }
@@ -1165,21 +1009,6 @@ function c_one_s_five(){
                    dataType : 'json'
                }).done(function(data) {
                     update_rating();
-                   // if ( ! data.success ) {
-                   // 	var toastConfig = {
-                   // 		timeout: 60*60*1000,
-                   // 		position: 'top',
-                   // 		actionText: 'OK',
-                   // 		message: data.message,
-                   // 		//actionHandler: someCallbackFunction
-                   // 	};
-                   // 	setTimeout(function(){
-                   // 		$('#snackbar').NitroToast(toastConfig);
-                   // 	}, 2000);
-                   // } else {
-                   // 	window.location.href = base_url + "module/user";
-                   // }
-                   // alert("success");
                });
    
  }
@@ -1316,21 +1145,6 @@ function c_one_s_five(){
                    dataType : 'json'
                }).done(function(data) {
                     update_rating();
-                   // if ( ! data.success ) {
-                   // 	var toastConfig = {
-                   // 		timeout: 60*60*1000,
-                   // 		position: 'top',
-                   // 		actionText: 'OK',
-                   // 		message: data.message,
-                   // 		//actionHandler: someCallbackFunction
-                   // 	};
-                   // 	setTimeout(function(){
-                   // 		$('#snackbar').NitroToast(toastConfig);
-                   // 	}, 2000);
-                   // } else {
-                   // 	window.location.href = base_url + "module/user";
-                   // }
-                   // alert("success");
                });
    
  }
@@ -1440,21 +1254,6 @@ function c_one_s_five(){
                    dataType : 'json'
                }).done(function(data) {
                     update_rating();
-                   // if ( ! data.success ) {
-                   // 	var toastConfig = {
-                   // 		timeout: 60*60*1000,
-                   // 		position: 'top',
-                   // 		actionText: 'OK',
-                   // 		message: data.message,
-                   // 		//actionHandler: someCallbackFunction
-                   // 	};
-                   // 	setTimeout(function(){
-                   // 		$('#snackbar').NitroToast(toastConfig);
-                   // 	}, 2000);
-                   // } else {
-                   // 	window.location.href = base_url + "module/user";
-                   // }
-                   // alert("success");
                });
    
  }
@@ -1500,21 +1299,6 @@ function c_one_s_five(){
                    dataType : 'json'
                }).done(function(data) {
                     update_rating();
-                   // if ( ! data.success ) {
-                   // 	var toastConfig = {
-                   // 		timeout: 60*60*1000,
-                   // 		position: 'top',
-                   // 		actionText: 'OK',
-                   // 		message: data.message,
-                   // 		//actionHandler: someCallbackFunction
-                   // 	};
-                   // 	setTimeout(function(){
-                   // 		$('#snackbar').NitroToast(toastConfig);
-                   // 	}, 2000);
-                   // } else {
-                   // 	window.location.href = base_url + "module/user";
-                   // }
-                   // alert("success");
                });
    
  }
@@ -1546,21 +1330,6 @@ function c_one_s_five(){
                    dataType : 'json'
                }).done(function(data) {
                     update_rating();
-                   // if ( ! data.success ) {
-                   // 	var toastConfig = {
-                   // 		timeout: 60*60*1000,
-                   // 		position: 'top',
-                   // 		actionText: 'OK',
-                   // 		message: data.message,
-                   // 		//actionHandler: someCallbackFunction
-                   // 	};
-                   // 	setTimeout(function(){
-                   // 		$('#snackbar').NitroToast(toastConfig);
-                   // 	}, 2000);
-                   // } else {
-                   // 	window.location.href = base_url + "module/user";
-                   // }
-                   // alert("success");
                });
    
  }
@@ -1598,21 +1367,6 @@ function c_one_s_five(){
                    dataType : 'json'
                }).done(function(data) {
                     update_rating();
-                   // if ( ! data.success ) {
-                   // 	var toastConfig = {
-                   // 		timeout: 60*60*1000,
-                   // 		position: 'top',
-                   // 		actionText: 'OK',
-                   // 		message: data.message,
-                   // 		//actionHandler: someCallbackFunction
-                   // 	};
-                   // 	setTimeout(function(){
-                   // 		$('#snackbar').NitroToast(toastConfig);
-                   // 	}, 2000);
-                   // } else {
-                   // 	window.location.href = base_url + "module/user";
-                   // }
-                   // alert("success");
                });
    
  }
@@ -1650,21 +1404,6 @@ function c_one_s_five(){
                 $(".tab-pane").removeClass("active in");
                 $("#nav-x2").addClass("active in");
                 $('a[href="#nav-x3"]').tab('show');
-                   // if ( ! data.success ) {
-                   // 	var toastConfig = {
-                   // 		timeout: 60*60*1000,
-                   // 		position: 'top',
-                   // 		actionText: 'OK',
-                   // 		message: data.message,
-                   // 		//actionHandler: someCallbackFunction
-                   // 	};
-                   // 	setTimeout(function(){
-                   // 		$('#snackbar').NitroToast(toastConfig);
-                   // 	}, 2000);
-                   // } else {
-                   // 	window.location.href = base_url + "module/user";
-                   // }
-                   // alert("success");
                });
    
  }
@@ -1708,21 +1447,6 @@ function c_one_s_five(){
                    dataType : 'json'
                }).done(function(data) {
                     update_rating();
-                   // if ( ! data.success ) {
-                   // 	var toastConfig = {
-                   // 		timeout: 60*60*1000,
-                   // 		position: 'top',
-                   // 		actionText: 'OK',
-                   // 		message: data.message,
-                   // 		//actionHandler: someCallbackFunction
-                   // 	};
-                   // 	setTimeout(function(){
-                   // 		$('#snackbar').NitroToast(toastConfig);
-                   // 	}, 2000);
-                   // } else {
-                   // 	window.location.href = base_url + "module/user";
-                   // }
-                   // alert("success");
                });
    
  }
@@ -1755,21 +1479,6 @@ function c_one_s_five(){
                    dataType : 'json'
                }).done(function(data) {
                     update_rating();
-                   // if ( ! data.success ) {
-                   // 	var toastConfig = {
-                   // 		timeout: 60*60*1000,
-                   // 		position: 'top',
-                   // 		actionText: 'OK',
-                   // 		message: data.message,
-                   // 		//actionHandler: someCallbackFunction
-                   // 	};
-                   // 	setTimeout(function(){
-                   // 		$('#snackbar').NitroToast(toastConfig);
-                   // 	}, 2000);
-                   // } else {
-                   // 	window.location.href = base_url + "module/user";
-                   // }
-                   // alert("success");
                });
    
  }
@@ -1802,21 +1511,6 @@ function c_one_s_five(){
                    dataType : 'json'
                }).done(function(data) {
                     update_rating();
-                   // if ( ! data.success ) {
-                   // 	var toastConfig = {
-                   // 		timeout: 60*60*1000,
-                   // 		position: 'top',
-                   // 		actionText: 'OK',
-                   // 		message: data.message,
-                   // 		//actionHandler: someCallbackFunction
-                   // 	};
-                   // 	setTimeout(function(){
-                   // 		$('#snackbar').NitroToast(toastConfig);
-                   // 	}, 2000);
-                   // } else {
-                   // 	window.location.href = base_url + "module/user";
-                   // }
-                   // alert("success");
                });
    
  }
@@ -1860,21 +1554,6 @@ function c_one_s_five(){
                    dataType : 'json'
                }).done(function(data) {
                     update_rating();
-                   // if ( ! data.success ) {
-                   // 	var toastConfig = {
-                   // 		timeout: 60*60*1000,
-                   // 		position: 'top',
-                   // 		actionText: 'OK',
-                   // 		message: data.message,
-                   // 		//actionHandler: someCallbackFunction
-                   // 	};
-                   // 	setTimeout(function(){
-                   // 		$('#snackbar').NitroToast(toastConfig);
-                   // 	}, 2000);
-                   // } else {
-                   // 	window.location.href = base_url + "module/user";
-                   // }
-                   // alert("success");
                });
    
  }
@@ -1916,21 +1595,6 @@ function c_one_s_five(){
                    dataType : 'json'
                }).done(function(data) {
                     update_rating();
-                   // if ( ! data.success ) {
-                   // 	var toastConfig = {
-                   // 		timeout: 60*60*1000,
-                   // 		position: 'top',
-                   // 		actionText: 'OK',
-                   // 		message: data.message,
-                   // 		//actionHandler: someCallbackFunction
-                   // 	};
-                   // 	setTimeout(function(){
-                   // 		$('#snackbar').NitroToast(toastConfig);
-                   // 	}, 2000);
-                   // } else {
-                   // 	window.location.href = base_url + "module/user";
-                   // }
-                   // alert("success");
                });
    
  }
@@ -1965,21 +1629,6 @@ function c_one_s_five(){
                    dataType : 'json'
                }).done(function(data) {
                     update_rating();
-                   // if ( ! data.success ) {
-                   // 	var toastConfig = {
-                   // 		timeout: 60*60*1000,
-                   // 		position: 'top',
-                   // 		actionText: 'OK',
-                   // 		message: data.message,
-                   // 		//actionHandler: someCallbackFunction
-                   // 	};
-                   // 	setTimeout(function(){
-                   // 		$('#snackbar').NitroToast(toastConfig);
-                   // 	}, 2000);
-                   // } else {
-                   // 	window.location.href = base_url + "module/user";
-                   // }
-                   // alert("success");
                });
    
  }
@@ -2007,21 +1656,6 @@ function c_one_s_five(){
                    dataType : 'json'
                }).done(function(data) {
                     update_rating();
-                   // if ( ! data.success ) {
-                   // 	var toastConfig = {
-                   // 		timeout: 60*60*1000,
-                   // 		position: 'top',
-                   // 		actionText: 'OK',
-                   // 		message: data.message,
-                   // 		//actionHandler: someCallbackFunction
-                   // 	};
-                   // 	setTimeout(function(){
-                   // 		$('#snackbar').NitroToast(toastConfig);
-                   // 	}, 2000);
-                   // } else {
-                   // 	window.location.href = base_url + "module/user";
-                   // }
-                   // alert("success");
                });
    
  }
@@ -2198,22 +1832,14 @@ $.ajax({
         });
 }
 
-    function savebtn(){
-        var toastConfig = {
-                    timeout: 60*60*1000,
-                    position: 'top',
-                    actionText: 'OK',
-                    message: "You have successfully saved the answers.",
-                };
-                
-                $('#snackbar').NitroToast(toastConfig);
-            
-        }
+function savebtn(){
+    showDialogBox('success', 'You have successfully saved the answers.');
+}
 
-        $(function() {
-            var role_id=  $('#role_id_def').val();
-            if(role_id == 3 || role_id == 2){
-                   $('input[type="text"]').prop('readonly', true);
-            }
- 
-         })
+$(function() {
+    var role_id=  $('#role_id_def').val();
+    if(role_id == 3 || role_id == 2){
+        $('input[type="text"]').prop('readonly', true);
+    }
+
+})

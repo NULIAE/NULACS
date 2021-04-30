@@ -111,7 +111,7 @@ foreach($criteria_answers_view as $answers){
         <div class=" document-mdata">
 
           <div class="mnHead">
-            <h3><a href="<?= base_url('module/assessment/assessment-listing'); ?>" class="text-white"><?= ($userId == '')? "AFFILIATE Performance Assessment" : "Affiliate Self-Assessment";?> (<?=isset($affiliate_details[0]['assessment_start_year'])?$affiliate_details[0]['assessment_start_year']:''?> - <?=isset($affiliate_details[0]['assessment_end_year'])?$affiliate_details[0]['assessment_end_year']:''?>) -  
+            <h3><a href="javascript:window.history.back();" class="text-white"><?= ($userId == '')? "AFFILIATE Performance Assessment" : "Affiliate Self-Assessment";?> (<?=isset($affiliate_details[0]['assessment_start_year'])?$affiliate_details[0]['assessment_start_year']:''?> - <?=isset($affiliate_details[0]['assessment_end_year'])?$affiliate_details[0]['assessment_end_year']:''?>) -  
              <?=isset($affiliate_details[0]['city'])?$affiliate_details[0]['city']:''?>, <?=isset($affiliate_details[0]['stateabbreviation'])?$affiliate_details[0]['stateabbreviation']:''?>
              </a>
             </h3>
@@ -121,11 +121,13 @@ foreach($criteria_answers_view as $answers){
           <nav>
             <div class="nav" id="nav-tab" role="tablist">
               <a class="nav-item nav-link active" id="nav-x1-tab" data-toggle="tab" href="#nav-x1" role="tab"
-                aria-controls="nav-x1" aria-selected="true"><i class="i i-org"></i>Organizational Soundness</a>
+                aria-controls="nav-x1" aria-selected="true"><i class="i i-org"></i> Organizational Soundness</a>
               <a class="nav-item nav-link" id="nav-x2-tab" data-toggle="tab" href="#nav-x2" role="tab"
-                aria-controls="nav-x2" aria-selected="false"><i class="i i-vitality"></i>Organizational Vitality</a>
+                aria-controls="nav-x2" aria-selected="false"><i class="i i-vitality"></i> Organizational Vitality</a>
               <a class="nav-item nav-link" id="nav-x3-tab" data-toggle="tab" href="#nav-x3" role="tab"
-                aria-controls="nav-x3" aria-selected="false"><i class="i i-mission"></i>Implementation of Mission</a>
+                aria-controls="nav-x3" aria-selected="false"><i class="i i-mission"></i> Implementation of Mission</a>
+              <a class="nav-item nav-link" id="nav-x4-tab" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId); ?>">
+              <i class="i i-timer"></i> Performance Score</a>
             </div>
           </nav>
            <div class="tab-content" id="nav-tabContent">
@@ -181,9 +183,6 @@ foreach($criteria_answers_view as $answers){
                       <div class="headOuter">
                           <div class="head">
                           <h3 class="ib-m">Criteria 1: Organizational Soundness </h3>
-                      <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId); ?>">
-                        <i class="i i-timer"></i>
-                      </a>
                           </div>
                       </div>
                       <div class="criteriaBottom">
@@ -722,9 +721,6 @@ foreach($criteria_answers_view as $answers){
         <div class="headOuter">
             <div class="head">
                 <h3 class="ib-m">Criteria 2: Organizational Vitality </h3>
-                      <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId); ?>">
-                        <i class="i i-timer"></i>
-                      </a>
             </div>
         </div>
 
@@ -1584,9 +1580,6 @@ foreach($criteria_answers_view as $answers){
            <div class="head">
              
                <h3 class="ib-m">Criteria 3: Implementation of Mission  </h3>
-                <a class="iconLink ib-m" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId); ?>">
-                <i class="i i-timer"></i>
-                </a>
            </div>
        </div>
        <div class="criteriaBottom">
