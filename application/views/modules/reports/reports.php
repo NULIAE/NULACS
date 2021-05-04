@@ -8,11 +8,11 @@ $quarterArray = array(
 ?>
 <style>
 .all-affiliates .mainTabAll .tab-content .pane113 table thead tr th{
-transform: rotate(-60deg);
--webkit-transform: rotate(-60deg);
--moz-transform: rotate(-60deg);
--ms-transform: rotate(-60deg);
--o-transform: rotate(-60deg);
+transform: rotate(0deg);
+-webkit-transform: rotate(0deg);
+-moz-transform: rotate(0deg);
+-ms-transform: rotate(0deg);
+-o-transform: rotate(0deg);
 padding:35px 11px !important;
 line-height:16px !important;
 vertical-align: middle;
@@ -100,7 +100,7 @@ font-size: 10px!important;
 
                 <div class="pane113 w-100">
 
-                  <table class="table table1 table-bordered" id="#table11">
+                  <table class="table table1 table-bordered" id="table11">
                     <thead>
                       <tr>
                         <th scope="col">Affiliates </th>
@@ -115,8 +115,8 @@ font-size: 10px!important;
                         <th scope="col">OE Fundraising</th>
                         <th scope="col">Change in N/A without restrictions</th>
                         <th scope="col">Days in Cash</th>
-                        <th scope="col"># of Grants TY YTD-LY YTD</th>
-                        <th scope="col">$ of Grants TY YTD -LY YTD</th>
+                        <th scope="col" data-orderable="false"># of Grants TY YTD-LY YTD</th>
+                        <th scope="col" data-orderable="false">$ of Grants TY YTD -LY YTD</th>
                         <th scope="col">Positive Net assets</th>
                         <th scope="col">Board Giving variance commitment - YTD</th>
                         <th scope="col">Operating Reserves</th>
@@ -334,7 +334,7 @@ font-size: 10px!important;
               <?php endif; ?>
               <div class="row">
                 <div class="pane113 w-100">
-                  <table class="table table1 table-condensed table-striped">
+                  <table class="table table1 table-condensed table-striped" id="ind-table">
                     <thead>
                         <tr>
                             <th scope="col">Quarter</th>

@@ -136,7 +136,10 @@ class Reports extends MY_Controller
 		//Page specific javascript files
 		$data['footer']['js'] = array(
 			'https://canvasjs.com/assets/script/canvasjs.min.js',
-            'https://www.gstatic.com/charts/loader.js'
+            'https://www.gstatic.com/charts/loader.js',
+			'https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js',
+			'https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js',
+			'pages/modules/reports.js'
 		);
 		$this->load->view('template', $data);
 	}
