@@ -69,7 +69,7 @@
                   </li>
                 <?php else: ?>
                   <li class="nav-item">
-                    <a class="nav-link" title="Upload Documents" href="<?php echo base_url('/module/affiliate/status/details/').$this->session->affiliate_id; ?>"><i class="icon-upload"></i><span class="sr-only">Documents Upload</span></a>
+                    <a class="nav-link" title="Upload Documents" href="<?php echo base_url('/module/affiliate/status/details/').$this->session->affiliate_id; ?>"><i class="i i-upload-n"></i><span class="sr-only">Documents Upload</span></a>
                   </li>
                 <?php endif; ?>
 								<?php if($this->session->role_id==1 || $this->session->role_id==3): ?>

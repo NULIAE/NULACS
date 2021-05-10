@@ -117,7 +117,7 @@
                   aria-controls="nav-w2" aria-selected="false"><i class="i i-quater"></i> View Quarterly Status</a>
                 <a class="nav-item nav-link" onclick="openTab('yearly')" id="nav-w3-tab" data-toggle="tab" href="#nav-w3" role="tab"
                   aria-controls="nav-w3" aria-selected="false"><i class="i i-date-o"></i> View Yearly Status</a>
-                <a class="nav-item nav-link" href="<?php echo base_url('module/affiliate/status/details/'.$this->session->affiliate_id.''); ?>" aria-selected="false"><i class="icon-upload"></i> Upload Documents</a>
+                <a class="nav-item nav-link" href="<?php echo base_url('module/affiliate/status/details/'.$this->session->affiliate_id.''); ?>" aria-selected="false"><i class="i i-upload-n"></i> Upload Documents</a>
               
                 <div class="ml-auto">
                   <div class="col-24 mr-auto t-r">
