@@ -80,7 +80,7 @@ class Reset_password extends CI_Controller
 
 			if ( $this->User_model->save_password_token($user_data['user_id'], $token) )
 			{
-				$reset_link = base_url("reset-password/".$token);
+				$reset_link = base_url()."reset-password/".$token;
 				//Token generated and saved successfully. Send reset link to user's email
 				$content = '<p>Dear Member,</p>';
 				$content .= '<p>Request for reset the password for your NUL account on <a href="'.base_url().'">Affiliate Compliance System</a> received. </p>';
