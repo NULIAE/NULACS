@@ -86,7 +86,7 @@ class Reset_password extends CI_Controller
 				$content .= '<p>Request for reset the password for your NUL account on <a href="'.base_url().'">Affiliate Compliance System</a> received. </p>';
 				$content .= '<p>If you did not perform this request, you can safely ignore this email.</p>';
 				$content .= '<p>To change your account password, click the link below.</p>';
-				$content .= '<p><a href="'.$reset_link.'">Reset Password</a></p>';
+				$content .= '<p><a href="'.$reset_link.'">'.$reset_link.'</a></p>';
 				$content .= '<p>Thanks</p>';
 
 				$mail_content = $this->load->view('layout/mail_template', array("message" => $content), TRUE);
