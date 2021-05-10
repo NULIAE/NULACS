@@ -7,6 +7,7 @@ $config = Array(
     'priority' => 1,
     'smtp_timeout' => 20,
     'mailtype' => 'html',
-    'charset' => 'iso-8859-1',
-    'wordwrap' => TRUE
+    'charset' => 'UTF-8',
+    'wordwrap' => TRUE,
+    'crlf' => "\r\n"
 );
