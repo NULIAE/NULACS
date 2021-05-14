@@ -38,7 +38,7 @@
 
 <body>
   <header class="header">
-
+  
 		<!-- Showing Navbar only for the logged in user. -->
 		<?php if ( $this->session->has_userdata('logged_in') && $this->session->logged_in ){ ?>
 			<nav class="navbar navbar-expand-lg navbar-dark">
@@ -99,7 +99,7 @@
                               <i class="i i-upload-line"></i>
                             </div>
                             <div class="col-lg-18 col-md-18 col-18 ml-3">
-                              <a href="<?php echo base_url('module/affiliate/status/details/'.$notification["affiliate_id"].'?&id='.$notification['notification_id']); ?>"><?=$notification['notification']?></a>
+                              <a href="<?php echo $notification["link"]; ?>"><?=$notification['notification']?></a>
                                 <p class="status">Upload</p>
                                 <?php if(isset($time_ago) && !empty($time_ago)){ ?>
                                   <p class="time"><?php echo $time_ago[0]; ?> ago</p>

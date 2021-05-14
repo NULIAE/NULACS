@@ -28,7 +28,9 @@ class Notification extends MY_Controller
 		//Page specific javascript files
 		$data['footer']['js'] = array('pages/modules/notifications.js');
 		$data['notifications'] = $this->Document_model->get_notifications();
-		$data['user_notifications'] = $this->Document_model->user_notifications();
+
+		$keyword = ($this->input->get('search') != NULL) ? $this->input->get('search') : NULL;
+		$data['user_notifications'] = $this->Document_model->user_notifications($keyword);
 
 		$this->load->view('template', $data);
 	}

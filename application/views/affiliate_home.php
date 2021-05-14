@@ -75,7 +75,7 @@
                              <div class="msg">
                                  <div class="dp"><?php echo strtoupper($notification['first_name'][0].$notification['last_name'][0]); ?></div>
                                  <div class="msgBox">
-                                     <div class="textMsg"><?=isset($notification['notification']) ? $notification['notification'] : '' ?></div>
+                                    <a href="<?= $notification['link']; ?>" class="text-dark"><div class="textMsg"><?=isset($notification['notification']) ? $notification['notification'] : '' ?></div></a>
                                      <div class="Details">
                                          <span><?php echo $notification['first_name'].' '.$notification['last_name']; ?></span>
                                          <date>&nbsp; <?=isset($formatedDate) ? $formatedDate : '' ?></date>
@@ -88,7 +88,7 @@
                          <div class="replyPosition">
                              <div class="msg-reply">
                                  <div class="msgBox2">
-                                     <div class="textMsg2"><?=isset($notification['notification']) ? $notification['notification'] : '' ?></div>
+                                    <a href="<?= $notification['link']; ?>" class="text-dark"><div class="textMsg2"><?=isset($notification['notification']) ? $notification['notification'] : '' ?></div></a>
                                      <div class="Details2">
                                          <span><?php echo $notification['first_name'].' '.$notification['last_name']; ?></span>
                                          <date>&nbsp; <?=isset($formatedDate) ? $formatedDate : '' ?></date>

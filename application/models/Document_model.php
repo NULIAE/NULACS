@@ -115,7 +115,65 @@ class Document_model extends CI_Model
 		
 		$query = $this->db->get('notification_summary'); 
 		
-		return $query->result_array();
+		$result = $query->result_array();
+		
+		foreach($result as $key => $row)
+		{
+			$base_url = base_url().'module/affiliate/status/details/' . $row['affiliate_id'] . '?id=' . $row['notification_id'];
+			
+			if($row['document_type_id'] == 1)
+			{
+				$this->db->select('document_month,document_year');
+				$this->db->from('monthly_document_status');
+				$this->db->where('monthly_document_id', $row['document_id']);
+
+				$query = $this->db->get();
+
+				$doc_data = $query->row_array();
+
+				if($doc_data != NULL)
+				{
+					$result[$key]['month'] = $doc_data['document_month'];
+					$result[$key]['year'] = $doc_data['document_year'];
+					$result[$key]['link'] = $base_url . '&interval=nav-y1&monthly_year='.$doc_data['document_year'].'&month='.$doc_data['document_month'];
+				}
+			} 
+			else if($row['document_type_id'] == 2)
+			{
+				$this->db->select('document_month,document_year');
+				$this->db->from('quarterly_document_status');
+				$this->db->where('quarterly_id', $row['document_id']);
+
+				$query = $this->db->get();
+
+				$doc_data = $query->row_array();
+
+				if($doc_data != NULL)
+				{
+					$result[$key]['quarter'] = $doc_data['document_month'];
+					$result[$key]['year'] = $doc_data['document_year'];
+					$result[$key]['link'] = $base_url . '&interval=nav-y2&quarterly_year='.$doc_data['document_year'].'&quarter='.$doc_data['document_month'];
+				}
+			}
+			else if($row['document_type_id'] == 3)
+			{
+				$this->db->select('document_year');
+				$this->db->from('yearly_document_status');
+				$this->db->where('yearly_d_id', $row['document_id']);
+
+				$query = $this->db->get();
+
+				$doc_data = $query->row_array();
+
+				if($doc_data != NULL)
+				{
+					$result[$key]['year'] = $doc_data['document_year'];
+					$result[$key]['link'] = $base_url . '&interval=nav-y3&yearly_year='.$doc_data['document_year'];
+				}
+			}
+		}
+
+		return $result;
 	}
 
 	 /**
@@ -153,23 +211,86 @@ class Document_model extends CI_Model
 	 *
 	 * @return array user notification 
 	 */
-	public function user_notifications()
+	public function user_notifications($keyword = NULL)
 	{
-		$this->db->select('*');
+		$this->db->select('ns.*, u.first_name,u.last_name');
 		$this->db->join('users as u', 'u.user_id = ns.created_by');
-		$this->db->join('affiliate as a', 'a.affiliate_id = ns.affiliate_id');
-		$this->db->join('state as s', 's.stateid = a.state');
 		
 		if($this->session->affiliate_id != 1)
 		{
 			$this->db->where('ns.affiliate_id =',$this->session->affiliate_id);
 		}
 
+		if(isset($keyword))
+		{
+			$this->db->like('ns.notification', $keyword);
+			$this->db->or_like('u.first_name', $keyword);
+			$this->db->or_like('u.last_name', $keyword);
+		}
+
 		$this->db->group_by('ns.notification_id');
 
 		$query = $this->db->get('notification_summary as ns'); 
 		
-		return $query->result_array();
+		$result = $query->result_array();
+		
+		foreach($result as $key => $row)
+		{
+			$base_url = base_url().'module/affiliate/status/details/' . $row['affiliate_id'] . '?id=' . $row['notification_id'];
+			
+			if($row['document_type_id'] == 1)
+			{
+				$this->db->select('document_month,document_year');
+				$this->db->from('monthly_document_status');
+				$this->db->where('monthly_document_id', $row['document_id']);
+
+				$query = $this->db->get();
+
+				$doc_data = $query->row_array();
+
+				if($doc_data != NULL)
+				{
+					$result[$key]['month'] = $doc_data['document_month'];
+					$result[$key]['year'] = $doc_data['document_year'];
+					$result[$key]['link'] = $base_url . '&interval=nav-y1&monthly_year='.$doc_data['document_year'].'&month='.$doc_data['document_month'];
+				}
+			} 
+			else if($row['document_type_id'] == 2)
+			{
+				$this->db->select('document_month,document_year');
+				$this->db->from('quarterly_document_status');
+				$this->db->where('quarterly_id', $row['document_id']);
+
+				$query = $this->db->get();
+
+				$doc_data = $query->row_array();
+
+				if($doc_data != NULL)
+				{
+					$result[$key]['quarter'] = $doc_data['document_month'];
+					$result[$key]['year'] = $doc_data['document_year'];
+					$result[$key]['link'] = $base_url . '&interval=nav-y2&quarterly_year='.$doc_data['document_year'].'&quarter='.$doc_data['document_month'];
+				}
+			}
+			else if($row['document_type_id'] == 3)
+			{
+				$this->db->select('document_year');
+				$this->db->from('yearly_document_status');
+				$this->db->where('yearly_d_id', $row['document_id']);
+
+				$query = $this->db->get();
+
+				$doc_data = $query->row_array();
+
+				if($doc_data != NULL)
+				{
+					$result[$key]['year'] = $doc_data['document_year'];
+					$result[$key]['link'] = $base_url . '&interval=nav-y3&yearly_year='.$doc_data['document_year'];
+				}
+			}
+		}
+
+		return $result;
 	}
 	
 	/**

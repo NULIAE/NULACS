@@ -1521,52 +1521,52 @@ foreach($criteria_answers_view as $answers){
 
     <div class="row wrapouterIcons">
       <div class="col-3 colCenter">
-          <a class="active <?=isset($bgc3s1)?$bgc3s1:''?>" id="dt-1" title="Standard 1" >
-              <i class="i i-standard-icon"></i>
+          <a class="active <?=isset($bgc3s1)?$bgc3s1:''?>" id="dt-1" title="Operational Standards" >
+              <i class="i i-operational-standards"></i>
           </a>
-          <span class="min w-180px">Standard 1 </span>
+          <span class="min w-180px">Operational Standards </span>
       </div>
      <div class="col-3 colCenter">
-          <a class="<?=isset($bgc3s2)?$bgc3s2:''?>" id="dt-2" title="Standard 2">
-              <i class="i i-standard-icon"></i>
+          <a class="<?=isset($bgc3s2)?$bgc3s2:''?>" id="dt-2" title="Program Quality">
+              <i class="i i-program-quality"></i>
           </a>
-          <span class="min w-180px">Standard 2</span>
+          <span class="min w-180px">Program Quality</span>
      </div>
       <div class="col-3 colCenter">
-          <a class="<?=isset($bgc3s3)?$bgc3s3:''?>" id="dt-3" title="Standard 3">
-              <i class="i i-standard-icon"></i>
+          <a class="<?=isset($bgc3s3)?$bgc3s3:''?>" id="dt-3" title="Program Quality">
+              <i class="i i-program-quality"></i>
           </a>
-          <span class="min w-180px">Standard 3</span>
+          <span class="min w-180px">Program Quality</span>
       </div>
       <div class="col-3 colCenter">
-          <a class="<?=isset($bgc3s4)?$bgc3s4:''?>" id="dt-4"  title="Standard 4">
-              <i class="i i-standard-icon"></i>
+          <a class="<?=isset($bgc3s4)?$bgc3s4:''?>" id="dt-4"  title="Operational Standards">
+              <i class="i i-operational-standards"></i>
           </a>
-          <span class="min w-180px">Standard 4 </span>
+          <span class="min w-180px">Operational Standards </span>
       </div>
       <div class="col-3 colCenter">
-          <a class="<?=isset($bgc3s5)?$bgc3s5:''?>" id="dt-5" title="Standard 5">
-              <i class="i i-standard-icon"></i>
+          <a class="<?=isset($bgc3s5)?$bgc3s5:''?>" id="dt-5" title="Operational Standards">
+              <i class="i i-operational-standards"></i>
           </a>
-          <span class="min w-180px">Standard 5 </span>
+          <span class="min w-180px">Operational Standards </span>
       </div>
       <div class="col-3 colCenter">
-          <a class="<?=isset($bgc3s6)?$bgc3s6:''?>" id="dt-6" title="Standard 6">
-              <i class="i i-standard-icon"></i>
+          <a class="<?=isset($bgc3s6)?$bgc3s6:''?>" id="dt-6" title="Operational Standards">
+              <i class="i i-operational-standards"></i>
           </a>
-          <span class="min w-180px">Standard 6</span>
+          <span class="min w-180px">Operational Standards</span>
       </div>
       <div class="col-3 colCenter">
-          <a class="<?=isset($bgc3s7)?$bgc3s7:''?>" id="dt-7" title="Standard 7">
-              <i class="i i-standard-icon"></i>
+          <a class="<?=isset($bgc3s7)?$bgc3s7:''?>" id="dt-7" title="Operational Standards">
+              <i class="i i-operational-standards"></i>
           </a>
-          <span class="min w-180px">Standard 7</span>
+          <span class="min w-180px">Operational Standards</span>
       </div>
       <div class="col-3 colCenter">
-          <a class="<?=isset($bgc3s8)?$bgc3s8:''?>" id="dt-8" title="Standard 8">
-              <i class="i i-standard-icon"></i>
+          <a class="<?=isset($bgc3s8)?$bgc3s8:''?>" id="dt-8" title="Program Quality">
+              <i class="i i-program-quality"></i>
           </a>
-          <span class="min w-180px">Standard 8</span>
+          <span class="min w-180px">Program Quality</span>
       </div>
     </div>
 

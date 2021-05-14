@@ -352,6 +352,8 @@
     
                     $('#'+i).val(item);
 
+                    if(i.includes('comment') & item != "")
+                        $('#'+i).closest('.collapse').siblings('.card-header').find('i').css('color', 'green');
 
                  });
                 
@@ -610,6 +612,7 @@ function c_one_s_one()
 				dataType : 'json'
 			}).done(function(data) {
                 update_rating();
+                savebtn(false);
 			});
 
 }
@@ -640,6 +643,7 @@ function c_one_s_two()
 				dataType : 'json'
 			}).done(function(data) {
                  update_rating();
+                 savebtn(false);
 			});
 
 }
@@ -751,6 +755,7 @@ function c_one_s_three()
 				dataType : 'json'
 			}).done(function(data) {
                  update_rating();
+                 savebtn(false);
 			});
 
 }
@@ -794,6 +799,7 @@ function c_one_s_four(){
 				dataType : 'json'
 			}).done(function(data) {
                  update_rating();
+                 savebtn(false);
 			});
 
 }
@@ -855,6 +861,7 @@ function c_one_s_five(){
                    dataType : 'json'
                }).done(function(data) {
                     update_rating();
+                    savebtn(false);
                });
    
  }
@@ -880,6 +887,7 @@ function c_one_s_five(){
                    dataType : 'json'
                }).done(function(data) {
                     update_rating();
+                    savebtn(false);
 
                 $(".tab-pane").removeClass("active in");
                     $("#nav-x2").addClass("active in");
@@ -940,6 +948,7 @@ function c_one_s_five(){
                    dataType : 'json'
                }).done(function(data) {
                     update_rating();
+                    savebtn(false);
                });
    
  }
@@ -1009,6 +1018,7 @@ function c_one_s_five(){
                    dataType : 'json'
                }).done(function(data) {
                     update_rating();
+                    savebtn(false);
                });
    
  }
@@ -1145,6 +1155,7 @@ function c_one_s_five(){
                    dataType : 'json'
                }).done(function(data) {
                     update_rating();
+                    savebtn(false);
                });
    
  }
@@ -1254,6 +1265,7 @@ function c_one_s_five(){
                    dataType : 'json'
                }).done(function(data) {
                     update_rating();
+                    savebtn(false);
                });
    
  }
@@ -1299,6 +1311,7 @@ function c_one_s_five(){
                    dataType : 'json'
                }).done(function(data) {
                     update_rating();
+                    savebtn(false);
                });
    
  }
@@ -1330,6 +1343,7 @@ function c_one_s_five(){
                    dataType : 'json'
                }).done(function(data) {
                     update_rating();
+                    savebtn(false);
                });
    
  }
@@ -1367,6 +1381,7 @@ function c_one_s_five(){
                    dataType : 'json'
                }).done(function(data) {
                     update_rating();
+                    savebtn(false);
                });
    
  }
@@ -1400,6 +1415,7 @@ function c_one_s_five(){
                    dataType : 'json'
                }).done(function(data) {
                     update_rating();
+                    savebtn(false);
 
                 $(".tab-pane").removeClass("active in");
                 $("#nav-x2").addClass("active in");
@@ -1447,6 +1463,7 @@ function c_one_s_five(){
                    dataType : 'json'
                }).done(function(data) {
                     update_rating();
+                    savebtn(false);
                });
    
  }
@@ -1479,6 +1496,7 @@ function c_one_s_five(){
                    dataType : 'json'
                }).done(function(data) {
                     update_rating();
+                    savebtn(false);
                });
    
  }
@@ -1511,6 +1529,7 @@ function c_one_s_five(){
                    dataType : 'json'
                }).done(function(data) {
                     update_rating();
+                    savebtn(false);
                });
    
  }
@@ -1554,6 +1573,7 @@ function c_one_s_five(){
                    dataType : 'json'
                }).done(function(data) {
                     update_rating();
+                    savebtn(false);
                });
    
  }
@@ -1595,6 +1615,7 @@ function c_one_s_five(){
                    dataType : 'json'
                }).done(function(data) {
                     update_rating();
+                    savebtn(false);
                });
    
  }
@@ -1629,6 +1650,7 @@ function c_one_s_five(){
                    dataType : 'json'
                }).done(function(data) {
                     update_rating();
+                    savebtn(false);
                });
    
  }
@@ -1656,6 +1678,7 @@ function c_one_s_five(){
                    dataType : 'json'
                }).done(function(data) {
                     update_rating();
+                    savebtn(false);
                });
    
  }
@@ -1832,8 +1855,15 @@ $.ajax({
         });
 }
 
-function savebtn(){
-    showDialogBox('success', 'You have successfully saved the answers.');
+function savebtn(showDialog = true){
+    $('input[id*="comment"]').each(function(){
+        if($(this).val() != ""){
+            $('#'+$(this).attr('id')).closest('.collapse').siblings('.card-header').find('i').css('color', 'green');
+        }
+    });
+    if(showDialog){
+        showDialogBox('success', 'You have successfully saved the answers.');
+    }
 }
 
 $(function() {

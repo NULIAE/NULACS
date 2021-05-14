@@ -275,17 +275,26 @@ class Assessment extends MY_Controller
 		$data['criteria_three_standard_seven'] = $this->Assessment_model->criteria_question(3,7);
 		$data['criteria_three_standard_eight'] = $this->Assessment_model->criteria_question(3,8);
 
-		$data['affiliate_details'] = $this->Assessment_model->affiliate_details($_GET);
+		$affiliate_details = $this->Assessment_model->affiliate_details($_GET);
+		$data['affiliate_details'] = $affiliate_details;
 
-		$ids = array("selfAssessmentId"=> $_GET['sid'], "affiliateId"=> $_GET['aid']);
+		if(isset($_GET['uid'])){
+			$user_id = $_GET['uid'];
+			$data['title'] = 'Affiliate Self-Assessment ';
+		}else{
+			$user_id = NULL;
+			$data['title'] = 'Affiliate Performance Assessment ';
+		}
+		
+		$data['title'] .= '('. $affiliate_details[0]['assessment_start_year'].' - '. $affiliate_details[0]['assessment_end_year'].') - ';
+        $data['title'] .= $affiliate_details[0]['city'].', '.$affiliate_details[0]['stateabbreviation'];
+
+		$ids = array("selfAssessmentId"=> $_GET['sid'], "affiliateId"=> $_GET['aid'],"userId"=>$user_id);
 		$data['criteria_answers_view'] = $this->Assessment_model->criteria_answers_view($ids);
 		$data['form_data'] = $this->FormData($_GET);
-		if(isset($_GET['uid'])){
-			$userId = $_GET['uid'];
-		}else{
-			$userId = NULL;
-		}
-		$data['totalrating'] = $this->rating($_GET['sid'],$_GET['aid'],$userId);
+		
+
+		$data['totalrating'] = $this->rating($_GET['sid'],$_GET['aid'],$user_id);
 
 			//Name of the view file
 			$data['view_name'] = 'modules/performance_assessment/assessment_pdf';

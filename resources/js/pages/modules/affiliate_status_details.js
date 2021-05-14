@@ -1,7 +1,7 @@
+var dollarUSLocale = Intl.NumberFormat('en-US');
 $(function () {
 	page.loader(true);
 	var key_indicators_status = $('#key_indicators_status').val();
-
 	if(key_indicators_status == '1'){
 
 		$('#key_indicators_save_btn').prop('disabled', true);
@@ -514,7 +514,11 @@ $(function () {
 					if(key=='liquidity' && value){
 						$("#form-key-indicators-approve").addClass("d-block");
 					}
-					$("input[name='" + key + "']").val(value);
+
+					if(key == 'liquidity' | key == 'change_in_cash_ytd' | key == 'change_in_net_assets_in_quarter')
+						$("input[name='" + key + "']").val(dollarUSLocale.format(value));
+					else
+						$("input[name='" + key + "']").val(value);
 				});
 				if (data.key_indicators.is_net_assets_positive != null) {
 					$("#pu-dx").attr("checked", "checked");
@@ -1018,41 +1022,46 @@ function reupload(type, docId){
 }
 function openTab(val) {
 	$('#tab-inner a[href="#' + val + '"]').tab('show');
-	if(val == 'nav-y1'){
-		$("#btn-year-pick").removeClass('d-inline').addClass('d-none');
-		$("#btn-year-pick").attr('disabled', 'disabled');
-		$("#monthpicker").removeAttr('disabled');
-		$("#monthyearpicker").removeAttr('disabled');
-		$("#btn-month-pick").removeClass('d-none').addClass('d-inline');
-		$("#quarter-dropdown").removeClass('d-inline').addClass('d-none');
-		$("#quarterpicker").attr('disabled', 'disabled');
-		$("#quarteryearpicker").attr('disabled', 'disabled');
-		$("#yearpicker").attr('disabled', 'disabled');
-		$("#tempmonthpicker").val($("#monthpicker").val()+"/"+$("#monthyearpicker").val());
-	} else if(val == 'nav-y2'){
-		$("#btn-year-pick").removeClass('d-none').addClass('d-inline');
-		$("#btn-month-pick").removeClass('d-inline').addClass('d-none');
-		$("#monthpicker").attr('disabled', 'disabled');
-		$("#monthyearpicker").attr('disabled', 'disabled');
-		$("#quarterpicker").removeAttr('disabled');
-		$("#quarteryearpicker").removeAttr('disabled');
-		$("#yearpicker").attr('disabled', 'disabled');
-		$("#quarter-dropdown").removeClass('d-none').addClass('d-inline');
-		$("#tempquarterpicker").val($("#quarterpicker").val());
-		$("#tempyearpicker").val($("#quarteryearpicker").val());
+	if(val == 'nav-y4' | val == 'nav-y5'){
+		$("#view-past-documents").hide();
 	} else {
-		$("#btn-year-pick").removeClass('d-none').addClass('d-inline');
-		$("#btn-month-pick").removeClass('d-inline').addClass('d-none');
-		$("#quarter-dropdown").removeClass('d-inline').addClass('d-none');
-		$("#yearpicker").removeAttr('disabled');
-		$("#monthpicker").attr('disabled', 'disabled');
-		$("#monthyearpicker").attr('disabled', 'disabled');
-		$("#quarterpicker").attr('disabled', 'disabled');
-		$("#quarteryearpicker").attr('disabled', 'disabled');
-		$("#tempyearpicker").val($("#yearpicker").val());
-	}
-	$("#input-interval").val(val);
-  }
+		$("#view-past-documents").show();
+		if(val == 'nav-y1'){
+			$("#btn-year-pick").removeClass('d-inline').addClass('d-none');
+			$("#btn-year-pick").attr('disabled', 'disabled');
+			$("#monthpicker").removeAttr('disabled');
+			$("#monthyearpicker").removeAttr('disabled');
+			$("#btn-month-pick").removeClass('d-none').addClass('d-inline');
+			$("#quarter-dropdown").removeClass('d-inline').addClass('d-none');
+			$("#quarterpicker").attr('disabled', 'disabled');
+			$("#quarteryearpicker").attr('disabled', 'disabled');
+			$("#yearpicker").attr('disabled', 'disabled');
+			$("#tempmonthpicker").val($("#monthpicker").val()+"/"+$("#monthyearpicker").val());
+		} else if(val == 'nav-y2'){
+			$("#btn-year-pick").removeClass('d-none').addClass('d-inline');
+			$("#btn-month-pick").removeClass('d-inline').addClass('d-none');
+			$("#monthpicker").attr('disabled', 'disabled');
+			$("#monthyearpicker").attr('disabled', 'disabled');
+			$("#quarterpicker").removeAttr('disabled');
+			$("#quarteryearpicker").removeAttr('disabled');
+			$("#yearpicker").attr('disabled', 'disabled');
+			$("#quarter-dropdown").removeClass('d-none').addClass('d-inline');
+			$("#tempquarterpicker").val($("#quarterpicker").val());
+			$("#tempyearpicker").val($("#quarteryearpicker").val());
+		} else {
+			$("#btn-year-pick").removeClass('d-none').addClass('d-inline');
+			$("#btn-month-pick").removeClass('d-inline').addClass('d-none');
+			$("#quarter-dropdown").removeClass('d-inline').addClass('d-none');
+			$("#yearpicker").removeAttr('disabled');
+			$("#monthpicker").attr('disabled', 'disabled');
+			$("#monthyearpicker").attr('disabled', 'disabled');
+			$("#quarterpicker").attr('disabled', 'disabled');
+			$("#quarteryearpicker").attr('disabled', 'disabled');
+			$("#tempyearpicker").val($("#yearpicker").val());
+		}
+		$("#input-interval").val(val);
+  	}
+}
 
   $('.liquidity_v_blur').on('blur', function() {
 
@@ -1090,7 +1099,7 @@ function openTab(val) {
 
 	var f_liquidity_s = 	parseFloat(liquidity_s).toFixed(0);
 		if($.isNumeric(f_liquidity_s) ) { 
-			$("#liquidity_v").val(f_liquidity_s);
+			$("#liquidity_v").val(dollarUSLocale.format(f_liquidity_s));
 		}else{
 			$("#liquidity_v").val('');
 		}	
@@ -1204,7 +1213,7 @@ $('.change_in_cash_ytd_blur').on('blur', function() {
 		var f_change_in_cash_ytd_s = parseFloat(change_in_cash_ytd_s).toFixed(0); 
 
 		if($.isNumeric(f_change_in_cash_ytd_s)) { 
-			$("#change_in_cash_ytd_v").val(f_change_in_cash_ytd_s);
+			$("#change_in_cash_ytd_v").val(dollarUSLocale.format(f_change_in_cash_ytd_s));
 		}else{
 			$("#change_in_cash_ytd_v").val('');
 
@@ -1367,7 +1376,7 @@ $('.change_in_net_assets_in_quarter_blur').on('blur', function() {
 
 
 		if($.isNumeric(f_change_in_net_assets_in_quarter_s)) { 
-			$("#change_in_net_assets_in_quarter_v").val(f_change_in_net_assets_in_quarter_s);
+			$("#change_in_net_assets_in_quarter_v").val(dollarUSLocale.format(f_change_in_net_assets_in_quarter_s));
 		}else{
 			$("#change_in_net_assets_in_quarter_v").val('');
 

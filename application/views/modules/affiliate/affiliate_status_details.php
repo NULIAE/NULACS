@@ -70,11 +70,11 @@ $quarterArray = array(
 								<a class="nav-item nav-link" id="nav-y3-tab" data-toggle="tab" href="#nav-y3" role="tab"
 									aria-controls="nav-y3" aria-selected="false" onclick="openTab('nav-y3')"><i class="i i-date-o"></i> Yearly</a>
 								<a class="nav-item nav-link" id="nav-y4-tab" data-toggle="tab" href="#nav-y4" role="tab"
-									aria-controls="nav-y4" aria-selected="false"><i class="i i-legal"></i> Legal</a>
+									aria-controls="nav-y4" aria-selected="false" onclick="openTab('nav-y4')"><i class="i i-legal"></i> Legal</a>
 								<a class="nav-item nav-link" id="nav-y5-tab" data-toggle="tab" href="#nav-y5" role="tab"
-									aria-controls="nav-y5" aria-selected="false"><i class="i i-other"></i> Others</a>
+									aria-controls="nav-y5" aria-selected="false" onclick="openTab('nav-y5')"><i class="i i-other"></i> Others</a>
 
-								<div class="ml-auto">
+								<div class="ml-auto" id="view-past-documents">
 									<span>View past documents</span>
 									<div class="btn btn-secondary  btn-rounded btn-action-sm position-relative d-inline" id="btn-year-pick" data-rel="tooltip" data-placement="top" title="Year"><i class="i i-date-o"></i></div>
 									<div class="btn btn-secondary  btn-rounded btn-action-sm position-relative d-inline" id="btn-month-pick" data-rel="tooltip" data-placement="top" title="Month"><i class="i i-month-31"></i></div>
@@ -146,7 +146,7 @@ $quarterArray = array(
 																	<?php if(isset($currentDoc)) : ?>
 																		<a href="<?php echo base_url($currentDoc['monthly_upload_file']); ?>" class="float-left" target="_blank"><span class="sub text-primary link"><?php echo $document['document_name']; ?></span></a> 
 																		<a href="#" data-document="<?php echo $document['document_id']; ?>" data-interval="month" class="reupload float-left pl-1"><span class="sub pl-1"><i class="i i-create"></i></span></a> 
-																		<?php if($currentDoc['monthly_compliance_status'] == 5): ?><a href="#" data-document="<?php echo $document['document_id']; ?>" data-interval="month" class="deletedoc float-left pl-1"><span class="sub pl-1"><i class="i i-delete"></i></span><?php endif; ?></a>
+																		<?php if($currentDoc['monthly_compliance_status'] == 5): ?><a href="#" data-document="<?php echo $currentDoc['monthly_document_id']; ?>" data-interval="month" class="deletedoc float-left pl-1"><span class="sub pl-1"><i class="i i-delete"></i></span><?php endif; ?></a>
 																	<?php else: ?>
 																		<span class="sub"><?php echo $document['document_name']; ?></span>
 																	<?php endif; ?>
@@ -396,7 +396,7 @@ $quarterArray = array(
 																<?php if(isset($currentDoc)) : ?>
 																		<a href="<?php echo base_url($currentDoc['quarterly_upload_file']); ?>" class="float-left" target="_blank"><span class="sub text-primary link"><?php echo $document['document_name']; ?></span></a> 
 																		<a href="#" data-document="<?php echo $document['document_id']; ?>" data-interval="quarter" class="reupload float-left"><span class="sub"><i class="i i-create"></i></span></a>
-																		<?php if($currentDoc['quarterly_compliance_status'] == 5): ?><a href="#" data-document="<?php echo $document['document_id']; ?>" data-interval="quarter" class="deletedoc float-left"><span class="sub pl-1"><i class="i i-delete"></span></i><?php endif; ?></a>
+																		<?php if($currentDoc['quarterly_compliance_status'] == 5): ?><a href="#" data-document="<?php echo $currentDoc['quarterly_id']; ?>" data-interval="quarter" class="deletedoc float-left"><span class="sub pl-1"><i class="i i-delete"></span></i><?php endif; ?></a>
 																	<?php else: ?>
 																		<span class="sub"><?php echo $document['document_name']; ?></span>
 																	<?php endif; ?>
@@ -634,7 +634,7 @@ $quarterArray = array(
 																	<?php if(isset($currentDoc)) : ?>
 																		<a href="<?php echo base_url($currentDoc['yearly_upload_file']); ?>" class="float-left" target="_blank"><span class="sub text-primary link"><?php echo $document['document_name']; ?></span></a> 
 																		<a href="#" data-document="<?php echo $document['document_id']; ?>" data-interval="year" class="reupload float-left"><span class="sub"><i class="i i-create"></i></span></a> 
-																		<?php if($currentDoc['yearly_compliance_status'] == 5): ?><a href="#" data-document="<?php echo $document['document_id']; ?>" data-interval="year" class="deletedoc float-left"><span class="sub pl-1"><i class="i i-delete"></i></span><?php endif; ?></a>
+																		<?php if($currentDoc['yearly_compliance_status'] == 5): ?><a href="#" data-document="<?php echo $currentDoc['yearly_d_id']; ?>" data-interval="year" class="deletedoc float-left"><span class="sub pl-1"><i class="i i-delete"></i></span><?php endif; ?></a>
 																	<?php else: ?>
 																		<span class="sub"><?php echo $document['document_name']; ?></span>
 																	<?php endif; ?>
@@ -1910,7 +1910,7 @@ $quarterArray = array(
 									<li class="wrapIn">
 										<div class="d-flex align-items-center">
 											<div>Liquidity $</div>
-											<div class="innControll"><input type="text" name="liquidity" id="liquidity_v" class="form-control liquidity_v_blur" value="<?php echo isset($key_indicators['liquidity']) ? $key_indicators['liquidity'] : ""; ?>" readonly/> </div>
+											<div class="innControll"><input type="text" name="liquidity" id="liquidity_v" class="form-control liquidity_v_blur" value="<?php echo (isset($key_indicators['liquidity']) && $key_indicators['liquidity'] != "") ? number_format($key_indicators['liquidity'], 0, '.', ',') : ""; ?>" readonly/> </div>
 										</div>
 										<div class="d-flex align-items-center">
 											<div>(Definition of Liquidity - Financial assets available to meet cash needs for general expenditures within one year).</div>
@@ -1958,7 +1958,7 @@ $quarterArray = array(
 									<li class="wrapIn">
 										<div class="d-flex align-items-center">
 											<div>Change in Cash YTD	$</div>
-											<div class="innControll"><input type="text" name="change_in_cash_ytd" id="change_in_cash_ytd_v" class="form-control change_in_cash_ytd_blur" value="<?php echo isset($key_indicators['change_in_cash_ytd']) ? $key_indicators['change_in_cash_ytd'] : ""; ?>" readonly/></div>
+											<div class="innControll"><input type="text" name="change_in_cash_ytd" id="change_in_cash_ytd_v" class="form-control change_in_cash_ytd_blur" value="<?php echo (isset($key_indicators['change_in_cash_ytd']) && $key_indicators['change_in_cash_ytd'] != "") ? number_format($key_indicators['change_in_cash_ytd'], 0, '.', ',') : ""; ?>" readonly/></div>
 										</div>
 										<div class="d-flex align-items-center">
 											<div>From Operations: $</div>
@@ -2007,7 +2007,7 @@ $quarterArray = array(
 									<li class="wrapIn">
 										<div class="d-flex align-items-center">
 											<div>Change in N/A without donor restrictions (Quarter) $</div>
-											<div class="innControll"><input type="text" name="change_in_net_assets_in_quarter" id="change_in_net_assets_in_quarter_v" class="form-control change_in_net_assets_in_quarter_blur" value="<?php echo isset($key_indicators['change_in_net_assets_in_quarter']) ? $key_indicators['change_in_net_assets_in_quarter'] : ""; ?>" readonly/> </div>
+											<div class="innControll"><input type="text" name="change_in_net_assets_in_quarter" id="change_in_net_assets_in_quarter_v" class="form-control change_in_net_assets_in_quarter_blur" value="<?php echo (isset($key_indicators['change_in_net_assets_in_quarter']) && $key_indicators['change_in_net_assets_in_quarter'] != "") ? number_format($key_indicators['change_in_net_assets_in_quarter'], 0, '.', ',') : ""; ?>" readonly/> </div>
 										</div>
 
 										<div class="d-flex align-items-center">

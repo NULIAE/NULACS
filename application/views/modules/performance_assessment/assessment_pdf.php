@@ -82,6 +82,10 @@
       ?>
     <div>
       <div
+        style="width: 100%;text-align: center;padding: 5px 30px;text-transform: uppercase;">
+        <h3><?= $title; ?></h3>
+      </div>
+      <div
         style="width: 100%;text-align: left;padding: 5px 30px;background-color: #A10707;color: #fff;text-transform: uppercase;border-radius: 8px 8px 0px 0px;  box-sizing: border-box;">
         <h3>Criteria 1: Organizational Soundness </h3>
       </div>
