@@ -294,7 +294,7 @@
                                     echo $data['rating'];
                                 } ?>
                                 <?php if(isset($data['comment']) && $data['comment'] != ""){ ?>
-                                <a data-container="body" data-toggle="popover" data-placement="top"
+                                <a class="link" data-container="body" data-toggle="popover" data-placement="top"
                                         data-trigger="hover"
                                         data-content="<?=$data['comment'];?>">
                                         <i class="i i i-chat-line"></i></a>
@@ -346,7 +346,7 @@
                                     echo "0";
                                 } ?>
                                 <?php if(isset($data['comment']) && $data['comment'] != ""){ ?>
-                                <a data-container="body" data-toggle="popover" data-placement="top"
+                                <a class="link" data-container="body" data-toggle="popover" data-placement="top"
                                         data-trigger="hover"
                                         data-content="<?=$data['comment'];?>">
                                         <i class="i i i-chat-line"></i></a>
@@ -397,7 +397,7 @@
                                     echo $data['rating'];
                                 } ?>
                                 <?php if(isset($data['comment']) && $data['comment'] != ""){ ?>
-                                <a data-container="body" data-toggle="popover" data-placement="top"
+                                <a class="link"  data-container="body" data-toggle="popover" data-placement="top"
                                         data-trigger="hover"
                                         data-content="<?=$data['comment'];?>">
                                         <i class="i i i-chat-line"></i></a>
@@ -450,7 +450,7 @@
                                     echo "0";
                                 } ?>
                                 <?php if(isset($data['comment']) && $data['comment'] != ""){ ?>
-                                <a data-container="body" data-toggle="popover" data-placement="top"
+                                <a class="link" data-container="body" data-toggle="popover" data-placement="top"
                                         data-trigger="hover"
                                         data-content="<?=$data['comment'];?>">
                                         <i class="i i i-chat-line"></i></a>
@@ -503,7 +503,7 @@
                                     echo "0";
                                 } ?>
                                 <?php if(isset($data['comment']) && $data['comment'] != ""){ ?>
-                                <a data-container="body" data-toggle="popover" data-placement="top"
+                                <a class="link" data-container="body" data-toggle="popover" data-placement="top"
                                         data-trigger="hover"
                                         data-content="<?=$data['comment'];?>">
                                         <i class="i i i-chat-line"></i></a>
@@ -558,7 +558,7 @@
                                     echo "0";
                                 } ?>
                                 <?php if(isset($data['comment']) && $data['comment'] != ""){ ?>
-                                <a data-container="body" data-toggle="popover" data-placement="top"
+                                <a class="link" data-container="body" data-toggle="popover" data-placement="top"
                                         data-trigger="hover"
                                         data-content="<?=$data['comment'];?>">
                                         <i class="i i i-chat-line"></i></a>
@@ -637,7 +637,7 @@
                                     echo "0";
                                 } ?>
                                 <?php if(isset($data['comment']) && $data['comment'] != ""){ ?>
-                                <a data-container="body" data-toggle="popover" data-placement="top"
+                                <a class="link" data-container="body" data-toggle="popover" data-placement="top"
                                         data-trigger="hover"
                                         data-content="<?=$data['comment'];?>">
                                         <i class="i i i-chat-line"></i></a>
@@ -688,7 +688,7 @@
                                     echo "0";
                                 } ?>
                                 <?php if(isset($data['comment']) && $data['comment'] != ""){ ?>
-                                <a data-container="body" data-toggle="popover" data-placement="top"
+                                <a class="link" data-container="body" data-toggle="popover" data-placement="top"
                                         data-trigger="hover"
                                         data-content="<?=$data['comment'];?>">
                                         <i class="i i i-chat-line"></i></a>
@@ -740,7 +740,7 @@
                                     echo "0";
                                 } ?>
                                 <?php if(isset($data['comment']) && $data['comment'] != ""){ ?>
-                                <a data-container="body" data-toggle="popover" data-placement="top"
+                                <a class="link" data-container="body" data-toggle="popover" data-placement="top"
                                         data-trigger="hover"
                                         data-content="<?=$data['comment'];?>">
                                         <i class="i i i-chat-line"></i></a>
@@ -791,7 +791,7 @@
                                     echo "0";
                                 } ?>
                                 <?php if(isset($data['comment']) && $data['comment'] != ""){ ?>
-                                <a data-container="body" data-toggle="popover" data-placement="top"
+                                <a class="link" data-container="body" data-toggle="popover" data-placement="top"
                                         data-trigger="hover"
                                         data-content="<?=$data['comment'];?>">
                                         <i class="i i i-chat-line"></i></a>
@@ -843,7 +843,7 @@
                                     echo "0";
                                 } ?>
                                 <?php if(isset($data['comment']) && $data['comment'] != ""){ ?>
-                                <a data-container="body" data-toggle="popover" data-placement="top"
+                                <a class="link" data-container="body" data-toggle="popover" data-placement="top"
                                         data-trigger="hover"
                                         data-content="<?=$data['comment'];?>">
                                         <i class="i i i-chat-line"></i></a>
@@ -896,7 +896,7 @@
                                     echo "0";
                                 } ?>
                                 <?php if(isset($data['comment']) && $data['comment'] != ""){ ?>
-                                <a data-container="body" data-toggle="popover" data-placement="top"
+                                <a class="link" data-container="body" data-toggle="popover" data-placement="top"
                                         data-trigger="hover"
                                         data-content="<?=$data['comment'];?>">
                                         <i class="i i i-chat-line"></i></a>
@@ -950,7 +950,7 @@
                                     echo "0";
                                 } ?>
                                 <?php if(isset($data['comment']) && $data['comment'] != ""){ ?>
-                                <a data-container="body" data-toggle="popover" data-placement="top"
+                                <a class="link" data-container="body" data-toggle="popover" data-placement="top"
                                         data-trigger="hover"
                                         data-content="<?=$data['comment'];?>">
                                         <i class="i i i-chat-line"></i></a>
@@ -1002,7 +1002,7 @@
                                     echo "0";
                                 } ?>
                                 <?php if(isset($data['comment']) && $data['comment'] != ""){ ?>
-                                <a data-container="body" data-toggle="popover" data-placement="top"
+                                <a class="link" data-container="body" data-toggle="popover" data-placement="top"
                                         data-trigger="hover"
                                         data-content="<?=$data['comment'];?>">
                                         <i class="i i i-chat-line"></i></a>
@@ -1079,7 +1079,7 @@
                                     echo "0";
                                 } ?>
                                 <?php if(isset($data['comment']) && $data['comment'] != ""){ ?>
-                                <a data-container="body" data-toggle="popover" data-placement="top"
+                                <a class="link" data-container="body" data-toggle="popover" data-placement="top"
                                         data-trigger="hover"
                                         data-content="<?=$data['comment'];?>">
                                         <i class="i i i-chat-line"></i></a>
@@ -1129,7 +1129,7 @@
                                     echo "0";
                                 } ?>
                                 <?php if(isset($data['comment']) && $data['comment'] != ""){ ?>
-                                <a data-container="body" data-toggle="popover" data-placement="top"
+                                <a class="link" data-container="body" data-toggle="popover" data-placement="top"
                                         data-trigger="hover"
                                         data-content="<?=$data['comment'];?>">
                                         <i class="i i i-chat-line"></i></a>
@@ -1182,7 +1182,7 @@
                                     echo "0";
                                 } ?>
                                 <?php if(isset($data['comment']) && $data['comment'] != ""){ ?>
-                                <a data-container="body" data-toggle="popover" data-placement="top"
+                                <a class="link" data-container="body" data-toggle="popover" data-placement="top"
                                         data-trigger="hover"
                                         data-content="<?=$data['comment'];?>">
                                         <i class="i i i-chat-line"></i></a>
@@ -1234,7 +1234,7 @@
                                     echo "0";
                                 } ?>
                                 <?php if(isset($data['comment']) && $data['comment'] != ""){ ?>
-                                <a data-container="body" data-toggle="popover" data-placement="top"
+                                <a class="link" data-container="body" data-toggle="popover" data-placement="top"
                                         data-trigger="hover"
                                         data-content="<?=$data['comment'];?>">
                                         <i class="i i i-chat-line"></i></a>
@@ -1285,7 +1285,7 @@
                                     echo "0";
                                 } ?>
                                 <?php if(isset($data['comment']) && $data['comment'] != ""){ ?>
-                                <a data-container="body" data-toggle="popover" data-placement="top"
+                                <a class="link" data-container="body" data-toggle="popover" data-placement="top"
                                         data-trigger="hover"
                                         data-content="<?=$data['comment'];?>">
                                         <i class="i i i-chat-line"></i></a>
@@ -1341,7 +1341,7 @@
                                     echo "0";
                                 } ?>
                                 <?php if(isset($data['comment']) && $data['comment'] != ""){ ?>
-                                <a data-container="body" data-toggle="popover" data-placement="top"
+                                <a class="link" data-container="body" data-toggle="popover" data-placement="top"
                                         data-trigger="hover"
                                         data-content="<?=$data['comment'];?>">
                                         <i class="i i i-chat-line"></i></a>
@@ -1396,7 +1396,7 @@
                                     echo "0";
                                 } ?>
                                 <?php if(isset($data['comment']) && $data['comment'] != ""){ ?>
-                                <a data-container="body" data-toggle="popover" data-placement="top"
+                                <a class="link" data-container="body" data-toggle="popover" data-placement="top"
                                         data-trigger="hover"
                                         data-content="<?=$data['comment'];?>">
                                         <i class="i i i-chat-line"></i></a>
@@ -1451,7 +1451,7 @@
                                     echo "0";
                                 } ?>
                                 <?php if(isset($data['comment']) && $data['comment'] != ""){ ?>
-                                <a data-container="body" data-toggle="popover" data-placement="top"
+                                <a class="link" data-container="body" data-toggle="popover" data-placement="top"
                                         data-trigger="hover"
                                         data-content="<?=$data['comment'];?>">
                                         <i class="i i i-chat-line"></i></a>
