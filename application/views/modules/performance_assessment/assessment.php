@@ -96,8 +96,9 @@ foreach($criteria_answers_view as $answers){
 
 }
 
-
-
+$selectedTab = 1;
+if(isset($_GET['tab']) && $_GET['tab'] != '')
+  $selectedTab = $_GET['tab'];
 ?>
 
 
@@ -120,14 +121,14 @@ foreach($criteria_answers_view as $answers){
         <div class="mainTab2">
           <nav>
             <div class="nav" id="nav-tab" role="tablist">
-              <a class="nav-item nav-link active" id="nav-x1-tab" data-toggle="tab" href="#nav-x1" role="tab"
-                aria-controls="nav-x1" aria-selected="true"><i class="i i-org"></i> Organizational Soundness</a>
-              <a class="nav-item nav-link" id="nav-x2-tab" data-toggle="tab" href="#nav-x2" role="tab"
-                aria-controls="nav-x2" aria-selected="false"><i class="i i-vitality"></i> Organizational Vitality</a>
-              <a class="nav-item nav-link" id="nav-x3-tab" data-toggle="tab" href="#nav-x3" role="tab"
-                aria-controls="nav-x3" aria-selected="false"><i class="i i-mission"></i> Implementation of Mission</a>
+              <a class="nav-item nav-link <?= $selectedTab == 1 ? 'active' : ''; ?>" id="nav-x1-tab" data-toggle="tab" href="#nav-x1" role="tab"
+                aria-controls="nav-x1" aria-selected="<?= $selectedTab == 1 ? 'true' : 'false'; ?>"><i class="i i-org"></i> Organizational Soundness</a>
+              <a class="nav-item nav-link <?= $selectedTab == 2 ? 'active' : ''; ?>" id="nav-x2-tab" data-toggle="tab" href="#nav-x2" role="tab"
+                aria-controls="nav-x2" aria-selected="<?= $selectedTab == 1 ? 'true' : 'false'; ?>"><i class="i i-vitality"></i> Organizational Vitality</a>
+              <a class="nav-item nav-link <?= $selectedTab == 3 ? 'active' : ''; ?>" id="nav-x3-tab" data-toggle="tab" href="#nav-x3" role="tab"
+                aria-controls="nav-x3" aria-selected="<?= $selectedTab == 1 ? 'true' : 'false'; ?>"><i class="i i-mission"></i> Implementation of Mission</a>
               <a class="nav-item nav-link" id="nav-x4-tab" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId); ?>">
-              <i class="i i-timer"></i> Performance Score</a>
+              <i class="i i-timer"></i> <?php echo ($userId !== '') ? 'Self Assessment - ' : ''; ?>Rating Sheet</a>
             </div>
           </nav>
            <div class="tab-content" id="nav-tabContent">
@@ -135,7 +136,7 @@ foreach($criteria_answers_view as $answers){
               <input type="hidden" value="<?=isset($_GET['aid'])?$_GET['aid']:''?>" id="affiliate_id">
               <input type="hidden" value="<?=isset($_GET['uid'])?$_GET['uid']:''?>" id="user_id">
 
-   <div class="tab-pane fade show active" id="nav-x1" role="tabpanel" aria-labelledby="nav-x1-tab">
+   <div class="tab-pane fade <?= $selectedTab == 1 ? 'show active' : ''; ?>" id="nav-x1" role="tabpanel" aria-labelledby="nav-x1-tab">
 
               <div class="row wrapouterIcons">
                   <div class="col-4 colCenter" >
@@ -656,7 +657,7 @@ foreach($criteria_answers_view as $answers){
 
 
 
-<div class="tab-pane fade" id="nav-x2" role="tabpanel" aria-labelledby="nav-x2-tab">
+<div class="tab-pane fade <?= $selectedTab == 2 ? 'show active' : ''; ?>" id="nav-x2" role="tabpanel" aria-labelledby="nav-x2-tab">
 
 <div class="row wrapouterIcons">
   <div class="col-3 colCenter">
@@ -1517,7 +1518,7 @@ foreach($criteria_answers_view as $answers){
 
 
 
-  <div class="tab-pane fade" id="nav-x3" role="tabpanel" aria-labelledby="nav-x3-tab">
+  <div class="tab-pane fade <?= $selectedTab == 3 ? 'show active' : ''; ?>" id="nav-x3" role="tabpanel" aria-labelledby="nav-x3-tab">
 
     <div class="row wrapouterIcons">
       <div class="col-3 colCenter">

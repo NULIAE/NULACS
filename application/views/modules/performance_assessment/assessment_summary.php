@@ -1,3 +1,10 @@
+<?php
+if(isset($_GET['uid']) && !empty($_GET['uid'])){
+    $userId = '&uid='.$_GET['uid'];
+}else{
+    $userId='';
+}
+?>
 <main class="user">
     <div class="container">
       <div class="Wrapper">
@@ -8,7 +15,7 @@
         <div class=" document-mdata">
 
           <div class="mnHead">
-            <h3><a onclick="javascript:window.history.back();" class="text-white">Performance Assessment summary</a></h3>
+            <h3><a onclick="javascript:window.history.back();" class="text-white"><?php echo ($userId !== '') ? 'Self Assessment - ' : ''; ?>Rating Sheet</a></h3>
           </div>
         </div>
        <?php
@@ -192,13 +199,19 @@
             }else{
                 $def_icon = 'i i i-create';
             } 
-
-            if(isset($_GET['uid']) && !empty($_GET['uid'])){
-              $userId = '&uid='.$_GET['uid'];
-           }else{
-              $userId='';
-           }
        ?>
+       <div class="mainTab2">
+       <nav>
+            <div class="nav" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link" id="nav-x1-tab" href="<?php echo base_url('module/assessment/assessment?tab=1&sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId); ?>"
+                aria-controls="nav-x1" aria-selected="false"><i class="i i-org"></i> Organizational Soundness</a>
+                <a class="nav-item nav-link" id="nav-x2-tab" href="<?php echo base_url('module/assessment/assessment?tab=2&sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId); ?>"
+                aria-controls="nav-x2" aria-selected="false"><i class="i i-vitality"></i> Organizational Vitality</a>
+                <a class="nav-item nav-link" id="nav-x3-tab" href="<?php echo base_url('module/assessment/assessment?tab=3&sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId); ?>"
+                aria-controls="nav-x3" aria-selected="false"><i class="i i-mission"></i> Implementation of Mission</a>
+            </div>
+        </nav>
+        </div>
         <form class="m-y-20">
             <div class="row align-items-end">
                 

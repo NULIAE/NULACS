@@ -378,52 +378,35 @@
         }).done(function(data) {
             $.each(data, function(i, items) {
           
-                   
                 var total_rating_criteria_one = total_rating_criteria_two =total_rating_criteria_three = 0;
 
                 $.each(items, function(j, name) {
-               
-
+                    var c1s1=  (name['count'] > 0) ? (name['val'] / name['count']) : 0;
                     if (j.indexOf('c1_') > -1){
-                        total_rating_criteria_one +=  +((name['val'] / name['count']).toFixed(1));
-                   }
+                        total_rating_criteria_one +=  +(c1s1.toFixed(1));
+                    }
                     if (j.indexOf('c2_') > -1){
-                        total_rating_criteria_two +=  +((name['val'] / name['count']).toFixed(1));
+                        total_rating_criteria_two +=  +(c1s1.toFixed(1));
                     }
                     if (j.indexOf('c3_') > -1){
-                        total_rating_criteria_three +=  +((name['val'] / name['count']).toFixed(1));
+                        total_rating_criteria_three +=  +(c1s1.toFixed(1));
                     }
 
-                    // console.log(name['val']+'--'+j+'----'+name['count']);
+                    $("#"+j).parent().find('.star').removeClass('active');
 
-
-               
-          var c1s1=  (name['val'] / name['count']);
-
-    if(c1s1 >= 5){
-
-        $("span ."+j+"_five").addClass("active");
-    
-    }else if(c1s1 >= 4){
-    
-        $("span ."+j+"_four").addClass("active");
-
-    }else if(c1s1 >= 3){
-    
-        $("span ."+j+"_three").addClass("active");
-
-    }else if(c1s1 >= 2){
-    
-        $("span ."+j+"_two").addClass("active");
-
-    }else if(c1s1 >= 1){
-    
-        $("span ."+j+"_one").addClass("active");
-
-    }
-            $("#"+j).text( c1s1.toFixed(1));
-
-        });
+                    if(c1s1 >= 5){
+                        $("span ."+j+"_five").addClass("active");
+                    }else if(c1s1 >= 4){
+                        $("span ."+j+"_four").addClass("active");
+                    }else if(c1s1 >= 3){
+                        $("span ."+j+"_three").addClass("active");
+                    }else if(c1s1 >= 2){
+                        $("span ."+j+"_two").addClass("active");
+                    }else if(c1s1 >= 1){
+                        $("span ."+j+"_one").addClass("active");
+                    }
+                    $("#"+j).text( c1s1.toFixed(1));
+                });
 
         if(total_rating_criteria_one){
             $("#total_rating_c1").text( (total_rating_criteria_one/6).toFixed(1));
@@ -543,15 +526,17 @@ function c2s8_2_href(){
 
 function checkrating(rating){
    
-var val  = rating.value;
+var val  = parseFloat(rating.value);
 
-if(!/^[0-9]+$/.test(val)){
+if(!/^(\d+(?:\.\d+)?)+$/.test(val)){
     $('#'+rating.id).val("");
     showDialogBox('error', 'Rating should be a number!');
 }else{
-    if(val >= 6){ 
+    if(val > 5){ 
         $('#'+rating.id).val("");
         showDialogBox('error', 'Rating should be  5 or below 5!');
+    } else {
+        $('#'+rating.id).val(val);
     }
 }
 
@@ -1769,25 +1754,23 @@ $.ajax({
     dataType : 'json'
 }).done(function(data) {
     $.each(data, function(i, items) {
-  
-           
         var total_rating_criteria_one = total_rating_criteria_two =total_rating_criteria_three = 0;
 
         $.each(items, function(j, name) {
        
+            var c1s1=  (name['count'] > 0) ? (name['val'] / name['count']) : 0;
 
             if (j.indexOf('c1_') > -1){
-                total_rating_criteria_one +=  +((name['val'] / name['count']).toFixed(1));
-           }
+                total_rating_criteria_one +=  +(c1s1.toFixed(1));
+            }
             if (j.indexOf('c2_') > -1){
-                total_rating_criteria_two +=  +((name['val'] / name['count']).toFixed(1));
+                total_rating_criteria_two +=  +(c1s1.toFixed(1));
             }
             if (j.indexOf('c3_') > -1){
-                total_rating_criteria_three +=  +((name['val'] / name['count']).toFixed(1));
+                total_rating_criteria_three +=  +(c1s1.toFixed(1));
             }
 
-            
-        var c1s1=  (name['val'] / name['count']);
+            $("#"+j).parent().find('.star').removeClass('active');
 
         if(c1s1 >= 5){
 

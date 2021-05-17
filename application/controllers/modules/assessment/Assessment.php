@@ -477,22 +477,45 @@ class Assessment extends MY_Controller
 		}
 
 		$sumC1S1 = $sumC1S2 = $sumC1S3= $sumC1S4= $sumC1S5= $sumC1S6 =0;
-
+		$countC1S1 = $countC1S2 = $countC1S3= $countC1S4= $countC1S5= $countC1S6 =0;
+ 
 		foreach($criteriaOneData as $e){
-			if(isset($e['c1_s1']) && !empty($e['c1_s1'])){ $sumC1S1 += $e['c1_s1'];}
-			if(isset($e['c1_s2']) && !empty($e['c1_s2'])){ $sumC1S2 += $e['c1_s2'];}
-			if(isset($e['c1_s3']) && !empty($e['c1_s3'])){ $sumC1S3 += $e['c1_s3'];}
-			if(isset($e['c1_s4']) && !empty($e['c1_s4'])){ $sumC1S4 += $e['c1_s4'];}
-			if(isset($e['c1_s5']) && !empty($e['c1_s5'])){ $sumC1S5 += $e['c1_s5'];}
-			if(isset($e['c1_s6']) && !empty($e['c1_s6'])){ $sumC1S6 += $e['c1_s6'];}
+
+			if(isset($e['c1_s1']) && !empty($e['c1_s1'])){ 
+				$sumC1S1 += $e['c1_s1'];
+				$countC1S1++;
+			}
+
+			if(isset($e['c1_s2']) && !empty($e['c1_s2'])){ 
+				$sumC1S2 += $e['c1_s2'];
+				$countC1S2++;
+			}
+			if(isset($e['c1_s3']) && !empty($e['c1_s3'])){ 
+				$sumC1S3 += $e['c1_s3'];
+				$countC1S3++;
+			}
+			if(isset($e['c1_s4']) && !empty($e['c1_s4'])){ 
+				$sumC1S4 += $e['c1_s4'];
+				$countC1S4++;
+			}
+			if(isset($e['c1_s5']) && !empty($e['c1_s5'])){ 
+				$sumC1S5 += $e['c1_s5'];
+				$countC1S5++;
+			}
+			if(isset($e['c1_s6']) && !empty($e['c1_s6'])){ 
+				$sumC1S6 += $e['c1_s6'];
+				$countC1S6++;
+			}
 		}
 
-		$criteriaOne = array("c1_s1"=> array("val"=>$sumC1S1,"count"=>7),
-								"c1_s2"=> 	array("val"=>$sumC1S2,"count"=>2),
-								"c1_s3"=> 	array("val"=>$sumC1S3,"count"=>16),
-								"c1_s4"=> 	array("val"=>$sumC1S4,"count"=>6),
-								"c1_s5"=> 	array("val"=>$sumC1S5,"count"=>11),
-								"c1_s6"=> 	array("val"=>$sumC1S6,"count"=>1));
+		$criteriaOne = array(
+			"c1_s1"=> array("val"=>$sumC1S1,"count"=>$countC1S1),
+			"c1_s2"=> 	array("val"=>$sumC1S2,"count"=>$countC1S2),
+			"c1_s3"=> 	array("val"=>$sumC1S3,"count"=>$countC1S3),
+			"c1_s4"=> 	array("val"=>$sumC1S4,"count"=>$countC1S4),
+			"c1_s5"=> 	array("val"=>$sumC1S5,"count"=>$countC1S5),
+			"c1_s6"=> 	array("val"=>$sumC1S6,"count"=>$countC1S6)
+		);
 
 		return $criteriaOne;
 	}
@@ -500,59 +523,67 @@ class Assessment extends MY_Controller
 
 	public function ratingC2($criteria_answers_view)
 	{
-
 		$criteriaTwoData = array();
-
 		foreach($criteria_answers_view as $data){
-			
-			$val = json_decode($data['answers']);
-			
+			$val = json_decode($data['answers']);	
 			foreach($val as $key=>$rating){
 				if (strpos($key, 'rating') !== false && strpos($key, 'c2') !== false) {
-	
-		
-						$c2_c= substr($key, 0, 5);
-
-						array_push($criteriaTwoData, [$c2_c => $rating]);
-					
-							
-				}	
-				
+					$c2_c= substr($key, 0, 5);
+					array_push($criteriaTwoData, [$c2_c => $rating]);		
+				}		
 			}	
-   }
-  
+   		}
+		
+		$sumC2S1 = $sumC2S2 = $sumC2S3= $sumC2S4= $sumC2S5= $sumC2S6 =$sumC2S7 =$sumC2S8 = 0;
+		$countC2S1 = $countC2S2 = $countC2S3= $countC2S4= $countC2S5= $countC2S6 =$countC2S7 =$countC2S8 = 0;
 
+		foreach($criteriaTwoData as $c2){
+			if(isset($c2['c2_s1']) && !empty($c2['c2_s1'])){
+				$sumC2S1 += $c2['c2_s1'];
+				$countC2S1++;
+			}
+			if(isset($c2['c2_s2']) && !empty($c2['c2_s2'])){ 
+				$sumC2S2 += $c2['c2_s2'];
+				$countC2S2++; 
+			}
+			if(isset($c2['c2_s3']) && !empty($c2['c2_s3'])){ 
+				$sumC2S3 += $c2['c2_s3']; 
+				$countC2S3++;
+			}
+			if(isset($c2['c2_s4']) && !empty($c2['c2_s4'])){ 
+				$sumC2S4 += $c2['c2_s4'];
+				$countC2S4++;
+			}
+			if(isset($c2['c2_s5']) && !empty($c2['c2_s5'])){ 
+				$sumC2S5 += $c2['c2_s5'];
+				$countC2S5++; 
+			}
+			if(isset($c2['c2_s6']) && !empty($c2['c2_s6'])){ 
+				$sumC2S6 += $c2['c2_s6'];
+				$countC2S6++;
+			}
+			if(isset($c2['c2_s7']) && !empty($c2['c2_s7'])){ 
+				$sumC2S7 += $c2['c2_s7'];
+				$countC2S7++;
+			}
+			if(isset($c2['c2_s8']) && !empty($c2['c2_s8'])){ 
+				$sumC2S8 += $c2['c2_s8'];
+				$countC2S8++;
+			}
+		}
 
-	$sumC2S1 = $sumC2S2 = $sumC2S3= $sumC2S4= $sumC2S5= $sumC2S6 =$sumC2S7 =$sumC2S8 = 0;
-
-	foreach($criteriaTwoData as $c2){
-	
-	if(isset($c2['c2_s4'])){
-
-	}
-		if(isset($c2['c2_s1']) && !empty($c2['c2_s1'])){
-			 $sumC2S1 += $c2['c2_s1'];
-			 }
-		if(isset($c2['c2_s2']) && !empty($c2['c2_s2'])){ $sumC2S2 += $c2['c2_s2']; }
-		if(isset($c2['c2_s3']) && !empty($c2['c2_s3'])){ $sumC2S3 += $c2['c2_s3']; }
-		if(isset($c2['c2_s4']) && !empty($c2['c2_s4'])){ $sumC2S4 += $c2['c2_s4']; }
-		if(isset($c2['c2_s5']) && !empty($c2['c2_s5'])){ $sumC2S5 += $c2['c2_s5']; }
-		if(isset($c2['c2_s6']) && !empty($c2['c2_s6'])){ $sumC2S6 += $c2['c2_s6']; }
-		if(isset($c2['c2_s7']) && !empty($c2['c2_s7'])){ $sumC2S7 += $c2['c2_s7']; }
-		if(isset($c2['c2_s8']) && !empty($c2['c2_s8'])){ $sumC2S8 += $c2['c2_s8']; }
-	}
-
-	$criteriaTwo =array("c2_s1"=>   array("val"=>$sumC2S1,"count"=>7),
-						"c2_s2"=> 	array("val"=>$sumC2S2,"count"=>6),
-						"c2_s3"=> 	array("val"=>$sumC2S3,"count"=>18),
-						"c2_s4"=> 	array("val"=>$sumC2S4,"count"=>20),
-						"c2_s5"=> 	array("val"=>$sumC2S5,"count"=>8),
-						"c2_s6"=> 	array("val"=>$sumC2S6,"count"=>2),
-						"c2_s7"=> 	array("val"=>$sumC2S7,"count"=>4),
-						"c2_s8"=> 	array("val"=>$sumC2S8,"count"=>3));
+		$criteriaTwo = array(
+			"c2_s1"=>   array("val"=>$sumC2S1,"count"=>$countC2S1),
+			"c2_s2"=> 	array("val"=>$sumC2S2,"count"=>$countC2S2),
+			"c2_s3"=> 	array("val"=>$sumC2S3,"count"=>$countC2S3),
+			"c2_s4"=> 	array("val"=>$sumC2S4,"count"=>$countC2S4),
+			"c2_s5"=> 	array("val"=>$sumC2S5,"count"=>$countC2S5),
+			"c2_s6"=> 	array("val"=>$sumC2S6,"count"=>$countC2S6),
+			"c2_s7"=> 	array("val"=>$sumC2S7,"count"=>$countC2S7),
+			"c2_s8"=> 	array("val"=>$sumC2S8,"count"=>$countC2S8)
+		);
 					
-	 return $criteriaTwo;
-
+	 	return $criteriaTwo;
 	}
 
 	public function ratingC3($criteria_answers_view)
@@ -574,25 +605,52 @@ class Assessment extends MY_Controller
 	
 	
 	$sumC3S1 = $sumC3S2 = $sumC3S3= $sumC3S4= $sumC3S5= $sumC3S6 =$sumC3S7 =$sumC3S8 = 0;
+	$countC3S1 = $countC3S2 = $countC3S3= $countC3S4= $countC3S5= $countC3S6 =$countC3S7 =$countC3S8 = 0;
 	foreach($criteriaThreeData as $c3){
-		if(isset($c3['c3_s1']) && !empty($c3['c3_s1'])){ $sumC3S1 += $c3['c3_s1']; }
-		if(isset($c3['c3_s2']) && !empty($c3['c3_s2'])){ $sumC3S2 += $c3['c3_s2']; }
-		if(isset($c3['c3_s3']) && !empty($c3['c3_s3'])){ $sumC3S3 += $c3['c3_s3']; }
-		if(isset($c3['c3_s4']) && !empty($c3['c3_s4'])){ $sumC3S4 += $c3['c3_s4']; }
-		if(isset($c3['c3_s5']) && !empty($c3['c3_s5'])){ $sumC3S5 += $c3['c3_s5']; }
-		if(isset($c3['c3_s6']) && !empty($c3['c3_s6'])){ $sumC3S6 += $c3['c3_s6']; }
-		if(isset($c3['c3_s7']) && !empty($c3['c3_s7'])){ $sumC3S7 += $c3['c3_s7']; }
-		if(isset($c3['c3_s8']) && !empty($c3['c3_s8'])){ $sumC3S8 += $c3['c3_s8']; }
+		if(isset($c3['c3_s1']) && !empty($c3['c3_s1'])){ 
+			$sumC3S1 += $c3['c3_s1'];
+			$countC3S1++;
+		}
+		if(isset($c3['c3_s2']) && !empty($c3['c3_s2'])){ 
+			$sumC3S2 += $c3['c3_s2'];
+			$countC3S2++; 
+		}
+		if(isset($c3['c3_s3']) && !empty($c3['c3_s3'])){ 
+			$sumC3S3 += $c3['c3_s3'];
+			$countC3S3++;
+		 }
+		if(isset($c3['c3_s4']) && !empty($c3['c3_s4'])){ 
+			$sumC3S4 += $c3['c3_s4'];
+			$countC3S4++;
+		}
+		if(isset($c3['c3_s5']) && !empty($c3['c3_s5'])){ 
+			$sumC3S5 += $c3['c3_s5'];
+			$countC3S5++;
+		}
+		if(isset($c3['c3_s6']) && !empty($c3['c3_s6'])){ 
+			$sumC3S6 += $c3['c3_s6'];
+			$countC3S6++; 
+		}
+		if(isset($c3['c3_s7']) && !empty($c3['c3_s7'])){ 
+			$sumC3S7 += $c3['c3_s7'];
+			$countC3S7++;
+		}
+		if(isset($c3['c3_s8']) && !empty($c3['c3_s8'])){ 
+			$sumC3S8 += $c3['c3_s8'];
+			$countC3S8++;
+		}
 	}
 	
-	$criteriaThree =  array("c3_s1"=>   array("val"=>$sumC3S1,"count"=>7),
-							"c3_s2"=> 	array("val"=>$sumC3S2,"count"=>3),
-							"c3_s3"=> 	array("val"=>$sumC3S3,"count"=>3),
-							"c3_s4"=> 	array("val"=>$sumC3S4,"count"=>7),
-							"c3_s5"=> 	array("val"=>$sumC3S5,"count"=>6),
-							"c3_s6"=> 	array("val"=>$sumC3S6,"count"=>4),
-							"c3_s7"=> 	array("val"=>$sumC3S7,"count"=>2),
-							"c3_s8"=> 	array("val"=>$sumC3S8,"count"=>3));
+	$criteriaThree =  array(
+		"c3_s1"=>   array("val"=>$sumC3S1,"count"=>$countC3S1),
+		"c3_s2"=> 	array("val"=>$sumC3S2,"count"=>$countC3S2),
+		"c3_s3"=> 	array("val"=>$sumC3S3,"count"=>$countC3S3),
+		"c3_s4"=> 	array("val"=>$sumC3S4,"count"=>$countC3S4),
+		"c3_s5"=> 	array("val"=>$sumC3S5,"count"=>$countC3S5),
+		"c3_s6"=> 	array("val"=>$sumC3S6,"count"=>$countC3S6),
+		"c3_s7"=> 	array("val"=>$sumC3S7,"count"=>$countC3S7),
+		"c3_s8"=> 	array("val"=>$sumC3S8,"count"=>$countC3S8)
+	);
 	return $criteriaThree;
 
  }
@@ -653,14 +711,12 @@ class Assessment extends MY_Controller
 	public function criteria_rating($totalrating,$number)
 	{
 		$criteriaRating = 0;
-			foreach($totalrating as $key=>$rating){
-				$criteriaRating+= ($rating['val'] /  $rating['count']);
+		foreach($totalrating as $key=>$rating){
+			$criteriaRating+= ($rating['count'] > 0) ? ($rating['val'] /  $rating['count']) : 0;
 		}
 		
 		return (round(($criteriaRating/$number),1,PHP_ROUND_HALF_ODD));
-	
-	
-  }
+	}
 
   public function add_self_assessment_data()
 	{
