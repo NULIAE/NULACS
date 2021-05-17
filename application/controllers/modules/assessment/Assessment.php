@@ -431,6 +431,9 @@ class Assessment extends MY_Controller
 		if(isset($_POST) && !empty($_POST)){
 			$selfAssessmentId = $_POST['selfAssessmentId'];
 			$affiliateId = $_POST['affiliateId'];
+			if(isset($_POST['userId'])){
+				$userId = $_POST['userId'];
+			}
 		}else{
 			$selfAssessmentId =$dSelfAssessmentId;
 			$affiliateId = $dAffiliateId;
