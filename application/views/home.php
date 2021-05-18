@@ -22,8 +22,8 @@
                         <h3>Affiliate Compliance</h3>
                     </div>
                 </div>
-                <div class="row chartBody">
-                    <div id="myChart2" style="width: 600px; height: 410px;"></div>
+                <div class="row chartBody p-0">
+                    <div id="myChart2" style="width: 700px; height: 410px;"></div>
                     <!-- <canvas id="myChart2" width="300" height="200"></canvas> -->
                 </div>
              </div>
@@ -33,8 +33,8 @@
                         <h3>Performance score</h3>
                     </div>
                 </div>
-                <div class="row chartBody">
-                    <div id="myChart" style="width: 600px; height: 410px;"></div>
+                <div class="row chartBody p-0">
+                    <div id="myChart" style="width: 700px; height: 410px;"></div>
                 </div>
             </div>
          </div>
@@ -74,7 +74,15 @@
               '2' => 'APR - JUN',
               '3' => 'JUL - SEP',
               '4' => 'OCT - DEC',
-            );?>
+            );
+            $score_count = array(
+              'poor' => 0,
+              'below_avg' => 0,
+              'average' => 0,
+              'strong' => 0,
+              'outstanding' => 0
+            );
+            ?>
             <table class="table table1" id="table11">
               <thead>
                 <tr>
@@ -103,6 +111,18 @@
                   <td class="f-b"><?php echo $row['performance_score']; ?></td>
 									<td><?php echo isset($row['last_login']) ? date("m-d-Y | H:i", strtotime($row['last_login'])) : ""; ?></td>
 									</tr>
+                    <?php if($row['performance_score'] != NULL){
+                      if($row['performance_score'] <= 1.99)
+                        $score_count['poor']++;
+                      elseif($row['performance_score'] <= 2.99)
+                        $score_count['below_avg']++;
+                      elseif($row['performance_score'] <= 3.74)
+                        $score_count['average']++;
+                      elseif($row['performance_score'] <= 4.99)
+                        $score_count['strong']++;
+                      else
+                        $score_count['outstanding']++;
+                    }?>
 									<?php endforeach; ?>
 								<?php else: ?>
 								<tr>
@@ -155,15 +175,16 @@
   
   function drawBarChart() {
       var data = google.visualization.arrayToDataTable([
-        ["", "Votes", { role: "style" } ],
-        ["60-100", 50, "#60c76e"],
-        ["40-60", 10, "#4eb8f7"],
-        ["20-40", 30, "#eae870"],
-        ["0-20", 10, "#f0594d"]
+        ["Label", "Score", { role: "style" }],
+        ["0 - 1.99 Poor", <?= $score_count['poor']; ?>, "#60c76e"],
+        ["2 - 2.99 Below Average", <?= $score_count['below_avg']; ?>, "#4eb8f7"],
+        ["3 - 3.74 Average", <?= $score_count['average']; ?>, "#eae870"],
+        ["3.75 - 4.99 Strong", <?= $score_count['strong']; ?>, "#f0594d"],
+        ["5 - 5.00 Outstanding", <?= $score_count['outstanding']; ?>, "#f0594d"]
       ]);
 
       var options = {
-        title: "# of Votes",
+        title: "Performance Score",
         orientation: 'horizontal',
         legend: { position: "none" },
         animation:{

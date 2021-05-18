@@ -100,7 +100,11 @@ $selectedTab = 1;
 if(isset($_GET['tab']) && $_GET['tab'] != '')
   $selectedTab = $_GET['tab'];
 ?>
-
+<style>
+  .mainTab2 .tab-content .wrapouterContents .criteria .criteriaBottom .textIn2 input{
+    max-width: 100px !important;
+  }
+</style>
 
   <main class="performanceAssess">
     <div class="container">

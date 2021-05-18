@@ -487,41 +487,9 @@
           $(this).addClass('active').parent().siblings().find('a').removeClass('active');
       });
       
-function c1s1_1_href(){
-
-    var year = $('#c1s1_1_href').val();
+function open_ref_link(inner_tab){
     var aid = $('#affiliate_id').val();
-    
-    window.open(base_url+"module/affiliate/status/details/"+aid+"?year="+year,'_blank');
-}
- 
-function c1s2_1_href(){
-
-    var year = $('#c1s2_1_href').val();
-    var aid = $('#affiliate_id').val();
-       window.open(base_url+"module/affiliate/status/details/"+aid+"?year="+year,'_blank');
-
-}
-function c1s3_2_href(){
-
-    var year = $('#c1s3_2_href').val();
-    var aid = $('#affiliate_id').val();
-       window.open(base_url+"module/affiliate/status/details/"+aid+"?year="+year,'_blank');
-
-}
-function c1s3_16_href(){
-
-    var year = $('#c1s3_16_href').val();
-    var aid = $('#affiliate_id').val();
-       window.open(base_url+"module/affiliate/status/details/"+aid+"?year="+year,'_blank');
-
-}
-function c2s8_2_href(){
-
-    var year = $('#c2s8_2_href').val();
-    var aid = $('#affiliate_id').val();
-       window.open(base_url+"module/affiliate/status/details/"+aid+"?year="+year,'_blank');
-
+    window.open(base_url+"module/affiliate/status/details/"+aid+"?tab=2&interval=nav-z"+inner_tab,'_blank');
 }
 
 function checkrating(rating){

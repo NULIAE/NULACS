@@ -1048,7 +1048,7 @@ function openTab(val) {
 			$("#quarter-dropdown").removeClass('d-none').addClass('d-inline');
 			$("#tempquarterpicker").val($("#quarterpicker").val());
 			$("#tempyearpicker").val($("#quarteryearpicker").val());
-		} else {
+		} else if(val == 'nav-y3'){
 			$("#btn-year-pick").removeClass('d-none').addClass('d-inline');
 			$("#btn-month-pick").removeClass('d-inline').addClass('d-none');
 			$("#quarter-dropdown").removeClass('d-inline').addClass('d-none');

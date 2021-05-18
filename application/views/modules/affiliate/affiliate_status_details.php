@@ -1175,24 +1175,24 @@ $quarterArray = array(
 					<div class="tab-pane fade <?php if($tabSelected==2) echo 'show active'; ?>" id="nav-x2" role="tabpanel" aria-labelledby="nav-x2-tab">
 						<nav>
 							<div class="nav b-b-1 p-b-0" id="tab-inner-z" role="tablist">
-								<a class="nav-item nav-link active" id="nav-z1-tab" data-toggle="tab" href="#nav-z1" role="tab"
+								<a class="nav-item nav-link <?php if($interval=='nav-z1') echo 'active'; ?>" id="nav-z1-tab" data-toggle="tab" href="#nav-z1" role="tab"
 									aria-controls="nav-z1" aria-selected="true"><i class="i i-self-assessment"></i> Self Assessment</a>
-								<a class="nav-item nav-link" id="nav-z2-tab" data-toggle="tab" href="#nav-z2" role="tab"
+								<a class="nav-item nav-link <?php if($interval=='nav-z2') echo 'active'; ?>" id="nav-z2-tab" data-toggle="tab" href="#nav-z2" role="tab"
 									aria-controls="nav-z2" aria-selected="false"><i class="i i-org"></i> Organizational Soundness</a>
-								<a class="nav-item nav-link" id="nav-z3-tab" data-toggle="tab" href="#nav-z3" role="tab"
+								<a class="nav-item nav-link <?php if($interval=='nav-z3') echo 'active'; ?>" id="nav-z3-tab" data-toggle="tab" href="#nav-z3" role="tab"
 									aria-controls="nav-z3" aria-selected="false"><i class="i i-vitality"></i> Organizational
 									Vitality</a>
-								<a class="nav-item nav-link" id="nav-z4-tab" data-toggle="tab" href="#nav-z4" role="tab"
+								<a class="nav-item nav-link <?php if($interval=='nav-z4') echo 'active'; ?>" id="nav-z4-tab" data-toggle="tab" href="#nav-z4" role="tab"
 									aria-controls="nav-z4" aria-selected="false"><i class="i i-mission"></i> Implementation of
 									Mission</a>
-								<a class="nav-item nav-link" id="nav-z5-tab" data-toggle="tab" href="#nav-z5" role="tab"
+								<a class="nav-item nav-link <?php if($interval=='nav-z5') echo 'active'; ?>" id="nav-z5-tab" data-toggle="tab" href="#nav-z5" role="tab"
 									aria-controls="nav-z5" aria-selected="false"><i class="i i-other"></i> Others</a>
 							</div>
 						</nav>
 						<form action="<?php echo base_url('module/assessment/add_self_assessment_data'); ?>" method="POST">
 
 						<div class="tab-content" id="nav-tabContent-nner-z">
-							<div class="tab-pane fade show active" id="nav-z1" role="tabpanel" aria-labelledby="nav-z1-tab">
+							<div class="tab-pane fade <?php if($interval=='nav-z1') echo 'show active'; ?>" id="nav-z1" role="tabpanel" aria-labelledby="nav-z1-tab">
 								<?php //if($this->session->role_id == 2): ?>
 									<div class="row m-y-20 justify-content-center align-items-center">
 										<span class="col-md-6">Assessment Year: Period covered from</span>
@@ -1308,7 +1308,7 @@ $quarterArray = array(
 								</div>
 
 							</div>
-							<div class="tab-pane fade " id="nav-z2" role="tabpanel" aria-labelledby="nav-z2-tab">
+							<div class="tab-pane fade <?php if($interval=='nav-z2') echo 'show active'; ?>" id="nav-z2" role="tabpanel" aria-labelledby="nav-z2-tab">
 								<div class="head">
 									<div class="row">
 										<div class="col-2"><span class="sub">NO</span></div>
@@ -1443,7 +1443,7 @@ $quarterArray = array(
 								</div>
 							</div>
 
-							<div class="tab-pane fade " id="nav-z3" role="tabpanel" aria-labelledby="nav-z3-tab">
+							<div class="tab-pane fade <?php if($interval=='nav-z3') echo 'show active'; ?>" id="nav-z3" role="tabpanel" aria-labelledby="nav-z3-tab">
 								<div class="head">
 									<div class="row">
 										<div class="col-2"><span class="sub">NO</span></div>
@@ -1580,7 +1580,7 @@ $quarterArray = array(
 								</div>
 							</div>
 
-							<div class="tab-pane fade " id="nav-z4" role="tabpanel" aria-labelledby="nav-z4-tab">
+							<div class="tab-pane fade <?php if($interval=='nav-z4') echo 'show active'; ?>" id="nav-z4" role="tabpanel" aria-labelledby="nav-z4-tab">
 
 								<div class="head">
 									<div class="row">
@@ -1693,7 +1693,7 @@ $quarterArray = array(
 
 							<!-- <div class="tab-pane fade " id="nav-z5" role="tabpanel" aria-labelledby="nav-z5-tab">Otherssss</div> -->
 
-							<div class="tab-pane fade" id="nav-z5" role="tabpanel" aria-labelledby="nav-y5-tab">
+							<div class="tab-pane fade <?php if($interval=='nav-z5') echo 'show active'; ?>" id="nav-z5" role="tabpanel" aria-labelledby="nav-y5-tab">
 
 								<div class="head m-t-30">
 									<div class="row">
