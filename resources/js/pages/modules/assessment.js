@@ -1768,6 +1768,7 @@ $.ajax({
         if(total_rating_criteria_one){
             $("#total_rating_c1").text( (total_rating_criteria_one/6).toFixed(1));
             t_c1 = (total_rating_criteria_one/6).toFixed(1);
+            $("#total_rating_c1").parent().find('.star').removeClass('active');
             if(t_c1 >= 5){ $("span .c1_five").addClass("active");
                 }else if(t_c1 >= 4){ $("span .c1_four").addClass("active");
                 }else if(t_c1 >= 3){ $("span .c1_three").addClass("active");
@@ -1780,6 +1781,7 @@ $.ajax({
         if(total_rating_criteria_two){
             $("#total_rating_c2").text( (total_rating_criteria_two/8).toFixed(1));
             t_c2 = (total_rating_criteria_two/8).toFixed(1);
+            $("#total_rating_c2").parent().find('.star').removeClass('active');
             if(t_c2 >= 5){ $("span .c2_five").addClass("active");
                 }else if(t_c2 >= 4){ $("span .c2_four").addClass("active");
                 }else if(t_c2 >= 3){ $("span .c2_three").addClass("active");
@@ -1792,6 +1794,7 @@ $.ajax({
         if(total_rating_criteria_three){
             $("#total_rating_c3").text( (total_rating_criteria_three/8).toFixed(1));
             t_c3 = (total_rating_criteria_three/8).toFixed(1);
+            $("#total_rating_c3").parent().find('.star').removeClass('active');
             if(t_c3 >= 5){ $("span .c3_five").addClass("active");
                 }else if(t_c3 >= 4){ $("span .c3_four").addClass("active");
                 }else if(t_c3 >= 3){ $("span .c3_three").addClass("active");
