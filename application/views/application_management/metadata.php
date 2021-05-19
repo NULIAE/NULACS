@@ -49,7 +49,7 @@
 										</select>
 										</div>
 										<input type="text" name="metadata[1]" class="col-20 form-control meta-data-value" placeholder="Meta Data" required>
-										<button name="remove" id="1" class="btn btn_remove"><i class="i i-minus"></i></button>
+										<button name="remove" id="1" class="btn btn_remove" type="button"><i class="i i-minus"></i></button>
 									</span>
 								</div>
 								<div class="row justify-content-center mt-2">

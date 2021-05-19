@@ -12,7 +12,7 @@ $(function () {
 				'</select>'+
 				'</div>'+
 				'<input type="text" name="metadata['+i+']" class="col-20 form-control meta-data-value" placeholder="Meta Data" value="'+value.metadata+'" required>'+
-				'<button name="remove" id="'+i+'" class="btn btn_remove"><i class="i i-minus"></i></button>'+
+				'<button name="remove" id="'+i+'" class="btn btn_remove" type="button"><i class="i i-minus"></i></button>'+
 			'</span>');
 			$('[data-type="selector"]').SumoSelect();
 		} else {
