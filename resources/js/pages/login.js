@@ -11,6 +11,23 @@ $(function () {
 		},
 		unhighlight: function(element, errorClass, validClass) {
 			$(element).removeClass('is-invalid');
+		},
+		submitHandler: function(form) {
+			$('#login-error-box').hide();
+			$('.login-form-btn').html('signing in..').attr('disabled', 'disabled');
+			$.ajax({
+				type : 'POST',
+				url	 : $(form).prop('action'),
+				data : $(form).serialize(),
+				dataType : 'json'
+			}).done(function(data) {
+				if ( data.success ) {
+					window.location = base_url + $('#return_url').val();
+				} else {
+					$('#login-error-box').html(data.error).show();
+					$('.login-form-btn').html('sign in').removeAttr('disabled');
+				}
+			});
 		}
 	});
 

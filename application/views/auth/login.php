@@ -18,14 +18,12 @@
 					<div class="fxt-content">
 						<div><img src="<?php echo base_url('/resources/images/login/logo.png');?>" class="img-fluid" alt="Logo"></div>
 
-						<form class="validate-form" id="loginForm" method="post" action="<?php echo base_url('/authenticate').$return_url; ?>">
+						<form class="validate-form" id="loginForm" method="post" action="<?php echo base_url('/authenticate'); ?>">
 						<p style="text-align:center;font-size:20px;">Affiliate Compliance System</p>
 							<span class="Sign-in">Sign in</span>
 		
 							<!-- Show error message -->
-							<?php if ($this->session->flashdata('error') !== NULL){
-								echo '<div class="alert alert-danger my-4" role="alert">'.$this->session->flashdata('error').'</div>';
-							} ?>
+							<div id="login-error-box" class="alert alert-danger my-4" role="alert" style="display:none;"></div>
 							<div class="mb-3">
 								<div class="nul-form mb-2">
 									<i class="i i-user-name"></i>
@@ -38,8 +36,6 @@
 									<input type="password" name="password" id="password" data-control="material" placeholder="Password" required />
 								</div>
 							</div>
-							<!-- csrf token -->
-							<input type="hidden" name="<?=$csrf_name;?>" value="<?=$csrf_hash;?>" />
 
 							<div class="forgot-password p-t-5 p-b-20">
 								<a href="#" id="f-pass">Forgot password</a>
@@ -49,6 +45,7 @@
 								<button class="btn login-form-btn" type="submit">sign in</button>
 							</div>
 						</form>
+						<input type="hidden" id="return_url" name="return_url" value="<?php echo isset($return_url) ? $return_url : ""; ?>">
 					</div>
 				</div>
 			</div>

@@ -207,8 +207,7 @@ if(isset($_GET['tab']) && $_GET['tab'] != '')
           
                       <div class="criteriaBottom">
                         <h5>Standard 1</h5>
-                        <p>Affiliates should prepare, and make available annually to the public, information about the affiliate’s mission, program activities, and basic audited financial data. The report 
-                          should also identify the names of the affiliate’s board of directors and management staff.</p>
+                        <p>The affiliate board ensures that the affiliate’s policies, standards, practices, and procedures are in compliance with the policies and standards of the National Urban League.</p>
                         <h4>INDICATORS OF EFFECTIVENESS</h4>
           
                         <div id="accordion">
@@ -592,8 +591,7 @@ if(isset($_GET['tab']) && $_GET['tab'] != '')
 
         <div class="criteriaBottom">
             <h5>Standard 6</h5>
-            <p>The Board and Management should always have a plan for the affiliate’s ongoing operation with the stated goals and objectives to effectively accomplish the mission.  
-              The affiliate should have a current strategic plan in effect periodically measuring its progress against goals and objectives and revising the plan as needed.</p>
+            <p>Affiliates promote an important vehicle through which individuals organize and work together to improve their communities.  Affiliates should represent the interests of the people they serve through public education, public policy advocacy, and by encouraging board members, staff, volunteers and constituents to participate in the public affairs of the community.</p>
             <h4>INDICATORS OF EFFECTIVENESS</h4>
 
             <div id="accordion_c1_s6">
@@ -1963,7 +1961,7 @@ if(isset($_GET['tab']) && $_GET['tab'] != '')
 
         <div class="criteriaBottom">
             <h5>Standard 6</h5>
-            <p>Program effectiveness is assessed on an ongoing manner and an action plan for continuous improvement is developed.</p>
+            <p>The affiliate program has a written program design, which includes program rationale, target population, specific program activities and key client outcomes.</p>
             <h4>INDICATORS OF EFFECTIVENESS</h4>
 
             <div id="accordion_c3_s6">
