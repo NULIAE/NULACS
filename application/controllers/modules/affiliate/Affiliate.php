@@ -581,6 +581,8 @@ class Affiliate extends MY_Controller
 			redirect(base_url('/'));
 		}
 
+		$this->session->set_userdata('previous_url', current_url().'?tab=2');
+
 		if(isset($_REQUEST['id'])){
 			$monthly_document_status = $this->Document_model->change_flag($_REQUEST['id']);
 		}
@@ -644,7 +646,7 @@ class Affiliate extends MY_Controller
 		$recent_data['monthly']['year'] = $monthly_filter['document_year'];
 
 		//Monthly document status
-		$monthly_document_status = $this->Affiliate_model->monthly_document_status($affiliate_id, $monthly_filter);
+		$monthly_document_status = $this->Affiliate_model->monthly_document_status($affiliate_id, $monthly_filter, TRUE);
 		
 		$monthly_filter['mds.document_id'] = 6;
 		$monthly_document_other = $this->Affiliate_model->monthly_document_status($affiliate_id, $monthly_filter);
@@ -701,7 +703,7 @@ class Affiliate extends MY_Controller
 		$recent_data['quarterly']['year'] = $quarterly_filter['document_year'];
 
 		//Quarterly document status
-		$quarterly_document_status = $this->Affiliate_model->quarterly_document_status($affiliate_id, $quarterly_filter);
+		$quarterly_document_status = $this->Affiliate_model->quarterly_document_status($affiliate_id, $quarterly_filter, TRUE);
 		
 		$quarterly_filter['qds.document_id'] = 8;
 		$quarterly_document_other = $this->Affiliate_model->quarterly_document_status($affiliate_id, $quarterly_filter);
@@ -739,7 +741,7 @@ class Affiliate extends MY_Controller
 
 		
 		//Yearly document status
-		$yearly_document_status = $this->Affiliate_model->yearly_document_status($affiliate_id, $yearly_filter);
+		$yearly_document_status = $this->Affiliate_model->yearly_document_status($affiliate_id, $yearly_filter, TRUE);
 		
 		$yearly_filter['yds.document_id'] = 14;
 		$yearly_document_other = $this->Affiliate_model->yearly_document_status($affiliate_id, $yearly_filter);

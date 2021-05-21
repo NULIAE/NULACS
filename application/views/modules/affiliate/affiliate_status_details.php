@@ -1173,6 +1173,7 @@ $quarterArray = array(
 						</div>
 					</div>
 					<div class="tab-pane fade <?php if($tabSelected==2) echo 'show active'; ?>" id="nav-x2" role="tabpanel" aria-labelledby="nav-x2-tab">
+						<?php $interval = strpos($interval, "nav-z") !== FALSE ? $interval: "nav-z1"; ?>	
 						<nav>
 							<div class="nav b-b-1 p-b-0" id="tab-inner-z" role="tablist">
 								<a class="nav-item nav-link <?php if($interval=='nav-z1') echo 'active'; ?>" id="nav-z1-tab" data-toggle="tab" href="#nav-z1" role="tab"

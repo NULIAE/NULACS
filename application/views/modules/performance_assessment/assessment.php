@@ -116,15 +116,16 @@ if(isset($_GET['tab']) && $_GET['tab'] != '')
         <div class=" document-mdata">
 
           <div class="mnHead">
-            <h3><a href="javascript:window.history.back();" class="text-white"><?= ($userId == '')? "AFFILIATE Performance Assessment" : "Affiliate Self-Assessment";?> (<?=isset($affiliate_details[0]['assessment_start_year'])?$affiliate_details[0]['assessment_start_year']:''?> - <?=isset($affiliate_details[0]['assessment_end_year'])?$affiliate_details[0]['assessment_end_year']:''?>) -  
+            <h3><?= ($userId == '')? "AFFILIATE Performance Assessment" : "Affiliate Self-Assessment";?> (<?=isset($affiliate_details[0]['assessment_start_year'])?$affiliate_details[0]['assessment_start_year']:''?> - <?=isset($affiliate_details[0]['assessment_end_year'])?$affiliate_details[0]['assessment_end_year']:''?>) -  
              <?=isset($affiliate_details[0]['city'])?$affiliate_details[0]['city']:''?>, <?=isset($affiliate_details[0]['stateabbreviation'])?$affiliate_details[0]['stateabbreviation']:''?>
-             </a>
             </h3>
           </div>
         </div>
         <div class="mainTab2">
           <nav>
             <div class="nav" id="nav-tab" role="tablist">
+              <a href="<?= $previous_url; ?>" class="nav-item nav-link" data-toggle="popover"data-placement="bottom" data-trigger="hover" data-content="Performance Assessments List">
+                <i class="i i-format_list_bulleted"></i></a>
               <a class="nav-item nav-link <?= $selectedTab == 1 ? 'active' : ''; ?>" id="nav-x1-tab" data-toggle="tab" href="#nav-x1" role="tab"
                 aria-controls="nav-x1" aria-selected="<?= $selectedTab == 1 ? 'true' : 'false'; ?>"><i class="i i-org"></i> Organizational Soundness</a>
               <a class="nav-item nav-link <?= $selectedTab == 2 ? 'active' : ''; ?>" id="nav-x2-tab" data-toggle="tab" href="#nav-x2" role="tab"

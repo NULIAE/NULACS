@@ -21,8 +21,13 @@ class Assessment extends MY_Controller
 	 */
 	public function index()
 	{
-
+		if($this->session->has_userdata('previous_url'))
+			$previous_url = $this->session->userdata('previous_url');
+		else
+			$previous_url = base_url('module/assessment/assessment-listing');
+		
 		$data['content'] = array(
+			'previous_url' => $previous_url,
 			'affiliates' => $this->Affiliate_model->home_affiliate_filter(10, 0, NULL, NULL)
 		);
 		
@@ -140,6 +145,8 @@ class Assessment extends MY_Controller
 	 */
 	public function assessment_listing()
 	{
+		$this->session->set_userdata('previous_url', current_url());
+
 		$data['notifications'] = $this->Document_model->get_notifications();
 		$data['content'] = array(
 			'affiliates' => $this->Affiliate_model->home_affiliate_filter(10, 0, NULL, NULL)

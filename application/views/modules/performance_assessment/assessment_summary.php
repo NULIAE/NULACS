@@ -15,7 +15,7 @@ if(isset($_GET['uid']) && !empty($_GET['uid'])){
         <div class=" document-mdata">
 
           <div class="mnHead">
-            <h3><a onclick="javascript:window.history.back();" class="text-white"><?php echo ($userId !== '') ? 'Self Assessment - ' : ''; ?>Rating Sheet</a></h3>
+            <h3><?php echo ($userId !== '') ? 'Self Assessment - ' : ''; ?>Rating Sheet</h3>
           </div>
         </div>
        <?php
@@ -203,12 +203,16 @@ if(isset($_GET['uid']) && !empty($_GET['uid'])){
        <div class="mainTab2">
        <nav>
             <div class="nav" id="nav-tab" role="tablist">
+                <a href="javascript:window.history.back();" class="nav-item nav-link" data-toggle="popover"data-placement="bottom" data-trigger="hover" data-content="Performance Assessment">
+                <i class="i i-format_list_bulleted"></i></a>
                 <a class="nav-item nav-link" id="nav-x1-tab" href="<?php echo base_url('module/assessment/assessment?tab=1&sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId); ?>"
                 aria-controls="nav-x1" aria-selected="false"><i class="i i-org"></i> Organizational Soundness</a>
                 <a class="nav-item nav-link" id="nav-x2-tab" href="<?php echo base_url('module/assessment/assessment?tab=2&sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId); ?>"
                 aria-controls="nav-x2" aria-selected="false"><i class="i i-vitality"></i> Organizational Vitality</a>
                 <a class="nav-item nav-link" id="nav-x3-tab" href="<?php echo base_url('module/assessment/assessment?tab=3&sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId); ?>"
                 aria-controls="nav-x3" aria-selected="false"><i class="i i-mission"></i> Implementation of Mission</a>
+                <a class="nav-item nav-link active" id="nav-x4-tab" aria-selected="true" href="#">
+                <i class="i i-timer"></i> <?php echo ($userId !== '') ? 'Self Assessment - ' : ''; ?>Rating Sheet</a>
             </div>
         </nav>
         </div>

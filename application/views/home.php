@@ -82,6 +82,12 @@
               'strong' => 0,
               'outstanding' => 0
             );
+            $compliance_count = array(
+              'compliant' => 0,
+              'non_compliant' => 0,
+              'waiting' => 0,
+              'indeterminate' => 0
+            );
             ?>
             <table class="table table1" id="table11">
               <thead>
@@ -104,8 +110,20 @@
 									<td><?php if(isset($row['compliance_status'])) echo $quarterArray[$row['compliance_status']['quarter']]; ?></td>
 									<td><?php if(isset($row['compliance_status'])) echo $row['compliance_status']['year']; ?></td>
                   <?php if(isset($row['compliance_status'])): ?>
-									  <td><div class="icon-rounded" data-rel="tooltip" data-placement="bottom" title="<?php echo $row['compliance_status']['status_name']; ?>"><?php echo $row['compliance_status']['icon']; ?></div></td>
+                    <?php 
+                      $compliance_status = $row['compliance_status']['status_name'];
+                      if($compliance_status == "Compliant") 
+                        $compliance_count['compliant']++;
+                      elseif($compliance_status == "Non-Compliant")
+                        $compliance_count['non_compliant']++;
+                      elseif($compliance_status == "Waiting")
+                        $compliance_count['waiting']++; 
+                      else
+                        $compliance_count['indeterminate']++; 
+                    ?>
+									  <td><div class="icon-rounded" data-rel="tooltip" data-placement="bottom" title="<?php echo $compliance_status; ?>"><?php echo $row['compliance_status']['icon']; ?></div></td>
                   <?php else: ?>
+                    <?php $compliance_count['indeterminate']++; ?>
                     <td><div class="icon-rounded" data-rel="tooltip" data-placement="bottom" title="Indeterminate"><i class="i i-Indeterminate inter"></i></div></td>
 									<?php endif; ?>
                   <td class="f-b"><?php echo $row['performance_score']; ?></td>
@@ -156,11 +174,11 @@
   google.charts.setOnLoadCallback(drawBarChart);
   function drawDonutChart() {
     var data = google.visualization.arrayToDataTable([
-      ['Task', '# of Votes'],
-      ['Complaint - Stable 60 ',     60],
-      ['Probation-Unstable 10',      10],
-      ['Non-Complaint - Watchlist 20',  20],
-      ['Crisis List - Merger - Disaffiliation 10', 10]
+      ['Compliance Status', 'Total'],
+      ['Complaint - Stable', <?= $compliance_count['compliant']; ?>],
+      ['Probation-Unstable', <?= $compliance_count['non_compliant']; ?>],
+      ['Non-Complaint - Watchlist', <?= $compliance_count['waiting']; ?>],
+      ['Crisis List - Merger - Disaffiliation', <?= $compliance_count['indeterminate']; ?>]
     ]);
 
     var options = {
@@ -176,11 +194,11 @@
   function drawBarChart() {
       var data = google.visualization.arrayToDataTable([
         ["Label", "Score", { role: "style" }],
-        ["0 - 1.99 Poor", <?= $score_count['poor']; ?>, "#60c76e"],
-        ["2 - 2.99 Below Average", <?= $score_count['below_avg']; ?>, "#4eb8f7"],
+        ["0 - 1.99 Poor", <?= $score_count['poor']; ?>, "#f0594d"],
+        ["2 - 2.99 Below Average", <?= $score_count['below_avg']; ?>, "#fe9248"],
         ["3 - 3.74 Average", <?= $score_count['average']; ?>, "#eae870"],
-        ["3.75 - 4.99 Strong", <?= $score_count['strong']; ?>, "#f0594d"],
-        ["5 - 5.00 Outstanding", <?= $score_count['outstanding']; ?>, "#f0594d"]
+        ["3.75 - 4.99 Strong", <?= $score_count['strong']; ?>, "#4eb8f7"],
+        ["5 - 5.00 Outstanding", <?= $score_count['outstanding']; ?>, "#60c76e"]
       ]);
 
       var options = {
