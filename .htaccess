@@ -4,3 +4,7 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond $1 !^(templates|plugins|resources|robots\.txt)
 RewriteRule ^(.*)$ index.php/$1 [L]
+
+<IfModule mod_env.c>
+    SetEnv CI_ENV production
+</IfModule>
