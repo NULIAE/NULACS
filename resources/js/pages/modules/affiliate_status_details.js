@@ -764,7 +764,7 @@ $(function () {
 						return count++;
 					},
 					"documentPath": function () {
-						return base_url + this.quarterly_upload_file+this.quarterly_upload_file_name;
+						return base_url + this.quarterly_upload_file;
 					},
 					"comments": this.comments,
 					"avatar": function () {
@@ -841,7 +841,7 @@ $(function () {
 						return count++;
 					},
 					"documentPath": function () {
-						return base_url + this.other_upload_file+this.other_upload_file_name;
+						return base_url + this.other_upload_file;
 					},
 					"documentType": function(){
 						return docType;
@@ -917,7 +917,7 @@ $(function () {
 						return count++;
 					},
 					"documentPath": function () {
-						return base_url + this.quarterly_upload_file+this.quarterly_upload_file_name;
+						return base_url + this.quarterly_upload_file;
 					},
 					"comments": this.comments,
 					"avatar": function () {
@@ -941,7 +941,7 @@ $(function () {
 						return count++;
 					},
 					"documentPath": function () {
-						return base_url + this.other_upload_file+this.other_upload_file_name;
+						return base_url + this.other_upload_file;
 					},
 					"documentType": function(){
 						return docType;
@@ -970,7 +970,7 @@ $(function () {
 						return count++;
 					},
 					"documentPath": function () {
-						return base_url + this.other_upload_file+this.other_upload_file_name;
+						return base_url + this.other_upload_file;
 					},
 					"documentType": function(){
 						return docType;

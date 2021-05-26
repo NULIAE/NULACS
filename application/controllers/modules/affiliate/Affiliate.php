@@ -1499,17 +1499,18 @@ class Affiliate extends MY_Controller
 	 */
 	public function doupload()
      {
+		 $affiliate_id = $_POST['affiliate_id'];
 		if($_POST['document_type'] == 'legal_compliance_document')
 		{
-			$filePath = './uploads/Documents/legal/'.date('Y').'/'.date('m').'/';
+			$filePath = './uploads/Documents/legal/'.$affiliate_id.'/'.date('Y').'/';
 		}
 		else if($_POST['document_type'] == 'other_compliance_document')
 		{
-			$filePath = './uploads/Documents/compliance_other/'.date('Y').'/'.date('m').'/';
+			$filePath = './uploads/Documents/compliance_other/'.$affiliate_id.'/'.date('Y').'/';
 		}
 		else
 		{
-			$filePath = './uploads/Documents/performance_other/'.date('Y').'/'.date('m').'/';
+			$filePath = './uploads/Documents/performance_other/'.$affiliate_id.'/'.date('Y').'/';
 		}
 
 		$config['upload_path'] = $filePath;
@@ -1530,11 +1531,12 @@ class Affiliate extends MY_Controller
 		{
 			$fileName =$this->upload->data('file_name');
 			$fileExtension = substr($this->upload->data('file_ext'), 1);
+			$fullPath = str_replace(FCPATH, '', $this->upload->data('full_path'));
 			
 			$val = array(
 				'document_type_id'=>$_POST['document_type_id'],
 				'affiliate_id'=>$_POST['affiliate_id'],
-				'file_path'=>$filePath,
+				'file_path'=>$fullPath,
 				'upload_file_name'=>$fileName,
 				'upload_file_extension'=>$fileExtension
 			);
