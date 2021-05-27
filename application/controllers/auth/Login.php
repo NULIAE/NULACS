@@ -104,7 +104,7 @@ class Login extends CI_Controller
 					else
 					{
 						//Invalid password. Back to login
-						$this->session->set_flashdata('error', 'Invalid username or password.');
+						$this->session->set_flashdata('error', 'Invalid username or password. Password not matched - '.$user_data['user_password']);
 				
 						redirect(base_url('/login').$return_url);
 						exit;							
@@ -113,7 +113,7 @@ class Login extends CI_Controller
 				else
 				{
 					//User with email id doesn't exists or invalid password. Back to login
-					$this->session->set_flashdata('error', 'Invalid username or password.');
+					$this->session->set_flashdata('error', 'Invalid username or password. User not exists or Status is 0');
 			
 					redirect(base_url('/login').$return_url);
 					exit;
@@ -129,7 +129,7 @@ class Login extends CI_Controller
 			}
 		}
 
-		$this->session->set_flashdata('error', 'Invalid username or password.');
+		$this->session->set_flashdata('error', 'Invalid username or password. Not POST');
 	
 		redirect(base_url('/login').$return_url);
 		exit;
