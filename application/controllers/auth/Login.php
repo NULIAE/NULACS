@@ -71,7 +71,7 @@ class Login extends CI_Controller
 				//Check whether user with the email id exists on `users` table
 				$user_data = $this->User_model->check_user($data['email']);
 
-				if ( isset($user_data) && $user_data['user_status'] === "1" )
+				if ( isset($user_data) && $user_data['user_status'] === 1 )
 				{
 					//User exists. Check for the valid password
 					if ($data['password'] == $user_data['user_password']) 
