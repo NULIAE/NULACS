@@ -556,7 +556,10 @@ $(function () {
 		var formValues = form.serializeArray();
 		var values = {}
 		$.each(formValues, function (key, el) {
-			values[el.name] = +el.value.replace(/,/g, "");
+			if(el.name == "qualitative_narrative")
+				values[el.name] = el.value;
+			else
+				values[el.name] = +el.value.replace(/,/g, "");
 		});
 		var inputData = {
 			affiliate_id: form.data('affiliate'),
