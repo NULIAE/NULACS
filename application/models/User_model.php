@@ -10,10 +10,13 @@ class User_model extends CI_Model
 	 * @param  mixed $email
 	 * @return array User record if exists; Otherwise return NULL
 	 */
-	public function check_user($email)
+	public function check_user($email, $check_status = FALSE)
 	{
 		$this->db->select('user_id, affiliate_id, role_id, name, user_status, user_password');
 		$this->db->where('name', $email);
+		
+		if($check_status)
+			$this->db->where('user_status', 1);
 
 		$query = $this->db->get('users');
 

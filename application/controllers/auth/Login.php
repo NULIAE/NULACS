@@ -28,12 +28,10 @@ class Login extends CI_Controller
 		}
 
 		$return_url = $this->input->get('return_url');
-		if(isset($return_url) &&  $return_url != "")
-			$return_url = "?return_url=".$return_url;
+		if(!isset($return_url) ||  $return_url == "")
+			$return_url = NULL;
 		
 		$data['content'] = array(
-			'csrf_name' => $this->security->get_csrf_token_name(),
-			'csrf_hash' => $this->security->get_csrf_hash(),
 			'return_url' => $return_url
 		);
 
@@ -55,11 +53,7 @@ class Login extends CI_Controller
 	 */
 	public function authenticate()
 	{
-		$return = $this->input->get('return_url');
-		if(isset($return) &&  $return != "")
-			$return_url = "?return_url=".$return;
-		else
-			$return_url = "";
+		$status = $error = NULL;
 		
 		if(isset($_POST))
 		{
@@ -69,9 +63,9 @@ class Login extends CI_Controller
 			if(isset($data['email']) && isset($data['password']))
 			{
 				//Check whether user with the email id exists on `users` table
-				$user_data = $this->User_model->check_user($data['email']);
+				$user_data = $this->User_model->check_user($data['email'], TRUE);
 
-				if ( isset($user_data) && $user_data['user_status'] === "1" )
+				if ( isset($user_data) && !empty($user_data) )
 				{
 					//User exists. Check for the valid password
 					if ($data['password'] == $user_data['user_password']) 
@@ -95,44 +89,35 @@ class Login extends CI_Controller
 						
 						$this->session->set_userdata($user_data);
 
-						if(isset($return) &&  $return != "")
-							redirect(base_url($return));
-						else
-							redirect(base_url('/'));
-						exit;
+						$status = TRUE;
 					}
 					else
 					{
 						//Invalid password. Back to login
-						$this->session->set_flashdata('error', 'Invalid username or password.');
-				
-						redirect(base_url('/login').$return_url);
-						exit;							
+						$status = FALSE;
+						$error = 'Invalid username or password.';							
 					}
 				}
 				else
 				{
 					//User with email id doesn't exists or invalid password. Back to login
-					$this->session->set_flashdata('error', 'Invalid username or password.');
-			
-					redirect(base_url('/login').$return_url);
-					exit;
+					$status = FALSE;
+					$error = 'Invalid username or password.';	
 				}
 			}
 			else
 			{
 				//User with email and password required. Back to login
-				$this->session->set_flashdata('error', 'Username and Password are required.');
-		
-				redirect(base_url('/login').$return_url);
-				exit;
+				$status = FALSE;
+				$error = 'Username and Password are required.';	
 			}
 		}
+		else{
+			$status = FALSE;
+			$error = 'Invalid username or password.';	
+		}
 
-		$this->session->set_flashdata('error', 'Invalid username or password.');
-	
-		redirect(base_url('/login').$return_url);
-		exit;
+		echo json_encode(array('success' => $status, 'error' => $error));
 	}
 	
 	/**
