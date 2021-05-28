@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>National Urban League</title>
+  <link rel="icon" href="<?php echo base_url() ?>/favicon.ico" type="image/png">
   <link rel="stylesheet" href="<?php echo base_url('/resources/css/style.css'); ?>">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
   
