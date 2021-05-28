@@ -23,7 +23,13 @@
 							<span class="Sign-in">Sign in</span>
 		
 							<!-- Show error message -->
-							<div id="login-error-box" class="alert alert-danger my-4" role="alert" style="display:none;"></div>
+							<?php if($this->session->flashdata('error')): ?>
+								<div id="login-error-box" class="alert alert-danger my-4" role="alert">
+								<?= $this->session->flashdata('error') ?>
+								</div>
+							<?php else: ?>
+								<div id="login-error-box" class="alert alert-danger my-4" role="alert" style="display:none;"></div>
+							<?php endif; ?>
 							<div class="mb-3">
 								<div class="nul-form mb-2">
 									<i class="i i-user-name"></i>

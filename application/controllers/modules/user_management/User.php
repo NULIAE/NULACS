@@ -144,11 +144,11 @@ class User extends MY_Controller
 		$data = $this->input->post(NULL, TRUE);
 
 		//Check whether user with the email id exists on `users` table
-		$user_data = $this->User_model->check_user($data['name']);
+		$user_data = $this->User_model->check_user($data['name'], TRUE);
 
 		$status = $message = NULL;
 
-		if ( ! empty($user_data) && $user_data['user_status'] === "1" )
+		if ( ! empty($user_data) )
 		{
 			//User already exists
 			$status = FALSE;
