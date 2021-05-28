@@ -1933,6 +1933,19 @@ $quarterArray = array(
 											<div>(2) Restricted by donor with time or purpose restrictions: $</div>
 											<div class="innControll"><input type="text" name="liquidity_restrictions_by_donor" id="liquidity_restrictions_by_donor_v" class="form-control liquidity_v_blur" value="<?php echo isset($key_indicators['liquidity_restrictions_by_donor']) ? $key_indicators['liquidity_restrictions_by_donor'] : ""; ?>" /> </div>
 										</div>
+										<div class="d-flex flex-column justify-content-start">
+											<div class="d-flex flex-row align-items-center">
+											<span>Qualitative Narrative</span>
+											<a class="ml-2 h4 text-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+											<i class="i i i-chat-line"></i>
+											</a>
+											</div>
+											<div class="collapse" id="collapseExample">
+											<div class="card card-body">
+												<input type="text" class="form-control" id="qualitative_narrative" value="<?php echo isset($key_indicators['qualitative_narrative']) ? $key_indicators['qualitative_narrative'] : ""; ?>" name="qualitative_narrative" placeholder="comment" style="height:60px;border-radius:6px;" />
+											</div>
+											</div>
+										</div>
 									</li>
 									<li class="wrapIn">
 										<div class="d-flex align-items-center">
