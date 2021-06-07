@@ -1,4 +1,4 @@
-affiliate_id ,region_id ,role_id ,name,prifix,first_name,last_name,user_title,user_email_address_1,is_adm_uploader
+affiliate_id,region_id,role_id,name,prifix,first_name,last_name,user_title,user_email_address_1,is_adm_uploader
 2,3,3,tlegrair@akronurbanleague.org,Ms.,Teresa,LeGrair,President/CEO,tlegrair@akronurbanleague.org,1
 3,1,3,diane.mclaughlin@live.com,Ms.,Diane,McLaughlin,Interim Chair,diane.mclaughlin@live.com,1
 4,3,3,bkwm51@aol.com,Ms.,Brenda Walker,McCain,President,bkwm51@aol.com,1
