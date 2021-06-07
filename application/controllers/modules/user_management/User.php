@@ -292,4 +292,44 @@ class User extends MY_Controller
 		$spreadsheet->disconnectWorksheets();
 		unset($spreadsheet);
 	}
+
+	public function import_user_list()
+	{
+		$count = 0;
+		$csv = './CEO_list_import.csv';
+		$handle = fopen($csv,"r");
+		while (($row = fgetcsv($handle, 1000, ",")) != FALSE) //get row vales
+		{
+			$count++;
+			if($count == 1)
+			{
+				$index = $row;
+				continue;
+			}
+
+			$insert_data = array(
+				$index[0] => $row[0],
+				$index[1] => $row[1],
+				$index[2] => $row[2],
+				$index[3] => $row[3],
+				$index[4] => $row[4],
+				$index[5] => $row[5],
+				$index[6] => $row[6],
+				$index[7] => $row[7],
+				$index[8] => $row[8],
+				$index[9] => $row[9]
+			);
+
+			$user_id = $this->User_model->new_user($insert_data);
+			
+			if ( $user_id !== FALSE )
+			{
+				echo '<p style="margin:0;padding:3px;color:green;">Success : Row'.$count.' => '.$insert_data['name'].' inserted with user_id = '.$user_id.'</p>';
+			}
+			else
+			{
+				echo '<p style="margin:0;padding:3px;color:red;">Failed:Row'.$count.' => '.$insert_data['name'].' not inserted</p>';
+			}
+		}
+	}
 }

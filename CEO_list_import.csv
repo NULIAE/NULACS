@@ -1,0 +1,79 @@
+affiliate_id ,region_id ,role_id ,name,prifix,first_name,last_name,user_title,user_email_address_1,is_adm_uploader
+2,3,3,tlegrair@akronurbanleague.org,Ms.,Teresa,LeGrair,President/CEO,tlegrair@akronurbanleague.org,1
+3,1,3,diane.mclaughlin@live.com,Ms.,Diane,McLaughlin,Interim Chair,diane.mclaughlin@live.com,1
+4,3,3,bkwm51@aol.com,Ms.,Brenda Walker,McCain,President,bkwm51@aol.com,1
+7,2,3,njohnson@ulgatl.org,Ms.,Nancy Flake,Johnson,President,njohnson@ulgatl.org,1
+8,3,3,theodia@aol.com,Ms.,Theodia ,Gillespie,President,theodia@aol.com,1
+9,2,3,quincy_dunlap@aaul.org,Ms.,Quincy,Dunlap,President,quincy_dunlap@aaul.org,1
+10,1,3,tmajors@gbul.org,Ms.,Tiffany,Majors,President,tmajors@gbul.org,1
+11,3,3,kyraul@swmul.org,Ms.,Kyra,Wallace,President,kyraul@swmul.org,1
+12,1,3,jlesko@bcul.org,Ms.,Jennifer,Lesko,President,jlesko@bcul.org,1
+13,2,3,william.barnes@birminghamul.org,Mr.,William,Barnes,President,william.barnes@birminghamul.org,1
+14,1,3,keith.motley@umb.edu,Ms.,J. Keith,Motley,Interim President,keith.motley@umb.edu,1
+15,1,3,tbeauford@buffalourbanleague.org,Mr.,Thomas,"Beauford, Jr.",President,tbeauford@buffalourbanleague.org,1
+16,3,3,829drobinson@gmail.com,Ms.,Diane Stevens,Robinson,Interim President,829drobinson@gmail.com,1
+17,2,3,otha.meadows@ctul.org,Ms.,Otha,Meadows,President,otha.meadows@ctul.org,1
+18,2,3,teddy.mcdaniel@urbanleaguecc.org,Mr.,Teddy,McDaniel,President,teddy.mcdaniel@urbanleaguecc.org,1
+19,2,3,cjohnson@ulchatt.net,Ms.,Candy,Johnson,President,cjohnson@ulchatt.net,1
+20,3,3,kfreemanwilson@chiul.org,Ms.,Karen,Freeman-Wilson,President/CEO,kfreemanwilson@chiul.org,1
+21,3,3,ekoen@ulgso.org,Mr.,Eddie,Koen,President/CEO,ekoen@ulgso.org,1
+22,3,3,mmockabee@ulcleveland.org,Ms.,Marsha,Mockabee,President,mmockabee@ulcleveland.org,1
+24,2,3,culsc@aol.com,Mr.,James,"McLawhorn, Jr.",President,culsc@aol.com,1
+25,2,3,tmosley@urbanleaguegc.org,Ms.,Tracey,Mosley,Interim President/CEO,tmosley@urbanleaguegc.org,1
+26,3,3,shightower@cul.org,Ms.,Stephanie,Hightower,President,shightower@cul.org,1
+29,4,3,pastordel@thwcdenver.com,Mr.,Del ,Phillips,Board Chair,pastordel@thwcdenver.com,1
+30,3,3,ncanderson@deturbanleague.org,Mr.,N. Charles,Anderson,President,ncanderson@deturbanleague.org,1
+31,1,3,dalexander@uloucnj.org,Ms.,Donna Lowe,Alexander,Interim President,dalexander@uloucnj.org,1
+32,3,3,psmith@lcul.org,Ms.,Parris,Smith,President,psmith@lcul.org,1
+34,1,3,ehouston@svurbanleague.org,Mr.,Erin,Houston,President,ehouston@svurbanleague.org,1
+36,2,3,gsbaugh@ulbcfl.org,Ms.,Germaine Smith ,Baugh,President,gsbaugh@ulbcfl.org,1
+38,3,3,vallen@ulofnwi.org,Ms.,Vanessa,Allen-McCloud,President,vallen@ulofnwi.org,1
+11,3,3,bmoore@grurbanleague.org,Ms.,Brenda,Moore,Interim President,bmoore@grurbanleague.org,1
+40,2,3,sdogan@urbanleagueupstate.org,Mr.,Sean ,Dogan,Interim President,sdogan@urbanleagueupstate.org,1
+41,1,3,dhopkins@ulgh.org,Mr.,David,Hopkins,President,dhopkins@ulgh.org,1
+42,2,3,judrob@haul.org,Mr.,Judson,Robinson,President,judrob@haul.org,1
+43,3,3,tmason@indplsul.org,Mr.,Tony,Mason,President,tmason@indplsul.org,1
+45,2,3,r.danford@jaxul.org,Mr.,Richard,"Danford, Jr.",President,r.danford@jaxul.org,1
+46,1,3,mumar@ulohc.org,Mr.,Muhammad,Umar,President,mumar@ulohc.org,1
+47,3,3,ggrant@ulkc.org,Ms.,Gwen,Grant,President,ggrant@ulkc.org,1
+48,2,3,pynichols@thekaul.org,Mr.,Phyllis,Nichols,President,pynichols@thekaul.org,1
+52,2,3,pg@ullexfay.org,Mr.,Porter,Peeples,President,pg@ullexfay.org,1
+100,2,3,SHamilton@urbanleagueark.org,Mr.,Scott,Hamilton,Interim President,SHamilton@urbanleagueark.org,1
+52,1,3,tsanders@urbanleaguelongisland.org,Ms.,Theresa,Sanders,President,tsanders@urbanleaguelongisland.org,1
+53,4,3,michael.lawson@laul.org,Mr.,Michael,Lawson,President,michael.lawson@laul.org,1
+54,2,3,sadiqa@lul.org,Ms.,Sadiqa,Reynolds,President,sadiqa@lul.org,1
+55,3,3,ranthony@ulgm.org,Mr.,Ruben,Anthony,President,ranthony@ulgm.org,1
+56,2,3,tsbaymon@memul.org,Ms.,Tonja ,Sesley-Baymon,President,tsbaymon@memul.org,1
+57,2,3,twfair@bellsouth.net,Mr.,T. Willard,Fair,President,twfair@bellsouth.net,1
+58,3,3,ehall@tmul.org,Ms.,Eve,Hall,President,ehall@tmul.org,1
+59,3,3,sbelton@mul.org,Mr.,Steve,Belton,President,sbelton@mul.org,1
+62,2,3,charris@urbanleagueofmidtn.org,Mr.,Clifton,Harris,President,charris@urbanleagueofmidtn.org,1
+63,2,3,jmorse@urbanleaguela.org,Ms.,Judy Reese,Morse,President,jmorse@urbanleaguela.org,1
+64,1,3,arice@nyul.org,Ms.,Arva ,Rice,President,arice@nyul.org,1
+65,1,3,vfraser@ulec.org,Mr.,Vivian Cox,Fraser,President,vfraser@ulec.org,1
+66,1,3,Gilbertbland@ulhr.org,Mr.,Gilbert,Bland,Interim President,Gilbertbland@ulhr.org,1
+67,2,3,vrthompson@urbanleagueok.org,Ms.,Valerie,Thompson,President,vrthompson@urbanleagueok.org,1
+68,3,3,twarren@urbanleagueneb.org,Mr.,Thomas,"Warren, Sr.",President,twarren@urbanleagueneb.org,1
+69,2,3,ggilzean@cful.org,Mr.,Glenton,Gilzean,President,ggilzean@cful.org,1
+71,1,3,acustis@urbanleaguephila.org,Ms.,Andrea,Custis,President,acustis@urbanleaguephila.org,1
+72,4,3,gdean@gphxul.org,Mr.,George,Dean,President,gdean@gphxul.org,1
+73,1,3,ebush@ulpgh.org,Ms.,Esther,Bush,President,ebush@ulpgh.org,1
+74,4,3,nhj@ulpdx.org,Ms.,Nkenge Harmon ,Johnson,President,nhj@ulpdx.org,1
+75,1,3,bel_atty@brown.edu,Ms.,Beverly,Ledbetter,Interim President,bel_atty@brown.edu,1
+76,3,3,james.hall@ulrk.org,Mr.,James,Hall,Interim President,james.hall@ulrk.org,1
+78,1,3,shawkins@ulr.org,Ms.,Seanelle ,Hawkins,President,shawkins@ulr.org,1
+79,4,3,cjennings@gsul.org,Ms.,Cassandra,Jennings,President,cjennings@gsul.org,1
+80,3,3,mmcmillan@urbanleague-stl.org,Mr.,Michael,McMillan,President,mmcmillan@urbanleague-stl.org,1
+82,2,3,whaynes@pcul.org,Mr.,Watson,Haynes,President,whaynes@pcul.org,1
+83,4,3,ray.king@sdul.org,Mr.,Ray,King,President,ray.king@sdul.org,1
+84,4,3,mmerriweather@urbanleague.org,Ms.,Michelle,Merriweather,President,mmerriweather@urbanleague.org,1
+85,3,3,nharris@springfieldul.org,Ms.,Nina,Harris,President,nharris@springfieldul.org,1
+86,1,3,hmthomas@ulspringfield.org,Mr.,Henry,Thomas,President,hmthomas@ulspringfield.org,1
+87,1,3,vtspell@ulsc.org,Ms.,Virginia,Spell,Interim President,vtspell@ulsc.org,1
+89,2,3,ctkoot62@gmail.com,Ms.,Curtis,Taylor,President,ctkoot62@gmail.com,1
+93,3,3,tconley@wyul.org,Mr.,Thomas,Conley,President,tconley@wyul.org,1
+94,1,3,glambert@gwul.org,Mr.,George,"Lambert, Jr.",President,glambert@gwul.org,1
+95,2,3,frankln@ulpbc.org,Mr.,Patrick,Franklin,President,frankln@ulpbc.org,1
+96,1,3,limacss@aol.com,Ms.,Sorraya,Sampson,President,limacss@aol.com,1
+97,3,3,businessdevelor@gmail.com,Ms.,Tracee,Adams,Board Chair,businessdevelor@gmail.com,1
+99,2,3,jperry@wsurban.org,Mr.,James,Perry,President,jperry@wsurban.org,1
