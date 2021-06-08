@@ -348,10 +348,6 @@ class User extends MY_Controller
 		$config['smtp_pass'] = $settings['smtp_pass'];
 		$config['smtp_port'] = $settings['smtp_port'];
 
-		$this->load->library('email');
-		$this->email->initialize($config);
-		$this->email->from("noreply@nul.org", "National Urban League");
-
 		$where = array(
 			'users.role_id' => 3,
 			'users.user_status' => 0
@@ -380,6 +376,9 @@ class User extends MY_Controller
 
 				$subject = "Welcome ".$data["first_name"]." ".$data["last_name"].", You are a NUL Member!";
 
+				$this->load->library('email');
+				$this->email->initialize($config);
+				$this->email->from("noreply@nul.org", "National Urban League");
 				$this->email->to($data["name"]);
 				$this->email->subject($subject);
 				$this->email->message($mail_content);
