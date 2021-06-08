@@ -142,3 +142,4 @@ $route['module/notification/emails/preview/(:num)'] = 'modules/notification_cent
 
 $route['module/notification/emails/send_reminder'] = 'modules/notification_center/email_template/send_remainders';
 $route['module/user/import'] = 'modules/user_management/user/import_user_list';
+$route['module/user/send_welcome_mail'] = 'modules/user_management/user/send_welcome_mail';
