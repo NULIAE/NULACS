@@ -1001,24 +1001,7 @@ class Affiliate_model extends CI_Model
 
 	public function recent_affiliate_data($affiliate_id, $role_id)
 	{
-		/* $query = $this->db->query("SELECT * FROM `settings` WHERE `type`='global'");
-
-		$result = $query->result_array();
-		foreach($result as $row)
-		{
-			$settings[$row['label']] = $row['value'];
-		}
-		//echo "<pre>";print_r($settings);
-
-		$date = explode('-', $settings['limit_date']);
-		$limit = array(
-			'month' => (int)$date[1],
-			'quarter' => ceil($date[1]/3),
-			'year' => $date[0]
-		);
-		//echo "<pre>";print_r($limit); */
-
-		if($role_id == 1) // For Administrator
+		/*if($role_id == 1) // For Administrator
 		{
 			//Check for affiliate monthly compliance status
 			$this->db->where("affiliate_id", $affiliate_id);
@@ -1099,7 +1082,7 @@ class Affiliate_model extends CI_Model
 			}
 		}
 		else
-		{
+		{*/
 			//Check for affiliate monthly document status
 			$this->db->select("document_month AS month, document_year AS year");
 			$this->db->where("affiliate_id", $affiliate_id);
@@ -1118,10 +1101,22 @@ class Affiliate_model extends CI_Model
 				$this->db->where_in("document_id", array(1, 2, 3, 4, 5));
 				$this->db->where("monthly_compliance_status !=", 4);
 
-				if($this->db->count_all_results('monthly_document_status') == 5)
+				if($this->db->count_all_results('monthly_document_status') == 5) 
 				{
+					if($role_id != 1)
+					{
+						//For affiliate user, move to next month if all files uploaded
+						$currentTime = mktime(0,0,0, $recent_month["month"], 1, $recent_month["year"]);
+						$date = explode("-", date("Y-n", strtotime("+1 months", $currentTime)));
+						$recent_month["year"] = $date[0];
+						$recent_month["month"] = $date[1];
+					}
+				}
+				else if($role_id == 1 && $this->input->get('month') == NULL)
+				{
+					//For administrator, move to previous month if all files not uploaded when first page load
 					$currentTime = mktime(0,0,0, $recent_month["month"], 1, $recent_month["year"]);
-					$date = explode("-", date("Y-n", strtotime("+1 months", $currentTime)));
+					$date = explode("-", date("Y-n", strtotime("-1 months", $currentTime)));
 					$recent_month["year"] = $date[0];
 					$recent_month["month"] = $date[1];
 				}
@@ -1147,9 +1142,20 @@ class Affiliate_model extends CI_Model
 
 				if($this->db->count_all_results('quarterly_document_status') == 1)
 				{
-					$month = $recent_quarter["quarter"] * 3;
+					if($role_id != 1)
+					{
+						$month = $recent_quarter["quarter"] * 3;
+						$currentTime = mktime(0,0,0, $month, 1, $recent_quarter["year"]);
+						$date = explode("-", date("Y-n", strtotime("+1 months", $currentTime)));
+						$recent_quarter["year"] = $date[0];
+						$recent_quarter["quarter"] = ceil($date[1]/3);
+					}
+				}
+				else if($role_id == 1 && $this->input->get('quarter') == NULL)
+				{
+					$month = ($recent_quarter["quarter"] - 1) * 3;
 					$currentTime = mktime(0,0,0, $month, 1, $recent_quarter["year"]);
-					$date = explode("-", date("Y-n", strtotime("+1 months", $currentTime)));
+					$date = explode("-", date("Y-n", strtotime("-1 months", $currentTime)));
 					$recent_quarter["year"] = $date[0];
 					$recent_quarter["quarter"] = ceil($date[1]/3);
 				}
@@ -1173,7 +1179,16 @@ class Affiliate_model extends CI_Model
 
 				if($this->db->count_all_results('yearly_document_status') == 5)
 				{
-					$recent_year["year"] += 1;
+					if($role_id != 1)
+					{
+						//For affiliate user, move to next year if all files uploaded
+						$recent_year["year"] += 1;
+					}
+				}
+				else if($role_id == 1 && $this->input->get('yearly_year') == NULL)
+				{
+					//For administrator, move to previous year if all files not uploaded when first page load
+					$recent_year["year"] -= 1;
 				}
 			}
 	
@@ -1194,7 +1209,7 @@ class Affiliate_model extends CI_Model
 				$recent_key_indicator["year"] = $date[0];
 				$recent_key_indicator["quarter"] = ceil($date[1]/3);
 			}
-		} 
+		//} 
 
 		return array(
 			'monthly' => $recent_month,
