@@ -616,34 +616,36 @@ class Affiliate extends MY_Controller
 
 		if(isset($recent_data['monthly']['month']) && isset($recent_data['monthly']['year']))
 		{
-			if($monthly_filter['document_year'] > $recent_data['monthly']['year'])
+			if(!isset($data['month']) && $this->session->role_id == 1)
 			{
-				if(isset($data['interval']) && $data['interval'] == 'nav-y1')
-				{
-					if($this->session->role_id == 1)
-						$errorMsg = 'No documents uploaded for the month ' .$monthly_filter['document_month'].'/'.$monthly_filter['document_year'];
-					else
-						$errorMsg = 'Please upload all documents for this month';
-					$this->session->set_flashdata('error', $errorMsg);
-				}
-
 				$monthly_filter['document_month'] =  $recent_data['monthly']['month'];
 				$monthly_filter['document_year'] =  $recent_data['monthly']['year'];
 			}
-			else if($monthly_filter['document_year'] == $recent_data['monthly']['year'])
+			else if($this->session->role_id != 1)
 			{
-				if($monthly_filter['document_month'] > $recent_data['monthly']['month'])
+				if($monthly_filter['document_year'] > $recent_data['monthly']['year'])
 				{
 					if(isset($data['interval']) && $data['interval'] == 'nav-y1')
 					{
-						if($this->session->role_id == 1)
-							$errorMsg = 'No documents uploaded for the month ' .$monthly_filter['document_month'].'/'.$monthly_filter['document_year'];
-						else
-							$errorMsg = 'Please upload all documents for this month';
+						$errorMsg = 'Please upload all documents for this month';
 						$this->session->set_flashdata('error', $errorMsg);
 					}
-
+					
 					$monthly_filter['document_month'] =  $recent_data['monthly']['month'];
+					$monthly_filter['document_year'] =  $recent_data['monthly']['year'];
+				}
+				else if($monthly_filter['document_year'] == $recent_data['monthly']['year'])
+				{
+					if($monthly_filter['document_month'] > $recent_data['monthly']['month'])
+					{
+						if(isset($data['interval']) && $data['interval'] == 'nav-y1')
+						{
+							$errorMsg = 'Please upload all documents for this month';
+							$this->session->set_flashdata('error', $errorMsg);
+						}
+						
+						$monthly_filter['document_month'] =  $recent_data['monthly']['month'];
+					}
 				}
 			}
 		}
@@ -679,36 +681,36 @@ class Affiliate extends MY_Controller
 
 		if(isset($recent_data['quarterly']['quarter']) && isset($recent_data['quarterly']['year']))
 		{
-			if($quarterly_filter['document_year'] > $recent_data['quarterly']['year'])
+			if(!isset($data['quarter']) && $this->session->role_id == 1)
 			{
-				if(isset($data['interval']) && $data['interval'] == 'nav-y2')
-				{
-					if($this->session->role_id == 1)
-						$errorMsg = 'No documents uploaded for the quarter Q'.$quarterly_filter['document_month'].'/'.$quarterly_filter['document_year'];
-					else
-						$errorMsg = 'Please upload all documents for this quarter';
-					
-					$this->session->set_flashdata('error', $errorMsg);
-				}
-
 				$quarterly_filter['document_month'] =  $recent_data['quarterly']['quarter'];
 				$quarterly_filter['document_year'] =  $recent_data['quarterly']['year'];
 			}
-			else if($quarterly_filter['document_year'] == $recent_data['quarterly']['year'])
+			else if($this->session->role_id != 1)
 			{
-				if($quarterly_filter['document_month'] > $recent_data['quarterly']['quarter'])
+				if($quarterly_filter['document_year'] > $recent_data['quarterly']['year'])
 				{
 					if(isset($data['interval']) && $data['interval'] == 'nav-y2')
 					{
-						if($this->session->role_id == 1)
-							$errorMsg = 'No documents uploaded for the quarter Q'.$quarterly_filter['document_month'].'/'.$quarterly_filter['document_year'];
-						else
-							$errorMsg = 'Please upload all documents for this quarter';
-						
+						$errorMsg = 'Please upload all documents for this quarter';
 						$this->session->set_flashdata('error', $errorMsg);
 					}
 
 					$quarterly_filter['document_month'] =  $recent_data['quarterly']['quarter'];
+					$quarterly_filter['document_year'] =  $recent_data['quarterly']['year'];
+				}
+				else if($quarterly_filter['document_year'] == $recent_data['quarterly']['year'])
+				{
+					if($quarterly_filter['document_month'] > $recent_data['quarterly']['quarter'])
+					{
+						if(isset($data['interval']) && $data['interval'] == 'nav-y2')
+						{
+							$errorMsg = 'Please upload all documents for this quarter';
+							$this->session->set_flashdata('error', $errorMsg);
+						}
+
+						$quarterly_filter['document_month'] =  $recent_data['quarterly']['quarter'];
+					}
 				}
 			}
 		}
@@ -739,25 +741,27 @@ class Affiliate extends MY_Controller
 
 		if(isset($recent_data['yearly']['year']))
 		{
-			if($yearly_filter['document_year'] > $recent_data['yearly']['year'])
+			if(!isset($data['yearly_year']) && $this->session->role_id == 1)
 			{
-				if(isset($data['interval']) && $data['interval'] == 'nav-y3')
-				{
-					if($this->session->role_id == 1)
-						$errorMsg = 'No documents uploaded for the year '.$yearly_filter['document_year'] ;
-					else
-						$errorMsg = 'Please upload all documents for this year';
-					
-					$this->session->set_flashdata('error', $errorMsg);
-				}
-
 				$yearly_filter['document_year'] = $recent_data['yearly']['year'];
+			}
+			else if($this->session->role_id != 1)
+			{
+				if($yearly_filter['document_year'] > $recent_data['yearly']['year'])
+				{
+					if(isset($data['interval']) && $data['interval'] == 'nav-y3')
+					{
+						$errorMsg = 'Please upload all documents for this year';
+						$this->session->set_flashdata('error', $errorMsg);
+					}
+
+					$yearly_filter['document_year'] = $recent_data['yearly']['year'];
+				}
 			}
 		}
 
 		$recent_data['yearly']['year'] = $yearly_filter['document_year'];
 
-		
 		//Yearly document status
 		$yearly_document_status = $this->Affiliate_model->yearly_document_status($affiliate_id, $yearly_filter, TRUE);
 		
