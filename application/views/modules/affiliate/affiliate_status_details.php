@@ -721,7 +721,7 @@ $quarterArray = array(
 													</div>
 												</div>
 
-												<?php if(!isset($currentDoc)): ?>
+												<?php //if(!isset($currentDoc)): ?>
 													<div id="collapse<?php echo $document['document_id']; ?>" class="collapse " aria-labelledby="heading<?php echo $key+1; ?>" data-parent="#accordionExample">
 														<div class="acc-body">
 															<form id="form-upload-<?php echo $document['document_id']; ?>" class="row align-items-end form-metadata">
@@ -748,7 +748,7 @@ $quarterArray = array(
 															</form>
 														</div>
 													</div>
-												<?php endif; ?>
+												<?php //endif; ?>
 
 											</div>
 										<?php endforeach; ?>

@@ -178,7 +178,7 @@ $(function () {
 			var segment = $("#" + interval + "-segment-" + id);
 			$(segment).next('button').toggleClass('d-none');
 			$(segment).toggleClass('d-none');
-
+			$('#collapse' + id).collapse('hide');
 		});
 	}
 	//---End re-upload form
