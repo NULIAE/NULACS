@@ -616,27 +616,35 @@ class Affiliate extends MY_Controller
 
 		if(isset($recent_data['monthly']['month']) && isset($recent_data['monthly']['year']))
 		{
-			if($monthly_filter['document_year'] > $recent_data['monthly']['year'])
+			if(!isset($data['month']) && $this->session->role_id == 1)
 			{
 				$monthly_filter['document_month'] =  $recent_data['monthly']['month'];
 				$monthly_filter['document_year'] =  $recent_data['monthly']['year'];
-
-				if(isset($data['interval']) && $data['interval'] == 'nav-y1')
-				{
-					$errorMsg = ($this->session->role_id == 1) ? 'Please update the compliance status for this month.' : 'Please upload all documents for this month';
-					$this->session->set_flashdata('error', $errorMsg);
-				}
 			}
-			else if($monthly_filter['document_year'] == $recent_data['monthly']['year'])
+			else if($this->session->role_id != 1)
 			{
-				if($monthly_filter['document_month'] > $recent_data['monthly']['month'])
+				if($monthly_filter['document_year'] > $recent_data['monthly']['year'])
 				{
-					$monthly_filter['document_month'] =  $recent_data['monthly']['month'];
-					
 					if(isset($data['interval']) && $data['interval'] == 'nav-y1')
 					{
-						$errorMsg = ($this->session->role_id == 1) ? 'Please update the compliance status for this month.' : 'Please upload all documents for this month';
+						$errorMsg = 'Please upload all documents for this month';
 						$this->session->set_flashdata('error', $errorMsg);
+					}
+					
+					$monthly_filter['document_month'] =  $recent_data['monthly']['month'];
+					$monthly_filter['document_year'] =  $recent_data['monthly']['year'];
+				}
+				else if($monthly_filter['document_year'] == $recent_data['monthly']['year'])
+				{
+					if($monthly_filter['document_month'] > $recent_data['monthly']['month'])
+					{
+						if(isset($data['interval']) && $data['interval'] == 'nav-y1')
+						{
+							$errorMsg = 'Please upload all documents for this month';
+							$this->session->set_flashdata('error', $errorMsg);
+						}
+						
+						$monthly_filter['document_month'] =  $recent_data['monthly']['month'];
 					}
 				}
 			}
@@ -673,27 +681,35 @@ class Affiliate extends MY_Controller
 
 		if(isset($recent_data['quarterly']['quarter']) && isset($recent_data['quarterly']['year']))
 		{
-			if($quarterly_filter['document_year'] > $recent_data['quarterly']['year'])
+			if(!isset($data['quarter']) && $this->session->role_id == 1)
 			{
 				$quarterly_filter['document_month'] =  $recent_data['quarterly']['quarter'];
 				$quarterly_filter['document_year'] =  $recent_data['quarterly']['year'];
-
-				if(isset($data['interval']) && $data['interval'] == 'nav-y2')
-				{
-					$errorMsg = ($this->session->role_id == 1) ? 'Please update the compliance status for this quarter.' : 'Please upload all documents for this quarter';
-					$this->session->set_flashdata('error', $errorMsg);
-				}
 			}
-			else if($quarterly_filter['document_year'] == $recent_data['quarterly']['year'])
+			else if($this->session->role_id != 1)
 			{
-				if($quarterly_filter['document_month'] > $recent_data['quarterly']['quarter'])
+				if($quarterly_filter['document_year'] > $recent_data['quarterly']['year'])
 				{
-					$quarterly_filter['document_month'] =  $recent_data['quarterly']['quarter'];
-
 					if(isset($data['interval']) && $data['interval'] == 'nav-y2')
 					{
-						$errorMsg = ($this->session->role_id == 1) ? 'Please update the compliance status for this quarter.' : 'Please upload all documents for this quarter';
+						$errorMsg = 'Please upload all documents for this quarter';
 						$this->session->set_flashdata('error', $errorMsg);
+					}
+
+					$quarterly_filter['document_month'] =  $recent_data['quarterly']['quarter'];
+					$quarterly_filter['document_year'] =  $recent_data['quarterly']['year'];
+				}
+				else if($quarterly_filter['document_year'] == $recent_data['quarterly']['year'])
+				{
+					if($quarterly_filter['document_month'] > $recent_data['quarterly']['quarter'])
+					{
+						if(isset($data['interval']) && $data['interval'] == 'nav-y2')
+						{
+							$errorMsg = 'Please upload all documents for this quarter';
+							$this->session->set_flashdata('error', $errorMsg);
+						}
+
+						$quarterly_filter['document_month'] =  $recent_data['quarterly']['quarter'];
 					}
 				}
 			}
@@ -725,21 +741,27 @@ class Affiliate extends MY_Controller
 
 		if(isset($recent_data['yearly']['year']))
 		{
-			if($yearly_filter['document_year'] > $recent_data['yearly']['year'])
+			if(!isset($data['yearly_year']) && $this->session->role_id == 1)
 			{
 				$yearly_filter['document_year'] = $recent_data['yearly']['year'];
-
-				if(isset($data['interval']) && $data['interval'] == 'nav-y3')
+			}
+			else if($this->session->role_id != 1)
+			{
+				if($yearly_filter['document_year'] > $recent_data['yearly']['year'])
 				{
-					$errorMsg = ($this->session->role_id == 1) ? 'Please update the compliance status for this year.' : 'Please upload all documents for this year';
-					$this->session->set_flashdata('error', $errorMsg);
+					if(isset($data['interval']) && $data['interval'] == 'nav-y3')
+					{
+						$errorMsg = 'Please upload all documents for this year';
+						$this->session->set_flashdata('error', $errorMsg);
+					}
+
+					$yearly_filter['document_year'] = $recent_data['yearly']['year'];
 				}
 			}
 		}
 
 		$recent_data['yearly']['year'] = $yearly_filter['document_year'];
 
-		
 		//Yearly document status
 		$yearly_document_status = $this->Affiliate_model->yearly_document_status($affiliate_id, $yearly_filter, TRUE);
 		
@@ -1499,17 +1521,18 @@ class Affiliate extends MY_Controller
 	 */
 	public function doupload()
      {
+		 $affiliate_id = $_POST['affiliate_id'];
 		if($_POST['document_type'] == 'legal_compliance_document')
 		{
-			$filePath = './uploads/Documents/legal/'.date('Y').'/'.date('m').'/';
+			$filePath = './uploads/Documents/legal/'.$affiliate_id.'/'.date('Y').'/';
 		}
 		else if($_POST['document_type'] == 'other_compliance_document')
 		{
-			$filePath = './uploads/Documents/compliance_other/'.date('Y').'/'.date('m').'/';
+			$filePath = './uploads/Documents/compliance_other/'.$affiliate_id.'/'.date('Y').'/';
 		}
 		else
 		{
-			$filePath = './uploads/Documents/performance_other/'.date('Y').'/'.date('m').'/';
+			$filePath = './uploads/Documents/performance_other/'.$affiliate_id.'/'.date('Y').'/';
 		}
 
 		$config['upload_path'] = $filePath;
@@ -1530,11 +1553,12 @@ class Affiliate extends MY_Controller
 		{
 			$fileName =$this->upload->data('file_name');
 			$fileExtension = substr($this->upload->data('file_ext'), 1);
+			$fullPath = str_replace(FCPATH, '', $this->upload->data('full_path'));
 			
 			$val = array(
 				'document_type_id'=>$_POST['document_type_id'],
 				'affiliate_id'=>$_POST['affiliate_id'],
-				'file_path'=>$filePath,
+				'file_path'=>$fullPath,
 				'upload_file_name'=>$fileName,
 				'upload_file_extension'=>$fileExtension
 			);

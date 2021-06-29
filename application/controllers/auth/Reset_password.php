@@ -69,7 +69,7 @@ class Reset_password extends CI_Controller
 		$data = $this->input->post(NULL, TRUE);
 
 		//Check whether user with the email id exists on `users` table
-		$user_data = $this->User_model->check_user($data['email']);
+		$user_data = $this->User_model->check_user($data['email'], TRUE);
 
 		$status = $message = NULL;
 

@@ -721,7 +721,7 @@ $quarterArray = array(
 													</div>
 												</div>
 
-												<?php if(!isset($currentDoc)): ?>
+												<?php //if(!isset($currentDoc)): ?>
 													<div id="collapse<?php echo $document['document_id']; ?>" class="collapse " aria-labelledby="heading<?php echo $key+1; ?>" data-parent="#accordionExample">
 														<div class="acc-body">
 															<form id="form-upload-<?php echo $document['document_id']; ?>" class="row align-items-end form-metadata">
@@ -748,7 +748,7 @@ $quarterArray = array(
 															</form>
 														</div>
 													</div>
-												<?php endif; ?>
+												<?php //endif; ?>
 
 											</div>
 										<?php endforeach; ?>
@@ -920,7 +920,7 @@ $quarterArray = array(
 														<div class="btn wrdiv <?php if($i%2==0) echo "odd"; ?>">
 															<div class="row  align-items-center">
 																<div class="col-3 col-md-3"><span class="sub"><?=$i++?></span></div>
-																<div class="col-24 col-md-10"><span class="sub"><a href="<?= base_url().$legal['quarterly_upload_file'].$legal['quarterly_upload_file_name']?>" target="_blank"><?=isset($legal['quarterly_upload_file_name'])?$legal['quarterly_upload_file_name']:''?></a>
+																<div class="col-24 col-md-10"><span class="sub"><a href="<?= base_url().$legal['quarterly_upload_file']?>" target="_blank"><?=isset($legal['quarterly_upload_file_name'])?$legal['quarterly_upload_file_name']:''?></a>
 																	<a href="javascript:reupload('legal', <?php echo $legal['legal_d_id']; ?>);">
 																	<span><i class="i i-create"></i> 
 																	</span>
@@ -1086,7 +1086,7 @@ $quarterArray = array(
 														<div class="btn wrdiv <?php if($i%2==0) echo "odd"; ?>">
 															<div class="row  align-items-center">
 																<div class="col-3 col-md-3"><span class="sub"><?=$i++?></span></div>
-																<div class="col-24 col-md-10"><span class="sub"><a href="<?= base_url().$other['other_upload_file'].$other['other_upload_file_name']?>" target="_blank"><?=isset($other['other_upload_file_name'])?$other['other_upload_file_name']:''?></a>
+																<div class="col-24 col-md-10"><span class="sub"><a href="<?= base_url().$other['other_upload_file']?>" target="_blank"><?=isset($other['other_upload_file_name'])?$other['other_upload_file_name']:''?></a>
 																	<a href="javascript:reupload('com-other', <?php echo $other['id']; ?>);">
 																	<span><i class="i i-create"></i>
 																	</span></a>
@@ -1775,7 +1775,7 @@ $quarterArray = array(
 														<div class="btn wrdiv <?php if($i%2==0) echo "odd"; ?>">
 															<div class="row  align-items-center">
 																<div class="col-3 col-md-3"><span class="sub"><?=$i++?></span></div>
-																<div class="col-24 col-md-10"><span class="sub"><a href="<?= base_url().$other['performance_other_upload_file'].$other['performance_other_upload_file_name']?>" target="_blank"><?=isset($other['performance_other_upload_file_name'])?$other['performance_other_upload_file_name']:''?></a>
+																<div class="col-24 col-md-10"><span class="sub"><a href="<?= base_url().$other['performance_other_upload_file']?>" target="_blank"><?=isset($other['performance_other_upload_file_name'])?$other['performance_other_upload_file_name']:''?></a>
 																	<a href="javascript:reupload('per-other', <?php echo $other['performance_o_id']; ?>);">
 																	<span><i class="i i-create"></i> 
 																	</span>
