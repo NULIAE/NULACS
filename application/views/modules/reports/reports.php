@@ -561,6 +561,7 @@ font-size: 10px!important;
     }, 2000);
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'Quarter');
+      <?php $graph_data["rows"] = array_reverse($graph_data["rows"]); ?>
       <?php foreach($graph_data["columns"] as $column): ?>
       <?php echo 'data.addColumn("number", "'.$column.'");'; ?>
       <?php endforeach; ?>
