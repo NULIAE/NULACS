@@ -221,7 +221,7 @@ class Affiliate_model extends CI_Model
 	{
 		//Calculate the previous month as `year_start`
 		$date_to_time = strtotime($year_end);
-		$year_start = date("Y-m-d", strtotime("-1 month", $date_to_time));
+		$year_start = date("Y-m-d", strtotime("-11 month", $date_to_time));
 		
 		$data = array(
 			'affiliate_id' => $affiliate_id,
@@ -246,7 +246,7 @@ class Affiliate_model extends CI_Model
 	{
 		//Calculate the previous month as `year_start`
 		$date_to_time = strtotime($year_end);
-		$year_start = date("Y-m-d", strtotime("-1 month", $date_to_time));
+		$year_start = date("Y-m-d", strtotime("-11 month", $date_to_time));
 		
 		$data = array(
 			'year_start'   => $year_start,
