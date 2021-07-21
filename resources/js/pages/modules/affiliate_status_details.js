@@ -15,6 +15,8 @@ $(function () {
 	$('.chatBoxinn').scrollTop($('.chatBoxinn')[0].scrollHeight);
 	}
 
+	init_delete_termly_document();
+
 	initCommentBox();
 
 	initStatusSelectBoxes();
@@ -276,6 +278,8 @@ $(function () {
 								if(docName != "Others") {
 									$('#submitted-' + elemId).html('<span class="sub">' + moment().format("MM/DD/YYYY") + '</span>');
 									$('#document-name-' + elemId).html('<a href="' + base_url + response.upload_data.full_path + '" class="float-left" target="_blank"><span class="sub text-primary link">' + docName + '</span></a> <a href="#" data-document="'+elemId+'" data-interval="'+interval+'" class="reupload"><span class="sub"><i class="i i-create"></i></span></a>');
+
+									$('#document-name-' + elemId).html('<a href="' + base_url + response.upload_data.full_path + '" class="float-left" target="_blank"><span class="sub text-primary link">' + docName + '</span></a> <a href="#" data-document="'+elemId+'" data-interval="'+interval+'" class="reupload float-left pl-1"><span class="sub pl-1"><i class="i i-create"></i></span></a><a href="#" data-document="'+elemId+'" data-interval="'+interval+'" data-uploadid="'+response.upload_data.added_document_id+'" class="deletedoc float-left pl-1"><span class="sub pl-1"><i class="i i-delete"></i></span>');
 									
 									if($("#doc-status-" + elemId).length){
 										$("#doc-status-" + elemId).toggleClass("d-none");
@@ -309,6 +313,8 @@ $(function () {
 									}
 
 									initReUploadDocuments();
+
+									init_delete_termly_document();
 									
 									if($("#" + interval + "-row-" + elemId + ' select.selG').length){
 										$("#" + interval + "-row-" + elemId + ' select.selG').val(5);
@@ -1511,3 +1517,78 @@ $('.operating_reserves_percentage_blur').on('blur', function() {
 		}
 	}
 });
+
+function init_delete_termly_document(){
+	$('.deletedoc').click(function (e) {
+		e.preventDefault();
+		var input = $(this);
+		var inputData = {
+			interval: input.data('interval'),
+			document_id: input.data('document'),
+			uploaded_id: input.data('uploadid')
+		}
+
+		$('#dialog').NitroDialog({
+			action: "open",
+			backdrop: true,
+			message: '<h4 class="bold m-b-15"><i class="i i-warning text-warning m-r-10"></i>Confirm</h4><p>Do you want to delete this document?</p>',
+			buttons: [
+				{
+					label: 'Proceed',
+					class: "btn btn-primary mr-1",
+					action: function () {
+						$('#dialog').NitroDialog({ action: "close" });
+						console.log(inputData);
+						$.ajax({
+							type: 'POST',
+							url: base_url + 'module/affiliate/document/delete_termly_document',
+							data: inputData,
+							dataType: 'json'
+						}).done(function (data) {
+							if(data.success){		
+								showDialogBox('success', data.message);
+								var interval = data.interval;
+								var elemId = data.document;
+								
+								var segment = $("#" + interval + "-segment-" + elemId);
+								$("#btn-collapse-"+elemId).toggleClass('d-none');
+								$(segment).toggleClass('d-none');
+								var docName = $('#document-name-' + elemId + ' span').html();
+								
+								$('#submitted-' + elemId).html('');
+								$('#document-name-' + elemId).html('<span class="sub">'+docName+'</span>');
+								
+								$("#doc-status-" + elemId).toggleClass("d-none");
+								$("#chat-box-" + elemId).toggleClass("d-none");
+		
+								if($("#" + interval + "-row-" + elemId + ' select.selG').length){
+									$("#" + interval + "-row-" + elemId + ' select.selG').val(4);
+								} else {
+									$("#doc-status-" + elemId).html('<span class="sub"><a href="javascript:(0)" class="btn btn-lbl" data-rel="tooltip" data-placement="bottom" title="Submission Pending"><i class="i i-document-status d-status"></i> </a></span>');
+								}
+								$('[data-rel="tooltip"]').tooltip();
+
+								var allowed_files = $('#dropzone-' + elemId + ' form').data('doctype');
+								
+								if(allowed_files != '')
+									$('#dropzone-' + elemId + ' p').html('<small><i>(Supports only '+allowed_files+' files)</i></small>');
+								else
+									$('#dropzone-' + elemId + ' p').html('<small><i></i></small>');
+
+							} else {
+								showDialogBox('error', data.message);
+							}
+						});
+					}
+				},
+				{
+					label: 'Cancel',
+					class: "btn btn-secondary",
+					action: function () {
+						$('#dialog').NitroDialog({ action: "close" });
+					}
+				}
+			]
+		});
+	});
+}

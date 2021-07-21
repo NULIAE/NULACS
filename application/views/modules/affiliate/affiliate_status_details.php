@@ -145,8 +145,8 @@ $quarterArray = array(
 																<div class="col-14 col-md-6" id="document-name-<?php echo $document['document_id']; ?>">
 																	<?php if(isset($currentDoc)) : ?>
 																		<a href="<?php echo base_url($currentDoc['monthly_upload_file']); ?>" class="float-left" target="_blank"><span class="sub text-primary link"><?php echo $document['document_name']; ?></span></a> 
-																		<a href="#" data-document="<?php echo $document['document_id']; ?>" data-interval="month" class="reupload float-left pl-1"><span class="sub pl-1"><i class="i i-create"></i></span></a> 
-																		<?php if($currentDoc['monthly_compliance_status'] == 5): ?><a href="#" data-document="<?php echo $currentDoc['monthly_document_id']; ?>" data-interval="month" class="deletedoc float-left pl-1"><span class="sub pl-1"><i class="i i-delete"></i></span><?php endif; ?></a>
+																		<a href="#" data-document="<?php echo $document['document_id']; ?>" data-interval="month" class="reupload float-left pl-1"><span class="sub"><i class="i i-create"></i></span></a> 
+																		<?php if($currentDoc['monthly_compliance_status'] == 5): ?><a href="#" data-document="<?php echo $document['document_id']; ?>" data-interval="month" data-uploadid="<?php echo $currentDoc['monthly_document_id']; ?>" class="deletedoc float-left pl-1"><span class="sub pl-1"><i class="i i-delete"></i></span><?php endif; ?></a>
 																	<?php else: ?>
 																		<span class="sub"><?php echo $document['document_name']; ?></span>
 																	<?php endif; ?>
@@ -395,8 +395,8 @@ $quarterArray = array(
 																<div class="col-14 col-md-6" id="document-name-<?php echo $document['document_id']; ?>">
 																<?php if(isset($currentDoc)) : ?>
 																		<a href="<?php echo base_url($currentDoc['quarterly_upload_file']); ?>" class="float-left" target="_blank"><span class="sub text-primary link"><?php echo $document['document_name']; ?></span></a> 
-																		<a href="#" data-document="<?php echo $document['document_id']; ?>" data-interval="quarter" class="reupload float-left"><span class="sub"><i class="i i-create"></i></span></a>
-																		<?php if($currentDoc['quarterly_compliance_status'] == 5): ?><a href="#" data-document="<?php echo $currentDoc['quarterly_id']; ?>" data-interval="quarter" class="deletedoc float-left"><span class="sub pl-1"><i class="i i-delete"></span></i><?php endif; ?></a>
+																		<a href="#" data-document="<?php echo $document['document_id']; ?>" data-interval="quarter" class="reupload float-left pl-1"><span class="sub pl-1"><i class="i i-create"></i></span></a>
+																		<?php if($currentDoc['quarterly_compliance_status'] == 5): ?><a href="#" data-document="<?php echo $document['document_id']; ?>" data-interval="quarter" data-uploadid="<?php echo $currentDoc['quarterly_id']; ?>" class="deletedoc float-left pl-1"><span class="sub pl-1"><i class="i i-delete"></span></i><?php endif; ?></a>
 																	<?php else: ?>
 																		<span class="sub"><?php echo $document['document_name']; ?></span>
 																	<?php endif; ?>
@@ -633,8 +633,8 @@ $quarterArray = array(
 																<div class="col-14 col-md-6" id="document-name-<?php echo $document['document_id']; ?>">
 																	<?php if(isset($currentDoc)) : ?>
 																		<a href="<?php echo base_url($currentDoc['yearly_upload_file']); ?>" class="float-left" target="_blank"><span class="sub text-primary link"><?php echo $document['document_name']; ?></span></a> 
-																		<a href="#" data-document="<?php echo $document['document_id']; ?>" data-interval="year" class="reupload float-left"><span class="sub"><i class="i i-create"></i></span></a> 
-																		<?php if($currentDoc['yearly_compliance_status'] == 5): ?><a href="#" data-document="<?php echo $currentDoc['yearly_d_id']; ?>" data-interval="year" class="deletedoc float-left"><span class="sub pl-1"><i class="i i-delete"></i></span><?php endif; ?></a>
+																		<a href="#" data-document="<?php echo $document['document_id']; ?>" data-interval="year" class="reupload float-left pl-1"><span class="sub pl-1"><i class="i i-create"></i></span></a> 
+																		<?php if($currentDoc['yearly_compliance_status'] == 5): ?><a href="#" data-document="<?php echo $document['document_id']; ?>" data-interval="year" data-uploadid="<?php echo $currentDoc['yearly_d_id']; ?>" class="deletedoc float-left pl-1"><span class="sub pl-1"><i class="i i-delete"></i></span><?php endif; ?></a>
 																	<?php else: ?>
 																		<span class="sub"><?php echo $document['document_name']; ?></span>
 																	<?php endif; ?>

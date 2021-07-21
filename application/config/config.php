@@ -493,7 +493,7 @@ $config['csrf_exclude_uris'] = array(
 	'module/notification/emails/save',
 	'module/notification/emails/send_reminder',
 	'module/assessment/add_self_assessment_data',
-
+	'module/affiliate/document/delete_termly_document'
 );
 
 /*
