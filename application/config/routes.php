@@ -108,6 +108,7 @@ $route['module/affiliate/document/upload'] = 'modules/affiliate/affiliate/upload
 $route['module/affiliate/filter-performance-documents'] = 'modules/affiliate/affiliate/filter_performance_documents_by_year';
 $route['module/affiliate/key-indicators/save'] = 'modules/affiliate/affiliate/save_key_indicators';
 $route['module/affiliate/key-indicators/search'] = 'modules/affiliate/affiliate/search_key_indicators';
+$route['module/affiliate/document/delete_termly_document'] = 'modules/affiliate/affiliate/delete_termly_document';
 
 /* Routes for Document Search Module Controllers */
 $route['module/documents/search'] = 'modules/documents/DocumentsSearch/index';

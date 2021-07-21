@@ -1680,4 +1680,58 @@ class Affiliate extends MY_Controller
 
 	}
 	 
+	/**
+	 * Delete monthly/quarterly/yearly uploaded file
+	 */
+	public function delete_termly_document()
+	{
+		$data = $this->input->post(NULL, TRUE);
+
+		$doc_details = $this->Affiliate_model->get_term_document($data);
+
+		if(isset($doc_details) && $doc_details != FALSE)
+		{
+			if($data['interval'] == "month")
+			{
+				$file_path = $doc_details['monthly_upload_file'];
+			}
+			else if($data['interval'] == "quarter")
+			{
+				$file_path = $doc_details['quarterly_upload_file'];
+			}
+			else if($data['interval'] == "year")
+			{
+				$file_path = $doc_details['yearly_upload_file'];
+			}
+
+			if($this->Affiliate_model->delete_term_document($data))
+			{
+				if(file_exists($file_path)){
+					unlink($file_path);
+				}
+
+				$status = TRUE;
+				$message = 'Document deleted successfully.';
+			}
+			else
+			{
+				$status = FALSE;
+				$message = 'Deletion failed. Please try again later';
+			}
+		}
+		else
+		{
+			$status = FALSE;
+			$message = 'Uploaded document not found.';
+		}
+
+		$result = array(
+			'success' => $status,
+			'interval' => $data['interval'],
+			'document' => $data['document_id'],
+			'message' => $message
+		);
+
+		echo json_encode($result);
+	}
 }
