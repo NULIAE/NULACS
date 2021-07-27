@@ -121,6 +121,7 @@ class Email_model extends CI_Model
 	{
 		$this->db->select("user_email_address_1");
 		$this->db->where("role_id", 1);
+		$this->db->where("user_status", 1);
 
 		$query = $this->db->get("users");
 
