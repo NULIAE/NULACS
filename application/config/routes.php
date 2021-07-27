@@ -142,3 +142,4 @@ $route['module/notification/emails/save'] = 'modules/notification_center/email_t
 $route['module/notification/emails/preview/(:num)'] = 'modules/notification_center/email_template/preview/$1';
 
 $route['module/notification/emails/send_reminder'] = 'modules/notification_center/email_template/send_remainders';
+$route['module/notification/emails/send_testmail'] = 'modules/notification_center/email_template/send_testmails';

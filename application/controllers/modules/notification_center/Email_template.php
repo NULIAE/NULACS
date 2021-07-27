@@ -283,4 +283,92 @@ class Email_template extends MY_Controller
 
 		echo json_encode($response);
 	}
+
+	public function send_testmails()
+	{
+		$data = $this->input->post();
+
+		$template = $this->Email_model->get_template($data["template"]);
+
+		$user_mails = $this->Email_model->get_admin_emails();
+
+		$target_mails = "";
+
+		foreach($user_mails as $row)
+		{
+			if(isset($row["user_email_address_1"]))
+            {
+                $target_mails .= ($target_mails == "") ? "" : ",";
+                $target_mails .= $row["user_email_address_1"];
+            }
+		}
+
+		$quarter = ceil($data["month"]/3);
+
+		$target_date = mktime(0, 0, 0, $data["month"], 1, $data["year"]);
+
+		$quarterArray = array(
+			'1' => 'January - March',
+			'2' => 'April - June',
+			'3' => 'July - September',
+			'4' => 'October - December',
+		);
+
+		$data['month'] = date("F", $target_date);
+		$data['quarter'] = $quarterArray[$quarter];
+
+		$data['last_date'] = date("l, F t, Y", strtotime("+1 month", $target_date));
+
+		$this->load->library('parser');
+
+		$preview_data = array(
+			"message" => $this->parser->parse_string($template['html_code'], $data, TRUE)
+		);
+		
+		$message = $this->load->view('layout/mail_template', $preview_data, TRUE);
+
+		//Get SMTP settings
+        $settings = array();
+        
+        $result = $this->Settings_model->get_all_settings();
+
+        foreach ( $result as $row)
+		{
+			$settings[$row['label']] = $row['value'];
+		}
+
+        $config['smtp_host'] = $settings['smtp_host'];
+        $config['smtp_user'] = $settings['smtp_user'];
+        $config['smtp_pass'] = $settings['smtp_pass'];
+        $config['smtp_port'] = $settings['smtp_port'];
+        
+        $this->load->library('email');
+        
+        $this->email->initialize($config);
+
+        $this->email->from("noreply@nul.org", "National Urban League");
+        
+		$this->email->to($target_mails);
+    
+        $this->email->subject($template['subject']);
+
+        $this->email->message($message);
+    
+        if($this->email->send())
+		{
+			$response = array(
+				"success" => TRUE,
+				"message" => "Reminder emails has been sent."
+			);
+		}
+		else
+		{
+			$response = array(
+				"success" => FALSE,
+				"message" => "Failed to send the emails. Please try again later."
+			);
+		}
+
+		echo json_encode($response);
+	}
 }

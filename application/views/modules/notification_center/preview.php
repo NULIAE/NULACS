@@ -68,9 +68,12 @@ button.remindBox, button.remindBox:focus{
                             </select>
                         </div>
 
-						<div class="col-lg-5 col-md-5 col-12 ">
-							<div class="t-l"><button type="submit" class="btn btn-primary btn-rounded min w-100px">PREVIEW</button></div>
+						<div class="col-lg-4 col-md-4 col-12 ">
+							<div class="t-l"><button type="submit" class="btn btn-primary btn-rounded btn-block">PREVIEW</button></div>
 						</div>
+                        <div class="col-lg-4 col-md-4 col-12 ">
+                            <div class="t-l"><button type="button" id="btn-send-testmail" class="btn btn-primary btn-rounded btn-block">TEST MAIL</button></div>
+                        </div>
 					</div>
 				</form>
                 </div>
