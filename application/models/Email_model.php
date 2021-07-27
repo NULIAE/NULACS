@@ -116,4 +116,15 @@ class Email_model extends CI_Model
 
 		return $query->result_array();
 	}
+
+	public function get_admin_emails()
+	{
+		$this->db->select("user_email_address_1");
+		$this->db->where("role_id", 1);
+		$this->db->where("user_status", 1);
+
+		$query = $this->db->get("users");
+
+		return $query->result_array();
+	}
 }

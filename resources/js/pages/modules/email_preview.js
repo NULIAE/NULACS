@@ -45,4 +45,33 @@ $(function () {
             btnElement.html('<i class="i i-monthly-reminder"></i>send reminder').removeAttr("disabled");
         });
     });
+
+    $("#btn-send-testmail").on("click", function() {
+        var btnElement = $(this);
+        
+        btnElement.html('SENDING...').attr("disabled", "disabled");
+
+        var inputData = {
+            "template": $('input[name="template"]').val(),
+            "month" : $('select[name="month"]').val(),
+            "year" : $('select[name="year"]').val()
+        };
+
+        console.log(inputData);
+        
+        $.ajax({
+            type : 'POST',
+            url	 : base_url + 'module/notification/emails/send_testmail',
+            data : inputData,
+            dataType : 'json'
+        }).done(function(data) {
+            if(data.success){		
+                showDialogBox('success', data.message);
+            } else {
+                showDialogBox('error', data.message);
+            }
+
+            btnElement.html('TEST MAIL').removeAttr("disabled");
+        });
+    });
 });
