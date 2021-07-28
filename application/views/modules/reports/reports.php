@@ -574,7 +574,12 @@ font-size: 10px!important;
           subtitle: 'in millions of dollars (USD)'
         }, */
         width: "100%",
-        height: 500
+        height: 500,
+        vAxis: {
+          viewWindow: {
+            min: 0
+          }
+        }
       };
 
       var chart = new google.charts.Line(document.getElementById('chart_divnul'));
