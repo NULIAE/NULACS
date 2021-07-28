@@ -209,7 +209,6 @@
           easing: 'out',
           startup: true
         },
-        ,
         vAxis: {
           title: 'No of Affiliates',
           ticks: [0, 25,50,75,100] 
