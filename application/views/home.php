@@ -209,9 +209,10 @@
           easing: 'out',
           startup: true
         },
+        ,
         vAxis: {
-            title: 'Performance Score',
-            ticks: [0, 1, 2, 3, 4, 5]
+          title: 'No of Affiliates',
+          ticks: [0, 25,50,75,100] 
         }
       };
       var chart = new google.visualization.BarChart(document.getElementById("myChart"));
