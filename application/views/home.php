@@ -202,13 +202,16 @@
       ]);
 
       var options = {
-        title: "Performance Score",
         orientation: 'horizontal',
         legend: { position: "none" },
         animation:{
           duration: 1000,
           easing: 'out',
           startup: true
+        },
+        vAxis: {
+            title: 'Performance Score',
+            ticks: [0, 1, 2, 3, 4, 5]
         }
       };
       var chart = new google.visualization.BarChart(document.getElementById("myChart"));
