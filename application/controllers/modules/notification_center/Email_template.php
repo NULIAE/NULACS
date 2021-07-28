@@ -203,15 +203,24 @@ class Email_template extends MY_Controller
 
 		$user_mails = $this->Email_model->get_user_emails($data["users"]);
 
-		$target_mails = "";
+		$email_list = array("");
 
-		foreach($user_mails as $row)
+		$count = 0;
+
+		// Make batches of 50 user emails
+		foreach($user_mails as $key => $row)
 		{
 			if(isset($row["user_email_address_1"]))
             {
-                $target_mails .= ($target_mails == "") ? "" : ",";
-                $target_mails .= $row["user_email_address_1"];
+                $email_list[$count] .= ($email_list[$count] == "") ? "" : ",";
+                $email_list[$count] .= $row["user_email_address_1"];
             }
+
+			if($key < (($count + 1) * 50 - 1))
+				continue;
+			
+			$count++;
+			$email_list[$count] = "";
 		}
 
 		$quarter = ceil($data["month"]/3);
@@ -252,36 +261,31 @@ class Email_template extends MY_Controller
         $config['smtp_user'] = $settings['smtp_user'];
         $config['smtp_pass'] = $settings['smtp_pass'];
         $config['smtp_port'] = $settings['smtp_port'];
-        
-        $this->load->library('email');
-        
-        $this->email->initialize($config);
 
-        $this->email->from("noreply@nul.org", "National Urban League");
-        
-		$this->email->to($target_mails);
-        //$this->email->to("nulapplication@gmail.com");
-    
-        $this->email->subject($template['subject']);
-
-        $this->email->message($message);
-    
-        if($this->email->send())
+		// Send mails to each batch of 50 emails
+		foreach($email_list as $list)
 		{
-			$response = array(
-				"success" => TRUE,
-				"message" => "Reminder emails has been sent."
-			);
+			$this->load->library('email');
+			
+			$this->email->initialize($config);
+
+			$this->email->from("noreply@nul.org", "National Urban League");
+			
+			$this->email->to($list);
+		
+			$this->email->subject($template['subject']);
+
+			$this->email->message($message);
+		
+			$status = $this->email->send();
 		}
+
+		if($status)
+			$message = "Reminder emails has been sent.";
 		else
-		{
-			$response = array(
-				"success" => FALSE,
-				"message" => "Failed to send the emails. Please try again later."
-			);
-		}
+			$message = "Failed to send the emails. Please try again later.";
 
-		echo json_encode($response);
+		echo json_encode(array("success" => $status,"message" => $message));
 	}
 
 	public function send_testmails()
