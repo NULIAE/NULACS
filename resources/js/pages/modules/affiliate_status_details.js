@@ -418,6 +418,7 @@ $(function () {
 			useCurrent: false,
 			format: 'YYYY',
 			maxDate: moment().subtract(1,'months').endOf('month').format('YYYY-MM-DD'),
+			minDate:'2010',
 			icons: {
 				previous: 'i i-keyboard_arrow_left',
 				next: 'i i-keyboard_arrow_right',
@@ -1102,7 +1103,7 @@ function openTab(val) {
 		$("#liquidity_v").val('');
 	}
 
-	if(liquidity_assets_available_v && liquidity_contractual_restrictions_v && liquidity_restrictions_by_donor_v){
+	if(liquidity_assets_available_v || liquidity_contractual_restrictions_v || liquidity_restrictions_by_donor_v){
 
 		var liquidity_s =  ((liquidity_assets_available_v) - ((+liquidity_contractual_restrictions_v) + (+liquidity_restrictions_by_donor_v)) )  ;
 
@@ -1116,6 +1117,11 @@ function openTab(val) {
 });
 
 $('.current_ratio_blur').on('blur', function() {
+
+	
+	if($('#current_liabilities_v').val() == 0 && $('#current_liabilities_v').val() != ""){
+		showDialogBox('error','Division by zero not possible');
+	}
 
 	var get_val = $('#'+$(this).attr('id')).val();
 
@@ -1154,6 +1160,10 @@ $('.current_ratio_blur').on('blur', function() {
 });
 
 $('.current_debt_ratio_blur').on('blur', function() {
+
+	if($('#total_assets_v').val() == 0 && $('#total_assets_v').val() != ""){
+		showDialogBox('error','Division by zero not possible');
+	}
 
 	var get_val = $('#'+$(this).attr('id')).val();
 
@@ -1214,9 +1224,11 @@ $('.change_in_cash_ytd_blur').on('blur', function() {
 		$("#from_operations_v").prop('required',true);
 		$("#from_financing_v").prop('required',true);
 		$("#from_investing_v").prop('required',true);
+	}else{
+		$("#change_in_cash_ytd_v").val('');
 	}
 
-	if(from_operations_v && from_financing_v && from_investing_v){
+	if(from_operations_v || from_financing_v || from_investing_v){
 
 		var change_in_cash_ytd_s =  ((+from_financing_v) + (+from_operations_v) + (+from_investing_v))   ;
 		var f_change_in_cash_ytd_s = parseFloat(change_in_cash_ytd_s).toFixed(0); 
