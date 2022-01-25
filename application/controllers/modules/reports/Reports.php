@@ -165,6 +165,8 @@ class Reports extends MY_Controller
 		
 		$spreadsheet = new Spreadsheet();
 		$sheet = $spreadsheet->getActiveSheet();
+		 // Rename 1st sheet
+		 $spreadsheet->getActiveSheet()->setTitle('KPI');
 
 		$sheet->setCellValue('B2', 'Liquidity');
 		$sheet->setCellValue('C2', 'Curren Ratio (S/B Greater than 1)');
@@ -214,6 +216,7 @@ class Reports extends MY_Controller
 		$color_red = PhpOffice\PhpSpreadsheet\Style\Color::COLOR_RED;
 
 		$i = 4;
+		$sheet2 = $spreadsheet->createSheet();
 		foreach($result as $record)
 		{
 			$row = json_decode($record["indicators"], TRUE);
@@ -339,8 +342,20 @@ class Reports extends MY_Controller
 				$sheet->getStyle('Q'.$i)->getNumberFormat()->setFormatCode("0.00\\%");
 			}
 			
+			$spreadsheet->setActiveSheetIndex(1);
+			$spreadsheet->getActiveSheet(1)->setCellValue('A2', "Affiliates");
+            $spreadsheet->getActiveSheet(1)->setCellValue('B2', "Comments");
+
+			$spreadsheet->getActiveSheet(1)->setCellValue('A'.$i, $record['name']);
+            if(!empty($row['qualitative_narrative'])){
+                $spreadsheet->getActiveSheet(1)->setCellValue('B'.$i, $row['qualitative_narrative']);
+            }
+			 // Rename 2nd sheet
+             $spreadsheet->getActiveSheet(1)->setTitle('Liquidity Narrative');
 			$i++;
 		}
+			// Active 1st worksheet
+			$spreadsheet->setActiveSheetIndex(0);
 
 		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 		header('Content-Disposition: attachment;filename="'.$OutputFilename.'"');

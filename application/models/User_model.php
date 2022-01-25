@@ -187,6 +187,17 @@ class User_model extends CI_Model
 	 */
 	public function get_users_count($where = NULL) 
 	{
+
+		if(!empty($where['users.name'])){
+			$this->db->group_start();
+			$this->db->like('users.name',$where['users.name']);
+			$this->db->or_like('users.first_name',$where['users.name']);
+			$this->db->or_like('users.last_name',$where['users.name']);
+			$this->db->group_end();
+			unset($where['users.name']);
+		}
+		
+		
 		if( $where !== NULL)
 		{
 			$this->db->where($where);
@@ -214,6 +225,15 @@ class User_model extends CI_Model
 		$this->db->join('state', 'stateid = affiliate.state');
 		$this->db->where('is_deleted',0);
 
+		
+		if(!empty($where['users.name'])){
+			$this->db->group_start();
+			$this->db->like('users.name',$where['users.name']);
+			$this->db->or_like('users.first_name',$where['users.name']);
+			$this->db->or_like('users.last_name',$where['users.name']);
+			$this->db->group_end();
+			unset($where['users.name']);
+		}
 		if( $where !== NULL)
 		{
 			$this->db->where($where);

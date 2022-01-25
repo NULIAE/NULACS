@@ -66,7 +66,11 @@ class User extends MY_Controller
 			
 		if( isset($data['affiliate']) && ($data['affiliate'] !== '') )
 			$filters['users.affiliate_id'] =  $data['affiliate'];
-		
+
+		if( isset($data['useremail']) && ($data['useremail'] !== '') ){
+			$filters['users.name']= $data['useremail']   ;
+		}
+
 		if( empty($filters) )
 			$filters = NULL;
 

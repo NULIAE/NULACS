@@ -13,7 +13,7 @@
 				<form class="filter" id="filter-form" action="<?php echo base_url('module/user/filter'); ?>">
 					<div class="row align-items-end">
 						<?php if($this->session->role_id==1): ?>
-						<div class="col-lg-4 col-md-6 col-sm-24 ">
+						<div class="col-lg-3 col-md-6 col-sm-24 ">
 							<label for="region">Region</label>
 							<select name="region" id="region" data-placeholder="Region" data-type="selector">
 							<option value="">All Regions</option>
@@ -48,7 +48,7 @@
 								<?php endforeach; ?>
 							</select>
 						</div>
-						<div class="col-lg-4 col-md-6 col-sm-24 ">
+						<div class="col-lg-3 col-md-6 col-sm-24 ">
 							<label for="user">User</label>
 							<select name="status" data-placeholder="User" data-type="selector">
 								<option value="">All Users</option>
@@ -56,12 +56,16 @@
 								<option value="0">Inactive Users</option>
 							</select>
 						</div>
+						<div class="col-lg-3 col-md-6 col-sm-24 ">
+							<label for="user">User ID/Name</label>
+							<input type="text" name="useremail" class="form-control" placeholder="UserID or Name" style="border-radius: 10px;"> 
+						</div>
 						<input type="hidden" id="page-items" name="page_items" value="">
-						<div class="col-lg-3 col-md-3 col-sm-12 ">
+						<div class="col-lg-2 col-md-3 col-sm-12 ">
 						<div class="t-c"><button id="search-btn" type="submit" class="btn btn-primary btn-rounded min w-100px">SEARCH</button> </div>
 						</div>
 						<?php if($this->session->role_id==1): ?>
-							<div class="col-lg-3 col-md-3 col-sm-12 mt-2">
+							<div class="col-lg-2 col-md-3 col-sm-12 mt-2">
 							<div class="t-c"><button id="export-btn" class="btn btn-primary btn-rounded min w-100px">EXPORT</button> </div>
 							</div>
 						<?php else: ?>

@@ -742,6 +742,11 @@ function c_one_s_four(){
                  "c1_s4_4_6_val_1":$('#c1_s4_4_6_val_1').val(),
                  "c1_s4_4_6_val_2":$('#c1_s4_4_6_val_2').val(), 
                  "c1_s4_4_6_rating_1":$('#c1_s4_4_6_rating_1').val(),        
+                 "c1_s4_4_7_comment_1":$('#c1_s4_4_7_comment_1').val(),
+                 "c1_s4_4_7_checkbox_1":$('#c1_s4_4_7_checkbox_1').val(),
+                 "c1_s4_4_7_rating_1":$('#c1_s4_4_7_rating_1').val(),
+                 "c1_s4_4_7_val_1":$('#c1_s4_4_7_val_1').val(),
+                 "c1_s4_4_7_val_2":$('#c1_s4_4_7_val_2').val(), 
 
             }
 			// $('#message-box').fadeOut();

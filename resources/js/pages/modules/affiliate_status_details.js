@@ -1476,7 +1476,7 @@ $('.borad_giving_blur').on('blur', function() {
 
 	if(direct_borad_giving_v && borad_commitment_v){
 
-		var borad_giving_s =  (direct_borad_giving_v / borad_commitment_v)  ;
+		var borad_giving_s =  (direct_borad_giving_v / borad_commitment_v) * 100;
 		var f_borad_giving_s = parseFloat(borad_giving_s).toFixed(0); 
 
 		if($.isNumeric(f_borad_giving_s) && f_borad_giving_s > 0) { 

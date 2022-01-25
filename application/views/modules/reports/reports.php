@@ -261,9 +261,34 @@ font-size: 10px!important;
                           } ?>
                           </td>
                         </tr>
-                      <?php endforeach; ?>
+                      <?php   endforeach; ?>
                     </tbody>
                   </table>
+                  
+                  <br><br>
+
+                  <table class="table table1 table-bordered" id="table11">
+                    <thead>
+                      <tr>
+                        <th scope="col">Affiliates </th>
+                        <th scope="col">Liquidity Narrative</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <?php $i=0;foreach($content['key_indicators'] as $ki):?>
+                      <tr>
+                    <td scope="row" class="t-l-c">
+                      <a class="d-block" href="<?php echo base_url('module/filter/reports')."?affiliate=".$ki['affiliate_id']."&choose_yr=".$year; ?>"><?=$ki['name']?></a>
+                      <?php $yummy = json_decode($ki['indicators'], true); ?>
+                    </td>
+                    <td><?php if (!empty($yummy['qualitative_narrative'])){echo $yummy['qualitative_narrative'];} ?></td> 
+                    </tr>    
+                    <?php 
+                    $i++;
+                    endforeach; 
+                    ?>                 
+                    </tbody>
+                    </table>
 
                 </div>
 
