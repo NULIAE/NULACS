@@ -53,7 +53,8 @@ if(isset($_GET['uid']) && !empty($_GET['uid'])){
             $c1s4_['4.3'] = 'Is the personnel manual regularly reviewed and updated to (1) describe recruitment, hiring, termination and standard work rules for all staff and (2) maintain compliance with changing government regulations including FLSA, EEOC, ADA, OSHA, FMLA and Affirmative Action Plan?';
             $c1s4_['4.4'] = 'The affiliate monitors legislative and regulatory actions that affect its corporate rights and responsibilities and takes appropriate action.';
             $c1s4_['4.5'] = 'The board of directors retains (either pro bono or fee-based) the services of independent legal counsel, who is available on an ongoing basis, but who does not hold elective or appointed office in the affiliate.';
-            $c1s4_['4.6'] = 'Negotiating and entering into contracts in the name of, or on behalf of, the Urban League are conducted by individuals designated by the affiliate’s board of directors and identified in the policies and procedures manual established by the affiliate board of directors or bylaws.';
+            $c1s4_['4.6'] = 'Are copies of the manual available for all board members, volunteers and staff?';
+            $c1s4_['4.7'] = 'Negotiating and entering into contracts in the name of, or on behalf of, the Urban League are conducted by individuals designated by the affiliate’s board of directors and identified in the policies and procedures manual established by the affiliate board of directors or bylaws.';
 
             $c1s5_['5.1'] = 'Does the affiliate have a clearly defined Strategic Plan with timelines for achieving affiliate goals and objectives?';
             $c1s5_['5.2'] = 'Did the affiliate involve board members, staff, service recipients, volunteers, key constituents and general members of the community to participate in the strategic planning process?';

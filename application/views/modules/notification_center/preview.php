@@ -60,16 +60,16 @@ button.remindBox, button.remindBox:focus{
                             <?php $user = isset($_GET["user"]) ? $_GET["user"] : ""; ?>
                             <label for="">Target Audience</label>
                             <select name="user" data-placeholder="Users" data-type="selector">
-                                <option value="">Both</option>
+                                <option value="">All</option>
                                 <?php foreach($roles as $row): ?>
-                                <?php if($row['role_id'] == 1) continue; ?>
+                                <?php //if($row['role_id'] == 1) continue; ?>
                                 <option value="<?php echo $row['role_id']; ?>" <?php if($row['role_id'] == $user) echo "selected"; ?>><?php echo $row['role_name']; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
 
-						<div class="col-lg-4 col-md-4 col-12 ">
-							<div class="t-l"><button type="submit" class="btn btn-primary btn-rounded btn-block">PREVIEW</button></div>
+                        <div class="col-lg-4 col-md-4 col-12 ">
+							<div class="t-l"><button type="submit" class="btn btn-primary btn-rounded min w-100px">PREVIEW</button></div>
 						</div>
                         <div class="col-lg-4 col-md-4 col-12 ">
                             <div class="t-l"><button type="button" id="btn-send-testmail" class="btn btn-primary btn-rounded btn-block">TEST MAIL</button></div>

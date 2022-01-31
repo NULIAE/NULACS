@@ -124,7 +124,7 @@ if(isset($_GET['tab']) && $_GET['tab'] != '')
         <div class="mainTab2">
           <nav>
             <div class="nav" id="nav-tab" role="tablist">
-              <a href="<?= $previous_url; ?>" class="nav-item nav-link" data-toggle="popover"data-placement="bottom" data-trigger="hover" data-content="Performance Assessments List">
+              <a href="<?= $previous_url; ?>" class="nav-item nav-link" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Performance Assessments List">
                 <i class="i i-format_list_bulleted"></i></a>
               <a class="nav-item nav-link <?= $selectedTab == 1 ? 'active' : ''; ?>" id="nav-x1-tab" data-toggle="tab" href="#nav-x1" role="tab"
                 aria-controls="nav-x1" aria-selected="<?= $selectedTab == 1 ? 'true' : 'false'; ?>"><i class="i i-org"></i> Organizational Soundness</a>
@@ -1138,7 +1138,7 @@ if(isset($_GET['tab']) && $_GET['tab'] != '')
           <div class="d-block">
         <div class="headOuter">
             <div class="head">
-                <h3>Internal Controls</h3>
+                <h3>Fiscal Policies and Procedures</h3>
             </div>
         </div>
   
@@ -1469,7 +1469,7 @@ if(isset($_GET['tab']) && $_GET['tab'] != '')
 
   <div class="col-5 d-flex justify-content-end align-items-center">
     <div class="rating-1">Rating</div>
-    <input type="text" class="border-red" id="c2_s8_8_3_rating_1" placeholder="4.4">
+    <input type="text" class="border-red" id="c2_s8_8_3_rating_1" onblur="checkrating(this)" >
   </div>
 
 </div>

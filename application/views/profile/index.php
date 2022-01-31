@@ -87,7 +87,7 @@
                     </div>
 
                 	<div class="row w-100 my-5">
-						<div class="col-lg-8 col-md-8 form-group">
+						<!-- <div class="col-lg-8 col-md-8 form-group">
 							<div>
 								<label>Is ADM Uploader?</label>
 								<div>
@@ -96,7 +96,7 @@
 									</label>
 								</div>
 							</div>
-						</div>
+						</div> -->
 						<?php if($this->session->role_id==1): ?>
 						<div class="col-lg-8 col-md-8 form-group d-none">
 							<div>

@@ -1,7 +1,7 @@
 
 $(function(){
 	
-	var sortTable = $('#table11').DataTable();
+	var sortTable = $('#table11').DataTable({"bPaginate": false});
 	$('#table11').parent('div').removeAttr('class').addClass('col-24');
 	$('#table11_length').parent('div').hide();
 	$('#table11_filter').parent('div').hide();

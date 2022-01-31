@@ -202,7 +202,7 @@
 				</div>
 				<div class="bg-light">
 					<div class="row">
-					<div class="col-lg-6 col-md-12 form-group">
+					<!-- <div class="col-lg-6 col-md-12 form-group">
 							<div>
 								<label>Is ADM Uploader?</label>
 								<div>
@@ -211,7 +211,7 @@
 									</label>
 								</div>
 							</div>
-						</div>
+						</div> -->
 						<?php if($this->session->role_id==1): ?>
                         <div class="col-lg-6 col-md-12 form-group d-none">
 							<div>
