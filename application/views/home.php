@@ -46,8 +46,27 @@
                     <a class="btn btn-round-ib btnSort" data-status="i-compliant" data-rel="tooltip" data-placement="bottom" title="Compliance"><i class="i i-compliant cmplt"></i><span class="sr-only">Compliance</span></a>
                     <a class="btn btn-round-ib btnSort" data-status="Non-Compliant" data-rel="tooltip" data-placement="bottom" title="Non Compliance"><i class="i i-non-compliant n-cmplt"></i><span class="sr-only">Non Compliance</span></a>
                     <a class="btn btn-round-ib btnSort" data-status="Waiting" data-rel="tooltip" data-placement="bottom" title="Waiting"><i class="i i-waiting wait"></i><span class="sr-only">Waiting</span></a>
-                    
-                 </div>
+
+                  <select name="year" id="filterbyyear" data-placeholder="Region" data-type="selector">
+                  <option value="">All</option>
+                  <?php 
+                  $year_array=[];
+                  foreach($affiliates as $row){
+                  if(isset($row['compliance_status'])) {
+                    $year_array[]=$row['compliance_status']['year'];
+                  }
+                  }
+                  $year_unique= array_unique($year_array);
+                  sort($year_unique);
+                  foreach($year_unique as $year){
+                  ?>
+                    <option value="<?php  echo $year; ?>">
+                      <?php  echo $year; ?>
+                    </option>
+                  <?php }?>
+                  </select>
+                  
+          </div>
               </div>
               <div class="col-sm-4">
 								<form id="search-form" action="<?php echo base_url('home/filter_affiliates');?>"></form>

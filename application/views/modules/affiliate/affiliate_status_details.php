@@ -2027,10 +2027,10 @@ $quarterArray = array(
 										<div class="d-flex align-items-center">
 											<div>Net Assets w/o donor restrictions at last quarter</div>
 											<div class="innControll">
-												<div class="yearPick">
+												<!-- <div class="yearPick">
 													<i class="i i-year-pick"></i>
 													<input class="yearpick form-control" placeholder="2019" type="text" name="net_assets_in_last_quarter_year" value="<?php echo isset($key_indicators['net_assets_in_last_quarter_year']) ? $key_indicators['net_assets_in_last_quarter_year'] : ""; ?>" />
-												</div>
+												</div> -->
 											</div>
 											<div>$</div>
 											<div class="innControll"><input type="text" class="form-control change_in_net_assets_in_quarter_blur" name="net_assets_in_last_quarter_value" id="net_assets_in_last_quarter_value_v" value="<?php echo isset($key_indicators['net_assets_in_last_quarter_value']) ? $key_indicators['net_assets_in_last_quarter_value'] : ""; ?>" /> </div>

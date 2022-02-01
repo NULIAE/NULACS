@@ -350,38 +350,102 @@
                         $('.'+i).addClass('checked');
                     }
                     $('#'+i).val(item);
+                    if(i=='c2_s2_2_2_val_2'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s2_2_2_val_2").val(dollarUSLocale.format(item));}}
+                    if(i=='c2_s2_2_2_val_3'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s2_2_2_val_3").val(dollarUSLocale.format(item));}}
+                    if(i=='c2_s2_2_2_val_4'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s2_2_2_val_4").val(dollarUSLocale.format(item));}}
+                    if(i=='c2_s2_2_2_val_6'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s2_2_2_val_6").val(dollarUSLocale.format(item));}}
+                    if(i=='c2_s2_2_2_val_7'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s2_2_2_val_7").val(dollarUSLocale.format(item));}}
+                    if(i=='c2_s2_2_2_val_8'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s2_2_2_val_8").val(dollarUSLocale.format(item));}}
+                    if(i=='c2_s2_2_2_val_10'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s2_2_2_val_10").val(dollarUSLocale.format(item));}}
+                    if(i=='c2_s2_2_2_val_11'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s2_2_2_val_11").val(dollarUSLocale.format(item));}}
+                    if(i=='c2_s2_2_2_val_12'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s2_2_2_val_12").val(dollarUSLocale.format(item));}}
+                    if(i=='c2_s2_2_3_val_2'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s2_2_3_val_2").val(dollarUSLocale.format(item));}}
+                    if(i=='c2_s2_2_3_val_4'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s2_2_3_val_4").val(dollarUSLocale.format(item));}}
+                    if(i=='c2_s2_2_3_val_6'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s2_2_3_val_6").val(dollarUSLocale.format(item));}}
 
-                    if(i=='c2_s2_2_3_val_2'){
-                        if(item!=''){$("#c2_s2_2_3_val_2").val(dollarUSLocale.format(item));}
-                    }
-                     if(i=='c2_s2_2_3_val_4'){
-                        if(item!=''){$("#c2_s2_2_3_val_4").val(dollarUSLocale.format(item));}
-                    }
-                    if(i=='c2_s2_2_3_val_6'){
-                        if(item!=''){$("#c2_s2_2_3_val_6").val(dollarUSLocale.format(item));}
-                    }
+                    if(i=='c2_s2_2_4_val_2'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s2_2_4_val_2").val(dollarUSLocale.format(item));}}
+                    if(i=='c2_s2_2_4_val_4'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s2_2_4_val_4").val(dollarUSLocale.format(item));}}
+                    if(i=='c2_s2_2_4_val_6'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s2_2_4_val_6").val(dollarUSLocale.format(item));}}
+                   
+                    if(i=='c2_s2_2_6_val_2'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s2_2_6_val_2").val(dollarUSLocale.format(item));}}
+                    if(i=='c2_s2_2_6_val_4'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s2_2_6_val_4").val(dollarUSLocale.format(item));}}
+                    if(i=='c2_s2_2_6_val_6'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s2_2_6_val_6").val(dollarUSLocale.format(item));}}
+                    
+
+                    if(i=='c2_s3_3_8_val_2'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s3_3_8_val_2").val(dollarUSLocale.format(item));}}
+                    if(i=='c2_s3_3_8_val_5'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s3_3_8_val_5").val(dollarUSLocale.format(item));}}
+                    if(i=='c2_s3_3_8_val_8'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s3_3_8_val_8").val(dollarUSLocale.format(item));}}
+                    if(i=='c2_s3_3_8_val_3'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s3_3_8_val_3").val(dollarUSLocale.format(item));}}
+                    if(i=='c2_s3_3_8_val_6'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s3_3_8_val_6").val(dollarUSLocale.format(item));}}
+                    if(i=='c2_s3_3_8_val_9'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s3_3_8_val_9").val(dollarUSLocale.format(item));}}
+
+
+                    if(i=='c2_s3_3_9_val_2'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s3_3_9_val_2").val(dollarUSLocale.format(item));}}
+                    if(i=='c2_s3_3_9_val_4'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s3_3_9_val_4").val(dollarUSLocale.format(item));}}
+                    if(i=='c2_s3_3_9_val_6'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s3_3_9_val_6").val(dollarUSLocale.format(item));}}
+                    
+                    if(i=='c2_s3_3_10_val_2'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s3_3_10_val_2").val(dollarUSLocale.format(item));}}
+                    if(i=='c2_s3_3_10_val_6'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s3_3_10_val_6").val(dollarUSLocale.format(item));}}
+                    if(i=='c2_s3_3_10_val_10'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s3_3_10_val_10").val(dollarUSLocale.format(item));}}
+                    if(i=='c2_s3_3_10_val_3'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s3_3_10_val_3").val(dollarUSLocale.format(item));}}
+                    if(i=='c2_s3_3_10_val_7'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s3_3_10_val_7").val(dollarUSLocale.format(item));}}
+                    if(i=='c2_s3_3_10_val_11'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s3_3_10_val_11").val(dollarUSLocale.format(item));}}
+                    
+
+                    if(i=='c2_s3_3_11_val_2'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s3_3_11_val_2").val(dollarUSLocale.format(item));}}
+                    if(i=='c2_s3_3_11_val_6'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s3_3_11_val_6").val(dollarUSLocale.format(item));}}
+                    if(i=='c2_s3_3_11_val_10'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s3_3_11_val_10").val(dollarUSLocale.format(item));}}
+                    if(i=='c2_s3_3_11_val_3'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s3_3_11_val_3").val(dollarUSLocale.format(item));}}
+                    if(i=='c2_s3_3_11_val_7'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s3_3_11_val_7").val(dollarUSLocale.format(item));}}
+                    if(i=='c2_s3_3_11_val_11'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s3_3_11_val_11").val(dollarUSLocale.format(item));}}
+                   
+
+                    if(i=='c2_s3_3_12_val_2'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s3_3_12_val_2").val(dollarUSLocale.format(item));}}
+                    if(i=='c2_s3_3_12_val_6'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s3_3_12_val_6").val(dollarUSLocale.format(item));}}
+                    if(i=='c2_s3_3_12_val_10'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s3_3_12_val_10").val(dollarUSLocale.format(item));}}
+                    if(i=='c2_s3_3_12_val_3'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s3_3_12_val_3").val(dollarUSLocale.format(item));}}
+                    if(i=='c2_s3_3_12_val_7'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s3_3_12_val_7").val(dollarUSLocale.format(item));}}
+                    if(i=='c2_s3_3_12_val_11'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s3_3_12_val_11").val(dollarUSLocale.format(item));}}
+
+                    if(i=='c2_s4_4_15_val_2'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s4_4_15_val_2").val(dollarUSLocale.format(item));}}
+                    if(i=='c2_s4_4_15_val_6'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s4_4_15_val_6").val(dollarUSLocale.format(item));}}
+                    if(i=='c2_s4_4_15_val_10'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s4_4_15_val_10").val(dollarUSLocale.format(item));}}
+                    if(i=='c2_s4_4_15_val_3'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s4_4_15_val_3").val(dollarUSLocale.format(item));}}
+                    if(i=='c2_s4_4_15_val_7'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s4_4_15_val_7").val(dollarUSLocale.format(item));}}
+                    if(i=='c2_s4_4_15_val_11'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s4_4_15_val_11").val(dollarUSLocale.format(item));}}
+
+                    if(i=='c2_s4_4_16_val_3'){item = item.replace(/,/g, "");if(item!=''){$("#c2_s4_4_16_val_3").val(dollarUSLocale.format(item));}}
+
+
+
+                //     if(i.includes("_val_")){
+                //        item = item.replace(/,/g, "");
+                //     if(item!=''){$("#"+i).val(dollarUSLocale.format(item));}
+                //    }
                     if(i.includes('comment') & item != ""){
                         $('#'+i).closest('.collapse').siblings('.card-header').find('i').css('color', 'green');
+                        $('#'+i).closest('.card-body').siblings('.card-header').find('i').css('color', 'green');
                     }
 
                  });
                 
              });
         });
-        $('#c2_s2_2_3_val_2').on('blur', function() {
-            var get_val = $('#'+$(this).attr('id')).val();
-            var val = +get_val.replace(/,/g, "");
-            if(isNaN(val)){
-                showDialogBox('error', 'Enter a valid number');
-                $('#'+$(this).attr('id')).val('');
-                $("#c2_s2_2_3_val_2").val('');
-        
-                document.getElementById($(this).attr('id')).style.borderColor = "#ff002b"; 
-            }else{
-                document.getElementById($(this).attr('id')).style.borderColor = "#ced4da"; 
-            }
 
-        });
+        // $('#c2_s2_2_3_val_2').on('blur', function() {
+        //     var get_val = $('#'+$(this).attr('id')).val();
+        //     var val = +get_val.replace(/,/g, "");
+        //     if(isNaN(val)){
+        //         showDialogBox('error', 'Enter a valid number');
+        //         $('#'+$(this).attr('id')).val('');
+        //         $("#c2_s2_2_3_val_2").val('');
+        
+        //         document.getElementById($(this).attr('id')).style.borderColor = "#ff002b"; 
+        //     }else{
+        //         document.getElementById($(this).attr('id')).style.borderColor = "#ced4da"; 
+        //     }
+
+        // });
 
         var selfAssessmentData = {
             "selfAssessmentId":$('#self_assessment_id').val(),

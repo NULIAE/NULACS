@@ -58,7 +58,10 @@ $(function(){
 			e.preventDefault();
 			$('#filter-date').submit();
 		});
-	
+		$("#filterbyyear").change(function(){
+			var year = $(this).val();
+			sortTable.column(2).search(year).draw();
+		});
 	$(".btn2").click(function(){
 		var searchVal = $(".input").val();
 		sortTable.search(searchVal).draw();
