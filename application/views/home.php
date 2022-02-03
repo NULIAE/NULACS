@@ -48,7 +48,7 @@
                     <a class="btn btn-round-ib btnSort" data-status="Waiting" data-rel="tooltip" data-placement="bottom" title="Waiting"><i class="i i-waiting wait"></i><span class="sr-only">Waiting</span></a>
 
                   <select name="year" id="filterbyyear" data-placeholder="Region" data-type="selector">
-                  <option value="">All</option>
+                  <option value="">Year</option>
                   <?php 
                   $year_array=[];
                   foreach($affiliates as $row){
@@ -254,3 +254,15 @@
 </tr>
 {{/affiliates}}
 </script>
+<style>
+  .SumoSelect > .CaptionCont{
+ border-radius: 5px;
+  border: none;
+  -o-box-shadow: 0 2px 3px 2px rgba(0,0,0,.1),0 2px 2px 0 rgba(0,0,0,.1),0 1px 5px 0 rgba(0,0,0,.1);
+  box-shadow: 0 2px 3px 2px rgba(0,0,0,.1),0 2px 2px 0 rgba(0,0,0,.1),0 1px 5px 0 rgba(0,0,0,.1);
+}
+.SumoSelect.sumo_year {
+  margin: 15px;
+  vertical-align: middle;
+}
+  </style>

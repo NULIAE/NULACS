@@ -1077,6 +1077,61 @@ class Affiliate extends MY_Controller
 		echo json_encode($response);
 	}
 
+	////Function to send doc name in mail 
+	public function get_document_name($name,$document_id)
+	{
+		switch($name){
+			case "Monthly Document":
+				$table='monthly_document_status';
+				$id='monthly_document_id';
+				break;
+			case "Yearly Document":
+				$table='yearly_document_status';
+				$id='yearly_d_id';
+				break;
+			case "Quarterly Document":
+				$table='quarterly_document_status';
+				$id='quarterly_id';
+				break;
+			case "Legal Documents":
+				$table='legal_document_status';
+				$id='legal_d_id';
+				break;
+			case "Other Compliance":
+				$table='other_document_status';
+				$id='id';
+				break;
+			case "Implementation of Mission":
+				$table='performance_impli_mission_document_status';
+				$id='performance_i_m_id';
+				break;
+			case "Organizational Soundness":
+				$table='performance_org_sndns_document_status';
+				$id='performance_o_s_id';
+				break;
+			case "Performance Other":
+				$table='performance_other_document_status';
+				$id='performance_o_id';
+				break;
+			case "Organizational Vitality":
+				$table='performance_vitality_document_status';
+				$id='performance_v_id';
+				break;
+		}
+		$this->db->select('document_id');
+		$this->db->where($id,$document_id);
+		$query=$this->db->get($table)->row();
+		if($query->document_id){
+			$this->db->select('document_name');
+			$this->db->where('document_id',$query->document_id);
+        	$query=$this->db->get('documents')->row();
+		}
+		else{
+			$query->document_name='';
+		}
+		return $query->document_name;
+	}
+
 	public function add_document_comment()
 	{
 		//XSS Filter all the input post fields
@@ -1087,13 +1142,16 @@ class Affiliate extends MY_Controller
 		$status = $message = NULL;
 
 		$inserted_comment = $this->Document_model->add_comment($data);
-
+		$get_document_name = $this->Document_model->get_documents_type_name($inserted_comment[0]['document_type_id']);
+		$document_id=$inserted_comment[0]['document_id'];
+		$doc_name=$this->get_document_name($get_document_name,$document_id);
 		if ( $inserted_comment !== FALSE )
 		{
 			$email_data = array(
 				"role_id"	=> $this->session->role_id,
 				"affiliate_id" => $data['affiliate_id'],
-				"message" => $data['notification']
+				"message" => $data['notification'],
+				"documet_name" => $doc_name
 			);
 
 			send_email_noification($email_data);

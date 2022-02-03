@@ -16,6 +16,7 @@ if ( ! function_exists('send_email_noification'))
         $data["organization"] = $affiliate["organization"];
         $data["city"] = $affiliate["city"];
         $data["state"] = $affiliate["state"];
+        $data["doc_name"] = $data["documet_name"];
 
         //echo "<pre>"; print_r($affiliate); echo "</pre>"; 
 

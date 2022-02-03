@@ -827,6 +827,22 @@ class Document_model extends CI_Model
 	    
 		return $query->result_array();;
 	}
-	
+
+	/**
+	 * Get name of document
+	 *
+	 * @param  int $document_type_id
+	 * @return array Name of documents type
+	 */
+	public function get_documents_type_name($document_type_id)
+	{
+		$this->db->select('document_type');
+		$this->db->where('document_type_id', $document_type_id);
+		$result = $this->db->get('document_type');
+		$query = $result->row();
+		return $query->document_type;
+	}
+
+
 
 }

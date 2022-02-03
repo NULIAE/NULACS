@@ -267,7 +267,7 @@ font-size: 10px!important;
                   
                   <br><br>
 
-                  <table class="table table1 table-bordered" id="table11">
+                  <table class="table table1 table-bordered" id="ind-table2">
                     <thead>
                       <tr>
                         <th scope="col">Affiliates </th>
@@ -540,6 +540,30 @@ font-size: 10px!important;
                       <?php endif; ?>
                     </tbody>
                   </table>
+
+                  <br><br>
+                  <table class="table table2 table-bordered" id="ind-table3">
+                    <thead>
+                      <tr>
+                        <th scope="col">Affiliates </th>
+                        <th scope="col">Liquidity Narrative</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <?php 
+                    if(isset($ind_affiliate)){ 
+                    $i=0;
+                    foreach($ind_affiliate as $ia){?>
+                      <?php $report = json_decode($ia['indicators'], true); ?>
+                      <?php $index++; ?>
+                      <tr>
+                      <td class="t-l"><?php $arrayForChart[0][$i] = $ia['year']." Q".$ia['quarter']; ?><a class="pl-0 text-center" href="<?php echo base_url('module/affiliate/status/details/').$affiliate.'?tab=3&key_quarter='.$ia['quarter'].'&key_year='.$ia['year']; ?>" target="_blank"><?php echo $arrayForChart[0][$i]; ?></a></td>
+                    <td><?php if (!empty($report['qualitative_narrative'])){echo $report['qualitative_narrative'];} ?></td> 
+                    </tr>    
+                    <?php $i++; }  }?>                 
+                    </tbody>
+                    </table>
+                    
                 </div>
 
               </div>

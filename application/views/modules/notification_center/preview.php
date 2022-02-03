@@ -106,7 +106,7 @@ button.remindBox, button.remindBox:focus{
                             </thead>
                             <tbody>
                                 <?php foreach($users as $user): ?>
-                                    <?php if($user["role_id"] == 2 && $user["is_adm_uploader"] == 0) continue; ?>
+                                    <?php //if($user["role_id"] == 2 && $user["is_adm_uploader"] == 0) continue; ?>
                                     <tr>
                                         <th scope="row"><input type="checkbox" name="usercheckbox[]" class="usercheckbox" value="<?php echo $user["user_id"]; ?>" checked /></th>
                                         <td><?php echo $user["fullname"]; ?></td>

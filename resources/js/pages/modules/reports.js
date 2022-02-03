@@ -20,7 +20,10 @@ $(function(){
 	var sortTable = $('#table11').DataTable({
         "columnDefs": [
             { "sType": "numeric-comma", targets: [1, 4, 5, 6, 10] }
-        ]
+        ],
+		"bPaginate": false,
+		"bInfo" : false,
+
     });
 	$('#table11').parent('div').removeAttr('class').addClass('col-24');
 	$('#table11_length').parent('div').hide();
@@ -31,7 +34,9 @@ $(function(){
     $('#ind-table').DataTable({
         "columnDefs": [
             { "sType": "numeric-comma", targets: [1, 4, 5, 6, 10] }
-        ]
+        ],
+		"bPaginate": false,
+		"bInfo" : false
     });
     $('#ind-table').parent('div').removeAttr('class').addClass('col-24');
 	$('#ind-table_length').parent('div').hide();
@@ -39,3 +44,22 @@ $(function(){
 	$('#ind-table_info').parent('div').removeAttr('class').addClass('col-12');
 	$('#ind-table_paginate').parent('div').removeAttr('class').addClass('col-12');
 });
+
+
+$(document).ready(function() {
+
+	$('#ind-table2').DataTable({
+		"bPaginate": false,
+		"bInfo" : false,
+		"searching": false, 
+    });
+    $('#ind-table2').parent('div').removeAttr('class').addClass('col-24');
+	
+	$('#ind-table3').DataTable({
+		"bPaginate": false,
+		"bInfo" : false,
+		"searching": false, 
+    });
+    $('#ind-table3').parent('div').removeAttr('class').addClass('col-24');
+} );
+
