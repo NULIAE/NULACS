@@ -1080,45 +1080,26 @@ class Affiliate extends MY_Controller
 	////Function to send doc name in mail 
 	public function get_document_name($name,$document_id)
 	{
+
 		switch($name){
+
 			case "Monthly Document":
+				$field_name='document_id';
 				$table='monthly_document_status';
 				$id='monthly_document_id';
 				break;
 			case "Yearly Document":
+				$field_name='document_id';
 				$table='yearly_document_status';
 				$id='yearly_d_id';
 				break;
 			case "Quarterly Document":
+				$field_name='document_id';
 				$table='quarterly_document_status';
 				$id='quarterly_id';
 				break;
-			case "Legal Documents":
-				$table='legal_document_status';
-				$id='legal_d_id';
-				break;
-			case "Other Compliance":
-				$table='other_document_status';
-				$id='id';
-				break;
-			case "Implementation of Mission":
-				$table='performance_impli_mission_document_status';
-				$id='performance_i_m_id';
-				break;
-			case "Organizational Soundness":
-				$table='performance_org_sndns_document_status';
-				$id='performance_o_s_id';
-				break;
-			case "Performance Other":
-				$table='performance_other_document_status';
-				$id='performance_o_id';
-				break;
-			case "Organizational Vitality":
-				$table='performance_vitality_document_status';
-				$id='performance_v_id';
-				break;
 		}
-		$this->db->select('document_id');
+		$this->db->select($field_name);
 		$this->db->where($id,$document_id);
 		$query=$this->db->get($table)->row();
 		if($query->document_id){
@@ -1141,10 +1122,35 @@ class Affiliate extends MY_Controller
 		
 		$status = $message = NULL;
 
+		if(isset($data['document_custom_type'])){
+			$document_type_name=$data['document_custom_type'];
+			unset($data['document_custom_type']);
+		}
+		else{
+			$document_type_name='';
+		}
+
 		$inserted_comment = $this->Document_model->add_comment($data);
+
+		if($document_type_name=='legal'){
+			//$doc_name=$this->get_document_name("Legal Documents",$data['document_id']);
+			$doc_name="Legal Compliance Document";
+		}
+		elseif($document_type_name=='other_compliance_document'){
+			//$doc_name=$this->get_document_name("Other Compliance",$data['document_id']);
+			$doc_name="Other Compliance Document";
+		}
+		elseif($document_type_name=='other_performance_assessment_documents'){
+			//$doc_name=$this->get_document_name("Performance Other",$data['document_id']);
+			$doc_name="Other Performance Assessment Documents";
+		}
+		elseif($document_type_name=='monthly' || $document_type_name=='quarter' || $document_type_name=='year'){
+
 		$get_document_name = $this->Document_model->get_documents_type_name($inserted_comment[0]['document_type_id']);
 		$document_id=$inserted_comment[0]['document_id'];
 		$doc_name=$this->get_document_name($get_document_name,$document_id);
+		}
+		
 		if ( $inserted_comment !== FALSE )
 		{
 			$email_data = array(

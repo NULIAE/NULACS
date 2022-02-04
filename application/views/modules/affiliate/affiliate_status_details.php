@@ -191,7 +191,7 @@ $quarterArray = array(
 																			</div>
 
 																			<div class="search collapsed">
-																				<input type="text" class="input-comment" id="month-comment-<?php echo $key+1; ?>" data-document="<?php echo $currentDoc['monthly_document_id']; ?>" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>" data-doctype="<?php echo $currentDoc['document_type_id']; ?>"placeholder="Type here" />
+																				<input type="text" class="input-comment" data-doctypecustom="monthly" id="month-comment-<?php echo $key+1; ?>" data-document="<?php echo $currentDoc['monthly_document_id']; ?>" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>" data-doctype="<?php echo $currentDoc['document_type_id']; ?>"placeholder="Type here" />
 																				<a class="btn btn-secondary btn-rounded btn-action-sm "><i
 																				class="i i-chat-box"></i><span class="sr-only">Add</span></a>
 																			</div>
@@ -440,7 +440,7 @@ $quarterArray = array(
 																		</div>
 
 																		<div class="search collapsed">
-																			<input type="text" class="input-comment" id="quarter-comment-<?php echo $key+1; ?>" data-document="<?php echo $currentDoc['quarterly_id']; ?>" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>" data-doctype="<?php echo $currentDoc['document_type_id']; ?>"placeholder="Type here" />
+																			<input type="text" class="input-comment" data-doctypecustom="quarter" id="quarter-comment-<?php echo $key+1; ?>" data-document="<?php echo $currentDoc['quarterly_id']; ?>" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>" data-doctype="<?php echo $currentDoc['document_type_id']; ?>"placeholder="Type here" />
 																			<a class="btn btn-secondary btn-rounded btn-action-sm "><i
 																			class="i i-chat-box"></i><span class="sr-only">Add</span></a>
 																		</div>
@@ -679,7 +679,7 @@ $quarterArray = array(
 																			</div>
 
 																			<div class="search collapsed">
-																				<input type="text" class="input-comment" id="year-comment-<?php echo $key+1; ?>" data-document="<?php echo $currentDoc['yearly_d_id']; ?>" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>" data-doctype="<?php echo $currentDoc['document_type_id']; ?>"placeholder="Type here" />
+																				<input type="text" class="input-comment" data-doctypecustom="year" id="year-comment-<?php echo $key+1; ?>" data-document="<?php echo $currentDoc['yearly_d_id']; ?>" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>" data-doctype="<?php echo $currentDoc['document_type_id']; ?>"placeholder="Type here" />
 																				<a class="btn btn-secondary btn-rounded btn-action-sm "><i
 																				class="i i-chat-box"></i><span class="sr-only">Add</span></a>
 																			</div>
@@ -952,7 +952,7 @@ $quarterArray = array(
 																			<?php endif; ?>
 																		</div>
 																		<div class="search collapsed">
-																			<input type="text" class="input-comment"  data-document="<?php echo $legal['legal_d_id']; ?>" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>" data-doctype="<?php echo $legal['document_id']; ?>" placeholder="Type here" />
+																			<input type="text" class="input-comment" data-doctypecustom="legal"  data-document="<?php echo $legal['legal_d_id']; ?>" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>" data-doctype="<?php echo $legal['document_id']; ?>" placeholder="Type here" />
 																			<a class="btn btn-secondary   btn-rounded btn-action-sm "><i
 																			class="i i-chat-box"></i> </a>
 																		</div>
@@ -1118,7 +1118,7 @@ $quarterArray = array(
 																			<?php endif; ?>
 																		</div>
 																		<div class="search collapsed">
-																			<input type="text" class="input-comment"  data-document="<?php echo $other['id']; ?>" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>" data-doctype="<?php echo $other['document_type_id']; ?>" placeholder="Type here" />
+																			<input type="text" class="input-comment"  data-doctypecustom="other_compliance_document" data-document="<?php echo $other['id']; ?>" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>" data-doctype="<?php echo $other['document_type_id']; ?>" placeholder="Type here" />
 																			<a class="btn btn-secondary   btn-rounded btn-action-sm "><i
 																			class="i i-chat-box"></i> </a>
 																		</div>
@@ -1807,7 +1807,7 @@ $quarterArray = array(
 																			<?php endif; ?>
 																		</div>
 																		<div class="search collapsed">
-																			<input type="text" class="input-comment"  data-document="<?php echo $other['performance_o_id']; ?>" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>" data-doctype="<?php echo $other['document_id']; ?>" placeholder="Type here" />
+																			<input type="text" class="input-comment" data-doctypecustom="other_performance_assessment_documents" data-document="<?php echo $other['performance_o_id']; ?>" data-affiliate="<?php echo $affiliate['affiliate_id']; ?>" data-doctype="<?php echo $other['document_id']; ?>" placeholder="Type here" />
 																			<a class="btn btn-secondary   btn-rounded btn-action-sm "><i
 																			class="i i-chat-box"></i> </a>
 																		</div>

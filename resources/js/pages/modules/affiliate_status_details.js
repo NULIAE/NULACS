@@ -649,11 +649,16 @@ $(function () {
 		$('.input-comment').keydown(function (e) {
 			var inputElem = $(this);
 			if (e.keyCode == 13 && inputElem.val() != "") {
+				var document_custom_type=inputElem.data('doctypecustom');
+				if(document_custom_type=='undefined' || document_custom_type==''){
+					document_custom_type='';
+				}
 				var inputData = {
 					document_id: inputElem.data('document'),
 					document_type_id: inputElem.data('doctype'),
 					affiliate_id: inputElem.data('affiliate'),
-					notification: inputElem.val()
+					notification: inputElem.val(),
+					document_custom_type: document_custom_type
 				}
 
 				$.ajax({
