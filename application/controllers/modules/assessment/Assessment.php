@@ -1,7 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-require_once APPPATH.'third_party/word/autoload.php';
+require_once FCPATH.'application/third_party/word/autoload.php';
 use PhpOffice\PhpWord\TemplateProcessor;
+use PhpOffice\PhpWord\Settings;
 class Assessment extends MY_Controller 
 {
 	
@@ -431,6 +432,7 @@ class Assessment extends MY_Controller
 		$aff_name=$affiliate_details[0]['city'].', '.$affiliate_details[0]['stateabbreviation'];
 		$templateProcessor->setValue('affname', $aff_name);
 		$fileName = $affiliate_details[0]['assessment_start_year']." ". $aff_name. " Performance Assessment";
+		Settings::setZipClass(Settings::PCLZIP);
         $templateProcessor->saveAs($fileName . '.docx');
 
 		
