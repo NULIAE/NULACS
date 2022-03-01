@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-require_once FCPATH.'vendor/autoload.php';
+require_once FCPATH.'application/third_party/word/autoload.php';
 use PhpOffice\PhpWord\TemplateProcessor;
 class Assessment extends MY_Controller 
 {
@@ -843,6 +843,24 @@ class Assessment extends MY_Controller
 
 
 		}
+		/**
+	 * delete Performance Assessment
+	 *
+	 * @return view 'assessment-listing.php'
+	 */
+	public function delete()
+	{
+		$input = $this->input->get();
+		$del = $this->Assessment_model->delete($input);
+		// $del = true;
+		if($del){
+			$this->session->set_flashdata('success', 'Delete successfully');
+			redirect('module/assessment/assessment-listing');
+		}else{
+			$this->session->set_flashdata('error', 'Operation failed');
+			redirect('module/assessment/assessment-listing');
+		}
+	}
 
 	/**
 	 * Show the rating by criteria wise
