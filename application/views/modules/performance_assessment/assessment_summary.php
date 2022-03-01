@@ -240,7 +240,7 @@ if(isset($_GET['uid']) && !empty($_GET['uid'])){
                             </div>
                         </div>
                 <div class="col ">
-                  <div class="t-r"><a  target="_blank" href="<?php echo base_url('module/assessment/assessment-pdf?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId); ?>"  class="btn btn-dark btn-rounded min w-100px">EXPORT</a> </div>
+                  <div class="t-r"><a  target="_blank" href="<?php echo base_url('module/assessment/assessment-pdf?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId); ?>"  class="btn btn-dark btn-rounded min w-100px">EXPORT TO WORD</a> </div>
                 </div>
 
              

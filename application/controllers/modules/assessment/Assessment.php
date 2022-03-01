@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+require_once FCPATH.'vendor/autoload.php';
+use PhpOffice\PhpWord\TemplateProcessor;
 class Assessment extends MY_Controller 
 {
 	
@@ -313,13 +314,143 @@ class Assessment extends MY_Controller
 				'pages/modules/assessment_pdf.js',
 			);
 
-		require_once APPPATH.'third_party/vendor/autoload.php';
-		$mpdf = new \Mpdf\Mpdf();
-		$html = $this->load->view('modules/performance_assessment/assessment_pdf',$data,true);
-		$mpdf->WriteHTML($html);
-		$mpdf->Output('assessment.pdf','D'); 
+		////Docx code begins
+		$items=array();
+		$templateProcessor = new TemplateProcessor('resources/template/2019 ULHC Performance Assessment.docx');
+		$array_count=count($data['criteria_answers_view']);
+
+			for($j=0;$j<$array_count;$j++){
+
+			//echo $j;echo "<br>";
+			$section_1= $data['criteria_answers_view'][$j]['answers'];
+			$jsonObj = json_decode($section_1);
+			//print_r($jsonObj);echo "<br><br>";
+				$i=1;
+				foreach($jsonObj as $key=>$value){
+
+					if (strpos($key, 'check') !== false)
+					{
+						$items[]=$key;
+						${'option_' . $i} = $jsonObj->$key;
+						if($value=='yes'){${$key.'_yes'}='X';${$key.'_no'}='';}else{${$key.'_yes'}='';${$key.'_no'}='X';}
+							$templateProcessor->setValue($key.'_yes', ${$key.'_yes'});
+							$templateProcessor->setValue($key.'_no', ${$key.'_no'});
+					}
+
+					if (strpos($key, 'val') !== false)
+					{
+						$items[]=$key;
+						$templateProcessor->setValue($key, $value);
+					}
+					if (strpos($key, 'date') !== false)
+					{
+						$items[]=$key;
+						$templateProcessor->setValue($key, $value);
+					}
+					if (strpos($key, 'comment') !== false)
+					{
+						$items[]=$key;
+						$templateProcessor->setValue($key, htmlspecialchars($value));
+					}
+
+						$i++;
+				}
+
+
+		}
+
+		$sections=array('criteria_one_standard_one','criteria_one_standard_two','criteria_one_standard_three','criteria_one_standard_four','criteria_one_standard_five','criteria_one_standard_six',
+                     'criteria_two_standard_one','criteria_two_standard_two',"criteria_two_standard_three","criteria_two_standard_four","criteria_two_standard_five","criteria_two_standard_six","criteria_two_standard_seven","criteria_two_standard_eight",
+					 "criteria_three_standard_one","criteria_three_standard_two","criteria_three_standard_three","criteria_three_standard_four","criteria_three_standard_five","criteria_three_standard_six","criteria_three_standard_seven","criteria_three_standard_eight",
+					
+					);
+		foreach($sections as $values){
+
+		  $dom = new DOMDocument();
+		  // set error level
+		 $internalErrors = libxml_use_internal_errors(true);
+
+		  $dom->loadHTML($data[$values]->question);
+		  
+			// Empty array to hold all links to return
+			$inputs = array();
+
+			//Loop through each <input> tag in the dom and add it to the inputs array
+			foreach($dom->getElementsByTagName('input') as $item) {
+
+				if (strpos($item->getAttribute('id'), 'check') !== false)
+				{
+
+				if( !in_array( $item->getAttribute('id') ,$items ) )
+					{
+					$templateProcessor->setValue($item->getAttribute('id').'_yes', '');
+					$templateProcessor->setValue($item->getAttribute('id').'_no', '');
+					}	
+
+				}
+
+				if (strpos($item->getAttribute('id'), 'val') !== false)
+				{
+					if( !in_array( $item->getAttribute('id') ,$items ) )
+						{
+						$templateProcessor->setValue($item->getAttribute('id'), '');
+						}
+					
+				}
+				if (strpos($item->getAttribute('id'), 'date') !== false)
+				{
+					if( !in_array( $item->getAttribute('id') ,$items ) )
+						{
+						$templateProcessor->setValue($item->getAttribute('id'), '');
+						}
+					
+				}
+
+				if (strpos($item->getAttribute('id'), 'comment') !== false)
+				{
+					if( !in_array( $item->getAttribute('id') ,$items ) )
+						{
+						$templateProcessor->setValue($item->getAttribute('id'), '');
+						}
+					
+				}
+
+			
+			}
+
+        }
+
+		$templateProcessor->setValue('year', $affiliate_details[0]['assessment_start_year']);
 		
-	
+		// require_once APPPATH.'third_party/vendor/autoload.php';
+		// $mpdf = new \Mpdf\Mpdf();
+		// $html = $this->load->view('modules/performance_assessment/assessment_pdf',$data,true);
+		// $mpdf->WriteHTML($html);
+		// $mpdf->Output('assessment.pdf','D'); 
+
+		$aff_name=$affiliate_details[0]['city'].', '.$affiliate_details[0]['stateabbreviation'];
+		$templateProcessor->setValue('affname', $aff_name);
+		$fileName = $affiliate_details[0]['assessment_start_year']." ". $aff_name. " Performance Assessment";
+        $templateProcessor->saveAs($fileName . '.docx');
+
+		
+		$file = '/tmp/'.$fileName.'.docx';
+
+		if (file_exists($file)) {
+			header('Content-Description: File Transfer');
+			header('Content-Type: application/octet-stream');
+			header('Content-Disposition: attachment; filename="'.basename($fileName.'.docx').'"');
+			header('Expires: 0');
+			header('Cache-Control: must-revalidate');
+			header('Pragma: public');
+			header('Content-Length: ' . filesize($file));
+			readfile($file);
+			unlink($file);
+			exit;
+		}
+
+
+
 	}
 
 	/**
