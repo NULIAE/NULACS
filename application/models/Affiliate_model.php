@@ -1592,4 +1592,18 @@ class Affiliate_model extends CI_Model
 			return FALSE;
 		}
 	}
+
+	/**
+	 * Get an affiliate id by city name 
+	 *
+	 * @param  string $affiliate_name
+	 * @return array
+	 */
+	public function get_affiliateid_by_name($affiliate_name)
+	{
+		$this->db->join('state', 'state.stateid = affiliate.state');
+		$this->db->where('affiliate.city', $affiliate_name);
+		$query = $this->db->get('affiliate');
+		return $query->row_array();
+	}
 }
