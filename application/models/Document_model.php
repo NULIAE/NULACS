@@ -105,6 +105,9 @@ class Document_model extends CI_Model
 	public function get_notifications()
 	{
 		$this->db->select('*');
+		$this->db->join('users u', 'u.user_id = notification_summary.created_by');
+		$this->db->join('affiliate af', 'af.affiliate_id = notification_summary.affiliate_id');
+		$this->db->join('state st', 'st.stateid = af.state');
 		$this->db->where('created_by !=', $this->session->user_id);
 		$this->db->where('flag', 1);
 		
@@ -213,8 +216,10 @@ class Document_model extends CI_Model
 	 */
 	public function user_notifications($keyword = NULL)
 	{
-		$this->db->select('ns.*, u.first_name,u.last_name');
+		$this->db->select('ns.*, u.first_name,u.last_name,af.organization,af.city,st.stateabbreviation');
 		$this->db->join('users as u', 'u.user_id = ns.created_by');
+		$this->db->join('affiliate af', 'af.affiliate_id = ns.affiliate_id');
+		$this->db->join('state st', 'st.stateid = af.state');
 		
 		if($this->session->affiliate_id != 1)
 		{

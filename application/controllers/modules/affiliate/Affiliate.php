@@ -1157,7 +1157,8 @@ class Affiliate extends MY_Controller
 				"role_id"	=> $this->session->role_id,
 				"affiliate_id" => $data['affiliate_id'],
 				"message" => $data['notification'],
-				"documet_name" => $doc_name
+				"documet_name" => $doc_name,
+				"name" => $inserted_comment[0]['first_name']." " . $inserted_comment[0]['last_name'],
 			);
 
 			send_email_noification($email_data);

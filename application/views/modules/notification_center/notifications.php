@@ -37,8 +37,9 @@
                             <div class="dp"><?php echo strtoupper($notification['first_name'][0].$notification['last_name'][0]); ?></div>
                             <div class="msgBox">
                                 <a href="<?= $notification['link']; ?>" class="text-dark"><div class="textMsg"><i><?=isset($notification['notification'])?$notification['notification']:''?></i></div></a>
+                                <p><?=isset($notification['doc_name'])? $notification['doc_name'] : '';?></p>
                                 <div class="Details">
-                                    <span><?php echo $notification['first_name'].' '.$notification['last_name']; ?></span>
+                                    <span><?php echo $notification['first_name'].' '.$notification['last_name']. ", "." ".$notification['city']." - ".$notification['stateabbreviation']; ?></span>
                                     <date>&nbsp; <?=isset($formatedDate)?$formatedDate:'' ?> </date>
                                 </div>
                             </div>
@@ -48,9 +49,10 @@
                     <div class="replyPosition">
                         <div class="msg-reply">
                             <div class="msgBox2">
-                                <a href="<?= $notification['link']; ?>" class="text-dark"><div class="textMsg2"><i><?=isset($notification['notification'])?$notification['notification']:''?></i></div></a>
+                                <a href="<?= isset($notification['link']) ? $notification['link'] : '#'; ?>" class="text-dark"><div class="textMsg2"><i><?=isset($notification['notification'])?$notification['notification']:''?></i></div></a>
+                                <p><?=isset($notification['doc_name'])? $notification['doc_name'] : '';?></p>
                                 <div class="Details2">
-                                    <span><?php echo $notification['first_name'].' '.$notification['last_name']; ?></span>
+                                    <span><?php echo $notification['first_name'].' '.$notification['last_name'].", ". " ". $notification['city']." - ".$notification['stateabbreviation']; ?></span>
                                     <date>&nbsp; <?=isset($formatedDate)? $formatedDate:'' ?></date>
                                 </div>
                             </div>

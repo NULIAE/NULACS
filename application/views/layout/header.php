@@ -101,7 +101,9 @@
                             </div>
                             <div class="col-lg-18 col-md-18 col-18 ml-3">
                               <a href="<?php echo $notification["link"]; ?>"><?=$notification['notification']?></a>
-                                <p class="status">Upload</p>
+                                <p class="status">Upload - <?=isset($notification['doc_name'])? $notification['doc_name'] : '';?></p>
+                                <p class="status"><?php echo $notification['city']." - ".$notification['stateabbreviation'];?> </p>
+                                <p class="status"> <?php echo $notification['first_name']. " ". $notification['last_name'];?></p>
                                 <?php if(isset($time_ago) && !empty($time_ago)){ ?>
                                   <p class="time"><?php echo $time_ago[0]; ?> ago</p>
                               <?php  } ?>
