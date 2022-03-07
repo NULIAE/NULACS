@@ -126,8 +126,9 @@ class Document_model extends CI_Model
 			
 			if($row['document_type_id'] == 1)
 			{
-				$this->db->select('document_month,document_year');
+				$this->db->select('document_month,document_year,doc.document_name');
 				$this->db->from('monthly_document_status');
+				$this->db->join('documents doc', 'doc.document_id = monthly_document_status.document_id');
 				$this->db->where('monthly_document_id', $row['document_id']);
 
 				$query = $this->db->get();
@@ -139,12 +140,15 @@ class Document_model extends CI_Model
 					$result[$key]['month'] = $doc_data['document_month'];
 					$result[$key]['year'] = $doc_data['document_year'];
 					$result[$key]['link'] = $base_url . '&interval=nav-y1&monthly_year='.$doc_data['document_year'].'&month='.$doc_data['document_month'];
+					$result[$key]['doc_name'] = $doc_data['document_name'];
+
 				}
 			} 
 			else if($row['document_type_id'] == 2)
 			{
-				$this->db->select('document_month,document_year');
+				$this->db->select('document_month,document_year,doc.document_name');
 				$this->db->from('quarterly_document_status');
+				$this->db->join('documents doc', 'doc.document_id = quarterly_document_status.document_id');
 				$this->db->where('quarterly_id', $row['document_id']);
 
 				$query = $this->db->get();
@@ -156,12 +160,14 @@ class Document_model extends CI_Model
 					$result[$key]['quarter'] = $doc_data['document_month'];
 					$result[$key]['year'] = $doc_data['document_year'];
 					$result[$key]['link'] = $base_url . '&interval=nav-y2&quarterly_year='.$doc_data['document_year'].'&quarter='.$doc_data['document_month'];
+					$result[$key]['doc_name'] = $doc_data['document_name'];
 				}
 			}
 			else if($row['document_type_id'] == 3)
 			{
-				$this->db->select('document_year');
+				$this->db->select('document_year,doc.document_name');
 				$this->db->from('yearly_document_status');
+				$this->db->join('documents doc', 'doc.document_id = yearly_document_status.document_id');
 				$this->db->where('yearly_d_id', $row['document_id']);
 
 				$query = $this->db->get();
@@ -172,6 +178,7 @@ class Document_model extends CI_Model
 				{
 					$result[$key]['year'] = $doc_data['document_year'];
 					$result[$key]['link'] = $base_url . '&interval=nav-y3&yearly_year='.$doc_data['document_year'];
+					$result[$key]['doc_name'] = $doc_data['document_name'];
 				}
 			}
 		}
@@ -220,7 +227,6 @@ class Document_model extends CI_Model
 		$this->db->join('users as u', 'u.user_id = ns.created_by');
 		$this->db->join('affiliate af', 'af.affiliate_id = ns.affiliate_id');
 		$this->db->join('state st', 'st.stateid = af.state');
-		
 		if($this->session->affiliate_id != 1)
 		{
 			$this->db->where('ns.affiliate_id =',$this->session->affiliate_id);
@@ -245,8 +251,9 @@ class Document_model extends CI_Model
 			
 			if($row['document_type_id'] == 1)
 			{
-				$this->db->select('document_month,document_year');
+				$this->db->select('document_month,document_year,doc.document_name');
 				$this->db->from('monthly_document_status');
+				$this->db->join('documents doc', 'doc.document_id = monthly_document_status.document_id');
 				$this->db->where('monthly_document_id', $row['document_id']);
 
 				$query = $this->db->get();
@@ -258,12 +265,14 @@ class Document_model extends CI_Model
 					$result[$key]['month'] = $doc_data['document_month'];
 					$result[$key]['year'] = $doc_data['document_year'];
 					$result[$key]['link'] = $base_url . '&interval=nav-y1&monthly_year='.$doc_data['document_year'].'&month='.$doc_data['document_month'];
+					$result[$key]['doc_name'] = $doc_data['document_name'];
 				}
 			} 
 			else if($row['document_type_id'] == 2)
 			{
-				$this->db->select('document_month,document_year');
+				$this->db->select('document_month,document_year,quarterly_upload_file_name,doc.document_name');
 				$this->db->from('quarterly_document_status');
+				$this->db->join('documents doc', 'doc.document_id = quarterly_document_status.document_id');
 				$this->db->where('quarterly_id', $row['document_id']);
 
 				$query = $this->db->get();
@@ -275,12 +284,14 @@ class Document_model extends CI_Model
 					$result[$key]['quarter'] = $doc_data['document_month'];
 					$result[$key]['year'] = $doc_data['document_year'];
 					$result[$key]['link'] = $base_url . '&interval=nav-y2&quarterly_year='.$doc_data['document_year'].'&quarter='.$doc_data['document_month'];
+					$result[$key]['doc_name'] = $doc_data['document_name'];
 				}
 			}
 			else if($row['document_type_id'] == 3)
 			{
-				$this->db->select('document_year');
+				$this->db->select('document_year,yearly_upload_file_name,doc.document_name');
 				$this->db->from('yearly_document_status');
+				$this->db->join('documents doc', 'doc.document_id = yearly_document_status.document_id');
 				$this->db->where('yearly_d_id', $row['document_id']);
 
 				$query = $this->db->get();
@@ -291,6 +302,7 @@ class Document_model extends CI_Model
 				{
 					$result[$key]['year'] = $doc_data['document_year'];
 					$result[$key]['link'] = $base_url . '&interval=nav-y3&yearly_year='.$doc_data['document_year'];
+					$result[$key]['doc_name'] = $doc_data['document_name'];
 				}
 			}
 		}
