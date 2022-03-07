@@ -113,7 +113,7 @@ class Document_model extends CI_Model
 		
 		if($this->session->role_id != 1)
 		{
-			$this->db->where('affiliate_id =',$this->session->affiliate_id);
+			$this->db->where('af.affiliate_id =',$this->session->affiliate_id);
 		}
 		
 		$query = $this->db->get('notification_summary'); 
