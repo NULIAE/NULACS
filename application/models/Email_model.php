@@ -88,8 +88,8 @@ class Email_model extends CI_Model
 		{
 			$this->db->where("role_id", $role);
 			
-			if($role == 2)
-				$this->db->where("is_adm_uploader", 1);
+			//if($role == 2)
+			//	$this->db->where("is_adm_uploader", 1);
 		}
 		// else
 		// {
