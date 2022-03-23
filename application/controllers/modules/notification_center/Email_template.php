@@ -262,6 +262,9 @@ class Email_template extends MY_Controller
         $config['smtp_pass'] = $settings['smtp_pass'];
         $config['smtp_port'] = $settings['smtp_port'];
 
+		//Log file
+		$log_file = APPPATH . 'logs/mail_' . str_replace(' ', '_', $template['subject']) . '_' . date('Y_m_d') .'.log';
+
 		// Send mails to each batch of 50 emails
 		foreach($email_list as $list)
 		{
@@ -278,6 +281,16 @@ class Email_template extends MY_Controller
 			$this->email->message($message);
 		
 			$status = $this->email->send();
+
+			$mail_list = explode(',', $list);
+			
+			foreach($mail_list as $item) {
+				if($status) {
+					error_log(date('Y-m-d H:i:s') . " $item Success" . PHP_EOL, 3, $log_file);
+				} else {
+					error_log(date('Y-m-d H:i:s') . " $item Failed" . PHP_EOL, 3, $log_file);
+				}
+			}
 		}
 
 		if($status)
