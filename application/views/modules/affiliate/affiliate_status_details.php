@@ -600,10 +600,13 @@ $quarterArray = array(
 							</div>
 							<div class="tab-pane fade" id="nav-y3" role="tabpanel" aria-labelledby="nav-y3-tab">
 								<div class=" m-y-20">
-									<?php $endMonth = date('m', strtotime($affiliate['year_end'])); ?>
+									<?php $endDate = explode('-', $affiliate['year_end']); ?>
+									<?php $endDate[2] = 1; ?>
+									<?php $year_end = implode('-', $endDate); ?>
+									<?php $startMonth = date('m', strtotime("+1 month", strtotime($year_end))); ?>
 									<div class="h5 t-c f-bold">
 										<a class="mr-3" href="<?php echo current_url().'?interval=nav-y3&yearly_year='.($yearly_year-1); ?>" data-rel="tooltip" data-placement="top" title="Previous"><i class="i i-arrow_back"></i></a>
-										YEARLY (<?php echo strtoupper(date('M Y', strtotime("+1 month", mktime(0, 0, 0, $endMonth, 1, $yearly_year)))); ?> - <?php echo strtoupper(date('M Y', strtotime("+12 month", mktime(0, 0, 0, $endMonth, 1, $yearly_year)))); ?>)
+										YEARLY (<?php echo strtoupper(date('M Y', mktime(0, 0, 0, $startMonth, 1, $yearly_year))); ?> - <?php echo strtoupper(date('M Y', strtotime("+11 month", mktime(0, 0, 0, $startMonth, 1, $yearly_year)))); ?>)
 										<a class="ml-3" href="<?php echo current_url().'?interval=nav-y3&yearly_year='.($yearly_year+1); ?>" data-rel="tooltip" data-placement="top" title="Next"><i class="i i-arrow_forward"></i></a>
 										<!-- <div class="h6">Due Date: 01/31/2021</div> -->
 									</div>
@@ -822,7 +825,7 @@ $quarterArray = array(
 
 										<div class="col-lg-12">
 											<div class="p-a-15 text-lg-right">
-											<span class="h5">Affiliate yearly compliance for <?php echo strtoupper(date('M Y', strtotime("+1 month", mktime(0, 0, 0, $endMonth, 1, $yearly_year)))); ?> - <?php echo strtoupper(date('M Y', strtotime("+12 month", mktime(0, 0, 0, $endMonth, 1, $yearly_year)))); ?></span>
+											<span class="h5">Affiliate yearly compliance for <?php echo strtoupper(date('M Y', mktime(0, 0, 0, $startMonth, 1, $yearly_year))); ?> - <?php echo strtoupper(date('M Y', strtotime("+11 month", mktime(0, 0, 0, $startMonth, 1, $yearly_year)))); ?></span>
 											</div>
 										</div>
 										<div class="col-lg-12 <?php if($this->session->role_id == 1) echo "update-status"; ?>">
