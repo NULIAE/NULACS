@@ -353,6 +353,12 @@ class Assessment extends MY_Controller
 						$items[]=$key;
 						$templateProcessor->setValue($key, htmlspecialchars($value));
 					}
+					if (strpos($key, 'rating') !== false)
+					{
+						$items[]=$key;
+						if($value==''){$value=0;}
+						$templateProcessor->setValue($key, htmlspecialchars($value));
+					}
 
 						$i++;
 				}
@@ -360,6 +366,7 @@ class Assessment extends MY_Controller
 
 		}
 
+		//To set null values if not filled
 		$sections=array('criteria_one_standard_one','criteria_one_standard_two','criteria_one_standard_three','criteria_one_standard_four','criteria_one_standard_five','criteria_one_standard_six',
                      'criteria_two_standard_one','criteria_two_standard_two',"criteria_two_standard_three","criteria_two_standard_four","criteria_two_standard_five","criteria_two_standard_six","criteria_two_standard_seven","criteria_two_standard_eight",
 					 "criteria_three_standard_one","criteria_three_standard_two","criteria_three_standard_three","criteria_three_standard_four","criteria_three_standard_five","criteria_three_standard_six","criteria_three_standard_seven","criteria_three_standard_eight",
@@ -415,11 +422,69 @@ class Assessment extends MY_Controller
 						}
 					
 				}
+				if (strpos($item->getAttribute('id'), 'rating') !== false)
+				{
+					if( !in_array( $item->getAttribute('id') ,$items ) )
+						{
+						//echo $item->getAttribute('id');echo "<br>";
+						$templateProcessor->setValue($item->getAttribute('id'), 0);
+						$templateProcessor->setValue('c2_s8_8_3_rating_1', 0);
+						}
+				}
 
 			
 			}
 
         }
+
+		$criteria=array_keys($data['totalrating']);
+		//print_r($criteria);echo "<br><br>";
+		$overallrating=$overallc2rating=$overallc3rating=0;
+		$totalrating=$totalC2Rating=$totalC3Rating=0;
+		
+		 foreach($criteria as $value){
+			$arrayb=$data['totalrating'][$value];
+			//print_r($arrayb);echo "<br><br>";
+			
+			foreach($arrayb as $key=>$total_ratings_field){
+				//echo "<br><br>";print_r ($total_ratings_field);echo "<br><br>";
+				if($total_ratings_field['count']==0){
+					$totalrating=0;
+					$templateProcessor->setValue($key, $totalrating);
+					//echo $key."-->".$totalrating;echo "<br><br>";
+				}
+				else{
+					$totalrating =  (round((($total_ratings_field['val']) / $total_ratings_field['count']), 1, PHP_ROUND_HALF_ODD));
+					$templateProcessor->setValue($key, $totalrating);
+					//echo $key."-->".$totalrating;echo "<br><br>";
+				}
+				//echo $key."-->".$totalrating;echo "<br><br>";echo $value."<br>";
+				if($value=='criteriaOne'){
+					$overallrating+=$totalrating;
+					$totalC1Rating =  (round((($overallrating) / 6), 1, PHP_ROUND_HALF_ODD));
+				}
+				elseif($value=='criteriaTwo'){
+					$overallc2rating+=$totalrating;
+					$totalC2Rating =  (round((($overallc2rating) / 8), 1, PHP_ROUND_HALF_ODD));
+				}
+				else{
+					$overallc3rating+=$totalrating;
+					$totalC3Rating =  (round((($overallc3rating) / 8), 1, PHP_ROUND_HALF_ODD));
+				}
+			}
+			$totalrating=0;
+		 }
+
+		//  echo "totalC1Rating".$totalC1Rating."<br>";
+		//  echo "totalC2Rating".$totalC2Rating."<br>";
+		//  echo "totalC3Rating".$totalC3Rating."<br>";
+
+		 $overalltotal =  (round((($totalC1Rating + $totalC2Rating + $totalC3Rating) / 3),1,PHP_ROUND_HALF_ODD));            
+		 
+		 $templateProcessor->setValue('C1', $totalC1Rating);
+		 $templateProcessor->setValue('C2', $totalC2Rating);
+		 $templateProcessor->setValue('C3', $totalC3Rating);
+		 $templateProcessor->setValue('t', $overalltotal);
 
 		$templateProcessor->setValue('year', $affiliate_details[0]['assessment_start_year']);
 		
@@ -431,6 +496,8 @@ class Assessment extends MY_Controller
 
 		$aff_name=$affiliate_details[0]['city'].', '.$affiliate_details[0]['stateabbreviation'];
 		$templateProcessor->setValue('affname', $aff_name);
+		$org_name=$affiliate_details[0]['organization'];
+		$templateProcessor->setValue('orgname', $org_name);
 		$fileName = $affiliate_details[0]['assessment_start_year']." ". $aff_name. " Performance Assessment";
 		Settings::setZipClass(Settings::PCLZIP);
         $templateProcessor->saveAs($fileName . '.docx');
@@ -876,7 +943,7 @@ class Assessment extends MY_Controller
 			$criteriaRating+= ($rating['count'] > 0) ? ($rating['val'] /  $rating['count']) : 0;
 		}
 		
-		return (round(($criteriaRating/$number),1,PHP_ROUND_HALF_ODD));
+		return (round((round($criteriaRating, 1)/$number),1,PHP_ROUND_HALF_ODD));
 	}
 
   public function add_self_assessment_data()

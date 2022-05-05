@@ -779,17 +779,17 @@ if(isset($_GET['uid']) && !empty($_GET['uid'])){
                                 <i class="<?=$def_icon?>"> </i></a>
                             </h5></div>
                             <div class="col-10">
-                            <?php if(isset($totalrating['criteriaTwo']['c2_s3']['val']) && !empty($totalrating['criteriaTwo']['c2_s3']['val'])){
-                                    $c2s3Ratings = (round(($totalrating['criteriaTwo']['c2_s3']['val'] / $totalrating['criteriaTwo']['c2_s3']['count']),1,PHP_ROUND_HALF_ODD));
+                            <?php if(isset($totalrating['criteriaTwo']['c2_s5']['val']) && !empty($totalrating['criteriaTwo']['c2_s5']['val'])){
+                                    $c2s5Ratings = (round(($totalrating['criteriaTwo']['c2_s5']['val'] / $totalrating['criteriaTwo']['c2_s5']['count']),1,PHP_ROUND_HALF_ODD));
 
                               }  ?>
                                 <div class="t-r"> <span class="h5">Rating</span><span class="btn btn-light m-x-10">
-                                <?=isset($c2s3Ratings)?$c2s3Ratings:'0'?>
+                                <?=isset($c2s5Ratings)?$c2s5Ratings:'0'?>
                                     </span></div></div>
                         </div>
                     </div>
                     <div class="cdnWrap">
-                    <?php foreach( $standard_rating_c2_s3 as $key=> $data ){ ?>
+                    <?php foreach( $standard_rating_c2_s5 as $key=> $data ){ ?>
                         <div class="row f-row">
                         <div class="col-14"><div class="t-c">
                           
@@ -798,7 +798,7 @@ if(isset($_GET['uid']) && !empty($_GET['uid'])){
                             data-toggle="popover"
                             data-placement="top"
                             data-trigger="hover"
-                            data-content="<?=$c2s3_[$key]?>"><?=isset($key)?$key:''?></a>
+                            data-content="<?=$c2s5_[$key]?>"><?=isset($key)?$key:''?></a>
                         </div></div>
 
                         <div class="col-10">
