@@ -212,7 +212,7 @@
   
   function drawBarChart() {
       var data = google.visualization.arrayToDataTable([
-        ["Label", "Score", { role: "style" }],
+        ["Label", "Affiliate", { role: "style" }],
         ["0 - 1.99 Poor", <?= $score_count['poor']; ?>, "#f0594d"],
         ["2 - 2.99 Below Average", <?= $score_count['below_avg']; ?>, "#fe9248"],
         ["3 - 3.74 Average", <?= $score_count['average']; ?>, "#eae870"],
