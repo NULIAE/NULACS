@@ -296,12 +296,12 @@ class User_model extends CI_Model
 			return NULL;
 	}
 
-	public function get_board_member_name($user_id)
+	public function get_board_member_name($affiliate_id)
 	{
 		$this->db->select('prifix, first_name, last_name');
 		$this->db->from('users');
-		$this->db->where('user_id', $user_id);
-
+		$this->db->where('affiliate_id', $affiliate_id);
+		$this->db->like('user_title','CEO');
 		$query = $this->db->get();
 
 		$row = $query->row_array();

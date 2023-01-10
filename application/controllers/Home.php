@@ -33,6 +33,8 @@ class Home extends MY_Controller
 			'pages/dashboard.js'
 		);
 		$data['notifications'] = $this->Document_model->get_notifications();
+		$user_id = $this->session->user_id;
+		$data['user_detail'] = $this->Document_model->get_user_detail($user_id);
 		if($this->session->role_id == 2 || $this->session->role_id == 3){
 			$filterWYear='';
 			$filterWMonth='';
@@ -57,7 +59,7 @@ class Home extends MY_Controller
 			$data['user_notifications'] = $this->Document_model->user_notifications();
 			$data['user_data'] = $this->Document_model->user_data();
 			$data['affiliate'] = $this->Affiliate_model->get_affiliate_by_id($this->session->affiliate_id);
-			$data['affiliate']['board_member'] = $this->User_model->get_board_member_name($this->session->user_id);
+			$data['affiliate']['board_member'] = $this->User_model->get_board_member_name($this->session->affiliate_id);
 			//Name of the view file
 			$data['view_name'] = 'affiliate_home.php';
 
