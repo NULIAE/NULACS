@@ -218,6 +218,7 @@ class User_model extends CI_Model
 	 */
 	public function get_all_users($limit = NULL, $start = NULL, $where = NULL)
 	{
+		
 		$this->db->select('*');
 		$this->db->from('users');
 		$this->db->join('affiliate', 'affiliate.affiliate_id = users.affiliate_id');
@@ -239,13 +240,13 @@ class User_model extends CI_Model
 			$this->db->where($where);
 		}
 
+		
 		if( ($limit !== NULL) && ($start !== NULL) )
 		{
 			$this->db->limit($limit, $start);
 		}
 
 		$query = $this->db->get();
-
 		return $query->result_array();
 	}
 
@@ -284,6 +285,22 @@ class User_model extends CI_Model
 		$this->db->select('prifix, first_name, last_name');
 		$this->db->from('users');
 		$this->db->where('affiliate_id', $affiliate_id);
+
+		$query = $this->db->get();
+
+		$row = $query->row_array();
+
+		if(isset($row))
+			return $row["prifix"].$row["first_name"]." ".$row["last_name"];
+		else
+			return NULL;
+	}
+
+	public function get_board_member_name($user_id)
+	{
+		$this->db->select('prifix, first_name, last_name');
+		$this->db->from('users');
+		$this->db->where('user_id', $user_id);
 
 		$query = $this->db->get();
 
