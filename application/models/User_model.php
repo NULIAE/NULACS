@@ -301,6 +301,7 @@ class User_model extends CI_Model
 		$this->db->select('prifix, first_name, last_name');
 		$this->db->from('users');
 		$this->db->where('affiliate_id', $affiliate_id);
+		$this->db->where('is_deleted', 0);
 		$this->db->like('user_title','CEO');
 		$query = $this->db->get();
 
