@@ -92,7 +92,10 @@
                     <ul>
                       <div class="dropContent">
                         <?php $now = time(); ?>
-                        <?php foreach($notifications as $notification){ 
+                        <?php foreach($notifications as $notification){
+                          $i++;
+                          include $notification;
+                          if($i == 11) break;
                             $curr_time= human_to_unix($notification['created']); 
                             $time_ago = explode(",", timespan($curr_time, $now)); ?>
                           <li>
