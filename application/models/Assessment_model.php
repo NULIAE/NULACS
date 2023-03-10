@@ -169,7 +169,7 @@ class Assessment_model extends CI_Model
 		}
 		$this->db->where('paa.user_id  !=', null);
 		$this->db->order_by('sa.self_assessment_id','desc');
-		$this->db->limit(5); 
+		//$this->db->limit(5); 
 		$this->db->group_by("paa.self_assessment_id");
 	
 		$query = $this->db->get(); 
