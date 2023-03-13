@@ -221,7 +221,7 @@ class Affiliate_model extends CI_Model
 	{
 		//Calculate the previous month as `year_start`
 		$date_to_time = strtotime($year_end);
-		$year_start = date("Y-m-d", strtotime("-11 month", $date_to_time));
+		$year_start = date("Y-m-d", strtotime("-1 month", $date_to_time));
 		
 		$data = array(
 			'affiliate_id' => $affiliate_id,
@@ -246,7 +246,7 @@ class Affiliate_model extends CI_Model
 	{
 		//Calculate the previous month as `year_start`
 		$date_to_time = strtotime($year_end);
-		$year_start = date("Y-m-d", strtotime("-11 month", $date_to_time));
+		$year_start = date("Y-m-d", strtotime("-1 month", $date_to_time));
 		
 		$data = array(
 			'year_start'   => $year_start,
@@ -543,6 +543,38 @@ class Affiliate_model extends CI_Model
 
 		return $query->result_array();
 	}
+		/**
+	 * Get list of key indicator
+	 * 
+	 * @param  int $affiliate_id
+	 * @return array
+	 */
+	public function key_indicatorList($affiliate_id)
+	{
+
+		$this->db->select('*');
+		$this->db->from('key_indicators ki');
+		$this->db->where('ki.affiliate_id', $affiliate_id);
+		$query = $this->db->get();
+
+		return $query->result_array();
+	}
+		/**
+	 * Get list of key indicator
+	 * 
+	 * @param  int $affiliate_id
+	 * @return array
+	 */
+	public function key_indicatorList_monthly($affiliate_id)
+	{
+
+		$this->db->select('*');
+		$this->db->from('key_indicators_monthly ki');
+		$this->db->where('ki.affiliate_id', $affiliate_id);
+		$query = $this->db->get();
+
+		return $query->result_array();
+	}
 	/**
 	 * Get the count of all affiliate yearly status using the filters
 	 *
@@ -626,9 +658,6 @@ class Affiliate_model extends CI_Model
 		}
 
 		$query = $this->db->get();
-
-		if($exclude_other)
-			log_message('debug', $this->db->last_query());
 
 		return $query->result_array();
 	}
@@ -812,7 +841,25 @@ class Affiliate_model extends CI_Model
 			return NULL;
 		}
 	}
+	public function get_key_indicators_monthly($affiliate_id, $quarter, $year)
+	{
+		$this->db->where('affiliate_id', $affiliate_id);
+		$this->db->where('month', $quarter);
+		$this->db->where('year', $year);
 
+		$query = $this->db->get('key_indicators_monthly');
+
+		$row = $query->row_array();
+
+		if(isset($row)) 
+		{
+			return array("id" => $row['id'], "status"=>$row['status'], "key_indicators_monthly" => json_decode($row['indicators'], TRUE));
+		} 
+		else 
+		{
+			return NULL;
+		}
+	}
 	public function save_key_indicators($data)
 	{
 		$row = $this->get_key_indicators($data['affiliate_id'], $data['quarter'], $data['year']);
@@ -828,7 +875,21 @@ class Affiliate_model extends CI_Model
 			return $this->db->insert('key_indicators', $data);
 		}
 	}
+	public function save_key_indicators_monthly($data)
+	{
+		$row = $this->get_key_indicators_monthly($data['affiliate_id'], $data['month'], $data['year']);
 
+		if(isset($row))
+		{
+			$this->db->where('id', $row['id']);
+
+			return $this->db->update('key_indicators_monthly', $data);
+		}
+		else
+		{
+			return $this->db->insert('key_indicators_monthly', $data);
+		}
+	}
 	public function approve_key_indicators($data)
 	{
 		$row = $this->get_key_indicators($data['affiliate_id'], $data['quarter'], $data['year']);
@@ -845,7 +906,22 @@ class Affiliate_model extends CI_Model
 		}
 		
 	}
+	public function approve_key_indicatorsmonthly($data)
+	{
+		$row = $this->get_key_indicators_monthly($data['affiliate_id'], $data['month'], $data['year']);
 
+		if(isset($row))
+		{
+			$insert_data = array(
+				"status" => $data['status'],
+		
+			);
+			$this->db->where('id', $row['id']);
+
+			return $this->db->update('key_indicators_monthly', $insert_data);
+		}
+		
+	}
 	/**
 	 * get_legal_document
 	 *
@@ -1524,76 +1600,6 @@ class Affiliate_model extends CI_Model
 	}
 
 	/**
-	 * Get monthly/quarterly/yearly uploaded file
-	 */
-	public function get_term_document($data)
-	{
-		$field_name = $table_name = NULL;
-		if($data['interval'] == "month")
-		{
-			$field_name = 'monthly_document_id';
-			$table_name = 'monthly_document_status';
-		}
-		else if($data['interval'] == "quarter")
-		{
-			$field_name = 'quarterly_id';
-			$table_name = 'quarterly_document_status';
-		}
-		else if($data['interval'] == "year")
-		{
-			$field_name = 'yearly_d_id';
-			$table_name = 'yearly_document_status';
-		}
-		
-		if(isset($field_name) && isset($table_name))
-		{
-			$this->db->where($field_name, $data['uploaded_id']);
-	
-			$query = $this->db->get($table_name);
-
-			return $query->row_array();
-		}
-		else
-		{
-			return FALSE;
-		}
-	}
-
-	/**
-	 * Delete monthly/quarterly/yearly uploaded file
-	 */
-	public function delete_term_document($data)
-	{
-		$field_name = $table_name = NULL;
-		if($data['interval'] == "month")
-		{
-			$field_name = 'monthly_document_id';
-			$table_name = 'monthly_document_status';
-		}
-		else if($data['interval'] == "quarter")
-		{
-			$field_name = 'quarterly_id';
-			$table_name = 'quarterly_document_status';
-		}
-		else if($data['interval'] == "year")
-		{
-			$field_name = 'yearly_d_id';
-			$table_name = 'yearly_document_status';
-		}
-		
-		if(isset($field_name) && isset($table_name))
-		{
-			$this->db->where($field_name, $data['uploaded_id']);
-	
-			return $this->db->delete($table_name);
-		}
-		else
-		{
-			return FALSE;
-		}
-	}
-
-	/**
 	 * Get an affiliate id by city name 
 	 *
 	 * @param  string $affiliate_name
@@ -1605,5 +1611,232 @@ class Affiliate_model extends CI_Model
 		$this->db->where('affiliate.city', $affiliate_name);
 		$query = $this->db->get('affiliate');
 		return $query->row_array();
+	}
+
+	public function report_details($report_id)
+	{
+
+		$sql  = " SELECT cr.*,af.organization FROM census_report cr ";
+		$sql .= " LEFT JOIN affiliate af ON cr.field_affiliate_select = af.field_affiliate_select_value ";
+		$sql .= " WHERE cr.report_id = ? ";
+		$query = $this->db->query($sql,[$report_id]);
+		$result =  $query->row();
+		return $result;
+
+	}
+	
+	public function service_areas($report_id)
+	{
+		$this->db->select('ser.*');
+		$this->db->from('service_areas_main ser');
+		$this->db->join('census_tab_statuses ts', 'ts.status_id = ser.field_tab_status');
+		$this->db->where('ser.field_parent_census', $report_id);
+		$query = $this->db->get();
+		//echo $this->db->last_query();
+		return $query->result_array();
+	}  
+
+	public function census_report_data($report_id)
+	{
+		$this->db->select('rep.*,af.organization,af.city,af.state,cs.status');
+		$this->db->from('census_report rep');
+		$this->db->join('affiliate af', 'af.field_affiliate_select_value = rep.field_affiliate_select', 'left');
+		$this->db->join('census_statuses cs', 'cs.status_id = rep.field_census_status');
+		$this->db->where('rep.report_id', $report_id);
+
+
+		$query = $this->db->get();
+		//echo $this->db->last_query();
+		return $query->result_array();
+	}
+
+	public function service_areas_details($service_area_id)
+	{
+		$this->db->select('ser.*');
+		$this->db->from('service_areas ser');
+		$this->db->where('ser.fk_service_area_id', $service_area_id);
+		$this->db->where('ser.is_deleted', 0);
+		$query = $this->db->get();
+		return $query->result_array();
+	}  
+
+	public function census_report_statuses()
+	{
+		$this->db->select('stat.*');
+		$this->db->from('census_statuses stat');
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+	
+	public function education_prg($report_id)
+	{
+		$this->db->select('eprg.*,ts.status,cr.field_year,af.organization,af.city,af.state,');
+		$this->db->from('education_program eprg');
+		$this->db->join('census_report cr', 'cr.report_id = eprg.field_parent_census');
+		$this->db->join('affiliate af', 'af.field_affiliate_select_value = cr.field_affiliate_select', 'left');
+		$this->db->join('census_tab_statuses ts', 'ts.status_id = eprg.field_tab_status');
+    	$this->db->where('eprg.field_parent_census', $report_id);
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+
+	public function expenditure($report_id)
+	{
+		$this->db->select('exp.*,ts.status,cr.field_year,af.organization,af.city,af.state,');
+		$this->db->from('expenditures exp');
+		$this->db->join('census_report cr', 'cr.report_id = exp.field_parent_census');
+		$this->db->join('affiliate af', 'af.field_affiliate_select_value = cr.field_affiliate_select', 'left');
+		$this->db->join('census_tab_statuses ts', 'ts.status_id = exp.field_tab_status');
+    	$this->db->where('exp.field_parent_census', $report_id);
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+
+	public function revenue($report_id)
+	{
+		$this->db->select('rev.*');
+		$this->db->from('revenue rev');
+    	$this->db->where('rev.field_parent_census', $report_id);
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+
+	public function employees_board($report_id)
+	{
+		$this->db->select('emp.*,ts.status,cr.field_year,af.organization,af.city,af.state,');
+		$this->db->from('employees_board_members emp');
+		$this->db->join('census_report cr', 'cr.report_id = emp.field_parent_census');
+		$this->db->join('affiliate af', 'af.field_affiliate_select_value = cr.field_affiliate_select', 'left');
+		$this->db->join('census_tab_statuses ts', 'ts.status_id = emp.field_tab_status');
+    	$this->db->where('emp.field_parent_census', $report_id);
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+
+	public function community_relations($report_id)
+	{
+		$this->db->select('com.*,ts.status,cr.field_year,af.organization,af.city,af.state,');
+		$this->db->from('community_relations com');
+		$this->db->join('census_report cr', 'cr.report_id = com.field_parent_census');
+		$this->db->join('affiliate af', 'af.field_affiliate_select_value = cr.field_affiliate_select', 'left');
+		$this->db->join('census_tab_statuses ts', 'ts.status_id = com.field_tab_status');
+    	$this->db->where('com.field_parent_census', $report_id);
+		$query = $this->db->get();
+		//echo $this->db->last_query();
+		return $query->result_array();
+	}
+	
+	public function other_prg($report_id)
+	{
+		$this->db->select('oth.*,ts.status,cr.field_year,af.organization,af.city,af.state,');
+		$this->db->from('other_programs oth');
+		$this->db->join('census_report cr', 'cr.report_id = oth.field_parent_census');
+		$this->db->join('affiliate af', 'af.field_affiliate_select_value = cr.field_affiliate_select', 'left');
+		$this->db->join('census_tab_statuses ts', 'ts.status_id = oth.field_tab_status');
+    	$this->db->where('oth.field_parent_census', $report_id);
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+
+	/**
+	 * Get get_programs
+	 * 
+	 * @param  int $field_parent_census
+	 * @return array
+	 */
+	public function get_programs($field_parent_census,$field_program_area_tid)
+	{
+		$this->db->select('p.*');
+		$this->db->from('programs p');
+    	$this->db->where('p.field_parent_census', $field_parent_census);
+		$this->db->where('p.field_program_area_tid', $field_program_area_tid);
+		$this->db->order_by("p.title", "asc");
+		$query = $this->db->get();
+		//echo $this->db->last_query();
+		return $query->result_array();
+	}
+	
+	/**
+	 * Get civic data
+	 * 
+	 * @param  int $report_id
+	 * @return array
+	 */
+	public function civic_data($report_id)
+	{
+		$this->db->select('ce.*');
+		$this->db->from('civic_engagement ce');
+    	$this->db->where('ce.field_parent_census', $report_id);
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+
+	/**
+	 * Get volunteer data
+	 * 
+	 * @param  int $report_id
+	 * @return array
+	 */
+	public function volunteer_data($report_id)
+	{
+		$this->db->select('vm.*');
+		$this->db->from('volunteers_members vm');
+    	$this->db->where('vm.field_parent_census', $report_id);
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+
+	/**
+	 * Get community_relation_method_ad_market
+	 * 
+	 * @param  int $community_relation_id
+	 * @return array
+	 */
+	public function get_community_relation_method_ad_market($community_relation_id)
+	{
+		$this->db->select('comrel.field_method_of_ad_marketing');
+		$this->db->from('community_relation_method_ad_market comrel');
+    	$this->db->where('comrel.community_relation_id', $community_relation_id);
+		$query = $this->db->get();
+		//echo $this->db->last_query();
+		return $query->result_array();
+	}
+
+	/**
+	 * Get entire census report
+	 * 
+	 * @param  int $creport_year
+	 * @return array
+	 */
+	public function census_report($report_year, $affiliate_id = NULL, $status = NULL)
+	{
+		$this->db->select('rep.*,af.organization,af.city,af.state,cs.status,exp.field_total_expenditures,exp.field_a_salaries_wages,exp.field_b_fringe_benefits,exp.field_c_professional_fees,exp.field_d_travel,exp.field_e_postage_freight,
+						   exp.field_f_insurance,exp.field_g_interest_payments,exp.field_h_dues_subscription_regist,exp.field_i_depreciation,exp.field_j_taxes_including_property,exp.field_k_utilities,exp.field_l_equipment_space_rental,
+						   exp.field_m_goods_and_services,exp.field_n_rent_mortgage_payments,exp.field_o_other,exp.field_number_properties_rented,exp.field_capital_budget_amount,rev.field_revenue_corporations,rev.field_revenue_foundations,rev.field_revenue_individual_members,
+						   rev.field_revenue_special_events,rev.field_revenue_united_way,rev.field_revenue_federal,rev.field_revenue_state_local,rev.field_revenue_other,rev.field_revenue_nul,rev.field_revenue_investment,com.field_affiliate_website_address,
+						   emp.field_board_member_grand_total,emp.field_part_time_employees,emp.field_full_time_employees,ce.field_voter_registration,ce.field_community_forums,ce.field_crja,ce.field_police_brutality,ce.field_advocacy_efforts,
+						   vm.field_ypc_members,vm.field_aux_members,vm.field_guild_members,GROUP_CONCAT(p.title) as program_titles,GROUP_CONCAT(p.field_program_area_tid) as program_areas');
+		$this->db->from('census_report rep');
+		$this->db->join('affiliate af', 'af.field_affiliate_select_value = rep.field_affiliate_select', 'left');
+		$this->db->join('expenditures exp', 'rep.report_id = exp.field_parent_census', 'left');
+		$this->db->join('revenue rev', 'rep.report_id = rev.field_parent_census', 'left');
+		$this->db->join('community_relations com', 'rep.report_id = com.field_parent_census');
+		$this->db->join('employees_board_members emp', 'rep.report_id = emp.field_parent_census');
+		$this->db->join('civic_engagement ce', 'rep.report_id = ce.field_parent_census');
+		$this->db->join('volunteers_members vm', 'rep.report_id = vm.field_parent_census');
+		$this->db->join('programs p', 'rep.report_id = p.field_parent_census');
+		$this->db->join('census_statuses cs', 'cs.status_id = rep.field_census_status');
+		$this->db->group_by('rep.report_id');
+		
+		$this->db->where('rep.field_year', $report_year);
+		if($status != NULL){
+			$this->db->where('rep.field_census_status', 126);
+		}
+		if($affiliate_id != NULL){
+			$this->db->where('rep.field_affiliate_select', $affiliate_id);
+		}
+
+		$query = $this->db->get();
+		return $query->result_array();
 	}
 }

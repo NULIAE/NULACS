@@ -172,7 +172,7 @@ class Assessment_model extends CI_Model
 		//$this->db->limit(5); 
 		$this->db->group_by("paa.self_assessment_id");
 	
-		$query = $this->db->get(); 
+		$query = $this->db->get();
 
 		return $query->result_array();
 	}
@@ -276,6 +276,27 @@ class Assessment_model extends CI_Model
 		
 		$this->db->where('self_assessment_id',  $selfAssessmentId);
 		$this->db->update('performance_assesment_answers', $update_data);
+	}
+
+	/**
+	* delete Performance Assessment
+	*
+	* @return array true or false 
+	*/
+	public function delete($data)
+	{
+		// $this->db->where('affiliate_id', $data['aid']);
+		$this->db->where('self_assessment_id', $data['sid']);
+		$del_performance_assesment_answers = $this->db->delete('performance_assesment_answers');
+		if($del_performance_assesment_answers){
+			// $this->db->where('affiliate_id', $data['aid']);
+			$this->db->where('self_assessment_id', $data['sid']);
+			$del_self_assessment = $this->db->delete('self_assessment');
+			return $del_self_assessment;
+		}else{
+			return $del_performance_assesment_answers;
+		}
+
 	}
 	
 }

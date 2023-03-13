@@ -25,7 +25,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $config['base_url'] = '';
 
-
 /*
 |--------------------------------------------------------------------------
 | Index File
@@ -36,7 +35,7 @@ $config['base_url'] = '';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = '';
+$config['index_page'] = 'index.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -224,7 +223,7 @@ $config['allow_get_array'] = TRUE;
 | your log files will fill up very fast.
 |
 */
-$config['log_threshold'] = 1;
+$config['log_threshold'] = 0;
 
 /*
 |--------------------------------------------------------------------------
@@ -465,7 +464,9 @@ $config['csrf_exclude_uris'] = array(
 	'user/password/update',
 	'module/user/filter',
 	'module/user/insert',
+	'module/notification/emails/save',
 	'module/notification/emails/update/[0-9]+',
+	'module/notification/emails/send_reminder',
 	'module/settings/update',
 	'module/affiliate/filter',
 	'module/affiliate/insert',
@@ -477,24 +478,54 @@ $config['csrf_exclude_uris'] = array(
 	'module/affiliate/document/update',
 	'module/affiliate/document/add-comment',
 	'module/affiliate/document/upload',
+	'module/affiliate/document/doupload',
+	'module/affiliate/document/compliance/delete',
+	'module/affiliate/document/delete_upload',
 	'module/affiliate/key-indicators/save',
-	'module/affiliate/key-indicators/search',
+	'module/affiliate/key-indicators/savemonthly',
 	'module/affiliate/key-indicators/approve',
+	'module/affiliate/key-indicators/approvemonthly',
+	'module/affiliate/key-indicators/search',
+	'module/affiliate/key-indicators/searchmonthly',
 	'module/affiliate/filter-performance-documents',
 	'module/documents/search-documents',
+	'module/documents/export',
 	'module/assessment/criteria-answers-view',
 	'module/assessment/criteria-answers',
 	'module/assessment/rating',
 	'module/assessment/assessment-listing',
-	'module/affiliate/document/doupload',
-	'module/documents/export',
 	'module/assessment/form-data',
-	'module/affiliate/document/delete_upload',
-	'module/notification/emails/save',
-	'module/notification/emails/send_reminder',
-	'module/notification/emails/send_testmail',
 	'module/assessment/add_self_assessment_data',
-	'module/affiliate/document/delete_termly_document'
+	'module/forms_update/contactinfo/update',
+	'module/forms_update/reviewed_complete',
+	'module/forms_update/service_area/update',
+	'module/forms_update/service_area/delete',
+	'module/forms_update/community/update',
+	'module/census_report/savenew',
+	'module/forms_update/employees/update',
+	'module/forms_update/revenue/update',
+	'module/forms_update/expenditure/update',
+	'module/forms_update/civic/update',
+	'module/forms_update/emergency/update',
+	'module/forms_update/contact_data/update',
+	'module/forms_update/empowerment/update',
+	'module/forms_update/volunteer/update',
+	'module/forms_update/education_prg/update',
+	'module/forms_update/entrepreneurship_prg/update',
+	'module/forms_update/health_quality_prg/update',
+	'module/forms_update/housing_prg/update',
+	'module/forms_update/workforce_prg/update',
+	'module/forms_update/other_prg/update',
+	'module/forms_update/programs/update',
+	'module/forms_update/revenue/venture_type_delete',
+	'module/forms_update/view_prg/update',
+	'module/forms_update/tab_status_change',
+	'module/forms_update/delete',
+	'module/forms_update/delete_tabwise',
+	'module/forms_update/covid/update',
+	'module/forms_update/entrepreneurship/buisiness_type_delete',
+	'module/affiliate/document/delete_termly_document',
+	'module/notification/emails/send_testmail'
 );
 
 /*

@@ -228,7 +228,8 @@ function showDialogBox(type, message) {
     message: content,
     buttons: [
       {
-        label: 'DONE',
+        //label: 'DONE',
+        label: 'OK',
         class: "btn btn-primary",
         action: function () {
           $('#dialog').NitroDialog({ action: "close" });
