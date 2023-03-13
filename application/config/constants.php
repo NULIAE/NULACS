@@ -83,3 +83,23 @@ defined('EXIT_USER_INPUT')     OR define('EXIT_USER_INPUT', 7); // invalid user 
 defined('EXIT_DATABASE')       OR define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
+
+
+
+/**
+ * User defined constants = census reports section
+ */
+
+define('EDUCATION_PROGRAM_ID',494);
+define('ENTREPRENEURSHIP_PROGRAM_ID',495);
+define('HEALTH_PROGRAM_ID',496);
+define('HOUSING_PROGRAM_ID',497);
+define('OTHER_PROGRAM_ID',498);
+define('WORKFORCE_PROGRAM_ID',499);
+
+define('STATUS_COMPLETE',119);
+define('STATUS_INCOMPLETE',120);
+define('STATUS_RESUBMIT',121);
+define('STATUS_REVIEWED_COMPLETE',122);
+define('STATUS_REVIEWED',123);
+define('STATUS_SUBMITTED',124);
