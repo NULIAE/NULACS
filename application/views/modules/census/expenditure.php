@@ -573,7 +573,11 @@
                         </tr>
                         <tr>
                           <td>How many properties does the affiliate rent?: </td>
-                          <td><span><?= number_format($content['report_data'][0]['field_number_properties_rented']); ?></span></td>
+                          <?php if($content['report_data'][0]['field_number_properties_rented'] == "") {?>
+                            <td><span><?= $content['report_data'][0]['field_number_properties_rented']; ?></span></td>
+                          <?php }else{?>
+                            <td><span><?= number_format($content['report_data'][0]['field_number_properties_rented']); ?></span></td>
+                          <?php }?>
                         </tr>
                         <tr>
                           <td>If the affiliate owns its facilities, what is the current market value of the property?: </td>

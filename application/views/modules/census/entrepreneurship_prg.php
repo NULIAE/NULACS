@@ -573,30 +573,32 @@
 												</tr>
 											</tbody>
 										</table>
-										<table class="table table-striped">
-											<tbody>
-												<tr>
-													<td>
-														<h4>Business Type </h4>
-													</td>
-													<td>
-														<h4>Sales </h4>
-													</td>
-													<td>
-														<h4>Served </h4>
-													</td>
-												</tr>
-												<?php
-												for ($i = 0; $i < count($content['buisiness']); $i++) {
-												?>
+										<?php if (count($content['buisiness']) > 0) { ?>
+											<table class="table table-striped">
+												<tbody>
 													<tr>
-														<td><?= $content['buisiness'][$i]['name']; ?> </td>
-														<td><span> $<?= number_format($content['buisiness'][$i]['field_business_sales_value'], 2); ?> </span></td>
-														<td><span> $<?= number_format($content['buisiness'][$i]['field_business_served_value'], 2); ?></span></td>
+														<td>
+															<h4>Business Type </h4>
+														</td>
+														<td>
+															<h4>Sales </h4>
+														</td>
+														<td>
+															<h4>Served </h4>
+														</td>
 													</tr>
-												<?php } ?>
-											</tbody>
-										</table>
+													<?php
+													for ($i = 0; $i < count($content['buisiness']); $i++) {
+													?>
+														<tr>
+															<td><?= $content['buisiness'][$i]['name']; ?> </td>
+															<td><span> $<?= number_format($content['buisiness'][$i]['field_business_sales_value'], 2); ?> </span></td>
+															<td><span> $<?= number_format($content['buisiness'][$i]['field_business_served_value'], 2); ?></span></td>
+														</tr>
+													<?php } ?>
+												</tbody>
+											</table>
+										<?php }?>
 										<table class="table table-striped">
 											<tbody>
 												<tr>

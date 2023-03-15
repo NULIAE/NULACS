@@ -508,14 +508,18 @@
                                        <td> Number of clients that decreased debt, increased savings, and/or increased credit score: </td>
                                        <td><span> <?= number_format($content['report_data'][0]['field_program_housing_improved']); ?></span></td>
                                     </tr>
+                                    <?php if (!empty($content['report_data'][0]['field_house_counseling'])) {?>
                                     <tr>
                                        <td> How many clients express a preference for in-person housing counseling services? </td>
                                        <td><span> <?= number_format($content['report_data'][0]['field_house_counseling']); ?></span></td>
                                     </tr>
+                                    <?php }?>
+                                    <?php if (!empty($content['report_data'][0]['field_program_homeless_assistance'])) {?>
                                     <tr>
                                        <td>Number of participants that was provided homeless assistance: </td>
                                        <td><span> <?= number_format($content['report_data'][0]['field_program_homeless_assistance']); ?></span></td>
                                     </tr>
+                                    <?php }?>
                                     <tr>
                                        <td colspan="2" class="border-bottom-0"><b class="text-primary h5 fw-bold">Home Purchased</b></td>
                                     </tr>

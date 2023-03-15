@@ -411,7 +411,7 @@
                           </tr>
                           <tr>
                             <td>If so, how many satellite offices does your affiliate have?: </td>
-                            <td><span><?php echo number_format($content['report_data'][0]['field_number_of_satellite_office']); ?></span></td>
+                            <td><span><?php if (!empty($content['report_data'][0]['field_number_of_satellite_office'])) { ?> $<?= number_format($content['report_data'][0]['field_number_of_satellite_office']); ?> <?php } ?></span></td>
                           </tr>
                           <!-- <tr>
                             <td>Board Help: </td>

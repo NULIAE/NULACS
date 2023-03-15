@@ -440,7 +440,7 @@
                           </tr>
                           <tr>
                             <td>Special Events: </td>
-                            <td><span> <?php if (!empty($content['report_data'][0]['field_revenue_special_events'])) { ?> $<?= number_format($content['report_data'][0]['field_revenue_special_events'], 2); ?> <?php } ?></span></td>
+                            <td><span> $<?= number_format($content['report_data'][0]['field_revenue_special_events'], 2); ?> </span></td>
                           </tr>
                           <tr>
                             <td>United Way: </td>
