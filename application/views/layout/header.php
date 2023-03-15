@@ -64,6 +64,18 @@
                 <li class="nav-item">
                   <a class="nav-link" title="Home" href="<?php echo base_url(); ?>"><i class="i i-home"></i><span class="sr-only">Home</span></a>
 								</li>
+                <?php $is_census = $user_detail['0']['is_census']; ?>
+                <li class="nav-item">
+                  <?php if($this->session->role_id == 1){?>
+                    <?php if($is_census == 1){?>
+                      <a class="nav-link" title="Census" href="<?php echo base_url(); ?>module/census_affiliate"><i class="i i-census-icon"></i><span class="sr-only">Census Affiliate</span></a>
+                    <?php } ?>
+                  <?php }else{ ?>
+                    <?php if($is_census == 1) {?>
+                      <a class="nav-link" title="Census" href="<?php echo base_url(); ?>module/censuses-for-my-affiliate"><i class="i i-census-icon"></i><span class="sr-only">Census Affiliate</span></a>
+                    <?php } ?>
+                  <?php } ?>
+								</li>
                 <?php if($this->session->role_id == 1): ?>
                   <li class="nav-item">
                     <a class="nav-link" title="All Affiliate Status" href="<?php echo base_url('/module/affiliate/status'); ?>"><i class="i i-b-o-d"></i><span class="sr-only">All Affiliate Status</span></a>
@@ -92,7 +104,7 @@
                     <ul>
                       <div class="dropContent">
                         <?php $now = time(); ?>
-                        <?php foreach($notifications as $notification){
+                        <?php foreach($notifications as $notification){ 
                           $i++;
                           include $notification;
                           if($i == 11) break;
@@ -106,7 +118,7 @@
                               <a href="<?php echo $notification["link"]; ?>"><?=$notification['notification']?></a>
                                 <p class="status">Upload - <?=isset($notification['doc_name'])? $notification['doc_name'] : '';?></p>
                                 <p class="status"><?php echo $notification['city']." - ".$notification['stateabbreviation'];?> </p>
-                                <p class="status"> <?php echo $notification['first_name']. " ". $notification['last_name'];?></p>
+                                <p class="status"> <?php echo $notification['first_name']. " ". $notification['last_name'];?></p> 
                                 <?php if(isset($time_ago) && !empty($time_ago)){ ?>
                                   <p class="time"><?php echo $time_ago[0]; ?> ago</p>
                               <?php  } ?>
