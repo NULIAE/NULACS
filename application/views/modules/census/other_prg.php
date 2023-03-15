@@ -22,7 +22,7 @@
                            <div class="nav nav-pills" id="nav-tab" role="tablist">
                               <button type="button" id="nav-sync-tab" data-bs-toggle="tab" class="btn btn-primary btnRound editbtn" data-bs-target="#nav-sync"><i class="i i-edit"></i></button>
                            </div>
-								   <?php if($content['report_data'][0]['field_do_you_offer_programs_of_t'] == 0) {?>
+								   <?php if($content['report_data'][0]['field_do_you_offer_programs_of_t'] == 0 && $content['report_data'][0]['field_tab_status']  == 120) {?>
                               <div class="nav nav-pills" id="" role="tablist">
                                  <button type="button" id="other_programs" data-bs-toggle="" class="r-50 btn btn-primary btnRound markbtn" title="Mark as complete" data-bs-target="#nav-sync" onclick="tabstatus_change(this,<?php echo $content['report_data'][0]['field_parent_census'] ?>,119)"><i class="i i-check"></i></button>
                               </div>
@@ -44,7 +44,7 @@
                         <div class="nav nav-pills" id="nav-tab" role="tablist">
                            <button type="button" id="nav-sync-tab" data-bs-toggle="tab" class="btn btn-primary btnRound editbtn" data-bs-target="#nav-sync"><i class="i i-edit"></i></button>
                         </div>
-								<?php if($content['report_data'][0]['field_do_you_offer_programs_of_t'] == 0) {?>
+								<?php if($content['report_data'][0]['field_do_you_offer_programs_of_t'] == 0 && $content['report_data'][0]['field_tab_status']  == 120) {?>
                         <div class="nav nav-pills" id="" role="tablist">
                            <button type="button" id="other_programs" data-bs-toggle="" class="r-50 btn btn-primary btnRound markbtn" title="Mark as complete" data-bs-target="#nav-sync" onclick="tabstatus_change(this,<?php echo $content['report_data'][0]['field_parent_census']?>,119)"><i class="i i-check"></i></button>
                         </div>

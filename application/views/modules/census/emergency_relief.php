@@ -499,18 +499,18 @@
 																} else {
 																	echo "";
 																} ?> </span></td>
-													<td><span> <?php $field_relief_ed_fund_other = $content['report_data'][0]['field_relief_ed_fund_other'];
-																if ($field_relief_ed_fund_other == 1) {
-																	echo "Yes";
-																} elseif ($field_relief_ed_fund_other == 0 && $field_relief_ed_fund_other != '') {
-																	echo "No";
-																} else {
-																	echo "";
-																}; ?> </span></td>
 													<td><span> <?php $field_relief_ed_fund_uway = $content['report_data'][0]['field_relief_ed_fund_uway'];
 																if ($field_relief_ed_fund_uway == 1) {
 																	echo "Yes";
 																} elseif ($field_relief_ed_fund_uway == 0 && $field_relief_ed_fund_uway != '') {
+																	echo "No";
+																} else {
+																	echo "";
+																}; ?> </span></td>
+													<td><span> <?php $field_relief_ed_fund_other = $content['report_data'][0]['field_relief_ed_fund_other'];
+																if ($field_relief_ed_fund_other == 1) {
+																	echo "Yes";
+																} elseif ($field_relief_ed_fund_other == 0 && $field_relief_ed_fund_other != '') {
 																	echo "No";
 																} else {
 																	echo "";
@@ -557,18 +557,18 @@
 																} else {
 																	echo "";
 																}; ?> </span></td>
-													<td><span> <?php $field_relief_health_fund_other = $content['report_data'][0]['field_relief_health_fund_other'];
-																if ($field_relief_health_fund_other == 1) {
-																	echo "Yes";
-																} elseif ($field_relief_health_fund_other == 0 && $field_relief_health_fund_other != '') {
-																	echo "No";
-																} else {
-																	echo "";
-																}; ?> </span></td>
 													<td><span> <?php $field_relief_health_fund_uway = $content['report_data'][0]['field_relief_health_fund_uway'];
 																if ($field_relief_health_fund_uway == 1) {
 																	echo "Yes";
 																} elseif ($field_relief_health_fund_uway == 0 && $field_relief_health_fund_uway != '') {
+																	echo "No";
+																} else {
+																	echo "";
+																}; ?> </span></td>
+													<td><span> <?php $field_relief_health_fund_other = $content['report_data'][0]['field_relief_health_fund_other'];
+																if ($field_relief_health_fund_other == 1) {
+																	echo "Yes";
+																} elseif ($field_relief_health_fund_other == 0 && $field_relief_health_fund_other != '') {
 																	echo "No";
 																} else {
 																	echo "";
@@ -586,18 +586,18 @@
 																} else {
 																	echo "";
 																}; ?> </span></td>
-													<td><span> <?php $field_relief_civic_fund_other = $content['report_data'][0]['field_relief_civic_fund_other'];
-																if ($field_relief_civic_fund_other == 1) {
-																	echo "Yes";
-																} elseif ($field_relief_civic_fund_other == 0 && $field_relief_civic_fund_other != '') {
-																	echo "No";
-																} else {
-																	echo "";
-																}; ?> </span></td>
 													<td><span> <?php $field_relief_civic_fund_uway = $content['report_data'][0]['field_relief_civic_fund_uway'];
 																if ($field_relief_civic_fund_uway == 1) {
 																	echo "Yes";
 																} elseif ($field_relief_civic_fund_uway == 0 && $field_relief_civic_fund_uway != '') {
+																	echo "No";
+																} else {
+																	echo "";
+																}; ?> </span></td>
+													<td><span> <?php $field_relief_civic_fund_other = $content['report_data'][0]['field_relief_civic_fund_other'];
+																if ($field_relief_civic_fund_other == 1) {
+																	echo "Yes";
+																} elseif ($field_relief_civic_fund_other == 0 && $field_relief_civic_fund_other != '') {
 																	echo "No";
 																} else {
 																	echo "";
