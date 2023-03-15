@@ -860,6 +860,15 @@ class Document_model extends CI_Model
 		return $query->document_type;
 	}
 
-
+	
+	public function get_user_detail($user_id)
+	{
+		$this->db->select('u.*,u.is_census,u.user_id');
+		$this->db->from('users u');
+		$this->db->where('u.user_id', $user_id);
+		$this->db->where('u.is_deleted', 0);
+		$query = $this->db->get();
+		return $query->result_array();
+	}
 
 }
