@@ -196,6 +196,19 @@ class User_model extends CI_Model
 			$this->db->group_end();
 			unset($where['users.name']);
 		}
+		if($where['users.is_census'] == 1){			
+			$this->db->where('is_census',1);		
+			$this->db->where('is_acs',1);
+			unset($where['users.is_census']);
+		}
+		if($where['users.is_census'] == 2){			
+			$this->db->where('is_census',1);
+			unset($where['users.is_census']);
+		}
+		if($where['users.is_census'] == 3){			
+			$this->db->where('is_acs',1);
+			unset($where['users.is_census']);
+		}
 		
 		
 		if( $where !== NULL)
@@ -234,6 +247,19 @@ class User_model extends CI_Model
 			$this->db->or_like('users.last_name',$where['users.name']);
 			$this->db->group_end();
 			unset($where['users.name']);
+		}
+		if($where['users.is_census'] == 1){			
+			$this->db->where('is_census',1);		
+			$this->db->where('is_acs',1);
+			unset($where['users.is_census']);
+		}
+		if($where['users.is_census'] == 2){			
+			$this->db->where('is_census',1);
+			unset($where['users.is_census']);
+		}
+		if($where['users.is_census'] == 3){			
+			$this->db->where('is_acs',1);
+			unset($where['users.is_census']);
 		}
 		if( $where !== NULL)
 		{

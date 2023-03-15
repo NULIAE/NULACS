@@ -38,6 +38,8 @@ class User extends MY_Controller
 			'https://unpkg.com/mustache@latest',
 			'pages/modules/filter_users.js'
 		);
+		$user_id = $this->session->user_id;
+		$data['user_detail'] = $this->Document_model->get_user_detail($user_id);
 		$data['notifications'] = $this->Document_model->get_notifications();
 		$this->load->view('template', $data);
 	}
@@ -66,6 +68,9 @@ class User extends MY_Controller
 			
 		if( isset($data['affiliate']) && ($data['affiliate'] !== '') )
 			$filters['users.affiliate_id'] =  $data['affiliate'];
+
+		if( isset($data['access']) && ($data['access'] !== '') )
+				$filters['users.is_census'] =  $data['access'];
 
 		if( isset($data['useremail']) && ($data['useremail'] !== '') ){
 			$filters['users.name']= $data['useremail']   ;
@@ -134,6 +139,8 @@ class User extends MY_Controller
 		//Page specific javascript files
 		$data['footer']['js'] = array('pages/modules/add_user.js');
 		$data['notifications'] = $this->Document_model->get_notifications();
+		$user_id = $this->session->user_id;
+		$data['user_detail'] = $this->Document_model->get_user_detail($user_id);
 		$this->load->view('template', $data);
 	}
 
@@ -146,6 +153,14 @@ class User extends MY_Controller
 	{
 		//XSS Filter all the input post fields
 		$data = $this->input->post(NULL, TRUE);
+		if($data['role_id'] == 3){
+			$data['is_census'] = 1;
+			$data['is_acs'] = 1;
+
+		}else{
+			$data['is_census'] = isset($data['is_census']) ? 1 : 0;
+			$data['is_acs'] = isset($data['is_acs']) ? 1 : 0;
+		}
 
 		//Check whether user with the email id exists on `users` table
 		$user_data = $this->User_model->check_user($data['name'], TRUE);

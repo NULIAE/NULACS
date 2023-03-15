@@ -24,7 +24,7 @@
 							<?php endforeach;?>
 							</select>
 						</div>
-						<div class="col-lg-4 col-md-6 col-sm-24 ">
+						<div class="col-lg-3 col-md-6 col-sm-24 ">
 							<label for="affiliate">Affiliate</label>
 							<select name="affiliate" id="affiliate" data-placeholder="Affiliate" data-type="selector">
 							<option value="">All Affiliates</option>
@@ -36,7 +36,7 @@
 							</select>
 						</div>
 						<?php endif; ?>
-						<div class="col-lg-4 col-md-6 col-sm-24 ">
+						<div class="col-lg-3 col-md-6 col-sm-24 ">
 							<label for="role">Role</label>
 							<select name="role" data-placeholder="Role" data-type="selector">
 								<option value="">All Roles</option>
@@ -54,6 +54,15 @@
 								<option value="">All Users</option>
 								<option value="1">Active Users</option>
 								<option value="0">Inactive Users</option>
+							</select>
+						</div>
+						<div class="col-lg-3 col-md-6 col-sm-24 ">
+							<label for="access">Access</label>
+							<select name="access" data-placeholder="Access" data-type="selector">
+								<option value="">All Users</option>>
+								<option value="3">ACS</option>
+								<option value="1">Both</option>
+								<option value="2">Census</option>
 							</select>
 						</div>
 						<div class="col-lg-3 col-md-6 col-sm-24 ">
@@ -233,6 +242,24 @@
 							</label>
 							</div>
 						</div>	
+
+						<div class="col-lg-8 col-md-8 form-group">
+							<label>Census User</label>
+							<div>
+								<label class="checkbox switch bool disabled" id="census-label{{user_id}}">
+									<input type="checkbox" name="is_census" id="census{{user_id}}"  value="1" disabled />
+								</label>
+							</div>
+						</div>
+
+						<div class="col-lg-8 col-md-8 form-group">
+							<label>ACS User</label>
+							<div>
+								<label class="checkbox switch bool disabled" id="acs-label{{user_id}}">
+									<input type="checkbox" name="is_acs" id="acs{{user_id}}"  value="1" disabled />
+								</label>
+							</div>
+						</div>
 					</div>
 				</div>
 				<div class="foot">

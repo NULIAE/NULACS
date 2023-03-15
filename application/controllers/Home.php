@@ -33,33 +33,45 @@ class Home extends MY_Controller
 			'pages/dashboard.js'
 		);
 		$data['notifications'] = $this->Document_model->get_notifications();
+		$user_id = $this->session->user_id;
+		$data['user_detail'] = $this->Document_model->get_user_detail($user_id);
+		$acs = $data['user_detail'][0]['is_acs'];
+		$census = $data['user_detail'][0]['is_census'];
 		if($this->session->role_id == 2 || $this->session->role_id == 3){
-			$filterWYear='';
-			$filterWMonth='';
-				if(isset($_REQUEST['year'])){
-					$filterWYear = $_REQUEST['year'];
-				}
-				if(isset($_REQUEST['month'])){
-					$filterWMonth = $_REQUEST['month'];
-				}
+			if($acs == 1){
+				$filterWYear='';
+				$filterWMonth='';
+					if(isset($_REQUEST['year'])){
+						$filterWYear = $_REQUEST['year'];
+					}
+					if(isset($_REQUEST['month'])){
+						$filterWMonth = $_REQUEST['month'];
+					}
 
-			$data['content'] = array(
-				'get_monthly_compliance' => $this->get_monthly_compliance($filterWMonth,$filterWYear),
-				'get_quarterly_compliance_status' => $this->get_quarterly_compliance_status($filterWYear),
-				'get_yearly_compliance_status' => $this->get_yearly_compliance_status($filterWMonth,$filterWYear),
-				'document_listing' => $this->document_listing($filterWMonth,$filterWYear),
-				'quarterly_document_listing' => $this->quarterly_document_listing($filterWYear),
-				'yearly_document_listing' => $this->yearly_document_listing($filterWMonth,$filterWYear),
-				'current_compliance_status' => $this->Affiliate_model->current_compliance_status($this->session->affiliate_id),
-				'performance_score' => $this->Affiliate_model->get_performance_score($this->session->affiliate_id)
-			);
+				$data['content'] = array(
+					'get_monthly_compliance' => $this->get_monthly_compliance($filterWMonth,$filterWYear),
+					'get_quarterly_compliance_status' => $this->get_quarterly_compliance_status($filterWYear),
+					'get_yearly_compliance_status' => $this->get_yearly_compliance_status($filterWMonth,$filterWYear),
+					'document_listing' => $this->document_listing($filterWMonth,$filterWYear),
+					'quarterly_document_listing' => $this->quarterly_document_listing($filterWYear),
+					'yearly_document_listing' => $this->yearly_document_listing($filterWMonth,$filterWYear),
+					'current_compliance_status' => $this->Affiliate_model->current_compliance_status($this->session->affiliate_id),
+					'performance_score' => $this->Affiliate_model->get_performance_score($this->session->affiliate_id)
+				);
 
-			$data['user_notifications'] = $this->Document_model->user_notifications();
-			$data['user_data'] = $this->Document_model->user_data();
-			$data['affiliate'] = $this->Affiliate_model->get_affiliate_by_id($this->session->affiliate_id);
-			$data['affiliate']['board_member'] = $this->User_model->get_board_member_name($this->session->affiliate_id);
-			//Name of the view file
-			$data['view_name'] = 'affiliate_home.php';
+				$data['user_notifications'] = $this->Document_model->user_notifications();
+				$data['user_data'] = $this->Document_model->user_data();
+				$data['affiliate'] = $this->Affiliate_model->get_affiliate_by_id($this->session->affiliate_id);
+				$data['affiliate']['board_member'] = $this->User_model->get_board_member_name($this->session->affiliate_id);
+				//Name of the view file
+				$data['view_name'] = 'affiliate_home.php';
+			}
+			elseif($acs == 0 && $census == 1){
+				redirect(base_url('/module/censuses-for-my-affiliate/'));
+			}
+			elseif($acs == 0 && $census == 0){
+				redirect(base_url('/logout/'));
+			}
 
 		}else{
 			//Name of the view file

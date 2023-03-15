@@ -119,6 +119,24 @@
 							</div>
 						</div>
 
+						<div class="col-lg-8 col-md-8 form-group">
+							<label>Census User</label>
+							<div>
+								<label class="checkbox switch bool" for="pu-3"><span class="sr-only">Census User</span>
+									<input type="checkbox" id="pu-3" name="is_census" value="1" />
+								</label>
+							</div>
+						</div>
+
+						<div class="col-lg-8 col-md-8 form-group">
+							<label>ACS User</label>
+							<div>
+								<label class="checkbox switch bool" for="pu-4"><span class="sr-only">ACS User</span>
+									<input type="checkbox" id="pu-4" name="is_acs" value="1" />
+								</label>
+							</div>
+						</div>
+
 						<!-- <div class="col-lg-8 col-md-8 form-group">
 							<div>
 								<label>Is ADM Uploader?</label>
