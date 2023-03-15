@@ -152,6 +152,22 @@
 								</label>
 							</div>
 						</div>
+						<div class="col-lg-6 col-md-12 form-group">
+							<label for="pu-1">Census User</label>
+							<div>
+								<label class="checkbox switch bool <?php if($role_id != '1') echo "disabled"; ?> <?php if($user['is_census']) echo "checked"; ?>" for="pu-3">
+								<input type="checkbox" id="pu-3" name="is_census" value="1" <?php if($user['is_census']) echo "checked"; ?> <?php if($role_id != '1') echo "disabled"; ?>>
+								</label>
+							</div>
+						</div>
+						<div class="col-lg-6 col-md-12 form-group">
+							<label for="pu-1">ACS User</label>
+							<div>
+								<label class="checkbox switch bool <?php if($role_id != '1') echo "disabled"; ?> <?php if($user['is_acs']) echo "checked"; ?>" for="pu-4">
+								<input type="checkbox" id="pu-4" name="is_acs" value="1" <?php if($user['is_acs']) echo "checked"; ?> <?php if($role_id != '1') echo "disabled"; ?>>
+								</label>
+							</div>
+						</div>
                 	</div>
 
 					<div class="foot">

@@ -37,6 +37,8 @@ class Profile extends MY_Controller {
 		//Page specific javascript files
 		$data['footer']['js'] = array('pages/profile.js');
 		$data['notifications'] = $this->Document_model->get_notifications();
+		$user_id = $this->session->user_id;
+		$data['user_detail'] = $this->Document_model->get_user_detail($user_id);
 		$this->load->view('template', $data);
 	}
 
@@ -67,6 +69,8 @@ class Profile extends MY_Controller {
 		//Page specific javascript files
 		$data['footer']['js'] = array('pages/profile.js');
 		$data['notifications'] = $this->Document_model->get_notifications();
+		$user_id = $this->session->user_id;
+		$data['user_detail'] = $this->Document_model->get_user_detail($user_id);
 		$this->load->view('template', $data);
 	}
 
@@ -118,6 +122,8 @@ class Profile extends MY_Controller {
 				$data['is_adm_uploader'] = isset($data['is_adm_uploader']) ? 1 : 0;
 				$data['isuser_super_administrator'] = isset($data['isuser_super_administrator']) ? 1 : 0;
 				$data['user_status'] = isset($data['user_status']) ? 1 : 0;
+				$data['is_census'] = isset($data['is_census']) ? 1 : 0;
+				$data['is_acs'] = isset($data['is_acs']) ? 1 : 0;
 			}
 
 			if ( $this->User_model->update($data['user_id'], $data) )
@@ -177,6 +183,8 @@ class Profile extends MY_Controller {
 		//Page specific javascript files
 		$data['footer']['js'] = array('pages/change_password.js');
 		$data['notifications'] = $this->Document_model->get_notifications();
+		$user_id = $this->session->user_id;
+		$data['user_detail'] = $this->Document_model->get_user_detail($user_id);
 		$this->load->view('template', $data);
 	}
 	
@@ -246,6 +254,8 @@ class Profile extends MY_Controller {
 		//Page specific javascript files
 		$data['footer']['js'] = array();
 		$data['notifications'] = $this->Document_model->get_notifications();
+		$user_id = $this->session->user_id;
+		$data['user_detail'] = $this->Document_model->get_user_detail($user_id);
 		$this->load->view('template', $data);
 	}
 }

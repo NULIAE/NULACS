@@ -76,6 +76,14 @@ $(function () {
 						$('#status-label'+item.user_id).addClass('checked');
 						$('#status'+item.user_id).attr('checked','checked');
 					}
+					if(item.is_census == "1"){
+						$('#census-label'+item.user_id).addClass('checked');
+						$('#census'+item.user_id).attr('checked','checked');
+					}
+					if(item.is_acs == "1"){
+						$('#acs-label'+item.user_id).addClass('checked');
+						$('#acs'+item.user_id).attr('checked','checked');
+					}
 					if(item.is_adm_uploader == "1"){
 						$('#isadm-label'+item.user_id).addClass('checked');
 						$('#isadm'+item.user_id).attr('checked','checked');
