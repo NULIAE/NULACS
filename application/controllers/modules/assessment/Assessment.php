@@ -1252,15 +1252,15 @@ class Assessment extends MY_Controller
 	$templateProcessor->setValue('economic_prg_ser', $economic_prg_ser);
 
 	  foreach($education_pgm_data as $edu){
-	 	$templateProcessor->setValue("test0", $edu["title"], 1);
+		$templateProcessor->setValue('test0', str_replace("&","and",$edu["title"]), 1);
 	   }
 
 	  foreach($health_pgm_data as $health_prg_data){
-		$templateProcessor->setValue('health_prg_data', $health_prg_data["title"], 1);
+		$templateProcessor->setValue('health_prg_data', str_replace("&","and",$health_prg_data["title"]), 1);
 	  }
 
 	  foreach($other_pgm_data as $other_prg_datas){
-		$templateProcessor->setValue('other_pgm', $other_prg_datas["title"], 1);
+		$templateProcessor->setValue('other_pgm', str_replace("&","and",$other_prg_datas["title"]), 1);
 	  }
 
 	  foreach($entrepreneurship_pgm_data as $entre_prg_datas){
@@ -1430,28 +1430,28 @@ class Assessment extends MY_Controller
 	  
 	  $civic_edu_data = $civic_pgm_data[0]['field_voter_registration'];
 	  if($civic_edu_data == "1"){
-		$templateProcessor->setValue('civic_edu_pgm', "voter_registration");	
-	  }	else{ $templateProcessor->setValue('civic_edu_pgm', ""); }
+		$templateProcessor->setValue('civic_edu_pgm', "voter_registration : Yes");	
+	  }	else{ $templateProcessor->setValue('civic_edu_pgm', "voter_registration : N/A"); }
 	  
 	  $civic_com_data = $civic_pgm_data[0]['field_community_forums'];
 	  if($civic_com_data == "1"){
-		$templateProcessor->setValue('civic_com_pgm', "Community Programs");	
-	  }else{ $templateProcessor->setValue('civic_com_pgm', ""); }
+		$templateProcessor->setValue('civic_com_pgm', "Community Programs : Yes");	
+	  }else{ $templateProcessor->setValue('civic_com_pgm', "Community Programs : N/A"); }
 	  
 	  $civic_crja_data = $civic_pgm_data[0]['field_crja'];
 	  if($civic_crja_data == "1"){
-		$templateProcessor->setValue('civic_crja_pgm', "Civil Rights And Racial Justice Activities");	
-	  }else{ $templateProcessor->setValue('civic_crja_pgm', ""); }
+		$templateProcessor->setValue('civic_crja_pgm', "Civil Rights And Racial Justice Activities : Yes");	
+	  }else{ $templateProcessor->setValue('civic_crja_pgm', "Civil Rights And Racial Justice Activities : N/A"); }
 	  
 	  $civic_pb_data = $civic_pgm_data[0]['field_police_brutality'];
 	  if($civic_pb_data == "1"){
-		$templateProcessor->setValue('civic_pb_pgm', "Police Brutality");	
-	  }else{ $templateProcessor->setValue('civic_pb_pgm', ""); }
+		$templateProcessor->setValue('civic_pb_pgm', "Police Brutality : Yes");	
+	  }else{ $templateProcessor->setValue('civic_pb_pgm', "Police Brutality : N/A"); }
 	  
 	  $civic_adv_data = $civic_pgm_data[0]['field_advocacy_efforts'];
 	  if($civic_adv_data == "1"){
-		$templateProcessor->setValue('civic_adv_pgm', "Advocacy");	
-	  }else{ $templateProcessor->setValue('civic_adv_pgm', ""); }
+		$templateProcessor->setValue('civic_adv_pgm', "Advocacy : Yes");	
+	  }else{ $templateProcessor->setValue('civic_adv_pgm', "Advocacy : N/A"); }
 	  
 	  $vol_young_data = $volunteer_data[0]['field_ypc_members'];
 	  if($vol_young_data != ""){
