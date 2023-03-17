@@ -393,7 +393,7 @@
     <div class="col-md-12">
         <div class="form-group">
             <label for="edit-field-program-target-age" class="form-label">Target age range</label>
-            <input type="text" id="edit-field-program-target-age" name="field_program_target_age" value="<?= number_format($report_data[0]['field_program_target_age']);?>" size="60"
+            <input type="text" id="edit-field-program-target-age" name="field_program_target_age" value="<?= $report_data[0]['field_program_target_age'];?>" size="60"
                 class="form-control">
         </div>
     </div>
@@ -652,7 +652,7 @@
 												</tr>
 												<tr>
 												<td >Target age range:  </td>
-												<td><span><?= number_format($report_data[0]['field_program_target_age']) ?></span></td>													
+												<td><span><?= $report_data[0]['field_program_target_age'] ?></span></td>													
 												</tr>
 												<tr>
 												<td>Target Group(s) Served:  </td>	

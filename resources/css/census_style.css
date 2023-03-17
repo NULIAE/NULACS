@@ -27265,9 +27265,6 @@ header.header .navbar-top {
 header.header .navbar-brand {
   padding: 10px 0px;
 }
-header.header .navbar-brand img {
-  height: 75px !important;
-}
 @media (max-width: 767.98px) {
   header.header .navbar-brand img {
     height: 40px !important;

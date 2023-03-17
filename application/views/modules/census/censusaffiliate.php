@@ -1,4 +1,4 @@
-  <main>
+<main>
     <div class="mainWrap">
 
       <div class="container">
@@ -24,7 +24,7 @@
                       $yearAll = date("Y");
                     } 
                 ?>
-                <option value="" <?php if($yearAll) echo "selected"; ?>>All</option>
+                <option value="" <?php if($yearAll) echo "selected"; ?>>Any</option>
                   <?php
 
                     for($i=2010;$i<2028;$i++){

@@ -1436,10 +1436,15 @@ class Census_affiliate extends MY_Controller
 
 		//XSS Filter all the input post fields
 		$data = $this->input->get();
-		if(!empty($data['year']))
-		$year_selected = $data['year'];
-		else	
-		$year_selected = 2021;
+		if($data['def_year'] == 1){
+			$year_selected = $data['year'];
+		}
+		else{
+			if(!empty($data['year']))
+			$year_selected = $data['year'];
+			else	
+			$year_selected = 2021;
+		}
 
 		if(!empty($data['affiliate']))
 			$affilate_selected = $data['affiliate'];
@@ -1449,14 +1454,21 @@ class Census_affiliate extends MY_Controller
 		$filters = array();
     
 		//default year
-		$filters['year'] = 2021;
+		if($data['def_year'] == ''){
+			$filters['year'] = 2021;
+		}
 
-		if( isset($data['year']) && ($data['year'] !== '') ){
-			$filters['year'] =  $data['year'];
+		if($data['def_year'] == 1){
+			
 		}
 		else{
-			$data['year']= 2021;
-		}			
+			if( isset($data['year']) && ($data['year'] !== '') ){
+				$filters['year'] =  $data['year'];
+			}
+			else{
+				$data['year']= 2021;
+			}	
+		}		
 
 
 		if( isset($data['affiliate']) && ($data['affiliate'] !== '') ){
@@ -1517,20 +1529,30 @@ class Census_affiliate extends MY_Controller
 		$data = $this->input->get();
 
 		$filters = array();
-		if(!empty($data['year']))
-		$year_selected = $data['year'];
-		else	
-		$year_selected = 2018;
+		if($data['def_year'] == 1){
+			$year_selected = $data['year'];
+		}
+		else{
+			if(!empty($data['year']))
+			$year_selected = $data['year'];
+			else	
+			$year_selected = 2018;
+		}
 
 		if(!empty($data['affiliate']))
 		$affilate_selected = $data['affiliate'];
 		else
 		$affilate_selected = '';
 
-		if( isset($data['year']) && ($data['year'] !== '') )
-			$filters['year'] =  $data['year']; 
-		else
-		$filters['year'] = 2018;
+		if($data['def_year'] == 1){
+
+		}
+		else{
+			if( isset($data['year']) && ($data['year'] !== '') )
+				$filters['year'] =  $data['year']; 
+			else
+			$filters['year'] = 2018;
+		}
 
 		if( isset($data['affiliate']) && ($data['affiliate'] !== '') )
 		$filters['affiliate'] =  $data['affiliate'];
@@ -1546,7 +1568,7 @@ class Census_affiliate extends MY_Controller
 		
 		//Page specific javascript files
 		$data['footer']['js'] = array(
-			'pages/modules/reports/filter_program_area_summary.js',
+			'pages/modules/filter_affiliate_keyfund_query.js',
 			'https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js'
 		);
 		

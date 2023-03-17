@@ -593,9 +593,9 @@ class Census_reports extends MY_Controller
 		$params = $this->input->get();
 		
 		
-		$year = 2018;
+		$year = "";
 		if( isset($params['year']) && ($params['year'] != '') && ($params['year'] != '0') )
-		  $year =  $params['year'];			
+		  $year =  $params['year'];	
 
     $areas = ['Education and Youth Development','Entrepreneurship and Business Development','Health and Quality of Life',
 	            'Housing and Community Development','Workforce Development','Other Program'];
@@ -1006,7 +1006,6 @@ class Census_reports extends MY_Controller
 		$params = $this->input->get();
 
 		$affiliate = ''; 
-		$year = 2018;
 		
 		if( isset($params['year']) && ($params['year'] != '') && ($params['year'] != '0') )
 		  $year =  $params['year'];
@@ -1098,7 +1097,6 @@ class Census_reports extends MY_Controller
 		$params = $this->input->get();
 
 		$affiliate = ''; 
-		$year = 2018;
 		
 		if( isset($params['year']) && ($params['year'] != '') && ($params['year'] != '0') )
 		  $year =  $params['year'];
@@ -1230,7 +1228,6 @@ class Census_reports extends MY_Controller
 		$params = $this->input->get();
 
 		$affiliate = ''; 
-		$year = 2018;
 		
 		if( isset($params['year']) && ($params['year'] != '') && ($params['year'] != '0') )
 		  $year =  $params['year'];
@@ -1317,7 +1314,6 @@ class Census_reports extends MY_Controller
 		$params = $this->input->get();
 
 		$affiliate = ''; 
-		$year = 2018;
 		
 		if( isset($params['year']) && ($params['year'] != '') && ($params['year'] != '0') )
 		  $year =  $params['year'];
@@ -1475,7 +1471,6 @@ class Census_reports extends MY_Controller
 		$params = $this->input->get();
 
 		$affiliate = '';
-		$year = 2018;
 
 		if( isset($params['year']) && ($params['year'] != '') && ($params['year'] != '0') )
 		  $year =  $params['year'];
@@ -1650,7 +1645,6 @@ class Census_reports extends MY_Controller
 		$params = $this->input->get();
 		
 		$affiliate = '';
-		$year = 2018;
 
 		if( isset($params['year']) && ($params['year'] != '') && ($params['year'] != '0') )
 		  $year =  $params['year'];

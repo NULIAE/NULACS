@@ -39,6 +39,17 @@ table.dataTable thead .sorting_desc {
               <div class="form-group">
                 <label for="year">Year</label>
                 <select class="form-select" aria-label="year" id="year" name="year">
+                <?php 
+                    $get = $this->input->get();
+                    $yearAll = 0;
+                    if($get){
+                      $yearAll = 1; 
+                    }
+                    else{
+                      $yearAll = date("Y");
+                    } 
+                ?>
+                <option value="" <?php if($yearAll) echo "selected"; ?>>Any</option>
                   <?php 
                     for($i=2010;$i<=date("Y");$i++){
                   ?>
@@ -60,6 +71,7 @@ table.dataTable thead .sorting_desc {
                 </select>
               </div>
             </div>
+            <input type="hidden" name="def_year" value="0" id="year_value">
             <div class="col-lg-8 col-md-9">
               <div class="form-group formclassbtn">
                 <button class="btn btn-primary m-r-15 btn-rounded">APPLY</button>

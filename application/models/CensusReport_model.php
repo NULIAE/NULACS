@@ -714,10 +714,10 @@ class CensusReport_model extends CI_Model
 		cr.field_date_established,cr.field_number_of_years_as_ceo,cr.field_address_line_1,cr.field_address_line_2,cr.field_city,cr.field_state_province,
 		cr.field_zip_code,cr.field_telephone,cr.field_fax,cr.field_email_address,cr.field_number_of_years_of_service,cr.field_year,af.organization 
 	          FROM census_report cr 
-						JOIN affiliate af ON cr.field_affiliate_select = af.affiliate_id
+						JOIN affiliate af ON cr.field_affiliate_select = af.affiliate_id	
             WHERE cr.field_year = ? AND field_affiliate_select = ? ";
 		$query = $this->db->query($sql,[$year,$affiliate_id]);
-    $result =  $query->row();
+    	$result =  $query->row();
 		return $result;
 	}
 
@@ -1192,31 +1192,49 @@ class CensusReport_model extends CI_Model
 
 	public function programs_by_year($year,$area) 
 	{
-		$sql = "SELECT count(*) AS total FROM programs prg
-	          LEFT JOIN census_report cr ON prg.field_parent_census = cr.report_id 
-						WHERE field_program_area_tid = ".$area." AND cr.field_year =".$year;
+		if($year == ""){
+			$sql = "SELECT count(*) AS total FROM programs prg
+				  LEFT JOIN census_report cr ON prg.field_parent_census = cr.report_id 
+							WHERE field_program_area_tid = ".$area;
+		}else{
+			$sql = "SELECT count(*) AS total FROM programs prg
+				  LEFT JOIN census_report cr ON prg.field_parent_census = cr.report_id 
+							WHERE field_program_area_tid = ".$area." AND cr.field_year =".$year;
+		}
 		$query = $this->db->query($sql);
-    $result =  $query->row();
+    	$result =  $query->row();
 		return $result->total;
 	}	
 	
 	public function programs_budget_by_year($year,$area) 
 	{
-		$sql = "SELECT SUM(field_program_budget) AS budget FROM programs prg
+		if($year == ""){
+			$sql = "SELECT SUM(field_program_budget) AS budget FROM programs prg
+	          LEFT JOIN census_report cr ON prg.field_parent_census = cr.report_id 
+						WHERE field_program_area_tid = ".$area;
+		}else{
+			$sql = "SELECT SUM(field_program_budget) AS budget FROM programs prg
 	          LEFT JOIN census_report cr ON prg.field_parent_census = cr.report_id 
 						WHERE field_program_area_tid = ".$area." AND cr.field_year =".$year;
+		}
 		$query = $this->db->query($sql);
-    $result =  $query->row();
+    	$result =  $query->row();
 		return $result->budget;
 	}
 	
 	public function programs_served_by_year($year,$area) 
 	{
-		$sql = "SELECT SUM(field_program_served_total) AS served FROM programs prg
+		if($year == ""){
+			$sql = "SELECT SUM(field_program_served_total) AS served FROM programs prg
+	          LEFT JOIN census_report cr ON prg.field_parent_census = cr.report_id 
+						WHERE field_program_area_tid = ".$area;
+		}else{
+			$sql = "SELECT SUM(field_program_served_total) AS served FROM programs prg
 	          LEFT JOIN census_report cr ON prg.field_parent_census = cr.report_id 
 						WHERE field_program_area_tid = ".$area." AND cr.field_year =".$year;
+		}		
 		$query = $this->db->query($sql);
-    $result =  $query->row();
+    	$result =  $query->row();
 		return $result->served;
 	}
 	
