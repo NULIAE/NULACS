@@ -1,4 +1,4 @@
-  <main>
+<main>
     <div class="mainWrap">
       <div class="container">
         <div class="h2 tittle">Affiliates and CEO's</div>
@@ -8,6 +8,7 @@
                 <table  class="table table1" id="tbl1">
                   <thead>
                     <tr>
+                      <th></th>
                       <th>AFFILIATE</th>
                       <th>CEO</th>
                       <th>Email Address</th>
@@ -16,13 +17,16 @@
                     </tr>
                   </thead>
                   <tbody>
+                    <?php $counter = 1; foreach($report as $data){ ?>
                     <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                      <td><?= $counter?></td>
+                      <td><?= $data['organization']; ?></td>
+                      <td><?= $data['prefix']." ".$data['last_name'].", ".$data['first_name']; ?></td>
+                      <td><?= $data['user_email_address_1']; ?></td>
+                      <td><?= $data['city']; ?></td>
+                      <td><?= $data['state']; ?></td>
                     </tr>
+                    <?php $counter++; } ?>
                   </tbody>
                 </table>          
               </div>

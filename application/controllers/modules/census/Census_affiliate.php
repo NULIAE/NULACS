@@ -998,8 +998,12 @@ class Census_affiliate extends MY_Controller
 		$housing_id = $this->get_program_area_id('Housing and Community Development');
 		$oth_id = $this->get_program_area_id('Other Program');
 		$workforce_id = $this->get_program_area_id('Workforce Development');
+		$census_report = $this->CensusReport_model->annual_census_pub_census_data($year,$affiliate_id);
+		$service_area_main = $this->CensusReport_model->service_areas($census_report->report_id);
+
 		$data['content'] = array(
 			'census_report' => $this->CensusReport_model->annual_census_pub_census_data($year,$affiliate_id),
+			'service_data' => $this->CensusReport_model->service_areas_details($service_area_main[0]['pk_id']),
 			'civic_data' => $this->CensusReport_model->annual_census_pub_civic_data($year,$affiliate_id),
 			'empowerment_data' => $this->CensusReport_model->annual_census_pub_empowerment_data($year,$affiliate_id),
 			'revenue_data' => $this->CensusReport_model->annual_census_pub_revenue_data($year,$affiliate_id),

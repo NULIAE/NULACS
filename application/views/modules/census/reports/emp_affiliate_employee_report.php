@@ -105,7 +105,7 @@ table.dataTable thead .sorting_desc {
                       <td><b><?php 
                       $a = array_filter(array_column($report, 'average'));
                       $avg = array_sum($a)/count($a);
-                      print '$'.number_format($avg, 2, '.', '');
+                      print '$'.number_format($avg, 2, '.', ',');
                       ?></b></td>                     
                     </tr>
                   </thead>

@@ -125,7 +125,7 @@
                   <a class="nav-link active censusadmin"  href="<?php echo base_url(); ?>module/censuses-for-my-affiliate/">CENSUS</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link censusreport" href="<?php echo base_url(); ?>module/census_report/">NUL CENSUS REPORTS</a>
+                  <a class="nav-link censusreport" href="<?php echo base_url(); ?>module/census_report/">CENSUS REPORTS</a>
                 </li>
               </ul>
       <?php } elseif($this->session->role_id == 1){?>

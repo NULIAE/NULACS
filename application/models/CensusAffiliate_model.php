@@ -52,7 +52,7 @@ class CensusAffiliate_model extends CI_Model
 	 */
 	public function affiliate_report_filter($limit = NULL, $start = NULL, $search)
 	{
-		$sql = "SELECT cr.report_id,cr.field_year, cs.status,af.organization from census_report cr";
+		$sql = "SELECT cr.report_id,cr.field_affiliate_select,cr.field_year, cs.status,af.organization from census_report cr";
 		$sql .= " JOIN census_statuses cs ON cs.status_id = cr.field_census_status ";
 		$sql .= "  JOIN affiliate af  ON af.field_affiliate_select_value = cr.field_affiliate_select ";
 
@@ -199,7 +199,7 @@ class CensusAffiliate_model extends CI_Model
 	###########*/
 	public function affiliateindex_report_filter($limit = NULL, $start = NULL, $search)
 	{
-		$sql = "SELECT af.affiliate_id,af.organization, cr.field_year, cr.field_city as city,cr.field_state_province as `state` from census_report cr";
+		$sql = "SELECT af.affiliate_id,af.organization, cr.field_year,cr.field_affiliate_select, cr.field_city as city,cr.field_state_province as `state` from census_report cr";
 		$sql .= " LEFT JOIN affiliate af ON cr.field_affiliate_select = af.field_affiliate_select_value ";
 
 

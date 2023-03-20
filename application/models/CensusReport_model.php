@@ -714,7 +714,7 @@ class CensusReport_model extends CI_Model
 		cr.field_date_established,cr.field_number_of_years_as_ceo,cr.field_address_line_1,cr.field_address_line_2,cr.field_city,cr.field_state_province,
 		cr.field_zip_code,cr.field_telephone,cr.field_fax,cr.field_email_address,cr.field_number_of_years_of_service,cr.field_year,af.organization 
 	          FROM census_report cr 
-						JOIN affiliate af ON cr.field_affiliate_select = af.affiliate_id	
+						JOIN affiliate af ON cr.field_affiliate_select = af.field_affiliate_select_value	
             WHERE cr.field_year = ? AND field_affiliate_select = ? ";
 		$query = $this->db->query($sql,[$year,$affiliate_id]);
     	$result =  $query->row();
@@ -2205,6 +2205,23 @@ class CensusReport_model extends CI_Model
 		$this->db->from('entrepreneurship_program_business ent_pro_bui');
 		$this->db->join('type_of_business typ', 'ent_pro_bui.field_business_type_tid = typ.id', 'left');
     	$this->db->where('ent_pro_bui.entrepreneurship_id', $entrepre_id);
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+
+    /**
+	 * Get affiliate and ceo data
+	 * @return array
+	 */
+	public function affiliates_and_ceo_s()
+	{
+		$this->db->select('* , aff.organization as affiliate,st.state as state');
+		$this->db->from('users us');
+		$this->db->join('affiliate aff', 'us.affiliate_id = aff.affiliate_id', 'left');
+		$this->db->join('state st', 'aff.state = st.stateid', 'left');
+		$this->db->like('us.user_title','President/CEO');
+		//$this->db->or_like('us.user_title','President');
+    	//$this->db->where('ent_pro_bui.entrepreneurship_id', $entrepre_id);
 		$query = $this->db->get();
 		return $query->result_array();
 	}

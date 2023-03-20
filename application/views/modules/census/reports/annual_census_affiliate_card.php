@@ -11,8 +11,8 @@
                   
 
 
-                
-                        <?php if($census_report){ ?>
+
+                  <?php if($census_report){ ?>
                         <div class="full_form">
                              
                              
@@ -47,6 +47,66 @@
                                         $contact_data->field_public_total_female +
                                         $contact_data->field_public_total_male; ?></p>
                                         <?php } ?>
+
+
+                                        <?php for ($i = 0; $i < count($service_data); $i++) { ?>
+                                        <div class="tabilCard inner NulCard">
+                                            <div class="contact-table table-responsive">
+                                                <table class="table table-striped">
+                                                    <tbody>
+                                                        <tr>
+                                                        <td>
+                                                            <h4 class="text-primary h5 fw-bold w-50">Service Area </h4>
+                                                        </td>
+                                                        <td><span></span></td>
+                                                        </tr>
+                                                        <tr>
+                                                        <td class="w-20">City/County </td>
+                                                        <td><span><?= $service_data[$i]['field_service_area_city_county']; ?> </span></td>
+                                                        </tr>
+                                                        <tr>
+                                                        <td class="w-50">Population </td>
+                                                        <td><span><?= number_format($service_data[$i]['field_service_area_population']); ?></span></td>
+                                                        </tr>
+                                                        <tr>
+                                                        <td class="w-50"><b>Race/Ethnicity</b></td>
+                                                        <td><b>Composition %</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                        <td class="w-50">White </td>
+                                                        <td><span><?= isset($service_data[$i]['field_service_area_white']) ? $service_data[$i]['field_service_area_white'] . '%' : ''; ?></span></td>
+                                                        </tr>
+                                                        <tr>
+                                                        <td class="w-50">Hispanic/Latino </td>
+                                                        <td><span><?= isset($service_data[$i]['field_service_area_hispanic']) ? $service_data[$i]['field_service_area_hispanic'] . '%' : ''; ?></span></td>
+                                                        </tr>
+                                                        <tr>
+                                                        <td class="w-50">Asian American </td>
+                                                        <td><span><?= isset($service_data[$i]['field_service_area_asian_am']) ? $service_data[$i]['field_service_area_asian_am'] . '%' : ''; ?></span></td>
+                                                        </tr>
+                                                        <tr>
+                                                        <td class="w-50">Native American </td>
+                                                        <td><span><?= isset($service_data[$i]['field_service_area_native_am']) ? $service_data[$i]['field_service_area_native_am'] . '%' : ''; ?></span></td>
+                                                        </tr>
+                                                        <tr>
+                                                        <td class="w-50">African American </td>
+                                                        <td><span><?= isset($service_data[$i]['field_service_area_african_am']) ? $service_data[$i]['field_service_area_african_am'] . '%' : ''; ?></span></td>
+                                                        </tr>
+                                                        <tr>
+                                                        <td class="w-50">Other </td>
+                                                        <td><span><?= isset($service_data[$i]['field_service_area_other']) ? $service_data[$i]['field_service_area_other'] . '%' : ''; ?></span></td>
+                                                        </tr>
+                                                        <tr style="visibility:hidden;">
+                                                        <td>Tab Status: </td>
+                                                        <td></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+
+
+                                            </div>
+                                        </div>
+                                        <?php } ?><br>
                                        
                                         <div class="h5 text-primary p-b-10"><b>PROGRAMS</b></div>
                                         <?php if(count($program_edu)>0){ ?>
@@ -58,7 +118,8 @@
                                                     <tbody>
                                                         <?php foreach($program_edu as $edu){ ?>
                                                         <tr>
-                                                            <td class="p-t-25"><?= $edu['title']; ?></td>
+                                                            <?php $pk_id = $edu['pk_id'];?>
+                                                            <td><a class="p-t-25" href="<?php echo base_url("module/census_report/$census_report->report_id/$pk_id/viewprogram"); ?>"><?= $edu['title']; ?></a></td>
                                                         </tr>
                                                         <?php } ?>
                                                     </tbody>
@@ -75,7 +136,8 @@
                                                     <tbody>
                                                         <?php foreach($program_entrepren as $entrepren){ ?>
                                                         <tr>
-                                                            <td class="p-t-25"><?= $entrepren['title']; ?></td>
+                                                            <?php $pk_id = $entrepren['pk_id'];?>
+                                                            <td><a class="p-t-25" href="<?php echo base_url("module/census_report/$census_report->report_id/$pk_id/viewprogram"); ?>"><?= $entrepren['title']; ?></a></td>
                                                         </tr>
                                                         <?php } ?>
                                                     </tbody>
@@ -92,7 +154,8 @@
                                                     <tbody>
                                                         <?php foreach($program_workforce as $workforce){ ?>
                                                         <tr>
-                                                            <td class="p-t-25"><?= $workforce['title']; ?></td>
+                                                            <?php $pk_id = $workforce['pk_id'];?>
+                                                            <td><a class="p-t-25" href="<?php echo base_url("module/census_report/$census_report->report_id/$pk_id/viewprogram"); ?>"><?= $workforce['title']; ?></a></td>
                                                         </tr>
                                                         <?php } ?>                                                    
                                                     </tbody>
@@ -109,7 +172,8 @@
                                                     <tbody>
                                                         <?php foreach($program_health as $health){ ?>
                                                         <tr>
-                                                            <td class="p-t-25"><?= $health['title']; ?></td>
+                                                            <?php $pk_id = $health['pk_id'];?>
+                                                            <td><a class="p-t-25" href="<?php echo base_url("module/census_report/$census_report->report_id/$pk_id/viewprogram"); ?>"><?= $health['title']; ?></a></td>
                                                         </tr>
                                                         <?php } ?>
                                                     </tbody>
@@ -126,7 +190,8 @@
                                                     <tbody>
                                                         <?php foreach($program_housing as $housing){ ?>
                                                         <tr>
-                                                            <td class="p-t-25"><?= $housing['title']; ?></td>
+                                                            <?php $pk_id = $housing['pk_id'];?>
+                                                            <td><a class="p-t-25" href="<?php echo base_url("module/census_report/$census_report->report_id/$pk_id/viewprogram"); ?>"><?= $housing['title']; ?></a></td>
                                                         </tr>
                                                         <?php } ?>
                                                     </tbody>
@@ -235,6 +300,12 @@
                                         </div
                                         </div>
                                         </div>
+
+                                        <div class="row">
+                        			    <div class="col-md-24">
+	                                        <a class="text-blackD" href="<?php echo base_url()?>module/affiliateindex">Return to Affiliate List</a>
+                                        </div>
+                                        </div
                         <hr>
                         </div>
                         <?php } ?>
@@ -245,3 +316,11 @@
       </div>
    </div>
 </main>
+<style>
+    a.text-blackD {
+  text-decoration: underline;
+}
+a.text-blackD {
+    color: #000000;
+}
+</style>

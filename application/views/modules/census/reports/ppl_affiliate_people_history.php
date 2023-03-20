@@ -78,7 +78,7 @@ table.dataTable thead .sorting_desc {
                     <?php foreach($report as $data){ ?>
                     <tr>
                       <td><?= $data['field_year']; ?></td>
-                      <td><a href="<?php echo base_url(); ?>module/census_report/<?= $data['report_id']; ?>/view"><?= $data['organization']; ?></a></td>
+                      <td><a href="<?php echo base_url(); ?>module/census_report/<?= $data['report_id']; ?>/contact_data"><?= $data['organization']; ?></a></td>
                       <td><?php if($data['indirect'] != '') { ?><?= number_format($data['indirect']); ?> <?php } ?></td>
                       <td><?php if($data['public'] != '') { ?><?= number_format($data['public']); ?> <?php } ?></td>
                       <td><?php if($data['direct'] != '') { ?><?= number_format($data['direct']); ?> <?php } ?></td>

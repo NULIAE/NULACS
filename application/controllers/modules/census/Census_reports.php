@@ -1595,8 +1595,7 @@ class Census_reports extends MY_Controller
 	 */
 	public function affiliates_and_ceo_s()
 	{
-		// $report = $this->CensusReport_model->affiliates_and_ceo_s();
-		$report = 'Test Data';
+		$report = $this->CensusReport_model->affiliates_and_ceo_s();
 		$data['content'] = [
 			'report' => $report
 		];		

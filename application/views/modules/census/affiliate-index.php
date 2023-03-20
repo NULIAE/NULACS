@@ -116,7 +116,7 @@ table.dataTable thead .sorting_desc {
 <tr>
 	<td scope="row" class="t-l-c">{{city}}</td>
 	<td>{{state}}</td>
-	<td><a class="text-greenD" href="<?php echo base_url()?>module/affiliateindex/organization/{{affiliate_id}}/{{field_year}}">{{organization}}</a></td>
+	<td><a class="text-greenD" href="<?php echo base_url()?>module/affiliateindex/organization/{{field_affiliate_select}}/{{field_year}}">{{organization}}</a></td>
 </tr>
 {{/affiliates}}
 
