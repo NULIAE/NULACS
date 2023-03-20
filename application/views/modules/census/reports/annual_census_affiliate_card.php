@@ -241,19 +241,19 @@
                                         <div class="row g-4 align-items-end p-b-20">
                         			    <div class="col-md-24">
                                         <div class="h5 text-primary p-b-10"><b>Total Revenue</b></div>
-                                        <div class="h6 p-b-10"><b>Total Revenue: </b><?= ($revenue_data->field_revenue_total_budget)?'$'.$revenue_data->field_revenue_total_budget:''; ?></div>
-                                        <div class="h6 p-b-10"><b>Corporations: </b><?= ($revenue_data->field_revenue_corporations)?'$'.$revenue_data->field_revenue_corporations:''; ?></div>
-                                        <div class="h6 p-b-10"><b>Foundations: </b><?= ($revenue_data->field_revenue_foundations)?'$'.$revenue_data->field_revenue_foundations:''; ?></div>
-                                        <div class="h6 p-b-10"><b>Individual Memberships: </b><?= ($revenue_data->field_revenue_individual_members)?'$'.$revenue_data->field_revenue_individual_members:''; ?></div>
-                                        <div class="h6 p-b-10"><b>Special Events: </b><?= ($revenue_data->field_revenue_special_events)?'$'.$revenue_data->field_revenue_special_events:''; ?></div>
-                                        <div class="h6 p-b-10"><b>United Way: </b><?= ($revenue_data->field_revenue_united_way)?'$'.$revenue_data->field_revenue_united_way:''; ?></div>
-                                        <div class="h6 p-b-10"><b>Federal: </b><?= ($revenue_data->field_revenue_federal)?'$'.$revenue_data->field_revenue_federal:''; ?></div>
-                                        <div class="h6 p-b-10"><b>State/Local: </b><?= ($revenue_data->field_revenue_state_local)?'$'.$revenue_data->field_revenue_state_local:''; ?></div>
-                                        <div class="h6 p-b-10"><b>Other: </b><?= ($revenue_data->field_revenue_other)?'$'.$revenue_data->field_revenue_other:''; ?></div>
-                                        <div class="h6 p-b-10"><b>NUL: </b><?= ($revenue_data->field_revenue_nul)?'$'.$revenue_data->field_revenue_nul:''; ?></div>
+                                        <div class="h6 p-b-10"><b>Total Revenue: </b><?= ($revenue_data->field_revenue_total_budget)?'$'.number_format($revenue_data->field_revenue_total_budget,2):''; ?></div>
+                                        <div class="h6 p-b-10"><b>Corporations: </b><?= ($revenue_data->field_revenue_corporations)?'$'.number_format($revenue_data->field_revenue_corporations,2):''; ?></div>
+                                        <div class="h6 p-b-10"><b>Foundations: </b><?= ($revenue_data->field_revenue_foundations)?'$'.number_format($revenue_data->field_revenue_foundations,2):''; ?></div>
+                                        <div class="h6 p-b-10"><b>Individual Memberships: </b><?= ($revenue_data->field_revenue_individual_members)?'$'.number_format($revenue_data->field_revenue_individual_members,2):''; ?></div>
+                                        <div class="h6 p-b-10"><b>Special Events: </b><?= ($revenue_data->field_revenue_special_events)?'$'.number_format($revenue_data->field_revenue_special_events,2):''; ?></div>
+                                        <div class="h6 p-b-10"><b>United Way: </b><?= ($revenue_data->field_revenue_united_way)?'$'.number_format($revenue_data->field_revenue_united_way,2):''; ?></div>
+                                        <div class="h6 p-b-10"><b>Federal: </b><?= ($revenue_data->field_revenue_federal)?'$'.number_format($revenue_data->field_revenue_federal,2):''; ?></div>
+                                        <div class="h6 p-b-10"><b>State/Local: </b><?= ($revenue_data->field_revenue_state_local)?'$'.number_format($revenue_data->field_revenue_state_local,2):''; ?></div>
+                                        <div class="h6 p-b-10"><b>Other: </b><?= ($revenue_data->field_revenue_other)?'$'.number_format($revenue_data->field_revenue_other,2):''; ?></div>
+                                        <div class="h6 p-b-10"><b>NUL: </b><?= ($revenue_data->field_revenue_nul)?'$'.number_format($revenue_data->field_revenue_nul,2):''; ?></div>
                                         <div class="h6 p-b-10"><b>Endowment: </b><?= ($revenue_data->field_revenue_has_endowment)?'Yes':'No'; ?></div>
-                                        <div class="h6 p-b-10"><b>Endowment: </b><?= ($revenue_data->field_revenue_endowment_amount)?'$'.$revenue_data->field_revenue_endowment_amount:''; ?></div>
-                                        <div class="h6 p-b-10"><b>Investment Earnings: </b> <?= ($revenue_data->field_revenue_investment)?'$'.$revenue_data->field_revenue_investment:''; ?></div>
+                                        <div class="h6 p-b-10"><b>Endowment: </b><?= ($revenue_data->field_revenue_endowment_amount)?'$'.number_format($revenue_data->field_revenue_endowment_amount,2):''; ?></div>
+                                        <div class="h6 p-b-10"><b>Investment Earnings: </b> <?= ($revenue_data->field_revenue_investment)?'$'.number_format($revenue_data->field_revenue_investment,2):''; ?></div>
                                         <div class="h6 p-b-10"><b>Affiliate Social Entrepreneurship Ventures and/or Income Generating Activities: </b><?php ?></div>
                                          </div>
                                         </div>
@@ -261,25 +261,25 @@
                                         <div class="row g-4 align-items-end p-b-20">
                         			    <div class="col-md-24">
                                         <div class="h5 text-primary p-b-10"><b>Annual Expenditures</b></div>
-                                        <div class="h6 p-b-10"><b>Affiliate Expenditures </b> $<?= ($expenditure_data->field_total_expenditures)?'$'.$expenditure_data->field_total_expenditures:''; ?></div>
-                                        <div class="h6 p-b-10"><b>A. Salaries/Wages: </b><?= ($expenditure_data->field_a_salaries_wages)?'$'.$expenditure_data->field_a_salaries_wages:''; ?></div>
-                                        <div class="h6 p-b-10"><b>B. Fringe Benefits: </b><?= ($expenditure_data->field_b_fringe_benefits)?'$'.$expenditure_data->field_b_fringe_benefits:''; ?></div>
-                                        <div class="h6 p-b-10"><b>C. Professional/Contract/Consulting Fees: </b> <?= ($expenditure_data->field_c_professional_fees)?'$'.$expenditure_data->field_c_professional_fees:''; ?></div>
-                                        <div class="h6 p-b-10"><b>D. Travel: </b><?= ($expenditure_data->field_d_travel)?'$'.$expenditure_data->field_d_travel:''; ?></div>
-                                        <div class="h6 p-b-10"><b>E. Postage/Freight: </b><?= ($expenditure_data->field_e_postage_freight)?'$'.$expenditure_data->field_e_postage_freight:''; ?></div>
-                                        <div class="h6 p-b-10"><b>F. Insurance: </b> <?= ($expenditure_data->field_f_insurance)?'$'.$expenditure_data->field_f_insurance:''; ?></div>
-                                        <div class="h6 p-b-10"><b>G. Interest Payments: </b><?= ($expenditure_data->field_g_interest_payments)?'$'.$expenditure_data->field_g_interest_payments:''; ?></div>
-                                        <div class="h6 p-b-10"><b>H. Dues/Subscription/Registration: </b><?= ($expenditure_data->field_h_dues_subscription_regist)?'$'.$expenditure_data->field_h_dues_subscription_regist:''; ?></div>
-                                        <div class="h6 p-b-10"><b>I. Depreciation: </b> <?= ($expenditure_data->field_i_depreciation)?'$'.$expenditure_data->field_i_depreciation:''; ?></div>
-                                        <div class="h6 p-b-10"><b>J. Taxes (including property taxes): </b><?= ($expenditure_data->field_j_taxes_including_property)?'$'.$expenditure_data->field_j_taxes_including_property:''; ?></div>
-                                        <div class="h6 p-b-10"><b>K. Utilities (telephone, gas, electric): </b><?= ($expenditure_data->field_k_utilities)?'$'.$expenditure_data->field_k_utilities:''; ?></div>
-                                        <div class="h6 p-b-10"><b>L. Equipment/space rental: </b> <?= ($expenditure_data->field_l_equipment_space_rental)?'$'.$expenditure_data->field_l_equipment_space_rental:''; ?></div>
-                                        <div class="h6 p-b-10"><b>M. Goods and Services: </b><?= ($expenditure_data->field_m_goods_and_services)?'$'.$expenditure_data->field_m_goods_and_services:''; ?></div>
-                                        <div class="h6 p-b-10"><b>N. Rent/mortgage payments: </b> <?= ($expenditure_data->field_n_rent_mortgage_payments)?'$'.$expenditure_data->field_n_rent_mortgage_payments:''; ?></div>
-                                        <div class="h6 p-b-10"><b>O. Other: </b><?= ($expenditure_data->field_o_other)?'$'.$expenditure_data->field_o_other:''; ?></div>
+                                        <div class="h6 p-b-10"><b>Affiliate Expenditures </b> $<?= ($expenditure_data->field_total_expenditures)?'$'.number_format($expenditure_data->field_total_expenditures,2):''; ?></div>
+                                        <div class="h6 p-b-10"><b>A. Salaries/Wages: </b><?= ($expenditure_data->field_a_salaries_wages)?'$'.number_format($expenditure_data->field_a_salaries_wages,2):''; ?></div>
+                                        <div class="h6 p-b-10"><b>B. Fringe Benefits: </b><?= ($expenditure_data->field_b_fringe_benefits)?'$'.number_format($expenditure_data->field_b_fringe_benefits,2):''; ?></div>
+                                        <div class="h6 p-b-10"><b>C. Professional/Contract/Consulting Fees: </b> <?= ($expenditure_data->field_c_professional_fees)?'$'.number_format($expenditure_data->field_c_professional_fees,2):''; ?></div>
+                                        <div class="h6 p-b-10"><b>D. Travel: </b><?= ($expenditure_data->field_d_travel)?'$'.number_format($expenditure_data->field_d_travel,2):''; ?></div>
+                                        <div class="h6 p-b-10"><b>E. Postage/Freight: </b><?= ($expenditure_data->field_e_postage_freight)?'$'.number_format($expenditure_data->field_e_postage_freight,2):''; ?></div>
+                                        <div class="h6 p-b-10"><b>F. Insurance: </b> <?= ($expenditure_data->field_f_insurance)?'$'.number_format($expenditure_data->field_f_insurance,2):''; ?></div>
+                                        <div class="h6 p-b-10"><b>G. Interest Payments: </b><?= ($expenditure_data->field_g_interest_payments)?'$'.number_format($expenditure_data->field_g_interest_payments,2):''; ?></div>
+                                        <div class="h6 p-b-10"><b>H. Dues/Subscription/Registration: </b><?= ($expenditure_data->field_h_dues_subscription_regist)?'$'.number_format($expenditure_data->field_h_dues_subscription_regist,2):''; ?></div>
+                                        <div class="h6 p-b-10"><b>I. Depreciation: </b> <?= ($expenditure_data->field_i_depreciation)?'$'.number_format($expenditure_data->field_i_depreciation,2):''; ?></div>
+                                        <div class="h6 p-b-10"><b>J. Taxes (including property taxes): </b><?= ($expenditure_data->field_j_taxes_including_property)?'$'.number_format($expenditure_data->field_j_taxes_including_property,2):''; ?></div>
+                                        <div class="h6 p-b-10"><b>K. Utilities (telephone, gas, electric): </b><?= ($expenditure_data->field_k_utilities)?'$'.number_format($expenditure_data->field_k_utilities,2):''; ?></div>
+                                        <div class="h6 p-b-10"><b>L. Equipment/space rental: </b> <?= ($expenditure_data->field_l_equipment_space_rental)?'$'.number_format($expenditure_data->field_l_equipment_space_rental,2):''; ?></div>
+                                        <div class="h6 p-b-10"><b>M. Goods and Services: </b><?= ($expenditure_data->field_m_goods_and_services)?'$'.number_format($expenditure_data->field_m_goods_and_services,2):''; ?></div>
+                                        <div class="h6 p-b-10"><b>N. Rent/mortgage payments: </b> <?= ($expenditure_data->field_n_rent_mortgage_payments)?'$'.number_format($expenditure_data->field_n_rent_mortgage_payments,2):''; ?></div>
+                                        <div class="h6 p-b-10"><b>O. Other: </b><?= ($expenditure_data->field_o_other)?'$'.number_format($expenditure_data->field_o_other,2):''; ?></div>
                                         <div class="h6 p-b-10"><b>Rents Properties: </b>--</div>
                                         <div class="h6 p-b-10"><b>Satellite Offices : </b> --</div>
-                                        <div class="h6 p-b-10"><b>Capital Budget: </b><?= ($expenditure_data->field_capital_budget)?'$'.$expenditure_data->field_capital_budget:''; ?></div>
+                                        <div class="h6 p-b-10"><b>Capital Budget: </b><?= ($expenditure_data->field_capital_budget)?'$'.number_format($expenditure_data->field_capital_budget,2):''; ?></div>
                                         </div>
                                         </div>
                                      
