@@ -545,10 +545,10 @@
                                                             </tr>
                                                             <?php foreach ( $funding_sources as $source ) { ?>
                                                             <tr>
-                                                                <td><?=$source['org'];?></td>
-                                                                <td><?=$source['sector'];?></td>
-                                                                <td><?=$source['vehicle'];?></td>
-                                                                <td><?= number_format($source['amount'], 2);?></td>
+                                                                <td><span><?=$source['org'];?></span></td>
+                                                                <td><span><?=$source['sector'];?></span></td>
+                                                                <td><span><?=$source['vehicle'];?></span></td>
+                                                                <td><span><?= "$".number_format($source['amount'], 2);?></span></td>
                                                             </tr>
                                                             <?php } ?>	
                                                         </tbody>
