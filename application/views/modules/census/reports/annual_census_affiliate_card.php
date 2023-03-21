@@ -41,11 +41,11 @@
                                         <p class="p-t-20"><b>Number of Years of Service in Movement:</b> <?=  $census_report->field_number_of_years_of_service; ?></p>
                                         <?php } ?>
                                         <?php if($contact_data){ ?>
-                                        <p class="p-t-20 p-b-20"><b>Total Number of People Served:</b> <?=  $contact_data->field_indirect_contact_served +
+                                        <p class="p-t-20 p-b-20"><b>Total Number of People Served:</b> <?=  number_format($contact_data->field_indirect_contact_served +
                                         $contact_data->field_direct_total_female +
                                         $contact_data->field_direct_total_male +
                                         $contact_data->field_public_total_female +
-                                        $contact_data->field_public_total_male; ?></p>
+                                        $contact_data->field_public_total_male); ?></p>
                                         <?php } ?>
 
 
@@ -223,18 +223,18 @@
                                         <div class="row g-4 align-items-end p-b-20">
                         			    <div class="col-md-24">
                                         <div class="h5 text-primary p-b-10"><b>Board Members</b></div>
-                                        <div class="h6 p-b-10"><b>Total number of board members: </b><?= $employees_board_data->field_full_time_employees; ?></div>
-                                        <div class="h6 p-b-10"><b>Full-time Employees: </b><?= $employees_board_data->field_full_time_employees; ?></div>
-                                        <div class="h6 p-b-10"><b>Part-time Employees: </b><?= $employees_board_data->field_part_time_employees; ?></div>
+                                        <div class="h6 p-b-10"><b>Total number of board members: </b><?= number_format($employees_board_data->field_full_time_employees); ?></div>
+                                        <div class="h6 p-b-10"><b>Full-time Employees: </b><?= number_format($employees_board_data->field_full_time_employees); ?></div>
+                                        <div class="h6 p-b-10"><b>Part-time Employees: </b><?= number_format($employees_board_data->field_part_time_employees); ?></div>
                                          </div>
                                         </div>
 
                                         <div class="row g-4 align-items-end p-b-20">
                         			    <div class="col-md-24">
                                         <div class="h5 text-primary p-b-10"><b>Volunteers</b></div>
-                                        <div class="h6 p-b-10"><b>Urban League Guild Membership: </b> <?= $volunteers_data->field_guild_members; ?></div>
-                                        <div class="h6 p-b-10"><b>Urban League Young Professional Membership: </b><?= $volunteers_data->field_ypc_members; ?></div>
-                                        <div class="h6 p-b-10"><b>Other Volunteer/Auxiliary Membership: </b><?= $volunteers_data->field_aux_members; ?></div>
+                                        <div class="h6 p-b-10"><b>Urban League Guild Membership: </b> <?= number_format($volunteers_data->field_guild_members); ?></div>
+                                        <div class="h6 p-b-10"><b>Urban League Young Professional Membership: </b><?= number_format($volunteers_data->field_ypc_members); ?></div>
+                                        <div class="h6 p-b-10"><b>Other Volunteer/Auxiliary Membership: </b><?= number_format($volunteers_data->field_aux_members); ?></div>
                                          </div>
                                         </div>
 
