@@ -547,9 +547,10 @@ class CensusAffiliate_model extends CI_Model
 
 	public function get_covid_impact_services($covid_impact_id)
 	{
-		$this->db->select('cis.field_what_kinds_of_supports');
+		$this->db->select('cis.field_what_kinds_of_supports,cisv.value');
 		$this->db->from('covid_impact_services cis');
     	$this->db->where('cis.covid_impact_id', $covid_impact_id);
+		$this->db->join('covid_impact_services_value cisv', 'cisv.covid_impact_services_id = cis.field_what_kinds_of_supports');
 		$query = $this->db->get();
 		//echo $this->db->last_query();
 		return $query->result_array();
@@ -564,9 +565,10 @@ class CensusAffiliate_model extends CI_Model
 
 	public function get_covid_impact_services_req($covid_impact_id)
 	{
-		$this->db->select('cis.services_requested');
+		$this->db->select('cis.services_requested,cisv.value');
 		$this->db->from('covid_impact_services_requested cis');
     	$this->db->where('cis.covid_impact_id', $covid_impact_id);
+		$this->db->join('covid_impact_services_requested_value cisv', 'cisv.covid_impact_services_requested_id = cis.services_requested');
 		$query = $this->db->get();
 		//echo $this->db->last_query();
 		return $query->result_array();
@@ -581,9 +583,10 @@ class CensusAffiliate_model extends CI_Model
 
 	public function get_covid_impact_services_prov($covid_impact_id)
 	{
-		$this->db->select('cis.services_provided');
+		$this->db->select('cis.services_provided,cisv.value');
 		$this->db->from('covid_impact_services_provided cis');
     	$this->db->where('cis.covid_impact_id', $covid_impact_id);
+		$this->db->join('covid_impact_services_provided_value cisv', 'cisv.covid_impact_services_provided_id = cis.services_provided');
 		$query = $this->db->get();
 		//echo $this->db->last_query();
 		return $query->result_array();
@@ -598,9 +601,10 @@ class CensusAffiliate_model extends CI_Model
 
 	public function get_covid_impact_participants($covid_impact_id)
 	{
-		$this->db->select('cip.engage_participants');
+		$this->db->select('cip.engage_participants,cisv.value');
 		$this->db->from('covid_impact_participants cip');
     	$this->db->where('cip.covid_impact_id', $covid_impact_id);
+		$this->db->join('covid_impact_participants_value cisv', 'cisv.covid_impact_participants_id = cip.engage_participants');
 		$query = $this->db->get();
 		//echo $this->db->last_query();
 		return $query->result_array();
@@ -615,9 +619,10 @@ class CensusAffiliate_model extends CI_Model
 
 	public function get_covid_impact_health_programs($covid_impact_id)
 	{
-		$this->db->select('cihp.field_what_health_programs');
+		$this->db->select('cihp.field_what_health_programs,cisv.value');
 		$this->db->from('covid_impact_health_pgm cihp');
     	$this->db->where('cihp.covid_impact_id', $covid_impact_id);
+		$this->db->join('covid_impact_health_pgm_value cisv', 'cisv.covid_impact_health_pgm_id = cihp.field_what_health_programs');
 		$query = $this->db->get();
 		//echo $this->db->last_query();
 		return $query->result_array();
@@ -632,9 +637,10 @@ class CensusAffiliate_model extends CI_Model
 	
 	public function get_covid_impact_disruptions($covid_impact_id)
 	{
-		$this->db->select('cid.field_were_there_any_disruptions');
+		$this->db->select('cid.field_were_there_any_disruptions,cisv.value');
 		$this->db->from('covid_impact_disruptions cid');
     	$this->db->where('cid.covid_impact_id', $covid_impact_id);
+		$this->db->join('covid_impact_disruptions_value cisv', 'cisv.covid_impact_disruptions_id = cid.field_were_there_any_disruptions');
 		$query = $this->db->get();
 		//echo $this->db->last_query();
 		return $query->result_array();

@@ -127,7 +127,7 @@
 																				$method_of_advertising = array("Youth Development", "STEM or STEAM (Science, Technology, Engineering, Arts/Agriculture and Math/Medicine)", "College Readiness", "Career Readiness", "Mentoring", "Counseling/Social Work", "Health and Wellness (Mental, physical, etc.)", "Athletics", "Academic Support/Homework Help/Tutoring/Accelerated Learning");
 																				$i = 0;
 																				foreach ($method_of_advertising as $key =>$method) { 
-																					if (in_array($method, $ad_market)) {
+																					if (in_array($key + 1, $ad_market)) {
 																						$checked = "checked";
 																					  } else {
 																						$checked = "";
@@ -135,7 +135,7 @@
 																					  <?php if ($key % 2 == 0) {?>
 																							<div class="form-group ">
 																								<label class="checkbox <?php echo $checked; ?>">
-																									<input type="checkbox" id="edit-field-what-kinds-of-supports-and-1-<?php echo $method; ?>" name="field_what_kinds_of_supports[]"  value="<?php echo $method; ?>" <?php if ($checked) { ?>checked="checked" <?php } ?>>
+																									<input type="checkbox" id="edit-field-what-kinds-of-supports-and-1-<?php echo $method; ?>" name="field_what_kinds_of_supports[]"  value="<?php echo $key + 1; ?>" <?php if ($checked) { ?>checked="checked" <?php } ?>>
 																									<label class="label" for="edit-field-what-kinds-of-supports-and-1-<?php echo $method; ?>"><?php echo $method; ?></label>
 																								</label>
 																							</div>
@@ -152,7 +152,7 @@
 
 																				$i = 0;
 																				foreach ($method_of_advertising as $key =>$method) { 
-																					if (in_array($method, $ad_market)) {
+																					if (in_array($key + 1, $ad_market)) {
 																						$checked = "checked";
 																					  } else {
 																						$checked = "";
@@ -160,7 +160,7 @@
 																					  <?php if ($key % 2 == 1) {?>
 																							<div class="form-group ">
 																								<label class="checkbox <?php echo $checked; ?>">
-																									<input type="checkbox" id="edit-field-what-kinds-of-supports-and-1-<?php echo $method; ?>" name="field_what_kinds_of_supports[]"  value="<?php echo $method; ?>" <?php if ($checked) { ?>checked="checked" <?php } ?>>
+																									<input type="checkbox" id="edit-field-what-kinds-of-supports-and-1-<?php echo $method; ?>" name="field_what_kinds_of_supports[]"  value="<?php echo $key + 1; ?>" <?php if ($checked) { ?>checked="checked" <?php } ?>>
 																									<label class="label" for="edit-field-what-kinds-of-supports-and-1-<?php echo $method; ?>"><?php echo $method; ?></label>
 																								</label>
 																							</div>
@@ -211,7 +211,7 @@
 																				$disruptions = array("School-based partnerships- limited access to school buildings, students and families", "Out of school time partnerships- limited access to museums, parks, recreational facilities, etc.", "Advocacy and engagement partnerships", "Parent, Family and Caregiver supports and services", "Internships or Summer Youth Employment placements", "Social service partnerships", "Health partnerships that serve children, youth and families (community clinics)", "Disruptions resulted in no new partnerships established");
 																				$i = 0;
 																				foreach ($disruptions as $key => $disruption_data) { 
-																					if (in_array($disruption_data, $covid_impact_discruption_data)) {
+																					if (in_array($key + 1, $covid_impact_discruption_data)) {
 																						$checked = "checked";
 																					  } else {
 																						$checked = "";
@@ -220,7 +220,7 @@
 																					<?php if ($key % 2 == 0) {?>
 																						<div class="form-group ">
 																							<label class="checkbox <?php echo $checked; ?>">
-																								<input type="checkbox" id="edit-field-were-there-any-disruptions-<?php echo $disruption_data; ?>" name="field_were_there_any_disruptions[]"  value="<?php echo $disruption_data; ?>" <?php if ($checked) { ?>checked="checked" <?php } ?>>
+																								<input type="checkbox" id="edit-field-were-there-any-disruptions-<?php echo $disruption_data; ?>" name="field_were_there_any_disruptions[]"  value="<?php echo $key + 1; ?>" <?php if ($checked) { ?>checked="checked" <?php } ?>>
 																								<label class="label" for="edit-field-were-there-any-disruptions-<?php echo $disruption_data; ?>"><?php echo $disruption_data; ?></label>
 																							</label>
 																						</div>
@@ -236,7 +236,7 @@
 																				$disruptions = array("School-based partnerships- limited access to school buildings, students and families", "Out of school time partnerships- limited access to museums, parks, recreational facilities, etc.", "Advocacy and engagement partnerships", "Parent, Family and Caregiver supports and services", "Internships or Summer Youth Employment placements", "Social service partnerships", "Health partnerships that serve children, youth and families (community clinics)", "Disruptions resulted in no new partnerships established");
 																				$i = 0;
 																				foreach ($disruptions as $key => $disruption_data) { 
-																					if (in_array($disruption_data, $covid_impact_discruption_data)) {
+																					if (in_array($key + 1, $covid_impact_discruption_data)) {
 																						$checked = "checked";
 																					  } else {
 																						$checked = "";
@@ -245,7 +245,7 @@
 																					<?php if ($key % 2 == 1) {?>
 																						<div class="form-group ">
 																							<label class="checkbox <?php echo $checked; ?>">
-																								<input type="checkbox" id="edit-field-were-there-any-disruptions-<?php echo $disruption_data; ?>" name="field_were_there_any_disruptions[]"  value="<?php echo $disruption_data; ?>" <?php if ($checked) { ?>checked="checked" <?php } ?>>
+																								<input type="checkbox" id="edit-field-were-there-any-disruptions-<?php echo $disruption_data; ?>" name="field_were_there_any_disruptions[]"  value="<?php echo $key + 1; ?>" <?php if ($checked) { ?>checked="checked" <?php } ?>>
 																								<label class="label" for="edit-field-were-there-any-disruptions-<?php echo $disruption_data; ?>"><?php echo $disruption_data; ?></label>
 																							</label>
 																						</div>
@@ -283,7 +283,7 @@
 																			}
 																			$health_programs = array("General Health Education", "Access to Care", "COVID 19 Vaccine Outreach, Education and Access", "Nutritional access (food pantry, SNAP/WIC)", "Physical Activity", "Mental Health resources");
 																				foreach($health_programs as $key => $health_data){																				
-																					if (in_array($health_data, $health_progam_data)) {
+																					if (in_array($key+1, $health_progam_data)) {
 																						$checked = "checked";
 																					  } else {
 																						$checked = "";
@@ -292,7 +292,7 @@
 																			<?php if ($key % 2 == 0) {?>
 																				<div class="form-group ">
 																					<label class="checkbox <?php echo $checked; ?>">
-																						<input type="checkbox" id="edit-field-what-health-programs-<?php echo $health_data;?>" name="field_what_health_programs[]" value="<?php echo $health_data;?>" <?php if ($checked) { ?>checked="checked" <?php } ?>>
+																						<input type="checkbox" id="edit-field-what-health-programs-<?php echo $health_data;?>" name="field_what_health_programs[]" value="<?php echo $key+1;?>" <?php if ($checked) { ?>checked="checked" <?php } ?>>
 																						<label class="label" for="edit-field-what-health-programs-<?php echo $health_data;?>"><?php echo $health_data;?></label>
 																					</label>
 																				</div>
@@ -306,7 +306,7 @@
 																			}
 																			$health_programs = array("General Health Education", "Access to Care", "COVID 19 Vaccine Outreach, Education and Access", "Nutritional access (food pantry, SNAP/WIC)", "Physical Activity", "Mental Health resources");
 																				foreach($health_programs as $key => $health_data){																				
-																					if (in_array($health_data, $health_progam_data)) {
+																					if (in_array($key+1, $health_progam_data)) {
 																						$checked = "checked";
 																					  } else {
 																						$checked = "";
@@ -315,7 +315,7 @@
 																			<?php if ($key % 2 == 1) {?>
 																				<div class="form-group ">
 																					<label class="checkbox <?php echo $checked; ?>">
-																						<input type="checkbox" id="edit-field-what-health-programs-<?php echo $health_data;?>" name="field_what_health_programs[]" value="<?php echo $health_data;?>" <?php if ($checked) { ?>checked="checked" <?php } ?>>
+																						<input type="checkbox" id="edit-field-what-health-programs-<?php echo $health_data;?>" name="field_what_health_programs[]" value="<?php echo $key+1;?>" <?php if ($checked) { ?>checked="checked" <?php } ?>>
 																						<label class="label" for="edit-field-what-health-programs-<?php echo $health_data;?>"><?php echo $health_data;?></label>
 																					</label>
 																				</div>
@@ -485,7 +485,7 @@
 																						   "Mental Health Assistance (anxiety/stress/depression/trouble sleeping)", "Information on respiratory/ hygiene and other infection prevention techniques", "Vaccine Assistance", 
 																						   "Job placement", "Access to Wi-Fi", "Bereavement Assistance");
 															foreach($services_requested as $key => $service_req) {
-															if (in_array($service_req, $covid_impact_service_request)) {
+															if (in_array($key + 1, $covid_impact_service_request)) {
 																$checked = "checked";
 															  } else {
 																$checked = "";
@@ -494,7 +494,7 @@
 														<?php if ($key % 2 == 0) {?>
 														<div class="form-group ">
 															<label class="checkbox <?php echo $checked;?>">
-																<input type="checkbox" id="services_requested-<?php echo $service_req;?>" name="services_requested[]" value="<?php echo $service_req;?>" <?php if ($checked) { ?>checked="checked" <?php } ?>>
+																<input type="checkbox" id="services_requested-<?php echo $service_req;?>" name="services_requested[]" value="<?php echo $key+"1";?>" <?php if ($checked) { ?>checked="checked" <?php } ?>>
 																<label class="label" for="services_requested-<?php echo $service_req;?>"><?php echo $service_req;?></label>
 															</label>
 														</div>
@@ -511,7 +511,7 @@
 																						   "Mental Health Assistance (anxiety/stress/depression/trouble sleeping)", "Information on respiratory/ hygiene and other infection prevention techniques", "Vaccine Assistance", 
 																						   "Job placement", "Access to Wi-Fi", "Bereavement Assistance");
 															foreach($services_requested as $key => $service_req) {
-															if (in_array($service_req, $covid_impact_service_request)) {
+															if (in_array($key + 1, $covid_impact_service_request)) {
 																$checked = "checked";
 															  } else {
 																$checked = "";
@@ -520,7 +520,7 @@
 														<?php if ($key % 2 == 1) {?>
 														<div class="form-group ">
 															<label class="checkbox <?php echo $checked;?>">
-																<input type="checkbox" id="services_requested-<?php echo $service_req;?>" name="services_requested[]" value="<?php echo $service_req;?>" <?php if ($checked) { ?>checked="checked" <?php } ?>>
+																<input type="checkbox" id="services_requested-<?php echo $service_req;?>" name="services_requested[]" value="<?php echo $key+"1";?>" <?php if ($checked) { ?>checked="checked" <?php } ?>>
 																<label class="label" for="services_requested-<?php echo $service_req;?>"><?php echo $service_req;?></label>
 															</label>
 														</div>
@@ -541,7 +541,7 @@
 																							"Mental Health Assistance (anxiety/stress/depression/trouble sleeping)", "Information on respiratory/ hygiene and other infection prevention techniques", "Vaccine Assistance", 
 																							"Job placement", "Access to Wi-Fi", "Bereavement");
 															foreach($services_provided as $key => $service_prov){						   
-																if (in_array($service_prov, $covid_impact_service_provided)) {
+																if (in_array($key + 1, $covid_impact_service_provided)) {
 																	$checked = "checked";
 																  } else {
 																	$checked = "";
@@ -549,7 +549,7 @@
 																<?php if ($key % 2 == 0) {?>
 																<div class="form-group ">
 																	<label class="checkbox <?php echo $checked;?>">
-																		<input type="checkbox" id="services_provided-<?php echo $service_prov;?>" name="services_provided[]" value="<?php echo $service_prov;?>" <?php if ($checked) { ?>checked="checked" <?php } ?>>
+																		<input type="checkbox" id="services_provided-<?php echo $service_prov;?>" name="services_provided[]" value="<?php echo $key+"1";?>" <?php if ($checked) { ?>checked="checked" <?php } ?>>
 																		<label class="label" for="services_provided-<?php echo $service_prov;?>"><?php echo $service_prov;?></label>
 																	</label>
 																</div>
@@ -566,7 +566,7 @@
 																							"Mental Health Assistance (anxiety/stress/depression/trouble sleeping)", "Information on respiratory/ hygiene and other infection prevention techniques", "Vaccine Assistance", 
 																							"Job placement", "Access to Wi-Fi", "Bereavement");
 															foreach($services_provided as $key => $service_prov){						   
-																if (in_array($service_prov, $covid_impact_service_provided)) {
+																if (in_array($key + 1, $covid_impact_service_provided)) {
 																	$checked = "checked";
 																  } else {
 																	$checked = "";
@@ -574,7 +574,7 @@
 																<?php if ($key % 2 == 1) {?>
 																<div class="form-group ">
 																	<label class="checkbox <?php echo $checked;?>">
-																		<input type="checkbox" id="services_provided-<?php echo $service_prov;?>" name="services_provided[]" value="<?php echo $service_prov;?>" <?php if ($checked) { ?>checked="checked" <?php } ?>>
+																		<input type="checkbox" id="services_provided-<?php echo $service_prov;?>" name="services_provided[]" value="<?php echo $key+"1";?>" <?php if ($checked) { ?>checked="checked" <?php } ?>>
 																		<label class="label" for="services_provided-<?php echo $service_prov;?>"><?php echo $service_prov;?></label>
 																	</label>
 																</div>
@@ -796,7 +796,7 @@
 													}
 													$participants = array("Phone", "Zoom or other Video Platform", "SMS", "Social Media");
 													foreach ($participants as $key => $participant) {
-														if (in_array($participant, $covid_impact_participant)) {
+														if (in_array($key + 1, $covid_impact_participant)) {
 															$checked = "checked";
 														  } else {
 															$checked = "";
@@ -805,7 +805,7 @@
 													<?php if ($key % 2 == 0) {?>
 													<div class="form-group ">
 														<label class="checkbox <?php echo $checked;?>">
-															<input type="checkbox" id="engage_participants<?php echo $participant; ?>" name="engage_participants[]"  value="<?php echo $participant; ?>" <?php if ($checked) { ?>checked="checked" <?php } ?>>
+															<input type="checkbox" id="engage_participants<?php echo $participant; ?>" name="engage_participants[]"  value="<?php echo $key + "1"; ?>" <?php if ($checked) { ?>checked="checked" <?php } ?>>
 															<label class="label" for="engage_participants<?php echo $participant; ?>"><?php echo $participant; ?></label>
 														</label>
 													</div>	
@@ -819,7 +819,7 @@
 													}
 													$participants = array("Phone", "Zoom or other Video Platform", "SMS", "Social Media");
 													foreach ($participants as $key => $participant) {
-														if (in_array($participant, $covid_impact_participant)) {
+														if (in_array($key + 1, $covid_impact_participant)) {
 															$checked = "checked";
 														  } else {
 															$checked = "";
@@ -828,7 +828,7 @@
 													<?php if ($key % 2 == 1) {?>
 													<div class="form-group ">
 														<label class="checkbox <?php echo $checked;?>">
-															<input type="checkbox" id="engage_participants<?php echo $participant; ?>" name="engage_participants[]"  value="<?php echo $participant; ?>" <?php if ($checked) { ?>checked="checked" <?php } ?>>
+															<input type="checkbox" id="engage_participants<?php echo $participant; ?>" name="engage_participants[]"  value="<?php echo $key + "1"; ?>" <?php if ($checked) { ?>checked="checked" <?php } ?>>
 															<label class="label" for="engage_participants<?php echo $participant; ?>"><?php echo $participant; ?></label>
 														</label>
 													</div>	
@@ -884,7 +884,7 @@
 													<td>What kinds of supports and services were offered under these new or expanded programs? Please check all that apply:: </td>
 													<td><span>
 															<?php foreach ($covid_impact_services as $key => $val) {
-																	echo $val['field_what_kinds_of_supports'] . "<br>";
+																	echo $val['value'] . "<br>";
 															} ?>
 														</span>
 													</td>
@@ -903,7 +903,12 @@
 												</tr>
 												<tr>
 													<td>Were there any disruptions in local partnerships? If yes, please check all that apply: </td>
-													<td><span>0</span></td>
+													<td><span>
+															<?php foreach ($covid_impact_disruptions as $key => $val) {
+																	echo $val['value'] . "<br>";
+															} ?>
+														</span>
+													</td>
 												</tr>
 												<tr>
 													<td colspan="2">Health Programs </td>
@@ -916,7 +921,7 @@
 													<td>What health programs do you currently offer to your clients?: </td>
 													<td><span>
 															<?php foreach ($covid_impact_health_pgm as $key => $val) {
-																	echo $val['field_what_health_programs'] . "<br>";
+																	echo $val['value'] . "<br>";
 															} ?>
 														</span>
 													</td>
@@ -945,7 +950,7 @@
 													<td>
 														<span>
 															<?php foreach ($covid_impact_participants as $key => $val) {
-																	echo $val['engage_participants'] . "<br>";
+																	echo $val['value'] . "<br>";
 															} ?>
 														</span>
 													</td>
@@ -1012,7 +1017,7 @@
 													<td>Please check the services that clients have requested in relation to COVID-19: (Check all that apply): </td>
 													<td><span>
 															<?php foreach ($covid_impact_service_req as $key => $val) {
-																	echo $val['services_requested'] . "<br>";
+																	echo $val['value'] . "<br>";
 															} ?>
 														</span>
 													</td>
@@ -1021,7 +1026,7 @@
 													<td>Please check the services the affiliate has provided for clients in relation to COVID-19: (Check all that apply) </td>
 													<td><span>
 															<?php foreach ($covid_impact_service_prov as $key => $val) {
-																	echo $val['services_provided'] . "<br>";
+																	echo $val['value'] . "<br>";
 															} ?>
 														</span>
 													</td>
