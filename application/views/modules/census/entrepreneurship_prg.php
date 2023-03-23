@@ -593,7 +593,7 @@
 														<tr>
 															<td><?= $content['buisiness'][$i]['name']; ?> </td>
 															<td><span> $<?= number_format($content['buisiness'][$i]['field_business_sales_value'], 2); ?> </span></td>
-															<td><span><?= number_format($content['buisiness'][$i]['field_business_served_value'], 2); ?></span></td>
+															<td><span><?= number_format($content['buisiness'][$i]['field_business_served_value']); ?></span></td>
 														</tr>
 													<?php } ?>
 												</tbody>
