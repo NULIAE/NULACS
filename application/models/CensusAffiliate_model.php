@@ -502,8 +502,8 @@ class CensusAffiliate_model extends CI_Model
 				fveh.name as vehicle,
 				fsou.`field_funding_amount_value` as amount
 				FROM `funding_source` fsou 
-				INNER JOIN `funding_sectors` fsec ON fsec.id=fsou.field_funding_sector_tid
-				INNER JOIN `funding_organizations` forg ON forg.id=fsou.field_funding_organization_tid
+				LEFT JOIN `funding_sectors` fsec ON fsec.id=fsou.field_funding_sector_tid
+				LEFT JOIN `funding_organizations` forg ON forg.id=fsou.field_funding_organization_tid
 				LEFT JOIN `funding_vehicles` fveh ON fveh.id=fsou.field_funding_vehicle_tid 
 				WHERE fsou.`program_id`= ? ';
 
