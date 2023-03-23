@@ -504,7 +504,7 @@ class CensusAffiliate_model extends CI_Model
 				FROM `funding_source` fsou 
 				INNER JOIN `funding_sectors` fsec ON fsec.id=fsou.field_funding_sector_tid
 				INNER JOIN `funding_organizations` forg ON forg.id=fsou.field_funding_organization_tid
-				INNER JOIN `funding_vehicles` fveh ON fveh.id=fsou.field_funding_vehicle_tid 
+				LEFT JOIN `funding_vehicles` fveh ON fveh.id=fsou.field_funding_vehicle_tid 
 				WHERE fsou.`program_id`= ? ';
 
 		$query = $this->db->query($sql,$pk_id);

@@ -80,7 +80,7 @@
 													<button class="btn btn-primary m-r-15 btn-rounded" type="submit">SAVE</button>
 													<button class="btn btn-accent m-r-15 btn-rounded" id="cancel1" type="button">CANCEL</button>
 										</div><br/><br/><br/>
-										<div class="row g-4 align-items-end p-b-20 ">
+										<div class="row g-4 align-items-end p-b-20 our-affiliate-enterpren-programs">
 											<div class="col-md-12" <?php if ($this->session->role_id != 1) { ?>style="display: none;" <?php } ?>>
 												<div class="form-group">
 													<label for="edit-title" class="form-label">Title <span>*</span></label>
@@ -221,10 +221,10 @@
 																	</tr>
 																</thead>
 																<tbody>
-																	<tr>
+																	<tr >
 																		<th>Business Type</th>
 																		<th>Sales</th>
-																		<th>Served</th>
+																		<th> Served</th>
 																	</tr>
 																	<tr>
 																		<td>
@@ -245,7 +245,7 @@
 																		</td>
 																		<td>
 																			<div class="row align-items-center">
-																				<div class="col-1"><span>$</span></div>
+																				<div class="col-1"><span></span></div>
 																				<div class="col-11"><input type="text" class="form-control w-200px" id="new-<?= $buttonid; ?>-service_served" name="new-<?= $buttonid; ?>-service_served" value="<?= $content['buisiness'][$i]['field_business_served_value']; ?>"> </div>
 																			</div>
 																		</td>
@@ -593,7 +593,7 @@
 														<tr>
 															<td><?= $content['buisiness'][$i]['name']; ?> </td>
 															<td><span> $<?= number_format($content['buisiness'][$i]['field_business_sales_value'], 2); ?> </span></td>
-															<td><span> $<?= number_format($content['buisiness'][$i]['field_business_served_value'], 2); ?></span></td>
+															<td><span><?= number_format($content['buisiness'][$i]['field_business_served_value'], 2); ?></span></td>
 														</tr>
 													<?php } ?>
 												</tbody>

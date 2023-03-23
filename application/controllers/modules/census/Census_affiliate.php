@@ -855,15 +855,14 @@ class Census_affiliate extends MY_Controller
 		$data['content'] = array(
 			'report_id' => $report_id,
 			'report_data' => $this->CensusReport_model->covid_data_fetch($report_id),
-			'covid_impact_data_services' => $this->CensusAffiliate_model->get_covid_impact_services($pk_id),
-			'covid_impact_service_req' => $this->CensusAffiliate_model->get_covid_impact_services_req($pk_id),
-			'covid_impact_service_prov' => $this->CensusAffiliate_model->get_covid_impact_services_prov($pk_id),
-			'covid_impact_participants' => $this->CensusAffiliate_model->get_covid_impact_participants($pk_id),
-			'covid_impact_health_pgm' => $this->CensusAffiliate_model->get_covid_impact_health_programs($pk_id),
-			'covid_impact_disruptions' => $this->CensusAffiliate_model->get_covid_impact_disruptions($pk_id),
+			'covid_impact_service_req' => $this->CensusAffiliate_model->get_covid_impact_services_req($report_id),
+			'covid_impact_service_prov' => $this->CensusAffiliate_model->get_covid_impact_services_prov($report_id),
+			'covid_impact_participants' => $this->CensusAffiliate_model->get_covid_impact_participants($report_id),
+			'covid_impact_health_pgm' => $this->CensusAffiliate_model->get_covid_impact_health_programs($report_id),
+			'covid_impact_disruptions' => $this->CensusAffiliate_model->get_covid_impact_disruptions($report_id),
+			'covid_impact_services' => $this->CensusAffiliate_model->get_covid_impact_services($report_id),
 			'census_tab_statuses' => $this->CensusReport_model->census_tab_statuses(),
-			'parent_census' => $this->CensusAffiliate_model->get_all_parent_census(),
-			'covid_impact_services' => $this->CensusAffiliate_model->get_covid_impact_services($report_id)
+			'parent_census' => $this->CensusAffiliate_model->get_all_parent_census()
 		);
 		$data['footer']['js'] = array(
 			'https://unpkg.com/mustache@latest',

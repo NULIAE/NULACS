@@ -316,18 +316,22 @@
                           }
                           //Create checkboxes
                           $own_rent_possible_vals = array("Own", "Rent");
+                          $i = 0;
                           foreach ($own_rent_possible_vals as $method) {
-                              if (in_array($method, $own_rent_arr)) {
-                                  $checked = "checked";
-                              } else {
-                                  $checked = "";
-                              }
-                          ?>
-                          <label class="radio <?php echo $checked; ?>">
-                              <input type="radio" name="edit-field-own-or-rent-" id="edit-field-own-or-rent-<?php echo $method; ?>" value="<?php echo $method; ?>" <?php if ($checked) { ?>checked="checked" <?php } ?>>
+                            if (in_array($method, $own_rent_arr)) {
+                              $checked = "checked";
+                            } else {
+                              $checked = "";
+                            } ?>
+
+                            <label class="checkbox <?php echo $checked; ?>">
+                              <input type="checkbox" name="edit-field-own-or-rent-<?php echo $method; ?>" id="edit-field-own-or-rent-<?php echo $method; ?>" value="<?php echo $method; ?>" <?php if ($checked) { ?>checked="checked" <?php } ?>>
                               <label class="label p-r-10" for="edit-field-own-or-rent-<?php echo $method; ?>"><?php echo $method; ?></label>
-                          </label>
-                          <?php } ?>
+  
+                            </label>
+                          <?php $i++;
+                          } ?>
+
                         </div>
                       </div>
                       <div class="col-md-8">

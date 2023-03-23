@@ -79,7 +79,7 @@
 													<button class="btn btn-primary m-r-15 btn-rounded" type="submit">SAVE</button>
 													<button class="btn btn-accent m-r-15 btn-rounded" id="cancel1" type="button">CANCEL</button>
 										</div><br/><br/><br/>
-                      <div class="row g-4 align-items-end p-b-20">
+                      <div class="row g-4 align-items-end p-b-20 full-time-employees">
                         <?php if ($this->session->role_id == 1) { ?>
                           <div class="col-md-12">
                             <div class="form-group">
@@ -411,7 +411,7 @@
                           </tr>
                           <tr>
                             <td>If so, how many satellite offices does your affiliate have?: </td>
-                            <td><span><?php if (!empty($content['report_data'][0]['field_number_of_satellite_office'])) { ?> $<?= number_format($content['report_data'][0]['field_number_of_satellite_office']); ?> <?php } ?></span></td>
+                            <td><span><?php if (!empty($content['report_data'][0]['field_number_of_satellite_office'])) { ?><?= number_format($content['report_data'][0]['field_number_of_satellite_office']); ?> <?php } ?></span></td>
                           </tr>
                           <!-- <tr>
                             <td>Board Help: </td>

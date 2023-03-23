@@ -121,10 +121,10 @@
 																			<div class="col-md-12">
 																				<?php 
 																				$ad_market = [];
-																				foreach ($covid_impact_data_services as $key => $val) {
+																				foreach ($covid_impact_services as $key => $val) {
 																					$ad_market[] = $val['field_what_kinds_of_supports'];
 																				}
-																				$method_of_advertising = array("Youth Development", "STEM or STEAM (Science, Technology, Engineering, Arts/Agriculture and Math/Medicine)", "College Readiness", "Career Readiness", "Mentoring", "Counseling/Social Work", "Health and Wellness (Mental, physical, etc.)", "Athletics", "Academic Support/Homework Help/Tutoring/Accelerated Learning");
+																				$method_of_advertising = array("Youth Development", "Academic Support/ Homework Help/ Tutoring/ Accelerated Learning", "College Readiness", "Career Readiness", "Mentoring", "Counseling/Social Work", "Health and Wellness (Mental, physical, etc.)", "Athletics", "STEM or STEAM (Science, Technology, Engineering, Arts/Agriculture and Math/Medicine)");
 																				$i = 0;
 																				foreach ($method_of_advertising as $key =>$method) { 
 																					if (in_array($key + 1, $ad_market)) {
@@ -145,11 +145,10 @@
 																			<div class="col-md-12">
 																				<?php 
 																				$ad_market = [];
-																				foreach ($covid_impact_data_services as $key => $val) {
+																				foreach ($covid_impact_services as $key => $val) {
 																					$ad_market[] = $val['field_what_kinds_of_supports'];
 																				}
-																				$method_of_advertising = array("Youth Development", "STEM or STEAM (Science, Technology, Engineering, Arts/Agriculture and Math/Medicine)", "College Readiness", "Career Readiness", "Mentoring", "Counseling/Social Work", "Health and Wellness (Mental, physical, etc.)", "Athletics", "Academic Support/Homework Help/Tutoring/Accelerated Learning");
-
+																				$method_of_advertising = array("Youth Development", "Academic Support/ Homework Help/ Tutoring/ Accelerated Learning", "College Readiness", "Career Readiness", "Mentoring", "Counseling/Social Work", "Health and Wellness (Mental, physical, etc.)", "Athletics", "STEM or STEAM (Science, Technology, Engineering, Arts/Agriculture and Math/Medicine)");
 																				$i = 0;
 																				foreach ($method_of_advertising as $key =>$method) { 
 																					if (in_array($key + 1, $ad_market)) {

@@ -391,7 +391,9 @@
                           <div class="col-md-8">
                             <div class="form-group">
                               <label for="edit-field-legacy-budgetnulfunding" class="form-label">Legacy budgetNULFunding </label>
-                              <input type="text" class="form-control" id="edit-field-legacy-budgetnulfunding" aria-label="edit-field-legacy-budgetnulfunding" name="field_legacy_budgetnulfunding" value="<?= number_format($content['report_data'][0]['field_legacy_budgetnulfunding']); ?>">
+                              <div class="d-flex justify-content-center align-items-center">
+                              <span>$</span> &nbsp; <input type="text" class="form-control" id="edit-field-legacy-budgetnulfunding" aria-label="edit-field-legacy-budgetnulfunding" name="field_legacy_budgetnulfunding" value="<?= number_format($content['report_data'][0]['field_legacy_budgetnulfunding']); ?>">
+                            </div>
                             </div>
                           </div>
                         <?php } ?>
@@ -428,15 +430,15 @@
                           </tr>
                           <tr>
                             <td>Corporations: </td>
-                            <td><span> <?php if (!empty($content['report_data'][0]['field_revenue_corporations'])) { ?>$<?= number_format($content['report_data'][0]['field_revenue_corporations'], 2); ?> <?php } ?></span></td>
+                            <td><span> <?php if (isset($content['report_data'][0]['field_revenue_corporations'])) { ?>$<?= number_format($content['report_data'][0]['field_revenue_corporations'], 2); ?> <?php } ?></span></td>
                           </tr>
                           <tr>
                             <td>Foundations: </td>
-                            <td><span> <?php if (!empty($content['report_data'][0]['field_revenue_foundations'])) { ?> $<?= number_format($content['report_data'][0]['field_revenue_foundations'], 2); ?> <?php } ?></span></td>
+                            <td><span> <?php if (isset($content['report_data'][0]['field_revenue_foundations'])) { ?> $<?= number_format($content['report_data'][0]['field_revenue_foundations'], 2); ?> <?php } ?></span></td>
                           </tr>
                           <tr>
                             <td>Individual Memberships: </td>
-                            <td><span> <?php if (!empty($content['report_data'][0]['field_revenue_individual_members'])) { ?> $<?= number_format($content['report_data'][0]['field_revenue_individual_members'], 2); ?> <?php } ?></span></td>
+                            <td><span> <?php if (isset($content['report_data'][0]['field_revenue_individual_members'])) { ?> $<?= number_format($content['report_data'][0]['field_revenue_individual_members'], 2); ?> <?php } ?></span></td>
                           </tr>
                           <tr>
                             <td>Special Events: </td>
@@ -452,7 +454,7 @@
                           </tr>
                           <tr>
                             <td>State/Local: </td>
-                            <td><span> <?php if (!empty($content['report_data'][0]['field_revenue_state_local'])) { ?> $<?= number_format($content['report_data'][0]['field_revenue_state_local'], 2); ?> <?php } ?></span></td>
+                            <td><span> <?php if (isset($content['report_data'][0]['field_revenue_state_local'])) { ?> $<?= number_format($content['report_data'][0]['field_revenue_state_local'], 2); ?> <?php } ?></span></td>
                           </tr>
                           <tr>
                             <td>NUL: </td>
@@ -511,18 +513,18 @@
                           <tr>
                             <td>If so, what is the present amount?: </td>
                             <td></td>
-                            <td><span><?php if (!empty($content['report_data'][0]['field_revenue_endowment_amount'])) { ?> $<?= number_format($content['report_data'][0]['field_revenue_endowment_amount'], 2); ?> <?php } ?></span></td>
+                            <td><span><?php if (isset($content['report_data'][0]['field_revenue_endowment_amount'])) { ?> $<?= number_format($content['report_data'][0]['field_revenue_endowment_amount'], 2); ?> <?php } ?></span></td>
                           </tr>
                           <tr>
-                            <td>Total revenue for your affiliate:: </td>
+                            <td>Total revenue for your affiliate: </td>
                             <td></td>
-                            <td><span><?php if (!empty($content['report_data'][0]['field_revenue_total_budget'])) { ?>$<?= number_format($content['report_data'][0]['field_revenue_total_budget'], 2); ?> <?php } ?></span></td>
+                            <td><span><?php if (isset($content['report_data'][0]['field_revenue_total_budget'])) { ?>$<?= number_format($content['report_data'][0]['field_revenue_total_budget'], 2); ?> <?php } ?></span></td>
                           </tr>
                           <?php if ($this->session->role_id == 1) { ?>
                             <tr>
                               <td>Legacy budgetNULFunding: </td>
                               <td></td>
-                              <td><span><?= number_format($content['report_data'][0]['field_legacy_budgetnulfunding'], 2); ?></span></td>
+                              <td><span>$<?= number_format($content['report_data'][0]['field_legacy_budgetnulfunding'], 2); ?></span></td>
                             </tr>
                           <?php } ?>
                           <tr style="visibility:hidden;">
