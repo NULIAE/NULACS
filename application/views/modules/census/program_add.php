@@ -14,6 +14,7 @@
             <div class="col-md-18">
                <div class="card formCard">
                 <div class="h3 tittleS "><?=$tab_title;?></div>
+                
                 <?php if ( $content['program_area']=='health_quality' ) $title_m = 'Health and Quality of Life Program Details';
                       elseif ( $content['program_area']=='housing' ) $title_m = 'Housing and Community Development';
                       elseif ( $content['program_area']=='education_program' ) $title_m = 'Education Program Details';
@@ -91,15 +92,17 @@
                                             <button class="btn btn-primary m-r-15 btn-rounded program_add_fund_source" data-sourceid="1" onclick="addFundingSource(get_funding_organizations,get_funding_sectors,get_funding_vehicles,this.getAttribute('data-sourceid'));" type="button">+ Add Funding Source</button><br><br>
                                     </div>
                                 </div>
-
+                                
+ 
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="edit-field-program-types" class="form-label">Program Type</label>
                                         <select class="form-select" aria-label="edit-field-parent-census" id="edit-field-program-types" name="field_program_types">
                                             <option value="_none">- None -</option>
                                             <?php foreach ($program_type as $pt) {?>
+                                            <?php if( $pt['program_areas_id'] == $content['program_area_id']) {?>
                                             <option value="<?=$pt['id'];?>" > <?=$pt['name'];?></option>
-                                            <?php }?>
+                                            <?php }}?>
                                         </select>
                                     </div>
                                 </div>

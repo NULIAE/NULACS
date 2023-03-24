@@ -82,11 +82,48 @@ function addBusinesstype(buttonid,type_of_business) {
 		output.push('<option value="'+ type_of_business[i].id +'">'+ type_of_business[i].name +'</option>');
 	}
 	buttonid++ ;
-   var html = '<div class="tabilCard NulCard EmployeeCard m-t-15" id="row' + i + '"><div class="table-responsive"><p class="m-t-10">Business type:Entrepreneurship and Business Development</p><table class="table"><thead><tr><th colspan="3">Business Table </th></tr></thead><tbody><tr><th>Type of Business</th><th>Sales</th><th># Served</th></tr><tr><td><div class="inpgrp"><select class="form-select w-200px" aria-label="Status" id="" name="new-'+buttonid+'-service_buisiness">' + output.join('') + '></select></div></td><td><div class="row align-items-center"><div class="col-1"><span>$</span></div><div class="col-11"><input type="text" class="form-control w-200px" id="" name="new-' + buttonid +'-service_sales" placeholder="0"> </div></div></td><td><div class="inpgrp row align-items-center"><div class="col-1"><span>$</span></div><div class="col-11"><input type="text" class="form-control w-200px" id="" placeholder="0" name="new-' + buttonid +'-service_served"> </div></div></td></tr><tr><td><button class="btn btn-danger m-r-15 btn-rounded btn_remove" id="' + i + '">Remove</button></td></tr></tbody></table></div></div>';
-   $('#business_type').append(html);
-   $(".buisiness").attr("data-sourceid", buttonid);
-   i++;
- }
+	var html = '<div class="tabilCard NulCard EmployeeCard m-t-15" id="row' + i + '"><div class="table-responsive"><p class="m-t-10">Business type:Entrepreneurship and Business Development</p><table class="table"><thead><tr><th colspan="3">Business Table </th></tr></thead><tbody><tr><th class="p-l-15">Business Type</th><th style="padding-left: 20px !important;">Sales</th><th style="padding-left: 40px !important;">Served</th></tr><tr><td><div class="inpgrp"><select class="form-select w-500px" aria-label="Status" id="" name="new-'+buttonid+'-service_buisiness">' + output.join('') + '></select></div></td><td><div class="row align-items-center"><div class="col-1"><span>$</span></div><div class="col-11"><input type="text" class="form-control w-200px entrepreneurship_prg_sale_total" id="" name="new-' + buttonid +'-service_sales" placeholder="0" onkeyup="entrepreneurship_prg_sale_total(this)"> </div></div></td><td><div class="inpgrp row align-items-center"><div class="col-1"><span></span></div><div class="col-11"><input type="text" class="form-control w-200px" id="" placeholder="0" name="new-' + buttonid +'-service_served"> </div></div></td></tr><tr><td><button class="btn btn-danger m-r-15 btn-rounded btn_remove" id="' + i + '">Remove</button></td></tr></tbody></table></div></div>';
+	$('#business_type').append(html);
+	$(".buisiness").attr("data-sourceid", buttonid);
+	i++;
+  }
+ 
+  function entrepreneurship_prg_sale_total(e) {
+	 var inputs = document.getElementsByClassName("entrepreneurship_prg_sale_total");
+	 var total = 0;
+	 for (var i = 0; i < inputs.length; i++) {
+		 var value = inputs[i].value.replace(/,/g, '');
+		 var parsedValue = parseFloat(value);
+		 if (!isNaN(parsedValue)) {
+		   total += parsedValue;
+		 }
+	   }
+	 var totalField = document.getElementsByClassName("entrepreneurship_prg_sale_add_total")[0];
+	 totalField.value = formatNumber(total);
+   }
+   setInterval(function() {
+	 var element = document.querySelector('.entrepreneurship_prg_sale_total'); // Replace '.my-class' with your desired class name
+	 if (!element) {
+	   var totalField = document.getElementsByClassName("entrepreneurship_prg_sale_add_total")[0];
+	   totalField.value = 0;
+	 }
+	 var inputs = document.getElementsByClassName("entrepreneurship_prg_sale_total");
+	 var total = 0;
+	 for (var i = 0; i < inputs.length; i++) {
+		 var value = inputs[i].value.replace(/,/g, '');
+		 var parsedValue = parseFloat(value);
+		 if (!isNaN(parsedValue)) {
+		   total += parsedValue;
+		 }
+	   }
+	 var totalField = document.getElementsByClassName("entrepreneurship_prg_sale_add_total")[0];
+	 totalField.value = formatNumber(total);
+   }, 10);
+ 
+   function formatNumber(number) {
+	 return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+   }
+ 
 
  function addFundingSource(get_funding_organizations='',get_funding_sectors='',get_funding_vehicles='',sourceid = '') {
 	var fundingorganizationsLength = get_funding_organizations.length;

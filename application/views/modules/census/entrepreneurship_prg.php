@@ -221,10 +221,10 @@
 																	</tr>
 																</thead>
 																<tbody>
-																	<tr >
-																		<th>Business Type</th>
-																		<th>Sales</th>
-																		<th> Served</th>
+																	<tr>
+																		<th class="p-l-15">Business Type</th>
+																		<th class="p-l-15">Sales</th>
+																		<th class="p-l-15">Served</th>
 																	</tr>
 																	<tr>
 																		<td>
@@ -240,13 +240,12 @@
 																		<td>
 																			<div class="row align-items-center">
 																				<div class="col-1"><span>$</span></div>
-																				<div class="col-11"><input type="text" class="form-control w-200px" id="new-<?= $buttonid; ?>-service_sales" name="new-<?= $buttonid; ?>-service_sales" value="<?= $content['buisiness'][$i]['field_business_sales_value']; ?>"> </div>
+																				<div class="col-11"><input type="text" class="form-control w-200px entrepreneurship_prg_sale_total" id="new-<?= $buttonid; ?>-service_sales" name="new-<?= $buttonid; ?>-service_sales" value="<?= $content['buisiness'][$i]['field_business_sales_value']; ?>"> </div>
 																			</div>
 																		</td>
 																		<td>
 																			<div class="row align-items-center">
-																				<div class="col-1"><span></span></div>
-																				<div class="col-11"><input type="text" class="form-control w-200px" id="new-<?= $buttonid; ?>-service_served" name="new-<?= $buttonid; ?>-service_served" value="<?= $content['buisiness'][$i]['field_business_served_value']; ?>"> </div>
+																				<div class="col-12"><input type="text" class="form-control w-200px" id="new-<?= $buttonid; ?>-service_served" name="new-<?= $buttonid; ?>-service_served" value="<?= $content['buisiness'][$i]['field_business_served_value']; ?>"> </div>
 																			</div>
 																		</td>
 																	</tr>
@@ -277,7 +276,7 @@
 													<div class="row align-items-center">
 														<div class="col-1"><span>$</span></div>
 														<div class="col-11">
-															<input type="text" class="form-control w-200px" id="edit-field-program-entpr-total-sales" name="field_program_entpr_total_sales" placeholder="" value="<?= number_format($content['report_data'][0]['field_program_entpr_total_sales'], 2); ?>">
+															<input type="text" class="form-control w-200px entrepreneurship_prg_sale_add_total" id="edit-field-program-entpr-total-sales" name="field_program_entpr_total_sales" placeholder="" value="<?= number_format($content['report_data'][0]['field_program_entpr_total_sales'], 2); ?>">
 														</div>
 													</div>
 													<br>
