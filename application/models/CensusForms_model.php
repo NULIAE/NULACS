@@ -1540,5 +1540,22 @@ class CensusForms_model extends CI_Model
 		return $query;
 	}
 
+	/**
+	 * census report basic data 
+	 * 
+	 * @param  int $report_id
+	 * 
+	 */
+	public function report_details($report_id)
+	{
+
+		$sql  = " SELECT cr.* FROM census_report cr ";
+		$sql .= " WHERE cr.report_id = ? ";
+		$query = $this->db->query($sql,[$report_id]);
+		$result =  $query->row();
+		return $result;
+
+	}
+
 
 }

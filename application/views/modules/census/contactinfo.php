@@ -62,16 +62,9 @@
                           <div class="form-group">
                             <label for="edit-field-census-status" class="form-label">Census Status * </label>
                             <select class="form-select" id="edit-field-census-status" name="edit-field-census-status" required>
-                            <?php if(($content['all_tab_status'][0]) == "119" && ($content['all_tab_status'][1]) == "119" && ($content['all_tab_status'][3]) == "119" && ($content['all_tab_status'][4]) == "119" && ($content['all_tab_status'][5]) == "119" && ($content['all_tab_status'][6]) == "119" && ($content['all_tab_status'][7]) == "119"
-                            && ($content['all_tab_status'][8]) == "119" && ($content['all_tab_status'][10]) == "119" && ($content['all_tab_status'][11]) == "119" && ($content['all_tab_status'][12]) == "119" && ($content['all_tab_status'][14]) == "119" && ($content['all_tab_status'][15]) == "119"
-                            && ($content['all_tab_status'][16]) == "119" && ($content['all_tab_status'][2]) == "119" && ($content['all_tab_status'][9]) == "119" && ($content['all_tab_status'][13]) == "119") {
-                            ?>
-                              <option value="125">Completed</option>
-                            <?php }else{?>
                               <?php foreach ($content['report_statuses'] as $option) { ?>
                                 <option value="<?= $option['status_id']; ?>" <?php if ($option['status_id'] == $content['report_data'][0]['field_census_status']) { ?>selected="selected" <?php } ?>><?= $option['status']; ?></option>
                               <?php } ?>
-                              <?php }?>
                             </select>
                           </div>
                         </div>
@@ -280,10 +273,7 @@
                           <tbody>
                             <tr>
                               <td>Census Status: </td>
-                              <td><span><?php if(($content['all_tab_status'][0]) == "119" && ($content['all_tab_status'][1]) == "119" && ($content['all_tab_status'][3]) == "119" && ($content['all_tab_status'][4]) == "119" && ($content['all_tab_status'][5]) == "119" && ($content['all_tab_status'][6]) == "119" && ($content['all_tab_status'][7]) == "119"
-                            && ($content['all_tab_status'][8]) == "119" && ($content['all_tab_status'][10]) == "119" && ($content['all_tab_status'][11]) == "119" && ($content['all_tab_status'][12]) == "119" && ($content['all_tab_status'][14]) == "119" && ($content['all_tab_status'][15]) == "119"
-                            && ($content['all_tab_status'][16]) == "119" && ($content['all_tab_status'][2]) == "119" && ($content['all_tab_status'][9]) == "119" && ($content['all_tab_status'][13]) == "119") {
-                            ?>Completed<?php }else{?><?= $report_data[0]['status']; ?><?php }?></span></td>
+                              <td><span><?= $report_data[0]['status']; ?></span></td>
                             </tr>
                             <tr>
                               <td>This information has been reviewed and certified as accurate. (Enter name of certifier.):: </td>

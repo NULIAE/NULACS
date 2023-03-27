@@ -82,7 +82,7 @@
 											</div><?php } ?>
 										<div class="col-24">
 
-											<div class="row g-4 align-items-end p-t-10 p-b-20 ">
+											<div class="row g-4 align-items-end p-t-10 p-b-20 our-affiliate-empowerment-programs">
 												<div class="col-md-8">
 													<div class="form-group">
 														<label for="edit-field-empower-economic" class="form-label">Economic Empowerment </label>
@@ -218,7 +218,7 @@
 										<div class="">
 											<div class="form-group t-c formclassbtn">
 												<button class="btn btn-primary m-r-15 btn-rounded" type="submit">SAVE</button>
-												<button class="btn btn-danger m-r-15 btn-rounded" type="button" data-table_name="empowerment" id="delete_button" value="<?php echo $content['report_data'][0]['field_parent_census'] ?>">DELETE</button>
+												<button class="btn btn-danger m-r-15 btn-rounded" type="button" data-status_id="<?= $statuses['empowerment']['status'];?>" data-table_name="empowerment" id="delete_button" value="<?php echo $content['report_data'][0]['field_parent_census'] ?>">DELETE</button>
 												<button class="btn btn-accent m-r-15 btn-rounded" id="cancel" type="button">CANCEL</button>
 											</div>
 										</div>

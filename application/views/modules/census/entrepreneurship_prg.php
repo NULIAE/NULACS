@@ -418,7 +418,7 @@
 									<div class="">
 										<div class="form-group t-c formclassbtn">
 											<button class="btn btn-primary m-r-15 btn-rounded" type="submit">SAVE</button>
-											<button class="btn btn-danger m-r-15 btn-rounded" type="button" id="delete_button" data-table_name="entrepreneurship_program" data-pk_id="<?= $content['report_data'][0]['pk_id']; ?>" value="<?php echo $content['report_data'][0]['field_parent_census'] ?>">DELETE</button>
+											<button class="btn btn-danger m-r-15 btn-rounded" type="button" id="delete_button" data-status_id="<?= $statuses['entrepreneurship_program']['status'];?>" data-table_name="entrepreneurship_program" data-pk_id="<?= $content['report_data'][0]['pk_id']; ?>" value="<?php echo $content['report_data'][0]['field_parent_census'] ?>">DELETE</button>
 											<button class="btn btn-accent m-r-15 btn-rounded" id="cancel" type="button">CANCEL</button>
 										</div>
 									</div>

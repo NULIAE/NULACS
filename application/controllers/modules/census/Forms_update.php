@@ -1663,7 +1663,59 @@ class Forms_update extends MY_Controller
 	public function update_tab_status_complete()
 	{
         $form_data = $this->input->post(null, true);
-        $report_id = $form_data['report_id'];
+        $report_id = $form_data['report_id']; 
+        if($form_data['table_name'] == 'service_areas_main'){
+            $tab_name = "serviceareas";
+        }elseif($form_data['table_name'] == 'community_relations'){
+            $tab_name = "community";
+        }elseif($form_data['table_name'] == 'employees_board_members'){
+            $tab_name = "employees"; 
+        }elseif($form_data['table_name'] == 'revenue'){
+            $tab_name = "revenue"; 
+        }elseif($form_data['table_name'] == 'expenditures'){
+            $tab_name = "expenditure"; 
+        }elseif($form_data['table_name'] == 'education_program'){
+            $tab_name = "education_program"; 
+        }elseif($form_data['table_name'] == 'entrepreneurship_program'){
+            $tab_name = "entrepreneurship_program"; 
+        }elseif($form_data['table_name'] == 'health_quality_program'){
+            $tab_name = "health_quality"; 
+        }elseif($form_data['table_name'] == 'housing_community_development'){
+            $tab_name = "housing"; 
+        }elseif($form_data['table_name'] == 'workforce_develop_program'){
+            $tab_name = "workforce"; 
+        }elseif($form_data['table_name'] == 'other_programs'){
+            $tab_name = "other_programs"; 
+        }elseif($form_data['table_name'] == 'covid_impact'){
+            $tab_name = "covid"; 
+        }elseif($form_data['table_name'] == 'civic_engagement'){
+            $tab_name = "civic"; 
+        }elseif($form_data['table_name'] == 'emergency_relief'){
+            $tab_name = "emergency_relief"; 
+        }elseif($form_data['table_name'] == 'contact_data'){
+            $tab_name = "contact_data"; 
+        }elseif($form_data['table_name'] == 'empowerment'){
+            $tab_name = "empowerment"; 
+        }elseif($form_data['table_name'] == 'volunteers_members'){
+            $tab_name = "volunteer"; 
+        }
+
+        $tab_status =  $this->CensusReport_model->select_tab_statuses($report_id);
+        $is_all_119 = true;
+        foreach ($tab_status as $key => $value) {
+            if ($key !== $tab_name && $value !== '119') {
+                $is_all_119 = false;
+                break;
+            }
+        }
+        if ($is_all_119) {
+            $table = "census_report";
+            $sql = "UPDATE  $table SET field_census_status = 125
+	          WHERE $table.report_id = ".$report_id;
+		    $query = $this->db->query($sql);
+
+        }
+        
         $table = $form_data['table_name'];
         $field_tab_status = $form_data['field_tab_status'];
 		$sql = "UPDATE  $table SET field_tab_status = $field_tab_status
@@ -1720,6 +1772,14 @@ class Forms_update extends MY_Controller
         $report_id = $form_data['report_id'];
         $table_name = $form_data['table'];
         $pk_id = $form_data['pk_id'];
+        $status = $form_data['status'];
+		$report_details = $this->CensusForms_model->report_details($report_id);
+        if($status == "Completed" && $report_details->field_census_status == 125){
+            $table = "census_report";
+            $sql = "UPDATE  $table SET field_census_status = 126
+	          WHERE $table.report_id = ".$report_id;
+		    $query = $this->db->query($sql);
+        }
 
         $output = $this->CensusForms_model->delete_censusreport_tab($report_id,$table_name,$pk_id);
 		echo json_encode(["data"=>$output]);

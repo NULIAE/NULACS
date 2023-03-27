@@ -274,7 +274,7 @@
                            <div class="">
                               <div class="form-group t-c formclassbtn">
                                  <button class="btn btn-primary m-r-15 btn-rounded" id="save_service_area" type="submit">SAVE</button>
-                                 <button class="btn btn-danger m-r-15 btn-rounded" type="button" data-table_name="service_areas_main" id="delete_button" value="<?php echo $content['service_areas_main'][0]['field_parent_census']?>">DELETE</button>
+                                 <button class="btn btn-danger m-r-15 btn-rounded" type="button" data-status_id="<?= $statuses['serviceareas']['status'];?>" data-table_name="service_areas_main" id="delete_button" value="<?php echo $content['service_areas_main'][0]['field_parent_census']?>">DELETE</button>
                                  <button class="btn btn-accent m-r-15 btn-rounded" id="cancel" type="button">CANCEL</button>
                               </div>
                            </div>

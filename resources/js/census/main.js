@@ -369,6 +369,7 @@ $('#delete_button').on('click', function(e){
 	var myButton = document.getElementById("delete_button");
 	var table_name = myButton.getAttribute("data-table_name");
 	var pkid = myButton.getAttribute("data-pk_id");
+	var status = myButton.getAttribute("data-status_id");
 	$('#dialog').NitroDialog({
 		action: "open",
 		backdrop: true,
@@ -381,7 +382,7 @@ $('#delete_button').on('click', function(e){
 							$.ajax({
 								type : 'POST', 
 								url	 : base_url + 'module/forms_update/delete_tabwise',
-								data : {report_id: $('#delete_button').val(), table: table_name, pk_id: pkid}, 
+								data : {report_id: $('#delete_button').val(), table: table_name, pk_id: pkid, status: status}, 
 								dataType : 'json',
 								success:function(data){
 									if(table_name=='programs'){

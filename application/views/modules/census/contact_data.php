@@ -363,7 +363,7 @@
 										<div class="mt-3">
 											<div class="form-group t-c formclassbtn">
 												<button class="btn btn-primary m-r-15 btn-rounded" type="submit">SAVE</button>
-												<button class="btn btn-danger m-r-15 btn-rounded" type="button" data-table_name="contact_data" id="delete_button" value="<?php echo $content['report_data'][0]['field_parent_census'] ?>">DELETE</button>
+												<button class="btn btn-danger m-r-15 btn-rounded" type="button" data-status_id="<?= $statuses['contact_data']['status'];?>" data-table_name="contact_data" id="delete_button" value="<?php echo $content['report_data'][0]['field_parent_census'] ?>">DELETE</button>
 												<button class="btn btn-accent m-r-15 btn-rounded" id="cancel" type="button">CANCEL</button>
 											</div>
 										</div>

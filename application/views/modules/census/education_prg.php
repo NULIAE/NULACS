@@ -84,7 +84,7 @@
 													<button class="btn btn-accent m-r-15 btn-rounded" id="cancel1" type="button">CANCEL</button>
 										</div>
 										<br/><br/><br/>
-											<div class="row g-4 align-items-end p-b-20 ">
+											<div class="row g-4 align-items-end p-b-20 our-affiliate-edducation-programs">
 												<div class="col-md-12" <?php if ($this->session->role_id != 1) { ?>style="display: none;" <?php } ?>>
 													<div class="form-group">
 														<label for="edit-title" class="form-label">Title <span>*</span></label>
@@ -542,11 +542,11 @@
 													</div>
 												</div>
 											</div>
-											<hr>
+											<hr>											
 											<div class="">
 												<div class="form-group t-c formclassbtn">
 													<button class="btn btn-primary m-r-15 btn-rounded" type="submit">SAVE</button>
-													<button class="btn btn-danger m-r-15 btn-rounded" type="button" data-table_name="education_program" data-pk_id="<?= $content['report_data'][0]['pk_id']; ?>" id="delete_button" value="<?php echo $content['report_data'][0]['field_parent_census'] ?>">DELETE</button>
+													<button class="btn btn-danger m-r-15 btn-rounded" type="button" data-table_name="education_program" data-status_id="<?= $statuses['education_program']['status'];?>" data-pk_id="<?= $content['report_data'][0]['pk_id']; ?>" id="delete_button" value="<?php echo $content['report_data'][0]['field_parent_census'] ?>">DELETE</button>
 													<button class="btn btn-accent m-r-15 btn-rounded" id="cancel" type="button">CANCEL</button>
 												</div>
 											</div>
