@@ -525,7 +525,8 @@ $config['csrf_exclude_uris'] = array(
 	'module/forms_update/covid/update',
 	'module/forms_update/entrepreneurship/buisiness_type_delete',
 	'module/affiliate/document/delete_termly_document',
-	'module/notification/emails/send_testmail'
+	'module/notification/emails/send_testmail',
+	'module/assessment/complete_assessment'
 );
 
 /*

@@ -225,22 +225,33 @@ if(isset($_GET['uid']) && !empty($_GET['uid'])){
 
                ?>
                 <div class="col ">
-                            <div class="p-b-0 ratingTop">
-                                <span class="text-data1 w-240px f-black h4">PERFORMANCE SCORE </span>
-                                <span class=" tag p-l-10 ">
-                                    <div class="rating">
-                                        <span class="star <?php if($overallrating >= 5){echo "active";}?> <?php if($overallrating >= 4.5){echo "half";}?>"></span>
-                                        <span class="star <?php if($overallrating >= 4){echo "active";}?> <?php if($overallrating >= 3.5){echo "half";}?>"></span>
-                                        <span class="star <?php if($overallrating >= 3){echo "active";}?> <?php if($overallrating >= 2.5){echo "half";}?>"></span>
-                                        <span class="star <?php if($overallrating >= 2){echo "active";}?> <?php if($overallrating >= 1.5){echo "half";}?>"></span>
-                                        <span class="star <?php if($overallrating >= 1){echo "active";}?> <?php if($overallrating >= 0.5){echo "half";}?>"></span>
-                                    </div>
-                                    <span class="btn btn-primary btn-lg m-x-10"> <?=isset( $overallrating)? $overallrating:'';?></span>
-                                </span>
-                            </div>
+                    <div class="p-b-0 ratingTop">
+                        <span class="text-data1 w-240px f-black h4">PERFORMANCE SCORE </span>
+                        <span class=" tag p-l-10 ">
+                        <div class="rating">
+                            <span class="star <?php if($overallrating >= 5){echo "active";}?> <?php if($overallrating >= 4.5){echo "half";}?>"></span>
+                            <span class="star <?php if($overallrating >= 4){echo "active";}?> <?php if($overallrating >= 3.5){echo "half";}?>"></span>
+                            <span class="star <?php if($overallrating >= 3){echo "active";}?> <?php if($overallrating >= 2.5){echo "half";}?>"></span>
+                            <span class="star <?php if($overallrating >= 2){echo "active";}?> <?php if($overallrating >= 1.5){echo "half";}?>"></span>
+                            <span class="star <?php if($overallrating >= 1){echo "active";}?> <?php if($overallrating >= 0.5){echo "half";}?>"></span>
                         </div>
-                <div class="col ">
-                  <div class="t-r"><a  target="_blank" href="<?php echo base_url('module/assessment/assessment-pdf?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId); ?>"  class="btn btn-dark btn-rounded min w-100px">EXPORT TO WORD</a> </div>
+                        <span class="btn btn-primary btn-lg m-x-10"> <?=isset( $overallrating)? $overallrating:'';?></span>
+                        </span>
+                    </div>
+                    </div>
+                    <div class="p-b-0" style="display: flex; justify-content: flex-end;">
+                        <?php if($this->session->role_id == 1) {?>
+                        <span>
+							<label for="pu-1">COMPLETED  </label>
+							<label class="checkbox switch bool <?php if($assessment_listing_null_data[0]['formstatus'] == "yes") echo "checked"; ?>">
+								<input type="checkbox" data-sid="<?= $_GET['sid'];?>" data-aid="<?= $_GET['aid'];?>" data-userid="<?= $_GET['uid'];?>" id="markComplete" name="user_status" value="1" <?php if($assessment_listing_null_data[0]['formstatus'] == "yes") echo "checked"; ?>>
+							</label>
+						</span>
+                        <?php } ?>
+                        <span class=" tag p-l-10 ">
+                        <span><a  target="_blank" href="<?php echo base_url('module/assessment/assessment-pdf?sid='.$_GET['sid'].'&aid='.$_GET['aid'].$userId); ?>"  class="btn btn-dark btn-rounded min w-100px">EXPORT TO WORD</a> </span>
+                        </span>
+                    </div>
                 </div>
 
              

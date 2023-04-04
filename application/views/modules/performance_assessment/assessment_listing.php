@@ -95,19 +95,21 @@
                           <i class="i i-add"></i></a>
                   
                       <?php  }else{ ?>
-                        <a class="link m-x-10" href="<?php echo base_url('module/assessment/assessment?sid='.$listing['sid'].'&aid='.$listing['affiliate_id']); ?>"><i class="<?=$def_icon?>"></i></a>
-                          <a class="iconLink ib-m" style="color:black;" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$listing['sid'].'&aid='.$listing['affiliate_id']); ?>">
+                        <?php if($this->session->role_id == 1 || $this->session->role_id == 3 && $assessment_listing_null_data[0]['formstatus'] == "yes") {?>
+                            <a class="link m-x-10" href="<?php echo base_url('module/assessment/assessment?sid='.$listing['sid'].'&aid='.$listing['affiliate_id']); ?>"><i class="<?=$def_icon?>"></i></a>
+                            <a class="iconLink ib-m" style="color:black;" href="<?php echo base_url('module/assessment/assessment-summary?sid='.$listing['sid'].'&aid='.$listing['affiliate_id']); ?>">
                               <i class="i i-timer"></i>
                             </a>
+                          <?php } ?>
                       <?php } 
                       
-                 if(!empty($listing['formstatus']) && $listing['formstatus'] =='yes' ){ ?>
-                
-                <a class="checkLink  m-x-10" href="javascript:;"><i class="i i-check"></i></a>
-                  
-                <?php  }
-                ?>
-                    
+                      if(!empty($listing['formstatus']) && $listing['formstatus'] =='yes' ){ ?>
+                      
+                        <a class="checkLink  m-x-10" href="javascript:;"><i class="i i-check"></i></a>
+                     
+                     <?php  } 
+                      ?>
+                      
                     </td>
                     <td><?=isset($listing['assessment_start_year'])?$listing['assessment_start_year']:''?></td>
                     <td><?=isset($listing['assessment_end_year'])?$listing['assessment_end_year']:''?></td>
@@ -134,4 +136,4 @@
 
     </div>
 
-  </main>
+</main>

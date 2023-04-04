@@ -140,6 +140,7 @@ $route['module/assessment/assessment-pdf'] = 'modules/assessment/assessment/asse
 $route['module/assessment/form-data'] = 'modules/assessment/assessment/formData';
 $route['module/assessment/add_self_assessment_data'] = 'modules/assessment/assessment/add_self_assessment_data';
 $route['module/assessment/delete'] = 'modules/assessment/assessment/delete';
+$route['module/assessment/complete_assessment'] = 'modules/assessment/assessment/complete_assessment';
 
 /* Routes for Census Controllers */
 $route['module/census_affiliate'] = 'modules/census/census_affiliate/index';
@@ -314,5 +315,5 @@ $route['module/census_reports/affiliate_workforce_query_report/export'] = 'modul
  $route['module/census_reports/entrepreneurship_centers_report_wnul/filter'] = 'modules/census/census_reports/entrepreneurship_centers_report_w_nul_filter';
  $route['module/census_reports/nul_census_total_contacts_breakdown/export'] = 'modules/census/census_reports/nul_census_total_contacts_breakdown_export';
 
-$route['module/notification/emails/send_testmail'] = 'modules/notification_center/email_template/send_testmails';
-$route['module/affiliate/document/delete_termly_document'] = 'modules/affiliate/affiliate/delete_termly_document';
+ $route['module/notification/emails/send_testmail'] = 'modules/notification_center/email_template/send_testmails';
+ $route['module/affiliate/document/delete_termly_document'] = 'modules/affiliate/affiliate/delete_termly_document';

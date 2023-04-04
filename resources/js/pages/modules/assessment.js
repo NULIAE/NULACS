@@ -755,15 +755,16 @@ function c_one_s_four(){
                  "c1_s4_4_5_rating_1":$('#c1_s4_4_5_rating_1').val(),
                  "c1_s4_4_6_comment_1":$('#c1_s4_4_6_comment_1').val(),
                  "c1_s4_4_6_checkbox_1":$('#c1_s4_4_6_checkbox_1').val(),
-                 //"c1_s4_4_6_val_1":$('#c1_s4_4_6_val_1').val(),
+
+                 "c1_s4_4_6_val_1":$('#c1_s4_4_6_val_1').val(),
                  //"c1_s4_4_6_val_2":$('#c1_s4_4_6_val_2').val(), 
-                 "c1_s4_4_6_rating_1":$('#c1_s4_4_6_rating_1').val(),        
+                 "c1_s4_4_6_rating_1":$('#c1_s4_4_6_rating_1').val(),               
                  "c1_s4_4_7_comment_1":$('#c1_s4_4_7_comment_1').val(),
                  "c1_s4_4_7_checkbox_1":$('#c1_s4_4_7_checkbox_1').val(),
                  "c1_s4_4_7_rating_1":$('#c1_s4_4_7_rating_1').val(),
                  "c1_s4_4_7_val_1":$('#c1_s4_4_7_val_1').val(),
                  "c1_s4_4_7_val_2":$('#c1_s4_4_7_val_2').val(), 
-
+             
             }
 			// $('#message-box').fadeOut();
 			$.ajax({
@@ -1852,4 +1853,23 @@ $(function() {
     }
 
 })
+
+ $(document).on('change', '#markComplete', function() {
+	var myButton = document.getElementById("markComplete");
+    var isChecked = $(this).is(":checked") ? 1 : 0;
+	var sid = myButton.getAttribute("data-sid");
+	var aid = myButton.getAttribute("data-aid");
+	var userid = myButton.getAttribute("data-userid");
+
+    $.ajax({
+		type : 'POST', 
+		url	 : base_url + 'module/assessment/complete_assessment',
+		data : {self_assessment_id: sid, affiliate_id: aid, user_id: userid, isChecked: isChecked}, 
+		dataType : 'json',
+		success:function(data){                    
+
+		}
+	});
+	
+});
 

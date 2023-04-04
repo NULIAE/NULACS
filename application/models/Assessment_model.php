@@ -176,7 +176,7 @@ class Assessment_model extends CI_Model
 
 		return $query->result_array();
 	}
-
+	
 	/**
 	* get affiliate_details
 	*
@@ -298,5 +298,63 @@ class Assessment_model extends CI_Model
 		}
 
 	}
+
+	/**
+	 * get assessment_listing
+	 *
+	 * @return array assessment_listing 
+	 */
+	public function assessment_listing_null_data($data)
+	{
+		$this->db->select('*, sa.self_assessment_id as sid, sa.affiliate_id as affiliate_id, paa.form_status as formstatus, paa.user_id as user_id_check');
+		$this->db->from('self_assessment sa');
+		$this->db->join('performance_assesment_answers paa', 'paa.self_assessment_id = sa.self_assessment_id');
+		$this->db->join('affiliate a', 'a.affiliate_id = sa.affiliate_id');
+		if(isset($this->session->role_id ) && $this->session->role_id != 1 ){ 
+			$this->db->where('sa.affiliate_id', $this->session->affiliate_id);
+		}
+		if(isset($data['affiliate_id']) && !empty($data['affiliate_id'])){
+			$this->db->where('sa.affiliate_id', $data['affiliate_id']);
+		}
+		if(isset($data['performance_assessment_from']) && !empty($data['performance_assessment_from'])){
+			$this->db->where('sa.assessment_start_year >=', $data['performance_assessment_from']);
+			// $this->db->where('s.assessment_start_year', $data['performance_assessment_from']);
+		}
+		if(isset($data['performance_assessment_to'])&& !empty($data['performance_assessment_to'])){
+			$this->db->where('sa.assessment_end_year <=', $data['performance_assessment_to']);
+			// $this->db->where('s.assessment_end_year',   $data['performance_assessment_to']);
+		}
+		$this->db->where('paa.user_id', null);
+		$this->db->order_by('sa.self_assessment_id','desc');
+		//$this->db->limit(5); 
+		$this->db->group_by("paa.self_assessment_id");
+	
+		$query = $this->db->get();
+
+		return $query->result_array();
+	}
+
+	public function complete_assessment($self_assessment_id, $affiliate_id, $user_id, $checked){
+		$this->db->where('self_assessment_id', $self_assessment_id);
+		$this->db->where('affiliate_id', $affiliate_id);
+		if($checked == "1") {
+			if($user_id == ""){
+				$sql = "UPDATE `performance_assesment_answers` SET `form_status` = 'yes' WHERE `user_id` IS NULL;";
+			}else{
+				$sql = "UPDATE `performance_assesment_answers` SET `form_status` = 'yes' WHERE `user_id` = '$user_id'";
+			}
+		}elseif($checked == "0"){
+			if($user_id == ""){
+				$sql = "UPDATE `performance_assesment_answers` SET `form_status` = '' WHERE `user_id` IS NULL;";
+			}else{
+				$sql = "UPDATE `performance_assesment_answers` SET `form_status` = '' WHERE `user_id` = '$user_id'";
+			}
+		}
+		
+		
+		$query = $this->db->query($sql);
+		return $query;
+	}
+
 	
 }

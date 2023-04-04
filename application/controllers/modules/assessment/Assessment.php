@@ -158,6 +158,7 @@ class Assessment extends MY_Controller
 			'affiliates' => $this->Affiliate_model->home_affiliate_filter(10, 0, NULL, NULL)
 		);
 		$data['assessment_listing'] = $this->Assessment_model->assessment_listing($_POST);
+		$data['assessment_listing_null_data'] = $this->Assessment_model->assessment_listing_null_data($_POST);
 		$data['affiliate_details'] = $this->Assessment_model->affiliate_details(NULL);
 		$data['get_assessement_answers_details'] = $this->Assessment_model->get_assessement_answers_details();
 
@@ -190,6 +191,7 @@ class Assessment extends MY_Controller
 		}else{
 			$userId = NULL;
 		}
+		$data['assessment_listing_null_data'] = $this->Assessment_model->assessment_listing_null_data($_GET);
 
 		$data['notifications'] = $this->Document_model->get_notifications();
 		$user_id = $this->session->user_id;
@@ -1519,5 +1521,23 @@ class Assessment extends MY_Controller
 		  exit;
 	  }  
   }
+
+  /**
+	 * Make assessement as complete
+	 * @param  int $sid,$aid,$userid
+	 * @return array
+	 */
+
+    public function complete_assessment()
+	{
+        $form_data = $this->input->post(null, true);
+        $self_assessment_id = $form_data['self_assessment_id'];
+        $affiliate_id = $form_data['affiliate_id'];
+        $user_id = $form_data['user_id'];
+        $checked = $form_data['isChecked'];
+
+        $output = $this->Assessment_model->complete_assessment($self_assessment_id,$affiliate_id,$user_id,$checked);
+		echo json_encode(["data"=>$output]);
+	}
   
 }
