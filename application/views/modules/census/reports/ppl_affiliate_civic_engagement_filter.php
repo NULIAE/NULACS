@@ -43,19 +43,19 @@
       <td>Total SUM</td>
       <td></td>
       <td><b>
-          <?= array_sum(array_column($report, 'voter')); ?>
+          <?= number_format(array_sum(array_column($report, 'voter'))); ?>
         </b></td>
       <td><b>
-          <?= array_sum(array_column($report, 'community')); ?>
+          <?= number_format(array_sum(array_column($report, 'community'))); ?>
         </b></td>
       <td><b>
-          <?= array_sum(array_column($report, 'racial')); ?>
+          <?= number_format(array_sum(array_column($report, 'racial'))); ?>
         </b></td>
       <td><b>
-          <?= array_sum(array_column($report, 'police')); ?>
+          <?= number_format(array_sum(array_column($report, 'police'))); ?>
         </b></td>
       <td><b>
-          <?= array_sum(array_column($report, 'adv')); ?>
+          <?= number_format(array_sum(array_column($report, 'adv'))); ?>
         </b></td>
     </tr>
     <tr>

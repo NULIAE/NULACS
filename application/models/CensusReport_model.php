@@ -514,7 +514,8 @@ class CensusReport_model extends CI_Model
 		
 		$sql = "SELECT SUM(hq.field_program_health_total_parti) AS field_program_health_total_parti,
 						SUM(hq.field_program_health_assisted) AS field_program_health_assisted,
-						SUM(hq.field_program_health_enrolled) AS field_program_health_enrolled 
+						SUM(hq.field_program_health_enrolled) AS field_program_health_enrolled,
+						SUM(hq.field_program_health_participant) AS field_program_health_participant 
 
 	          FROM health_quality_program hq 
 	          LEFT JOIN census_report cr ON hq.field_parent_census = cr.report_id
@@ -541,7 +542,7 @@ class CensusReport_model extends CI_Model
 		$sql = "SELECT SUM(hc.field_program_housing_total_part) AS field_program_housing_total_part,
 						SUM(hc.field_program_housing_attended) AS field_program_housing_attended,
 						SUM(hc.field_program_housing_purchased) AS field_program_housing_purchased,
-						SUM(hc.field_program_housing_avg_price) AS field_program_housing_avg_price,
+						AVG(hc.field_program_housing_avg_price) AS field_program_housing_avg_price,
 						SUM(hc.field_program_housing_not4closed) AS field_program_housing_not4closed,
 						SUM(hc.field_program_housing_alternate) AS field_program_housing_alternate,
 						SUM(hc.field_program_housing_have_kids) AS field_program_housing_have_kids 																												
@@ -576,12 +577,67 @@ class CensusReport_model extends CI_Model
 						AVG(wf.field_program_work_hourly) AS field_program_work_hourly,
 						SUM(wf.field_program_work_welfare) AS field_program_work_welfare,
 						SUM(wf.field_program_work_welfare_place) AS field_program_work_welfare_place,
+						SUM(wf.field_program_work_total) AS field_program_work_total,
+						SUM(wf.field_program_work_counseling) AS field_program_work_counseling,
 						AVG(wf.field_program_work_welfare_salar) AS field_program_work_welfare_salar,
 						AVG(wf.field_program_work_welfare_hour) AS field_program_work_welfare_hour 
 
 
 	          FROM workforce_develop_program wf 
 	          LEFT JOIN census_report cr ON wf.field_parent_census = cr.report_id
+	          WHERE cr.field_year = ". $filters['field_year']; 
+		if(isset($filters['field_affiliate_select'])){
+			$sql .= " AND  cr.field_affiliate_select = ". $filters['field_affiliate_select'] ;
+			}
+		$sql .= " GROUP BY cr.field_year ";
+		$query = $this->db->query($sql);
+		$result =  $query->result_array();
+		return $result;		
+
+	}
+	
+	/**
+	 * Get census summary report - civic section
+	 * 
+	 * 
+	 * @return array
+	 */	
+	public function censussummary_civic($filters)
+	{
+		
+		$sql = "SELECT SUM(ce.field_voter_societal_impact) AS field_voter_societal_impact,
+						SUM(ce.field_forums_societal_impact) AS field_forums_societal_impact,
+						SUM(ce.field_crja_societal_impact) AS field_crja_societal_impact,
+						SUM(ce.field_police_societal_impact) AS field_police_societal_impact,
+						SUM(ce.field_advocacy_societal_impact) AS field_advocacy_societal_impact
+
+
+	          FROM civic_engagement ce 
+	          LEFT JOIN census_report cr ON ce.field_parent_census = cr.report_id
+	          WHERE cr.field_year = ". $filters['field_year']; 
+		if(isset($filters['field_affiliate_select'])){
+			$sql .= " AND  cr.field_affiliate_select = ". $filters['field_affiliate_select'] ;
+			}
+		$sql .= " GROUP BY cr.field_year ";
+		$query = $this->db->query($sql);
+		$result =  $query->result_array();
+		return $result;		
+
+	}
+	
+	/**
+	 * Get census summary report - emergency section
+	 * 
+	 * 
+	 * @return array
+	 */	
+	public function censussummary_emergency($filters)
+	{
+		
+		$sql = "SELECT SUM(er.field_relief_total_served) AS field_relief_total_served
+
+	          FROM emergency_relief er 
+	          LEFT JOIN census_report cr ON er.field_parent_census = cr.report_id
 	          WHERE cr.field_year = ". $filters['field_year']; 
 		if(isset($filters['field_affiliate_select'])){
 			$sql .= " AND  cr.field_affiliate_select = ". $filters['field_affiliate_select'] ;
@@ -656,7 +712,7 @@ class CensusReport_model extends CI_Model
 						SUM(rv.field_revenue_federal) AS field_revenue_federal,
 						SUM(rv.field_revenue_state_local) AS field_revenue_state_local
 						FROM revenue rv 
-	          LEFT JOIN census_report cr ON rv.field_parent_census = cr.report_id WHERE cr.field_year != 2022 ";	  
+	          LEFT JOIN census_report cr ON rv.field_parent_census = cr.report_id WHERE cr.field_year != '' ";	  
 	  $sql .= " GROUP BY cr.field_year "; 
 
 		$query = $this->db->query($sql);

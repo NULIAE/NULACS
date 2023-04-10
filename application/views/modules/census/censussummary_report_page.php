@@ -1,7 +1,7 @@
-              <table  class="table table1" id="table11">
+<table  class="table table1" id="table11">
                   <thead>
                     <tr>
-                      <th colspan="2">Report: Census Summary <?= $filters['field_year']; ?> Urban League of Philadelphia</th>
+                      <th colspan="2">Report: Census Summary <?= $filters['field_year']; ?> <?= $affiliate->organization; ?></th>
                     </tr>
                   </thead>
                   <tbody id="table-body">
@@ -134,11 +134,11 @@
                   </tr>
                   <tr>  
                     <td class="left">How many properties does the affiliate own?:</td>
-                    <td class="right"><?= number_format($expenditures[0]['field_number_properties_owned'],2); ?></td>
+                    <td class="right"><?= number_format($expenditures[0]['field_number_properties_owned']); ?></td>
                   </tr>
                   <tr>  
                     <td class="left">How many properties does the affiliate rent?:</td>
-                    <td class="right"><?= number_format($expenditures[0]['field_number_properties_rented'],2); ?></td>
+                    <td class="right"><?= number_format($expenditures[0]['field_number_properties_rented']); ?></td>
                   </tr>
                   <tr>  
                     <td class="left">If the affiliate owns its facilities, what is the current market value of the property?: </td>
@@ -192,7 +192,7 @@
                   </tr>
                   <tr>  
                     <td class="left">Average number of participants at Education Classes/Events/Seminars:</td>
-                    <td class="right">-</td>
+                    <td class="right"><?= number_format($health[0]['field_program_health_participant']); ?></td>
                   </tr>
                   <tr>  
                     <td class="left">Number of individuals assisted with using their health insurance by Community Health Worker or Navigator:</td>
@@ -222,7 +222,7 @@
                   </tr>
                   <tr>  
                     <td class="left">Average price of homes purchased:</td>
-                    <td class="right"><?= number_format($housing[0]['field_program_housing_avg_price']); ?></td>
+                    <td class="right">$<?= number_format($housing[0]['field_program_housing_avg_price'],2); ?></td>
                   </tr>
                   <tr>  
                     <td class="left">Number of foreclosures prevented:</td>
@@ -244,15 +244,15 @@
                   </tr>
                   <tr>  
                     <td class="left">Total Participants in Workforce Programs:</td>
-                    <td class="right"><?= number_format($workforce[0]['field_program_work_participants']); ?></td>
+                    <td class="right"><?php if($workforce[0]['field_program_work_total'] != 0) {?><?= number_format($workforce[0]['field_program_work_total']); ?><?php }?></td>
                   </tr>
                   <tr>  
                     <td class="left">Number of clients who received workforce development/job placement counseling from your affiliate last year?:</td>
-                    <td class="right">-</td>
+                    <td class="right"><?= number_format($workforce[0]['field_program_work_counseling']); ?></td>
                   </tr>
                   <tr>  
                     <td class="left">Number of participants in employment/workforce development programs (exclude welfare recipients)?:</td>
-                    <td class="right">-</td>
+                    <td class="right"><?= number_format($workforce[0]['field_program_work_participants']); ?></td>
                   </tr>
                   <tr>  
                     <td class="left">Number of participants placed in jobs:</td>
@@ -264,11 +264,11 @@
                   </tr>
                   <tr>  
                     <td class="left">Annual salary (if applicable):</td>
-                    <td class="right">$<?= number_format((float)$workforce[0]['field_program_work_salary'], 2, '.', ''); ?></td>
+                    <td class="right">$<?= number_format($workforce[0]['field_program_work_salary'],2); ?></td>
                   </tr>
                   <tr>  
                     <td class="left">Hourly wage rate:</td>
-                    <td class="right">$<?= number_format((float)$workforce[0]['field_program_work_hourly'], 2, '.', ''); ?></td>
+                    <td class="right">$<?= number_format($workforce[0]['field_program_work_hourly'],2); ?></td>
                   </tr>
                   <tr>  
                     <td class="left">Number of welfare participants in federal/state funded programs:</td>
@@ -280,13 +280,47 @@
                   </tr>
                   <tr>  
                     <td class="left">Annual welfare salary (if applicable):</td>
-                    <td class="right">$<?= number_format((float)$workforce[0]['field_program_work_welfare_salar'], 2, '.', ''); ?></td>
+                    <td class="right">$<?= number_format($workforce[0]['field_program_work_welfare_salar'],2); ?></td>
                   </tr>
                   <tr>  
                     <td class="left">Hourly wage rate (welfare):</td>
-                    <td class="right">$<?= number_format((float)$workforce[0]['field_program_work_welfare_hour'], 2, '.', ''); ?></td>
+                    <td class="right">$<?= number_format($workforce[0]['field_program_work_welfare_hour'],2); ?></td>
                   </tr>                          
-                  <?php } ?>                         
+                  <?php } ?>
+                  <?php if(count($civic)>0){?>
+                  <tr>  
+                    <td class="section_head"><b>Civic Engagement</b></td>
+                    <td></td>
+                  </tr>  
+                  <tr>  
+                    <td class="left">Voter Registration - Total Number Served or Registered::</td>
+                    <td class="right"><?= number_format($civic[0]['field_voter_societal_impact']); ?></td>
+                  </tr>
+                  <tr>  
+                    <td class="left">Community Forums Total Served:</td>
+                    <td class="right"><?= number_format($civic[0]['field_forums_societal_impact']); ?></td>
+                  </tr>
+                  <tr>  
+                    <td class="left">Civil Rights & Racial Justice Total Served:</td>
+                    <td class="right"><?= number_format($civic[0]['field_crja_societal_impact']); ?></td>
+                  </tr>
+                  <tr>  
+                    <td class="left">Police Brutality Total Served:	</td>
+                    <td class="right"><?= number_format($civic[0]['field_police_societal_impact']); ?></td>
+                  </tr>
+                  <tr>  
+                    <td class="left">Advocacy Total Served:	</td>
+                    <td class="right"><?= number_format($civic[0]['field_advocacy_societal_impact']); ?></td>
+                  </tr>  
+                  <tr>  
+                    <td class="section_head"><b>Emergency Relief Activities</b></td>
+                    <td></td>
+                  </tr>                   
+                  <?php } ?>
+                  <tr>  
+                    <td class="left">Total Served:</td>
+                    <td class="right"><?= number_format($emergency[0]['field_relief_total_served']); ?></td>
+                  </tr>                     
                   </tbody>
                 </table>
 

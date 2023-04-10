@@ -1,3 +1,8 @@
+<?php if($pgm_count != "") {?>
+                  <div class="pgm-count">
+                    Total Programs : <?= $pgm_count ?>
+                  </div>
+                <?php }?>
                 <table  class="table table1 tblpcpr5" id="tbl_area">
                   <thead>
                     <tr>
@@ -17,8 +22,8 @@
                       <td></td>
                       <td></td>
                       <td></td>
-                      <td><b><?= array_sum(array_column($report, 'served')); ?></b></td>
-                      <td><b>$<?= array_sum(array_column($report, 'budget')); ?></b></td>
+                      <td><b><?= number_format(array_sum(array_column($report, 'served'))); ?></b></td>
+                      <td><b>$<?= number_format(array_sum(array_column($report, 'budget')),2); ?></b></td>
                       <td></td>  
                     </tr>
                     </thead>
@@ -33,7 +38,7 @@
                       <td><?= $data['organization']; ?></td>
                       <!-- module/census_report/$report_id/$pk_id/viewprogram -->
                       <td><a class="text-greenD" href="<?php echo base_url("module/census_report/".$data['report_id']."/".$data['pk_id']."/viewprogram");?>"><?= $data['program_name']; ?></a></td>
-                      <td><?php if($data['served'] != '') { ?><?= number_format($data['served'], 2); ?> <?php } ?></td>
+                      <td><?php if($data['served'] != '') { ?><?= number_format($data['served']); ?> <?php } ?></td>
                       <td><?php if($data['budget'] != '') { ?><?= "$".number_format($data['budget'], 2); ?> <?php } ?></td>
                       <td><?= $data['nul']; ?></td>                      
                     </tr>
@@ -45,8 +50,8 @@
                       <td></td>
                       <td></td>
                       <td></td>
-                      <td><b><?= array_sum(array_column($report, 'served')); ?></b></td>
-                      <td><b>$<?= array_sum(array_column($report, 'budget')); ?></b></td>
+                      <td><b><?= number_format(array_sum(array_column($report, 'served'))); ?></b></td>
+                      <td><b>$<?= number_format(array_sum(array_column($report, 'budget')),2); ?></b></td>
                       <td></td>  
                     </tr>
                     <tr>
@@ -69,4 +74,4 @@
                       info: false
                     });
                   });
-                </script>       
+                </script> 

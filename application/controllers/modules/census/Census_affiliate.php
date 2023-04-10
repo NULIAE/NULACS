@@ -1067,6 +1067,7 @@ class Census_affiliate extends MY_Controller
 		$filters['field_affiliate_select'] =  $data['affiliate'];
 		
 		$result['filters'] = $filters; 
+		$result['affiliate'] = $this->CensusReport_model->get_affiliate($filters['field_affiliate_select']);
 		$result['revenue'] = $this->CensusReport_model->censussummary_revenue($filters);
 		$result['expenditures'] = $this->CensusReport_model->censussummary_expenditures($filters);
 		$result['education'] = $this->CensusReport_model->censussummary_education($filters);
@@ -1074,6 +1075,8 @@ class Census_affiliate extends MY_Controller
 		$result['health'] = $this->CensusReport_model->censussummary_health($filters);
 		$result['housing'] = $this->CensusReport_model->censussummary_housing($filters);
 		$result['workforce'] = $this->CensusReport_model->censussummary_workforce($filters);
+		$result['civic'] = $this->CensusReport_model->censussummary_civic($filters);
+		$result['emergency'] = $this->CensusReport_model->censussummary_emergency($filters);
 
 
 		$data=$this->load->view('modules/census/censussummary_report_page',$result, TRUE);

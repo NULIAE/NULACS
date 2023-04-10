@@ -30,7 +30,7 @@ table.dataTable thead .sorting_desc {
     <div class="mainWrap">
 
       <div class="container">
-        <div class="h2 tittle">Affiliate Key Funding Revenue Query Report(2011-2019) </div>
+        <div class="h2 tittle">Affiliate Key Funding Revenue Query Report </div>
         <div class="filter">
         <form id="filter-form" action="#">
           <div class="row align-items-end">
