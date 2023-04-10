@@ -30,6 +30,10 @@ table.dataTable thead .sorting_desc {
    background-position: center right;
 }
 
+.container {
+    max-width: 1545px;
+}
+
 </style>
 <main>
     <div class="mainWrap">
@@ -104,6 +108,7 @@ table.dataTable thead .sorting_desc {
                       <th>Number of welfare program participants placed in jobs</th>
                       <th>Annual welfare salary (if applicable)</th>
                       <th>or Hourly wage rate (welfare)</th>
+                      <th>Number obtaining IRC</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -120,6 +125,7 @@ table.dataTable thead .sorting_desc {
                       <td><?php if($data['wel_placed'] != '') { ?><?= number_format($data['wel_placed']); ?> <?php } ?></td>                          
                       <td><?php if($data['wel_sal'] != '') { ?><?= "$".number_format($data['wel_sal'], 2); ?> <?php } ?></td>                            
                       <td><?php if($data['wel_hour'] != '') { ?><?= "$".number_format($data['wel_hour'], 2); ?> <?php } ?></td>    
+                      <td><?php if($data['wel_cred'] != '') { ?><?= number_format($data['wel_cred']); ?> <?php } ?></td>
                     </tr>
                     <?php } ?>
                   </tbody>
@@ -140,9 +146,11 @@ table.dataTable thead .sorting_desc {
                       <td><b><?= number_format(array_sum(array_column($report, 'wel_placed'))); ?></b></td>
                       <td><b>$<?= number_format(array_sum(array_filter(array_column($report, 'wel_sal')))/count(array_filter(array_column($report, 'wel_sal'))),2);?></b></td>
                       <td><b>$<?= number_format(array_sum(array_filter(array_column($report, 'wel_hour')))/count(array_filter(array_column($report, 'wel_hour'))),2);?></b></td>
+                      <td></td>
                     </tr>
                     <tr>
                     <td><a href="<?php echo base_url("module/census_reports/affiliate_workforce_query_report/export")."?year=".$data['year']."&org=".$data['org_id']; ?>"><button>XLS</button></a></td>
+                      <td></td>
                       <td></td>
                       <td></td>
                       <td></td>

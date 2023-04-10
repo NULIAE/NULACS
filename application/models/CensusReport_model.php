@@ -1837,7 +1837,8 @@ class CensusReport_model extends CI_Model
 				wdp.`field_program_work_welfare` as wel_prt, 
 				wdp.`field_program_work_welfare_place` as wel_placed, 
 				wdp.`field_program_work_welfare_salar` as wel_sal, 
-				wdp.`field_program_work_welfare_hour` as wel_hour 
+				wdp.`field_program_work_welfare_hour` as wel_hour, 
+				wdp.`field_program_work_credentials` as wel_cred  
 				FROM `workforce_develop_program` wdp 
 				LEFT JOIN census_report cr ON wdp.field_parent_census = cr.report_id 
 				LEFT JOIN affiliate af ON cr.field_affiliate_select = af.field_affiliate_select_value "; 

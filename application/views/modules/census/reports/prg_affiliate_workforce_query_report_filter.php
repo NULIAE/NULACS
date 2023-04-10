@@ -12,6 +12,8 @@
       <th>Number of welfare program participants placed in jobs</th>
       <th>Annual welfare salary (if applicable)</th>
       <th>or Hourly wage rate (welfare)</th>
+      <th>Number obtaining IRC</th>
+
     </tr>
   </thead>
   <?php if($report != []) { ?>
@@ -50,6 +52,9 @@
       </td>
       <td>
         <?php if($data['wel_hour'] != '') { ?><?= "$".number_format($data['wel_hour'], 2); ?> <?php } ?>
+      </td>
+      <td>
+        <?php if($data['wel_cred'] != '') { ?><?= number_format($data['wel_cred']); ?> <?php } ?>
       </td>
     </tr>
     <?php } ?>
@@ -93,12 +98,14 @@
       <td><b>
           <?= "$".number_format(array_sum(array_filter(array_column($report, 'wel_hour')))/count(array_filter(array_column($report, 'wel_hour'))),2);?>
         </b></td>
+        <td></td>
         <?php } else { ?>
           <td><b>0</b></td>
           <?php } ?>
     </tr>
     <tr>
     <td><a href="<?php echo base_url("module/census_reports/affiliate_workforce_query_report/export")."?year=".$data['year']."&org=".$data['org_id']; ?>"><button>XLS</button></a></td>
+      <td></td>
       <td></td>
       <td></td>
       <td></td>
