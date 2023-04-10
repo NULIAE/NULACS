@@ -1599,6 +1599,78 @@ class Affiliate_model extends CI_Model
 		return isset($result['performance_score']) ? $result['performance_score'] : '';
 	}
 
+
+
+	/**
+	 * Get monthly/quarterly/yearly uploaded file
+	 */
+	public function get_term_document($data)
+	{
+		$field_name = $table_name = NULL;
+		if($data['interval'] == "month")
+		{
+			$field_name = 'monthly_document_id';
+			$table_name = 'monthly_document_status';
+		}
+		else if($data['interval'] == "quarter")
+		{
+			$field_name = 'quarterly_id';
+			$table_name = 'quarterly_document_status';
+		}
+		else if($data['interval'] == "year")
+		{
+			$field_name = 'yearly_d_id';
+			$table_name = 'yearly_document_status';
+		}
+		
+		if(isset($field_name) && isset($table_name))
+		{
+			$this->db->where($field_name, $data['uploaded_id']);
+	
+			$query = $this->db->get($table_name);
+
+			return $query->row_array();
+		}
+		else
+		{
+			return FALSE;
+		}
+	}
+
+	/**
+	 * Delete monthly/quarterly/yearly uploaded file
+	 */
+	public function delete_term_document($data)
+	{
+		$field_name = $table_name = NULL;
+		if($data['interval'] == "month")
+		{
+			$field_name = 'monthly_document_id';
+			$table_name = 'monthly_document_status';
+		}
+		else if($data['interval'] == "quarter")
+		{
+			$field_name = 'quarterly_id';
+			$table_name = 'quarterly_document_status';
+		}
+		else if($data['interval'] == "year")
+		{
+			$field_name = 'yearly_d_id';
+			$table_name = 'yearly_document_status';
+		}
+		
+		if(isset($field_name) && isset($table_name))
+		{
+			$this->db->where($field_name, $data['uploaded_id']);
+	
+			return $this->db->delete($table_name);
+		}
+		else
+		{
+			return FALSE;
+		}
+	}
+
 	/**
 	 * Get an affiliate id by city name 
 	 *
