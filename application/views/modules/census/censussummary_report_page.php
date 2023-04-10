@@ -260,7 +260,7 @@
                   </tr>
                   <tr>  
                     <td class="left">Number of placed participants who retained jobs for 90 days:</td>
-                    <td class="right"><?= $workforce[0]['field_program_work_retained']; ?></td>
+                    <td class="right"><?= number_format($workforce[0]['field_program_work_retained']); ?></td>
                   </tr>
                   <tr>  
                     <td class="left">Annual salary (if applicable):</td>
