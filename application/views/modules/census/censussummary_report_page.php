@@ -323,4 +323,9 @@
                   </tr>                     
                   </tbody>
                 </table>
+                <style>
+                  .right{
+                    text-align: right;
+                  }
+                </style>
 
