@@ -388,7 +388,7 @@ class CensusReport_model extends CI_Model
 						SUM(rv.field_revenue_state_local) AS field_revenue_state_local,
 						SUM(rv.field_revenue_other) AS field_revenue_other,
 						SUM(rv.field_revenue_investment) AS field_revenue_investment,
-						rv.field_revenue_has_endowment,
+						SUM(rv.field_revenue_has_endowment) AS field_revenue_has_endowment,
 						SUM(rv.field_revenue_endowment_amount) AS field_revenue_endowment_amount
 	          FROM revenue rv 
 	          LEFT JOIN census_report cr ON rv.field_parent_census = cr.report_id

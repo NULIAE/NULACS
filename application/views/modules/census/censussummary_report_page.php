@@ -56,7 +56,7 @@
                   </tr>
                   <tr>  
                     <td class="left">Does the affiliate have an endowment?:</td>
-                    <td class="right"><?= number_format($revenue[0]['field_revenue_has_endowment'],2); ?></td>
+                    <td class="right"><?= number_format($revenue[0]['field_revenue_has_endowment']); ?></td>
                   </tr>
                   <tr>  
                     <td class="left">If so, what is the present amount?:</td>

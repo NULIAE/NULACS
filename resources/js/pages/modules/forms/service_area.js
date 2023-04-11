@@ -17,7 +17,7 @@ $("#edit-servicearea").submit(function (event) {
 			sum += parseFloat(percent);
 		});
 
-		if(sum != 100) {
+		if(sum.toFixed(2) != 100) {
 			$('#percent-error'+i).removeClass('d-none');
 			$('html, body').animate({scrollTop: $('#percent-error'+i).offset().top}, 500);
 			return;
