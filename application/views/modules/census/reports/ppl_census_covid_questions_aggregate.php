@@ -1,4 +1,4 @@
-  <main>
+<main>
     <div class="mainWrap">
       <div class="container">
         <div class="h2 tittle">Census COVID Questions</div>
@@ -15,12 +15,14 @@
                     </tr>
                   </thead>
                   <tbody>
+                    <?php foreach($report as $data){ ?>
                     <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                      <td><?= $data['field_year']; ?></a></td>
+                      <td><?= number_format($data['field_if_yes_how_much_funding_di_value'],2); ?></td>
+                      <td><?= number_format($data['field_if_yes_how_much_ppp2_value'],2); ?></td>
+                      <td><?= number_format($data['field__how_many_people_did_you_a_value']); ?></td>
                     </tr>
+                    <?php } ?>
                   </tbody>
                 </table>          
               </div>

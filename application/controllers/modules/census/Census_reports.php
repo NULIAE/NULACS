@@ -695,7 +695,7 @@ class Census_reports extends MY_Controller
 			$filters['program_area'] =  $params['program_area'];			
 
 
-		$report = $this->CensusReport_model->affiliate_program_area_query($filters);
+		$report = $this->CensusReport_model->affiliate_program_area_query($filters);		
 		$data['report'] = $report;
 		$data['org_id'] = isset($filters['affiliate']) ? $filters['affiliate'] : '';
 		$data['nul_val'] = isset($filters['nul']) ? $filters['nul'] : '';
@@ -1557,8 +1557,7 @@ class Census_reports extends MY_Controller
 	 */
 	public function census_covid_questions_aggregate()
 	{
-		// $report = $this->CensusReport_model->census_covid_questions_aggregate();
-		$report = 'Test Data';
+		$report = $this->CensusReport_model->census_covid_questions_aggregate();
 		$data['content'] = [
 			'report' => $report
 		];		
@@ -1576,10 +1575,9 @@ class Census_reports extends MY_Controller
 	 */
 	public function census_covid_questions()
 	{
-		// $report = $this->CensusReport_model->census_covid_questions();
-		$report = 'Test Data';
+		$report = $this->CensusReport_model->census_covid_questions();
 		$data['content'] = [
-			'report' => $report
+			'report' => $report,
 		];		
 		//Page specific javascript files
 		$data['footer']['js'] = array(

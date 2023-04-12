@@ -2283,4 +2283,41 @@ class CensusReport_model extends CI_Model
 		return $query->result_array();
 	}
 
+    /**
+	 * Get covid question aggregate data
+	 * @return array
+	 */
+	public function census_covid_questions_aggregate()
+	{
+		$sql = "SELECT SUM(er.field_if_yes_how_much_funding_di_value) AS field_if_yes_how_much_funding_di_value,
+						SUM(er.field_if_yes_how_much_ppp2_value) AS field_if_yes_how_much_ppp2_value,
+						SUM(er.field__how_many_people_did_you_a_value) AS field__how_many_people_did_you_a_value,cr.field_year
+
+	          FROM emergency_relief er 
+	          LEFT JOIN census_report cr ON er.field_parent_census = cr.report_id
+			  WHERE cr.field_year IN (2021,2022,2023,2024,2025)";
+		$sql .= " GROUP BY cr.field_year DESC";
+		$query = $this->db->query($sql);
+		$result =  $query->result_array();
+		return $result;			
+	}
+
+    /**
+	 * Get covid questions data
+	 * @return array
+	 */
+	public function census_covid_questions()
+	{		
+		$this->db->select('er.*,cr.field_year,cr.report_id, af.organization as affiliate, ecp.name as percentage');
+		$this->db->from('emergency_relief er');
+		$this->db->join('census_report cr', 'cr.report_id = er.field_parent_census');
+		$this->db->join('affiliate af', 'af.field_affiliate_select_value = cr.field_affiliate_select', 'left');
+		$this->db->join('emergency_covid_programs ecp', 'ecp.id = er.field__what_percentage_of_your_p', 'left');
+		//$this->db->join('emergency_covid_services_value csv', 'csv.field_did_your_affiliate_receive = cr.field_affiliate_select', 'left');
+    	$this->db->where_in('cr.field_year', array(2021, 2022, 2023, 2024, 2025));
+		$this->db->order_by('cr.field_year','DESC');
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+
 }
