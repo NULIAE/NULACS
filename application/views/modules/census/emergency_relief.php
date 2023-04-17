@@ -349,7 +349,7 @@
 											<?php } else { ?>
 												<input type="hidden" value="<?= $report_id; ?>" name="field_parent_census" id="field_parent_census">
 											<?php } ?>
-											<?php if ($this->session->role_id != 1) { ?><br>
+											<!-- <?php if ($this->session->role_id != 1) { ?><br>
 												<div class="col-md-24" style="display:none">
 													<div class="form-group">
 														<label for="emer_first_question" class="form-label">If yes, when did you receive PPP Funding Cycle 1 funds?</label>
@@ -418,7 +418,7 @@
 														<input type="text" class="form-control" id="emer_fifth_question" name="emer_fifth_question" value="<?= $content['report_data'][0]['emer_fifth_question']; ?>">
 													</div>
 												</div>
-											<?php } ?>
+											<?php } ?> -->
 										</div>
 
 
