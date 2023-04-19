@@ -73,7 +73,7 @@
                 <!-- <button class="btn btn-primary m-r-15 btn-rounded">APPLY</button> -->
                 <button id="submitbtn" class="btn btn-primary m-r-15 btn-rounded">APPLY</button>
                 <button onclick="myFunction()" class="btn btn-danger m-r-15 btn-rounded">CANCEL</button>
-                <!-- <button id="exportbtn" class="btn btn-info btn-rounded">EXPORT</button> -->
+                <button id="exportbtn" class="btn btn-info btn-rounded">EXPORT</button>
               </div>
             </div>
           
