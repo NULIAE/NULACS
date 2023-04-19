@@ -15,10 +15,10 @@ foreach($report_data as $key => $value){
         <tr  style="width: 100%;">
           <td  style=" text-align: center; padding: 0px 0px 0;   ">
             <?php if($report_data[$key]['field_photo_title']){ ?>
-              <?php $image_path = "http://10.168.10.25/nul-adm-application/resources/images/profile/" . $report_data[$key]['field_photo_title'];?>
+              <?php $image_path = "https://nulacs.org/resources/images/profile/" . $report_data[$key]['field_photo_title'];?>
               <div><img src="<?= $image_path;?>" class="f-img" alt="footer logo" width="200" height="220"></div>   
             <?php }elseif($report_data[$key]['field_photo_title'] == ""){?> 
-              <div><img src="http://10.168.10.25/nul-adm-application/resources/images/person-icon.png" class="f-img" alt="footer logo"  width="200" height="220"></div>  
+              <div><img src="https://nulacs.org/resources/images/person-icon.png" class="f-img" alt="footer logo"  width="200" height="220"></div>  
             <?php }?>       
           </td>
           <td   style="border: 1px solid #919993;; border-bottom: 1px; border-collapse: collapse; padding:10px;  ">
