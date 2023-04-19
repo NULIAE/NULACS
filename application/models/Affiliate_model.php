@@ -1885,24 +1885,27 @@ class Affiliate_model extends CI_Model
 		$this->db->select('rep.*,af.organization,af.city,af.state,cs.status,exp.field_total_expenditures,exp.field_a_salaries_wages,exp.field_b_fringe_benefits,exp.field_c_professional_fees,exp.field_d_travel,exp.field_e_postage_freight,
 						   exp.field_f_insurance,exp.field_g_interest_payments,exp.field_h_dues_subscription_regist,exp.field_i_depreciation,exp.field_j_taxes_including_property,exp.field_k_utilities,exp.field_l_equipment_space_rental,
 						   exp.field_m_goods_and_services,exp.field_n_rent_mortgage_payments,exp.field_o_other,exp.field_number_properties_rented,exp.field_capital_budget_amount,rev.field_revenue_corporations,rev.field_revenue_foundations,rev.field_revenue_individual_members,
-						   rev.field_revenue_special_events,rev.field_revenue_united_way,rev.field_revenue_federal,rev.field_revenue_state_local,rev.field_revenue_other,rev.field_revenue_nul,rev.field_revenue_investment,com.field_affiliate_website_address,
+						   rev.field_revenue_special_events,rev.field_revenue_united_way,rev.field_revenue_federal,rev.field_revenue_state_local,rev.field_revenue_other,rev.field_revenue_nul,rev.field_revenue_investment,rev.field_revenue_total_budget,
+						   rev.field_revenue_endowment_amount,com.field_produces_annual_report,
+						   com.field_newsletter,com.field_state_of_black_report,com.field_marketing_kit_or_pamphlet,com.field_affiliate_website_address,com.field_is_website_linked_to_nul,com.field_has_ad_marketing_campaign,
 						   emp.field_board_member_grand_total,emp.field_part_time_employees,emp.field_full_time_employees,ce.field_voter_registration,ce.field_community_forums,ce.field_crja,ce.field_police_brutality,ce.field_advocacy_efforts,
-						   vm.field_ypc_members,vm.field_aux_members,vm.field_guild_members,GROUP_CONCAT(p.title) as program_titles,GROUP_CONCAT(p.field_program_area_tid) as program_areas');
+						   vm.field_ypc_members,vm.field_aux_members,vm.field_guild_members,GROUP_CONCAT(p.title) as program_titles,GROUP_CONCAT(p.field_program_area_tid) as program_areas,sam.pk_id as sam_pk_id');
 		$this->db->from('census_report rep');
 		$this->db->join('affiliate af', 'af.field_affiliate_select_value = rep.field_affiliate_select', 'left');
 		$this->db->join('expenditures exp', 'rep.report_id = exp.field_parent_census', 'left');
 		$this->db->join('revenue rev', 'rep.report_id = rev.field_parent_census', 'left');
-		$this->db->join('community_relations com', 'rep.report_id = com.field_parent_census');
-		$this->db->join('employees_board_members emp', 'rep.report_id = emp.field_parent_census');
-		$this->db->join('civic_engagement ce', 'rep.report_id = ce.field_parent_census');
-		$this->db->join('volunteers_members vm', 'rep.report_id = vm.field_parent_census');
-		$this->db->join('programs p', 'rep.report_id = p.field_parent_census');
-		$this->db->join('census_statuses cs', 'cs.status_id = rep.field_census_status');
+		$this->db->join('community_relations com', 'rep.report_id = com.field_parent_census','left');
+		$this->db->join('employees_board_members emp', 'rep.report_id = emp.field_parent_census','left');
+		$this->db->join('civic_engagement ce', 'rep.report_id = ce.field_parent_census','left');
+		$this->db->join('volunteers_members vm', 'rep.report_id = vm.field_parent_census','left');
+		$this->db->join('programs p', 'rep.report_id = p.field_parent_census','left');
+		$this->db->join('service_areas_main sam', 'rep.report_id = sam.field_parent_census','left');
+		$this->db->join('census_statuses cs', 'cs.status_id = rep.field_census_status','left');
 		$this->db->group_by('rep.report_id');
 		
 		$this->db->where('rep.field_year', $report_year);
 		if($status != NULL){
-			$this->db->where('rep.field_census_status', 126);
+			$this->db->where('rep.field_census_status', $status);
 		}
 		if($affiliate_id != NULL){
 			$this->db->where('rep.field_affiliate_select', $affiliate_id);
