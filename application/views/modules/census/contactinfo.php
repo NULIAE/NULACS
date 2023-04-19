@@ -180,7 +180,7 @@
                           <div class="form-group">
                             <label class="form-label">Photo</label>
                             <input type="file" name="photo" id="photo" />
-                              <?php if(isset($report_data[0]['field_photo_title'])){ ?><span><img src="<?php echo base_url($report_data[0]['field_photo_title']);?>" style="width: 50vh;"?></span><?php } ?>
+                              <?php if(isset($report_data[0]['field_photo_title'])){ ?><span><img src="<?php echo base_url('/resources/images/profile/'.$report_data[0]['field_photo_title']);?>" style="width: 50vh;"?></span><?php } ?>
                           </div>
                         </div>
                       </div>
@@ -343,7 +343,7 @@
                               <td>Photo: </td>
                                <td>
                                 <span>
-                                  <img src="<?php echo base_url($report_data[0]['field_photo_title']);?>" style="width: 50vh;"?>
+                                  <img src="<?php echo base_url('/resources/images/profile/'.$report_data[0]['field_photo_title']);?>" style="width: 50vh;"?>
                                 </span></td>
                             </tr>
                             <?php if ($this->session->role_id == 1) { ?>
