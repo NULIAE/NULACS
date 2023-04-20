@@ -355,9 +355,9 @@ class Forms_update extends MY_Controller
         $file = $_FILES['photo'];
         $file_name = $file['name'];
 
-        $data['field_photo_title'] = './uploads/Documents/'.$file_name;
+        $data['field_photo_title'] = $file_name;
 
-        $filePath = './uploads/Documents/';
+        $filePath = './resources/images/profile';
         $config['upload_path'] = $filePath;
 		$config['allowed_types'] = '*';
 
