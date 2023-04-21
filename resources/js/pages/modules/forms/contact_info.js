@@ -86,3 +86,15 @@ $('#delete_btn').on('click', function(e){
 	});
 
 });
+
+function checkFileSize() {
+    var fileInput = document.getElementById('photo');
+    var fileSize = fileInput.files[0].size;
+    var maxSize = 5 * 1024 * 1024; // 5MB
+    if (fileSize > maxSize) {
+        document.getElementById('file-size-warning').innerHTML = 'File size exceeds the limit (5MB)';
+        fileInput.value = ''; // clear the file input field
+    } else {
+        document.getElementById('file-size-warning').innerHTML = '';
+    }
+}
