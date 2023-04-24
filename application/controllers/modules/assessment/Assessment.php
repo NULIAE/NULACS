@@ -980,7 +980,7 @@ class Assessment extends MY_Controller
 	$service_area_main = $this->Affiliate_model->service_areas($report_id);
 
 	$report_data = $this->Affiliate_model->census_report($report_year, $affiliate_id, $status);
-	
+
 	require_once FCPATH.'application/third_party/word/HtmlToDoc/HtmlToDoc.class.php';
 	
 	$htd = new HTML_TO_DOC();
@@ -995,7 +995,7 @@ class Assessment extends MY_Controller
 	$htmlContent = ob_get_clean();
 	
 	// Generate the Word document
-	$htd->createDoc($htmlContent, "Census Reports", 1);
+	$htd->createDoc($htmlContent, "Census Reports - $report_year", 1);
 	
 	
 	// $this->load->view('export', $report_data);
@@ -1524,7 +1524,7 @@ class Assessment extends MY_Controller
       if($report_data[0]['field_photo_title'] == ""){
         $templateProcessor->setValue('IMAGE', "");
 	  	//$templateProcessor->setImageValue('IMAGE', array('path' => $field_photo_title, 'media-type' => 'image/jpg'));
-	  }else{
+	}else{
         $templateProcessor->setImageValue('IMAGE', array('path' =>'https://NULACS/resources/images/profile/'.$field_photo_title));
 	  }
 
