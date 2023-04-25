@@ -486,7 +486,7 @@
                                                    }; ?></span> </td>
                                     </tr>
                                     <tr>
-                                       <td colspan="2" class="border-bottom-0"><b class="text-primary h5 fw-bold">Person Who Oversees Workforce Programs </b></td>
+                                       <td colspan="2" class="border-bottom-0"><b class="text-primary h5 fw-bold">Person Who Oversees Housing Programs </b></td>
                                     </tr>
                                     <tr>
                                        <td>Name: </td>
