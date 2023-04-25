@@ -26895,7 +26895,7 @@ label.radio label, label.checkbox label {
 }
 
 .NulCard {
-  filter: drop-shadow(0 0 40px rgba(0, 0, 0, 0.3));
+  box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.3);
 }
 
 .form {
