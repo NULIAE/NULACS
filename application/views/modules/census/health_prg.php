@@ -117,7 +117,7 @@
 
                       <div class="row g-4 align-items-end p-b-20">
                         <div class="col-md-12">
-                          <div class="h5 Subtittle">Person Who Oversees Educational Program</div>
+                          <div class="h5 Subtittle">Person Who Oversees Health Program</div>
 
                           <div class="form-group">
                             <label for="edit-field-health-overseer-name" class="form-label">Name </label>

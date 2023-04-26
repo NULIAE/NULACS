@@ -107,7 +107,7 @@
 											<div class="clearfix"  <?php if (($content['report_data'][0]['field_do_you_offer_programs_of_t'] == 0 || count($programs) != 0)) {?> style="display:none"<?php }?>>
 												<div class="messages error"> <i class="i i-warning"></i>&nbsp; &nbsp;You will require to enter information about at least one program to complete this tab on the next screen </div>
 											</div>
-											<div class="h5 Subtittle m-t-20">Person Who Oversees Educational Program</div>
+											<div class="h5 Subtittle m-t-20">Person Who Oversees Entrepreneurship Program</div>
 											<div class="row g-4 align-items-end p-b-20 ">
 												<div class="col-md-8">
 													<div class="form-group ">
