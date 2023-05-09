@@ -1189,363 +1189,384 @@ class Assessment extends MY_Controller
 
   public function contactinfoexports()
   {
-  
+
 	$report_id = $this->uri->segment('4');
-	$report_details = $this->Affiliate_model->report_details($report_id);
-	$service_area_main = $this->Affiliate_model->service_areas($report_id);
+	$report_details = $this->Affiliate_model->single_census_report($report_id);
+	$fileName = $report_details[0]['field_year']." ". $report_details[0]['organization'];
+	//var_dump($fileName);die;
 
-	$report_data = $this->Affiliate_model->census_report_data($report_id);
-	$service_data = $this->Affiliate_model->service_areas_details($service_area_main[0]['pk_id']);
-	$report_statuses = $this->Affiliate_model->census_report_statuses();
-	$education_data = $this->Affiliate_model->education_prg($report_id);
-	$expenditure_data = $this->Affiliate_model->expenditure($report_id);
-	$revenue_data = $this->Affiliate_model->revenue($report_id);
-	$employee_data = $this->Affiliate_model->employees_board($report_id);
-	$community_data = $this->Affiliate_model->community_relations($report_id);
-	$other_prg_data = $this->Affiliate_model->other_prg($report_id);
-	$education_pgm_data = $this->Affiliate_model->get_programs($education_data[0]['field_parent_census'],EDUCATION_PROGRAM_ID);
-	$other_pgm_data = $this->Affiliate_model->get_programs($education_data[0]['field_parent_census'],OTHER_PROGRAM_ID);
-	$health_pgm_data = $this->Affiliate_model->get_programs($education_data[0]['field_parent_census'],HEALTH_PROGRAM_ID);
-	$housing_pgm_data = $this->Affiliate_model->get_programs($education_data[0]['field_parent_census'],HOUSING_PROGRAM_ID);
-	$workforce_pgm_data = $this->Affiliate_model->get_programs($education_data[0]['field_parent_census'],WORKFORCE_PROGRAM_ID);
-	$entrepreneurship_pgm_data = $this->Affiliate_model->get_programs($education_data[0]['field_parent_census'],ENTREPRENEURSHIP_PROGRAM_ID);
-	$civic_pgm_data = $this->Affiliate_model->civic_data($report_id);
-	$volunteer_data = $this->Affiliate_model->volunteer_data($report_id);
-	$community_relation_method_ad_market = $this->Affiliate_model->get_community_relation_method_ad_market($report_id);	  
+	require_once FCPATH.'application/third_party/word/HtmlToDoc/HtmlToDoc.class.php';
+	
+	$htd = new HTML_TO_DOC();
+	
+	// Store the $report_data variable in a PHP session
+	session_start();
+	$_SESSION['report_details'] = $report_details;
+	
+	// Load the export.php file
+	ob_start(); // Start output buffering
+	include 'application/views/single_export.php';
+	$htmlContent = ob_get_clean();
+	
+	// Generate the Word document
+	$htd->createDoc($htmlContent, "$fileName", 1);
+  
+// 	$report_id = $this->uri->segment('4');
+// 	$report_details = $this->Affiliate_model->report_details($report_id);
+// 	$service_area_main = $this->Affiliate_model->service_areas($report_id);
 
-	  $affiliate_details = $this->Assessment_model->affiliate_details($_GET);
-	  $data['affiliate_details'] = $affiliate_details;	  
+// 	$report_data = $this->Affiliate_model->census_report_data($report_id);
+// 	$service_data = $this->Affiliate_model->service_areas_details($service_area_main[0]['pk_id']);
+// 	$report_statuses = $this->Affiliate_model->census_report_statuses();
+// 	$education_data = $this->Affiliate_model->education_prg($report_id);
+// 	$expenditure_data = $this->Affiliate_model->expenditure($report_id);
+// 	$revenue_data = $this->Affiliate_model->revenue($report_id);
+// 	$employee_data = $this->Affiliate_model->employees_board($report_id);
+// 	$community_data = $this->Affiliate_model->community_relations($report_id);
+// 	$other_prg_data = $this->Affiliate_model->other_prg($report_id);
+// 	$education_pgm_data = $this->Affiliate_model->get_programs($education_data[0]['field_parent_census'],EDUCATION_PROGRAM_ID);
+// 	$other_pgm_data = $this->Affiliate_model->get_programs($education_data[0]['field_parent_census'],OTHER_PROGRAM_ID);
+// 	$health_pgm_data = $this->Affiliate_model->get_programs($education_data[0]['field_parent_census'],HEALTH_PROGRAM_ID);
+// 	$housing_pgm_data = $this->Affiliate_model->get_programs($education_data[0]['field_parent_census'],HOUSING_PROGRAM_ID);
+// 	$workforce_pgm_data = $this->Affiliate_model->get_programs($education_data[0]['field_parent_census'],WORKFORCE_PROGRAM_ID);
+// 	$entrepreneurship_pgm_data = $this->Affiliate_model->get_programs($education_data[0]['field_parent_census'],ENTREPRENEURSHIP_PROGRAM_ID);
+// 	$civic_pgm_data = $this->Affiliate_model->civic_data($report_id);
+// 	$volunteer_data = $this->Affiliate_model->volunteer_data($report_id);
+// 	$community_relation_method_ad_market = $this->Affiliate_model->get_community_relation_method_ad_market($report_id);	  
 
-	  $ids = array("selfAssessmentId"=> $_GET['sid'], "affiliateId"=> $_GET['aid'],"userId"=>$user_id);
-	  $data['criteria_answers_view'] = $this->Assessment_model->criteria_answers_view($ids);	  
+// 	  $affiliate_details = $this->Assessment_model->affiliate_details($_GET);
+// 	  $data['affiliate_details'] = $affiliate_details;	  
 
-	  $data['totalrating'] = $this->rating($_GET['sid'],$_GET['aid'],$user_id);
+// 	  $ids = array("selfAssessmentId"=> $_GET['sid'], "affiliateId"=> $_GET['aid'],"userId"=>$user_id);
+// 	  $data['criteria_answers_view'] = $this->Assessment_model->criteria_answers_view($ids);	  
 
-		  $data['footer']['js'] = array(
-			  'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js',
-			  'https://unpkg.com/mustache@latest',
-			  'vendor/bootstrap-datetimepicker.js',
-			  'pages/modules/assessment_pdf.js',
-		  );
+// 	  $data['totalrating'] = $this->rating($_GET['sid'],$_GET['aid'],$user_id);
 
-	  $items=array();
-	  $templateProcessor = new TemplateProcessor('resources/template/Affiliate Detail.docx');	
+// 		  $data['footer']['js'] = array(
+// 			  'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js',
+// 			  'https://unpkg.com/mustache@latest',
+// 			  'vendor/bootstrap-datetimepicker.js',
+// 			  'pages/modules/assessment_pdf.js',
+// 		  );
+
+// 	  $items=array();
+// 	  $templateProcessor = new TemplateProcessor('resources/template/Affiliate Detail.docx');	
 	  
-	  $templateProcessor->cloneBlock('CLONEME', count($education_pgm_data));
-	  $templateProcessor->cloneBlock('HEALTH', count($health_pgm_data));
-	  $templateProcessor->cloneBlock('OTHER', count($other_pgm_data));
-	  $templateProcessor->cloneBlock('ENTRE', count($entrepreneurship_pgm_data));
-	  $templateProcessor->cloneBlock('WORK', count($workforce_pgm_data));
-	  $templateProcessor->cloneBlock('HOUSE', count($housing_pgm_data));
-	  $templateProcessor->cloneBlock('PRG_SER', count($education_pgm_data));
+// 	  $templateProcessor->cloneBlock('CLONEME', count($education_pgm_data));
+// 	  $templateProcessor->cloneBlock('HEALTH', count($health_pgm_data));
+// 	  $templateProcessor->cloneBlock('OTHER', count($other_pgm_data));
+// 	  $templateProcessor->cloneBlock('ENTRE', count($entrepreneurship_pgm_data));
+// 	  $templateProcessor->cloneBlock('WORK', count($workforce_pgm_data));
+// 	  $templateProcessor->cloneBlock('HOUSE', count($housing_pgm_data));
+// 	  $templateProcessor->cloneBlock('PRG_SER', count($education_pgm_data));
 
-	$field_program_served_totals = array_map(function($item) {
-		return $item['field_program_served_total'];
-	}, $education_pgm_data);
+// 	$field_program_served_totals = array_map(function($item) {
+// 		return $item['field_program_served_total'];
+// 	}, $education_pgm_data);
 	
-	$edu_prg_ser = implode(',', $field_program_served_totals);
+// 	$edu_prg_ser = implode(',', $field_program_served_totals);
 	
-	$field_program_served_totals_oth = array_map(function($item) {
-		return $item['field_program_served_total'];
-	}, $other_pgm_data);
+// 	$field_program_served_totals_oth = array_map(function($item) {
+// 		return $item['field_program_served_total'];
+// 	}, $other_pgm_data);
 
-	$other_prg_ser = implode(',', $field_program_served_totals_oth);
+// 	$other_prg_ser = implode(',', $field_program_served_totals_oth);
 	
-	$field_method_of_ad_marketing_comm = array_map(function($item) {
-		return $item['field_method_of_ad_marketing'];
-	}, $community_relation_method_ad_market);
+// 	$field_method_of_ad_marketing_comm = array_map(function($item) {
+// 		return $item['field_method_of_ad_marketing'];
+// 	}, $community_relation_method_ad_market);
 
-	$comm_method = implode(',', $field_method_of_ad_marketing_comm);
+// 	$comm_method = implode(',', $field_method_of_ad_marketing_comm);
 
-	$field_program_served_totals_entre = array_map(function($item) {
-		return $item['field_program_served_total'];
-	}, $entrepreneurship_pgm_data);
+// 	$field_program_served_totals_entre = array_map(function($item) {
+// 		return $item['field_program_served_total'];
+// 	}, $entrepreneurship_pgm_data);
 
-	$field_program_served_totals_work = array_map(function($item) {
-		return $item['field_program_served_total'];
-	}, $workforce_pgm_data);
+// 	$field_program_served_totals_work = array_map(function($item) {
+// 		return $item['field_program_served_total'];
+// 	}, $workforce_pgm_data);
 
-	$field_program_served_totals_house = array_map(function($item) {
-		return $item['field_program_served_total'];
-	}, $housing_pgm_data);
+// 	$field_program_served_totals_house = array_map(function($item) {
+// 		return $item['field_program_served_total'];
+// 	}, $housing_pgm_data);
 
-	$combinedArray = array_merge($field_program_served_totals_entre, $field_program_served_totals_work, $field_program_served_totals_house);
+// 	$combinedArray = array_merge($field_program_served_totals_entre, $field_program_served_totals_work, $field_program_served_totals_house);
 
-	$economic_prg_ser = implode(' ,  ', $combinedArray);
+// 	$economic_prg_ser = implode(' ,  ', $combinedArray);
 
 
-	$templateProcessor->setValue('edu_prg_ser', $edu_prg_ser);
-	$templateProcessor->setValue('other_prg_ser', $other_prg_ser);
-	$templateProcessor->setValue('comm_method', $comm_method);
-	$templateProcessor->setValue('economic_prg_ser', $economic_prg_ser);
+// 	$templateProcessor->setValue('edu_prg_ser', $edu_prg_ser);
+// 	$templateProcessor->setValue('other_prg_ser', $other_prg_ser);
+// 	$templateProcessor->setValue('comm_method', $comm_method);
+// 	$templateProcessor->setValue('economic_prg_ser', $economic_prg_ser);
 
-	  foreach($education_pgm_data as $edu){
-		$templateProcessor->setValue('test0', str_replace("&","and",$edu["title"]), 1);
-	   }
+// 	  foreach($education_pgm_data as $edu){
+// 		$templateProcessor->setValue('test0', str_replace("&","and",$edu["title"]), 1);
+// 	   }
 
-	  foreach($health_pgm_data as $health_prg_data){
-		$templateProcessor->setValue('health_prg_data', str_replace("&","and",$health_prg_data["title"]), 1);
-	  }
+// 	  foreach($health_pgm_data as $health_prg_data){
+// 		$templateProcessor->setValue('health_prg_data', str_replace("&","and",$health_prg_data["title"]), 1);
+// 	  }
 
-	  foreach($other_pgm_data as $other_prg_datas){
-		$templateProcessor->setValue('other_pgm', str_replace("&","and",$other_prg_datas["title"]), 1);
-	  }
+// 	  foreach($other_pgm_data as $other_prg_datas){
+// 		$templateProcessor->setValue('other_pgm', str_replace("&","and",$other_prg_datas["title"]), 1);
+// 	  }
 
-	  foreach($entrepreneurship_pgm_data as $entre_prg_datas){
-		$templateProcessor->setValue('entre_pgm', str_replace("&","and",$entre_prg_datas["title"]), 1);
+// 	  foreach($entrepreneurship_pgm_data as $entre_prg_datas){
+// 		$templateProcessor->setValue('entre_pgm', str_replace("&","and",$entre_prg_datas["title"]), 1);
 
-	  }
+// 	  }
 
-	  foreach($workforce_pgm_data as $work_prg_datas){
-		$templateProcessor->setValue('work_pgm', str_replace("&","and",$work_prg_datas["title"]), 1);
-	  }
+// 	  foreach($workforce_pgm_data as $work_prg_datas){
+// 		$templateProcessor->setValue('work_pgm', str_replace("&","and",$work_prg_datas["title"]), 1);
+// 	  }
 
-	  foreach($housing_pgm_data as $house_prg_datas){
-		$templateProcessor->setValue('house_pgm', str_replace("&","and",$house_prg_datas["title"]), 1);
-	  }
+// 	  foreach($housing_pgm_data as $house_prg_datas){
+// 		$templateProcessor->setValue('house_pgm', str_replace("&","and",$house_prg_datas["title"]), 1);
+// 	  }
 	  
 	   
-	  $aff_name= $report_data[0]['organization'];
-	  $templateProcessor->setValue('affnames',  strtoupper(str_replace("&","and",$aff_name)));		  
+// 	  $aff_name= $report_data[0]['organization'];
+// 	  $templateProcessor->setValue('affnames',  strtoupper(str_replace("&","and",$aff_name)));		  
 	  
-	  $ceo= $report_data[0]['field_number_of_years_as_ceo'];
-	  $templateProcessor->setValue('ceo', $ceo);
+// 	  $ceo= $report_data[0]['field_number_of_years_as_ceo'];
+// 	  $templateProcessor->setValue('ceo', $ceo);
 	  
-	  $ceo= $report_data[0]['field_number_of_years_as_ceo'];
-	  $templateProcessor->setValue('ceo', $ceo);
+// 	  $ceo= $report_data[0]['field_number_of_years_as_ceo'];
+// 	  $templateProcessor->setValue('ceo', $ceo);
 
-	  $name= $report_data[0]['field_president_ceo_first_name']." ".$report_data[0]['field_president_ceo_middle_name']." ".$report_data[0]['field_president_ceo_last_name'];
-	  $templateProcessor->setValue('name', $name);		  
+// 	  $name= $report_data[0]['field_president_ceo_first_name']." ".$report_data[0]['field_president_ceo_middle_name']." ".$report_data[0]['field_president_ceo_last_name'];
+// 	  $templateProcessor->setValue('name', $name);		  
 
-	  $date_established= $report_data[0]['field_date_established'];
-	  $templateProcessor->setValue('d_e', $date_established);	
+// 	  $date_established= $report_data[0]['field_date_established'];
+// 	  $templateProcessor->setValue('d_e', $date_established);	
 
-	  $field_email_address= $report_data[0]['field_email_address'];
-	  $templateProcessor->setValue('cell_add', $field_email_address);
+// 	  $field_email_address= $report_data[0]['field_email_address'];
+// 	  $templateProcessor->setValue('cell_add', $field_email_address);
 	  
-	  $year_service= $report_data[0]['field_number_of_years_of_service'];
-	  $templateProcessor->setValue('year_service', $year_service);
+// 	  $year_service= $report_data[0]['field_number_of_years_of_service'];
+// 	  $templateProcessor->setValue('year_service', $year_service);
 	  
-	  $field_telephone= $report_data[0]['field_telephone'];
-	  $templateProcessor->setValue('field_telephone', $field_telephone);
+// 	  $field_telephone= $report_data[0]['field_telephone'];
+// 	  $templateProcessor->setValue('field_telephone', $field_telephone);
 
-	  $field_fax= $report_data[0]['field_fax'];
-	  $templateProcessor->setValue('field_fax', $field_fax);
+// 	  $field_fax= $report_data[0]['field_fax'];
+// 	  $templateProcessor->setValue('field_fax', $field_fax);
 	  
-	  $field_address_line_1= $report_data[0]['field_address_line_1'];
-	  $templateProcessor->setValue('address_line', $field_address_line_1);
+// 	  $field_address_line_1= $report_data[0]['field_address_line_1'];
+// 	  $templateProcessor->setValue('address_line', $field_address_line_1);
 
-	  foreach ($service_data as $key => $data) {
+// 	  foreach ($service_data as $key => $data) {
 
-	  $field_service_area_city_county= $data['field_service_area_city_county'];
-	  $templateProcessor->setValue('country', $field_service_area_city_county);
-	  //print_r($field_service_area_city_county);
-	  }
+// 	  $field_service_area_city_county= $data['field_service_area_city_county'];
+// 	  $templateProcessor->setValue('country', $field_service_area_city_county);
+// 	  //print_r($field_service_area_city_county);
+// 	  }
 
-	  //die;
+// 	  //die;
 
-	  $field_service_area_population= $service_data[0]['field_service_area_population'];
-	  $templateProcessor->setValue('population', $field_service_area_population);
+// 	  $field_service_area_population= $service_data[0]['field_service_area_population'];
+// 	  $templateProcessor->setValue('population', $field_service_area_population);
 
-	  $field_service_area_white= $service_data[0]['field_service_area_white'];
-	  $templateProcessor->setValue('white', $field_service_area_white);
+// 	  $field_service_area_white= $service_data[0]['field_service_area_white'];
+// 	  $templateProcessor->setValue('white', $field_service_area_white);
 	  
-	  $field_service_area_hispanic= $service_data[0]['field_service_area_hispanic'];
-	  $templateProcessor->setValue('hispanic', $field_service_area_hispanic);
+// 	  $field_service_area_hispanic= $service_data[0]['field_service_area_hispanic'];
+// 	  $templateProcessor->setValue('hispanic', $field_service_area_hispanic);
 
-	  $field_service_area_african_am= $service_data[0]['field_service_area_african_am'];
-	  $templateProcessor->setValue('african', $field_service_area_african_am);
+// 	  $field_service_area_african_am= $service_data[0]['field_service_area_african_am'];
+// 	  $templateProcessor->setValue('african', $field_service_area_african_am);
 
-	  $field_service_area_asian_am= $service_data[0]['field_service_area_asian_am'];
-	  $templateProcessor->setValue('asian', $field_service_area_asian_am);
+// 	  $field_service_area_asian_am= $service_data[0]['field_service_area_asian_am'];
+// 	  $templateProcessor->setValue('asian', $field_service_area_asian_am);
 	  
-	  $field_service_area_native_am= $service_data[0]['field_service_area_native_am'];
-	  $templateProcessor->setValue('native', $field_service_area_native_am);
+// 	  $field_service_area_native_am= $service_data[0]['field_service_area_native_am'];
+// 	  $templateProcessor->setValue('native', $field_service_area_native_am);
 	  
-	  $field_total_expenditures= $expenditure_data[0]['field_total_expenditures'];
-	  $templateProcessor->setValue('total_exp', "$".number_format($field_total_expenditures,2));
+// 	  $field_total_expenditures= $expenditure_data[0]['field_total_expenditures'];
+// 	  $templateProcessor->setValue('total_exp', "$".number_format($field_total_expenditures,2));
 
-	  $field_a_salaries_wages= $expenditure_data[0]['field_a_salaries_wages'];
-	  $templateProcessor->setValue('salary_wages', "$".number_format($field_a_salaries_wages,2));
+// 	  $field_a_salaries_wages= $expenditure_data[0]['field_a_salaries_wages'];
+// 	  $templateProcessor->setValue('salary_wages', "$".number_format($field_a_salaries_wages,2));
 
-	  $field_b_fringe_benefits= $expenditure_data[0]['field_b_fringe_benefits'];
-	  $templateProcessor->setValue('fringe_benefits', "$".number_format($field_b_fringe_benefits,2));
+// 	  $field_b_fringe_benefits= $expenditure_data[0]['field_b_fringe_benefits'];
+// 	  $templateProcessor->setValue('fringe_benefits', "$".number_format($field_b_fringe_benefits,2));
 
-	  $field_c_professional_fees= $expenditure_data[0]['field_c_professional_fees'];
-	  $templateProcessor->setValue('professional_fees', "$".number_format($field_c_professional_fees,2));
+// 	  $field_c_professional_fees= $expenditure_data[0]['field_c_professional_fees'];
+// 	  $templateProcessor->setValue('professional_fees', "$".number_format($field_c_professional_fees,2));
 
-	  $field_d_travel= $expenditure_data[0]['field_d_travel'];
-	  $templateProcessor->setValue('travel', "$".number_format($field_d_travel,2));
+// 	  $field_d_travel= $expenditure_data[0]['field_d_travel'];
+// 	  $templateProcessor->setValue('travel', "$".number_format($field_d_travel,2));
 
-	  $field_e_postage_freight= $expenditure_data[0]['field_e_postage_freight'];
-	  $templateProcessor->setValue('postage', "$".number_format($field_e_postage_freight,2));
+// 	  $field_e_postage_freight= $expenditure_data[0]['field_e_postage_freight'];
+// 	  $templateProcessor->setValue('postage', "$".number_format($field_e_postage_freight,2));
 
-	  $field_f_insurance= $expenditure_data[0]['field_f_insurance'];
-	  $templateProcessor->setValue('insurance', "$".number_format($field_f_insurance,2));
+// 	  $field_f_insurance= $expenditure_data[0]['field_f_insurance'];
+// 	  $templateProcessor->setValue('insurance', "$".number_format($field_f_insurance,2));
 
-	  $field_g_interest_payments= $expenditure_data[0]['field_g_interest_payments'];
-	  $templateProcessor->setValue('interest_payments', "$".number_format($field_g_interest_payments,2));
+// 	  $field_g_interest_payments= $expenditure_data[0]['field_g_interest_payments'];
+// 	  $templateProcessor->setValue('interest_payments', "$".number_format($field_g_interest_payments,2));
 
-	  $subscription= $expenditure_data[0]['field_h_dues_subscription_regist'];
-	  $templateProcessor->setValue('subscription', "$".number_format($subscription,2));
+// 	  $subscription= $expenditure_data[0]['field_h_dues_subscription_regist'];
+// 	  $templateProcessor->setValue('subscription', "$".number_format($subscription,2));
 
-	  $depreciation= $expenditure_data[0]['field_i_depreciation'];
-	  $templateProcessor->setValue('depreciation', "$".number_format($depreciation,2));
+// 	  $depreciation= $expenditure_data[0]['field_i_depreciation'];
+// 	  $templateProcessor->setValue('depreciation', "$".number_format($depreciation,2));
 
-	  $taxes= $expenditure_data[0]['field_j_taxes_including_property'];
-	  $templateProcessor->setValue('taxes', "$".number_format($taxes,2));
+// 	  $taxes= $expenditure_data[0]['field_j_taxes_including_property'];
+// 	  $templateProcessor->setValue('taxes', "$".number_format($taxes,2));
 
-	  $utilities= $expenditure_data[0]['field_k_utilities'];
-	  $templateProcessor->setValue('utilities', "$".number_format($utilities,2));
+// 	  $utilities= $expenditure_data[0]['field_k_utilities'];
+// 	  $templateProcessor->setValue('utilities', "$".number_format($utilities,2));
 
-	  $equipment= $expenditure_data[0]['field_l_equipment_space_rental'];
-	  $templateProcessor->setValue('equipment', "$".number_format($equipment,2));
+// 	  $equipment= $expenditure_data[0]['field_l_equipment_space_rental'];
+// 	  $templateProcessor->setValue('equipment', "$".number_format($equipment,2));
 
-	  $goods= $expenditure_data[0]['field_m_goods_and_services'];
-	  $templateProcessor->setValue('goods', "$".number_format($goods,2));	  
+// 	  $goods= $expenditure_data[0]['field_m_goods_and_services'];
+// 	  $templateProcessor->setValue('goods', "$".number_format($goods,2));	  
 
-	  $mortgage= $expenditure_data[0]['field_n_rent_mortgage_payments'];
-	  $templateProcessor->setValue('mortgage', "$".number_format($mortgage,2));	  
+// 	  $mortgage= $expenditure_data[0]['field_n_rent_mortgage_payments'];
+// 	  $templateProcessor->setValue('mortgage', "$".number_format($mortgage,2));	  
 
-	  $field_o_other= $expenditure_data[0]['field_o_other'];
-	  $templateProcessor->setValue('other_exp', "$".number_format($field_o_other,2));	  
+// 	  $field_o_other= $expenditure_data[0]['field_o_other'];
+// 	  $templateProcessor->setValue('other_exp', "$".number_format($field_o_other,2));	  
 
-	  $rent_exp= $expenditure_data[0]['field_number_properties_rented'];
-	  $templateProcessor->setValue('rent_exp', "$".number_format($rent_exp,2));
+// 	  $rent_exp= $expenditure_data[0]['field_number_properties_rented'];
+// 	  $templateProcessor->setValue('rent_exp', "$".number_format($rent_exp,2));
 
-	  $corporations= $revenue_data[0]['field_revenue_corporations'];
-	  $templateProcessor->setValue('corporations', "$".number_format($corporations,2));
+// 	  $corporations= $revenue_data[0]['field_revenue_corporations'];
+// 	  $templateProcessor->setValue('corporations', "$".number_format($corporations,2));
 
-	  $foundations= $revenue_data[0]['field_revenue_foundations'];
-	  $templateProcessor->setValue('foundations', "$".number_format($foundations,2));
+// 	  $foundations= $revenue_data[0]['field_revenue_foundations'];
+// 	  $templateProcessor->setValue('foundations', "$".number_format($foundations,2));
 
-	  $ind_mem= $revenue_data[0]['field_revenue_individual_members'];
-	  $templateProcessor->setValue('ind_mem', "$".number_format($ind_mem,2));
+// 	  $ind_mem= $revenue_data[0]['field_revenue_individual_members'];
+// 	  $templateProcessor->setValue('ind_mem', "$".number_format($ind_mem,2));
 
-	  $spcl_events= $revenue_data[0]['field_revenue_special_events'];
-	  $templateProcessor->setValue('spcl_events', "$".number_format($spcl_events,2));
+// 	  $spcl_events= $revenue_data[0]['field_revenue_special_events'];
+// 	  $templateProcessor->setValue('spcl_events', "$".number_format($spcl_events,2));
 
-	  $united_way= $revenue_data[0]['field_revenue_united_way'];
-	  $templateProcessor->setValue('united_way', "$".number_format($united_way,2));
+// 	  $united_way= $revenue_data[0]['field_revenue_united_way'];
+// 	  $templateProcessor->setValue('united_way', "$".number_format($united_way,2));
 
-	  $federal= $revenue_data[0]['field_revenue_federal'];
-	  $templateProcessor->setValue('federal', "$".number_format($federal,2));
+// 	  $federal= $revenue_data[0]['field_revenue_federal'];
+// 	  $templateProcessor->setValue('federal', "$".number_format($federal,2));
 
-	  $local_revenue= $revenue_data[0]['field_revenue_state_local'];
-	  $templateProcessor->setValue('local_revenue', "$".number_format($local_revenue,2));
+// 	  $local_revenue= $revenue_data[0]['field_revenue_state_local'];
+// 	  $templateProcessor->setValue('local_revenue', "$".number_format($local_revenue,2));
 
-	  $other_revenue= $revenue_data[0]['field_revenue_other'];
-	  $templateProcessor->setValue('other_revenue', "$".number_format($other_revenue,2));
+// 	  $other_revenue= $revenue_data[0]['field_revenue_other'];
+// 	  $templateProcessor->setValue('other_revenue', "$".number_format($other_revenue,2));
 
-	  $nul_revenue= $revenue_data[0]['field_revenue_nul'];
-	  $templateProcessor->setValue('nul_revenue', "$".number_format($nul_revenue,2));
+// 	  $nul_revenue= $revenue_data[0]['field_revenue_nul'];
+// 	  $templateProcessor->setValue('nul_revenue', "$".number_format($nul_revenue,2));
 
-	  $inv_earnings= $revenue_data[0]['field_revenue_investment'];
-	  $templateProcessor->setValue('inv_earnings', "$".number_format($inv_earnings,2));		  
+// 	  $inv_earnings= $revenue_data[0]['field_revenue_investment'];
+// 	  $templateProcessor->setValue('inv_earnings', "$".number_format($inv_earnings,2));		  
 	  
-	  $website= $community_data[0]['field_affiliate_website_address'];
-	  $templateProcessor->setValue('website', $website);		  
+// 	  $website= $community_data[0]['field_affiliate_website_address'];
+// 	  $templateProcessor->setValue('website', $website);		  
 	  
-	  $education_pgm_data = $education_pgm_data[0]['title'];
-	  $templateProcessor->setValue('education_pgm', $education_pgm_data);	
+// 	  $education_pgm_data = $education_pgm_data[0]['title'];
+// 	  $templateProcessor->setValue('education_pgm', $education_pgm_data);	
 	  
-	  $other_pgm_data = $other_pgm_data[0]['title'];
-	  if($other_pgm_data != ""){
-		$templateProcessor->setValue('civic_pgm', $other_pgm_data);	
-	  }else{
-		$templateProcessor->setValue('civic_pgm', "N/A");	
-	  }
+// 	  $other_pgm_data = $other_pgm_data[0]['title'];
+// 	  if($other_pgm_data != ""){
+// 		$templateProcessor->setValue('civic_pgm', $other_pgm_data);	
+// 	  }else{
+// 		$templateProcessor->setValue('civic_pgm', "N/A");	
+// 	  }
 	  
-	  $civic_edu_data = $civic_pgm_data[0]['field_voter_registration'];
-	  if($civic_edu_data == "1"){
-		$templateProcessor->setValue('civic_edu_pgm', "voter_registration : Yes");	
-	  }	else{ $templateProcessor->setValue('civic_edu_pgm', "voter_registration : N/A"); }
+// 	  $civic_edu_data = $civic_pgm_data[0]['field_voter_registration'];
+// 	  if($civic_edu_data == "1"){
+// 		$templateProcessor->setValue('civic_edu_pgm', "voter_registration : Yes");	
+// 	  }	else{ $templateProcessor->setValue('civic_edu_pgm', "voter_registration : N/A"); }
 	  
-	  $civic_com_data = $civic_pgm_data[0]['field_community_forums'];
-	  if($civic_com_data == "1"){
-		$templateProcessor->setValue('civic_com_pgm', "Community Programs : Yes");	
-	  }else{ $templateProcessor->setValue('civic_com_pgm', "Community Programs : N/A"); }
+// 	  $civic_com_data = $civic_pgm_data[0]['field_community_forums'];
+// 	  if($civic_com_data == "1"){
+// 		$templateProcessor->setValue('civic_com_pgm', "Community Programs : Yes");	
+// 	  }else{ $templateProcessor->setValue('civic_com_pgm', "Community Programs : N/A"); }
 	  
-	  $civic_crja_data = $civic_pgm_data[0]['field_crja'];
-	  if($civic_crja_data == "1"){
-		$templateProcessor->setValue('civic_crja_pgm', "Civil Rights And Racial Justice Activities : Yes");	
-	  }else{ $templateProcessor->setValue('civic_crja_pgm', "Civil Rights And Racial Justice Activities : N/A"); }
+// 	  $civic_crja_data = $civic_pgm_data[0]['field_crja'];
+// 	  if($civic_crja_data == "1"){
+// 		$templateProcessor->setValue('civic_crja_pgm', "Civil Rights And Racial Justice Activities : Yes");	
+// 	  }else{ $templateProcessor->setValue('civic_crja_pgm', "Civil Rights And Racial Justice Activities : N/A"); }
 	  
-	  $civic_pb_data = $civic_pgm_data[0]['field_police_brutality'];
-	  if($civic_pb_data == "1"){
-		$templateProcessor->setValue('civic_pb_pgm', "Police Brutality : Yes");	
-	  }else{ $templateProcessor->setValue('civic_pb_pgm', "Police Brutality : N/A"); }
+// 	  $civic_pb_data = $civic_pgm_data[0]['field_police_brutality'];
+// 	  if($civic_pb_data == "1"){
+// 		$templateProcessor->setValue('civic_pb_pgm', "Police Brutality : Yes");	
+// 	  }else{ $templateProcessor->setValue('civic_pb_pgm', "Police Brutality : N/A"); }
 	  
-	  $civic_adv_data = $civic_pgm_data[0]['field_advocacy_efforts'];
-	  if($civic_adv_data == "1"){
-		$templateProcessor->setValue('civic_adv_pgm', "Advocacy : Yes");	
-	  }else{ $templateProcessor->setValue('civic_adv_pgm', "Advocacy : N/A"); }
+// 	  $civic_adv_data = $civic_pgm_data[0]['field_advocacy_efforts'];
+// 	  if($civic_adv_data == "1"){
+// 		$templateProcessor->setValue('civic_adv_pgm', "Advocacy : Yes");	
+// 	  }else{ $templateProcessor->setValue('civic_adv_pgm', "Advocacy : N/A"); }
 	  
-	  $vol_young_data = $volunteer_data[0]['field_ypc_members'];
-	  if($vol_young_data != ""){
-		$templateProcessor->setValue('vol_young_data', $vol_young_data);	
-	  }else{ $templateProcessor->setValue('vol_young_data', "N/A"); }
+// 	  $vol_young_data = $volunteer_data[0]['field_ypc_members'];
+// 	  if($vol_young_data != ""){
+// 		$templateProcessor->setValue('vol_young_data', $vol_young_data);	
+// 	  }else{ $templateProcessor->setValue('vol_young_data', "N/A"); }
 	  
-	  $vol_oth_data = $volunteer_data[0]['field_aux_members'];
-	  if($vol_oth_data != ""){
-		$templateProcessor->setValue('vol_oth_data', $vol_oth_data);	
-	  }else{ $templateProcessor->setValue('vol_oth_data', "N/A"); } 
+// 	  $vol_oth_data = $volunteer_data[0]['field_aux_members'];
+// 	  if($vol_oth_data != ""){
+// 		$templateProcessor->setValue('vol_oth_data', $vol_oth_data);	
+// 	  }else{ $templateProcessor->setValue('vol_oth_data', "N/A"); } 
 	  
-	  $vol_guild_data = $volunteer_data[0]['field_guild_members'];
-	  if($vol_guild_data != ""){
-		$templateProcessor->setValue('vol_guild_data', $vol_guild_data);	
-	  }else{ $templateProcessor->setValue('vol_guild_data', "N/A"); }
+// 	  $vol_guild_data = $volunteer_data[0]['field_guild_members'];
+// 	  if($vol_guild_data != ""){
+// 		$templateProcessor->setValue('vol_guild_data', $vol_guild_data);	
+// 	  }else{ $templateProcessor->setValue('vol_guild_data', "N/A"); }
 	  
-	  $vol_emp_data = $employee_data[0]['field_board_member_grand_total'];
-	  if($vol_emp_data != ""){
-		$templateProcessor->setValue('vol_emp_data', $vol_emp_data);	
-	  }else{ $templateProcessor->setValue('vol_emp_data', "N/A"); }
+// 	  $vol_emp_data = $employee_data[0]['field_board_member_grand_total'];
+// 	  if($vol_emp_data != ""){
+// 		$templateProcessor->setValue('vol_emp_data', $vol_emp_data);	
+// 	  }else{ $templateProcessor->setValue('vol_emp_data', "N/A"); }
 
-	  $capital_amount = $expenditure_data[0]['field_capital_budget_amount'];
-	  $templateProcessor->setValue('capital_budget', "$".number_format($capital_amount,2));	
+// 	  $capital_amount = $expenditure_data[0]['field_capital_budget_amount'];
+// 	  $templateProcessor->setValue('capital_budget', "$".number_format($capital_amount,2));	
 
-	  $ft_emp = $employee_data[0]['field_full_time_employees'];
-	  $templateProcessor->setValue('ft_emp', $ft_emp);	
+// 	  $ft_emp = $employee_data[0]['field_full_time_employees'];
+// 	  $templateProcessor->setValue('ft_emp', $ft_emp);	
 
-	  $pt_emp = $employee_data[0]['field_part_time_employees'];
-	  $templateProcessor->setValue('pt_emp', $pt_emp);	
+// 	  $pt_emp = $employee_data[0]['field_part_time_employees'];
+// 	  $templateProcessor->setValue('pt_emp', $pt_emp);	
 
-	  //$templateProcessor->setValue('image', '<img src="opt/lampp/htdocs/nul_adms1/resources/images/demo.jpg">');
-	  //$templateProcessor->setImageValue('IMAGE', array('path' => 'http://localhost/nul_adms1/resources/images/demo.jpg', 'media-type' => 'image/jpg'));
+// 	  //$templateProcessor->setValue('image', '<img src="opt/lampp/htdocs/nul_adms1/resources/images/demo.jpg">');
+// 	  //$templateProcessor->setImageValue('IMAGE', array('path' => 'http://localhost/nul_adms1/resources/images/demo.jpg', 'media-type' => 'image/jpg'));
 
-     $image_path = str_replace('./uploads/Documents/','',$report_data[0]['field_photo_title']);
-	  $field_photo_title = $report_data[0]['field_photo_title']; 
-      //print_r($field_photo_title);die;
-//      if($report_data[0]['field_photo_title']){
-//	  	$templateProcessor->setImageValue('IMAGE', array('path' => $field_photo_title, 'media-type' => 'image/jpg'));
-//	  }else{
-//		$templateProcessor->setValue('IMAGE', "");	
-//	  }
-      if($report_data[0]['field_photo_title'] == ""){
-        $templateProcessor->setValue('IMAGE', "");
-	  	//$templateProcessor->setImageValue('IMAGE', array('path' => $field_photo_title, 'media-type' => 'image/jpg'));
-	  }else{
-        $templateProcessor->setImageValue('IMAGE', array('path' =>'https://nulacs.org/resources/images/profile/'.$field_photo_title));
-	  }
-
-	  
-	  
-	  $fileName = $report_data[0]['field_year']." ". $aff_name;
-	  $templateProcessor->saveAs($fileName . '.docx');
+//      $image_path = str_replace('./uploads/Documents/','',$report_data[0]['field_photo_title']);
+// 	  $field_photo_title = $report_data[0]['field_photo_title']; 
+//       //print_r($field_photo_title);die;
+// //      if($report_data[0]['field_photo_title']){
+// //	  	$templateProcessor->setImageValue('IMAGE', array('path' => $field_photo_title, 'media-type' => 'image/jpg'));
+// //	  }else{
+// //		$templateProcessor->setValue('IMAGE', "");	
+// //	  }
+//       if($report_data[0]['field_photo_title'] == ""){
+//         $templateProcessor->setValue('IMAGE', "");
+// 	  	//$templateProcessor->setImageValue('IMAGE', array('path' => $field_photo_title, 'media-type' => 'image/jpg'));
+// 	  }else{
+//         $templateProcessor->setImageValue('IMAGE', array('path' =>'https://nulacs.org/resources/images/profile/'.$field_photo_title));
+// 	  }
 
 	  
-	  $file = '/tmp/'.$fileName.'.docx';
+	  
+// 	  $fileName = $report_data[0]['field_year']." ". $aff_name;
+// 	  $templateProcessor->saveAs($fileName . '.docx');
 
-	  if (file_exists($file)) {
-		  header('Content-Disposition: attachment; filename="'.basename($fileName.'.docx').'"');
-		  header('Expires: 0');
-		  header('Cache-Control: must-revalidate');
-		  header('Pragma: public');
-		  header('Content-Length: ' . filesize($file));
-		  readfile($file);
-		  unlink($file);
-		  exit;
-	  }  
+	  
+// 	  $file = '/tmp/'.$fileName.'.docx';
+
+// 	  if (file_exists($file)) {
+// 		  header('Content-Disposition: attachment; filename="'.basename($fileName.'.docx').'"');
+// 		  header('Expires: 0');
+// 		  header('Cache-Control: must-revalidate');
+// 		  header('Pragma: public');
+// 		  header('Content-Length: ' . filesize($file));
+// 		  readfile($file);
+// 		  unlink($file);
+// 		  exit;
+// 	  }  
   }
 
   /**
