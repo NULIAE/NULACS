@@ -1524,8 +1524,8 @@ class Assessment extends MY_Controller
       if($report_data[0]['field_photo_title'] == ""){
         $templateProcessor->setValue('IMAGE', "");
 	  	//$templateProcessor->setImageValue('IMAGE', array('path' => $field_photo_title, 'media-type' => 'image/jpg'));
-	}else{
-        $templateProcessor->setImageValue('IMAGE', array('path' =>'https://NULACS/resources/images/profile/'.$field_photo_title));
+	  }else{
+        $templateProcessor->setImageValue('IMAGE', array('path' =>'https://nulacs.org/resources/images/profile/'.$field_photo_title));
 	  }
 
 	  
