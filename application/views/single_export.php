@@ -4,7 +4,6 @@ session_start();
 
 // Get the $report_data variable from the session
 $report_data = $_SESSION['report_details'];
-//var_dump($report_data);die;
 foreach($report_data as $key => $value){
     ?>
  
@@ -16,7 +15,8 @@ foreach($report_data as $key => $value){
         <tr  style="width: 100%;">
           <td  style=" text-align: center; padding: 0px 0px 0;   ">
             <?php if($report_data[$key]['field_photo_title']){ ?>
-              <div><img src="https://nulacs.org/resources/images/profile/.<?= $report_data[$key]['field_photo_title'];?>" class="f-img" alt="footer logo" width="200" height="220"></div>   
+              <?php $image_path = "https://nulacs.org/resources/images/profile/" . $report_data[$key]['field_photo_title'];?>
+              <div><img src="<?= $image_path;?>" class="f-img" alt="footer logo" width="200" height="220"></div>   
             <?php }elseif($report_data[$key]['field_photo_title'] == ""){?> 
               <div><img src="https://nulacs.org/resources/images/person-icon.png" class="f-img" alt="footer logo"  width="200" height="220"></div>  
             <?php }?>       
