@@ -327,7 +327,7 @@ function civic_advocacy_calc(btnid){
 	}
 
 	var field_advocacy_white_total =  isset(parseInt(($('#field_advocacy_white_male').val()).replace(/,/g, ''))) + isset(parseInt(($('#field_advocacy_white_female').val()).replace(/,/g, '')));
-	var field_advocacy_hispanic_total =  isset(parseInt(($('#field_advocacy_white_female').val()).replace(/,/g, ''))) + isset(parseInt(($('#field_advocacy_hispanic_female').val()).replace(/,/g, '')));
+	var field_advocacy_hispanic_total =  isset(parseInt(($('#field_advocacy_hispanic_male').val()).replace(/,/g, ''))) + isset(parseInt(($('#field_advocacy_hispanic_female').val()).replace(/,/g, '')));
 	var field_advocacy_asian_am_total =  isset(parseInt(($('#field_advocacy_asian_am_male').val()).replace(/,/g, ''))) + isset(parseInt(($('#field_advocacy_asian_am_female').val()).replace(/,/g, '')));
 	var field_advocacy_native_am_total =  isset(parseInt(($('#field_advocacy_native_am_male').val()).replace(/,/g, ''))) + isset(parseInt(($('#field_advocacy_native_am_female').val()).replace(/,/g, '')));
 	var field_advocacy_african_am_total =  isset(parseInt(($('#field_advocacy_african_am_male').val()).replace(/,/g, ''))) + isset(parseInt(($('#field_advocacy_african_am_female').val()).replace(/,/g, '')));
