@@ -19,6 +19,8 @@ class Profile extends MY_Controller {
 	public function index($user_id)
 	{
 		$user = $this->User_model->get_user_by_id($user_id);
+		
+		$data['user_detail'] = $this->Document_model->get_user_detail($user_id);
 
 		if ( empty($user) )
 			redirect('/');

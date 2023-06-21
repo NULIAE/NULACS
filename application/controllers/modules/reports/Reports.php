@@ -131,6 +131,8 @@ class Reports extends MY_Controller
 			"group" => $data["group"]
         );
 		$data['notifications'] = $this->Document_model->get_notifications();
+		$user_id = $this->session->user_id;
+		$data['user_detail'] = $this->Document_model->get_user_detail($user_id);
 		//Name of the view file
 		$data['view_name'] = 'modules/reports/reports';
 		//Page specific javascript files

@@ -20,6 +20,8 @@ class Email_template extends MY_Controller
 	public function index()
 	{
 		$data['notifications'] = $this->Document_model->get_notifications();
+		$user_id = $this->session->user_id;
+		$data['user_detail'] = $this->Document_model->get_user_detail($user_id);
 		
 		$data['content'] = array(
 			'templates' => $this->Email_model->get_email_templates()
@@ -44,6 +46,8 @@ class Email_template extends MY_Controller
 	public function add_form()
 	{
 		$data['notifications'] = $this->Document_model->get_notifications();
+		$user_id = $this->session->user_id;
+		$data['user_detail'] = $this->Document_model->get_user_detail($user_id);
 		
 		$data['content'] = array();
 		
@@ -126,6 +130,8 @@ class Email_template extends MY_Controller
 		$data = $this->input->get();
 
 		$data['notifications'] = $this->Document_model->get_notifications();
+		$user_id = $this->session->user_id;
+		$data['user_detail'] = $this->Document_model->get_user_detail($user_id);
 
 		$template = $this->Email_model->get_template($template_id);
 

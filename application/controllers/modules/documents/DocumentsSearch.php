@@ -32,6 +32,8 @@ class DocumentsSearch extends MY_Controller
 			'https://unpkg.com/mustache@latest',
 			'pages/modules/documents_search.js'
 		);
+		$user_id = $this->session->user_id;
+		$data['user_detail'] = $this->Document_model->get_user_detail($user_id);
 		
 		$data['notifications'] = $this->Document_model->get_notifications();
 		

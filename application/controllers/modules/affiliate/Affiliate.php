@@ -32,6 +32,8 @@ class Affiliate extends MY_Controller
 			'pages/modules/filter_affiliates.js'
 		);
 		$data['notifications'] = $this->Document_model->get_notifications();
+		$user_id = $this->session->user_id;
+		$data['user_detail'] = $this->Document_model->get_user_detail($user_id);
 		$this->load->view('template', $data);
 	}
 
@@ -117,6 +119,8 @@ class Affiliate extends MY_Controller
 		//Page specific javascript files
 		$data['footer']['js'] = array('pages/modules/add_affiliate.js');
 		$data['notifications'] = $this->Document_model->get_notifications();
+		$user_id = $this->session->user_id;
+		$data['user_detail'] = $this->Document_model->get_user_detail($user_id);
 		$this->load->view('template', $data);
 	}
 
@@ -197,6 +201,8 @@ class Affiliate extends MY_Controller
 		//Page specific javascript files
 		$data['footer']['js'] = array('pages/modules/edit_affiliate.js');
 		$data['notifications'] = $this->Document_model->get_notifications();
+		$user_id = $this->session->user_id;
+		$data['user_detail'] = $this->Document_model->get_user_detail($user_id);
 		$this->load->view('template', $data);
 	}
 
@@ -292,6 +298,8 @@ class Affiliate extends MY_Controller
 			'pages/modules/affiliate_status.js'
 		);
 		$data['notifications'] = $this->Document_model->get_notifications();
+		$user_id = $this->session->user_id;
+		$data['user_detail'] = $this->Document_model->get_user_detail($user_id);
 		$this->load->view('template', $data);
 	}
 
@@ -575,6 +583,9 @@ class Affiliate extends MY_Controller
 		{
 			redirect(base_url('/'));
 		}
+
+		$user_id = $this->session->user_id;
+		$data['user_detail'] = $this->Document_model->get_user_detail($user_id);
 
 		if($this->session->role_id != 1 && $affiliate_id != $this->session->affiliate_id)
 		{
