@@ -693,7 +693,7 @@
 													<table class="table">
 														<thead>
 															<tr>
-																<th colspan="3">What is racial/gender composition on board? </th>
+																
 															</tr>
 														</thead>
 														<tbody>

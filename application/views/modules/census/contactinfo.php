@@ -344,7 +344,7 @@
                               <td>Photo: </td>
                                <td>
                                 <span>
-                                  <img src="<?php echo base_url('/resources/images/profile/'.$report_data[0]['field_photo_title']);?>" style="width: 50vh;"?>
+                                  <?php if(isset($report_data[0]['field_photo_title'])){ ?><img src="<?php echo base_url('/resources/images/profile/'.$report_data[0]['field_photo_title']);?>" style="width: 50vh;"?><?php } ?>
                                 </span></td>
                             </tr>
                             <?php if ($this->session->role_id == 1) { ?>

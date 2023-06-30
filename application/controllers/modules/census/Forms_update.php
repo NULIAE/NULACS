@@ -25,7 +25,7 @@ class Forms_update extends MY_Controller
             $file_name = $file['name'];
 
             $data['field_photo_title'] = str_replace(' ', '_', $file_name);
-
+            $data['field_photo_title'] = str_replace(['[', ']'], '', $data['field_photo_title']);
 
             $filePath = './resources/images/profile';
             $config['upload_path'] = $filePath;
