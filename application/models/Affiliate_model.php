@@ -1902,6 +1902,7 @@ class Affiliate_model extends CI_Model
 		$this->db->join('service_areas_main sam', 'rep.report_id = sam.field_parent_census','left');
 		$this->db->join('census_statuses cs', 'cs.status_id = rep.field_census_status','left');
 		$this->db->group_by('rep.report_id');
+		$this->db->order_by('af.city', 'ASC');
 		
 		$this->db->where('rep.field_year', $report_year);
 		if($status != NULL){
