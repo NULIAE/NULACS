@@ -106,10 +106,10 @@ table.dataTable thead .sorting_desc {
                     <tr>
                       <td><?= $data['year']; ?></td>
                       <td><a class="text-greenD" href="<?php echo base_url("module/census_report/".$data['report_id']."/view");?>"><?= $data['org']; ?></a></td> 
-                      <td><?= $data['indirect']; ?></td>
-                      <td><?= $data['public']; ?></td>
-                      <td><?= $data['direct']; ?></td>
-                      <td><?= $data['net']; ?></td>
+                      <td><?= number_format($data['indirect']); ?></td>
+                      <td><?= number_format($data['public']); ?></td>
+                      <td><?= number_format($data['direct']); ?></td>
+                      <td><?= number_format($data['net']); ?></td>
                     </tr>
                     <?php } ?>
                   </tbody>
