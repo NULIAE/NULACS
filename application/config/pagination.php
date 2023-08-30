@@ -1,5 +1,5 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
-$config['pagination']['per_page'] = 10;
+$config['pagination']['per_page'] = 100;
 $config['num_links'] = 1;
 $config['pagination']['page_query_string'] = TRUE;
 $config['pagination']['full_tag_open'] = '<ul class="pagination justify-content-end">';

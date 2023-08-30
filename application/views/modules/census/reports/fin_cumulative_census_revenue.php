@@ -58,7 +58,7 @@ table.dataTable thead .sorting_desc {
                       <td><a class="text-greenD" href="<?php echo base_url(); ?>module/census_report/affiliate_census_revenue?year=<?= $data['year']; ?>"><?= $data['year']; ?></a></td>
                       <td><?= number_format($data['revenue']); ?>.00</td>
                       <td><?= number_format($data['expenditures']); ?>.00</td>
-                      <td><?= number_format($data['net']); ?>.00</td>
+                      <td><?= number_format($data['revenue']-$data['expenditures']); ?>.00</td>
                     </tr>
                     <?php } ?>
                   </tbody>
@@ -67,7 +67,7 @@ table.dataTable thead .sorting_desc {
                       <td>TOTAL SUM</td>
                       <td><?= number_format(array_sum(array_column($report, 'revenue'))); ?>.00</td>
                       <td><?= number_format(array_sum(array_column($report, 'expenditures'))); ?>.00</td>
-                      <td><?= number_format(array_sum(array_column($report, 'net'))); ?>.00</td>                      
+                      <td><?= number_format(array_sum(array_column($report, 'revenue'))-array_sum(array_column($report, 'expenditures'))); ?>.00</td>                  
                     </tr>
                     <tr>
                       <td><a href="<?php echo base_url()?>/module/census_report/cumulative_census_revenue/export"><button>XLS</button></a></td>

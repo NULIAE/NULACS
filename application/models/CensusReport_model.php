@@ -985,7 +985,8 @@ class CensusReport_model extends CI_Model
 	 */	
 	public function cumulative_census_revenue()
 	{
-		$sql = "SELECT  year,SUM(revenue) as revenue,SUM(expenditures) as expenditures,SUM(net) as net FROM NUL_Census_Financials GROUP BY year ORDER BY year ASC "; 
+		//$sql = "SELECT  year,SUM(revenue) as revenue,SUM(expenditures) as expenditures,SUM(net) as net FROM NUL_Census_Financials GROUP BY year ORDER BY year ASC ";
+		$sql = "SELECT cr.field_year as year,SUM(revenue.field_revenue_total_budget) as revenue,SUM(expenditures.field_total_expenditures) as expenditures FROM census_report cr LEFT JOIN expenditures ON expenditures.field_parent_census = cr.report_id LEFT JOIN revenue ON revenue.field_parent_census = cr.report_id GROUP BY cr.field_year ORDER BY cr.field_year ASC"; 
 		// $sql = "SELECT  year,revenue,expenditures,net FROM NUL_Census_Financials GROUP BY year ORDER BY year ASC"; 
 		// $sql = "SELECT  year,SUM(revenue) as revenue,SUM(expenditures) as expenditures,SUM(net) as net FROM NUL_Census_Financials"; 
 
