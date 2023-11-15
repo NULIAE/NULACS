@@ -21,7 +21,8 @@ class DocumentMetaData extends MY_Controller
 			'document_types' => $this->Document_model->get_document_types(),
 			'documents_list' => $this->Document_model->document_metadata_listing()
 		);
-		$data['notifications'] = $this->Document_model->get_notifications();
+		$data['notifications'] = $this->Document_model->get_limited_notification();
+		$data['notification_count'] = $this->Document_model->get_notification_count();
 		$user_id = $this->session->user_id;
 		$data['user_detail'] = $this->Document_model->get_user_detail($user_id);
 		//Name of the view file

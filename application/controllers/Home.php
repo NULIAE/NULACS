@@ -32,7 +32,8 @@ class Home extends MY_Controller
 			'https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js',
 			'pages/dashboard.js'
 		);
-		$data['notifications'] = $this->Document_model->get_notifications();
+		$data['notifications'] = $this->Document_model->get_limited_notification();
+		$data['notification_count'] = $this->Document_model->get_notification_count();
 		$user_id = $this->session->user_id;
 		$data['user_detail'] = $this->Document_model->get_user_detail($user_id);
 		$acs = $data['user_detail'][0]['is_acs'];

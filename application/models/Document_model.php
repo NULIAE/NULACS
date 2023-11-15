@@ -871,4 +871,119 @@ class Document_model extends CI_Model
 		return $query->result_array();
 	}
 
+	/**
+	* Get first 10 notifications
+	*
+	* @return array List of all notifications
+	*/
+   public function get_limited_notification()
+   {
+	   $this->db->select('*');
+	   $this->db->join('users u', 'u.user_id = notification_summary.created_by');
+	   $this->db->join('affiliate af', 'af.affiliate_id = notification_summary.affiliate_id');
+	   $this->db->join('state st', 'st.stateid = af.state');
+	   $this->db->where('created_by !=', $this->session->user_id);
+	   $this->db->where('flag', 1);
+	   
+	   if($this->session->role_id != 1)
+	   {
+		   $this->db->where('af.affiliate_id =',$this->session->affiliate_id);
+	   }
+	   
+	   $this->db->limit(10);
+	   $query = $this->db->get('notification_summary'); 
+	   
+	   $result = $query->result_array();
+	   
+	   foreach($result as $key => $row)
+	   {
+		   $base_url = base_url().'module/affiliate/status/details/' . $row['affiliate_id'] . '?id=' . $row['notification_id'];
+		   
+		   if($row['document_type_id'] == 1)
+		   {
+			   $this->db->select('document_month,document_year,doc.document_name');
+			   $this->db->from('monthly_document_status');
+			   $this->db->join('documents doc', 'doc.document_id = monthly_document_status.document_id');
+			   $this->db->where('monthly_document_id', $row['document_id']);
+
+			   $query = $this->db->get();
+
+			   $doc_data = $query->row_array();
+
+			   if($doc_data != NULL)
+			   {
+				   $result[$key]['month'] = $doc_data['document_month'];
+				   $result[$key]['year'] = $doc_data['document_year'];
+				   $result[$key]['link'] = $base_url . '&interval=nav-y1&monthly_year='.$doc_data['document_year'].'&month='.$doc_data['document_month'];
+				   $result[$key]['doc_name'] = $doc_data['document_name'];
+
+			   }
+		   } 
+		   else if($row['document_type_id'] == 2)
+		   {
+			   $this->db->select('document_month,document_year,doc.document_name');
+			   $this->db->from('quarterly_document_status');
+			   $this->db->join('documents doc', 'doc.document_id = quarterly_document_status.document_id');
+			   $this->db->where('quarterly_id', $row['document_id']);
+
+			   $query = $this->db->get();
+
+			   $doc_data = $query->row_array();
+
+			   if($doc_data != NULL)
+			   {
+				   $result[$key]['quarter'] = $doc_data['document_month'];
+				   $result[$key]['year'] = $doc_data['document_year'];
+				   $result[$key]['link'] = $base_url . '&interval=nav-y2&quarterly_year='.$doc_data['document_year'].'&quarter='.$doc_data['document_month'];
+				   $result[$key]['doc_name'] = $doc_data['document_name'];
+			   }
+		   }
+		   else if($row['document_type_id'] == 3)
+		   {
+			   $this->db->select('document_year,doc.document_name');
+			   $this->db->from('yearly_document_status');
+			   $this->db->join('documents doc', 'doc.document_id = yearly_document_status.document_id');
+			   $this->db->where('yearly_d_id', $row['document_id']);
+
+			   $query = $this->db->get();
+
+			   $doc_data = $query->row_array();
+
+			   if($doc_data != NULL)
+			   {
+				   $result[$key]['year'] = $doc_data['document_year'];
+				   $result[$key]['link'] = $base_url . '&interval=nav-y3&yearly_year='.$doc_data['document_year'];
+				   $result[$key]['doc_name'] = $doc_data['document_name'];
+			   }
+		   }
+	   }
+
+	   return $result;
+   }
+
+   /**
+   * Get first 10 notifications
+   *
+   * @return array List of all notifications
+   */
+  public function get_notification_count()
+  {
+	  $this->db->select('*');
+	  $this->db->join('users u', 'u.user_id = notification_summary.created_by');
+	  $this->db->join('affiliate af', 'af.affiliate_id = notification_summary.affiliate_id');
+	  $this->db->join('state st', 'st.stateid = af.state');
+	  $this->db->where('created_by !=', $this->session->user_id);
+	  $this->db->where('flag', 1);
+	  
+	  if($this->session->role_id != 1)
+	  {
+		  $this->db->where('af.affiliate_id =',$this->session->affiliate_id);
+	  }
+
+	  $query = $this->db->get('notification_summary'); 
+	  $row_count = $query->num_rows();	
+
+	  return $row_count;
+  }
+
 }

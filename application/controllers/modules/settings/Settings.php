@@ -38,7 +38,8 @@ class Settings extends MY_Controller
 		$data['view_name'] = 'modules/settings/settings';
 		//Page specific javascript files
 		$data['footer']['js'] = array('pages/modules/settings.js');
-		$data['notifications'] = $this->Document_model->get_notifications();
+		$data['notifications'] = $this->Document_model->get_limited_notification();
+		$data['notification_count'] = $this->Document_model->get_notification_count();
 		$user_id = $this->session->user_id;
 		$data['user_detail'] = $this->Document_model->get_user_detail($user_id);
 		$this->load->view('template', $data);

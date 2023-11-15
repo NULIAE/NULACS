@@ -35,7 +35,8 @@ class Assessment extends MY_Controller
 		
 		
 	
-		$data['notifications'] = $this->Document_model->get_notifications();
+		$data['notifications'] = $this->Document_model->get_limited_notification();
+		$data['notification_count'] = $this->Document_model->get_notification_count();
 		$user_id = $this->session->user_id;
 		$data['user_detail'] = $this->Document_model->get_user_detail($user_id);
 		$data['criteria_one_standard_one'] = $this->Assessment_model->criteria_question(1,1);
@@ -151,7 +152,8 @@ class Assessment extends MY_Controller
 	{
 		$this->session->set_userdata('previous_url', current_url());
 
-		$data['notifications'] = $this->Document_model->get_notifications();
+		$data['notifications'] = $this->Document_model->get_limited_notification();
+		$data['notification_count'] = $this->Document_model->get_notification_count();
 		$user_id = $this->session->user_id;
 		$data['user_detail'] = $this->Document_model->get_user_detail($user_id);
 		$data['content'] = array(
@@ -193,7 +195,8 @@ class Assessment extends MY_Controller
 		}
 		$data['assessment_listing_null_data'] = $this->Assessment_model->assessment_listing_null_data($_GET);
 
-		$data['notifications'] = $this->Document_model->get_notifications();
+		$data['notifications'] = $this->Document_model->get_limited_notification();
+		$data['notification_count'] = $this->Document_model->get_notification_count();
 		$user_id = $this->session->user_id;
 		$data['user_detail'] = $this->Document_model->get_user_detail($user_id);
 		$data['content'] = array(
@@ -266,7 +269,8 @@ class Assessment extends MY_Controller
 		
 		
 	
-		$data['notifications'] = $this->Document_model->get_notifications();
+		$data['notifications'] = $this->Document_model->get_limited_notification();
+		$data['notification_count'] = $this->Document_model->get_notification_count();
 		$user_id = $this->session->user_id;
 		$data['user_detail'] = $this->Document_model->get_user_detail($user_id);
 		$data['criteria_one_standard_one'] = $this->Assessment_model->criteria_question(1,1);

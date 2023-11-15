@@ -40,7 +40,8 @@ class User extends MY_Controller
 		);
 		$user_id = $this->session->user_id;
 		$data['user_detail'] = $this->Document_model->get_user_detail($user_id);
-		$data['notifications'] = $this->Document_model->get_notifications();
+		$data['notifications'] = $this->Document_model->get_limited_notification();
+		$data['notification_count'] = $this->Document_model->get_notification_count();
 		$this->load->view('template', $data);
 	}
 
@@ -138,7 +139,8 @@ class User extends MY_Controller
 		$data['view_name'] = 'modules/user_management/add_user';
 		//Page specific javascript files
 		$data['footer']['js'] = array('pages/modules/add_user.js');
-		$data['notifications'] = $this->Document_model->get_notifications();
+		$data['notifications'] = $this->Document_model->get_limited_notification();
+		$data['notification_count'] = $this->Document_model->get_notification_count();
 		$user_id = $this->session->user_id;
 		$data['user_detail'] = $this->Document_model->get_user_detail($user_id);
 		$this->load->view('template', $data);

@@ -93,21 +93,21 @@
                 <li class="nav-item dropdown">
 									<a class="nav-link dropdown-toggle" title="Notifications" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 										<i class="i i-notification"></i>
-										<div class="rounded_notification"><?=isset($notifications)?count($notifications):'0'?></div>
+										<div class="rounded_notification"><?=isset($notification_count)?$notification_count:'0'?></div>
 									</a>
 									
 									<div class="dropdown-menu dropdown-nul" aria-labelledby="navbarDropdown">
                     <div class="dropdownHead">
                         <h5>Notifications</h5>
-                        <div class="rounded_notification"><?=isset($notifications)?count($notifications):''?></div>
+                        <div class="rounded_notification"><?=isset($notification_count)?$notification_count:''?></div>
                     </div>
                     <ul>
                       <div class="dropContent">
                         <?php $now = time(); ?>
                         <?php foreach($notifications as $notification){ 
-                          $i++;
-                          include $notification;
-                          if($i == 11) break;
+                          //$i++;
+                          //include $notification;
+                          //if($i == 11) break;
                             $curr_time= human_to_unix($notification['created']); 
                             $time_ago = explode(",", timespan($curr_time, $now)); ?>
                           <li>
