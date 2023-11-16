@@ -60,7 +60,8 @@ class Home extends MY_Controller
 					'performance_score' => $this->Affiliate_model->get_performance_score($this->session->affiliate_id)
 				);
 
-				$data['user_notifications'] = $this->Document_model->user_notifications('',1);
+				$keyword = ($this->input->get('search') != NULL) ? $this->input->get('search') : NULL;
+				$data['user_notifications'] = $this->Document_model->user_notifications($keyword,1);
 				$data['user_data'] = $this->Document_model->user_data();
 				$data['affiliate'] = $this->Affiliate_model->get_affiliate_by_id($this->session->affiliate_id);
 				$data['affiliate']['board_member'] = $this->User_model->get_board_member_name($this->session->affiliate_id);
