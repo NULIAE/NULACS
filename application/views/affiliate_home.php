@@ -87,9 +87,7 @@
         <div class="col-lg-11">
           <div class="row headOuter">
             <div class="head">
-              <h3>Notifications (
-                <?=isset($notifications)?count($notifications):0?>)
-              </h3>
+              <h3>Notifications (<?=isset($notification_count)?$notification_count:0?>)</h3>
             </div>
           </div>
           <div class="row chartBody2">
@@ -152,6 +150,12 @@
                     } ?>
               </div>
             </div>
+            <?php if(isset($user_notifications) && !empty($user_notifications)){?>
+              <div class="liFoot view_center">
+                <a href="<?php echo base_url('/module/notification/all'); ?>" class="btn btn-primary btn-rounded min w-100px mb-4">VIEW ALL</a>
+              </div>
+            <?php } ?>
+
           </div>
         </div>
       </div>

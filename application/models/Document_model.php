@@ -221,7 +221,7 @@ class Document_model extends CI_Model
 	 *
 	 * @return array user notification 
 	 */
-	public function user_notifications($keyword = NULL)
+	public function user_notifications($keyword = NULL,$con= NULL)
 	{
 		$this->db->select('ns.*, u.first_name,u.last_name,af.organization,af.city,st.stateabbreviation');
 		$this->db->join('users as u', 'u.user_id = ns.created_by');
@@ -237,7 +237,11 @@ class Document_model extends CI_Model
 			$this->db->like('ns.notification', $keyword);
 			$this->db->or_like('u.first_name', $keyword);
 			$this->db->or_like('u.last_name', $keyword);
+		}		
+		if($con){
+			$this->db->limit(20);
 		}
+
 
 		$this->db->group_by('ns.notification_id');
 
