@@ -188,7 +188,9 @@ class Census_reports extends MY_Controller
 			$filters['year'] =  $params['year'];
 
 		$report = $this->CensusReport_model->affiliate_civic_engagement($filters);
-		$data['report'] = $report; 	
+		$data['report']    = $report; 	
+		$data['affiliate'] = $params['affiliate']; 	
+		$data['year']      = $params['year']; 	
 
 		$data['footer']['js'] = array(
 			'pages/modules/reports/filter_affiliate_civic_engagement.js',
@@ -1096,7 +1098,7 @@ class Census_reports extends MY_Controller
 		//XSS Filter all the input post fields
 		$params = $this->input->get();
 
-		$affiliate = ''; 
+		$affiliate = '';
 		
 		if( isset($params['year']) && ($params['year'] != '') && ($params['year'] != '0') )
 		  $year =  $params['year'];
@@ -1106,6 +1108,8 @@ class Census_reports extends MY_Controller
 		$report = [];
 		$report = $this->CensusReport_model->affiliate_entrepreneurship_query_report($year,$affiliate);
 		$data['report'] = $report;
+		$data['year'] = $year;
+		$data['affiliate'] = $affiliate;
 
 		$result=$this->load->view('modules/census/reports/prg_affiliate_entrepreneurship_query_report_filter.php',$data, TRUE);
 		echo json_encode($result);
@@ -1120,8 +1124,7 @@ class Census_reports extends MY_Controller
 	{
 		$data = $this->input->get(NULL, TRUE);
 
-		$affiliate = ''; 
-		$year = 2018;
+		$affiliate = '';
 		
 		if( isset($data['year']) && ($data['year'] != '') && ($data['year'] != '0') )
 		  $year =  $data['year'];
@@ -1445,13 +1448,14 @@ class Census_reports extends MY_Controller
 		  $year =  $params['year'];
 		if( isset($params['affiliate']) && ($params['affiliate'] != '') && ($params['affiliate'] != '0') )
 		  $affiliate =  $params['affiliate'];
-    
+
 		$report = $this->CensusReport_model->affiliate_workforce_query_report($year,$affiliate);
 		$data['content'] = [
 			'report' => $report,
 			'affiliate' => $this->CensusAffiliate_model->get_all_affiliates(),
 			'year_selected'=> $year
 		];		
+		$data['affiliate'] = $affiliate;
 		//Page specific javascript files
 		$data['footer']['js'] = array(
 			'pages/modules/reports/filter_affiliate_workforce_query_report.js',
@@ -1476,10 +1480,11 @@ class Census_reports extends MY_Controller
 		  $year =  $params['year'];
 		if( isset($params['affiliate']) && ($params['affiliate'] != '') && ($params['affiliate'] != '0') )
 		  $affiliate =  $params['affiliate'];
-    
+		
 		$report = [];
 		$report = $this->CensusReport_model->affiliate_workforce_query_report($year,$affiliate);
 		$data['report'] = $report;
+		$data['affiliate'] = $affiliate;
 
 		$data['footer']['js'] = array(
 			'pages/modules/reports/filter_affiliate_workforce_query_report.js',
@@ -1505,7 +1510,7 @@ class Census_reports extends MY_Controller
 		  $year =  $data['year'];
 		if( isset($data['org']) && ($data['org'] != ''))
 		  $affiliate =  $data['org'];
-    
+
 		$report = $this->CensusReport_model->affiliate_workforce_query_report($year,$affiliate);
 
 		$spreadsheet = new Spreadsheet();
@@ -1651,6 +1656,8 @@ class Census_reports extends MY_Controller
 		$report = [];
 		$report = $this->CensusReport_model->nul_census_total_contacts_breakdown_filter($year,$affiliate);
 		$data['report'] = $report;
+		$data['affiliate'] = $affiliate;
+		$data['year'] = $year;
 
         $data['footer']['js'] = array(
 			'pages/modules/reports/filter_nul_census_total_contacts_breakdown.js',

@@ -128,7 +128,7 @@ table.dataTable thead .sorting_desc {
                       <td></td>                                          
                     </tr>
                     <tr>
-                      <td><a href="<?php echo base_url("module/census_report/affiliate_keyfund_query/export")."?year=".$data['field_year']."&affiliate=".$organization; ?>"><button>XLS</button></a></td>
+                      <td><a href="<?php echo base_url("module/census_report/affiliate_keyfund_query/export")."?year=".$year_selected."&affiliate=".$affiliate_selected; ?>"><button>XLS</button></a></td>
                       <td>&nbsp;</td>
                       <td>&nbsp;</td>
                       <td>&nbsp;</td>

@@ -124,7 +124,7 @@ table.dataTable thead .sorting_desc {
                       <td><b><?= number_format(array_sum(array_column($report_data, 'net'))); ?></b></td>                      
                     </tr>
                     <tr>
-                      <td><a href="<?php echo base_url("module/census_report/affiliate_census_revenue/export")."?year=".$data['year']."&affiliate=".$data['affiliate_id']; ?>"><button>XLS</button></a></td>
+                      <td><a href="<?php echo base_url("module/census_report/affiliate_census_revenue/export")."?year=".$year_selected."&affiliate=".$affiliate_selected; ?>"><button>XLS</button></a></td>
    
                       <td>&nbsp;</td>
                       <td>&nbsp;</td>

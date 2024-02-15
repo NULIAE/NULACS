@@ -2051,7 +2051,7 @@ class CensusReport_model extends CI_Model
 
 		if(isset($where['affiliate'])){
 		$sql .= ($flag == 0) ? "WHERE " : " AND ";	
-		$sql .= "  af.affiliate_id = '". $where['affiliate']."'" ;
+		$sql .= "  af.field_affiliate_select_value = '". $where['affiliate']."'" ;
 		$flag = 1;
 		}
 		$sql .= " ORDER BY year ASC ";
@@ -2154,7 +2154,7 @@ class CensusReport_model extends CI_Model
 		 if(isset($filters['affiliate']))
 		 {
 			 $sql .= ($flag == 0) ? "WHERE " : " AND ";
-			 $sql .= "  `af`.`affiliate_id`=".$filters['affiliate'];
+			 $sql .= "  `af`.`field_affiliate_select_value`=".$filters['affiliate'];
 			 $flag =1;
 		 }
 
@@ -2215,7 +2215,7 @@ class CensusReport_model extends CI_Model
 		if($filters['affiliate']!='')
 		{
 			$sql .= ($flag == 0) ? "WHERE " : " AND ";
-			$sql .= "  `af`.`affiliate_id`=".$filters['affiliate'];
+			$sql .= "  `af`.`field_affiliate_select_value`=".$filters['affiliate'];
 			$flag =1;
 		}
 		

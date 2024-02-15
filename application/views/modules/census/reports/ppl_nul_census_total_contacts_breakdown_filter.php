@@ -33,7 +33,7 @@
       <td><b><?= number_format(array_sum(array_column($report, 'net'))); ?></b></td>
     </tr>
     <tr>
-      <td><a href="<?php echo base_url("module/census_reports/nul_census_total_contacts_breakdown/export")."?year=".$data['year']."&affiliate=".$data['af_id']; ?>"><button>XLS</button></a></td>
+      <td><a href="<?php echo base_url("module/census_reports/nul_census_total_contacts_breakdown/export")."?year=".$year."&affiliate=".$affiliate; ?>"><button>XLS</button></a></td>
       <td></td>
       <td></td>
       <td></td>

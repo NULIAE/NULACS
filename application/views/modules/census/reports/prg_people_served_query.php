@@ -167,8 +167,7 @@ table.dataTable thead .sorting_desc {
                   </b></td>
               </tr>
               <tr>
-                <td><a href="<?php echo base_url("
-                    module/census_reports/program_area_people_served/export")."?year=".$year_selected."
+                <td><a href="<?php echo base_url("module/census_reports/program_area_people_served/export")."?year=".$year_selected."
                     &affiliate=&program_area="; ?>"><button>CSV</button></a></td>
                 <td></td>
                 <td></td>

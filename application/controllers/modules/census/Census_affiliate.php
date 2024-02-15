@@ -1956,7 +1956,7 @@ class Census_affiliate extends MY_Controller
 			$sheet->setCellValue('A'.$i , $row['year']);
 			$sheet->setCellValue('B'.$i , $row['revenue']);
 			$sheet->setCellValue('C'.$i , $row['expenditures']);
-			$sheet->setCellValue('D'.$i , $row['net']);
+			$sheet->setCellValue('D'.$i , $row['revenue']-$row['expenditures']);
 			$i++;
 		}
 

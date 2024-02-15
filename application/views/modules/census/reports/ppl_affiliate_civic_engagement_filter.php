@@ -59,7 +59,7 @@
         </b></td>
     </tr>
     <tr>
-      <td><a href="<?php echo base_url("modules/census/census_reports/affiliate_civic_engagement/export")."?year=".$data['field_year']."&affiliate=".$data['affiliate']; ?>"><button>XLS</button></a></td>
+      <td><a href="<?php echo base_url("modules/census/census_reports/affiliate_civic_engagement/export")."?year=".$year."&affiliate=".$affiliate; ?>"><button>XLS</button></a></td>
       <td>&nbsp;</td>
       <td>&nbsp;</td>
       <td>&nbsp;</td>
