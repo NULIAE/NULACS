@@ -887,7 +887,7 @@ class Census_reports extends MY_Controller
 		header("Expires: 0");
 
 		$file = fopen('php://output', 'w');
-		$header = array("Year","Affiliate","Program Title","Program Area","Number of People Served Annually by this program","Total Number of People Served Annually for all Programs for this Affiliate"); 
+		$header = array("Year","Affiliate","Program Title","Program Area","Number of People Served Annually by this program"); 
 		fputcsv($file, $header);
 		foreach ($report as $data_array) {
 
@@ -896,7 +896,6 @@ class Census_reports extends MY_Controller
 			$column['3'] = $data_array['program_name']; 
 			$column['4'] = $data_array['program_area']; 
 			$column['5'] = $data_array['served']; 
-			$column['6'] = $data_array['served']; 
 			fputcsv($file, array_values($column));
 	
 		}	
