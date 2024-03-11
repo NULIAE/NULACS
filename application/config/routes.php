@@ -171,6 +171,7 @@ $route['module/census_report/(:num)/civic'] = 'modules/census/census_affiliate/c
 $route['module/census_report/(:num)/empowerment'] = 'modules/census/census_affiliate/empowerment';
 $route['module/census_report/(:num)/volunteer'] = 'modules/census/census_affiliate/volunteer';
 $route['module/census_report/(:num)/covid'] = 'modules/census/census_affiliate/covid';
+$route['module/census_report/(:num)/mental_health'] = 'modules/census/census_affiliate/mental_health';
 
 //Census report tabs update
 $route['module/forms_update/contactinfo/update'] = 'modules/census/forms_update/contactinfo_update';
@@ -195,6 +196,7 @@ $route['module/forms_update/housing_prg/update'] = 'modules/census/forms_update/
 $route['module/forms_update/workforce_prg/update'] = 'modules/census/forms_update/workforce_prg_update';
 $route['module/forms_update/other_prg/update'] = 'modules/census/forms_update/other_prg_update';
 $route['module/forms_update/covid/update'] = 'modules/census/forms_update/covid_update';
+$route['module/forms_update/mental_health/update'] = 'modules/census/forms_update/mental_health';
 
 /* Add programs route */
 //$route['module/census_report/(:num)/program_education'] = 'modules/census/census_affiliate/program_education';

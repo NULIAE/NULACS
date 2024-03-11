@@ -185,9 +185,9 @@
                           </div>
                         </div>
                       </div>
-<?php if(($content['all_tab_status'][0]) == "119" && ($content['all_tab_status'][1]) == "119" && ($content['all_tab_status'][3]) == "119" && ($content['all_tab_status'][4]) == "119" && ($content['all_tab_status'][5]) == "119" && ($content['all_tab_status'][6]) == "119" && ($content['all_tab_status'][7]) == "119"
-                            && ($content['all_tab_status'][8]) == "119" && ($content['all_tab_status'][10]) == "119" && ($content['all_tab_status'][11]) == "119" && ($content['all_tab_status'][12]) == "119" && ($content['all_tab_status'][14]) == "119" && ($content['all_tab_status'][15]) == "119"
-                            && ($content['all_tab_status'][16]) == "119" && ($content['all_tab_status'][2]) == "119" && ($content['all_tab_status'][9]) == "119" && ($content['all_tab_status'][13]) == "119") {
+<?php if(($content['all_tab_status'][0]) == "119" && ($content['all_tab_status'][1]) == "119" && ($content['all_tab_status'][2]) == "119" && ($content['all_tab_status'][3]) == "119" && ($content['all_tab_status'][4]) == "119" && ($content['all_tab_status'][5]) == "119" && ($content['all_tab_status'][6]) == "119" && ($content['all_tab_status'][7]) == "119"
+                            && ($content['all_tab_status'][8]) == "119" && ($content['all_tab_status'][9]) == "119" && ($content['all_tab_status'][10]) == "119" && ($content['all_tab_status'][11]) == "119" && ($content['all_tab_status'][12]) == "119" && ($content['all_tab_status'][13]) == "119" && ($content['all_tab_status'][14]) == "119" && ($content['all_tab_status'][15]) == "119"
+                            && ($content['all_tab_status'][16]) == "119") {
                       ?>
                       <div class="row g-4 align-items-end p-b-20" <?php if ($this->session->role_id == 2) { ?>style="display: none;" <?php } ?>>
                         <div class="col-md-24">

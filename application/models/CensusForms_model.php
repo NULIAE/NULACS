@@ -871,6 +871,23 @@ class CensusForms_model extends CI_Model
 	}
 
 	/**
+	 * Create dummy entry in mental_health table
+	 * 
+	 * 
+	 * @param  int $report_id
+	 * @return array
+	 */	
+	public function add_dummy_data_mental_health($report_id)
+	{
+	
+		$data = array(
+			'field_tab_status' => 0,
+			'field_parent_census' => $report_id
+		);
+		$this->db->insert('mental_health', $data);	
+	}
+
+	/**
 	 * Create dummy entry in servcie areas
 	 * 
 	 * @param  int $report_id
@@ -1071,6 +1088,7 @@ class CensusForms_model extends CI_Model
 					JOIN empowerment  t16 ON (t1.report_id = t16.field_parent_census)
 					JOIN volunteers_members  t17 ON (t1.report_id = t17.field_parent_census)
 					JOIN covid_impact  t18 ON (t1.report_id = t18.pk_id)
+					JOIN mental_health  t19 ON (t1.report_id = t19.pk_id)
 					SET  
 						t2.field_tab_status = 124,
 						t3.field_tab_status = 124,
@@ -1089,6 +1107,7 @@ class CensusForms_model extends CI_Model
 						t16.field_tab_status = 124,
 						t17.field_tab_status = 124,
 						t18.field_tab_status = 124,
+						t19.field_tab_status = 124,
 						t1.field_census_status = 128
 					WHERE t1.report_id = $report_id ";
 		$this->db->query($query);
@@ -1336,6 +1355,25 @@ class CensusForms_model extends CI_Model
 			return $status;
 		//}
 	}
+
+	/**
+	 * mental health data update
+	 * 
+	 * 
+	 * @param  int $pk_id
+	 * @return array
+	 */
+
+	 public function mental_health_data_update($pk_id,$data)
+	 {
+		 $this->db->where('field_parent_census', $pk_id);
+		 $del = $this->db->delete('mental_health');
+ 
+		 $this->db->where('field_parent_census', $pk_id);
+			 $status = $this->db->insert('mental_health', $data);
+			 return $status;
+		 //}
+	 }
 	
 	/**
 	 * Update Workforce Financial Incentive

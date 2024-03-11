@@ -64,9 +64,14 @@
                     <div class="subtext <?= $statuses['other_programs']['class']; ?>"> <i class="<?= $statuses['other_programs']['icon']; ?>"></i><?= $statuses['other_programs']['status']; ?></div>
                   </a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                   <a class="nav-link" id="covid" href="<?php echo base_url()?>module/census_report/<?php echo $this->uri->segment('3');?>/covid">Covid Impact
                     <div class="subtext <?= $statuses['covid']['class']; ?>"> <i class="<?= $statuses['covid']['icon']; ?>"></i><?= $statuses['covid']['status']; ?></div>
+                  </a>
+                </li> -->
+                <li class="nav-item">
+                  <a class="nav-link" id="mental_health" href="<?php echo base_url()?>module/census_report/<?php echo $this->uri->segment('3');?>/mental_health">Mental Health Questions
+                    <div class="subtext <?= $statuses['mental_health']['class']; ?>"> <i class="<?= $statuses['mental_health']['icon']; ?>"></i><?= $statuses['mental_health']['status']; ?></div>
                   </a>
                 </li>
                 <li class="nav-item">

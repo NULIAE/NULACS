@@ -843,6 +843,37 @@ class Census_affiliate extends MY_Controller
 	}
 
 	/**
+	 * View page mental health questions data
+	 * */
+	public function mental_health()
+	{
+		$report_id = $this->uri->segment('3');
+		$report_details = $this->CensusAffiliate_model->report_details($report_id);
+		$affiliate_id = $this->session->affiliate_id;
+		if(empty($this->CensusReport_model->volunteer_data($report_id))) $this->CensusForms_model->add_dummy_data_mental_health($report_id);
+		$data['content'] = array(
+			'report_id' => $report_id,
+			'report_data' => $this->CensusReport_model->mental_health_data($report_id),
+			'census_tab_statuses' => $this->CensusReport_model->census_tab_statuses(),
+			'parent_census' => $this->CensusAffiliate_model->get_all_parent_census()
+		);
+		$data['footer']['js'] = array(
+			'https://unpkg.com/mustache@latest',
+			'pages/modules/forms/mental_health_questions.js',
+		);
+		$statuses = $this->left_tab_statuses_list($report_id);
+
+		$data['tab_title'] = $report_details->organization." ".$report_details->field_year." Census";
+		$data['left_tabs'] = $this->load->view('modules/census/left_tabs', $statuses, TRUE);
+		if($this->session->role_id == 1){
+			$data['view_name'] = 'modules/census/mental_health_questions.php';
+		}elseif($affiliate_id == $report_details->affiliate_id){
+			$data['view_name'] = 'modules/census/mental_health_questions.php';
+		}else{ redirect("/");}
+		$this->load->view('census_template', $data);
+	}
+	
+	/**
 	 * View page covid data
 	 * */
 	public function covid()
@@ -1873,6 +1904,7 @@ class Census_affiliate extends MY_Controller
 					'workforce' => ['status'=>$tab_stat_arr['workforce'], 'icon'=>$icons[$tab_stat_arr['workforce']],'class'=>$classes[$tab_stat_arr['workforce']]],
 					'other_programs' => ['status'=>$tab_stat_arr['other_programs'], 'icon'=>$icons[$tab_stat_arr['other_programs']],'class'=>$classes[$tab_stat_arr['other_programs']]],
 					'covid' => ['status'=>$tab_stat_arr['covid'], 'icon'=>$icons[$tab_stat_arr['covid']],'class'=>$classes[$tab_stat_arr['covid']]],
+					'mental_health' => ['status'=>$tab_stat_arr['mental_health'], 'icon'=>$icons[$tab_stat_arr['mental_health']],'class'=>$classes[$tab_stat_arr['mental_health']]],
 					'civic' => ['status'=>$tab_stat_arr['civic'], 'icon'=>$icons[$tab_stat_arr['civic']],'class'=>$classes[$tab_stat_arr['civic']]],
 					'emergency_relief' => ['status'=>$tab_stat_arr['emergency_relief'], 'icon'=>$icons[$tab_stat_arr['emergency_relief']],'class'=>$classes[$tab_stat_arr['emergency_relief']]],
 					'contact_data' => ['status'=>$tab_stat_arr['contact_data'], 'icon'=>$icons[$tab_stat_arr['contact_data']],'class'=>$classes[$tab_stat_arr['contact_data']]],

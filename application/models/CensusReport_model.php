@@ -338,6 +338,21 @@ class CensusReport_model extends CI_Model
 	}
 
 	/**
+	 * Get mental health questions data
+	 * 
+	 * @param  int $report_id
+	 * @return array
+	 */
+	public function mental_health_data($report_id)
+	{
+		$this->db->select('mh.*');
+		$this->db->from('mental_health mh');
+    	$this->db->where('mh.field_parent_census', $report_id);
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+
+	/**
 	 * Get covid data
 	 * 
 	 * @param  int $report_id
@@ -1482,7 +1497,7 @@ class CensusReport_model extends CI_Model
 						hou.field_tab_status as housing,
 						wrk.field_tab_status as workforce,
 						oth.field_tab_status as other_programs,
-						covid.field_tab_status as covid,
+						mh.field_tab_status as mental_health,
 						civ.field_tab_status as civic,
 						em.field_tab_status as emergency_relief,
 						cont.field_tab_status as contact_data,
@@ -1502,7 +1517,7 @@ class CensusReport_model extends CI_Model
 						LEFT JOIN housing_community_development hou ON hou.field_parent_census = cr.report_id
 						LEFT JOIN workforce_develop_program wrk ON wrk.field_parent_census = cr.report_id
 						LEFT JOIN other_programs oth ON oth.field_parent_census = cr.report_id
-						LEFT JOIN covid_impact covid ON covid.field_parent_census = cr.report_id
+						LEFT JOIN mental_health mh ON mh.field_parent_census = cr.report_id
 						LEFT JOIN civic_engagement civ ON civ.field_parent_census = cr.report_id
 						LEFT JOIN emergency_relief em ON em.field_parent_census = cr.report_id
 						LEFT JOIN contact_data cont ON cont.field_parent_census = cr.report_id

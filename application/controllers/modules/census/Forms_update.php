@@ -1686,8 +1686,8 @@ class Forms_update extends MY_Controller
             $tab_name = "workforce"; 
         }elseif($form_data['table_name'] == 'other_programs'){
             $tab_name = "other_programs"; 
-        }elseif($form_data['table_name'] == 'covid_impact'){
-            $tab_name = "covid"; 
+        }elseif($form_data['table_name'] == 'mental_health'){
+            $tab_name = "mental_health"; 
         }elseif($form_data['table_name'] == 'civic_engagement'){
             $tab_name = "civic"; 
         }elseif($form_data['table_name'] == 'emergency_relief'){
@@ -1754,6 +1754,7 @@ class Forms_update extends MY_Controller
                  'empowerment',
                  'volunteers_members',
                  'covid_impact',
+                 'mental_health'
                 ];
 
         $output = $this->CensusForms_model->delete_censusreport($report_id,$arr);
@@ -1848,6 +1849,47 @@ class Forms_update extends MY_Controller
        );
        echo json_encode($response);
     }	
+
+    /**
+     * Update Mental health information
+     *
+     */
+
+     public function mental_health()
+     {
+        //XSS Filter all the input post fields
+        $form_data = $this->input->post(null, true);
+        $data = array(
+             'field_receive_calls_or_visits_for_adult_over_18'              => $form_data['field_receive_calls_or_visits_for_adult_over_18'],
+             'field_receive_calls_or_visits_for_children_under_18'          => $form_data['field_receive_calls_or_visits_for_children_under_18'],
+             'field_staff_have_the_training_when_requesting'                => $form_data['field_staff_have_the_training_when_requesting'],
+             'field_staff_have_the_training_if_they_determine'              => $form_data['field_staff_have_the_training_if_they_determine'],
+             'field_affiliate_offer_any_specific_mental_health_services'    => $form_data['field_affiliate_offer_any_specific_mental_health_services'],
+             'field_affiliate_plan_to_offer_any_mental_health_services'     => $form_data['field_affiliate_plan_to_offer_any_mental_health_services'],
+             'field_tab_status'                                             => $form_data['field_tab_status'],
+             'field_parent_census'                                          => $form_data['pk_id'],
+             'pk_id'                                                        => $form_data['pk_id']
+         );         
+        
+        $pk_id = $form_data['pk_id'];
+        $status = $message = null;        
+ 
+        if ($this->CensusForms_model->mental_health_data_update($pk_id, $data)) {
+            $status = true;
+            $message = 'Mental health questions data updated successfully.';
+        } else {
+            //Failed to add new user.
+            $status = false;
+            $message = 'Something went wrong. Try again later.';
+        }
+ 
+        $response = array(
+            'success' => $status,
+            'message' => $message,
+        );
+        echo json_encode($response);
+     }	
+
     /**
      * Delete Buisiness type 
      *
