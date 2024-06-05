@@ -299,11 +299,11 @@
                               <!-- <option value="">- None -</option> -->
                               <?php foreach ($census_tab_statuses as $option) {
                                 if ($content['report_data'][0]['field_tab_status'] == 0) { ?>
-                                  <option value="<?= $option['status_id']; ?>" <?php if ($option['status_id'] == 120) { ?>selected="selected" <?php } ?>>
+                                  <option value="<?= $option['status_id']; ?>">
                                     <?= $option['status']; ?>
                                   </option>
                                 <?php } else { ?>
-                                  <option value="<?= $option['status_id']; ?>" <?php if(count($programs) == 0){ ?><?php if($option['status_id'] != 120){ ?>disabled="true" <?php } if ($option['status_id'] == 120) { ?>selected="selected" <?php } ?><?php } else{?>  <?php if ($option['status_id'] == $content['report_data'][0]['field_tab_status']) { ?>selected="selected" <?php }} ?>><?= $option['status']; ?></option>
+                                  <option value="<?= $option['status_id']; ?>" <?php if ($option['status_id'] == $content['report_data'][0]['field_tab_status']) { ?>selected="selected" <?php } ?>><?= $option['status']; ?></option>
                                 <?php } ?>
                               <?php } ?>
                             </select>

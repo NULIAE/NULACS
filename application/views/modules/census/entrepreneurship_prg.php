@@ -354,14 +354,13 @@
 															foreach ($census_tab_statuses as $option) {
 																if ($content['report_data'][0]['field_tab_status'] == 0) {
 														?>
-																	<option value="<?= $option['status_id']; ?>" <?php if ($option['status_id'] == 120) { ?>selected="selected" <?php } ?>>
+																	<option value="<?= $option['status_id']; ?>">
 																		<?= $option['status']; ?>
 																	</option>
 																<?php
 																} else {
 																?>
-																	<option value="<?= $option['status_id']; ?>" <?php if ($option['status_id'] == $content['report_data'][0]['field_tab_status']) { ?>selected="selected" <?php } ?> <?php if (count($programs) == 0) { ?> <?php if ($option['status_id'] != 120) { ?>disabled="true" <?php }
-																																																																																	if ($option['status_id'] == 120) { ?>selected="selected" <?php } ?> <?php } ?>>
+																	<option value="<?= $option['status_id']; ?>" <?php if ($option['status_id'] == $content['report_data'][0]['field_tab_status']) { ?>selected="selected" <?php } ?>>
 																		<?= $option['status']; ?>
 																	</option>
 																<?php
@@ -374,14 +373,13 @@
 																if ($option['status_id'] != '122' && $option['status_id'] != '123' && $option['status_id'] != '124') {
 																	if ($content['report_data'][0]['field_tab_status'] == 0) {
 																?>
-																		<option value="<?= $option['status_id']; ?>" <?php if ($option['status_id'] == 120) { ?>selected="selected" <?php } ?>>
+																		<option value="<?= $option['status_id']; ?>">
 																			<?= $option['status']; ?>
 																		</option>
 																	<?php
 																	} else {
 																	?>
-																		<option value="<?= $option['status_id']; ?>" <?php if ($option['status_id'] == $content['report_data'][0]['field_tab_status']) { ?>selected="selected" <?php } ?> <?php if (count($programs) == 0) { ?> <?php if ($option['status_id'] != 120) { ?>disabled="true" <?php }
-																																																																																		if ($option['status_id'] == 120) { ?>selected="selected" <?php } ?> <?php } ?>>
+																		<option value="<?= $option['status_id']; ?>" <?php if ($option['status_id'] == $content['report_data'][0]['field_tab_status']) { ?>selected="selected" <?php } ?> >
 																			<?= $option['status']; ?>
 																		</option>
 																<?php
