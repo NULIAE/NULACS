@@ -1880,7 +1880,7 @@ class Affiliate_model extends CI_Model
 	 * @param  int $creport_year
 	 * @return array
 	 */
-	public function census_report($report_year, $affiliate_id = NULL, $status = NULL)
+	public function census_report($report_year = NULL, $affiliate_id = NULL, $status = NULL)
 	{
 		$this->db->select('rep.*,af.organization,af.city,af.state,cs.status,exp.field_total_expenditures,exp.field_a_salaries_wages,exp.field_b_fringe_benefits,exp.field_c_professional_fees,exp.field_d_travel,exp.field_e_postage_freight,
 						   exp.field_f_insurance,exp.field_g_interest_payments,exp.field_h_dues_subscription_regist,exp.field_i_depreciation,exp.field_j_taxes_including_property,exp.field_k_utilities,exp.field_l_equipment_space_rental,
@@ -1905,7 +1905,9 @@ class Affiliate_model extends CI_Model
 		$this->db->group_by('rep.report_id');
 		$this->db->order_by('af.city', 'ASC');
 		
-		$this->db->where('rep.field_year', $report_year);
+		if($report_year != NULL){
+			$this->db->where('rep.field_year', $report_year);
+		}
 		if($status != NULL){
 			$this->db->where('rep.field_census_status', $status);
 		}
