@@ -1196,7 +1196,18 @@ class Assessment extends MY_Controller
   public function censusPdfExport() {
 	$data = $this->input->get();
 	$dompdf = new Dompdf();
-	$report_year = isset($data['year']) ? $data['year'] : NULL;
+	$report_year = $data['year'] ? $data['year'] : NULL;
+	$status = $data['status'] ? $data['status'] : NULL;
+	$affiliate_id = $data['affiliate'] ? $data['affiliate'] : NULL;
+	$report_details = $this->Affiliate_model->report_details($report_id);
+
+	$report_data = $this->Affiliate_model->census_report($report_year, $affiliate_id, $status);
+	$arrContextOptions=array(
+		"ssl"=>array(
+			"verify_peer"=>false,
+			"verify_peer_name"=>false,
+		),
+	); 
 	$html = '<!DOCTYPE html>
 			 <html lang="en">
 			 <head>
