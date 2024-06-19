@@ -166,6 +166,7 @@ $route['module/census_report/(:num)/emergency_relief'] = 'modules/census/census_
 $route['module/census_report/(:num)/contact_data'] = 'modules/census/census_affiliate/contact_data';
 $route['module/census_report/contactinfo/(:num)'] = 'modules/assessment/assessment/contactinfoexports/$i';
 $route['module/census_report/censusexport'] = 'modules/assessment/assessment/censusexport/';
+$route['module/census_report/censuspdfexport'] = 'modules/assessment/assessment/censusPdfExport/';
 
 $route['module/census_report/(:num)/civic'] = 'modules/census/census_affiliate/civic';
 $route['module/census_report/(:num)/empowerment'] = 'modules/census/census_affiliate/empowerment';
