@@ -17,8 +17,6 @@
     <div class="dialog-footer t-r"></div>
   </div>
 
-  <script crossorigin="anonymous"
-    src="https://polyfill.io/v3/polyfill.min.js?features=default%2CArray.prototype.find%2CIntersectionObserver"></script>
   <script src="<?php echo base_url('/resources/js/vendor/jquery-3.3.1.min.js'); ?>"></script>
   <script src="<?php echo base_url('/resources/js/vendor/popper.min.js'); ?>"></script>
   <script src="<?php echo base_url('/resources/js/vendor/bootstrap.min.js'); ?>"></script>

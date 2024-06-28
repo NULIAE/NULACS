@@ -28,8 +28,6 @@
     <div class="dialog-footer t-r"></div>
   </div>
 
-  <script crossorigin="anonymous"
-    src="https://polyfill.io/v3/polyfill.min.js?features=default%2CArray.prototype.find%2CIntersectionObserver"></script>
   <script src="<?php echo base_url('/resources/js/census/vendor/jquery.min.js'); ?>"></script>
   <script src="<?php echo base_url('/resources/js/census/vendor/jquery-ui.min.js'); ?>"></script>
   <script src="<?php echo base_url('/resources/js/census/vendor/popper.min.js'); ?>"></script>
