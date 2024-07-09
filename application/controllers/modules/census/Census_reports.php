@@ -1904,6 +1904,28 @@ class Census_reports extends MY_Controller
 		$spreadsheet->disconnectWorksheets();
 		unset($spreadsheet);
 
+	}	
+
+	/**
+	 * Cumulative Emergency Relief Report
+	 *
+	 */
+	public function cumulative_emergency_relief_report()
+	{
+		$report = $this->CensusReport_model->cumulative_emergency_relief_report();
+		// // $report = 'Test Data';
+		$data['content'] = [
+		 	'report' => $report,
+		 	'affiliate' => $this->CensusAffiliate_model->get_all_affiliates()
+		];		
+		 //Page specific javascript files
+		$data['footer']['js'] = array(
+		 	//'pages/modules/reports/filter_cumulative_emergency_relief_report.js',
+		 	'https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js'
+		);
+
+		$data['view_name'] = 'modules/census/reports/prg_cumulative_emergency_relief_report.php';
+		$this->load->view('census_template', $data);	
 	}		
 	
 }

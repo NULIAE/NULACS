@@ -2336,4 +2336,18 @@ class CensusReport_model extends CI_Model
 		return $query->result_array();
 	}
 
+	/**
+	 * Cumulative emergency Relief Report
+	 * 
+	 * 
+	 * @return array
+	 */	
+	public function cumulative_emergency_relief_report()
+	{
+		$sql = "SELECT cr.field_year as year,SUM(er.`field_relief_ed_served`) as edu,SUM(er.`field_relief_employ_served`) as empl,SUM(er.`field_relief_health_served`) as health,SUM(er.`field_relief_civic_served`) as civic,SUM(er.`field_relief_justice_served`) as justice FROM `emergency_relief` er LEFT JOIN census_report cr ON er.field_parent_census = cr.report_id GROUP BY cr.field_year ORDER BY cr.field_year DESC"; 
+		$query = $this->db->query($sql);
+		$result =  $query->result_array();
+		return $result;		
+	}
+
 }

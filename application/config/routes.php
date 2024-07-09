@@ -320,3 +320,4 @@ $route['module/census_reports/affiliate_workforce_query_report/export'] = 'modul
 
  $route['module/notification/emails/send_testmail'] = 'modules/notification_center/email_template/send_testmails';
  $route['module/affiliate/document/delete_termly_document'] = 'modules/affiliate/affiliate/delete_termly_document';
+$route['module/census_reports/cumulative_emergency_relief_report'] = 'modules/census/census_reports/cumulative_emergency_relief_report';
