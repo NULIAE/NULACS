@@ -87,43 +87,49 @@ table.dataTable thead .sorting_desc {
                     </tr>
                   </thead>
                   <tbody>
-                  <?php foreach($report as $data){ ?>
-                    <tr>
-                      <?php $total_served = $data['edu'] + $data['empl'] + $data['health'] + $data['civic'] + $data['justice'];
-                            $total_served_arr[] = $total_served;?>
-                      <td><?= $data['year']; ?></td>
-                      <td><?php if($data['edu'] != '') { ?><?= number_format($data['edu']); ?> <?php } ?></td>
-                      <td><?php if($data['empl'] != '') { ?><?= number_format($data['empl']); ?> <?php } ?></td>
-                      <td><?php if($data['health'] != '') { ?><?= number_format($data['health']); ?> <?php } ?></td>
-                      <td><?php if($data['civic'] != '') { ?><?= number_format($data['civic']); ?> <?php } ?></td>
-                      <td><?php if($data['justice'] != '') { ?><?= number_format($data['justice']); ?> <?php } ?></td>
-                      <td><?php if($total_served != '') { ?><?= number_format($total_served); ?> <?php } ?></td>
-                    </tr>
-                    <?php } ?>
-                  </tbody>
-                  <tfoot>
-                    <tr class="total" style="font-weight:bold">
-                      <td></td>
-                      <td><b>
-                        <?= number_format(array_sum(array_column($report, 'edu'))); ?>
-                        </b></td>
-                      <td><b>
-                        <?= number_format(array_sum(array_column($report, 'empl'))); ?>
-                        </b></td>
-                      <td><b>
-                        <?= number_format(array_sum(array_column($report, 'health'))); ?>
-                        </b></td>
-                      <td><b>
-                        <?= number_format(array_sum(array_column($report, 'civic'))); ?>
-                        </b></td>
-                      <td><b>
-                        <?= number_format(array_sum(array_column($report, 'justice'))); ?>
-                        </b></td>
-                        <td>
-                            <b><?= number_format(array_sum($total_served_arr)); ?></b>
-                        </td>
-                    </tr>
-                  </tfoot>
+                        <?php 
+                        $total_edu = 0;
+                        $total_empl = 0;
+                        $total_health = 0;
+                        $total_civic = 0;
+                        $total_justice = 0;
+                        $total_served_arr = []; // Array to store total_served values
+
+                        foreach($report as $data) { 
+                            if (empty($data['year'])) {
+                            continue; // Skip this iteration if the year is empty
+                            }
+
+                            $total_served = $data['edu'] + $data['empl'] + $data['health'] + $data['civic'] + $data['justice'];
+                            $total_edu += $data['edu'];
+                            $total_empl += $data['empl'];
+                            $total_health += $data['health'];
+                            $total_civic += $data['civic'];
+                            $total_justice += $data['justice'];
+                            $total_served_arr[] = $total_served;
+                        ?>
+                            <tr>
+                            <td><a class="text-greenD" href="<?php echo base_url("module/census_reports/affiliate_workforce_query_report")."?year=".$data['year'];?>"><?= $data['year']; ?></a></td>
+                            <td><?php if($data['edu'] != '') { ?><?= number_format($data['edu']); ?> <?php } ?></td>
+                            <td><?php if($data['empl'] != '') { ?><?= number_format($data['empl']); ?> <?php } ?></td>
+                            <td><?php if($data['health'] != '') { ?><?= number_format($data['health']); ?> <?php } ?></td>
+                            <td><?php if($data['civic'] != '') { ?><?= number_format($data['civic']); ?> <?php } ?></td>
+                            <td><?php if($data['justice'] != '') { ?><?= number_format($data['justice']); ?> <?php } ?></td>
+                            <td><?php if($total_served != '') { ?><?= number_format($total_served); ?> <?php } ?></td>
+                            </tr>
+                        <?php } ?>
+                        </tbody>
+                        <tfoot>
+                        <tr class="total" style="font-weight:bold">
+                            <td></td>
+                            <td><b><?= number_format($total_edu); ?></b></td>
+                            <td><b><?= number_format($total_empl); ?></b></td>
+                            <td><b><?= number_format($total_health); ?></b></td>
+                            <td><b><?= number_format($total_civic); ?></b></td>
+                            <td><b><?= number_format($total_justice); ?></b></td>
+                            <td><b><?= number_format(array_sum($total_served_arr)); ?></b></td>
+                        </tr>
+                        </tfoot>
                 </table>            
           </div>
         </div>
