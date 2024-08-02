@@ -2133,7 +2133,7 @@ class Assessment extends MY_Controller
 	  $inv_earnings= $revenue_data[0]['field_revenue_investment'];
 	  $templateProcessor->setValue('inv_earnings', "$".number_format($inv_earnings,2));		  
 
-	  $templateProcessor->setValue('year', $report_data[0]['field_year']);	
+	  $templateProcessor->setValue('year', $report_data[0]['field_year']-1);	
 
 	  $inv_earnings= $revenue_data[0]['field_revenue_investment'];
 	  $templateProcessor->setValue('inv_earnings', "$".number_format($inv_earnings,2));	
