@@ -1457,7 +1457,7 @@ class Assessment extends MY_Controller
 			$html .= '<div style="margin-bottom: 1px; margin-top: 10px;font-family: Arial, sans-serif; font-size: 8pt;"><b>8.	&nbsp;&nbsp;&nbsp;&nbsp;Operational Statistics: </b></div>
 			<div style="margin-left: 0.35in;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;"><b>Total Budget: $' . number_format($report['field_revenue_total_budget']) . '</b></div>
 			<ul style="padding-left: 0px; margin-left: 35px;line-height:0px;font-family: Arial, sans-serif; font-size: 8pt;">
-				<li style="margin-bottom: 1px;">Budget Derived from the following sources in ' . htmlspecialchars($report['field_year']) . '</li>
+				<li style="margin-bottom: 1px;">Budget Derived from the following sources in ' . htmlspecialchars($report['field_year']-1) . '</li>
 			</ul>
 			<table>
 				<tbody>
@@ -2213,9 +2213,13 @@ class Assessment extends MY_Controller
 	  $field_photo_title = $report_data[0]['field_photo_title']; 
       //print_r($field_photo_title);die;
       if($report_data[0]['field_photo_title'] != "" || $report_data[0]['field_photo_title']){
-	  	$templateProcessor->setImageValue('IMAGE', array('path' => '/var/www/html/nulacs/resources/images/profile/'.$field_photo_title, 'width' => 500, 'height' => 97,'media-type' => 'image/jpg'));
+		if (file_exists('/var/www/html/nul_adms/resources/images/profile/'.$field_photo_title)) {
+			$templateProcessor->setImageValue('IMAGE', array('path' => '/var/www/html/nul_adms/resources/images/profile/'.$field_photo_title, 'width' => 500, 'height' => 97,'media-type' => 'image/jpg'));
+	  	} else {
+			$templateProcessor->setImageValue('IMAGE', array('path' => '/var/www/html/nul_adms/resources/images/demo.jpg', 'width' => 100, 'height' => 85,'media-type' => 'image/jpg'));
+		}
 	  }else{
-		$templateProcessor->setImageValue('IMAGE', array('path' => '/var/www/html/nulacs/resources/images/demo.jpg', 'width' => 100, 'height' => 85,'media-type' => 'image/jpg'));	
+		$templateProcessor->setImageValue('IMAGE', array('path' => '/var/www/html/nul_adms/resources/images/demo.jpg', 'width' => 100, 'height' => 85,'media-type' => 'image/jpg'));	
 	  }
     //   if($report_data[0]['field_photo_title'] == ""){
     //     $templateProcessor->setValue('IMAGE', "");
@@ -2227,7 +2231,7 @@ class Assessment extends MY_Controller
 	  
 	  
 	  $fileName = $report_data[0]['field_year']." ". $aff_name;
-	  $templateProcessor->saveAs($fileName . '.docx');
+	  $templateProcessor->saveAs('/tmp/'.$fileName.'.docx');
 
 	  
 	  $file = '/tmp/'.$fileName.'.docx';
