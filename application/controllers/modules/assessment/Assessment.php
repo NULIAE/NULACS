@@ -2218,7 +2218,7 @@ class Assessment extends MY_Controller
 	  	} else {
 			$templateProcessor->setImageValue('IMAGE', array('path' => '/var/www/html/nul_adms/resources/images/demo.jpg', 'width' => 100, 'height' => 85,'media-type' => 'image/jpg'));
 		}
-	  }else{ print_r("checking");die;
+	  }else{
 		$templateProcessor->setImageValue('IMAGE', array('path' => '/var/www/html/nul_adms/resources/images/demo.jpg', 'width' => 100, 'height' => 85,'media-type' => 'image/jpg'));	
 	  }
     //   if($report_data[0]['field_photo_title'] == ""){
