@@ -2213,13 +2213,13 @@ class Assessment extends MY_Controller
 	  $field_photo_title = $report_data[0]['field_photo_title']; 
       //print_r($field_photo_title);die;
       if($report_data[0]['field_photo_title'] != "" || $report_data[0]['field_photo_title']){
-		if (file_exists('/var/www/html/nul_adms/resources/images/profile/'.$field_photo_title)) {
-			$templateProcessor->setImageValue('IMAGE', array('path' => '/var/www/html/nul_adms/resources/images/profile/'.$field_photo_title, 'width' => 500, 'height' => 97,'media-type' => 'image/jpg'));
+		if (file_exists('/var/www/html/nulacs/resources/images/profile/'.$field_photo_title)) {
+			$templateProcessor->setImageValue('IMAGE', array('path' => '/var/www/html/nulacs/resources/images/profile/'.$field_photo_title, 'width' => 500, 'height' => 97,'media-type' => 'image/jpg'));
 	  	} else {
-			$templateProcessor->setImageValue('IMAGE', array('path' => '/var/www/html/nul_adms/resources/images/demo.jpg', 'width' => 100, 'height' => 85,'media-type' => 'image/jpg'));
+			$templateProcessor->setImageValue('IMAGE', array('path' => '/var/www/html/nulacs/resources/images/demo.jpg', 'width' => 100, 'height' => 85,'media-type' => 'image/jpg'));
 		}
 	  }else{
-		$templateProcessor->setImageValue('IMAGE', array('path' => '/var/www/html/nul_adms/resources/images/demo.jpg', 'width' => 100, 'height' => 85,'media-type' => 'image/jpg'));	
+		$templateProcessor->setImageValue('IMAGE', array('path' => '/var/www/html/nulacs/resources/images/demo.jpg', 'width' => 100, 'height' => 85,'media-type' => 'image/jpg'));	
 	  }
     //   if($report_data[0]['field_photo_title'] == ""){
     //     $templateProcessor->setValue('IMAGE', "");
