@@ -1256,11 +1256,11 @@ class Assessment extends MY_Controller
 			$html .= '<div style="background:red;">
 				<table style="width: 100%;background-color: #e6e6e6;border:2px solid black">
 					<tbody>
-						<tr style="width: 100%;">
+						<tr style="width: 100%;margin-bottom:0px">
 							<td style="padding: 0;width:30%;text-align:center;">
 								<div><img src="'.$image.'" class="f-img" alt="Profile photo" width="80" height="100"></div>
 							</td>
-							<td style="padding:10px; font-family: Arial, sans-serif; font-size: 8pt;">
+							<td style="padding:5px; font-family: Arial, sans-serif; font-size: 6pt;margin-bottom:0px">
 								<table>
 									<tbody>
 										<tr>
@@ -1331,8 +1331,8 @@ class Assessment extends MY_Controller
 							</td>
 						</tr>
 						<tr>
-							<td colspan="2" style="border-bottom: 1px; padding:10px; padding-bottom: 60px; width:100%;font-family: Arial, sans-serif; font-size: 8pt;">
-								<p><b>Years of Service in Urban League: </b><span>' . htmlspecialchars($report['field_number_of_years_of_service']) . '</span></p>';
+							<td colspan="2" style="border-bottom: 1px; padding:2px; padding-bottom: 2px; width:100%;font-family: Arial, sans-serif; font-size: 7pt;">
+								<p style="margin-bottom:1px"><b>Years of Service in Urban League: </b><span>' . htmlspecialchars($report['field_number_of_years_of_service']) . '</span></p>';
 								if (!empty($service_data)) {
 								$html .= '
 									<table>
@@ -1342,11 +1342,16 @@ class Assessment extends MY_Controller
 														<p style="position:absolute;top:0px;"><b>Service Areas:</b></p>
 												</td>
 												<td>';
+												$i = 1;
 													foreach($service_data as $value){
-													$html .= '
-													<p style="margin-bottom: 5px;line-height:12px;"><b><i> ' . htmlspecialchars($value['field_service_area_city_county']) . ' Country</b></i><br>Population: '.htmlspecialchars($value['field_service_area_population']) . ' <br><i>(White ' . htmlspecialchars($value['field_service_area_white']) . '% , African American ' . htmlspecialchars($value['field_service_area_african_am']) . '% , Hispanic/Latino American ' . htmlspecialchars($value['field_service_area_hispanic']) . '% , Asian American ' . htmlspecialchars($value['field_service_area_asian_am']) . '% , Native American ' . htmlspecialchars($value['field_service_area_native_am']) . '% , Other ' . htmlspecialchars($value['field_service_area_other']) . '% )</i></p>
-												
-													';
+														if($i <= 3) {
+															$i++;
+														
+															$html .= '
+															<p style="line-height:12px;"><b><i> ' . htmlspecialchars($value['field_service_area_city_county']) . ' Country</b></i><br>Population: '.htmlspecialchars($value['field_service_area_population']) . ' <br><i>(White ' . htmlspecialchars($value['field_service_area_white']) . '% , African American ' . htmlspecialchars($value['field_service_area_african_am']) . '% , Hispanic/Latino American ' . htmlspecialchars($value['field_service_area_hispanic']) . '% , Asian American ' . htmlspecialchars($value['field_service_area_asian_am']) . '% , Native American ' . htmlspecialchars($value['field_service_area_native_am']) . '% , Other ' . htmlspecialchars($value['field_service_area_other']) . '% )</i></p>
+														
+															';
+														}
 													}
 												$html.='</td>
 											</tr>
@@ -1363,441 +1368,441 @@ class Assessment extends MY_Controller
 				</table>
 			</div>';
 
-			$html .= ' <div style="padding-left:20px;"><div style="font-family: Arial, sans-serif; font-size: 8pt;"><h3 style="font-weight: bold;">' . htmlspecialchars($report['organization']) . '</h3></div>';
+			$html .= ' <div style="padding-left:20px;"><div style="font-family: Arial, sans-serif; font-size: 7pt"><h3 style="font-weight: bold;">' . htmlspecialchars($report['organization']) . '</h3></div>';
 
 			//Education data//
-			$html .= '<div style="margin-bottom: 1px; margin-top: 10px;font-family: Arial, sans-serif; font-size: 8pt;"><b>1.	&nbsp;&nbsp;&nbsp;&nbsp;Education: </b></div>';
+			$html .= '<div style="margin-bottom: 1px; margin-top: 2px;font-family: Arial, sans-serif; font-size: 7pt"><b>1.	&nbsp;&nbsp;&nbsp;&nbsp;Education: </b></div>';
 		
 				foreach($education_pgm_data as $l => $value){
-			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:0px;"><li style="margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">&nbsp;&nbsp;&nbsp;&nbsp;' . $value["title"] . '</li></ul>';					
+			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:0px;"><li style="margin-bottom: 0px;font-family: Arial, sans-serif; font-size: 6pt;">&nbsp;&nbsp;&nbsp;&nbsp;' . $value["title"] . '</li></ul>';					
 				}
 
 			//Economic data//
-			$html .= ' <div style="margin-bottom: 1px; margin-top: 10px;font-family: Arial, sans-serif; font-size: 8pt;"><b>2.	&nbsp;&nbsp;&nbsp;&nbsp;Economic Empowerment: </b></div>';
+			$html .= ' <div style="margin-bottom: 1px; margin-top: 5px;font-family: Arial, sans-serif; font-size: 7pt"><b>2.	&nbsp;&nbsp;&nbsp;&nbsp;Economic Empowerment: </b></div>';
 		
 				foreach($entrepreneurship_pgm_data as $l => $value){
-			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:10px;"><li style="margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">' . $value["title"] . '</li></ul>';					
+			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:1px;"><li style="margin-bottom: 0px;font-family: Arial, sans-serif; font-size: 6pt;">' . $value["title"] . '</li></ul>';					
 				}
 				foreach($workforce_pgm_data as $l => $value){
-			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:0px;"><li style="margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">' . $value["title"] . '</li></ul>';					
+			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:1px;"><li style="margin-bottom: 0px;font-family: Arial, sans-serif; font-size: 6pt;">' . $value["title"] . '</li></ul>';					
 				}
 				foreach($housing_pgm_data as $l => $value){
-			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:0px;"><li style="margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">' . $value["title"] . '</li></ul>';					
+			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:1px;"><li style="margin-bottom: 0px;font-family: Arial, sans-serif; font-size: 6pt;">' . $value["title"] . '</li></ul>';					
 				}
 
 			//Health & Quality data//
-			$html .= '<div style="margin-bottom: 1px; margin-top: 10px;font-family: Arial, sans-serif; font-size: 8pt;"><b>3.	&nbsp;&nbsp;&nbsp;&nbsp;Health & Quality of Life: </b></div>';
+			$html .= '<div style="margin-bottom: 1px; margin-top: 5px;font-family: Arial, sans-serif; font-size: 7pt"><b>3.	&nbsp;&nbsp;&nbsp;&nbsp;Health & Quality of Life: </b></div>';
 				foreach($health_pgm_data as $l => $value){
-			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:0px;"><li style="margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">' . $value["title"] . '</li></ul>';					
+			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:0px;"><li style="margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 6pt;">' . $value["title"] . '</li></ul>';					
 				}
 
 			//Civic engagement data//
 
-				$html .= '<div style="margin-bottom: 1px; margin-top: 10px;font-family: Arial, sans-serif; font-size: 8pt;"><b>4.	&nbsp;&nbsp;&nbsp;&nbsp;Civic Engagement: </b></div>';
+				$html .= '<div style="margin-bottom: 1px; margin-top: 5px;font-family: Arial, sans-serif; font-size: 7pt"><b>4.	&nbsp;&nbsp;&nbsp;&nbsp;Civic Engagement: </b></div>';
 				if($report['field_voter_registration'] == "1"){
-			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:0px;"><li style="margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;"> Voter Registration</li></ul>';
+			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:0px;"><li style="margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 6pt;"> Voter Registration</li></ul>';
 				} 
 				if($report['field_community_forums'] == "1"){
-			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:0px;"><li style="margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;"> Community Forums</li></ul>';
+			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:0px;"><li style="margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 6pt;"> Community Forums</li></ul>';
 				}
 
 			//Civil Rights & Racial Justice Activities data//
 
-				$html .= '<div style="margin-bottom: 1px; margin-top: 10px;font-family: Arial, sans-serif; font-size: 8pt;"><b>5.	&nbsp;&nbsp;&nbsp;&nbsp;Civil Rights & Racial Justice Activities: </b></div>';
+				$html .= '<div style="margin-bottom: 1px; margin-top: 3px;font-family: Arial, sans-serif; font-size: 7pt"><b>5.	&nbsp;&nbsp;&nbsp;&nbsp;Civil Rights & Racial Justice Activities: </b></div>';
 				if($report['field_crja'] == "1"){
-			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:0px;"><li style="margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;"> Civil Rights and Racial Justice Activities</li></ul>';
+			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:0px;"><li style="margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 6pt;"> Civil Rights and Racial Justice Activities</li></ul>';
 				} 
 				if($report['field_police_brutality'] == "1"){
-			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:0px;"><li style="margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;"> Police Brutality</li></ul>';
+			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:0px;"><li style="margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 6pt;"> Police Brutality</li></ul>';
 				}
 				if($report['field_advocacy_efforts'] == "1"){
-			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:0px;"><li style="margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;"> Advocacy</li></ul>';
+			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:0px;"><li style="margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 6pt;"> Advocacy</li></ul>';
 				}
 				
 			//Other program data//
 
-				$html .= '<div style="margin-bottom: 1px; margin-top: 10px;font-family: Arial, sans-serif; font-size: 8pt;"><b>6.	&nbsp;&nbsp;&nbsp;&nbsp;Other Programs: </b></div>';
+				$html .= '<div style="margin-bottom: 10px; margin-top: 3px;font-family: Arial, sans-serif; font-size: 7pt"><b>6.	&nbsp;&nbsp;&nbsp;&nbsp;Other Programs: </b></div>';
 				foreach($other_pgm_data as $l => $value){
-			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:0px;"><li style="margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">' . $value["title"] . '</li></ul>';					
+			$html .= '<ul style="padding-left: 0px; margin-left: 35px;margin-top:0px;line-height:1px;"><li style="margin-bottom: 0px;font-family: Arial, sans-serif; font-size: 6pt;">' . $value["title"] . '</li></ul>';					
 				}
 						
 			//Board members data//
 
-			$html .= '<div style="margin-bottom: 1px; margin-top: 10px;font-family: Arial, sans-serif; font-size: 8pt;"><b>7.	&nbsp;&nbsp;&nbsp;&nbsp;Board Members/Volunteers: </b></div>';
+			$html .= '<div style="margin-bottom: 1px; margin-top: 3px;font-family: Arial, sans-serif; font-size: 7pt"><b>7.	&nbsp;&nbsp;&nbsp;&nbsp;Board Members/Volunteers: </b></div>';
 				$vol_emp_data = $report['field_board_member_grand_total'];
 				if($vol_emp_data != "") {
-			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:0px;"><li style="margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">Board Members Currently Serving : ' . htmlspecialchars($vol_emp_data) . '</li></ul>';
+			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:0px;"><li style="margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 6pt;">Board Members Currently Serving : ' . htmlspecialchars($vol_emp_data) . '</li></ul>';
 				} else {
-			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:0px;"><li style="margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">Board Members Currently Serving : N/A</li></ul>';
+			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:0px;"><li style="margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 6pt;">Board Members Currently Serving : N/A</li></ul>';
 				}
 
 				$vol_guild_data = $report['field_guild_members'];
 				if($vol_guild_data != "") {
-			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:0px;"><li style="margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">Urban League Guild Membership : ' . htmlspecialchars($vol_guild_data) . '</li></ul>';
+			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:0px;"><li style="margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 6pt;">Urban League Guild Membership : ' . htmlspecialchars($vol_guild_data) . '</li></ul>';
 				} else {
-			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:0px;"><li style="margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">Urban League Guild Membership : N/A</li></ul>';
+			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:0px;"><li style="margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 6pt;">Urban League Guild Membership : N/A</li></ul>';
 				}
 
 				$vol_young_data = $report['field_ypc_members'];
 				if($vol_young_data != "") {
-			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:0px;"><li style="margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">Urban League Young Professionals Membership : ' . htmlspecialchars($vol_young_data) . '</li></ul>';
+			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:0px;"><li style="margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 6pt;">Urban League Young Professionals Membership : ' . htmlspecialchars($vol_young_data) . '</li></ul>';
 				} else {
-			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:0px;"><li style="margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">Urban League Young Professionals Membership : N/A</li></ul>';
+			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:0px;"><li style="margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 6pt;">Urban League Young Professionals Membership : N/A</li></ul>';
 				}
 
 				$vol_oth_data = $report['field_aux_members'];
 				if($vol_oth_data != "") {
-			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:0px;"><li style="margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">Other Volunteer/Auxiliary Membership : ' . htmlspecialchars($vol_oth_data) . '</li></ul>';
+			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:0px;"><li style="margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 6pt;">Other Volunteer/Auxiliary Membership : ' . htmlspecialchars($vol_oth_data) . '</li></ul>';
 				} else {
-			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:0px;"><li style="margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">Other Volunteer/Auxiliary Membership : N/A</li></ul>';
+			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:0px;"><li style="margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 6pt;">Other Volunteer/Auxiliary Membership : N/A</li></ul>';
 				}
 
 			//Operational data//
 
-			$html .= '<div style="margin-bottom: 1px; margin-top: 10px;font-family: Arial, sans-serif; font-size: 8pt;"><b>8.	&nbsp;&nbsp;&nbsp;&nbsp;Operational Statistics: </b></div>
-			<div style="margin-left: 0.35in;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;"><b>Total Budget: $' . number_format($report['field_revenue_total_budget']) . '</b></div>
-			<ul style="padding-left: 0px; margin-left: 35px;line-height:0px;font-family: Arial, sans-serif; font-size: 8pt;">
+			$html .= '<div style="margin-bottom: 1px; margin-top: 3px;font-family: Arial, sans-serif; font-size: 7pt"><b>8.	&nbsp;&nbsp;&nbsp;&nbsp;Operational Statistics: </b></div>
+			<div style="margin-left: 0.35in;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 7pt"><b>Total Budget: $' . number_format($report['field_revenue_total_budget']) . '</b></div>
+			<ul style="padding-left: 0px; margin-left: 35px;line-height:0px;font-family: Arial, sans-serif; font-size: 7pt">
 				<li style="margin-bottom: 1px;">Budget Derived from the following sources in ' . htmlspecialchars($report['field_year']-1) . '</li>
 			</ul>
 			<table>
 				<tbody>
 					<tr>
 						<td>
-							<p style="margin-left: 40px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">- Corporations: </p>
+							<p style="margin-left: 40px;margin-bottom: 0px;line-height:0px;font-family: Arial, sans-serif; font-size: 6pt;">- Corporations: </p>
 						</td>
 						<td>
-							<p style="margin-left: 80px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">	$' . number_format($report['field_revenue_corporations'], 2) . '</p>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<p style="margin-left: 40px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">- Foundations: </p>
-						</td>
-						<td>
-							<p style="margin-left: 80px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">	$' . number_format($report['field_revenue_foundations'], 2) . '</p>
+							<p style="margin-left: 80px;margin-bottom: 0px;line-height:0px;font-family: Arial, sans-serif; font-size: 6pt;">	$' . number_format($report['field_revenue_corporations'], 2) . '</p>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<p style="margin-left: 40px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">- Individual Membership: </p>
+							<p style="margin-left: 40px;line-height:0px;margin-bottom: 0px;font-family: Arial, sans-serif; font-size: 6pt;">- Foundations: </p>
 						</td>
 						<td>
-							<p style="margin-left: 80px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">	$' . number_format($report['field_revenue_individual_members'], 2) . '</p>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<p style="margin-left: 40px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">- Special Events: </p>
-						</td>
-						<td>
-							<p style="margin-left: 80px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">	$' . number_format($report['field_revenue_special_events'], 2) . '</p>
+							<p style="margin-left: 80px;line-height:0px;margin-bottom: 0px;font-family: Arial, sans-serif; font-size: 6pt;">	$' . number_format($report['field_revenue_foundations'], 2) . '</p>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<p style="margin-left: 40px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">- United Way: </p>
+							<p style="margin-left: 40px;line-height:0px;margin-bottom: 0px;font-family: Arial, sans-serif; font-size: 6pt;">- Individual Membership: </p>
 						</td>
 						<td>
-							<p style="margin-left: 80px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">	$' . number_format($report['field_revenue_united_way'], 2) . '</p>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<p style="margin-left: 40px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">- Federal: </p>
-						</td>
-						<td>
-							<p style="margin-left: 80px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">	$' . number_format($report['field_revenue_federal'], 2) . '</p>
+							<p style="margin-left: 80px;line-height:0px;margin-bottom: 0px;font-family: Arial, sans-serif; font-size: 6pt;">	$' . number_format($report['field_revenue_individual_members'], 2) . '</p>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<p style="margin-left: 40px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">- State/Local: </p>
+							<p style="margin-left: 40px;line-height:0px;margin-bottom: 0px;font-family: Arial, sans-serif; font-size: 6pt;">- Special Events: </p>
 						</td>
 						<td>
-							<p style="margin-left: 80px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">	$' . number_format($report['field_revenue_state_local'], 2) . '</p>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<p style="margin-left: 40px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">- Other: </p>
-						</td>
-						<td>
-							<p style="margin-left: 80px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">	$' . number_format($report['field_revenue_other'], 2) . '</p>
+							<p style="margin-left: 80px;line-height:0px;margin-bottom: 0px;font-family: Arial, sans-serif; font-size: 6pt;">	$' . number_format($report['field_revenue_special_events'], 2) . '</p>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<p style="margin-left: 40px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">- NUL:  </p>
+							<p style="margin-left: 40px;line-height:0px;margin-bottom: 0px;font-family: Arial, sans-serif; font-size: 6pt;">- United Way: </p>
 						</td>
 						<td>
-							<p style="margin-left: 80px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">	$' . number_format($report['field_revenue_nul'], 2) . '</p>
+							<p style="margin-left: 80px;line-height:0px;margin-bottom: 0px;font-family: Arial, sans-serif; font-size: 6pt;">	$' . number_format($report['field_revenue_united_way'], 2) . '</p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p style="margin-left: 40px;line-height:0px;margin-bottom: 0px;font-family: Arial, sans-serif; font-size: 6pt;">- Federal: </p>
+						</td>
+						<td>
+							<p style="margin-left: 80px;line-height:0px;margin-bottom: 0px;font-family: Arial, sans-serif; font-size: 6pt;">	$' . number_format($report['field_revenue_federal'], 2) . '</p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p style="margin-left: 40px;line-height:0px;margin-bottom: 0px;font-family: Arial, sans-serif; font-size: 6pt;">- State/Local: </p>
+						</td>
+						<td>
+							<p style="margin-left: 80px;line-height:0px;margin-bottom: 0px;font-family: Arial, sans-serif; font-size: 6pt;">	$' . number_format($report['field_revenue_state_local'], 2) . '</p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p style="margin-left: 40px;line-height:0px;margin-bottom: 0px;font-family: Arial, sans-serif; font-size: 6pt;">- Other: </p>
+						</td>
+						<td>
+							<p style="margin-left: 80px;line-height:0px;margin-bottom: 0px;font-family: Arial, sans-serif; font-size: 6pt;">	$' . number_format($report['field_revenue_other'], 2) . '</p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p style="margin-left: 40px;line-height:0px;margin-bottom: 0px;font-family: Arial, sans-serif; font-size: 6pt;">- NUL:  </p>
+						</td>
+						<td>
+							<p style="margin-left: 80px;line-height:0px;margin-bottom: 0px;font-family: Arial, sans-serif; font-size: 6pt;">	$' . number_format($report['field_revenue_nul'], 2) . '</p>
 						</td>
 					</tr>
 				</tbody>
 			</table>
-			<ul style="padding-left: 0px; margin-left: 35px;line-height:14px;font-family: Arial, sans-serif; font-size: 8pt;">
+			<ul style="padding-left: 0px; margin-left: 35px;line-height:12px;font-family: Arial, sans-serif; font-size: 6pt;margin-top:1px">
 				<li>Endowment: $' . number_format($report['field_revenue_endowment_amount'], 2) . '</li>
 				<li>Investment Earnings: $' . number_format($report['field_revenue_investment'], 2) . '</li>
 				<li>Employees: Full-time: ' . htmlspecialchars($report['field_full_time_employees']) . ' Part-time: ' . htmlspecialchars($report['field_part_time_employees']) . '</li>
 			</ul>
-			<div style="margin-bottom: 1px; margin-top: 10px;font-family: Arial, sans-serif; font-size: 8pt;"><b>9.	&nbsp;&nbsp;&nbsp;&nbsp;Annual Expenditures </b></div>
-			<ul style=""margin-top:-0px;padding-left: 0px; margin-left: 20px;line-height:14px;font-family: Arial, sans-serif; font-size: 7pt;">
-				<li style="margin-top:-11px;padding-top:0px; font-size: 8pt;">
+			<div style="margin-bottom: 1px; margin-top: 10px;font-family: Arial, sans-serif; font-size: 7pt"><b>9.	&nbsp;&nbsp;&nbsp;&nbsp;Annual Expenditures </b></div>
+			<ul style=""margin-top:-0px;padding-left: 0px; margin-left: 20px;line-height:12px;font-family: Arial, sans-serif; font-size: 6pt;">
+				<li style="margin-top:-11px;padding-top:0px; font-size: 6pt;">
 					<table style="margin-top:-13px;padding-top:0px;">
 						<tbody style="margin-top:0px;padding-top:0px;">
 							<tr style="margin-top:0px;padding-top:0px;">
 								<td  style="margin-top:0px;padding-top:0px;width:200px;">
-									<p style="margin-top:0px: 1px;font-family: Arial, sans-serif; font-size: 8pt;font-weight:bold;"> Affiliate Expenditures: </p>
+									<p style="margin-top:0px: 1px;font-family: Arial, sans-serif; font-size: 6pt;font-weight:bold;"> Affiliate Expenditures: </p>
 								</td>
 								<td>
-									<p style="margin-top:0px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;font-weight:bold;">	$' . number_format($report['field_total_expenditures'], 2) . '</p>
+									<p style="margin-top:0px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 6pt;font-weight:bold;">	$' . number_format($report['field_total_expenditures'], 2) . '</p>
 								</td>
 							</tr>
 						</tbody>
 					</table>
 				</li>
-				<li style="margin-top:-8px;padding-top:0px; font-size: 8pt;">
+				<li style="margin-top:-8px;padding-top:0px; font-size: 6pt;">
 					<table style="margin-top:-13px;padding-top:0px;">
 						<tbody style="margin-top:0px;padding-top:0px;">
 							<tr style="margin-top:0px;padding-top:0px;">
 								<td  style="margin-top:0px;padding-top:0px;width:200px;">
-									<p style="margin-top:0px: 1px;font-family: Arial, sans-serif; font-size: 8pt;"> Salaries/Wages:  </p>
+									<p style="margin-top:0px: 1px;font-family: Arial, sans-serif; font-size: 6pt;"> Salaries/Wages:  </p>
 								</td>
 								<td>
-									<p style="margin-top:0px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">	$' . number_format($report['field_a_salaries_wages'], 2) . '</p>
+									<p style="margin-top:0px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 6pt;">	$' . number_format($report['field_a_salaries_wages'], 2) . '</p>
 								</td>
 							</tr>
 						</tbody>
 					</table>
 				</li>
 
-				<li style="margin-top:-8px;padding-top:0px; font-size: 8pt;">
+				<li style="margin-top:-8px;padding-top:0px; font-size: 6pt;">
 					<table style="margin-top:-13px;padding-top:0px;">
 						<tbody style="margin-top:0px;padding-top:0px;">
 							<tr style="margin-top:0px;padding-top:0px;">
 								<td  style="margin-top:0px;padding-top:0px;width:200px;">
-									<p style="margin-top:0px: 1px;font-family: Arial, sans-serif; font-size: 8pt;"> Fringe Benefits: </p>
+									<p style="margin-top:0px: 1px;font-family: Arial, sans-serif; font-size: 6pt;"> Fringe Benefits: </p>
 								</td>
 								<td>
-									<p style="margin-top:0px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">	$' . number_format($report['field_b_fringe_benefits'], 2) . '</p>
+									<p style="margin-top:0px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 6pt;">	$' . number_format($report['field_b_fringe_benefits'], 2) . '</p>
 								</td>
 							</tr>
 						</tbody>
 					</table>
 				</li>
-				<li style="margin-top:-8px;padding-top:0px; font-size: 8pt;">
+				<li style="margin-top:-8px;padding-top:0px; font-size: 6pt;">
 					<table style="margin-top:-13px;padding-top:0px;">
 						<tbody style="margin-top:0px;padding-top:0px;">
 							<tr style="margin-top:0px;padding-top:0px;">
 								<td  style="margin-top:0px;padding-top:0px;width:200px;">
-									<p style="margin-top:0px: 1px;font-family: Arial, sans-serif; font-size: 8pt;"> Professional/Contract/Consulting Fees: </p>
+									<p style="margin-top:0px: 1px;font-family: Arial, sans-serif; font-size: 6pt;"> Professional/Contract/Consulting Fees: </p>
 								</td>
 								<td>
-									<p style="margin-top:0px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">	$' . number_format($report['field_c_professional_fees'], 2) . '</p>
+									<p style="margin-top:0px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 6pt;">	$' . number_format($report['field_c_professional_fees'], 2) . '</p>
 								</td>
 							</tr>
 						</tbody>
 					</table>
 				</li>
-				<li style="margin-top:-8px;padding-top:0px; font-size: 8pt;">
+				<li style="margin-top:-8px;padding-top:0px; font-size: 6pt;">
 					<table style="margin-top:-13px;padding-top:0px;">
 						<tbody style="margin-top:0px;padding-top:0px;">
 							<tr style="margin-top:0px;padding-top:0px;">
 								<td  style="margin-top:0px;padding-top:0px;width:200px;">
-									<p style="margin-top:0px: 1px;font-family: Arial, sans-serif; font-size: 8pt;"> Travel: </p>
+									<p style="margin-top:0px: 1px;font-family: Arial, sans-serif; font-size: 6pt;"> Travel: </p>
 								</td>
 								<td>
-									<p style="margin-top:0px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">	$' . number_format($report['field_d_travel'], 2) . '</p>
+									<p style="margin-top:0px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 6pt;">	$' . number_format($report['field_d_travel'], 2) . '</p>
 								</td>
 							</tr>
 						</tbody>
 					</table>
 				</li>
-				<li style="margin-top:-8px;padding-top:0px; font-size: 8pt;">
+				<li style="margin-top:-8px;padding-top:0px; font-size: 6pt;">
 					<table style="margin-top:-13px;padding-top:0px;">
 						<tbody style="margin-top:0px;padding-top:0px;">
 							<tr style="margin-top:0px;padding-top:0px;">
 								<td  style="margin-top:0px;padding-top:0px;width:200px;">
-									<p style="margin-top:0px: 1px;font-family: Arial, sans-serif; font-size: 8pt;"> Postage/Freight: </p>
+									<p style="margin-top:0px: 1px;font-family: Arial, sans-serif; font-size: 6pt;"> Postage/Freight: </p>
 								</td>
 								<td>
-									<p style="margin-top:0px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">	$' . number_format($report['field_e_postage_freight'], 2) . '</p>
+									<p style="margin-top:0px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 6pt;">	$' . number_format($report['field_e_postage_freight'], 2) . '</p>
 								</td>
 							</tr>
 						</tbody>
 					</table>
 				</li>
-				<li style="margin-top:-8px;padding-top:0px; font-size: 8pt;">
+				<li style="margin-top:-8px;padding-top:0px; font-size: 6pt;">
 					<table style="margin-top:-13px;padding-top:0px;">
 						<tbody style="margin-top:0px;padding-top:0px;">
 							<tr style="margin-top:0px;padding-top:0px;">
 								<td  style="margin-top:0px;padding-top:0px;width:200px;">
-									<p style="margin-top:0px: 1px;font-family: Arial, sans-serif; font-size: 8pt;"> Insurance: </p>
+									<p style="margin-top:0px: 1px;font-family: Arial, sans-serif; font-size: 6pt;"> Insurance: </p>
 								</td>
 								<td>
-									<p style="margin-top:0px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">	$' . number_format($report['field_f_insurance'], 2) . '</p>
+									<p style="margin-top:0px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 6pt;">	$' . number_format($report['field_f_insurance'], 2) . '</p>
 								</td>
 							</tr>
 						</tbody>
 					</table>
 				</li>
-				<li style="margin-top:-8px;padding-top:0px; font-size: 8pt;">
+				<li style="margin-top:-8px;padding-top:0px; font-size: 6pt;">
 					<table style="margin-top:-13px;padding-top:0px;">
 						<tbody style="margin-top:0px;padding-top:0px;">
 							<tr style="margin-top:0px;padding-top:0px;">
 								<td  style="margin-top:0px;padding-top:0px;width:200px;">
-									<p style="margin-top:0px: 1px;font-family: Arial, sans-serif; font-size: 8pt;"> Interest Payments: </p>
+									<p style="margin-top:0px: 1px;font-family: Arial, sans-serif; font-size: 6pt;"> Interest Payments: </p>
 								</td>
 								<td>
-									<p style="margin-top:0px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">	$' . number_format($report['field_g_interest_payments'], 2) . '</p>
+									<p style="margin-top:0px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 6pt;">	$' . number_format($report['field_g_interest_payments'], 2) . '</p>
 								</td>
 							</tr>
 						</tbody>
 					</table>
 				</li>
-				<li style="margin-top:-8px;padding-top:0px; font-size: 8pt;">
+				<li style="margin-top:-8px;padding-top:0px; font-size: 6pt;">
 					<table style="margin-top:-13px;padding-top:0px;">
 						<tbody style="margin-top:0px;padding-top:0px;">
 							<tr style="margin-top:0px;padding-top:0px;">
 								<td  style="margin-top:0px;padding-top:0px;width:200px;">
-									<p style="margin-top:0px: 1px;font-family: Arial, sans-serif; font-size: 8pt;"> Dues/Subscription/Registration: </p>
+									<p style="margin-top:0px: 1px;font-family: Arial, sans-serif; font-size: 6pt;"> Dues/Subscription/Registration: </p>
 								</td>
 								<td>
-									<p style="margin-top:0px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">	$' . number_format($report['field_h_dues_subscription_regist'], 2) . '</p>
+									<p style="margin-top:0px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 6pt;">	$' . number_format($report['field_h_dues_subscription_regist'], 2) . '</p>
 								</td>
 							</tr>
 						</tbody>
 					</table>
 				</li>
-				<li style="margin-top:-8px;padding-top:0px; font-size: 8pt;">
+				<li style="margin-top:-8px;padding-top:0px; font-size: 6pt;">
 					<table style="margin-top:-13px;padding-top:0px;">
 						<tbody style="margin-top:0px;padding-top:0px;">
 							<tr style="margin-top:0px;padding-top:0px;">
 								<td  style="margin-top:0px;padding-top:0px;width:200px;">
-									<p style="margin-top:0px: 1px;font-family: Arial, sans-serif; font-size: 8pt;"> Depreciation: </p>
+									<p style="margin-top:0px: 1px;font-family: Arial, sans-serif; font-size: 6pt;"> Depreciation: </p>
 								</td>
 								<td>
-									<p style="margin-top:0px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">	$' . number_format($report['field_i_depreciation'], 2) . '</p>
+									<p style="margin-top:0px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 6pt;">	$' . number_format($report['field_i_depreciation'], 2) . '</p>
 								</td>
 							</tr>
 						</tbody>
 					</table>
 				</li>
-				<li style="margin-top:-8px;padding-top:0px; font-size: 8pt;">
+				<li style="margin-top:-8px;padding-top:0px; font-size: 6pt;">
 					<table style="margin-top:-13px;padding-top:0px;">
 						<tbody style="margin-top:0px;padding-top:0px;">
 							<tr style="margin-top:0px;padding-top:0px;">
 								<td  style="margin-top:0px;padding-top:0px;width:200px;">
-									<p style="margin-top:0px: 1px;font-family: Arial, sans-serif; font-size: 8pt;"> Taxes (Including Property Taxes): </p>
+									<p style="margin-top:0px: 1px;font-family: Arial, sans-serif; font-size: 6pt;"> Taxes (Including Property Taxes): </p>
 								</td>
 								<td>
-									<p style="margin-top:0px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">	$' . number_format($report['field_j_taxes_including_property'], 2) . '</p>
+									<p style="margin-top:0px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 6pt;">	$' . number_format($report['field_j_taxes_including_property'], 2) . '</p>
 								</td>
 							</tr>
 						</tbody>
 					</table>
 				</li>
-				<li style="margin-top:-8px;padding-top:0px; font-size: 8pt;">
+				<li style="margin-top:-8px;padding-top:0px; font-size: 6pt;">
 					<table style="margin-top:-13px;padding-top:0px;">
 						<tbody style="margin-top:0px;padding-top:0px;">
 							<tr style="margin-top:0px;padding-top:0px;">
 								<td  style="margin-top:0px;padding-top:0px;width:200px;">
-									<p style="margin-top:0px: 1px;font-family: Arial, sans-serif; font-size: 8pt;"> Utilities (Telephone, Gas, Electric): </p>
+									<p style="margin-top:0px: 1px;font-family: Arial, sans-serif; font-size: 6pt;"> Utilities (Telephone, Gas, Electric): </p>
 								</td>
 								<td>
-									<p style="margin-top:0px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">	$' . number_format($report['field_k_utilities'], 2) . '</p>
+									<p style="margin-top:0px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 6pt;">	$' . number_format($report['field_k_utilities'], 2) . '</p>
 								</td>
 							</tr>
 						</tbody>
 					</table>
 				</li>
-				<li style="margin-top:-8px;padding-top:0px; font-size: 8pt;">
+				<li style="margin-top:-8px;padding-top:0px; font-size: 6pt;">
 					<table style="margin-top:-13px;padding-top:0px;">
 						<tbody style="margin-top:0px;padding-top:0px;">
 							<tr style="margin-top:0px;padding-top:0px;">
 								<td  style="margin-top:0px;padding-top:0px;width:200px;">
-									<p style="margin-top:0px: 1px;font-family: Arial, sans-serif; font-size: 8pt;"> Equipment/Space Rental: </p>
+									<p style="margin-top:0px: 1px;font-family: Arial, sans-serif; font-size: 6pt;"> Equipment/Space Rental: </p>
 								</td>
 								<td>
-									<p style="margin-top:0px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">	$' . number_format($report['field_l_equipment_space_rental'], 2) . '</p>
+									<p style="margin-top:0px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 6pt;">	$' . number_format($report['field_l_equipment_space_rental'], 2) . '</p>
 								</td>
 							</tr>
 						</tbody>
 					</table>
 				</li>
-				<li style="margin-top:-8px;padding-top:0px; font-size: 8pt;">
+				<li style="margin-top:-8px;padding-top:0px; font-size: 6pt;">
 					<table style="margin-top:-13px;padding-top:0px;">
 						<tbody style="margin-top:0px;padding-top:0px;">
 							<tr style="margin-top:0px;padding-top:0px;">
 								<td  style="margin-top:0px;padding-top:0px;width:200px;">
-									<p style="margin-top:0px: 1px;font-family: Arial, sans-serif; font-size: 8pt;"> Goods and Services: </p>
+									<p style="margin-top:0px: 1px;font-family: Arial, sans-serif; font-size: 6pt;"> Goods and Services: </p>
 								</td>
 								<td>
-									<p style="margin-top:0px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">	$' . number_format($report['field_m_goods_and_services'], 2) . '</p>
+									<p style="margin-top:0px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 6pt;">	$' . number_format($report['field_m_goods_and_services'], 2) . '</p>
 								</td>
 							</tr>
 						</tbody>
 					</table>
 				</li>
-				<li style="margin-top:-8px;padding-top:0px; font-size: 8pt;">
+				<li style="margin-top:-8px;padding-top:0px; font-size: 6pt;">
 					<table style="margin-top:-13px;padding-top:0px;">
 						<tbody style="margin-top:0px;padding-top:0px;">
 							<tr style="margin-top:0px;padding-top:0px;">
 								<td  style="margin-top:0px;padding-top:0px;width:200px;">
-									<p style="margin-top:0px: 1px;font-family: Arial, sans-serif; font-size: 8pt;"> Rent/Mortgage Payments: </p>
+									<p style="margin-top:0px: 1px;font-family: Arial, sans-serif; font-size: 6pt;"> Rent/Mortgage Payments: </p>
 								</td>
 								<td>
-									<p style="margin-top:0px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">	$' . number_format($report['field_n_rent_mortgage_payments'], 2) . '</p>
+									<p style="margin-top:0px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 6pt;">	$' . number_format($report['field_n_rent_mortgage_payments'], 2) . '</p>
 								</td>
 							</tr>
 						</tbody>
 					</table>
 				</li>
-				<li style="margin-top:-8px;padding-top:0px; font-size: 8pt;">
+				<li style="margin-top:-8px;padding-top:0px; font-size: 6pt;">
 					<table style="margin-top:-13px;padding-top:0px;">
 						<tbody style="margin-top:0px;padding-top:0px;">
 							<tr style="margin-top:0px;padding-top:0px;">
 								<td  style="margin-top:0px;padding-top:0px;width:200px;">
-									<p style="margin-top:0px: 1px;font-family: Arial, sans-serif; font-size: 8pt;"> Other: </p>
+									<p style="margin-top:0px: 1px;font-family: Arial, sans-serif; font-size: 6pt;"> Other: </p>
 								</td>
 								<td>
-									<p style="margin-top:0px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">	$' . number_format($report['field_o_other'], 2) . '</p>
+									<p style="margin-top:0px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 6pt;">	$' . number_format($report['field_o_other'], 2) . '</p>
 								</td>
 							</tr>
 						</tbody>
 					</table>
 				</li>
-				<li style="margin-top:-8px;padding-top:0px; font-size: 8pt;">
+				<li style="margin-top:-8px;padding-top:0px; font-size: 6pt;">
 					<table style="margin-top:-13px;padding-top:0px;">
 						<tbody style="margin-top:0px;padding-top:0px;">
 							<tr style="margin-top:0px;padding-top:0px;">
 								<td  style="margin-top:0px;padding-top:0px;width:200px;">
-									<p style="margin-top:0px: 1px;font-family: Arial, sans-serif; font-size: 8pt;"> Value of Property: </p>
+									<p style="margin-top:0px: 1px;font-family: Arial, sans-serif; font-size: 6pt;"> Value of Property: </p>
 								</td>
 								<td>
-									<p style="margin-top:0px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">	$' . number_format($report['field_number_properties_rented'], 2) . '</p>
+									<p style="margin-top:0px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 6pt;">	$' . number_format($report['field_number_properties_rented'], 2) . '</p>
 								</td>
 							</tr>
 						</tbody>
 					</table>
 				</li>
-				<li style="margin-top:-8px;padding-top:0px; font-size: 8pt;">
+				<li style="margin-top:-8px;padding-top:0px; font-size: 6pt;">
 					<table style="margin-top:-13px;padding-top:0px;">
 						<tbody style="margin-top:0px;padding-top:0px;">
 							<tr style="margin-top:0px;padding-top:0px;">
 								<td  style="margin-top:0px;padding-top:0px;width:200px;">
-									<p style="margin-top:0px: 1px;font-family: Arial, sans-serif; font-size: 8pt;"> Capital Budget: </p>
+									<p style="margin-top:0px: 1px;font-family: Arial, sans-serif; font-size: 6pt;"> Capital Budget: </p>
 								</td>
 								<td>
-									<p style="margin-top:0px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 8pt;">	$' . number_format($report['field_capital_budget_amount'], 2) . '</p>
+									<p style="margin-top:0px;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 6pt;">	$' . number_format($report['field_capital_budget_amount'], 2) . '</p>
 								</td>
 							</tr>
 						</tbody>
 					</table>
 				</li>
 			</ul>
-			<div style="margin-bottom: 1px; margin-top: 10px;font-family: Arial, sans-serif; font-size: 8pt;"><b>10.	&nbsp;&nbsp;&nbsp;&nbsp;Community Relations Activities: </b></div>
-				<ul style="padding-left: 0px; margin-left: 35px;line-height:14px;font-family: Arial, sans-serif; font-size: 8pt;">
+			<div style="margin-bottom: 1px; margin-top: 0px;line-height: 1px;font-family: Arial, sans-serif; font-size: 7pt"><b>10.	&nbsp;&nbsp;&nbsp;&nbsp;Community Relations Activities: </b></div>
+				<ul style="padding-left: 0px; margin-left: 35px;line-height:12px;font-family: Arial, sans-serif; font-size: 6pt;">
 					' . ($report['field_produces_annual_report'] == 1 ? '<li>Annual Report </li>' : '') . '
 					<li>Website: ' . htmlspecialchars($report['field_affiliate_website_address']) . '</li>
 					' . ($report['field_is_website_linked_to_nul'] == 1 ? '<li>Linked to National Urban League Website: www.nul.org </li>' : '') . '
@@ -1822,6 +1827,15 @@ class Assessment extends MY_Controller
 	$dompdf->loadHtml($html);
 	$dompdf->setPaper(array(0, 0, 4.50 * 72, 9 * 72), 'portrait');
 	$dompdf->render();
+	$start_page_number = 16;
+	$canvas = $dompdf->getCanvas();
+	$font = $dompdf->getFontMetrics()->get_font("helvetica", "bold");
+	$canvas->page_script(function($pageNumber, $pageCount, $canvas, $fontMetrics) use ($font, $start_page_number) {
+		$text = $start_page_number + $pageNumber - 1;
+		$fontSize = 10;
+		$width = $fontMetrics->getTextWidth($text, $font, $fontSize);
+		$canvas->text(150, 610, $text, $font, $fontSize, array(0, 0, 0));
+	});
 	$dompdf->stream('Census Reports - '.$report_year.'.pdf', [
 		'compress' => false,
 		'Attachment' => true,

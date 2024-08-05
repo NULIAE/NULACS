@@ -1904,7 +1904,7 @@ class Affiliate_model extends CI_Model
 		$this->db->join('census_statuses cs', 'cs.status_id = rep.field_census_status','left');
 		$this->db->group_by('rep.report_id');
 		$this->db->order_by('af.city', 'ASC');
-		
+		$this->db->where('af.organization IS NOT NULL');
 		if($report_year != NULL){
 			$this->db->where('rep.field_year', $report_year);
 		}
@@ -1914,11 +1914,11 @@ class Affiliate_model extends CI_Model
 		if($affiliate_id != NULL){
 			$this->db->where('rep.field_affiliate_select', $affiliate_id);
 		}
-
+		
 		$query = $this->db->get();
 		return $query->result_array();
 	}
-	
+
 	/**
 	 * Get single census report
 	 * 
