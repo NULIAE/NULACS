@@ -1252,13 +1252,13 @@ class Assessment extends MY_Controller
             $data = file_get_contents($path, false, stream_context_create($arrContextOptions));
             $image = 'data:image/' . $type . ';base64,' . base64_encode($data);
 
-			$html .= '<div style="font-family: Arial, sans-serif; font-size: 9pt;"><h3 style="font-weight: bold;">' . htmlspecialchars($report['organization']) . '</h3></div>';
+			$html .= '<div style="font-family: Arial, sans-serif; font-size: 9pt;"><h3 style="font-weight: bold;margin-bottom:0px;">' . htmlspecialchars($report['organization']) . '</h3></div>';
 			$html .= '<div style="background:red;">
 				<table style="width: 100%;background-color: #e6e6e6;border:2px solid black">
 					<tbody>
 						<tr style="width: 100%;margin-bottom:0px">
 							<td style="padding: 0;width:30%;text-align:center;">
-								<div><img src="'.$image.'" class="f-img" alt="Profile photo" width="80" height="100"></div>
+								<div><img src="'.$image.'" class="f-img" alt="Profile photo" width="80" height="90"></div>
 							</td>
 							<td style="padding:5px; font-family: Arial, sans-serif; font-size: 6pt;margin-bottom:0px">
 								<table>
@@ -1273,57 +1273,57 @@ class Assessment extends MY_Controller
 										<tr>
 										<tr>
 											<td style="width:50%;">
-												<b>President/CEO</b>
+												<p style="margin-top:-5px;margin-bottom:0px;" ><b>President/CEO</b></p>
 											</td>
-											<td>
-												:&nbsp;<span>' . htmlspecialchars($report['field_president_ceo_first_name']) . ' ' . htmlspecialchars($report['field_president_ceo_middle_name']) . ' ' . htmlspecialchars($report['field_president_ceo_last_name']) . '</span></td>
+											<td > 
+												<p style="margin-top:-5px;margin-bottom:0px;">:&nbsp;<span>' . htmlspecialchars($report['field_president_ceo_first_name']) . ' ' . htmlspecialchars($report['field_president_ceo_middle_name']) . ' ' . htmlspecialchars($report['field_president_ceo_last_name']) . '</span></p></td>
 										<tr>
 										<tr>
 											<td style="width:50%;">
-												<b>Years as CEO</b>
+												<p style="margin-top:-5px;margin-bottom:0px;"><b>Years as CEO</b></p>
 											</td>
 											<td>
-												:&nbsp;<span>' . htmlspecialchars($report['field_number_of_years_as_ceo']) . '</span>
-											</td>
-										<tr>
-										<tr>
-											<td style="width:50%;">
-												<b>Address</b>
-											</td>
-											<td>
-												:&nbsp;<span>' . htmlspecialchars($report['field_address_line_1']) . '</span>
+												<p style="margin-top:-5px;margin-bottom:0px;">:&nbsp;<span>' . htmlspecialchars($report['field_number_of_years_as_ceo']) . '</span></p>
 											</td>
 										<tr>
 										<tr>
 											<td style="width:50%;">
-												<b>Telephone</b> 
+												<p style="margin-top:-5px;margin-bottom:0px;"><b>Address</b></p>
 											</td>
 											<td>
-												:&nbsp;<span>' . htmlspecialchars($report['field_telephone']) . '</span>
+												<p style="margin-top:-5px;margin-bottom:0px;">:&nbsp;<span>' . htmlspecialchars($report['field_address_line_1']) . '</span></p>
 											</td>
 										<tr>
 										<tr>
 											<td style="width:50%;">
-												<b>Fax</b>
+												<p style="margin-top:-5px;margin-bottom:0px;"><b>Telephone</b></p> 
 											</td>
 											<td>
-												:&nbsp;<span>' . htmlspecialchars($report['field_fax']) . '</span>
+												<p style="margin-top:-5px;margin-bottom:0px;">:&nbsp;<span>' . htmlspecialchars($report['field_telephone']) . '</span></p>
 											</td>
 										<tr>
 										<tr>
 											<td style="width:50%;">
-												<b>Website</b>
+												<p style="margin-top:-5px;margin-bottom:0px;"><b>Fax</b></p>
 											</td>
 											<td>
-												:&nbsp;<span>' . htmlspecialchars($report['field_affiliate_website_address']) . '</span>
+												<p style="margin-top:-5px;margin-bottom:0px;">:&nbsp;<span>' . htmlspecialchars($report['field_fax']) . '</span></p>
 											</td>
 										<tr>
 										<tr>
 											<td style="width:50%;">
-												<b>Email</b>
+												<p style="margin-top:-5px;margin-bottom:0px;"><b>Website</b></p>
 											</td>
 											<td>
-												:&nbsp;<span>' . htmlspecialchars($report['field_email_address']) . '</span>
+												<p style="margin-top:-5px;margin-bottom:0px;">:&nbsp;<span>' . htmlspecialchars($report['field_affiliate_website_address']) . '</span></p>
+											</td>
+										<tr>
+										<tr>
+											<td style="width:50%;">
+												<p style="margin-top:-5px;margin-bottom:0px;"><b>Email</b></p>
+											</td>
+											<td>
+												<p style="margin-top:-5px;margin-bottom:0px;">:&nbsp;<span>' . htmlspecialchars($report['field_email_address']) . '</span></p>
 											</td>
 										<tr>										
 									</tbody>
@@ -1331,8 +1331,8 @@ class Assessment extends MY_Controller
 							</td>
 						</tr>
 						<tr>
-							<td colspan="2" style="border-bottom: 1px; padding:2px; padding-bottom: 2px; width:100%;font-family: Arial, sans-serif; font-size: 7pt;">
-								<p style="margin-bottom:1px"><b>Years of Service in Urban League: </b><span>' . htmlspecialchars($report['field_number_of_years_of_service']) . '</span></p>';
+							<td colspan="2" style="border-bottom: 1px; padding:2px; padding-bottom: 2px; width:100%;font-family: Arial, sans-serif; font-size: 7pt;margin-bottom:0px;">
+								<p style="margin-bottom:8px;margin-top:-8px;"><b>Years of Service in Urban League: </b><span>' . htmlspecialchars($report['field_number_of_years_of_service']) . '</span></p>';
 								if (!empty($service_data)) {
 								$html .= '
 									<table>
@@ -1341,14 +1341,14 @@ class Assessment extends MY_Controller
 												<td style="width:100px;position:relative;" >
 														<p style="position:absolute;top:0px;"><b>Service Areas:</b></p>
 												</td>
-												<td>';
+												<td style="margin-top:5px;">';
 												$i = 1;
 													foreach($service_data as $value){
 														if($i <= 3) {
 															$i++;
 														
 															$html .= '
-															<p style="line-height:12px;"><b><i> ' . htmlspecialchars($value['field_service_area_city_county']) . ' Country</b></i><br>Population: '.htmlspecialchars($value['field_service_area_population']) . ' <br><i>(White ' . htmlspecialchars($value['field_service_area_white']) . '% , African American ' . htmlspecialchars($value['field_service_area_african_am']) . '% , Hispanic/Latino American ' . htmlspecialchars($value['field_service_area_hispanic']) . '% , Asian American ' . htmlspecialchars($value['field_service_area_asian_am']) . '% , Native American ' . htmlspecialchars($value['field_service_area_native_am']) . '% , Other ' . htmlspecialchars($value['field_service_area_other']) . '% )</i></p>
+															<p style="line-height:12px;margin-top:-10px;"><b><i> ' . htmlspecialchars($value['field_service_area_city_county']) . ' Country</b></i><br>Population: '.htmlspecialchars($value['field_service_area_population']) . ' <br><i>(White ' . htmlspecialchars($value['field_service_area_white']) . '% , African American ' . htmlspecialchars($value['field_service_area_african_am']) . '% , Hispanic/Latino American ' . htmlspecialchars($value['field_service_area_hispanic']) . '% , Asian American ' . htmlspecialchars($value['field_service_area_asian_am']) . '% , Native American ' . htmlspecialchars($value['field_service_area_native_am']) . '% , Other ' . htmlspecialchars($value['field_service_area_other']) . '% )</i></p>
 														
 															';
 														}
@@ -1368,37 +1368,37 @@ class Assessment extends MY_Controller
 				</table>
 			</div>';
 
-			$html .= ' <div style="padding-left:20px;"><div style="font-family: Arial, sans-serif; font-size: 7pt"><h3 style="font-weight: bold;">' . htmlspecialchars($report['organization']) . '</h3></div>';
+			$html .= ' <div style="padding-left:20px;"><div style="font-family: Arial, sans-serif; font-size: 7pt"><h3 style="font-weight: bold;margin-top:0px;margin-bottom:-1px;">' . htmlspecialchars($report['organization']) . '</h3></div>';
 
 			//Education data//
 			$html .= '<div style="margin-bottom: 1px; margin-top: 2px;font-family: Arial, sans-serif; font-size: 7pt"><b>1.	&nbsp;&nbsp;&nbsp;&nbsp;Education: </b></div>';
 		
 				foreach($education_pgm_data as $l => $value){
-			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:0px;"><li style="margin-bottom: 0px;font-family: Arial, sans-serif; font-size: 6pt;">&nbsp;&nbsp;&nbsp;&nbsp;' . $value["title"] . '</li></ul>';					
+			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:0px;"><li style="margin-bottom: -3px;font-family: Arial, sans-serif; font-size: 6pt;margin-top:-1px">&nbsp;&nbsp;&nbsp;&nbsp;' . $value["title"] . '</li></ul>';					
 				}
 
 			//Economic data//
-			$html .= ' <div style="margin-bottom: 1px; margin-top: 5px;font-family: Arial, sans-serif; font-size: 7pt"><b>2.	&nbsp;&nbsp;&nbsp;&nbsp;Economic Empowerment: </b></div>';
+			$html .= ' <div style="margin-bottom: -2px; margin-top: 0px;font-family: Arial, sans-serif; font-size: 7pt"><b>2.	&nbsp;&nbsp;&nbsp;&nbsp;Economic Empowerment: </b></div>';
 		
 				foreach($entrepreneurship_pgm_data as $l => $value){
-			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:1px;"><li style="margin-bottom: 0px;font-family: Arial, sans-serif; font-size: 6pt;">' . $value["title"] . '</li></ul>';					
+			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:1px;"><li style="margin-bottom: -2px;font-family: Arial, sans-serif; font-size: 6pt;margin-top:-1px;">' . $value["title"] . '</li></ul>';					
 				}
 				foreach($workforce_pgm_data as $l => $value){
-			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:1px;"><li style="margin-bottom: 0px;font-family: Arial, sans-serif; font-size: 6pt;">' . $value["title"] . '</li></ul>';					
+			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:1px;"><li style="margin-bottom: -2px;font-family: Arial, sans-serif; font-size: 6pt;margin-top:-1px;">' . $value["title"] . '</li></ul>';					
 				}
 				foreach($housing_pgm_data as $l => $value){
-			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:1px;"><li style="margin-bottom: 0px;font-family: Arial, sans-serif; font-size: 6pt;">' . $value["title"] . '</li></ul>';					
+			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:1px;"><li style="margin-bottom: -2px;font-family: Arial, sans-serif; font-size: 6pt;margin-top:-1px;">' . $value["title"] . '</li></ul>';					
 				}
 
 			//Health & Quality data//
-			$html .= '<div style="margin-bottom: 1px; margin-top: 5px;font-family: Arial, sans-serif; font-size: 7pt"><b>3.	&nbsp;&nbsp;&nbsp;&nbsp;Health & Quality of Life: </b></div>';
+			$html .= '<div style="margin-bottom: 1px; margin-top: 0px;font-family: Arial, sans-serif; font-size: 7pt"><b>3.	&nbsp;&nbsp;&nbsp;&nbsp;Health & Quality of Life: </b></div>';
 				foreach($health_pgm_data as $l => $value){
 			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:0px;"><li style="margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 6pt;">' . $value["title"] . '</li></ul>';					
 				}
 
 			//Civic engagement data//
 
-				$html .= '<div style="margin-bottom: 1px; margin-top: 5px;font-family: Arial, sans-serif; font-size: 7pt"><b>4.	&nbsp;&nbsp;&nbsp;&nbsp;Civic Engagement: </b></div>';
+				$html .= '<div style="margin-bottom: 1px; margin-top: 0px;font-family: Arial, sans-serif; font-size: 7pt"><b>4.	&nbsp;&nbsp;&nbsp;&nbsp;Civic Engagement: </b></div>';
 				if($report['field_voter_registration'] == "1"){
 			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:0px;"><li style="margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 6pt;"> Voter Registration</li></ul>';
 				} 
@@ -1408,7 +1408,7 @@ class Assessment extends MY_Controller
 
 			//Civil Rights & Racial Justice Activities data//
 
-				$html .= '<div style="margin-bottom: 1px; margin-top: 3px;font-family: Arial, sans-serif; font-size: 7pt"><b>5.	&nbsp;&nbsp;&nbsp;&nbsp;Civil Rights & Racial Justice Activities: </b></div>';
+				$html .= '<div style="margin-bottom: 1px; margin-top: 0px;font-family: Arial, sans-serif; font-size: 7pt"><b>5.	&nbsp;&nbsp;&nbsp;&nbsp;Civil Rights & Racial Justice Activities: </b></div>';
 				if($report['field_crja'] == "1"){
 			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:0px;"><li style="margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 6pt;"> Civil Rights and Racial Justice Activities</li></ul>';
 				} 
@@ -1421,14 +1421,14 @@ class Assessment extends MY_Controller
 				
 			//Other program data//
 
-				$html .= '<div style="margin-bottom: 10px; margin-top: 3px;font-family: Arial, sans-serif; font-size: 7pt"><b>6.	&nbsp;&nbsp;&nbsp;&nbsp;Other Programs: </b></div>';
+				$html .= '<div style="margin-bottom: 10px; margin-top: 0px;font-family: Arial, sans-serif; font-size: 7pt"><b>6.	&nbsp;&nbsp;&nbsp;&nbsp;Other Programs: </b></div>';
 				foreach($other_pgm_data as $l => $value){
-			$html .= '<ul style="padding-left: 0px; margin-left: 35px;margin-top:0px;line-height:1px;"><li style="margin-bottom: 0px;font-family: Arial, sans-serif; font-size: 6pt;">' . $value["title"] . '</li></ul>';					
+			$html .= '<ul style="padding-left: 0px; margin-left: 35px;margin-top:-1px;line-height:1px;"><li style="margin-bottom: -3px;font-family: Arial, sans-serif; font-size: 6pt;">' . $value["title"] . '</li></ul>';					
 				}
 						
 			//Board members data//
 
-			$html .= '<div style="margin-bottom: 1px; margin-top: 3px;font-family: Arial, sans-serif; font-size: 7pt"><b>7.	&nbsp;&nbsp;&nbsp;&nbsp;Board Members/Volunteers: </b></div>';
+			$html .= '<div style="margin-bottom: 1px; margin-top: 0px;font-family: Arial, sans-serif; font-size: 7pt"><b>7.	&nbsp;&nbsp;&nbsp;&nbsp;Board Members/Volunteers: </b></div>';
 				$vol_emp_data = $report['field_board_member_grand_total'];
 				if($vol_emp_data != "") {
 			$html .= '<ul style="padding-left: 0px; margin-left: 35px;line-height:0px;"><li style="margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 6pt;">Board Members Currently Serving : ' . htmlspecialchars($vol_emp_data) . '</li></ul>';
@@ -1459,7 +1459,7 @@ class Assessment extends MY_Controller
 
 			//Operational data//
 
-			$html .= '<div style="margin-bottom: 1px; margin-top: 3px;font-family: Arial, sans-serif; font-size: 7pt"><b>8.	&nbsp;&nbsp;&nbsp;&nbsp;Operational Statistics: </b></div>
+			$html .= '<div style="margin-bottom: 1px; margin-top: -2px;font-family: Arial, sans-serif; font-size: 7pt"><b>8.	&nbsp;&nbsp;&nbsp;&nbsp;Operational Statistics: </b></div>
 			<div style="margin-left: 0.35in;margin-bottom: 1px;font-family: Arial, sans-serif; font-size: 7pt"><b>Total Budget: $' . number_format($report['field_revenue_total_budget']) . '</b></div>
 			<ul style="padding-left: 0px; margin-left: 35px;line-height:0px;font-family: Arial, sans-serif; font-size: 7pt">
 				<li style="margin-bottom: 1px;">Budget Derived from the following sources in ' . htmlspecialchars($report['field_year']-1) . '</li>
@@ -1829,10 +1829,10 @@ class Assessment extends MY_Controller
 	$dompdf->render();
 	$start_page_number = 16;
 	$canvas = $dompdf->getCanvas();
-	$font = $dompdf->getFontMetrics()->get_font("helvetica", "bold");
+	$font = $dompdf->getFontMetrics()->get_font("helvetica", "regular");
 	$canvas->page_script(function($pageNumber, $pageCount, $canvas, $fontMetrics) use ($font, $start_page_number) {
 		$text = $start_page_number + $pageNumber - 1;
-		$fontSize = 10;
+		$fontSize = 8;
 		$width = $fontMetrics->getTextWidth($text, $font, $fontSize);
 		$canvas->text(150, 610, $text, $font, $fontSize, array(0, 0, 0));
 	});
