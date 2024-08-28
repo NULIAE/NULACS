@@ -179,9 +179,10 @@
                         <div class="col-md-24">
                           <div class="form-group">
                             <label class="form-label">Photo</label>
-                            <input type="file" name="photo" id="photo" onchange="checkFileSize()"/><br>
-                              <span id="file-size-warning" style="color: red;"></span>
-                              <?php if(isset($report_data[0]['field_photo_title'])){ ?><span><img src="<?php echo base_url('/resources/images/profile/'.$report_data[0]['field_photo_title']);?>" style="width: 50vh;"?></span><?php } ?>
+                            <input type="file" name="photo" id="photo" accept=".jpg, .jpeg, .png" onchange="checkFileSize()"/><br>
+                            <p class="file_accept">*Only .jpg, .jpeg and .png files are allowed.</p>
+                            <span id="file-size-warning" style="color: red;"></span>
+                            <?php if(isset($report_data[0]['field_photo_title'])){ ?><span><img src="<?php echo base_url('/resources/images/profile/'.$report_data[0]['field_photo_title']);?>" style="width: 50vh;"?></span><?php } ?>
                           </div>
                         </div>
                       </div>
