@@ -516,7 +516,7 @@ class Assessment extends MY_Controller
 		$templateProcessor->setValue('orgname', $org_name);
 		$fileName = $affiliate_details[0]['assessment_start_year']." ". $aff_name. " Performance Assessment";
 		Settings::setZipClass(Settings::PCLZIP);
-        $templateProcessor->saveAs($fileName . '.docx');
+        $templateProcessor->saveAs('/tmp/'.$fileName . '.docx');
 
 		
 		$file = '/tmp/'.$fileName.'.docx';
