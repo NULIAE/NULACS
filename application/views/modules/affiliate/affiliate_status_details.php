@@ -19,6 +19,9 @@ $quarterArray = array(
 .yearPick i{
 	z-index: 999;
 }
+.yearpickSelected i{
+	z-index: 999;
+}
 .invalid-input
 {
  border-color: red !important;
@@ -1895,7 +1898,7 @@ $quarterArray = array(
 								<div class="col-12 col-md-6 col-lg-3">
 									<div class="yearPick">
 										<i class="i i-year-pick"></i>
-										<input id="key-year" class="yearpick form-control" name="year" type="text" value="<?php echo $key_year; ?>" />
+										<input id="key-year" class="yearpickSelected form-control" name="year" type="text" value="<?php echo $key_year; ?>" />
 									</div>
 								</div>
 

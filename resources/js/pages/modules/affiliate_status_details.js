@@ -2,17 +2,17 @@ var dollarUSLocale = Intl.NumberFormat('en-US');
 $(function () {
 	page.loader(true);
 	var key_indicators_status = $('#key_indicators_status').val();
-	if(key_indicators_status == '1'){
+	if (key_indicators_status == '1') {
 
 		$('#key_indicators_save_btn').prop('disabled', true);
 		// $('.key_indicators_approve_btn').prop('disabled', true);
 		document.getElementById("fieldset_disable").disabled = true;
-	}else{
+	} else {
 		document.getElementById("fieldset_disable").disabled = false;
 	}
 
-	if($('.chatBoxinn').length){
-	$('.chatBoxinn').scrollTop($('.chatBoxinn')[0].scrollHeight);
+	if ($('.chatBoxinn').length) {
+		$('.chatBoxinn').scrollTop($('.chatBoxinn')[0].scrollHeight);
 	}
 
 	init_delete_termly_document();
@@ -23,7 +23,7 @@ $(function () {
 
 	initReUploadDocuments();
 
-	$('a.other-reupload').on('click', function(e){
+	$('a.other-reupload').on('click', function (e) {
 		e.preventDefault();
 		var id = $(this).data('document');
 		var interval = $(this).data('interval');
@@ -45,7 +45,7 @@ $(function () {
 		widgetParent: $btnYear,
 		format: 'YYYY',
 		viewMode: 'years',
-		maxDate: moment().subtract(1,'months').endOf('month').format('YYYY-MM-DD'),
+		maxDate: moment().subtract(1, 'months').endOf('month').format('YYYY-MM-DD'),
 		icons: {
 			previous: 'i i-keyboard_arrow_left',
 			next: 'i i-keyboard_arrow_right',
@@ -62,7 +62,7 @@ $(function () {
 		widgetParent: $btnMonth,
 		format: 'M/YYYY',
 		viewMode: 'months',
-		maxDate: moment().subtract(1,'months').endOf('month').format('YYYY-MM-DD'),
+		maxDate: moment().subtract(1, 'months').endOf('month').format('YYYY-MM-DD'),
 		icons: {
 			previous: 'i i-keyboard_arrow_left',
 			next: 'i i-keyboard_arrow_right',
@@ -85,11 +85,11 @@ $(function () {
 	$('#btn-filter-date').on('click', function (e) {
 		e.preventDefault();
 		var interval = $("#input-interval").val();
-		if(interval == 'nav-y1'){
+		if (interval == 'nav-y1') {
 			var selectedDate = $("#tempmonthpicker").val().split('/');
 			$("#monthpicker").val(selectedDate[0]);
 			$("#monthyearpicker").val(selectedDate[1]);
-		} else if(interval == 'nav-y2'){
+		} else if (interval == 'nav-y2') {
 			$("#quarterpicker").val($("#tempquarterpicker").val());
 			$("#quarteryearpicker").val($("#tempyearpicker").val());
 		} else {
@@ -101,13 +101,13 @@ $(function () {
 	//------End filter
 	initDatePickerforPerformanceDocuments();
 
-	$(".input-upload-year").on("blur", function(){
+	$(".input-upload-year").on("blur", function () {
 		var formId = "#form-upload-" + $(this).data("document");
-		var value = $(this).val()?$(this).val():moment().format('YYYY')
+		var value = $(this).val() ? $(this).val() : moment().format('YYYY')
 		$(formId).find("input[name=year]").val(value);
 	});
 
-	$("#quarter-dropdown button.dropdown-item").on('click', function(){
+	$("#quarter-dropdown button.dropdown-item").on('click', function () {
 		$("#quarter-dropdown button.dropdown-item").removeClass('active');
 		$(this).addClass('active');
 		$("#tempquarterpicker").val($(this).data('quarter'));
@@ -123,8 +123,8 @@ $(function () {
 		var compliance = $(updateButton).data('compliance');
 		if ($(updateButton).siblings('a.active').length == 1 && $(this).data('status') != compliance)
 			$(updateButton).removeAttr('disabled');
-		else{
-			$(updateButton).siblings('[data-status="'+compliance+'"]').addClass('active');
+		else {
+			$(updateButton).siblings('[data-status="' + compliance + '"]').addClass('active');
 			$(updateButton).attr('disabled', 'disabled');
 		}
 	});
@@ -134,9 +134,9 @@ $(function () {
 		var selectedStatusElement = statusBtn.siblings('a.active');
 		if (selectedStatusElement.length == 1) {
 			var interval = $(this).data('interval');
-			if(interval == "month"){
+			if (interval == "month") {
 				$yearValue = $('#monthyearpicker').val();
-			} else if(interval == "quarter"){
+			} else if (interval == "quarter") {
 				$yearValue = $('#quarteryearpicker').val();
 			} else {
 				$yearValue = $('#yearpicker').val();
@@ -157,7 +157,7 @@ $(function () {
 			}).done(function (data) {
 				if (data.success) {
 					//$(selectedStatusElement).removeClass('active');
-					statusBtn.attr('disabled', 'disabled').data('compliance', $(selectedStatusElement).data('status'));		
+					statusBtn.attr('disabled', 'disabled').data('compliance', $(selectedStatusElement).data('status'));
 					showDialogBox('success', data.message);
 				} else {
 					showDialogBox('error', data.message);
@@ -170,8 +170,8 @@ $(function () {
 	//---End compliance status updation
 
 	//---Show re-upload form
-	function initReUploadDocuments(){
-		$('a.reupload').on('click', function(e){
+	function initReUploadDocuments() {
+		$('a.reupload').on('click', function (e) {
 			e.preventDefault();
 			var id = $(this).data('document');
 			var interval = $(this).data('interval');
@@ -209,25 +209,25 @@ $(function () {
 				$("#btn-upload-self-assessment-doc").click(function (e) {
 					e.preventDefault();
 					var check = true;
-					if($('#assessment_from_year').val() == ""){ 
-						$('#assessment_from_year').parent('.yearPick').addClass("invalid-input"); 
-						
+					if ($('#assessment_from_year').val() == "") {
+						$('#assessment_from_year').parent('.yearPick').addClass("invalid-input");
+
 					} else {
-						$('#assessment_from_year').parent('.yearPick').removeClass("invalid-input"); 
+						$('#assessment_from_year').parent('.yearPick').removeClass("invalid-input");
 					}
-					if($('#assessment_end_year').val() == ""){ 
+					if ($('#assessment_end_year').val() == "") {
 						$('#assessment_end_year').parent('.yearPick').addClass("invalid-input");
 						check = false;
 					} else {
-						$('#assessment_end_year').parent('.yearPick').removeClass("invalid-input"); 
+						$('#assessment_end_year').parent('.yearPick').removeClass("invalid-input");
 					}
-					if($('#assessment_document_name').val() == ""){ 
+					if ($('#assessment_document_name').val() == "") {
 						$('#assessment_document_name').addClass("invalid-input");
 						check = false;
 					} else {
-						$('#assessment_document_name').removeClass("invalid-input"); 
+						$('#assessment_document_name').removeClass("invalid-input");
 					}
-					if(check)
+					if (check)
 						myDropzone.processQueue();
 				});
 
@@ -241,7 +241,7 @@ $(function () {
 
 				this.on('sending', function (file, xhr, formData) {
 					// Append all form inputs to the formData Dropzone will POST
-					if(elemId == "self-assessment"){ 
+					if (elemId == "self-assessment") {
 						//Append data for Self Assessment Document
 						formData.append("assessment_start_year", $('#assessment_from_year').val());
 						formData.append("assessment_end_year", $('#assessment_end_year').val());
@@ -253,7 +253,7 @@ $(function () {
 						var data = $('#form-upload-' + elemId).serializeArray();
 						$.each(data, function (key, el) {
 							formData.append(el.name, el.value);
-						});					
+						});
 					}
 				});
 
@@ -267,21 +267,21 @@ $(function () {
 
 						var interval = response.upload_data.interval;
 
-						if(interval != "self-assessment"){ 
+						if (interval != "self-assessment") {
 							$('#collapse' + elemId).collapse('hide');
-							
+
 							if (interval == "month" || interval == "quarter" || interval == "year") {
 								var segment = $("#" + interval + "-segment-" + elemId);
-								$("#btn-collapse-"+elemId).toggleClass('d-none');
+								$("#btn-collapse-" + elemId).toggleClass('d-none');
 								$(segment).toggleClass('d-none');
 								var docName = $('#document-name-' + elemId + ' span').html();
-								if(docName != "Others") {
+								if (docName != "Others") {
 									$('#submitted-' + elemId).html('<span class="sub">' + moment().format("MM/DD/YYYY") + '</span>');
-									$('#document-name-' + elemId).html('<a href="' + base_url + response.upload_data.full_path + '" class="float-left" target="_blank"><span class="sub text-primary link">' + docName + '</span></a> <a href="#" data-document="'+elemId+'" data-interval="'+interval+'" class="reupload"><span class="sub"><i class="i i-create"></i></span></a>');
+									$('#document-name-' + elemId).html('<a href="' + base_url + response.upload_data.full_path + '" class="float-left" target="_blank"><span class="sub text-primary link">' + docName + '</span></a> <a href="#" data-document="' + elemId + '" data-interval="' + interval + '" class="reupload"><span class="sub"><i class="i i-create"></i></span></a>');
 
-									$('#document-name-' + elemId).html('<a href="' + base_url + response.upload_data.full_path + '" class="float-left" target="_blank"><span class="sub text-primary link">' + docName + '</span></a> <a href="#" data-document="'+elemId+'" data-interval="'+interval+'" class="reupload float-left pl-1"><span class="sub pl-1"><i class="i i-create"></i></span></a><a href="#" data-document="'+elemId+'" data-interval="'+interval+'" data-uploadid="'+response.upload_data.added_document_id+'" class="deletedoc float-left pl-1"><span class="sub pl-1"><i class="i i-delete"></i></span>');
-									
-									if($("#doc-status-" + elemId).length){
+									$('#document-name-' + elemId).html('<a href="' + base_url + response.upload_data.full_path + '" class="float-left" target="_blank"><span class="sub text-primary link">' + docName + '</span></a> <a href="#" data-document="' + elemId + '" data-interval="' + interval + '" class="reupload float-left pl-1"><span class="sub pl-1"><i class="i i-create"></i></span></a><a href="#" data-document="' + elemId + '" data-interval="' + interval + '" data-uploadid="' + response.upload_data.added_document_id + '" class="deletedoc float-left pl-1"><span class="sub pl-1"><i class="i i-delete"></i></span>');
+
+									if ($("#doc-status-" + elemId).length) {
 										$("#doc-status-" + elemId).toggleClass("d-none");
 										$("#chat-box-" + elemId).toggleClass("d-none");
 										var chatBox = $("#chat-box-" + elemId).find(".chatBoxinn");
@@ -295,7 +295,7 @@ $(function () {
 											}
 										}));
 									} else {
-										$("#" + interval + "-row-" + elemId).append(Mustache.render($("#template-submitted").html(), { 
+										$("#" + interval + "-row-" + elemId).append(Mustache.render($("#template-submitted").html(), {
 											document: response.upload_data,
 											"comment": response.comment,
 											"avatar": function () {
@@ -315,16 +315,16 @@ $(function () {
 									initReUploadDocuments();
 
 									init_delete_termly_document();
-									
-									if($("#" + interval + "-row-" + elemId + ' select.selG').length){
+
+									if ($("#" + interval + "-row-" + elemId + ' select.selG').length) {
 										$("#" + interval + "-row-" + elemId + ' select.selG').val(5);
 									} else {
 										$("#doc-status-" + elemId).html('<span class="sub"><a href="javascript:(0)" class="btn btn-lbl" data-rel="tooltip" data-placement="bottom" title="Review Pending"><i class="i i-review-pending r-pending"></i> </a></span>');
 									}
 									$('[data-rel="tooltip"]').tooltip();
-								}else{
-									$('#other-list-'+elemId).toggleClass('d-none');
-									$('#other-list-'+elemId+' .intab').append(Mustache.render($("#template-other-row").html(), {
+								} else {
+									$('#other-list-' + elemId).toggleClass('d-none');
+									$('#other-list-' + elemId + ' .intab').append(Mustache.render($("#template-other-row").html(), {
 										document: response.upload_data,
 										"documentPath": function () {
 											return base_url + response.upload_data.full_path;
@@ -336,7 +336,7 @@ $(function () {
 											return moment().format("MM/DD/YYYY");
 										},
 										"isEmpty": function () {
-											if($('#other-list-'+elemId+' .intab').html().trim().length)
+											if ($('#other-list-' + elemId + ' .intab').html().trim().length)
 												return false;
 											else
 												return true;
@@ -361,11 +361,11 @@ $(function () {
 								//Re-initialize yearpickers
 								initDatePickerforPerformanceDocuments(); */
 							}
-						}else{
+						} else {
 							var key = 1;
 							$("#self-assessment-list").html(Mustache.render($("#template-self-assessment").html(), {
 								documents: response.upload_data.self_assessment_documents,
-								"key": function(){
+								"key": function () {
 									return key++;
 								},
 								"documentPath": function () {
@@ -413,12 +413,12 @@ $(function () {
 	});
 	//---End form validation
 
-	function initDatePickerforPerformanceDocuments(){
+	function initDatePickerforPerformanceDocuments() {
 		$('.yearpick').datetimepicker({
 			useCurrent: false,
 			format: 'YYYY',
-			maxDate: moment().subtract(1,'months').endOf('month').format('YYYY-MM-DD'),
-			minDate:'2010',
+			maxDate: moment().subtract(1, 'months').endOf('month').format('YYYY-MM-DD'),
+			minDate: '2010',
 			icons: {
 				previous: 'i i-keyboard_arrow_left',
 				next: 'i i-keyboard_arrow_right',
@@ -426,7 +426,18 @@ $(function () {
 		}).on('dp.hide', function (e) {
 			$(this).val(e.date.format('YYYY'));
 		});
-
+		$('.yearpickSelected').datetimepicker({
+			useCurrent: true,
+			format: 'YYYY',
+			maxDate: moment().subtract(0, 'months').endOf('month').format('YYYY-MM-DD'),
+			minDate: '2010',
+			icons: {
+				previous: 'i i-keyboard_arrow_left',
+				next: 'i i-keyboard_arrow_right',
+			}
+		}).on('dp.hide', function (e) {
+			$(this).val(e.date.format('YYYY'));
+		});
 		//---Search performance documents by year
 		$('.input-search-year').on("blur", function () {
 			var inputElem = $(this);
@@ -446,7 +457,7 @@ $(function () {
 				var parentElem = inputElem.closest('.intab');
 				parentElem.find('span.year-lbl').html(inputData.year);
 				parentElem.children('.row').not('.upload-row').remove();
-				parentElem.children('.header').after(Mustache.render($("#template-performance-filter").html(), { 
+				parentElem.children('.header').after(Mustache.render($("#template-performance-filter").html(), {
 					documents: data,
 					"documentPath": function () {
 						return base_url + this.filepath;
@@ -472,15 +483,15 @@ $(function () {
 			year: $("#key-year").val()
 		}
 
-		var quarterName ='';
-		if(inputData.quarter == 1)
-			quarterName = 'JAN - MAR '+inputData.year;
-		else if(inputData.quarter == 2)
-			quarterName = 'APR - JUN '+inputData.year;
-		else if(inputData.quarter == 3)
-			quarterName = 'JUL - SEP '+inputData.year;
+		var quarterName = '';
+		if (inputData.quarter == 1)
+			quarterName = 'JAN - MAR ' + inputData.year;
+		else if (inputData.quarter == 2)
+			quarterName = 'APR - JUN ' + inputData.year;
+		else if (inputData.quarter == 3)
+			quarterName = 'JUL - SEP ' + inputData.year;
 		else
-			quarterName = 'OCT - DEC '+inputData.year;
+			quarterName = 'OCT - DEC ' + inputData.year;
 
 		$("#label-duration").html(quarterName);
 
@@ -492,8 +503,8 @@ $(function () {
 		}).done(function (data) {
 			if (data != null) {
 				$.each(data.key_indicators, function (key, value) {
-				
-					if(data.status == '1'){
+
+					if (data.status == '1') {
 						$(".key_indicators_save_btn_u_s").text("Approved");
 						$("#key_indicators_save_btn_u").text("Approved");
 						$('.key_indicators_approve_btn').val('Approved');
@@ -502,9 +513,9 @@ $(function () {
 						$('#key_indicators_save_btn').prop('disabled', true);
 						$('#key_indicators_save_btn_u').prop('disabled', true);
 						$("#key_indicators_save_btn_u").addClass("btn btn-success");
-						
+
 						document.getElementById("fieldset_disable").disabled = true;
-					}else{
+					} else {
 						$('#key_indicators_save_btn_u').removeClass("btn btn-success");
 						$('#key_indicators_save_btn_u').removeAttr('disabled');
 						$("#key_indicators_save_btn_u").text("SAVE");
@@ -518,11 +529,11 @@ $(function () {
 						document.getElementById("fieldset_disable").disabled = false;
 					}
 
-					if(key=='liquidity' && value){
+					if (key == 'liquidity' && value) {
 						$("#form-key-indicators-approve").addClass("d-block");
 					}
 
-					if(key == 'liquidity' | key == 'change_in_cash_ytd' | key == 'change_in_net_assets_in_quarter')
+					if (key == 'liquidity' | key == 'change_in_cash_ytd' | key == 'change_in_net_assets_in_quarter')
 						$("input[name='" + key + "']").val(dollarUSLocale.format(value));
 					else
 						$("input[name='" + key + "']").val(value);
@@ -563,7 +574,7 @@ $(function () {
 		var formValues = form.serializeArray();
 		var values = {}
 		$.each(formValues, function (key, el) {
-			if(el.name == "qualitative_narrative")
+			if (el.name == "qualitative_narrative")
 				values[el.name] = el.value;
 			else
 				values[el.name] = +el.value.replace(/,/g, "");
@@ -581,7 +592,7 @@ $(function () {
 			data: inputData,
 			dataType: 'json'
 		}).done(function (data) {
-			if(data.success){		
+			if (data.success) {
 				showDialogBox('success', data.message);
 			} else {
 				showDialogBox('error', data.message);
@@ -591,53 +602,53 @@ $(function () {
 
 	//End of form submit
 
-		//Key indicators form approve
-		$("#form-key-indicators-approve").click( function() {
-			var statusval='';
-			var statusvals = $(this).val();
-			
-			if(statusvals == 'Approved'){
-				statusval= 0; 
-			}else{
-				statusval= 1; 
+	//Key indicators form approve
+	$("#form-key-indicators-approve").click(function () {
+		var statusval = '';
+		var statusvals = $(this).val();
+
+		if (statusvals == 'Approved') {
+			statusval = 0;
+		} else {
+			statusval = 1;
+		}
+
+		var inputData = {
+			affiliate_id: $('#affiliate_id_val').val(),
+			quarter: $("#key-quarter").val(),
+			year: $("#key-year").val(),
+			status: statusval,
+		}
+
+		$.ajax({
+			type: 'POST',
+			url: base_url + 'module/affiliate/key-indicators/approve',
+			data: inputData,
+			dataType: 'json'
+		}).done(function (data) {
+			if (statusval == '1') {
+				document.getElementById("fieldset_disable").disabled = true;
+				$('.key_indicators_approve_btn').val('Approved');
+				$(".key_indicators_approve_btn").addClass("btn btn-success");
+				$('#key_indicators_save_btn').prop('disabled', true);
+			} else {
+				$('.key_indicators_approve_btn').val('Approve');
+				$(".key_indicators_approve_btn").removeClass("btn btn-success");
+				$(".key_indicators_approve_btn").addClass("btn btn-primary");
+				$('#key_indicators_save_btn').removeAttr('disabled');
+				$('#key_indicators_save_btn_s').removeAttr('disabled');
+				document.getElementById("fieldset_disable").disabled = false;
 			}
-		
-			var inputData = {
-				affiliate_id: $('#affiliate_id_val').val(),
-				quarter: $("#key-quarter").val(),
-				year: $("#key-year").val(),
-				status: statusval,			
+
+			if (data.success) {
+				showDialogBox('success', data.message);
+			} else {
+				showDialogBox('error', data.message);
 			}
-	
-			$.ajax({
-				type: 'POST',
-				url: base_url + 'module/affiliate/key-indicators/approve',
-				data: inputData,
-				dataType: 'json'
-			}).done(function (data) {
-				if(statusval == '1'){
-					document.getElementById("fieldset_disable").disabled = true;
-					$('.key_indicators_approve_btn').val('Approved');
-					$(".key_indicators_approve_btn").addClass("btn btn-success");
-					$('#key_indicators_save_btn').prop('disabled', true);
-				}else{
-					$('.key_indicators_approve_btn').val('Approve');
-					$(".key_indicators_approve_btn").removeClass("btn btn-success");
-					$(".key_indicators_approve_btn").addClass("btn btn-primary");
-					$('#key_indicators_save_btn').removeAttr('disabled');
-					$('#key_indicators_save_btn_s').removeAttr('disabled');
-					document.getElementById("fieldset_disable").disabled = false;
-				}		
-				
-				if(data.success){		
-					showDialogBox('success', data.message);
-				} else {
-					showDialogBox('error', data.message);
-				}
-			});
 		});
-	
-		//End of form approve
+	});
+
+	//End of form approve
 
 	//Initialize comment box for the document
 	function initCommentBox() {
@@ -649,9 +660,9 @@ $(function () {
 		$('.input-comment').keydown(function (e) {
 			var inputElem = $(this);
 			if (e.keyCode == 13 && inputElem.val() != "") {
-				var document_custom_type=inputElem.data('doctypecustom');
-				if(document_custom_type=='undefined' || document_custom_type==''){
-					document_custom_type='';
+				var document_custom_type = inputElem.data('doctypecustom');
+				if (document_custom_type == 'undefined' || document_custom_type == '') {
+					document_custom_type = '';
 				}
 				var inputData = {
 					document_id: inputElem.data('document'),
@@ -678,7 +689,7 @@ $(function () {
 							"commentTime": function () {
 								return moment().format("Do MMM YYYY | HH:mm");
 							}
-						}));	
+						}));
 						showDialogBox('success', data.message);
 					} else {
 						showDialogBox('error', data.message);
@@ -719,7 +730,7 @@ $(function () {
 								data: inputData,
 								dataType: 'json'
 							}).done(function (data) {
-								if(data.success){		
+								if (data.success) {
 									showDialogBox('success', data.message);
 								} else {
 									showDialogBox('error', data.message);
@@ -744,7 +755,7 @@ $(function () {
 
 	$("form.l_dZUpload").each(function () {
 		var formElement = $(this);
-		formElement.dropzone({	
+		formElement.dropzone({
 			autoProcessQueue: false,
 			url: base_url + 'module/affiliate/document/doupload',
 			addRemoveLinks: true,
@@ -753,8 +764,8 @@ $(function () {
 				var myDropzone = this;
 				$(".btn-upload-l").click(function (e) {
 					e.preventDefault();
-				
-						myDropzone.processQueue();
+
+					myDropzone.processQueue();
 				});
 				this.on("addedfile", function (file) {
 					$('.collapsedoc').collapse('show');
@@ -775,7 +786,7 @@ $(function () {
 				var count = 1;
 				$('#legal_loop').html(Mustache.render($("#template-legal").html(), {
 					documents: resp,
-					"count": function(){
+					"count": function () {
 						return count++;
 					},
 					"documentPath": function () {
@@ -797,7 +808,7 @@ $(function () {
 			error: function (file, response) {
 				file.previewElement.classList.add("dz-error");
 			},
-			sending: function(file, xhr, formData){
+			sending: function (file, xhr, formData) {
 				//Append data for all other Documents
 				var data = formElement.serializeArray();
 				$.each(data, function (key, el) {
@@ -806,8 +817,8 @@ $(function () {
 			}
 		});
 	});
-	
-	
+
+
 	$("form.o_dZUpload").each(function () {
 		var formElement = $(this);
 		formElement.dropzone({
@@ -819,8 +830,8 @@ $(function () {
 				var myDropzone = this;
 				$(".btn-upload-o").click(function (e) {
 					e.preventDefault();
-				
-						myDropzone.processQueue();
+
+					myDropzone.processQueue();
 				});
 				this.on("addedfile", function (file) {
 					$('.collapsedoc').collapse('show');
@@ -836,12 +847,12 @@ $(function () {
 				showDialogBox('success', 'Document has been uploaded!');
 
 				var resp = JSON.parse(response);
-				
+
 
 				var docType = formElement.find('input[name="document_type"]').val();
 				var notification = formElement.find('input[name="notification"]').val();
 
-				if(docType == "other_compliance_document"){
+				if (docType == "other_compliance_document") {
 					var containerElem = '#com_other_loop';
 					var rendertemplateother = "#template-other";
 				} else {
@@ -852,16 +863,16 @@ $(function () {
 				var count = 1;
 				$(containerElem).html(Mustache.render($(rendertemplateother).html(), {
 					documents: resp,
-					"count": function(){
+					"count": function () {
 						return count++;
 					},
 					"documentPath": function () {
 						return base_url + this.other_upload_file;
 					},
-					"documentType": function(){
+					"documentType": function () {
 						return docType;
 					},
-					"notifyMessage": function(){
+					"notifyMessage": function () {
 						return notification;
 					},
 					"comments": this.comments,
@@ -871,16 +882,16 @@ $(function () {
 					"commentTime": function () {
 						return moment().format("Do MMM YYYY | HH:mm");
 					}
-					
+
 				}));
-				
+
 				initCommentBox();
 				init_delect_upload();
 			},
 			error: function (file, response) {
 				file.previewElement.classList.add("dz-error");
 			},
-			sending: function(file, xhr, formData){
+			sending: function (file, xhr, formData) {
 				var data = formElement.serializeArray();
 				$.each(data, function (key, el) {
 					formData.append(el.name, el.value);
@@ -890,158 +901,158 @@ $(function () {
 	});
 
 
-	function init_delect_upload(){
+	function init_delect_upload() {
 
-	$('.delete_upload').click(function () {
-		var docType = $(this).attr('doc_type');
-		var inputData = {
-			doc_type: $(this).attr('doc_type'),
-			del_document_id:$(this).attr('del_document_id'),
-			affiliate_id: $(this).attr('a_id_document'),
-			doc_type_id: $(this).attr('doc_type_id'),
-		}
-		
-		$('#dialog').NitroDialog({
-			action: "open",
-			backdrop: true,
-			message: '<h4 class="bold m-b-15"><i class="i i-warning text-warning m-r-10"></i>Confirm</h4><p>Do you want to delete this document?</p>',
-			buttons: [
-				{
-					label: 'Yes',
-					class: "btn btn-primary mr-1",
-					action: function () {
-
-
-	$.ajax({
-			type: 'POST',
-			url: base_url + 'module/affiliate/document/delete_upload',
-			data: inputData,
-			dataType: 'json'
-		}).done(function (response) {
-	
-			showDialogBox('success', 'Document has been deleted!');
-
-				var resp = response;
-				
-				if(docType == 'legal_compliance_document'){
-	
-				var count = 1;
-				$('#legal_loop').html(Mustache.render($("#template-legal").html(), {
-					documents: resp,
-					"count": function(){
-						return count++;
-					},
-					"documentPath": function () {
-						return base_url + this.quarterly_upload_file;
-					},
-					"comments": this.comments,
-					"avatar": function () {
-						return (this.first_name.charAt(0) + this.last_name.charAt(0)).toUpperCase();
-					},
-					"commentTime": function () {
-						return moment().format("Do MMM YYYY | HH:mm");
-					}
-				}));
-
-
+		$('.delete_upload').click(function () {
+			var docType = $(this).attr('doc_type');
+			var inputData = {
+				doc_type: $(this).attr('doc_type'),
+				del_document_id: $(this).attr('del_document_id'),
+				affiliate_id: $(this).attr('a_id_document'),
+				doc_type_id: $(this).attr('doc_type_id'),
 			}
 
+			$('#dialog').NitroDialog({
+				action: "open",
+				backdrop: true,
+				message: '<h4 class="bold m-b-15"><i class="i i-warning text-warning m-r-10"></i>Confirm</h4><p>Do you want to delete this document?</p>',
+				buttons: [
+					{
+						label: 'Yes',
+						class: "btn btn-primary mr-1",
+						action: function () {
 
-			if(docType == 'other_compliance_document'){
 
-				var count = 1;
-				$('#com_other_loop').html(Mustache.render($("#template-other").html(), {
-					documents: resp,
-					"count": function(){
-						return count++;
+							$.ajax({
+								type: 'POST',
+								url: base_url + 'module/affiliate/document/delete_upload',
+								data: inputData,
+								dataType: 'json'
+							}).done(function (response) {
+
+								showDialogBox('success', 'Document has been deleted!');
+
+								var resp = response;
+
+								if (docType == 'legal_compliance_document') {
+
+									var count = 1;
+									$('#legal_loop').html(Mustache.render($("#template-legal").html(), {
+										documents: resp,
+										"count": function () {
+											return count++;
+										},
+										"documentPath": function () {
+											return base_url + this.quarterly_upload_file;
+										},
+										"comments": this.comments,
+										"avatar": function () {
+											return (this.first_name.charAt(0) + this.last_name.charAt(0)).toUpperCase();
+										},
+										"commentTime": function () {
+											return moment().format("Do MMM YYYY | HH:mm");
+										}
+									}));
+
+
+								}
+
+
+								if (docType == 'other_compliance_document') {
+
+									var count = 1;
+									$('#com_other_loop').html(Mustache.render($("#template-other").html(), {
+										documents: resp,
+										"count": function () {
+											return count++;
+										},
+										"documentPath": function () {
+											return base_url + this.other_upload_file;
+										},
+										"documentType": function () {
+											return docType;
+										},
+										"notifyMessage": function () {
+											return "Compliance other document is uploaded";
+										},
+										"comments": this.comments,
+										"avatar": function () {
+											return (this.first_name.charAt(0) + this.last_name.charAt(0)).toUpperCase();
+										},
+										"commentTime": function () {
+											return moment().format("Do MMM YYYY | HH:mm");
+										}
+
+									}));
+								}
+
+
+								if (docType == 'other_performance_assessment_documents') {
+
+									var count = 1;
+									$('#per_other_loop').html(Mustache.render($("#template-per-other").html(), {
+										documents: resp,
+										"count": function () {
+											return count++;
+										},
+										"documentPath": function () {
+											return base_url + this.other_upload_file;
+										},
+										"documentType": function () {
+											return docType;
+										},
+										"notifyMessage": function () {
+											return "Compliance other document is uploaded";
+										},
+										"comments": this.comments,
+										"avatar": function () {
+											return (this.first_name.charAt(0) + this.last_name.charAt(0)).toUpperCase();
+										},
+										"commentTime": function () {
+											return moment().format("Do MMM YYYY | HH:mm");
+										}
+
+									}));
+								}
+
+								initCommentBox();
+								init_delect_upload();
+
+
+							});
+							$('#dialog').NitroDialog({ action: "close" });
+						}
 					},
-					"documentPath": function () {
-						return base_url + this.other_upload_file;
-					},
-					"documentType": function(){
-						return docType;
-					},
-					"notifyMessage": function(){
-						return "Compliance other document is uploaded";
-					},
-					"comments": this.comments,
-					"avatar": function () {
-						return (this.first_name.charAt(0) + this.last_name.charAt(0)).toUpperCase();
-					},
-					"commentTime": function () {
-						return moment().format("Do MMM YYYY | HH:mm");
+					{
+						label: 'Cancel',
+						class: "btn btn-secondary",
+						action: function () {
+							$('#dialog').NitroDialog({ action: "close" });
+						}
 					}
-					
-				}));
-			}
-
-
-			if(docType == 'other_performance_assessment_documents'){
-
-				var count = 1;
-				$('#per_other_loop').html(Mustache.render($("#template-per-other").html(), {
-					documents: resp,
-					"count": function(){
-						return count++;
-					},
-					"documentPath": function () {
-						return base_url + this.other_upload_file;
-					},
-					"documentType": function(){
-						return docType;
-					},
-					"notifyMessage": function(){
-						return "Compliance other document is uploaded";
-					},
-					"comments": this.comments,
-					"avatar": function () {
-						return (this.first_name.charAt(0) + this.last_name.charAt(0)).toUpperCase();
-					},
-					"commentTime": function () {
-						return moment().format("Do MMM YYYY | HH:mm");
-					}
-					
-				}));
-			}
-
-				initCommentBox();
-				init_delect_upload();
-
-
+				]
 			});
-            $('#dialog').NitroDialog({ action: "close" });
-					}
-				},
-				{
-					label: 'Cancel',
-					class: "btn btn-secondary",
-					action: function () {
-						$('#dialog').NitroDialog({ action: "close" });
-					}
-				}
-			]
+
+
+
 		});
-
-
-
-	});
 	}
 
 
 });
 
-function reupload(type, docId){
-	var elem = "#"+type+'-row-'+docId;
+function reupload(type, docId) {
+	var elem = "#" + type + '-row-' + docId;
 	$(elem).find('.chatBox').toggleClass("d-none");
 	$(elem).find('.upload').toggleClass("d-none");
 }
 function openTab(val) {
 	$('#tab-inner a[href="#' + val + '"]').tab('show');
-	if(val == 'nav-y4' | val == 'nav-y5'){
+	if (val == 'nav-y4' | val == 'nav-y5') {
 		$("#view-past-documents").hide();
 	} else {
 		$("#view-past-documents").show();
-		if(val == 'nav-y1'){
+		if (val == 'nav-y1') {
 			$("#btn-year-pick").removeClass('d-inline').addClass('d-none');
 			$("#btn-year-pick").attr('disabled', 'disabled');
 			$("#monthpicker").removeAttr('disabled');
@@ -1051,8 +1062,8 @@ function openTab(val) {
 			$("#quarterpicker").attr('disabled', 'disabled');
 			$("#quarteryearpicker").attr('disabled', 'disabled');
 			$("#yearpicker").attr('disabled', 'disabled');
-			$("#tempmonthpicker").val($("#monthpicker").val()+"/"+$("#monthyearpicker").val());
-		} else if(val == 'nav-y2'){
+			$("#tempmonthpicker").val($("#monthpicker").val() + "/" + $("#monthyearpicker").val());
+		} else if (val == 'nav-y2') {
 			$("#btn-year-pick").removeClass('d-none').addClass('d-inline');
 			$("#btn-month-pick").removeClass('d-inline').addClass('d-none');
 			$("#monthpicker").attr('disabled', 'disabled');
@@ -1063,7 +1074,7 @@ function openTab(val) {
 			$("#quarter-dropdown").removeClass('d-none').addClass('d-inline');
 			$("#tempquarterpicker").val($("#quarterpicker").val());
 			$("#tempyearpicker").val($("#quarteryearpicker").val());
-		} else if(val == 'nav-y3'){
+		} else if (val == 'nav-y3') {
 			$("#btn-year-pick").removeClass('d-none').addClass('d-inline');
 			$("#btn-month-pick").removeClass('d-inline').addClass('d-none');
 			$("#quarter-dropdown").removeClass('d-inline').addClass('d-none');
@@ -1075,172 +1086,172 @@ function openTab(val) {
 			$("#tempyearpicker").val($("#yearpicker").val());
 		}
 		$("#input-interval").val(val);
-  	}
+	}
 }
 
-  $('.liquidity_v_blur').on('blur', function() {
+$('.liquidity_v_blur').on('blur', function () {
 
-	var get_val = $('#'+$(this).attr('id')).val();
+	var get_val = $('#' + $(this).attr('id')).val();
 
 	var val = +get_val.replace(/,/g, "");
-	if(isNaN(val)){
+	if (isNaN(val)) {
 		showDialogBox('error', 'Enter a valid number');
-		$('#'+$(this).attr('id')).val('');
+		$('#' + $(this).attr('id')).val('');
 		$("#liquidity_v").val('');
 
-		document.getElementById($(this).attr('id')).style.borderColor = "#ff002b"; 
-	}else{
-		document.getElementById($(this).attr('id')).style.borderColor = "#ced4da"; 
+		document.getElementById($(this).attr('id')).style.borderColor = "#ff002b";
+	} else {
+		document.getElementById($(this).attr('id')).style.borderColor = "#ced4da";
 	}
-	
-	var liquidity_assets_available_v = 	+$('#liquidity_assets_available_v').val().replace(/,/g, "");
+
+	var liquidity_assets_available_v = +$('#liquidity_assets_available_v').val().replace(/,/g, "");
 	var liquidity_contractual_restrictions_v = +$('#liquidity_contractual_restrictions_v').val().replace(/,/g, "");
 	var liquidity_restrictions_by_donor_v = +$('#liquidity_restrictions_by_donor_v').val().replace(/,/g, "");
 
-	if(liquidity_assets_available_v || liquidity_contractual_restrictions_v || liquidity_restrictions_by_donor_v){
-		$("#liquidity_assets_available_v").prop('required',true);
-		$("#liquidity_contractual_restrictions_v").prop('required',true);
-		$("#liquidity_restrictions_by_donor_v").prop('required',true);
-	}else{
-		$("#liquidity_assets_available_v").prop('required',false);
-		$("#liquidity_contractual_restrictions_v").prop('required',false);
-		$("#liquidity_restrictions_by_donor_v").prop('required',false);
+	if (liquidity_assets_available_v || liquidity_contractual_restrictions_v || liquidity_restrictions_by_donor_v) {
+		$("#liquidity_assets_available_v").prop('required', true);
+		$("#liquidity_contractual_restrictions_v").prop('required', true);
+		$("#liquidity_restrictions_by_donor_v").prop('required', true);
+	} else {
+		$("#liquidity_assets_available_v").prop('required', false);
+		$("#liquidity_contractual_restrictions_v").prop('required', false);
+		$("#liquidity_restrictions_by_donor_v").prop('required', false);
 		$("#liquidity_v").val('');
 	}
 
-	if(liquidity_assets_available_v || liquidity_contractual_restrictions_v || liquidity_restrictions_by_donor_v){
+	if (liquidity_assets_available_v || liquidity_contractual_restrictions_v || liquidity_restrictions_by_donor_v) {
 
-		var liquidity_s =  ((liquidity_assets_available_v) - ((+liquidity_contractual_restrictions_v) + (+liquidity_restrictions_by_donor_v)) )  ;
+		var liquidity_s = ((liquidity_assets_available_v) - ((+liquidity_contractual_restrictions_v) + (+liquidity_restrictions_by_donor_v)));
 
-	var f_liquidity_s = 	parseFloat(liquidity_s).toFixed(0);
-		if($.isNumeric(f_liquidity_s) ) { 
+		var f_liquidity_s = parseFloat(liquidity_s).toFixed(0);
+		if ($.isNumeric(f_liquidity_s)) {
 			$("#liquidity_v").val(dollarUSLocale.format(f_liquidity_s));
-		}else{
+		} else {
 			$("#liquidity_v").val('');
-		}	
+		}
 	}
 });
 
-$('.current_ratio_blur').on('blur', function() {
+$('.current_ratio_blur').on('blur', function () {
 
-	
-	if($('#current_liabilities_v').val() == 0 && $('#current_liabilities_v').val() != ""){
-		showDialogBox('error','Division by zero not possible');
+
+	if ($('#current_liabilities_v').val() == 0 && $('#current_liabilities_v').val() != "") {
+		showDialogBox('error', 'Division by zero not possible');
 	}
 
-	var get_val = $('#'+$(this).attr('id')).val();
+	var get_val = $('#' + $(this).attr('id')).val();
 
 	var val = +get_val.replace(/,/g, "");
-	if(isNaN(val)  ){
+	if (isNaN(val)) {
 		showDialogBox('error', 'Enter a valid number');
-		$('#'+$(this).attr('id')).val('');
+		$('#' + $(this).attr('id')).val('');
 		$("#current_ratio_v").val('');
-		document.getElementById($(this).attr('id')).style.borderColor = "#ff002b"; 
-	}else{
-		document.getElementById($(this).attr('id')).style.borderColor = "#ced4da"; 
+		document.getElementById($(this).attr('id')).style.borderColor = "#ff002b";
+	} else {
+		document.getElementById($(this).attr('id')).style.borderColor = "#ced4da";
 	}
-	var current_assets_v = 	+$('#current_assets_v').val().replace(/,/g, "");
+	var current_assets_v = +$('#current_assets_v').val().replace(/,/g, "");
 	var current_liabilities_v = +$('#current_liabilities_v').val().replace(/,/g, "");
 
-	if(current_assets_v || current_liabilities_v){
-		$("#current_assets_v").prop('required',true);
-		$("#current_liabilities_v").prop('required',true);
-	}else{
-		$("#current_assets_v").prop('required',false);
-		$("#current_liabilities_v").prop('required',false);
+	if (current_assets_v || current_liabilities_v) {
+		$("#current_assets_v").prop('required', true);
+		$("#current_liabilities_v").prop('required', true);
+	} else {
+		$("#current_assets_v").prop('required', false);
+		$("#current_liabilities_v").prop('required', false);
 		$("#current_ratio_v").val('');
 	}
-	if(current_assets_v && current_liabilities_v){
+	if (current_assets_v && current_liabilities_v) {
 
-		var current_ratio_s  = ((current_assets_v) / (current_liabilities_v)) ;
-		var f_current_ratio_s = parseFloat(current_ratio_s).toFixed(1); 
-		if($.isNumeric(f_current_ratio_s)) { 
+		var current_ratio_s = ((current_assets_v) / (current_liabilities_v));
+		var f_current_ratio_s = parseFloat(current_ratio_s).toFixed(1);
+		if ($.isNumeric(f_current_ratio_s)) {
 			$("#current_ratio_v").val(f_current_ratio_s);
-		}else{
+		} else {
 			$("#current_ratio_v").val('');
 
 		}
-		
+
 	}
 });
 
-$('.current_debt_ratio_blur').on('blur', function() {
+$('.current_debt_ratio_blur').on('blur', function () {
 
-	if($('#total_assets_v').val() == 0 && $('#total_assets_v').val() != ""){
-		showDialogBox('error','Division by zero not possible');
+	if ($('#total_assets_v').val() == 0 && $('#total_assets_v').val() != "") {
+		showDialogBox('error', 'Division by zero not possible');
 	}
 
-	var get_val = $('#'+$(this).attr('id')).val();
+	var get_val = $('#' + $(this).attr('id')).val();
 
 	var val = +get_val.replace(/,/g, "");
-	if(isNaN(val) ){
+	if (isNaN(val)) {
 		showDialogBox('error', 'Enter a valid number');
-		$('#'+$(this).attr('id')).val('');
+		$('#' + $(this).attr('id')).val('');
 		$("#current_debt_ratio_v").val('');
-		document.getElementById($(this).attr('id')).style.borderColor = "#ff002b"; 
-	}else{
-		document.getElementById($(this).attr('id')).style.borderColor = "#ced4da"; 
+		document.getElementById($(this).attr('id')).style.borderColor = "#ff002b";
+	} else {
+		document.getElementById($(this).attr('id')).style.borderColor = "#ced4da";
 	}
 	var total_liabilities_v = +$('#total_liabilities_v').val().replace(/,/g, "");
 	var total_assets_v = +$('#total_assets_v').val().replace(/,/g, "");
-	if(total_liabilities_v || total_assets_v){
-		$("#total_liabilities_v").prop('required',true);
-		$("#total_assets_v").prop('required',true);
-	}else{
-		$("#total_liabilities_v").prop('required',false);
-		$("#total_assets_v").prop('required',false);
+	if (total_liabilities_v || total_assets_v) {
+		$("#total_liabilities_v").prop('required', true);
+		$("#total_assets_v").prop('required', true);
+	} else {
+		$("#total_liabilities_v").prop('required', false);
+		$("#total_assets_v").prop('required', false);
 		$("#current_debt_ratio_v").val('');
 
 	}
-	if(total_liabilities_v && total_assets_v){
+	if (total_liabilities_v && total_assets_v) {
 
-		var current_debt_ratio_s =  ((total_liabilities_v) / (total_assets_v))   ;
-		var f_current_debt_ratio_s = parseFloat(current_debt_ratio_s).toFixed(1); 
+		var current_debt_ratio_s = ((total_liabilities_v) / (total_assets_v));
+		var f_current_debt_ratio_s = parseFloat(current_debt_ratio_s).toFixed(1);
 
-		if($.isNumeric(f_current_debt_ratio_s) ) { 
+		if ($.isNumeric(f_current_debt_ratio_s)) {
 			$("#current_debt_ratio_v").val(f_current_debt_ratio_s);
-		}else{
+		} else {
 			$("#current_debt_ratio_v").val('');
 
 		}
-		
+
 	}
 });
 
 
-$('.change_in_cash_ytd_blur').on('blur', function() {
+$('.change_in_cash_ytd_blur').on('blur', function () {
 
-	var get_val = $('#'+$(this).attr('id')).val();
+	var get_val = $('#' + $(this).attr('id')).val();
 
 	var val = +get_val.replace(/,/g, "");
-	if(isNaN(val)){
+	if (isNaN(val)) {
 		showDialogBox('error', 'Enter a valid number');
-		$('#'+$(this).attr('id')).val('');
+		$('#' + $(this).attr('id')).val('');
 		$("#change_in_cash_ytd_v").val('');
 
-		document.getElementById($(this).attr('id')).style.borderColor = "#ff002b"; 
-	}else{
-		document.getElementById($(this).attr('id')).style.borderColor = "#ced4da"; 
+		document.getElementById($(this).attr('id')).style.borderColor = "#ff002b";
+	} else {
+		document.getElementById($(this).attr('id')).style.borderColor = "#ced4da";
 	}
-	var from_operations_v = 	+$('#from_operations_v').val().replace(/,/g, "");
-	var from_financing_v = 	+$('#from_financing_v').val().replace(/,/g, "");
+	var from_operations_v = +$('#from_operations_v').val().replace(/,/g, "");
+	var from_financing_v = +$('#from_financing_v').val().replace(/,/g, "");
 	var from_investing_v = +$('#from_investing_v').val().replace(/,/g, "");
-	if(from_operations_v || from_financing_v || from_investing_v){
-		$("#from_operations_v").prop('required',true);
-		$("#from_financing_v").prop('required',true);
-		$("#from_investing_v").prop('required',true);
-	}else{
+	if (from_operations_v || from_financing_v || from_investing_v) {
+		$("#from_operations_v").prop('required', true);
+		$("#from_financing_v").prop('required', true);
+		$("#from_investing_v").prop('required', true);
+	} else {
 		$("#change_in_cash_ytd_v").val('');
 	}
 
-	if(from_operations_v || from_financing_v || from_investing_v){
+	if (from_operations_v || from_financing_v || from_investing_v) {
 
-		var change_in_cash_ytd_s =  ((+from_financing_v) + (+from_operations_v) + (+from_investing_v))   ;
-		var f_change_in_cash_ytd_s = parseFloat(change_in_cash_ytd_s).toFixed(0); 
+		var change_in_cash_ytd_s = ((+from_financing_v) + (+from_operations_v) + (+from_investing_v));
+		var f_change_in_cash_ytd_s = parseFloat(change_in_cash_ytd_s).toFixed(0);
 
-		if($.isNumeric(f_change_in_cash_ytd_s)) { 
+		if ($.isNumeric(f_change_in_cash_ytd_s)) {
 			$("#change_in_cash_ytd_v").val(dollarUSLocale.format(f_change_in_cash_ytd_s));
-		}else{
+		} else {
 			$("#change_in_cash_ytd_v").val('');
 
 		}
@@ -1248,294 +1259,294 @@ $('.change_in_cash_ytd_blur').on('blur', function() {
 });
 
 
-$('.operating_efficiency_program_value_blur').on('blur', function() {
-	var get_val = $('#'+$(this).attr('id')).val();
+$('.operating_efficiency_program_value_blur').on('blur', function () {
+	var get_val = $('#' + $(this).attr('id')).val();
 
 	var val = +get_val.replace(/,/g, "");
-	if(isNaN(val) || val <= 0){
+	if (isNaN(val) || val <= 0) {
 		showDialogBox('error', 'Enter a valid number');
-		$('#'+$(this).attr('id')).val('');
+		$('#' + $(this).attr('id')).val('');
 		$("#operating_efficiency_program_value_v").val('');
 
-		document.getElementById($(this).attr('id')).style.borderColor = "#ff002b"; 
-	}else{
-		document.getElementById($(this).attr('id')).style.borderColor = "#ced4da"; 
+		document.getElementById($(this).attr('id')).style.borderColor = "#ff002b";
+	} else {
+		document.getElementById($(this).attr('id')).style.borderColor = "#ced4da";
 	}
-	var operating_efficiency_program_expense_v = 	+$('#operating_efficiency_program_expense_v').val().replace(/,/g, "");
-	var operating_efficiency_program_total_expense_v = 	+$('#operating_efficiency_program_total_expense_v').val().replace(/,/g, "");
-	if(operating_efficiency_program_expense_v || operating_efficiency_program_total_expense_v){
-		$("#operating_efficiency_program_expense_v").prop('required',true);
-		$("#operating_efficiency_program_total_expense_v").prop('required',true);
-	}else{
-		$("#operating_efficiency_program_expense_v").prop('required',false);
-		$("#operating_efficiency_program_total_expense_v").prop('required',false);
+	var operating_efficiency_program_expense_v = +$('#operating_efficiency_program_expense_v').val().replace(/,/g, "");
+	var operating_efficiency_program_total_expense_v = +$('#operating_efficiency_program_total_expense_v').val().replace(/,/g, "");
+	if (operating_efficiency_program_expense_v || operating_efficiency_program_total_expense_v) {
+		$("#operating_efficiency_program_expense_v").prop('required', true);
+		$("#operating_efficiency_program_total_expense_v").prop('required', true);
+	} else {
+		$("#operating_efficiency_program_expense_v").prop('required', false);
+		$("#operating_efficiency_program_total_expense_v").prop('required', false);
 		$("#operating_efficiency_program_value_v").val('');
 
 	}
-	if(operating_efficiency_program_expense_v && operating_efficiency_program_total_expense_v){
+	if (operating_efficiency_program_expense_v && operating_efficiency_program_total_expense_v) {
 
-		var operating_efficiency_program_value_s =  ((operating_efficiency_program_expense_v) / (operating_efficiency_program_total_expense_v)) * 100  ;
-		var f_operating_efficiency_program_value_s = parseFloat(operating_efficiency_program_value_s).toFixed(0); 
+		var operating_efficiency_program_value_s = ((operating_efficiency_program_expense_v) / (operating_efficiency_program_total_expense_v)) * 100;
+		var f_operating_efficiency_program_value_s = parseFloat(operating_efficiency_program_value_s).toFixed(0);
 
-		if($.isNumeric(f_operating_efficiency_program_value_s) && f_operating_efficiency_program_value_s > 0) { 
+		if ($.isNumeric(f_operating_efficiency_program_value_s) && f_operating_efficiency_program_value_s > 0) {
 			$("#operating_efficiency_program_value_v").val(f_operating_efficiency_program_value_s);
-		}else{
+		} else {
 			$("#operating_efficiency_program_value_v").val('');
 
 		}
-		
+
 	}
 });
 
 
-$('.operating_efficiency_admin_value_blur').on('blur', function() {
-	var get_val = $('#'+$(this).attr('id')).val();
+$('.operating_efficiency_admin_value_blur').on('blur', function () {
+	var get_val = $('#' + $(this).attr('id')).val();
 
 	var val = +get_val.replace(/,/g, "");
-	if(isNaN(val) || val <= 0 ){
+	if (isNaN(val) || val <= 0) {
 		showDialogBox('error', 'Enter a valid number');
-		$('#'+$(this).attr('id')).val('');
+		$('#' + $(this).attr('id')).val('');
 		$("#operating_efficiency_admin_value_v").val('');
-		document.getElementById($(this).attr('id')).style.borderColor = "#ff002b"; 
-	}else{
-		document.getElementById($(this).attr('id')).style.borderColor = "#ced4da"; 
+		document.getElementById($(this).attr('id')).style.borderColor = "#ff002b";
+	} else {
+		document.getElementById($(this).attr('id')).style.borderColor = "#ced4da";
 	}
-	var operating_efficiency_admin_expense_v = 	+$('#operating_efficiency_admin_expense_v').val().replace(/,/g, "");
-	var operating_efficiency_admin_total_expense_v = 	+$('#operating_efficiency_admin_total_expense_v').val().replace(/,/g, "");
-	if(operating_efficiency_admin_expense_v || operating_efficiency_admin_total_expense_v){
-		$("#operating_efficiency_admin_expense_v").prop('required',true);
-		$("#operating_efficiency_admin_total_expense_v").prop('required',true);
-	}else{
-		$("#operating_efficiency_admin_expense_v").prop('required',false);
-		$("#operating_efficiency_admin_total_expense_v").prop('required',false);
+	var operating_efficiency_admin_expense_v = +$('#operating_efficiency_admin_expense_v').val().replace(/,/g, "");
+	var operating_efficiency_admin_total_expense_v = +$('#operating_efficiency_admin_total_expense_v').val().replace(/,/g, "");
+	if (operating_efficiency_admin_expense_v || operating_efficiency_admin_total_expense_v) {
+		$("#operating_efficiency_admin_expense_v").prop('required', true);
+		$("#operating_efficiency_admin_total_expense_v").prop('required', true);
+	} else {
+		$("#operating_efficiency_admin_expense_v").prop('required', false);
+		$("#operating_efficiency_admin_total_expense_v").prop('required', false);
 		$("#operating_efficiency_admin_value_v").val('');
 
 	}
-	if(operating_efficiency_admin_expense_v && operating_efficiency_admin_total_expense_v){
+	if (operating_efficiency_admin_expense_v && operating_efficiency_admin_total_expense_v) {
 
-		var operating_efficiency_admin_value_s =  ((operating_efficiency_admin_expense_v) / (operating_efficiency_admin_total_expense_v)) * 100  ;
+		var operating_efficiency_admin_value_s = ((operating_efficiency_admin_expense_v) / (operating_efficiency_admin_total_expense_v)) * 100;
 
-		var f_operating_efficiency_admin_value_s= parseFloat(operating_efficiency_admin_value_s).toFixed(0); 
+		var f_operating_efficiency_admin_value_s = parseFloat(operating_efficiency_admin_value_s).toFixed(0);
 
-		if($.isNumeric(f_operating_efficiency_admin_value_s) && f_operating_efficiency_admin_value_s > 0) { 
+		if ($.isNumeric(f_operating_efficiency_admin_value_s) && f_operating_efficiency_admin_value_s > 0) {
 			$("#operating_efficiency_admin_value_v").val(f_operating_efficiency_admin_value_s);
-		}else{
+		} else {
 			$("#operating_efficiency_admin_value_v").val('');
 
 		}
-		
+
 	}
 });
 
-$('.operating_efficiency_fundraising_value_blur').on('blur', function() {
+$('.operating_efficiency_fundraising_value_blur').on('blur', function () {
 
-	var get_val = $('#'+$(this).attr('id')).val();
+	var get_val = $('#' + $(this).attr('id')).val();
 
 	var val = +get_val.replace(/,/g, "");
-	if(isNaN(val) || val <= 0){
+	if (isNaN(val) || val <= 0) {
 		showDialogBox('error', 'Enter a valid number');
-		$('#'+$(this).attr('id')).val('');
+		$('#' + $(this).attr('id')).val('');
 		$("#operating_efficiency_fundraising_value_v").val('');
 
-		document.getElementById($(this).attr('id')).style.borderColor = "#ff002b"; 
-	}else{
-		document.getElementById($(this).attr('id')).style.borderColor = "#ced4da"; 
+		document.getElementById($(this).attr('id')).style.borderColor = "#ff002b";
+	} else {
+		document.getElementById($(this).attr('id')).style.borderColor = "#ced4da";
 	}
-	var operating_efficiency_fundraising_expense_v = 	+$('#operating_efficiency_fundraising_expense_v').val().replace(/,/g, "");
-	var operating_efficiency_fundraising_total_expense_v = 	+$('#operating_efficiency_fundraising_total_expense_v').val().replace(/,/g, "");
-	if(operating_efficiency_fundraising_expense_v || operating_efficiency_fundraising_total_expense_v){
-		$("#operating_efficiency_fundraising_expense_v").prop('required',true);
-		$("#operating_efficiency_fundraising_total_expense_v").prop('required',true);
-	}else{
-		$("#operating_efficiency_fundraising_expense_v").prop('required',false);
-		$("#operating_efficiency_fundraising_total_expense_v").prop('required',false);
+	var operating_efficiency_fundraising_expense_v = +$('#operating_efficiency_fundraising_expense_v').val().replace(/,/g, "");
+	var operating_efficiency_fundraising_total_expense_v = +$('#operating_efficiency_fundraising_total_expense_v').val().replace(/,/g, "");
+	if (operating_efficiency_fundraising_expense_v || operating_efficiency_fundraising_total_expense_v) {
+		$("#operating_efficiency_fundraising_expense_v").prop('required', true);
+		$("#operating_efficiency_fundraising_total_expense_v").prop('required', true);
+	} else {
+		$("#operating_efficiency_fundraising_expense_v").prop('required', false);
+		$("#operating_efficiency_fundraising_total_expense_v").prop('required', false);
 		$("#operating_efficiency_fundraising_value_v").val('');
 
 	}
-	if(operating_efficiency_fundraising_expense_v && operating_efficiency_fundraising_total_expense_v){
+	if (operating_efficiency_fundraising_expense_v && operating_efficiency_fundraising_total_expense_v) {
 
-		var operating_efficiency_fundraising_value_s =  ((operating_efficiency_fundraising_expense_v) / (operating_efficiency_fundraising_total_expense_v)) * 100  ;
+		var operating_efficiency_fundraising_value_s = ((operating_efficiency_fundraising_expense_v) / (operating_efficiency_fundraising_total_expense_v)) * 100;
 
-		var f_operating_efficiency_fundraising_value_s = parseFloat(operating_efficiency_fundraising_value_s).toFixed(0); 
+		var f_operating_efficiency_fundraising_value_s = parseFloat(operating_efficiency_fundraising_value_s).toFixed(0);
 
-		if($.isNumeric(f_operating_efficiency_fundraising_value_s)  && f_operating_efficiency_fundraising_value_s > 0) { 
+		if ($.isNumeric(f_operating_efficiency_fundraising_value_s) && f_operating_efficiency_fundraising_value_s > 0) {
 			$("#operating_efficiency_fundraising_value_v").val(f_operating_efficiency_fundraising_value_s);
-		}else{
+		} else {
 			$("#operating_efficiency_fundraising_value_v").val('');
 
 		}
-		
+
 	}
 });
 
-$('.change_in_net_assets_in_quarter_blur').on('blur', function() {
+$('.change_in_net_assets_in_quarter_blur').on('blur', function () {
 
-	var get_val = $('#'+$(this).attr('id')).val();
+	var get_val = $('#' + $(this).attr('id')).val();
 
 	var val = +get_val.replace(/,/g, "");
-	if(isNaN(val)){
+	if (isNaN(val)) {
 		showDialogBox('error', 'Enter a valid number');
-		$('#'+$(this).attr('id')).val('');
+		$('#' + $(this).attr('id')).val('');
 		$("#change_in_net_assets_in_quarter_v").val('');
 
-		document.getElementById($(this).attr('id')).style.borderColor = "#ff002b"; 
-	}else{
-		document.getElementById($(this).attr('id')).style.borderColor = "#ced4da"; 
+		document.getElementById($(this).attr('id')).style.borderColor = "#ff002b";
+	} else {
+		document.getElementById($(this).attr('id')).style.borderColor = "#ced4da";
 	}
 
-	var net_assets_in_last_quarter_value_v = 	+$('#net_assets_in_last_quarter_value_v').val().replace(/,/g, "");
-	var less_net_assets_in_last_quarter_value_v =	+$('#less_net_assets_in_last_quarter_value_v').val().replace(/,/g, "");
-	if(net_assets_in_last_quarter_value_v || less_net_assets_in_last_quarter_value_v){
-		$("#net_assets_in_last_quarter_value_v").prop('required',true);
-		$("#less_net_assets_in_last_quarter_value_v").prop('required',true);
-	}else{
-		$("#net_assets_in_last_quarter_value_v").prop('required',false);
-		$("#less_net_assets_in_last_quarter_value_v").prop('required',false);
+	var net_assets_in_last_quarter_value_v = +$('#net_assets_in_last_quarter_value_v').val().replace(/,/g, "");
+	var less_net_assets_in_last_quarter_value_v = +$('#less_net_assets_in_last_quarter_value_v').val().replace(/,/g, "");
+	if (net_assets_in_last_quarter_value_v || less_net_assets_in_last_quarter_value_v) {
+		$("#net_assets_in_last_quarter_value_v").prop('required', true);
+		$("#less_net_assets_in_last_quarter_value_v").prop('required', true);
+	} else {
+		$("#net_assets_in_last_quarter_value_v").prop('required', false);
+		$("#less_net_assets_in_last_quarter_value_v").prop('required', false);
 		$("#change_in_net_assets_in_quarter_v").val('');
 	}
 
-	if(net_assets_in_last_quarter_value_v && less_net_assets_in_last_quarter_value_v){
+	if (net_assets_in_last_quarter_value_v && less_net_assets_in_last_quarter_value_v) {
 
-		var change_in_net_assets_in_quarter_s =  ( less_net_assets_in_last_quarter_value_v - net_assets_in_last_quarter_value_v) ;
+		var change_in_net_assets_in_quarter_s = (less_net_assets_in_last_quarter_value_v - net_assets_in_last_quarter_value_v);
 
-		var f_change_in_net_assets_in_quarter_s = parseFloat(change_in_net_assets_in_quarter_s).toFixed(0); 
+		var f_change_in_net_assets_in_quarter_s = parseFloat(change_in_net_assets_in_quarter_s).toFixed(0);
 
 
-		if($.isNumeric(f_change_in_net_assets_in_quarter_s)) { 
+		if ($.isNumeric(f_change_in_net_assets_in_quarter_s)) {
 			$("#change_in_net_assets_in_quarter_v").val(dollarUSLocale.format(f_change_in_net_assets_in_quarter_s));
-		}else{
+		} else {
 			$("#change_in_net_assets_in_quarter_v").val('');
 
 		}
 	}
 });
 
-$('.days_in_cash_blur').on('blur', function() {
+$('.days_in_cash_blur').on('blur', function () {
 
-	var get_val = $('#'+$(this).attr('id')).val();
+	var get_val = $('#' + $(this).attr('id')).val();
 
 	var val = +get_val.replace(/,/g, "");
-	if(isNaN(val)  || val <= 0 ){
+	if (isNaN(val) || val <= 0) {
 		showDialogBox('error', 'Enter a valid number');
-		$('#'+$(this).attr('id')).val('');
+		$('#' + $(this).attr('id')).val('');
 		$("#days_in_cash_v").val('');
 
-		document.getElementById($(this).attr('id')).style.borderColor = "#ff002b"; 
-	}else{
-		document.getElementById($(this).attr('id')).style.borderColor = "#ced4da"; 
+		document.getElementById($(this).attr('id')).style.borderColor = "#ff002b";
+	} else {
+		document.getElementById($(this).attr('id')).style.borderColor = "#ced4da";
 	}
 
-	var Equivalents_v = 	+$('#Equivalents_v').val().replace(/,/g, "");
-	var daily_cost_operation_v =	+$('#daily_cost_operation_v').val().replace(/,/g, "");
-	if(Equivalents_v || daily_cost_operation_v){
-		$("#Equivalents_v").prop('required',true);
-		$("#daily_cost_operation_v").prop('required',true);
-	}else{
-		$("#Equivalents_v").prop('required',false);
-		$("#daily_cost_operation_v").prop('required',false);
+	var Equivalents_v = +$('#Equivalents_v').val().replace(/,/g, "");
+	var daily_cost_operation_v = +$('#daily_cost_operation_v').val().replace(/,/g, "");
+	if (Equivalents_v || daily_cost_operation_v) {
+		$("#Equivalents_v").prop('required', true);
+		$("#daily_cost_operation_v").prop('required', true);
+	} else {
+		$("#Equivalents_v").prop('required', false);
+		$("#daily_cost_operation_v").prop('required', false);
 		$("#days_in_cash_v").val('');
 	}
 
-	if(Equivalents_v && daily_cost_operation_v){
+	if (Equivalents_v && daily_cost_operation_v) {
 
-		var days_in_cash_s =  (Equivalents_v / daily_cost_operation_v) ;
+		var days_in_cash_s = (Equivalents_v / daily_cost_operation_v);
 
-		var f_days_in_cash_s = parseFloat(days_in_cash_s).toFixed(0); 
+		var f_days_in_cash_s = parseFloat(days_in_cash_s).toFixed(0);
 
 
-		if($.isNumeric(f_days_in_cash_s)) { 
+		if ($.isNumeric(f_days_in_cash_s)) {
 			$("#days_in_cash_v").val(f_days_in_cash_s);
-		}else{
+		} else {
 			$("#days_in_cash_v").val('');
 
 		}
 	}
 });
 
-$('.borad_giving_blur').on('blur', function() {
+$('.borad_giving_blur').on('blur', function () {
 
-	var get_val = $('#'+$(this).attr('id')).val();
+	var get_val = $('#' + $(this).attr('id')).val();
 
 	var val = +get_val.replace(/,/g, "");
-	if(isNaN(val) || val <= 0){
+	if (isNaN(val) || val <= 0) {
 		showDialogBox('error', 'Enter a valid number');
-		$('#'+$(this).attr('id')).val('');
+		$('#' + $(this).attr('id')).val('');
 		$("#borad_giving_v").val('');
 
-		document.getElementById($(this).attr('id')).style.borderColor = "#ff002b"; 
-	}else{
-		document.getElementById($(this).attr('id')).style.borderColor = "#ced4da"; 
+		document.getElementById($(this).attr('id')).style.borderColor = "#ff002b";
+	} else {
+		document.getElementById($(this).attr('id')).style.borderColor = "#ced4da";
 	}
 
 
 	var direct_borad_giving_v = +$('#direct_borad_giving_v').val().replace(/,/g, "");
-	var borad_commitment_v = 	+$('#borad_commitment_v').val().replace(/,/g, "");
-	if(direct_borad_giving_v || borad_commitment_v){
-		$("#direct_borad_giving_v").prop('required',true);
-		$("#borad_commitment_v").prop('required',true);
-	}else{
-		$("#direct_borad_giving_v").prop('required',false);
-		$("#borad_commitment_v").prop('required',false);
+	var borad_commitment_v = +$('#borad_commitment_v').val().replace(/,/g, "");
+	if (direct_borad_giving_v || borad_commitment_v) {
+		$("#direct_borad_giving_v").prop('required', true);
+		$("#borad_commitment_v").prop('required', true);
+	} else {
+		$("#direct_borad_giving_v").prop('required', false);
+		$("#borad_commitment_v").prop('required', false);
 		$("#borad_giving_v").val('');
 	}
 
-	if(direct_borad_giving_v && borad_commitment_v){
+	if (direct_borad_giving_v && borad_commitment_v) {
 
-		var borad_giving_s =  (direct_borad_giving_v / borad_commitment_v) * 100;
-		var f_borad_giving_s = parseFloat(borad_giving_s).toFixed(0); 
+		var borad_giving_s = (direct_borad_giving_v / borad_commitment_v) * 100;
+		var f_borad_giving_s = parseFloat(borad_giving_s).toFixed(0);
 
-		if($.isNumeric(f_borad_giving_s) && f_borad_giving_s > 0) { 
+		if ($.isNumeric(f_borad_giving_s) && f_borad_giving_s > 0) {
 			$("#borad_giving_v").val(f_borad_giving_s);
-		}else{
+		} else {
 			$("#borad_giving_v").val('');
 
 		}
 	}
 });
 
-$('.operating_reserves_percentage_blur').on('blur', function() {
+$('.operating_reserves_percentage_blur').on('blur', function () {
 
-	var get_val = $('#'+$(this).attr('id')).val();
+	var get_val = $('#' + $(this).attr('id')).val();
 
 	var val = +get_val.replace(/,/g, "");
-	if(isNaN(val) || val <= 0 ){
+	if (isNaN(val) || val <= 0) {
 		showDialogBox('error', 'Enter a valid number');
-		$('#'+$(this).attr('id')).val('');
+		$('#' + $(this).attr('id')).val('');
 		$("#operating_reserves_percentage_v").val('');
 
-		document.getElementById($(this).attr('id')).style.borderColor = "#ff002b"; 
-	}else{
-		document.getElementById($(this).attr('id')).style.borderColor = "#ced4da"; 
+		document.getElementById($(this).attr('id')).style.borderColor = "#ff002b";
+	} else {
+		document.getElementById($(this).attr('id')).style.borderColor = "#ced4da";
 	}
 
-	var operating_reserves_amount_v = 	+$('#operating_reserves_amount_v').val().replace(/,/g, "");
-	var three_months_annual_expenses_v = 	+$('#three_months_annual_expenses_v').val().replace(/,/g, "");
+	var operating_reserves_amount_v = +$('#operating_reserves_amount_v').val().replace(/,/g, "");
+	var three_months_annual_expenses_v = +$('#three_months_annual_expenses_v').val().replace(/,/g, "");
 
-	if(operating_reserves_amount_v || three_months_annual_expenses_v){
-		$("#operating_reserves_amount_v").prop('required',true);
-		$("#three_months_annual_expenses_v").prop('required',true);
-	}else{
-		$("#operating_reserves_amount_v").prop('required',false);
-		$("#three_months_annual_expenses_v").prop('required',false);
+	if (operating_reserves_amount_v || three_months_annual_expenses_v) {
+		$("#operating_reserves_amount_v").prop('required', true);
+		$("#three_months_annual_expenses_v").prop('required', true);
+	} else {
+		$("#operating_reserves_amount_v").prop('required', false);
+		$("#three_months_annual_expenses_v").prop('required', false);
 		$("#operating_reserves_percentage_v").val('');
 	}
 
-	if(operating_reserves_amount_v && three_months_annual_expenses_v){
+	if (operating_reserves_amount_v && three_months_annual_expenses_v) {
 
-		var operating_reserves_percentage_s =  (operating_reserves_amount_v / three_months_annual_expenses_v) * 100  ;
+		var operating_reserves_percentage_s = (operating_reserves_amount_v / three_months_annual_expenses_v) * 100;
 
-		var f_operating_reserves_percentage_s = parseFloat(operating_reserves_percentage_s).toFixed(0); 
+		var f_operating_reserves_percentage_s = parseFloat(operating_reserves_percentage_s).toFixed(0);
 
-		if($.isNumeric(f_operating_reserves_percentage_s) && f_operating_reserves_percentage_s > 0) { 
+		if ($.isNumeric(f_operating_reserves_percentage_s) && f_operating_reserves_percentage_s > 0) {
 			$("#operating_reserves_percentage_v").val(f_operating_reserves_percentage_s);
-		}else{
+		} else {
 			$("#operating_reserves_percentage_v").val('');
 
 		}
 	}
 });
 
-function init_delete_termly_document(){
+function init_delete_termly_document() {
 	$('.deletedoc').click(function (e) {
 		e.preventDefault();
 		var input = $(this);
@@ -1562,23 +1573,23 @@ function init_delete_termly_document(){
 							data: inputData,
 							dataType: 'json'
 						}).done(function (data) {
-							if(data.success){		
+							if (data.success) {
 								showDialogBox('success', data.message);
 								var interval = data.interval;
 								var elemId = data.document;
-								
+
 								var segment = $("#" + interval + "-segment-" + elemId);
-								$("#btn-collapse-"+elemId).toggleClass('d-none');
+								$("#btn-collapse-" + elemId).toggleClass('d-none');
 								$(segment).toggleClass('d-none');
 								var docName = $('#document-name-' + elemId + ' span').html();
-								
+
 								$('#submitted-' + elemId).html('');
-								$('#document-name-' + elemId).html('<span class="sub">'+docName+'</span>');
-								
+								$('#document-name-' + elemId).html('<span class="sub">' + docName + '</span>');
+
 								$("#doc-status-" + elemId).toggleClass("d-none");
 								$("#chat-box-" + elemId).toggleClass("d-none");
-		
-								if($("#" + interval + "-row-" + elemId + ' select.selG').length){
+
+								if ($("#" + interval + "-row-" + elemId + ' select.selG').length) {
 									$("#" + interval + "-row-" + elemId + ' select.selG').val(4);
 								} else {
 									$("#doc-status-" + elemId).html('<span class="sub"><a href="javascript:(0)" class="btn btn-lbl" data-rel="tooltip" data-placement="bottom" title="Submission Pending"><i class="i i-document-status d-status"></i> </a></span>');
@@ -1586,9 +1597,9 @@ function init_delete_termly_document(){
 								$('[data-rel="tooltip"]').tooltip();
 
 								var allowed_files = $('#dropzone-' + elemId + ' form').data('doctype');
-								
-								if(allowed_files != '')
-									$('#dropzone-' + elemId + ' p').html('<small><i>(Supports only '+allowed_files+' files)</i></small>');
+
+								if (allowed_files != '')
+									$('#dropzone-' + elemId + ' p').html('<small><i>(Supports only ' + allowed_files + ' files)</i></small>');
 								else
 									$('#dropzone-' + elemId + ' p').html('<small><i></i></small>');
 
