@@ -115,7 +115,12 @@
                   <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
                     <tr>
                       <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
-                        <?php echo $message; ?>
+                        <?php echo $message; ?><br>
+                        
+                        <a href="<?php echo base_url('/uploads/attachments/'.$attachment);?>" target="_blank"><?php echo base_url('/uploads/attachments/'.$attachment);?></a>
+                        <span>
+                          <?php if(isset($attachment)){ ?><img src="<?php echo base_url('/uploads/attachments/'.$attachment);?>" style="width: 50vh;"?><?php } ?>
+                        </span>
                       </td>
                     </tr>
                   </table>
