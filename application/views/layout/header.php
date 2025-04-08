@@ -34,9 +34,6 @@
     font-size: 36px;
     }
   }
-  .cke_notifications_area {
-    display: none !important;
-  }
   </style>
 </head>
 
