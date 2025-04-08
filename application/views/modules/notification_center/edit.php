@@ -9,9 +9,9 @@
 <main class="Meta-data emailTemplate">
     <div class="container">
        <div class="Wrapper">
-            <div class="row justify-content-end date">
+       <div class="row justify-content-end date">
                 Date: <span> &nbsp;<?php echo date('l F d, Y'); ?></span>
-            </div>
+            </div>            
             <div class="row document-mdata">
                 <div class="head">
                     <h3>email template</h3>
@@ -20,11 +20,22 @@
               <a  href="<?php echo base_url('module/notification/emails/add'); ?>" class="btn btn-primary m-l-auto btn-rounded btn-action btn-fix"><i class="i i-add"></i></a>
               </div>
             </div>
+            <?php if ($this->session->flashdata('success')): ?>
+                      <div class="alert alert-success">
+                          <?php echo $this->session->flashdata('success'); ?>
+                      </div>
+                  <?php endif; ?>
+
+                  <?php if ($this->session->flashdata('error')): ?>
+                      <div class="alert alert-danger">
+                          <?php echo $this->session->flashdata('error'); ?>
+                      </div>
+                  <?php endif; ?>
             <div class="row nulAccordian">
               
                     <div id="accordion" class="w-100">
 						<?php $flag = 0; ?>
-						<?php foreach($templates as $template): ?>
+						  <?php foreach($templates as $template): ?>
                             <div class="card">
                               <div class="card-header nul-header" id="heading<?php echo $template['temp_id']; ?>">
                                 <h5 class="mb-0">
@@ -35,11 +46,11 @@
                                   </button>
                                 </h5>
                               </div>
-                          
+
                               <div id="collapse<?php echo $template['temp_id']; ?>" class="collapse <?php if($flag===0) echo "show"; ?>" aria-labelledby="heading<?php echo $template['temp_id']; ?>" data-parent="#accordion">
-                                <div class="card-body">
-									<form class="form-edit" action="<?php echo base_url('module/notification/emails/update/'.$template['temp_id']); ?>" method="post">
-										<div class="row m-0">
+                              <div class="card-body">       
+                  <form class="form-edit" action="<?php echo base_url('module/notification/emails/update/'.$template['temp_id']); ?>" method="post" enctype="multipart/form-data">
+                    <div class="row m-0">
                       <div class="col-12">
                         <label class="title"></label>
                         <div class="title2"><input type="text" name="name" data-control="material" id="name<?php echo $template['name']; ?>" class="form-control form-nul" placeholder="Title" value="<?php echo $template['name']; ?>" required></div>
@@ -55,8 +66,8 @@
                             <option value="combined" <?php if($template['type'] == "combined") echo "selected"; ?>>Combined</option>
                           </select>
                         </div>
-                      </div>
-										</div>
+                        </div>
+                    </div>
                     <div class="row my-3">
                         <div class="col-24">
                             <label class="title"></label>
@@ -69,9 +80,25 @@
 										    <textarea name="content" class="ckeditor" id="content<?php echo $template['temp_id']; ?>" cols="30" rows="10" required><?php echo $template['html_code']; ?></textarea>
                       </div>
                     </div>
+                    <?php if ($template['name'] === "Monthly Notification"): ?>
+                    <div class="row my-3">
+                        <div class="col-24">
+                            <label class="title w-100">Attachment</label>
+                            <?php if (!empty($template['attachment'])): ?>
+                              <p>Current Attachment: 
+                                  <a href="<?php echo base_url('uploads/attachments/' . $template['attachment']); ?>" target="_blank">
+                                      <?php echo $template['attachment']; ?>
+                                  </a>
+                              </p>
+                          <?php endif; ?>
+                            <input type="file" name="attachment" accept=".pdf,.doc,.docx,.xls,.xlsx">
+                        </div>
+                    </div>
+                    <?php endif; ?>
+                    
 										<div class="row justify-content-end m-t-30">
 										<a href="<?php echo base_url('module/notification/emails/preview/').$template['temp_id']; ?>" class="btn btn-dark btn-rounded px-4 mr-3" style="line-height:30px;">PREVIEW</a>
-										<button type="submit" class="sign-in-btn">EDIT</button>
+										<button type="submit">EDIT</button>
 										</div>
                                     </form>
                                 </div>
@@ -85,3 +112,17 @@
        </div>
     </div>
   </main>
+  <script>
+    // Hide flash messages after 5 seconds
+    setTimeout(function() {
+        const successAlert = document.querySelector('.alert-success');
+        const errorAlert = document.querySelector('.alert-danger');
+        
+        if (successAlert) {
+            successAlert.style.display = 'none';
+        }
+        if (errorAlert) {
+            errorAlert.style.display = 'none';
+        }
+    }, 5000); // 5000ms = 5 seconds
+</script>

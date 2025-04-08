@@ -32,8 +32,7 @@ class Email_template extends MY_Controller
 		$data['view_name'] = 'modules/notification_center/edit';
 		//Page specific javascript files
 		$data['footer']['js'] = array(
-			'https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js',
-			'pages/modules/email_templates.js'
+			'https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js'
 		);
 
 		$this->load->view('template', $data);
@@ -104,27 +103,45 @@ class Email_template extends MY_Controller
 	public function update($id)
 	{
 		$data = $this->input->post();
-
+	
 		$update_data = array(
 			'name' => $data['name'],
 			'html_code' => $data['content'],
 			'subject' => $data['subject'],
 			'type' => $data['type']
 		);
-
-		//Update email template
+	
+		// Handle file upload
+		if (!empty($_FILES['attachment']['name'])) {
+			$config['upload_path'] = './uploads/attachments/';
+			$config['allowed_types'] = 'pdf|doc|docx|xls|xlsx';
+			$config['file_name'] = time() . '_' . $_FILES['attachment']['name'];
+	
+			$this->load->library('upload', $config);
+	
+			if ($this->upload->do_upload('attachment')) {
+				$upload_data = $this->upload->data();
+				$update_data['attachment'] = $upload_data['file_name'];
+			} else {
+				// Set error message and redirect
+				$this->session->set_flashdata('error', $this->upload->display_errors());
+				redirect('module/notification/emails');
+				return;
+			}
+		}
+	
+		// Update email template
 		$status = $this->Email_model->update($id, $update_data);
-
-		if ( $status === TRUE)
-		{
-			$message = "Email template updated successfully";
+	
+		// Set success or error message based on the update status
+		if ($status === TRUE) {
+			$this->session->set_flashdata('success', 'Email template updated successfully.');
+		} else {
+			$this->session->set_flashdata('error', 'Something went wrong. Please try again.');
 		}
-		else
-		{
-			$message = "Something went wrong. Please try again.";
-		}
-
-		echo json_encode(array('success' => true, 'message' => $message));
+	
+		// Redirect back to the edit page
+		redirect('module/notification/emails');
 	}
 
 	public function preview($template_id)
@@ -179,7 +196,8 @@ class Email_template extends MY_Controller
 
 		$preview_data = array(
 			"message" => $this->parser->parse_string($template['html_code'], $data, TRUE),
-			"preview" => TRUE
+			"preview" => TRUE,
+			"attachment" => $template['attachment']
 		);
 		
 		$preview = $this->load->view('layout/mail_template', $preview_data, TRUE);
@@ -288,6 +306,14 @@ class Email_template extends MY_Controller
 			$this->email->subject($template['subject']);
 
 			$this->email->message($message);
+
+			// Attach the file if it exists
+			if (!empty($template['attachment'])) {
+				$attachment_path = base_url() . 'uploads/attachments/' . $template['attachment'];
+				if ($attachment_path) {
+					$this->email->attach($attachment_path);
+				}
+			}
 		
 			$status = $this->email->send();
 
@@ -313,74 +339,83 @@ class Email_template extends MY_Controller
 	public function send_testmails()
 	{
 		$data = $this->input->post();
-
+	
 		$template = $this->Email_model->get_template($data["template"]);
-
+	
 		$user_mails = $this->Email_model->get_admin_emails();
-
+	
 		$target_mails = "";
-
+	
 		foreach($user_mails as $row)
 		{
 			if(isset($row["user_email_address_1"]))
-            {
-                $target_mails .= ($target_mails == "") ? "" : ",";
-                $target_mails .= $row["user_email_address_1"];
-            }
+			{
+				$target_mails .= ($target_mails == "") ? "" : ",";
+				$target_mails .= $row["user_email_address_1"];
+			}
 		}
-
+	
 		$quarter = ceil($data["month"]/3);
-
+	
 		$target_date = mktime(0, 0, 0, $data["month"], 1, $data["year"]);
-
+	
 		$quarterArray = array(
 			'1' => 'January - March',
 			'2' => 'April - June',
 			'3' => 'July - September',
 			'4' => 'October - December',
 		);
-
+	
 		$data['month'] = date("F", $target_date);
 		$data['quarter'] = $quarterArray[$quarter];
 
 		$data['last_date'] = date("l, F t, Y", strtotime("+1 month", $target_date));
-
+	
 		$this->load->library('parser');
-
+	
 		$preview_data = array(
 			"message" => $this->parser->parse_string($template['html_code'], $data, TRUE)
 		);
-		
+	
 		$message = $this->load->view('layout/mail_template', $preview_data, TRUE);
-
+	
 		//Get SMTP settings
-        $settings = array();
-        
-        $result = $this->Settings_model->get_all_settings();
-
-        foreach ( $result as $row)
+		$settings = array();
+		
+		$result = $this->Settings_model->get_all_settings();
+	
+		foreach ( $result as $row)
 		{
 			$settings[$row['label']] = $row['value'];
 		}
-
-        $config['smtp_host'] = $settings['smtp_host'];
-        $config['smtp_user'] = $settings['smtp_user'];
-        $config['smtp_pass'] = $settings['smtp_pass'];
-        $config['smtp_port'] = $settings['smtp_port'];
-        
-        $this->load->library('email');
-        
-        $this->email->initialize($config);
-
-        $this->email->from("noreply@nul.org", "National Urban League");
-        
+	
+		$config['smtp_host'] = $settings['smtp_host'];
+		$config['smtp_user'] = $settings['smtp_user'];
+		$config['smtp_pass'] = $settings['smtp_pass'];
+		$config['smtp_port'] = $settings['smtp_port'];
+	
+		$this->load->library('email');
+		
+		$this->email->initialize($config);
+	
+		$this->email->from("noreply@nul.org", "National Urban League");
+		
 		$this->email->to($target_mails);
-    
-        $this->email->subject($template['subject']);
+		
+		$this->email->subject($template['subject']);
+		
+		$this->email->message($message);
 
-        $this->email->message($message);
-    
-        if($this->email->send())
+	    // Attach the file if it exists
+		if (!empty($template['attachment'])) {
+			$attachment_path = base_url() . 'uploads/attachments/' . $template['attachment'];
+			if ($attachment_path) {
+				$this->email->attach($attachment_path);
+			}
+		}
+	
+		// Send the email
+		if ($this->email->send()) 
 		{
 			$response = array(
 				"success" => TRUE,
@@ -394,7 +429,7 @@ class Email_template extends MY_Controller
 				"message" => "Failed to send the emails. Please try again later."
 			);
 		}
-
+	
 		echo json_encode($response);
 	}
 }
