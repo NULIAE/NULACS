@@ -65,6 +65,14 @@
           <?php echo "$".number_format(array_sum(array_filter(array_column($report, 'avg')))/count(array_filter(array_column($report, 'avg'))),2); ?><?php } ?>
         </b></td>
     </tr>
+    <tr>
+      <td><a href="<?php echo base_url()?>/module/census_reports/affiliate_education_query_report/export?year=<?=$data['year']?>&affiliate=<?=$affiliate_id; ?>"><button>XLS</button></a></td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
   </tfoot>
   <?php } ?>
 </table>

@@ -121,27 +121,35 @@ table.dataTable thead .sorting_desc {
                   </tbody>
                   <tfoot>
                     <tr class="total" style="font-weight:bold">
-      <td></td>
-      <td></td>
-      <td><b>
-          <?= number_format(array_sum(array_column($report, 'total'))); ?>
-        </b></td>
-      <td><b>
-          <?= number_format(array_sum(array_column($report, 'promo'))); ?>
-        </b></td>
-       <td><b>
-          <?= number_format(array_sum(array_column($report, 'grad'))/count(array_filter(array_column($report, 'grad')))); ?>%
-        </b></td>
-      <td><b>
-          <?= number_format(array_sum(array_column($report, 'clapp'))/count(array_filter(array_column($report, 'clapp')))); ?>%
-        </b></td>
-      <td><b>$
-          <?= number_format(array_sum(array_column($report, 'scholar')),2); ?>
-        </b></td>
-      <td><b>$
-          <?php echo number_format(array_sum(array_filter(array_column($report, 'avg')))/count(array_filter(array_column($report, 'avg'))),2); ?>
-        </b></td>
-    </tr>
+                      <td></td>
+                      <td></td>
+                      <td><b>
+                          <?= number_format(array_sum(array_column($report, 'total'))); ?>
+                        </b></td>
+                      <td><b>
+                          <?= number_format(array_sum(array_column($report, 'promo'))); ?>
+                        </b></td>
+                      <td><b>
+                          <?= number_format(array_sum(array_column($report, 'grad'))/count(array_filter(array_column($report, 'grad')))); ?>%
+                        </b></td>
+                      <td><b>
+                          <?= number_format(array_sum(array_column($report, 'clapp'))/count(array_filter(array_column($report, 'clapp')))); ?>%
+                        </b></td>
+                      <td><b>$
+                          <?= number_format(array_sum(array_column($report, 'scholar')),2); ?>
+                        </b></td>
+                      <td><b>$
+                          <?php echo number_format(array_sum(array_filter(array_column($report, 'avg')))/count(array_filter(array_column($report, 'avg'))),2); ?>
+                        </b></td>
+                    </tr>
+                    <tr>
+                      <td><a href="<?php echo base_url()?>/module/census_reports/affiliate_education_query_report/export?year=<?=$data['year']?>&org=<?=$data['affiliate_id']; ?>"><button>XLS</button></a></td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                    </tr>
                   </tfoot>
                 </table>            
           </div>

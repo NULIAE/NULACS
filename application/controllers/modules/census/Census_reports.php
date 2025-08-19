@@ -1016,6 +1016,8 @@ class Census_reports extends MY_Controller
 		$report = [];
 		$report = $this->CensusReport_model->affiliate_education_query_report($year,$affiliate);
 		$data['report'] = $report;
+		$data['year'] = $year;
+		$data['affiliate_id'] = $affiliate;
 
 		$data['footer']['js'] = array(
 			'pages/modules/reports/filter_affiliate_education_query_report.js',
@@ -1026,7 +1028,59 @@ class Census_reports extends MY_Controller
 		echo json_encode($result);
 
 	}
-	
+
+	public function affiliate_education_query_report_export()
+	{
+
+		$params = $this->input->get();
+
+		$affiliate = ''; 
+		$year = 2018;
+		
+		if( isset($params['year']) && ($params['year'] != '') && ($params['year'] != '0') )
+		  $year =  $params['year'];
+		if( isset($params['affiliate']) && ($params['affiliate'] != '') && ($params['affiliate'] != '0') )
+		$affiliate =  $params['affiliate'];
+
+		$report = $this->CensusReport_model->affiliate_education_query_report($year,$affiliate);
+
+		// Excel export logic
+		$spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
+		$sheet = $spreadsheet->getActiveSheet();
+		$sheet->setCellValue('A1', 'Affiliate');
+		$sheet->setCellValue('B1', 'Year');
+		$sheet->setCellValue('C1', 'Total Participants');
+		$sheet->setCellValue('D1', 'Promoted to next grade');
+		$sheet->setCellValue('E1', 'Graduated from high school');
+		$sheet->setCellValue('F1', 'Submitted college application(s)');
+		$sheet->setCellValue('G1', 'Overall value of the scholarships');
+		$sheet->setCellValue('H1', 'Average value of scholarships');
+
+		$i = 2;
+		foreach($report as $row) {
+			$sheet->setCellValue('A'.$i , isset($row['org']) ? $row['org'] : '');
+			$sheet->setCellValue('B'.$i , isset($row['year']) ? $row['year'] : '');
+			$sheet->setCellValue('C'.$i , isset($row['total']) ? $row['total'] : '');
+			$sheet->setCellValue('D'.$i , isset($row['promo']) ? $row['promo'] : '');
+			$sheet->setCellValue('E'.$i , isset($row['grad']) ? number_format($row['grad'])."%" : '');
+			$sheet->setCellValue('F'.$i , isset($row['clapp']) ? number_format($row['clapp'])."%" : '');
+			$sheet->setCellValue('G'.$i , isset($row['scholar']) ?  "$".number_format($row['scholar'],2) : '');
+			$sheet->setCellValue('H'.$i , isset($row['avg']) ? "$".number_format($row['avg'],2) : '');
+			$i++;
+		}
+
+		header('Content-Type: application/vnd.ms-excel');
+		header('Content-Disposition: attachment;filename="education-export.xlsx"');
+		header('Cache-Control: max-age=0');
+
+		$writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
+		$writer->save('php://output');
+
+		$spreadsheet->disconnectWorksheets();
+		unset($spreadsheet);
+		exit;
+	}
+
 	/**
 	 * Cumulative entrepreneurship report
 	 *
@@ -1239,6 +1293,8 @@ class Census_reports extends MY_Controller
 		$report = [];
 		$report = $this->CensusReport_model->affiliate_health_query_report($year,$affiliate);
 		$data['report'] = $report;
+		$data['year'] = $year;
+		$data['affiliate_id'] = $affiliate;	
 
 		$data['footer']['js'] = array(
 			'pages/modules/reports/filter_affiliate_health_query_report.js',
@@ -1248,6 +1304,55 @@ class Census_reports extends MY_Controller
 		$result=$this->load->view('modules/census/reports/prg_affiliate_health_query_report_filter.php',$data, TRUE);
 		echo json_encode($result);
 
+	}
+
+	public function affiliate_health_query_report_export()
+	{
+		$params = $this->input->get();
+
+		$affiliate = ''; 
+		$year = 2018;
+		
+		if( isset($params['year']) && ($params['year'] != '') && ($params['year'] != '0') )
+		  $year =  $params['year'];
+		if( isset($params['affiliate']) && ($params['affiliate'] != '') && ($params['affiliate'] != '0') )
+		  $affiliate =  $params['affiliate'];
+		
+		$report = $this->CensusReport_model->affiliate_health_query_report($year,$affiliate);
+		//var_dump($report);die;
+
+		$spreadsheet = new Spreadsheet();
+		$sheet = $spreadsheet->getActiveSheet();
+		$sheet->setCellValue('A1', 'Affiliate');
+		$sheet->setCellValue('B1', 'Year');
+		$sheet->setCellValue('C1', 'Total Participants');
+		$sheet->setCellValue('D1', 'At Education classes/Events/Seminars');
+		$sheet->setCellValue('E1', 'Enrolled in health insurance');
+		$sheet->setCellValue('F1', 'Assisted with health insurance');
+
+		$i = 2;
+		
+		foreach($report as $row)
+		{
+			$sheet->setCellValue('A'.$i , $row['org']);
+			$sheet->setCellValue('B'.$i , $row['year']);
+			$sheet->setCellValue('C'.$i , $row['tot']);
+			$sheet->setCellValue('D'.$i , $row['cse']);
+			$sheet->setCellValue('E'.$i , $row['enrol']);
+			$sheet->setCellValue('F'.$i , $row['assisted']);
+			$i++;
+		}
+
+		header('Content-Type: application/vnd.ms-excel');
+		header('Content-Disposition: attachment;filename="health-export.xlsx"');
+		header('Cache-Control: max-age=0');
+
+		$writer = new Xlsx($spreadsheet);
+		$writer->save('php://output');
+
+		$spreadsheet->disconnectWorksheets();
+		unset($spreadsheet);
+		exit;
 	}
 
 	/**
@@ -1325,6 +1430,8 @@ class Census_reports extends MY_Controller
 		$report = [];
 		$report = $this->CensusReport_model->affiliate_housing_query_report($year,$affiliate);
 		$data['report'] = $report;
+		$data['year'] = $year;
+		$data['org_id'] = $affiliate;
 
 		$result=$this->load->view('modules/census/reports/prg_affiliate_housing_query_report_filter.php',$data, TRUE);
 		echo json_encode($result);
@@ -1525,6 +1632,7 @@ class Census_reports extends MY_Controller
 		$sheet->setCellValue('I1', 'Number of welfare program participants placed in jobs');
 		$sheet->setCellValue('J1', 'Annual welfare salary (if applicable)');
 		$sheet->setCellValue('K1', 'or Hourly wage rate (welfare)');
+		$sheet->setCellValue('L1', 'Number obtaining IRC');
 
 		$i = 2;
 		
@@ -1541,6 +1649,7 @@ class Census_reports extends MY_Controller
 			$sheet->setCellValue('I'.$i , $row['wel_placed']);
 			$sheet->setCellValue('J'.$i , $row['wel_sal']);
 			$sheet->setCellValue('K'.$i , $row['wel_hour']);
+			$sheet->setCellValue('L'.$i , $row['wel_cred']);
 			$i++;
 		}
 

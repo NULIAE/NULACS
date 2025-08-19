@@ -317,7 +317,9 @@ $route['module/census_reports/affiliate_workforce_query_report/export'] = 'modul
  $route['module/census_reports/entrepreneurship_centers_report_wnul'] = 'modules/census/census_reports/entrepreneurship_centers_report_w_nul';
  $route['module/census_reports/entrepreneurship_centers_report_wnul/filter'] = 'modules/census/census_reports/entrepreneurship_centers_report_w_nul_filter';
  $route['module/census_reports/nul_census_total_contacts_breakdown/export'] = 'modules/census/census_reports/nul_census_total_contacts_breakdown_export';
-
+ $route['module/census_reports/affiliate_education_query_report/export'] = 'modules/census/census_reports/affiliate_education_query_report_export';
+ $route['module/census_reports/affiliate_health_query_report/export'] = 'modules/census/census_reports/affiliate_health_query_report_export';
+ 
  $route['module/notification/emails/send_testmail'] = 'modules/notification_center/email_template/send_testmails';
  $route['module/affiliate/document/delete_termly_document'] = 'modules/affiliate/affiliate/delete_termly_document';
 $route['module/census_reports/cumulative_emergency_relief_report'] = 'modules/census/census_reports/cumulative_emergency_relief_report';

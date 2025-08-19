@@ -130,6 +130,14 @@ table.dataTable thead .sorting_desc {
                         <?= number_format(array_sum(array_column($report, 'assisted'))); ?>
                         </b></td>
                     </tr>
+                    <tr>
+                      <td><a href="<?php echo base_url()?>/module/census_reports/affiliate_health_query_report/export?year=<?=$year?>&affiliate=<?=$affiliate_id; ?>"><button>XLS</button></a></td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                    </tr>
                   </tfoot>
                 </table>            
           </div>

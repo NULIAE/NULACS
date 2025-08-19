@@ -61,7 +61,7 @@
         </b></td>
     </tr>
     <tr>
-      <td><a href="<?php echo base_url("module/census_reports/affiliate_housing_query_report/export")."?year=".$data['year']."&org=".$data['org_id']; ?>"><button>XLS</button></a></td>
+      <td><a href="<?php echo base_url("module/census_reports/affiliate_housing_query_report/export")."?year=".$year."&org=".$org_id; ?>"><button>XLS</button></a></td>
     </tr>
   </tfoot>
   <?php } ?>
