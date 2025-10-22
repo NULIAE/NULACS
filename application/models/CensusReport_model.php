@@ -672,30 +672,38 @@ class CensusReport_model extends CI_Model
 	 */	
 	public function revenue_expenditure_yearly_affiliate($where = NULL)
 	{
+		$sql = "SELECT af.affiliate_id,
+					cr.report_id as censusid,
+					cr.field_year as year,
+					af.organization as affiliate,
+					rv.field_revenue_total_budget as revenue,
+					exp.field_total_expenditures as expenditures,
+					(rv.field_revenue_total_budget - exp.field_total_expenditures) as net,
+					rv.pk_id as revid,
+					exp.pk_id as exid,
+					cr.report_id as id
+				FROM census_report cr 
+				LEFT JOIN revenue rv ON rv.field_parent_census = cr.report_id
+				LEFT JOIN expenditures exp ON exp.field_parent_census = cr.report_id
+				LEFT JOIN affiliate af ON af.field_affiliate_select_value = cr.field_affiliate_select
+				WHERE rv.field_revenue_total_budget IS NOT NULL 
+				AND exp.field_total_expenditures IS NOT NULL";
+
+		$flag = 1; // Since we already have WHERE clause
 		
-		$sql = "SELECT af.affiliate_id,nf.censusid,nf.year,nf.affiliate,nf.revenue,nf.expenditures,nf.net,nf.revid,nf.exid,nf.id
-						FROM NUL_Census_Financials nf 
-	          LEFT JOIN affiliate af ON af.organization = nf.affiliate ";	  
-
-
-		$flag = 0;
 		if(isset($where['year'])){
-		$sql .= ($flag == 0) ? "WHERE " : " AND ";
-		$sql .= "  year = ". $where['year'] ;
-		$flag = 1;
-	  }
+			$sql .= " AND cr.field_year = ". $where['year'];
+		}
 
 		if(isset($where['affiliate'])){
-		$sql .= ($flag == 0) ? "WHERE " : " AND ";	
-		$sql .= "  affiliate = '". $where['affiliate']."'" ;
-		$flag = 1;
+			$sql .= " AND af.organization = '". $where['affiliate']."'";
 		}
-		$sql .= " ORDER BY year ASC ";
+		
+		$sql .= " ORDER BY cr.field_year ASC";
 
 		$query = $this->db->query($sql);
-    $result =  $query->result_array();
-		return $result;		
-
+		$result = $query->result_array();
+		return $result;
 	}
 
 	/**
@@ -2049,32 +2057,38 @@ class CensusReport_model extends CI_Model
 
 	public function revenue_expenditure_yearly_affiliate_export($where = NULL)
 	{
-		
-		//$sql = "SELECT * FROM NUL_Census_Financials ";
+		$sql = "SELECT af.affiliate_id,
+					cr.report_id as censusid,
+					cr.field_year as year,
+					af.organization as affiliate,
+					rv.field_revenue_total_budget as revenue,
+					exp.field_total_expenditures as expenditures,
+					(rv.field_revenue_total_budget - exp.field_total_expenditures) as net,
+					rv.pk_id as revid,
+					exp.pk_id as exid,
+					cr.report_id as id
+				FROM census_report cr 
+				LEFT JOIN revenue rv ON rv.field_parent_census = cr.report_id
+				LEFT JOIN expenditures exp ON exp.field_parent_census = cr.report_id
+				LEFT JOIN affiliate af ON af.field_affiliate_select_value = cr.field_affiliate_select
+				WHERE rv.field_revenue_total_budget IS NOT NULL 
+				AND exp.field_total_expenditures IS NOT NULL";
 
-		$sql = "SELECT af.affiliate_id,nf.censusid,nf.year,nf.affiliate,nf.revenue,nf.expenditures,nf.net,nf.revid,nf.exid,nf.id
-						FROM NUL_Census_Financials nf 
-	          LEFT JOIN affiliate af ON af.organization = nf.affiliate ";	  
+		$flag = 1; // Since we already have WHERE clause
 
-
-		$flag = 0;
 		if(isset($where['year'])){
-		$sql .= ($flag == 0) ? "WHERE " : " AND ";
-		$sql .= "  year = ". $where['year'] ;
-		$flag = 1;
-	  }
+			$sql .= " AND cr.field_year = ". $where['year'];
+		}
 
 		if(isset($where['affiliate'])){
-		$sql .= ($flag == 0) ? "WHERE " : " AND ";	
-		$sql .= "  af.field_affiliate_select_value = '". $where['affiliate']."'" ;
-		$flag = 1;
+			$sql .= " AND af.organization = '". $where['affiliate']."'";
 		}
-		$sql .= " ORDER BY year ASC ";
+		
+		$sql .= " ORDER BY cr.field_year ASC";
 
 		$query = $this->db->query($sql);
-    $result =  $query->result_array();
-		return $result;		
-
+		$result = $query->result_array();
+		return $result;
 	}
 
 	public function affiliate_keyfund_query_export($where = NULL)
