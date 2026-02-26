@@ -20,7 +20,7 @@
               <a  href="<?php echo base_url('module/notification/emails/add'); ?>" class="btn btn-primary m-l-auto btn-rounded btn-action btn-fix"><i class="i i-add"></i></a>
               </div>
             </div>
-            <?php if ($this->session->flashdata('success')): ?>
+            <!-- <?php if ($this->session->flashdata('success')): ?>
                       <div class="alert alert-success">
                           <?php echo $this->session->flashdata('success'); ?>
                       </div>
@@ -30,7 +30,7 @@
                       <div class="alert alert-danger">
                           <?php echo $this->session->flashdata('error'); ?>
                       </div>
-                  <?php endif; ?>
+                  <?php endif; ?> -->
             <div class="row nulAccordian">
               
                     <div id="accordion" class="w-100">
@@ -98,7 +98,7 @@
                     
 										<div class="row justify-content-end m-t-30">
 										<a href="<?php echo base_url('module/notification/emails/preview/').$template['temp_id']; ?>" class="btn btn-dark btn-rounded px-4 mr-3" style="line-height:30px;">PREVIEW</a>
-										<button type="submit">EDIT</button>
+										<button class="btn btn-rounded px-4 mr-3" type="submit">SAVE</button>
 										</div>
                                     </form>
                                 </div>
@@ -113,16 +113,23 @@
     </div>
   </main>
   <script>
-    // Hide flash messages after 5 seconds
-    setTimeout(function() {
-        const successAlert = document.querySelector('.alert-success');
-        const errorAlert = document.querySelector('.alert-danger');
+    window.addEventListener('load', function() {
+        var urlParams = new URLSearchParams(window.location.search);
+        var msg = urlParams.get('msg');
+        var t = urlParams.get('t');
         
-        if (successAlert) {
-            successAlert.style.display = 'none';
+        if (msg && t) {
+            // Remove the query parameters from URL without reload
+            var cleanUrl = window.location.pathname;
+            window.history.replaceState({}, document.title, cleanUrl);
+            
+            if (msg === 'success') {
+                showDialogBox('success', 'Email template updated successfully.');
+            } else if (msg === 'error') {
+                showDialogBox('error', 'Something went wrong. Please try again.');
+            } else if (msg === 'upload_error') {
+                showDialogBox('error', 'File upload failed. Please check the file type and try again.');
+            }
         }
-        if (errorAlert) {
-            errorAlert.style.display = 'none';
-        }
-    }, 5000); // 5000ms = 5 seconds
+    });
 </script>

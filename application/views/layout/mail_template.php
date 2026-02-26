@@ -117,10 +117,10 @@
                       <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
                         <?php echo $message; ?><br>
                         
-                        <a href="<?php echo base_url('/uploads/attachments/'.$attachment);?>" target="_blank"><?php echo base_url('/uploads/attachments/'.$attachment);?></a>
-                        <span>
+                        <!-- <a href="<?php echo base_url('/uploads/attachments/'.$attachment);?>" target="_blank"><?php echo base_url('/uploads/attachments/'.$attachment);?></a> -->
+                        <!-- <span>
                           <?php if(isset($attachment)){ ?><img src="<?php echo base_url('/uploads/attachments/'.$attachment);?>" style="width: 50vh;"?><?php } ?>
-                        </span>
+                        </span> -->
                       </td>
                     </tr>
                   </table>

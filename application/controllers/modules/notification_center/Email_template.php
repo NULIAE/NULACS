@@ -124,8 +124,7 @@ class Email_template extends MY_Controller
 				$update_data['attachment'] = $upload_data['file_name'];
 			} else {
 				// Set error message and redirect
-				$this->session->set_flashdata('error', $this->upload->display_errors());
-				redirect('module/notification/emails');
+                redirect('module/notification/emails?msg=upload_error&t=' . time());
 				return;
 			}
 		}
@@ -135,13 +134,10 @@ class Email_template extends MY_Controller
 	
 		// Set success or error message based on the update status
 		if ($status === TRUE) {
-			$this->session->set_flashdata('success', 'Email template updated successfully.');
+			redirect('module/notification/emails?msg=success&t=' . time());
 		} else {
-			$this->session->set_flashdata('error', 'Something went wrong. Please try again.');
+			redirect('module/notification/emails?msg=error&t=' . time());
 		}
-	
-		// Redirect back to the edit page
-		redirect('module/notification/emails');
 	}
 
 	public function preview($template_id)
