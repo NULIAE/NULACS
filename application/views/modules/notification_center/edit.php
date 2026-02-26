@@ -112,6 +112,12 @@
        </div>
     </div>
   </main>
+  <style>
+    /* Ensure dialog captures pointer events and sits above other content */
+    .dialog, .dialog * { pointer-events: auto !important; }
+    .dialogBackdrop.active, .dialogBackdrop.transparent { pointer-events: all !important; }
+    .dialog { z-index: 99999 !important; }
+  </style>
   <script>
     window.addEventListener('load', function() {
         var urlParams = new URLSearchParams(window.location.search);
