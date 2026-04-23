@@ -42,10 +42,11 @@ font-size: 10px!important;
           </div>
         </div>
         <?php
-        if (strpos($_SERVER['REQUEST_URI'], "affiliate") !== false){
+        $secondTbab = 0;
+        if (isset($_GET['tab']) && $_GET['tab'] == '2') {
           $secondTbab = 1;
-        }else{
-          $secondTbab = 0;
+        } else if (strpos($_SERVER['REQUEST_URI'], "affiliate") !== false) {
+          $secondTbab = 1;
         }
         ?>
         <div class="mainTabAll">
@@ -297,21 +298,27 @@ font-size: 10px!important;
             </div>
 
             <div class="tab-pane fade active <?=$secondTbab==1?'show':''?>" id="nav-x2" role="tabpanel" aria-labelledby="nav-x2-tab">
-              <?php if($this->session->role_id==1): ?>
+              <?php if($this->session->role_id==1 || $this->session->role_id==2): ?>
               <form action="">
+              <input type="hidden" name="tab" value="2">
               <div class="row mt-5">
-                <div class="col-4 col-md-4 col-lg-3 secondSelection">
-                  <span class="sub">
-                  <select name="affiliate" onchange="window.location.href = '<?php echo base_url();?>/module/filter/reports?affiliate=' + this.value;" class="form-control selectp-r" data-type="selector">
-                    <option>Choose Affiliate</option>
-                    <?php foreach($affiliates as $aff): ?>
-                        <option value="<?=$aff['affiliate_id']?>" <?php if($affiliate == $aff['affiliate_id']) echo "selected";?>><?=$aff['name']?></option>
-                    <?php endforeach; ?>
-                  </select>
-                  
-                  </span>
-                </div>
+                <?php if ($this->session->role_id == 1): ?>
+                  <div class="col-4 col-md-4 col-lg-3 secondSelection">
+                    <span class="sub">
+                      <select name="affiliate" onchange="window.location.href = '<?php echo base_url();?>/module/filter/reports?affiliate=' + this.value;" class="form-control selectp-r" data-type="selector">
+                        <option>Choose Affiliate</option>
+                        <?php foreach($affiliates as $aff): ?>
+                          <option value="<?=$aff['affiliate_id']?>" <?php if($affiliate == $aff['affiliate_id']) echo "selected";?>><?=$aff['name']?></option>
+                        <?php endforeach; ?>
+                      </select>
+                      
+                    </span>
+                  </div>
+                <?php elseif ($this->session->role_id == 2): ?>
+                  <input type="hidden" name="affiliate" value="<?php echo $this->session->affiliate_id; ?>">
+                <?php endif; ?>
                 <div class="col-1 col-md-1 col-lg-1 ml-auto align-self-center"><strong>From</strong></div>
+                <input type="hidden" name="group" value="<?php echo isset($_GET['group']) ? $_GET['group'] : 'group1'; ?>">
                 <div class="col-2 col-md-2 col-lg-2">
                   <?php $from_quarter = isset($_GET['from_quarter'])? $_GET['from_quarter'] : ''; ?>
                   <span class="sub">
@@ -572,7 +579,17 @@ font-size: 10px!important;
               <div class="row mt-5 m-y-20" id="page_scroll">
                 <div class="col-4 col-md-4 col-lg-4 secondSelection mt-5 mb-3">
                   <span class="sub">
-                  <select onchange="window.location.href = '<?php echo base_url();?>/module/filter/reports?affiliate=<?php echo $affiliate; ?>&group=' + this.value;" class="form-control selectp-r" data-type="selector">
+                  <select onchange="
+                    var params = [];
+                    params.push('affiliate=<?php echo $affiliate; ?>');
+                    params.push('group=' + this.value);
+                    var urlParams = new URLSearchParams(window.location.search);
+                    ['from_quarter','from_year','to_quarter','to_year'].forEach(function(key) {
+                      var v = urlParams.get(key);
+                      if (v !== null && v !== '') params.push(key + '=' + encodeURIComponent(v));
+                    });
+                    window.location.href = '<?php echo base_url();?>/module/filter/reports?' + params.join('&');
+                  " class="form-control selectp-r" data-type="selector">
                     <option value="group1" <?php if($group == "group1") echo "selected"; ?>>Liquidity Group</option>
                     <option value="group2" <?php if($group == "group2") echo "selected"; ?>>Ratio Group</option>
                     <option value="group3" <?php if($group == "group3") echo "selected"; ?>>Operating Efficiency Group</option>
