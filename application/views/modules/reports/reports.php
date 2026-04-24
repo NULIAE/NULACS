@@ -298,7 +298,7 @@ font-size: 10px!important;
             </div>
 
             <div class="tab-pane fade active <?=$secondTbab==1?'show':''?>" id="nav-x2" role="tabpanel" aria-labelledby="nav-x2-tab">
-              <?php if($this->session->role_id==1 || $this->session->role_id==2): ?>
+              <?php if($this->session->role_id==1 || $this->session->role_id==2 || $this->session->role_id==3): ?>
               <form action="">
               <input type="hidden" name="tab" value="2">
               <div class="row mt-5">
@@ -314,7 +314,7 @@ font-size: 10px!important;
                       
                     </span>
                   </div>
-                <?php elseif ($this->session->role_id == 2): ?>
+                <?php elseif ($this->session->role_id == 2 || $this->session->role_id == 3): ?>
                   <input type="hidden" name="affiliate" value="<?php echo $this->session->affiliate_id; ?>">
                 <?php endif; ?>
                 <div class="col-1 col-md-1 col-lg-1 ml-auto align-self-center"><strong>From</strong></div>
