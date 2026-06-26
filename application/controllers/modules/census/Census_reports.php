@@ -511,7 +511,8 @@ class Census_reports extends MY_Controller
 	{
 		//$report = $this->CensusReport_model->cumulative_mem_vol();
 		$total = [];
-		for($year=2026;$year>=2011;$year--){
+		$startYear = date('Y');
+		for($year=$startYear;$year>=2011;$year--){
 		$arr['year'] = $year; 
 		$arr['program_edu'] = $this->CensusReport_model->programs_by_year($year,$this->CensusReport_model->get_program_area_id('Education and Youth Development'));
 		$arr['program_entrepren'] = $this->CensusReport_model->programs_by_year($year,$this->CensusReport_model->get_program_area_id('Entrepreneurship and Business Development'));
@@ -524,7 +525,7 @@ class Census_reports extends MY_Controller
 	  }
 
 		$budget = [];
-		for($year=2026;$year>=2011;$year--){
+		for($year=$startYear;$year>=2011;$year--){
 		$arr['year'] = $year; 
 		$arr['program_edu'] = $this->CensusReport_model->programs_budget_by_year($year,$this->CensusReport_model->get_program_area_id('Education and Youth Development'));
 		$arr['program_entrepren'] = $this->CensusReport_model->programs_budget_by_year($year,$this->CensusReport_model->get_program_area_id('Entrepreneurship and Business Development'));
@@ -537,7 +538,7 @@ class Census_reports extends MY_Controller
 	  }		
 
 		$served = [];
-		for($year=2026;$year>=2011;$year--){
+		for($year=$startYear;$year>=2011;$year--){
 		$arr['year'] = $year; 
 		$arr['program_edu'] = $this->CensusReport_model->programs_served_by_year($year,$this->CensusReport_model->get_program_area_id('Education and Youth Development'));
 		$arr['program_entrepren'] = $this->CensusReport_model->programs_served_by_year($year,$this->CensusReport_model->get_program_area_id('Entrepreneurship and Business Development'));
@@ -563,7 +564,7 @@ class Census_reports extends MY_Controller
 
 		$data['view_name'] = 'modules/census/reports/prg_cumulative_program_report.php';
 		$this->load->view('census_template', $data);
-	}	
+	}		
 
 	
 	/**
